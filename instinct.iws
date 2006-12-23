@@ -32,7 +32,6 @@
     <list default="true" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/roadmap.txt" afterPath="$PROJECT_DIR$/docs/roadmap.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/terms.txt" afterPath="$PROJECT_DIR$/docs/terms.txt" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -192,7 +191,7 @@
       <file leaf-file-name="roadmap.txt" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/roadmap.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="0" selection-start="580" selection-end="580" vertical-scroll-proportion="0.32481202">
+            <state line="60" column="24" selection-start="2960" selection-end="2960" vertical-scroll-proportion="0.86466163">
               <folding />
             </state>
           </provider>
@@ -1942,7 +1941,7 @@
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
     <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
     <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
-    <option name="ERROR_OCCURED" value="true" />
+    <option name="ERROR_OCCURED" value="false" />
     <option name="ACTIVE_VCS_NAME" value="svn" />
     <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
@@ -2099,7 +2098,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/roadmap.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="580" selection-end="580" vertical-scroll-proportion="0.32481202">
+        <state line="60" column="24" selection-start="2960" selection-end="2960" vertical-scroll-proportion="0.86466163">
           <folding />
         </state>
       </provider>

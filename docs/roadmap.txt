@@ -57,4 +57,5 @@ o Only use mocks for seting expectations on (will be able to provide framework l
 o For classes with annotations, may not want to also add in specification methods discovered by naming conventions.
 
 Test Strategy
-o Determine how to automatically test core code against .
+o Determine how to automatically test core code against example code (maybe seperate classloader). This could form a
+  "compatibility" suite.
