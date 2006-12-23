@@ -1,19 +1,23 @@
-Instinct is a Behaviour Driven Development (BDD) framework for Java. Inspired by RSpec, Instinct provides flexible annotation of contexts, specifications, mocks, etc. (via Java 1.5 annotations, marker interfaces or naming conventions); automatic creation of mocks, stubs, test subjects & unique fields; a verification API (similar to JUnit's Assert); unique utilities; and JUnit test runner integration.
+Instinct is a Behaviour Driven Development (BDD) framework for Java. Inspired by RSpec, Instinct provides flexible
+annotation of contexts, specifications, mocks, etc. (via Java 1.5 annotations, marker interfaces or naming conventions);
+automatic creation of mocks, stubs, test subjects & unique fields; a verification API (similar to JUnit's Assert);
+unique utilities; and JUnit test runner integration.
 
 
 Implementation Plan
 o Implement core annotations (context, specification)
-o Implement example code
 o Implement suite aggregator
+o Get example code working
 o Auto mocking
-o Auto fixture creation
+o Auto unique field creation
+o Auto fixture/subject creation
+o Come up with nomenclature (see terms.txt)
 
 Core Features
-o Should allow the use of annotation, naming conventions or interfaces (markers) to mark things (allows 1.4 compatability).
-o Built in framework support for deliniating mocks, stubs, etc.
+o Should allow the use of annotation, naming conventions or interfaces (markers) to mark things.
+o Built in framework support for nomenclature: mocks, stubs, etc.
 o IntelliJ IDEA plugin.
 o Support for JUnit runners.
-o Runtime exceptions only.
 
 Testing
 o Allow/encourage more than one Context per class file
@@ -46,26 +50,11 @@ o Hook into junit style runners for IDE integration - should find
 o How do you run an individual BehaviourContext in an IDE? Do we need to write a plugin?
 o May need a plugin to run tests individually (steal code from TestNG plugin - http://code.google.com/p/testng-idea/).
 
-General
-o JDK 1.5 only
-
 Functionality
 o Allow "naming conventions" to be added (discover these at runtime to extend functionality).
 o Need some way to discover what methods to run for non-annotated classes. Provide a naming convention to do this.
 o Only use mocks for seting expectations on (will be able to provide framework level support for this distinction).
 o For classes with annotations, may not want to also add in specification methods discovered by naming conventions.
 
-
-Suite run algorithm / lifecycle
-
-  find all @Contexts
-  for each context
-    find all @Specification methods
-    for each spec
-      auto wire mocks
-      run @SetUp methods
-      run specification
-      verify mocks
-      run @TearDown
-    end
-  end
+Test Strategy
+o Determine how to automatically test core code against .

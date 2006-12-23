@@ -30,8 +30,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/roadmap.txt" afterPath="$PROJECT_DIR$/docs/roadmap.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/docs/terms.txt" afterPath="$PROJECT_DIR$/docs/terms.txt" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -188,10 +189,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BehaviourContextRunnerImpl.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java">
+      <file leaf-file-name="roadmap.txt" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/docs/roadmap.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="68" column="14" selection-start="3632" selection-end="3632" vertical-scroll-proportion="0.8746356">
+            <state line="12" column="0" selection-start="580" selection-end="580" vertical-scroll-proportion="0.32481202">
               <folding />
             </state>
           </provider>
@@ -1611,7 +1612,7 @@
       <showLibraryContents />
       <hideEmptyPackages ProjectPane="true" />
       <abbreviatePackageNames />
-      <showStructure Scope="false" ProjectPane="false" PackagesPane="false" Favorites="false" />
+      <showStructure Favorites="false" ProjectPane="false" Scope="false" PackagesPane="false" />
       <autoscrollToSource />
       <autoscrollFromSource PackagesPane="true" ProjectPane="true" />
       <sortByType />
@@ -1674,6 +1675,18 @@
         <option name="Make" value="true" />
       </method>
     </tempConfiguration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+    </configuration>
     <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
       <option name="MAIN_CLASS_NAME" />
       <option name="VM_PARAMETERS" />
@@ -1683,6 +1696,13 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <module name="" />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <module name="" />
@@ -1702,25 +1722,6 @@
       <method>
         <option name="Make" value="true" />
       </method>
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
     </configuration>
     <configuration default="false" name="JUnit Suite" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <pattern value="au.id.adams.instinct.integrate.junit.*" />
@@ -1867,7 +1868,7 @@
     <option name="UPDATE_RUN_STATUS" value="false" />
     <option name="UPDATE_RECURSIVELY" value="true" />
     <option name="MERGE_DRY_RUN" value="false" />
-    <configuration useDefault="true">$PROJECT_DIR$/../../.subversion</configuration>
+    <configuration useDefault="true">$PROJECT_DIR$/../../../.subversion</configuration>
     <remoteStatus />
     <upgradeMode>none</upgradeMode>
   </component>
@@ -1886,14 +1887,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1920" height="1174" extended-state="0" />
+    <frame x="0" y="22" width="1280" height="828" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993513" order="7" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22423919" order="0" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22384427" order="0" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32808155" order="1" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3253012" order="8" />
@@ -1998,55 +1999,6 @@
     <option name="myLastEditedConfigurable" value="Harvey Norman Inspection Profile" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/integrate/junit/JUnitSuite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="248" selection-end="248" vertical-scroll-proportion="0.27231467">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/aggregate/locate/ClassLocatorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="23" selection-start="648" selection-end="648" vertical-scroll-proportion="0.19062027">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/aggregate/BehaviourContextAggregatorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="15" selection-start="854" selection-end="854" vertical-scroll-proportion="0.27231467">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/aggregate/locate/AnnotatedMethodLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="173" selection-end="259" vertical-scroll-proportion="0.1633888">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/util/type/Interface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="17" selection-start="59" selection-end="59" vertical-scroll-proportion="0.054462936">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/core/naming/NamingConvention.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="17" selection-start="98" selection-end="98" vertical-scroll-proportion="0.0816944">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/aggregate/locate/MethodLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="28" selection-start="250" selection-end="250" vertical-scroll-proportion="0.13615733">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/integrate/junit/ProxyGeneratorImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="70" selection-start="687" selection-end="687" vertical-scroll-proportion="0.3540091">
@@ -2133,7 +2085,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="14" selection-start="3632" selection-end="3632" vertical-scroll-proportion="0.8746356">
+        <state line="46" column="37" selection-start="2714" selection-end="2714" vertical-scroll-proportion="0.75789475">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/terms.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="30" selection-start="122" selection-end="122" vertical-scroll-proportion="0.3518797">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/roadmap.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="580" selection-end="580" vertical-scroll-proportion="0.32481202">
           <folding />
         </state>
       </provider>
