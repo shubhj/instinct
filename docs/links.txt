@@ -1,0 +1,18 @@
+Annotations
+o http://www.oracle.com/technology/pub/articles/hunter_meta_2.html
+
+rSpec
+o http://rspec.rubyforge.org/examples.html
+
+Terminology
+o http://martinfowler.com/bliki/TestDouble.html
+o http://agilesoftwaredevelopment.com/node/29
+
+Projects
+o http://jdummy.sourceforge.net/
+
+ASM/javassist
+
+o http://www.csg.is.titech.ac.jp/~chiba/javassist/
+o http://www-128.ibm.com/developerworks/java/library/j-dyn0203.html
+o http://www.jboss.org/products/javassist
