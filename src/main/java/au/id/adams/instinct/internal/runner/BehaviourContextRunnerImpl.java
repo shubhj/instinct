@@ -1,11 +1,11 @@
 package au.id.adams.instinct.internal.runner;
 
 import java.lang.reflect.Method;
-import au.id.adams.instinct.core.annotate.AfterTest;
-import au.id.adams.instinct.core.annotate.BeforeTest;
+import au.id.adams.instinct.core.annotate.AfterSpecification;
+import au.id.adams.instinct.core.annotate.BeforeSpecification;
 import au.id.adams.instinct.core.annotate.Specification;
-import au.id.adams.instinct.core.naming.AfterTestNamingConvention;
-import au.id.adams.instinct.core.naming.BeforeTestNamingConvention;
+import au.id.adams.instinct.core.naming.AfterSpecificationNamingConvention;
+import au.id.adams.instinct.core.naming.BeforeSpecificationNamingConvention;
 import au.id.adams.instinct.core.naming.BehaviourContextNamingConvention;
 import au.id.adams.instinct.internal.aggregate.locate.MethodLocator;
 import au.id.adams.instinct.internal.aggregate.locate.MethodLocatorImpl;
@@ -32,8 +32,8 @@ public final class BehaviourContextRunnerImpl implements BehaviourContextRunner 
     public <T> void run(final Class<T> cls) {
         checkNotNull(cls);
         final Method[] specificationMethods = methodLocator.locateAll(cls, Specification.class, new BehaviourContextNamingConvention());
-        final Method[] setUpMethods = methodLocator.locateAll(cls, BeforeTest.class, new BeforeTestNamingConvention());
-        final Method[] tearDownMethods = methodLocator.locateAll(cls, AfterTest.class, new AfterTestNamingConvention());
+        final Method[] setUpMethods = methodLocator.locateAll(cls, BeforeSpecification.class, new BeforeSpecificationNamingConvention());
+        final Method[] tearDownMethods = methodLocator.locateAll(cls, AfterSpecification.class, new AfterSpecificationNamingConvention());
         runSpecifications(cls, specificationMethods, setUpMethods, tearDownMethods);
     }
 

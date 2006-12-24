@@ -1,8 +1,8 @@
 package au.id.adams.instinct.internal.runner;
 
 import au.id.adams.instinct.core.annotate.BehaviourContext;
-import au.id.adams.instinct.core.annotate.BeforeTest;
-import au.id.adams.instinct.core.annotate.AfterTest;
+import au.id.adams.instinct.core.annotate.BeforeSpecification;
+import au.id.adams.instinct.core.annotate.AfterSpecification;
 
 @SuppressWarnings({"EmptyClass"})
 @BehaviourContext
@@ -10,27 +10,27 @@ public final class TestContextWithSetUpAndTearDown {
 
     @BehaviourContext
     public static class AnEmbeddedPublicContext {
-        @BeforeTest
+        @BeforeSpecification
         public void aSetUpMethod() {
         }
 
-        @BeforeTest
+        @BeforeSpecification
         private void anotherSetUpMethod() {
         }
 
-        @AfterTest
+        @AfterSpecification
         public void aTearDownMethod() {
         }
 
-        @AfterTest
+        @AfterSpecification
         protected void drop() {
         }
 
-        @AfterTest
+        @AfterSpecification
         void down() {
         }
 
-        @AfterTest
+        @AfterSpecification
         private void anotherTearDownMethod() {
         }
     }

@@ -2,19 +2,19 @@ package au.id.adams.instinct.internal.runner;
 
 import au.id.adams.instinct.core.annotate.BehaviourContext;
 import au.id.adams.instinct.core.annotate.Specification;
-import au.id.adams.instinct.core.annotate.BeforeTest;
-import au.id.adams.instinct.core.annotate.AfterTest;
+import au.id.adams.instinct.core.annotate.BeforeSpecification;
+import au.id.adams.instinct.core.annotate.AfterSpecification;
 import static au.id.adams.instinct.verify.Verify.mustBeTrue;
 
 @BehaviourContext
 public final class ASimpleContext {
 
-    @BeforeTest
+    @BeforeSpecification
     public void setUp() {
         System.out.println("Foo");
     }
 
-    @BeforeTest
+    @BeforeSpecification
     public void setUpAgain() {
         System.out.println("Fooby");
     }
@@ -25,12 +25,12 @@ public final class ASimpleContext {
         mustBeTrue(true);
     }
 
-    @AfterTest
+    @AfterSpecification
     public void tearDown() {
         System.out.println("Baz");
     }
 
-    @AfterTest
+    @AfterSpecification
     public void tearDownAgain() {
         System.out.println("Qux");
     }

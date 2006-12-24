@@ -1,7 +1,7 @@
 package au.id.adams.instinct.example;
 
 import au.id.adams.instinct.core.annotate.BehaviourContext;
-import au.id.adams.instinct.core.annotate.BeforeTest;
+import au.id.adams.instinct.core.annotate.BeforeSpecification;
 import au.id.adams.instinct.core.annotate.Specification;
 import au.id.adams.instinct.internal.util.Suggest;
 import static au.id.adams.instinct.verify.Verify.mustBeFalse;
@@ -16,7 +16,7 @@ public final class ContextExample {
         @Suggest("Label this a @Fixture, and remove use of new in setUp")
         private Stack stack;
 
-        @BeforeTest
+        @BeforeSpecification
         void setUp() {
             stack = new StackImpl();
         }
@@ -44,7 +44,7 @@ public final class ContextExample {
         @Suggest("Label this a @Fixture, and remove use of new in setUp")
         private Stack stack;
 
-        @BeforeTest
+        @BeforeSpecification
         void setUp() {
             stack = new StackImpl();
             for (int i = 0; i < 10; i++) {
