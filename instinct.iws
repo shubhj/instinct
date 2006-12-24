@@ -188,28 +188,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="roadmap.txt" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="roadmap.txt" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/docs/roadmap.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state line="39" column="24" selection-start="1836" selection-end="1836" vertical-scroll-proportion="0.29705882">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BehaviourContextRunnerImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="48" selection-start="1101" selection-end="1101" vertical-scroll-proportion="0.21654135">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SpecificationRunnerImpl.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunnerImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="0" selection-start="1146" selection-end="1146" vertical-scroll-proportion="0.2647059">
               <folding />
             </state>
           </provider>
@@ -2014,8 +1996,8 @@
     <option name="myPlainMode" value="false" />
     <option name="myLastEditedConfigurable" value="javassist-3.4.jar" />
   </component>
-  <component name="com.intellij.profile.ui.ErrorOptionsConfigurable" proportions="0.11111111" version="1">
-    <option name="myLastEditedConfigurable" value="IDE Profiles" />
+  <component name="com.intellij.profile.ui.ErrorOptionsConfigurable" proportions="0.11111111,0.5285714" version="1">
+    <option name="myLastEditedConfigurable" value="Default" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/internal/aggregate/ClassLocatorSlowTest.java">
@@ -2104,13 +2086,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/roadmap.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="24" selection-start="1836" selection-end="1836" vertical-scroll-proportion="0.29705882">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="48" selection-start="1101" selection-end="1101" vertical-scroll-proportion="0.21654135">
@@ -2120,7 +2095,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunnerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="1146" selection-end="1146" vertical-scroll-proportion="0.2647059">
+        <state line="20" column="0" selection-start="1146" selection-end="1146" vertical-scroll-proportion="0.20882353">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/roadmap.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="24" selection-start="1836" selection-end="1836" vertical-scroll-proportion="0.29705882">
           <folding />
         </state>
       </provider>

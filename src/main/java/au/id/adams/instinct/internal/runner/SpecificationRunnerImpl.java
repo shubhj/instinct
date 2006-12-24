@@ -20,7 +20,7 @@ final class SpecificationRunnerImpl implements SpecificationRunner {
     private final MockVerifier mockVerifier = new MockVerifierImpl();
 
     @Suggest("Check JUNit 4 code for the way they are now doing finally in runBare()")
-    public void run(SpecificationContext context) {
+    public void run(final SpecificationContext context) {
         checkNotNull(context);
         final Object instance = invokeConstructor(context.getBehaviourContextClass());
         try {
