@@ -30,15 +30,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationContextImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/LifeCycleMethodValidator.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/LifeCycleMethodValidator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunnerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunner.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationContext.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationContext.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunnerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunnerImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/LifeCycleMethodValidatorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/LifeCycleMethodValidatorImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunner.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunner.java" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -204,7 +197,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BehaviourContextRunnerImpl.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="BehaviourContextRunnerImpl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="19" column="48" selection-start="1101" selection-end="1101" vertical-scroll-proportion="0.21654135">
@@ -213,13 +206,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SpecificationRunnerImpl.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="SpecificationRunnerImpl.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunnerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="4" selection-start="986" selection-end="986" vertical-scroll-proportion="0.37058824">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="20" column="0" selection-start="1146" selection-end="1146" vertical-scroll-proportion="0.2647059">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -2120,18 +2111,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunnerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="4" selection-start="986" selection-end="986" vertical-scroll-proportion="0.37058824">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="48" selection-start="1101" selection-end="1101" vertical-scroll-proportion="0.21654135">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunnerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="0" selection-start="1146" selection-end="1146" vertical-scroll-proportion="0.2647059">
           <folding />
         </state>
       </provider>

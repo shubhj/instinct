@@ -5,8 +5,12 @@ import au.id.adams.instinct.internal.mock.MockAutoWirer;
 import au.id.adams.instinct.internal.mock.MockAutoWirerImpl;
 import au.id.adams.instinct.internal.mock.MockVerifier;
 import au.id.adams.instinct.internal.mock.MockVerifierImpl;
-import au.id.adams.instinct.internal.util.*;
+import au.id.adams.instinct.internal.util.ConstructorInvoker;
+import au.id.adams.instinct.internal.util.ConstructorInvokerImpl;
+import au.id.adams.instinct.internal.util.MethodInvoker;
+import au.id.adams.instinct.internal.util.MethodInvokerImpl;
 import static au.id.adams.instinct.internal.util.ParamChecker.checkNotNull;
+import au.id.adams.instinct.internal.util.Suggest;
 
 final class SpecificationRunnerImpl implements SpecificationRunner {
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
