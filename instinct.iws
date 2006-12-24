@@ -30,22 +30,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/example/ContextExample.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/example/ContextExample.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/internal/aggregate/TestContext3.java" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/internal/aggregate/TestContext3.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationContextImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/LifeCycleMethodValidator.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/LifeCycleMethodValidator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunnerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunner.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationContext.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationContext.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunner.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/core/naming/BeforeTestNamingConvention.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/core/annotate/BeforeTest.java" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/core/annotate/BeforeSpecification.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/LifeCycleMethodValidatorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/LifeCycleMethodValidatorImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/core/annotate/AfterSpecification.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/internal/runner/TestContextWithSetUpAndTearDown.java" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/internal/runner/TestContextWithSetUpAndTearDown.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationContext.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/core/naming/AfterSpecificationNamingConvention.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/core/annotate/AfterTest.java" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/core/naming/BeforeSpecificationNamingConvention.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/internal/runner/ASimpleContext.java" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/internal/runner/ASimpleContext.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/core/naming/AfterTestNamingConvention.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunner.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunner.java" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -211,29 +204,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BehaviourContextRunnerImpl.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="BehaviourContextRunnerImpl.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="26" selection-start="1895" selection-end="1895" vertical-scroll-proportion="0.26766917">
+            <state line="19" column="48" selection-start="1101" selection-end="1101" vertical-scroll-proportion="0.21654135">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SpecificationRunner.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunner.java">
+      <file leaf-file-name="SpecificationRunnerImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunnerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="36" selection-start="98" selection-end="117" vertical-scroll-proportion="0.105882354">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SpecificationContext.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationContext.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="33" selection-start="238" selection-end="238" vertical-scroll-proportion="0.18529412">
-              <folding />
+            <state line="18" column="4" selection-start="986" selection-end="986" vertical-scroll-proportion="0.37058824">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -2037,45 +2023,10 @@
     <option name="myPlainMode" value="false" />
     <option name="myLastEditedConfigurable" value="javassist-3.4.jar" />
   </component>
-  <component name="com.intellij.profile.ui.ErrorOptionsConfigurable" proportions="0.11111111,0.5285714" version="1">
-    <option name="myLastEditedConfigurable" value="Harvey Norman Inspection Profile" />
+  <component name="com.intellij.profile.ui.ErrorOptionsConfigurable" proportions="0.11111111" version="1">
+    <option name="myLastEditedConfigurable" value="IDE Profiles" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/integrate/junit/JUnitTestSuiteBuilderImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="36" selection-start="1005" selection-end="1005" vertical-scroll-proportion="0.17492712">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/mock/MockVerifierImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="26" selection-start="186" selection-end="186" vertical-scroll-proportion="0.10495627">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/mock/MockVerifier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="28" selection-start="73" selection-end="73" vertical-scroll-proportion="0.034985423">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/mock/MockAutoWirer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="21" selection-start="66" selection-end="66" vertical-scroll-proportion="0.034985423">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/docs/terms.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="30" selection-start="122" selection-end="122" vertical-scroll-proportion="0.3518797">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/internal/aggregate/ClassLocatorSlowTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="5" selection-start="954" selection-end="954" vertical-scroll-proportion="0.5034965">
@@ -2111,13 +2062,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/roadmap.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="24" selection-start="1836" selection-end="1836" vertical-scroll-proportion="0.29705882">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/core/naming/BehaviourContextNamingConvention.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="19" selection-start="62" selection-end="62" vertical-scroll-proportion="0.052941177">
@@ -2125,23 +2069,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/LifeCycleMethodValidatorImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="26" selection-start="1895" selection-end="1895" vertical-scroll-proportion="0.26766917">
+        <state line="11" column="0" selection-start="485" selection-end="485" vertical-scroll-proportion="0.13533835">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunner.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/LifeCycleMethodValidator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="36" selection-start="98" selection-end="117" vertical-scroll-proportion="0.105882354">
+        <state line="4" column="0" selection-start="81" selection-end="81" vertical-scroll-proportion="0.105882354">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationContext.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="33" selection-start="238" selection-end="238" vertical-scroll-proportion="0.18529412">
+        <state line="5" column="4" selection-start="118" selection-end="118" vertical-scroll-proportion="0.13235295">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationContextImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="28" selection-start="438" selection-end="462" vertical-scroll-proportion="0.17941177">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="53" selection-start="142" selection-end="142" vertical-scroll-proportion="0.07941177">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="22" selection-start="69" selection-end="69" vertical-scroll-proportion="0.052941177">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/docs/roadmap.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="24" selection-start="1836" selection-end="1836" vertical-scroll-proportion="0.29705882">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunnerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="4" selection-start="986" selection-end="986" vertical-scroll-proportion="0.37058824">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="48" selection-start="1101" selection-end="1101" vertical-scroll-proportion="0.21654135">
           <folding />
         </state>
       </provider>

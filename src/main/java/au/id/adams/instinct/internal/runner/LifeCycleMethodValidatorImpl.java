@@ -9,7 +9,7 @@ import au.net.netstorm.boost.edge.java.lang.EdgeClass;
 import au.net.netstorm.boost.edge.EdgeException;
 
 @Suggest("Should we check for void?")
-public final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
+final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
     private final EdgeClass edgeClass = new DefaultEdgeClass();
 
     @Suggest("Consider adding parameter types to message for overloaded methods")

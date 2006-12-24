@@ -1,0 +1,36 @@
+package au.id.adams.instinct.internal.runner;
+
+import java.lang.reflect.Method;
+import static au.id.adams.instinct.internal.util.ParamChecker.checkNotNull;
+
+final class SpecificationContextImpl implements SpecificationContext {
+    private final Class<?> behaviourContextClass;
+    private final Method[] beforeSpecificationMethods;
+    private final Method[] afterSpecificationMethods;
+    private final Method specificationMethod;
+
+    SpecificationContextImpl(final Class<?> behaviourContextClass, final Method[] beforeSpecificationMethods,
+            final Method[] afterSpecificationMethods, final Method specificationMethod) {
+        checkNotNull(behaviourContextClass, beforeSpecificationMethods, afterSpecificationMethods, specificationMethod);
+        this.behaviourContextClass = behaviourContextClass;
+        this.beforeSpecificationMethods = beforeSpecificationMethods;
+        this.afterSpecificationMethods = afterSpecificationMethods;
+        this.specificationMethod = specificationMethod;
+    }
+
+    public Class<?> getBehaviourContextClass() {
+        return behaviourContextClass;
+    }
+
+    public Method[] getBeforeSpecificationMethods() {
+        return beforeSpecificationMethods;
+    }
+
+    public Method[] getAfterSpecificationMethods() {
+        return afterSpecificationMethods;
+    }
+
+    public Method getSpecificationMethod() {
+        return specificationMethod;
+    }
+}
