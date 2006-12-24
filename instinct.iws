@@ -30,8 +30,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunnerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunnerImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/roadmap.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/docs/terms.txt" afterPath="" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -187,17 +188,7 @@
     <option name="myCurrentFavoritesList" value="instinct" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="roadmap.txt" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/docs/roadmap.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="24" selection-start="1836" selection-end="1836" vertical-scroll-proportion="0.29705882">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -2100,9 +2091,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/roadmap.txt">
+    <entry file="file://$PROJECT_DIR$/docs/links.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="24" selection-start="1836" selection-end="1836" vertical-scroll-proportion="0.29705882">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
