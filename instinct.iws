@@ -30,7 +30,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/ConstructorTestChecker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/MockingInstanceProvider.java" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/MockingInstanceProvider.java" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -186,7 +188,35 @@
     <option name="myCurrentFavoritesList" value="instinct" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="ConstructorTestChecker.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/ConstructorTestChecker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="0" selection-start="310" selection-end="310" vertical-scroll-proportion="0.29117647">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConcreteInstanceProvider.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/ConcreteInstanceProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="32" selection-start="412" selection-end="412" vertical-scroll-proportion="0.13235295">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConstructorDataChecker.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/test/atom/ConstructorDataChecker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="12" selection-start="399" selection-end="399" vertical-scroll-proportion="0.105882354">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -217,7 +247,9 @@
     <option name="LAST_EDITED_MODULE_NAME" value="instinct" />
     <option name="LAST_EDITED_TAB_NAME" value="Libraries (Classpath)" />
   </component>
-  <component name="NamedScopeManager" />
+  <component name="NamedScopeManager">
+    <scope name="Boost" pattern="lib:au.net.netstorm.*" />
+  </component>
   <component name="PackagesPane">
     <subPane>
       <PATH>
@@ -920,6 +952,88 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.LibraryGroupNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/test" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.LibraryGroupNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/test" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/test/atom" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.LibraryGroupNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/reflect" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -1858,13 +1972,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="828" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993513" order="7" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18491484" order="0" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18491484" order="0" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32808155" order="1" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32465753" order="8" />
@@ -1960,8 +2074,8 @@
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
-  <component name="com.intellij.ide.util.scopeChooser.ScopeChooserConfigurable" proportions="" version="1">
-    <option name="myLastEditedConfigurable" />
+  <component name="com.intellij.ide.util.scopeChooser.ScopeChooserConfigurable" proportions="0.11111111" version="1">
+    <option name="myLastEditedConfigurable" value="Boost" />
   </component>
   <component name="com.intellij.openapi.roots.ui.configuration.projectRoot.ProjectRootMasterDetailsConfigurable" proportions="0.11111111" version="1">
     <option name="myPlainMode" value="false" />
@@ -1971,69 +2085,6 @@
     <option name="myLastEditedConfigurable" value="Default" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/internal/aggregate/ClassLocatorSlowTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="5" selection-start="954" selection-end="954" vertical-scroll-proportion="0.5034965">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerSlowTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="19" selection-start="403" selection-end="403" vertical-scroll-proportion="0.16783217">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/internal/aggregate/BehaviourContextAggregatorSlowTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="19" selection-start="468" selection-end="468" vertical-scroll-proportion="0.16783217">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/internal/aggregate/AnnotatedMethodLocatorSlowTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="19" selection-start="371" selection-end="371" vertical-scroll-proportion="0.16783217">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/integrate/junit/AllBehaviourContextsSlowTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="16" selection-start="1267" selection-end="1267" vertical-scroll-proportion="0.3357488">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/core/naming/BehaviourContextNamingConvention.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="19" selection-start="62" selection-end="62" vertical-scroll-proportion="0.052941177">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/LifeCycleMethodValidatorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="485" selection-end="485" vertical-scroll-proportion="0.13533835">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/LifeCycleMethodValidator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="81" selection-end="81" vertical-scroll-proportion="0.105882354">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="4" selection-start="118" selection-end="118" vertical-scroll-proportion="0.13235295">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationContextImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="28" selection-start="438" selection-end="462" vertical-scroll-proportion="0.17941177">
@@ -2074,6 +2125,69 @@
     <entry file="file://$PROJECT_DIR$/docs/links.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/test/atom/ConstructorDataChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="12" selection-start="399" selection-end="399" vertical-scroll-proportion="0.105882354">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/test/atom/DefaultPrimitiveBoxer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="12" selection-start="164" selection-end="164" vertical-scroll-proportion="0.105882354">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/reflect/DefaultReflectObjectMaster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="23" selection-start="219" selection-end="219" vertical-scroll-proportion="0.15882353">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/reflect/DefaultReflectMaster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="29" selection-start="681" selection-end="681" vertical-scroll-proportion="0.29117647">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/test/atom/DefaultInstanceHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="57" selection-start="668" selection-end="668" vertical-scroll-proportion="0.2382353">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/test/atom/InstanceHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="10" selection-start="52" selection-end="52" vertical-scroll-proportion="0.052941177">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/test/atom/ConstructorNullDataChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="18" selection-start="319" selection-end="319" vertical-scroll-proportion="0.13235295">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/ConstructorTestChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="310" selection-end="310" vertical-scroll-proportion="0.29117647">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/ConcreteInstanceProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="32" selection-start="412" selection-end="412" vertical-scroll-proportion="0.13235295">
           <folding />
         </state>
       </provider>
