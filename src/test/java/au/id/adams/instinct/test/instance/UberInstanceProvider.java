@@ -4,7 +4,7 @@ import static java.lang.reflect.Modifier.isFinal;
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 
 public final class UberInstanceProvider implements InstanceProvider {
-    private static final InstanceProvider MOCKING_INSTANCE_PROVIDER = new MockingInstanceProvider();
+    private static final InstanceProvider MOCKING_INSTANCE_PROVIDER = new ProxiedInstanceProvider();
     private static final InstanceProvider CONCRETE_INSTANCE_PROVIDER = new ConcreteInstanceProvider();
 
     @SuppressWarnings({"RawUseOfParameterizedType"})

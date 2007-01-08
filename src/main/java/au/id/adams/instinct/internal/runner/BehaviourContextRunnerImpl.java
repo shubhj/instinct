@@ -28,13 +28,13 @@ public final class BehaviourContextRunnerImpl implements BehaviourContextRunner 
     private <T> void runSpecifications(final Class<T> behaviourContextClass, final Method[] specificationMethods, final Method[] setUpMethods,
             final Method[] tearDownMethods) {
         for (final Method specificationMethod : specificationMethods) {
-            SpecificationContext specificationContext =
+            final SpecificationContext specificationContext =
                     new SpecificationContextImpl(behaviourContextClass, setUpMethods, tearDownMethods, specificationMethod);
             specificationRunner.run(specificationContext);
         }
     }
 
-    private <T> Method[] getMethods(Class<T> behaviourContextClass, Class<? extends Annotation> annotationType, NamingConvention namingConvention) {
+    private <T> Method[] getMethods(final Class<T> behaviourContextClass, final Class<? extends Annotation> annotationType, final NamingConvention namingConvention) {
         return methodLocator.locateAll(behaviourContextClass, annotationType, namingConvention);
     }
 }
