@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="jrdf" default="dist" basedir=".">
+<project name="instinct" default="dist" basedir=".">
 
     <import file="build-setup.xml"/>
-    <import file="build-sparql.xml"/>
-    <import file="build-ntriples.xml"/>
 
     <target name="clean">
         <delete dir="${build.dir}"/>
     </target>
-
-    <target name="gen-src" depends="gen-sparql-parser, gen-ntriples-parser"/>
 
     <target name="checkstyle">
         <checkstyle config="${conf.dir}/checkstyle.xml">
@@ -139,11 +135,11 @@
         </javadoc>
     </target>
 
-    <target name="test" depends="unit-test,integration-test"/>
+    <target name="test" depends="unit-test,slow-test"/>
     <target name="unit-test" depends="dist">
         <test.macro type="unit"/>
     </target>
-    <target name="integration-test" depends="dist">
+    <target name="slow-test" depends="dist">
         <test.macro type="integration"/>
     </target>
     <target name="emma-unit-test" depends="-emma, dist">
