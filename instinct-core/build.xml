@@ -71,53 +71,17 @@
         </sequential>
     </macrodef>
 
-    <target name="dist" depends="compile,-copy-sparql-sablecc-resources,-copy-ntriples-sablecc-resources">
+    <target name="dist" depends="compile">
         <antcall target="-dist-jar"/>
-        <antcall target="-dist-gui"/>
     </target>
 
     <target name="-dist-jar">
-        <!-- Setup main jar ./main/jrdf-0.x.x.jar -->
         <mkdir dir="${dist.dir}/jar"/>
         <jar destfile="${dist.dir}/jar/${project.jar}">
-            <manifest>
-                <attribute name="Main-Class" value="org.jrdf.example.RdfXmlParserExample"/>
-            </manifest>
-            <fileset dir="${prod.classes.dir}" excludes="com/**/*"/>
+            <fileset dir="${prod.classes.dir}"/>
         </jar>
     </target>
 
-    <target name="-dist-gui">
-        <!-- Setup main jar ./main/jrdf-0.x.x.jar -->
-        <mkdir dir="${dist.dir}/gui"/>
-        <pathconvert dirsep="/" pathsep=" " property="jar.classpath">
-           <map from="${basedir}/lib" to="lib"/>
-           <path refid="production.class.path"/>
-        </pathconvert>
-        <jar destfile="${dist.dir}/gui/${project.jar}">
-            <manifest>
-                <attribute name="Main-Class" value="org.jrdf.gui.SparqlGui"/>
-                <attribute name="Class-Path" value="${jar.classpath}"/>
-            </manifest>
-            <fileset dir="${prod.classes.dir}" excludes="com/**/*"/>
-        </jar>
-        <!-- Copy required lib jars to ./lib/* -->
-        <copy todir="${dist.dir}/gui">
-            <fileset dir="${basedir}">
-                <patternset refid="production.classpath.pattern"/>
-            </fileset>
-        </copy>
-        <!-- Create structure for single jar file -->
-        <mkdir dir="${dist.dir}/gui/main"/>
-        <move file="${dist.dir}/gui/${project.jar}" todir="${dist.dir}/gui/main"/>
-        <!-- Update uber jar with one-jar classes and manifest. -->
-        <jar destfile="${dist.dir}/gui/${gui.jar}" manifest="${conf.dir}/boot-manifest.mf">
-            <fileset dir="${dist.dir}/gui" includes="**/*" excludes="${gui.jar}"/>
-            <fileset dir="${prod.classes.dir}" includes="com/**/*"/>
-            <fileset dir="${conf.dir}" includes="**/commons-logging.properties"/>
-            <fileset dir="${conf.dir}" includes="**/simplelog.properties"/>
-        </jar>
-    </target>
 
     <target name="javadoc" depends="-compile">
         <mkdir dir="${javadoc.dir}"/>
@@ -178,20 +142,4 @@
         </sequential>
     </macrodef>
 
-    <target name="jester" depends="dist">
-        <delete dir="${modified.src.dir}"/>
-        <copy todir="${modified.src.dir}">
-            <fileset dir="${src.dir}">
-                <exclude name="**/*Test.java"/>
-                <exclude name="**/AllTests.java"/>
-            </fileset>
-        </copy>
-        <java classpathref="test.class.path" classname="jester.TestTester" fork="true">
-            <!-- FIXME TJA: Use the value of a property to set the classpath here -->
-            <arg value="-cp=lib/junit-3.8.1.jar:lib/jester-1.3.7.jar:build/dist/jrdf-0.4.jar:build/test-classes"/>
-            <arg value="-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel"/>
-            <arg value="org.jrdf.graph.mem.GraphImplUnitTest"/>
-            <arg value="${modified.src.dir}/java"/>
-        </java>
-    </target>
 </project>

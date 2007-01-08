@@ -91,9 +91,6 @@
     <fileset id="production.code.fileset" dir="${prod.src.dir}">
         <patternset refid="production.code.pattern"/>
     </fileset>
-    <fileset id="gen.code.fileset" dir="${gen.src.dir}">
-        <patternset refid="production.code.pattern"/>
-    </fileset>
     <fileset id="test.code.fileset" dir="${test.src.dir}">
         <patternset refid="test.code.pattern"/>
     </fileset>
