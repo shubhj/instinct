@@ -86,7 +86,7 @@
     <target name="javadoc" depends="-compile">
         <mkdir dir="${javadoc.dir}"/>
         <javadoc destdir="${javadoc.dir}" author="true" version="true"
-                 packagenames="org.jrdf.*"
+                 packagenames="com.googlecode.*"
                  sourcepath="${prod.src.dir}"
                  classpath="${prod.classes.dir}"
                  failonerror="true"
