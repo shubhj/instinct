@@ -2,10 +2,8 @@ package au.id.adams.instinct.internal.aggregate;
 
 import au.id.adams.instinct.internal.aggregate.locate.ClassLocator;
 import au.id.adams.instinct.internal.aggregate.locate.ClassLocatorImpl;
-import au.id.adams.instinct.test.InstinctTestCase;
 import au.id.adams.instinct.internal.util.ClassName;
-import au.id.adams.instinct.internal.aggregate.BehaviourContextAggregator;
-import au.id.adams.instinct.internal.aggregate.BehaviourContextAggregatorImpl;
+import au.id.adams.instinct.test.InstinctTestCase;
 
 public final class BehaviourContextAggregatorSlowTest extends InstinctTestCase {
     private static final int EXPECTED_CONTEXTS = 17;

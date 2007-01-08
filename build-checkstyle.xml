@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project default="_checkstyle">
+    <import file="build-init.xml"/>
+
+    <target name="_checkstyle">
+        <macro_checkstyle code.type="main"/>
+        <macro_checkstyle code.type="test"/>
+    </target>
+
+    <macrodef name="macro_run_checkstyle">
+        <attribute name="code.type"/>
+        <sequential>
+            <mkdir dir="${etc.checkstyle.dir}"/>
+            <mkdir dir="${reports.checkstyle.dir}"/>
+            <taskdef resource="checkstyletask.properties" classpathref="build.lib.classpath"/>
+            <checkstyle config="${etc.checkstyle.dir}/checkstyle-@{code.type}.xml"
+                        failOnViolation="false" failureProperty="checkstyle.@{code.type}.failed">
+                <formatter/>
+                <formatter type="xml" tofile="${reports.checkstyle.dir}/checkstyle-@{code.type}.xml"/>
+                <fileset refid="src.@{code.type}.java.fileset"/>
+            </checkstyle>
+            <style in="${reports.checkstyle.dir}/checkstyle-@{code.type}.xml"
+                   out="${reports.checkstyle.dir}/checkstyle-@{code.type}.html"
+                   style="${etc.checkstyle.dir}/checkstyle-noframes-sorted.xsl"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="macro_check_checkstyle">
+        <attribute name="code.type"/>
+        <sequential>
+            <fail if="checkstyle.@{code.type}.failed" message="Checkstyle failure [@{code.type}]."/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="macro_checkstyle">
+        <attribute name="code.type"/>
+        <sequential>
+            <macro_run_checkstyle code.type="@{code.type}"/>
+            <macro_check_checkstyle code.type="@{code.type}"/>
+        </sequential>
+    </macrodef>
+
+</project>

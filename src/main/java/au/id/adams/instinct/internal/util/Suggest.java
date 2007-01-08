@@ -26,9 +26,9 @@ public @interface Suggest {
 
     String value();
 
-    String card() default "";
+    String card() default "None";
 
-    String[] owners() default "";
+    String[] owners() default "Everyone";
 
     Priority priority() default Priority.LOW;
 }

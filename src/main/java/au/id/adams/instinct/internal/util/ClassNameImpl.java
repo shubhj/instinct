@@ -21,7 +21,7 @@ public final class ClassNameImpl implements ClassName {
         return fullyQualifiedClassName;
     }
 
-    @Suggest("DO we need to escape / as well?")
+    @Suggest("Do we need to escape / as well?")
     private String slashesToDots(final String path) {
         final String deBillGates = path.replaceAll("[/\\\\]", ".");
         final String noLeadingSlash = deBillGates.substring(1);

@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+<module name="Checker">
+    <module name="SuppressionCommentFilter">
+        <property name="offCommentFormat" value="CHECKSTYLE\:OFF ([\w\|]+)"/>
+        <property name="onCommentFormat" value="CHECKSTYLE\:ON ([\w\|]+)"/>
+        <property name="checkFormat" value="$1"/>
+    </module>
+    <module name="TreeWalker">
+        <property name="fileExtensions" value="java"/>
+        <property name="tabWidth" value="4"/>
+        <module name="FileContentsHolder"/>
+        <module name="ArrayTypeStyle"/>
+        <module name="AvoidNestedBlocks"/>
+        <module name="AvoidStarImport"/>
+        <module name="ConstantName"/>
+        <module name="CovariantEquals"/>
+        <module name="DeclarationOrder"/>
+        <module name="DesignForExtension"/>
+        <module name="EmptyForInitializerPad"/>
+        <module name="EmptyForIteratorPad"/>
+        <module name="EmptyStatement"/>
+        <module name="EqualsHashCode"/>
+        <module name="ExplicitInitialization"/>
+        <module name="FinalClass"/>
+        <module name="FinalLocalVariable"/>
+        <module name="FinalParameters"/>
+        <module name="GenericIllegalRegexp">
+            <property name="format"
+                      value="System\w*\.\w*out|System\w*\.\w*err|\.\w*printStackTrace\w*(\w*)|\.\w*clone\w*(\w*)|\.\w*finalize\w*(\w*)"/>
+        </module>
+        <module name="HideUtilityClassConstructor"/>
+        <module name="IllegalCatch">
+            <property name="illegalClassNames" value="java.lang.Error, java.lang.Throwable"/>
+        </module>
+        <module name="IllegalImport"/>
+        <module name="IllegalInstantiation">
+            <property name="classes"
+                      value="java.lang.Boolean,java.lang.Byte,java.lang.Short,java.lang.Character,java.lang.Integer,java.lang.Long,java.lang.Float,java.lang.Double"/>
+        </module>
+        <module name="IllegalToken">
+            <property name="tokens" value="LITERAL_PROTECTED,LITERAL_SWITCH,LITERAL_CASE,LITERAL_ASSERT"/>
+        </module>
+        <module name="IllegalType">
+            <property name="illegalClassNames"
+                      value="java.util.GregorianCalendar, java.util.Hashtable, java.util.HashSet, java.util.HashMap, java.util.ArrayList, java.util.LinkedList, java.util.LinkedHashMap, java.util.LinkedHashSet, java.util.TreeSet, java.util.TreeMap, java.util.Vector"/>
+        </module>
+        <module name="Indentation"/>
+        <module name="InterfaceIsType"/>
+        <module name="LeftCurly"/>
+        <module name="LocalFinalVariableName"/>
+        <module name="LocalVariableName"/>
+        <module name="MemberName"/>
+        <module name="MethodName"/>
+        <module name="MethodParamPad"/>
+        <module name="ModifiedControlVariable"/>
+        <module name="ModifierOrder"/>
+        <module name="MultipleVariableDeclarations"/>
+        <module name="MutableException"/>
+        <module name="NeedBraces"/>
+        <module name="NoWhitespaceAfter"/>
+        <module name="NoWhitespaceBefore"/>
+        <module name="OperatorWrap"/>
+        <module name="PackageDeclaration"/>
+        <module name="PackageName"/>
+        <module name="ParameterAssignment"/>
+        <module name="ParameterName"/>
+        <module name="ParenPad"/>
+        <module name="RedundantImport"/>
+        <module name="RedundantModifier"/>
+        <module name="RedundantThrows">
+            <property name="allowUnchecked" value="true"/>
+            <property name="allowSubclasses" value="true"/>
+        </module>
+        <module name="RightCurly"/>
+        <module name="SimplifyBooleanExpression"/>
+        <module name="SimplifyBooleanReturn"/>
+        <module name="StaticVariableName"/>
+        <module name="TabCharacter"/>
+        <module name="TrailingComment"/>
+        <module name="TypeName"/>
+        <module name="TypecastParenPad"/>
+        <module name="UnnecessaryParentheses"/>
+        <module name="UnusedImports"/>
+        <module name="UpperEll"/>
+        <module name="VisibilityModifier"/>
+    </module>
+</module>
