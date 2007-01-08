@@ -30,26 +30,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/util/ClassNameImpl.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/util/ClassNameImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/util/Suggest.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/util/Suggest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/mock" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/mock/MockCreator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/etc/checkstyle/checkstyle-noframes-sorted.xsl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/internal/aggregate/BehaviourContextAggregatorSlowTest.java" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/internal/aggregate/BehaviourContextAggregatorSlowTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LICENCE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/etc/checkstyle/checkstyle-test.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/ConstructorTestChecker.java" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/ConstructorTestChecker.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/instance" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build-setup.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/instance/ConcreteInstanceProvider.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/instance/MockingInstanceProvider.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build.cmd" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/etc/checkstyle" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/etc/checkstyle/checkstyle-main.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build-checkstyle.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/instance/UberInstanceProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/example/ContextExample.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/example/ContextExample.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
     </list>
   </component>
@@ -207,10 +188,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="UberInstanceProvider.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="UberInstanceProvider.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/instance/UberInstanceProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="48" selection-start="536" selection-end="536" vertical-scroll-proportion="0.15789473">
+            <state line="6" column="27" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0877193">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ContextExample.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/example/ContextExample.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="60" column="0" selection-start="1674" selection-end="1674" vertical-scroll-proportion="0.9649123">
               <folding />
             </state>
           </provider>
@@ -2372,13 +2362,6 @@
     <option name="myLastEditedConfigurable" value="Default" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/test/atom/InstanceHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="10" selection-start="52" selection-end="52" vertical-scroll-proportion="0.052941177">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/test/atom/ConstructorNullDataChecker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="18" selection-start="319" selection-end="319" vertical-scroll-proportion="0.13235295">
@@ -2544,7 +2527,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/instance/UberInstanceProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="48" selection-start="536" selection-end="536" vertical-scroll-proportion="0.15789473">
+        <state line="6" column="27" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0877193">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/example/ContextExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="0" selection-start="1674" selection-end="1674" vertical-scroll-proportion="0.9649123">
           <folding />
         </state>
       </provider>

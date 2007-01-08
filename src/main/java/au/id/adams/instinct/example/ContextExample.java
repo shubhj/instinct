@@ -22,7 +22,7 @@ public final class ContextExample {
         }
 
         @Specification
-        void shouldBeEmpty() {
+        void mustBeEmpty() {
             mustBeTrue(stack.isEmpty());
         }
     }
@@ -53,7 +53,7 @@ public final class ContextExample {
         }
 
         @Specification
-        void shouldNoLongerBeFullAfterPop() {
+        void mustNoLongerBeFullAfterPop() {
             stack.pop();
             mustBeFalse(stack.isEmpty());
         }
