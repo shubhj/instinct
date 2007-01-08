@@ -32,10 +32,12 @@
     <list default="true" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/instance/UberInstanceProvider.java" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/instance/UberInstanceProvider.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/ConstructorTestChecker.java" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/ConstructorTestChecker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/util/Suggest.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/util/Suggest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/BehaviourContextRunnerImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/instance/ProxiedInstanceProvider.java" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/instance/MockingInstanceProvider.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/instance/ProxiedInstanceProvider.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/instance/ConcreteInstanceProvider.java" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/instance/ConcreteInstanceProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/mock/MockCreator.java" afterPath="$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/mock/MockCreator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
     </list>
   </component>
@@ -211,22 +213,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SpecificationRunnerImpl.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="SpecificationRunnerImpl.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunnerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="61" selection-start="1602" selection-end="1602" vertical-scroll-proportion="0.4909091">
+            <state line="21" column="7" selection-start="1154" selection-end="1154" vertical-scroll-proportion="0.3">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProxiedInstanceProvider.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/instance/ProxiedInstanceProvider.java">
+      <file leaf-file-name="MockCreator.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/mock/MockCreator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="30" selection-start="484" selection-end="484" vertical-scroll-proportion="0.3">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="6" column="9" selection-start="240" selection-end="240" vertical-scroll-proportion="0.13636364">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -2405,23 +2405,9 @@
     <option name="myLastEditedConfigurable" value="Default" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/lang/Override.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="26" selection-start="614" selection-end="622" vertical-scroll-proportion="0.24324325">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/InstinctTestCase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="22" selection-start="172" selection-end="172" vertical-scroll-proportion="0.13513513">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/lang/SuppressWarnings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="21" selection-start="1940" selection-end="1957" vertical-scroll-proportion="0.2972973">
           <folding />
         </state>
       </provider>
@@ -2559,26 +2545,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunnerImpl.java">
+    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/lang/SuppressWarnings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="61" selection-start="1602" selection-end="1602" vertical-scroll-proportion="0.4909091">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/mock/MockCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="24" selection-start="517" selection-end="517" vertical-scroll-proportion="0.3761194">
+        <state line="45" column="21" selection-start="1957" selection-end="1957" vertical-scroll-proportion="0.3">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/instance/ProxiedInstanceProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="30" selection-start="484" selection-end="484" vertical-scroll-proportion="0.3">
+        <state line="9" column="19" selection-start="358" selection-end="358" vertical-scroll-proportion="0.24545455">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/util/Suggest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="18" selection-start="1022" selection-end="1022" vertical-scroll-proportion="0.35454544">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/au/id/adams/instinct/test/mock/MockCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="9" selection-start="240" selection-end="240" vertical-scroll-proportion="0.13636364">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/au/id/adams/instinct/internal/runner/SpecificationRunnerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="7" selection-start="1154" selection-end="1154" vertical-scroll-proportion="0.3">
+          <folding />
         </state>
       </provider>
     </entry>

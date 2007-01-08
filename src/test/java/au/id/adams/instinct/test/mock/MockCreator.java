@@ -3,7 +3,7 @@ package au.id.adams.instinct.test.mock;
 import org.easymock.IMocksControl;
 import au.id.adams.instinct.internal.util.Suggest;
 
-@Suggest("Make this use JMock rather than EasyMock")
+@Suggest({"Make this use JMock rather than EasyMock", "This probably belongs in the production tree"})
 public final class MockCreator {
 //    private static final MockFactoryImpl MOCK_FACTORY = new MockFactoryImpl();
 

@@ -24,7 +24,7 @@ public @interface Suggest {
         LOW, MEDIUM, HIGH
     }
 
-    String value();
+    String[] value();
 
     String card() default "None";
 
