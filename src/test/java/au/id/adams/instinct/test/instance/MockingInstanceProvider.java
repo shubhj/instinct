@@ -5,6 +5,7 @@ import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 import com.workingmouse.test.mock.MockFactory;
 import com.workingmouse.test.mock.MockFactoryImpl;
 
+@Suggest("Rename this to proxied instance provider")
 public final class MockingInstanceProvider implements InstanceProvider {
 
     @SuppressWarnings({"RawUseOfParameterizedType", "unchecked"})
