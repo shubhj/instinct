@@ -6,7 +6,7 @@ import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
-import com.googlecode.instinct.internal.util.ClassName;
+import com.googlecode.instinct.internal.util.DodgyClassName;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 public final class ClassLocatorSlowTest extends InstinctTestCase {
@@ -16,7 +16,7 @@ public final class ClassLocatorSlowTest extends InstinctTestCase {
 
     public void testFindsCorrectNumberOfContexts() {
         final FileFilter filter = new AnnotationFileFilter(getSpecPackageRoot(), BehaviourContext.class);
-        final ClassName[] names = locator.locate(getSpecPackageRoot(), filter);
+        final DodgyClassName[] names = locator.locate(getSpecPackageRoot(), filter);
         assertEquals(EXPECTED_CONTEXTS, names.length);
     }
 

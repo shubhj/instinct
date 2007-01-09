@@ -1,7 +1,7 @@
 package com.googlecode.instinct.internal.aggregate;
 
-import com.googlecode.instinct.internal.util.ClassName;
+import com.googlecode.instinct.internal.util.DodgyClassName;
 
 public interface BehaviourContextAggregator {
-    ClassName[] getContextNames();
+    DodgyClassName[] getContextNames();
 }

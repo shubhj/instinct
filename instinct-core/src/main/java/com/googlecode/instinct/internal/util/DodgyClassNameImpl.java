@@ -2,10 +2,10 @@ package com.googlecode.instinct.internal.util;
 
 import java.io.File;
 
-public final class ClassNameImpl implements ClassName {
+public final class DodgyClassNameImpl implements DodgyClassName {
     private final String fullyQualifiedClassName;
 
-    public ClassNameImpl(final File rootDir, final File clsFile) {
+    public DodgyClassNameImpl(final File rootDir, final File clsFile) {
         final String rootAbsolute = rootDir.getAbsolutePath();
         final String clsAbsolute = clsFile.getAbsolutePath();
         final String path = getPathRelativeToRoot(rootAbsolute, clsAbsolute);

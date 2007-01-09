@@ -2,8 +2,8 @@ package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.io.File;
 import java.lang.annotation.Annotation;
-import com.googlecode.instinct.internal.util.ClassName;
-import com.googlecode.instinct.internal.util.ClassNameImpl;
+import com.googlecode.instinct.internal.util.DodgyClassName;
+import com.googlecode.instinct.internal.util.DodgyClassNameImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
@@ -29,7 +29,7 @@ final class AnnotationCheckerImpl implements AnnotationChecker {
 
     @SuppressWarnings({"unchecked"})
     private <T> Class<T> instantiateClass(final File classFile) {
-        final ClassName className = new ClassNameImpl(packageRoot, classFile);
+        final DodgyClassName className = new DodgyClassNameImpl(packageRoot, classFile);
         return (Class<T>) edgeClass.forName(className.getFullyQualifiedName());
     }
 }

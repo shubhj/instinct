@@ -2,7 +2,7 @@ package com.googlecode.instinct.internal.aggregate;
 
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
-import com.googlecode.instinct.internal.util.ClassName;
+import com.googlecode.instinct.internal.util.DodgyClassName;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 public final class BehaviourContextAggregatorSlowTest extends InstinctTestCase {
@@ -10,7 +10,7 @@ public final class BehaviourContextAggregatorSlowTest extends InstinctTestCase {
     private BehaviourContextAggregator aggregator;
 
     public void testFindsCorrectNumberOfContexts() {
-        final ClassName[] contexts = aggregator.getContextNames();
+        final DodgyClassName[] contexts = aggregator.getContextNames();
         assertEquals(EXPECTED_CONTEXTS, contexts.length);
     }
 
