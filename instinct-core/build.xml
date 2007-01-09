@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="instinct" default="dist" basedir=".">
+<project name="instinct" default="all" basedir=".">
 
     <import file="build-setup.xml"/>
     <import file="build-checkstyle.xml"/>
+
+    <target name="all" depends="clean,dist"/>
 
     <target name="clean">
         <delete dir="${build.dir}"/>
@@ -10,90 +12,58 @@
 
     <target name="compile" depends="checkstyle, -compile"/>
 
-    <target name="-compile">
-        <compile.macro src.dir="${prod.src.dir}" classpath.ref="production.class.path" output.dir="${prod.classes.dir}"
-                       code.path="production.code.path" code.pattern="production.code.pattern"/>
-        <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}"
-                       code.path="test.code.path" code.pattern="test.code.pattern"/>
-
-        <taskdef resource="emma_ant.properties" classpathref="test.class.path" />
-        <emma enabled="${emma.enabled}">
-            <instr instrpath="${prod.classes.dir}" destdir="${out.instr.dir}/classes"
-                   metadatafile="${coverage.dir}/metadata.emma" merge="true">
-                <filter value="${emma.filter}" />
-            </instr>
-        </emma>
-
-        <!-- Configuration for Wiring up the various components using Spring and other configuration files-->
-        <copy todir="${prod.classes.dir}">
-            <fileset dir="${prod.src.dir}" includes="**/commands-context.xml"/>
-            <fileset dir="${prod.src.dir}" includes="**/richclient-application-splash.xml"/>
-            <fileset dir="${prod.src.dir}" includes="**/richclient-application-context.xml"/>
-            <fileset dir="${prod.src.dir}" includes="**/images.properties"/>
-            <fileset dir="${prod.src.dir}" includes="**/messages.properties"/>
-            <fileset dir="${prod.src.dir}" includes="**/about.txt"/>
-            <fileset dir="${conf.dir}" includes="**/wiring.xml"/>
-        </copy>
-
-        <!-- Test data used by the RDF/XML Writer -->
-        <copy todir="${prod.classes.dir}">
-            <fileset dir="${test.src.dir}" includes="**/*.rdf"/>
-        </copy>
-    </target>
-
-    <macrodef name="compile.macro">
-        <attribute name="src.dir"/>
-        <attribute name="output.dir"/>
-        <attribute name="classpath.ref"/>
-        <attribute name="code.path"/>
-        <attribute name="code.pattern"/>
-        <attribute name="compiler.args" default="-Xlint"/>
-        <sequential>
-            <mkdir dir="@{output.dir}"/>
-            <javac source="${java.src.version}" srcdir="@{src.dir}" destdir="@{output.dir}"
-                   classpathref="@{classpath.ref}"
-                   debug="${compile.debug}" debuglevel="${compile.debuglevel}" deprecation="${compile.deprecation}"
-                   optimize="${compile.optimize}">
-                <src>
-                    <path refid="@{code.path}"/>
-                </src>
-                <patternset refid="@{code.pattern}"/>
-                <compilerarg value="@{compiler.args}"/>
-            </javac>
-        </sequential>
-    </macrodef>
-
     <target name="dist" depends="compile">
         <antcall target="-dist-jar"/>
     </target>
 
-    <target name="-dist-jar">
-        <mkdir dir="${dist.dir}/jar"/>
-        <jar destfile="${dist.dir}/jar/${project.jar}">
-            <fileset dir="${prod.classes.dir}"/>
-        </jar>
+    <target name="test" depends="unit-test,slow-test"/>
+
+    <target name="unit-test" depends="dist">
+        <test.macro type="unit"/>
+    </target>
+
+    <target name="slow-test" depends="dist">
+        <test.macro type="slow"/>
+    </target>
+
+    <target name="emma-unit-test" depends="-emma, dist">
+        <test.macro type="unit"/>
     </target>
 
     <target name="javadoc" depends="-compile">
         <mkdir dir="${javadoc.dir}"/>
         <javadoc destdir="${javadoc.dir}" author="true" version="true"
-                 packagenames="com.googlecode.*" sourcepath="${prod.src.dir}" classpath="${prod.classes.dir}" failonerror="true"
-                 additionalparam="-breakiterator" Use="true" source="${java.src.version}"
-                 windowtitle="${project.longname} Framework ${project.version.full}"
-                 doctitle="${project.longname} ${project.version.full}">
+                packagenames="${main.package.name}.*" sourcepath="${prod.src.dir}" classpath="${prod.classes.dir}" failonerror="true"
+                additionalparam="-breakiterator" Use="true" source="${java.src.version}"
+                windowtitle="${project.longname} ${project.version.full}"
+                doctitle="${project.longname} ${project.version.full}">
             <link href="http://java.sun.com/j2se/1.5.0/docs/api"/>
         </javadoc>
     </target>
 
-    <target name="test" depends="unit-test,slow-test"/>
-    <target name="unit-test" depends="dist">
-        <test.macro type="unit"/>
+
+    <target name="-compile">
+        <compile.macro src.dir="${prod.src.dir}" classpath.ref="production.class.path" output.dir="${prod.classes.dir}"
+                code.path="production.code.path" code.pattern="production.code.pattern"/>
+        <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}"
+                code.path="test.code.path" code.pattern="test.code.pattern"/>
+        <taskdef resource="emma_ant.properties" classpathref="test.class.path"/>
+        <emma enabled="${emma.enabled}">
+            <instr instrpath="${prod.classes.dir}" destdir="${out.instr.dir}/classes"
+                    metadatafile="${coverage.dir}/metadata.emma" merge="true">
+                <filter value="${emma.filter}"/>
+            </instr>
+        </emma>
+        <copy todir="${prod.classes.dir}">
+            <fileset dir="${prod.src.dir}" includes="**/application-context.xml"/>
+        </copy>
     </target>
-    <target name="slow-test" depends="dist">
-        <test.macro type="slow"/>
-    </target>
-    <target name="emma-unit-test" depends="-emma, dist">
-        <test.macro type="unit"/>
+
+    <target name="-dist-jar">
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/${project.jar}">
+            <fileset dir="${prod.classes.dir}"/>
+        </jar>
     </target>
 
     <target name="-emma" description="turns on EMMA instrumentation/reporting">
@@ -125,6 +95,26 @@
                     <html outfile="${coverage.dir}/coverage.html"/>
                 </report>
             </emma>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="compile.macro">
+        <attribute name="src.dir"/>
+        <attribute name="output.dir"/>
+        <attribute name="classpath.ref"/>
+        <attribute name="code.path"/>
+        <attribute name="code.pattern"/>
+        <attribute name="compiler.args" default="-Xlint"/>
+        <sequential>
+            <mkdir dir="@{output.dir}"/>
+            <javac source="${java.src.version}" srcdir="@{src.dir}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="${compile.debug}"
+                    debuglevel="${compile.debuglevel}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
+                <src>
+                    <path refid="@{code.path}"/>
+                </src>
+                <patternset refid="@{code.pattern}"/>
+                <compilerarg value="@{compiler.args}"/>
+            </javac>
         </sequential>
     </macrodef>
 

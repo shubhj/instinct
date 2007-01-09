@@ -5,7 +5,7 @@ final class StackImpl implements Stack {
         return true;
     }
 
-    public void push(Object o) {
+    public void push(final Object o) {
     }
 
     public Object pop() {

@@ -16,8 +16,8 @@ import junit.framework.Test;
 import junit.framework.TestResult;
 
 public final class BehaviourContextTestCase implements Test {
-    private AnnotatedMethodLocator methodLocator = new AnnotatedMethodLocatorImpl();
-    private BehaviourContextRunner contextRunner = new BehaviourContextRunnerImpl();
+    private final AnnotatedMethodLocator methodLocator = new AnnotatedMethodLocatorImpl();
+    private final BehaviourContextRunner contextRunner = new BehaviourContextRunnerImpl();
     private final Class<?> specificationClass;
 
     public <T> BehaviourContextTestCase(final Class<T> specificationClass) {
@@ -66,7 +66,7 @@ public final class BehaviourContextTestCase implements Test {
         return methods.length;
     }
 
-    private static class ContextProtectable implements Protectable {
+    private static final class ContextProtectable implements Protectable {
         private final BehaviourContextRunner contextRunner;
         private final Class<?> specificationClass;
 

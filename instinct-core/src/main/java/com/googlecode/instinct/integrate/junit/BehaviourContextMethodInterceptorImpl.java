@@ -9,7 +9,7 @@ import junit.framework.Test;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
-public class BehaviourContextMethodInterceptorImpl implements MethodInterceptor {
+public final class BehaviourContextMethodInterceptorImpl implements MethodInterceptor {
     private EdgeClass edgeClass = new DefaultEdgeClass();
     private EdgeMethod edgeMethod = new DefaultEdgeMethod();
     private final Test delegate;

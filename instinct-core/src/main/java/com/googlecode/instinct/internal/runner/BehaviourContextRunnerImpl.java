@@ -34,7 +34,8 @@ public final class BehaviourContextRunnerImpl implements BehaviourContextRunner 
         }
     }
 
-    private <T> Method[] getMethods(final Class<T> behaviourContextClass, final Class<? extends Annotation> annotationType, final NamingConvention namingConvention) {
+    private <T> Method[] getMethods(final Class<T> behaviourContextClass, final Class<? extends Annotation> annotationType,
+            final NamingConvention namingConvention) {
         return methodLocator.locateAll(behaviourContextClass, annotationType, namingConvention);
     }
 }
