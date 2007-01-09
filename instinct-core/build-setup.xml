@@ -11,6 +11,7 @@
 
     <property name="build.dir" value="build"/>
     <property name="doc.dir" value="doc"/>
+    <property name="etc.dir" value="etc"/>
     <property name="lib.dir" value="lib"/>
     <property name="src.dir" value="src/main"/>
     <property name="test.dir" value="src/test"/>
@@ -37,6 +38,7 @@
     <property name="slow.test.classes.dir" value="${test.classes.dir}"/>
     <property name="slow.test.results.dir" value="${build.dir}/slow-test-results"/>
     <property name="slow.test.results" value="${slow.test.results.dir}/Slow-Tests.xml"/>
+    <property name="checkstyle.results.dir" value="${build.dir}/checkstyle"/>
 
     <property name="coverage.dir" value="${build.dir}/coverage" />
     <property name="out.instr.dir" value="${build.dir}/outinstr" />
@@ -63,27 +65,16 @@
     </patternset>
 
     <patternset id="production.classpath.pattern">
-        <include name="${lib.dir}/spring/spring-beans-2.0.1.jar"/>
-        <include name="${lib.dir}/spring/spring-core-2.0.1.jar"/>
-        <include name="${lib.dir}/jakarta-commons/commons-logging-1.0.4.jar"/>
+        <!--<include name="${lib.dir}/spring/spring-beans-2.0.1.jar"/>-->
+        <!--<include name="${lib.dir}/spring/spring-core-2.0.1.jar"/>-->
+        <!--<include name="${lib.dir}/jakarta-commons/commons-logging-1.0.4.jar"/>-->
     </patternset>
 
     <patternset id="test.classpath.pattern">
         <include name="${lib.dir}/junit-4.1.jar"/>
-        <include name="${lib.dir}/gsbase-2.0.1.jar"/>
-        <include name="${lib.dir}/jester-1.3.7.jar"/>
-        <include name="${lib.dir}/easymock/easymock-2.1.0.jar"/>
-        <include name="${lib.dir}/easymock/easymockclassextension-2.1.0.jar"/>
-        <include name="${lib.dir}/easymock/cglib-nodep-2.1_3.jar"/>
-        <include name="${lib.dir}/spring/spring-beans-2.0.1.jar"/>
-        <include name="${lib.dir}/spring/spring-context-2.0.1.jar"/>
-        <include name="${lib.dir}/spring/spring-core-2.0.1.jar"/>
-        <include name="${lib.dir}/spring-rcp/forms-1.0.7.jar"/>
-        <include name="${lib.dir}/spring-rcp/looks-2.0.4.jar"/>
-        <include name="${lib.dir}/spring-rcp/spring-binding-1.0-rc3.jar"/>
-        <include name="${lib.dir}/spring-rcp/spring-richclient-full-0.2.1.jar"/>
-        <include name="${lib.dir}/spring-rcp/swingx-0.2005-06-02.jar"/>
-        <include name="${lib.dir}/jakarta-commons/commons-logging-1.0.4.jar"/>
+        <!--<include name="${lib.dir}/spring/spring-beans-2.0.1.jar"/>-->
+        <!--<include name="${lib.dir}/spring/spring-core-2.0.1.jar"/>-->
+        <!--<include name="${lib.dir}/jakarta-commons/commons-logging-1.0.4.jar"/>-->
         <include name="${lib.dir}/emma/emma-2.0.5312.jar"/>
         <include name="${lib.dir}/emma/emma_ant-2.0.5312.jar"/>
    </patternset>
@@ -125,8 +116,6 @@
         <path refid="gen.code.path"/>
     </path>
 
-    <path id="gen.class.path"/>
-
     <path id="production.class.path">
         <fileset dir="${basedir}">
             <patternset refid="production.classpath.pattern"/>
@@ -148,28 +137,9 @@
         <path refid="test.class.path"/>
     </path>
 
-    <taskdef resource="emma_ant.properties" classpathref="test.class.path" />
-
-    <taskdef resource="checkstyletask.properties"
-             classpath="${checkstyle.lib.dir}/checkstyle-all-4.2.jar"/>
-
     <target name="default">
         <echo message="Nothing to see here..."/>
     </target>
 
-    <path id="sablecc.class.path">
-        <pathelement location="${lib.dir}/sablecc-3.2.jar"/>
-    </path>
-    <taskdef name="sablecc" classname="org.sablecc.ant.taskdef.Sablecc" classpathref="sablecc.class.path"/>
-
-    <macrodef name="sablecc.macro">
-        <attribute name="grammar.file"/>
-        <sequential>
-            <mkdir dir="${gen.src.dir}"/>
-            <sablecc src="${sablecc.src.dir}" outputdirectory="${gen.src.dir}">
-                <include name="@{grammar.file}"/>
-            </sablecc>
-        </sequential>
-    </macrodef>
 
 </project>
