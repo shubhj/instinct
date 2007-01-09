@@ -3,14 +3,11 @@ package com.googlecode.instinct.internal.runner;
 import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.core.annotate.Specification;
 
+@SuppressWarnings({"EmptyClass", "UnusedDeclaration", "ProtectedMemberInFinalClass"})
 public final class TestContextWithConstructors {
-
     @BehaviourContext
     public static final class AConstructorWithParameters {
-        private final String someField;
-
         public AConstructorWithParameters(final String someField) {
-            this.someField = someField;
         }
 
         @Specification
@@ -50,9 +47,6 @@ public final class TestContextWithConstructors {
 
     @BehaviourContext
     public static final class APublicConstructor {
-        public APublicConstructor() {
-        }
-
         @Specification
         public void aSpecification() {
         }

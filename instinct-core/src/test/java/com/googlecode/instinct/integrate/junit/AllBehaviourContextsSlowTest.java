@@ -1,6 +1,7 @@
 package com.googlecode.instinct.integrate.junit;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregatorImpl;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
@@ -16,9 +17,9 @@ import au.net.netstorm.boost.edge.java.lang.EdgeClass;
 @SuppressWarnings({"ProhibitedExceptionThrown"})
 public final class AllBehaviourContextsSlowTest extends InstinctTestCase {
     private final EdgeClass edgeClass = new DefaultEdgeClass();
-    private final BehaviourContextRunner contextRunner = new BehaviourContextRunnerImpl();
     private final BehaviourContextAggregator aggregator = new BehaviourContextAggregatorImpl(AllBehaviourContextsSlowTest.class,
-        new ClassLocatorImpl());
+            new ClassLocatorImpl());
+    private final BehaviourContextRunner contextRunner = new BehaviourContextRunnerImpl();
 
     public void testRunAllContexts() {
         runAllContexts();
@@ -26,6 +27,7 @@ public final class AllBehaviourContextsSlowTest extends InstinctTestCase {
 
     private void runAllContexts() {
         final ClassName[] contextClasses = aggregator.getContexts();
+        System.out.println("contextClasses = " + Arrays.asList(contextClasses));
         for (final ClassName contextClassName : contextClasses) {
             final Class<?> cls = edgeClass.forName(contextClassName.getFullyQualifiedName());
             invokeContextIgnoringConfigurationExceptions(cls);

@@ -11,27 +11,22 @@ public final class ASimpleContext {
 
     @BeforeSpecification
     public void setUp() {
-        System.out.println("Foo");
     }
 
     @BeforeSpecification
     public void setUpAgain() {
-        System.out.println("Fooby");
     }
 
     @Specification
     public void toCheckVerification() {
-        System.out.println("Bar");
         mustBeTrue(true);
     }
 
     @AfterSpecification
     public void tearDown() {
-        System.out.println("Baz");
     }
 
     @AfterSpecification
     public void tearDownAgain() {
-        System.out.println("Qux");
     }
 }

@@ -12,7 +12,6 @@ import com.googlecode.instinct.internal.util.Suggest;
 
 public final class BehaviourContextAggregatorImpl implements BehaviourContextAggregator {
     private static final Class<? extends Annotation> ANNOTATION_TO_FIND = BehaviourContext.class;
-    private static final String PATH_ROOT = "/";
     private final Class<?> classInSpecTree;
     private final ClassLocator locator;
 
@@ -29,15 +28,9 @@ public final class BehaviourContextAggregatorImpl implements BehaviourContextAgg
 
     @Suggest("Pull this logic out into another class - PackageRootFinder?")
     private File getSpecPackageRoot() {
-        final String classResource = classInSpecTree.getName().replace('.', '/') + ".class";
-        final URL classFileUrl = classInSpecTree.getResource('/' + classResource);
-        final File newPackageRoot = new File(classFileUrl.getFile().replace(classResource, ""));
-//        System.out.println("packageRoot = " + newPackageRoot);
-//        final URL resource = classInSpecTree.getResource(PATH_ROOT);
-//        final String specRoot = resource.getFile();
-//        final File oldPackageRoot = new File(specRoot);
-//        System.out.println("oldPackageRoot = " + oldPackageRoot);
-//        return oldPackageRoot;
-        return newPackageRoot;
+        final String classResourceNoLeadingSlash = classInSpecTree.getName().replace('.', '/') + ".class";
+        final URL classResourceUrl = classInSpecTree.getResource('/' + classResourceNoLeadingSlash);
+        final String packageRootPath = classResourceUrl.getFile().replace(classResourceNoLeadingSlash, "");
+        return new File(packageRootPath);
     }
 }

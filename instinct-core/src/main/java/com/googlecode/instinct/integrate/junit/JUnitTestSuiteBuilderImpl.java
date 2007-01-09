@@ -4,6 +4,7 @@ import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregatorImpl;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
 import com.googlecode.instinct.internal.util.ClassName;
+import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
@@ -11,6 +12,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
+@Suggest("Move this into a seperate distribution")
 public final class JUnitTestSuiteBuilderImpl implements JUnitTestSuiteBuilder {
     private final EdgeClass edgeClass = new DefaultEdgeClass();
     private final ProxyGenerator proxyGenerator = new ProxyGeneratorImpl();

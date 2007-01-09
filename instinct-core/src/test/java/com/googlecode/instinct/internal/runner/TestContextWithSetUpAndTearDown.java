@@ -4,8 +4,7 @@ import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.core.annotate.BeforeSpecification;
 import com.googlecode.instinct.core.annotate.AfterSpecification;
 
-@SuppressWarnings({"EmptyClass"})
-@BehaviourContext
+@SuppressWarnings({"EmptyClass", "UnusedDeclaration"})
 public final class TestContextWithSetUpAndTearDown {
 
     @BehaviourContext

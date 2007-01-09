@@ -9,7 +9,6 @@ import java.util.Comparator;
 import java.util.List;
 import com.googlecode.instinct.internal.util.ClassName;
 import com.googlecode.instinct.internal.util.ClassNameImpl;
-import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class ClassLocatorImpl implements ClassLocator {
@@ -37,7 +36,6 @@ public final class ClassLocatorImpl implements ClassLocator {
         findMatchingClasses(searchBase, filter, result);
     }
 
-    @Suggest("This is very similar")
     private File[] getSubdirectories(final File dir) {
         final FileFilter filter = new DirectoryFilter();
         return dir.listFiles(filter);

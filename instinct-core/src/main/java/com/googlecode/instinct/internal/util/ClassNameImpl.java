@@ -21,6 +21,11 @@ public final class ClassNameImpl implements ClassName {
         return fullyQualifiedClassName;
     }
 
+    @Override
+    public String toString() {
+        return fullyQualifiedClassName;
+    }
+
     @Suggest("Appears to be broken for some cases of rootDir & clsFile (empty or /)")
     private String convertClassFilePathToClassName(final String path) {
         final String dotsForSlashes = path.replaceAll("[/\\\\]", ".");
