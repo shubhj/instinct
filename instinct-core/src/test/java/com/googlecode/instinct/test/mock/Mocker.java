@@ -14,15 +14,15 @@ public final class Mocker {
     }
 
     @Suggest("Will need to keep a track of the mock by adding it to a map so we can get to the control & the proxy")
-    public <T> T mock(final Class<T> toMock) {
+    public static <T> T mock(final Class<T> toMock) {
         return toMock.isInterface() ? newInterfaceMock(toMock) : newConcreteMock(toMock);
     }
 
-    private <T> T newInterfaceMock(final Class<T> toMock) {
+    private static <T> T newInterfaceMock(final Class<T> toMock) {
         return (T) new Mock(toMock).proxy();
     }
 
-    private <T> T newConcreteMock(final Class<T> toMock) {
+    private static <T> T newConcreteMock(final Class<T> toMock) {
         return (T) new CGLIBCoreMock(toMock, mockNameFromClass(toMock)).proxy();
     }
 
