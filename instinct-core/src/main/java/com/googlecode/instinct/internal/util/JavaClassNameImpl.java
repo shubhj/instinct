@@ -1,4 +1,4 @@
 package com.googlecode.instinct.internal.util;
 
-final class JavaClassNameImpl implements JavaClassName {
+public final class JavaClassNameImpl implements JavaClassName {
 }
