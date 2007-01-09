@@ -1,6 +1,5 @@
 package com.googlecode.instinct.test.mock;
 
-import org.easymock.IMocksControl;
 import com.googlecode.instinct.internal.util.Suggest;
 
 @Suggest({"Make this use JMock rather than EasyMock", "This probably belongs in the production tree"})
@@ -10,7 +9,7 @@ public final class MockCreator {
     private MockCreator() {
         throw new UnsupportedOperationException();
     }
-
+/*
     public static <T> T createMock(final Class<T> toMock) {
         throw new UnsupportedOperationException();
 //        return MOCK_FACTORY.createMock(toMock);
@@ -54,5 +53,5 @@ public final class MockCreator {
     public static void reset() {
         throw new UnsupportedOperationException();
 //        MOCK_FACTORY.reset();
-    }
+    }*/
 }

@@ -1,7 +1,6 @@
 package com.googlecode.instinct.internal.aggregate;
 
 import java.io.File;
-import java.lang.annotation.Annotation;
 import java.net.URL;
 import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
@@ -11,7 +10,6 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 
 public final class BehaviourContextAggregatorImpl implements BehaviourContextAggregator {
-    private static final Class<? extends Annotation> ANNOTATION_TO_FIND = BehaviourContext.class;
     private final Class<?> classInSpecTree;
     private final ClassLocator locator;
 
@@ -23,7 +21,7 @@ public final class BehaviourContextAggregatorImpl implements BehaviourContextAgg
 
     public ClassName[] getContexts() {
         final File packageRoot = getSpecPackageRoot();
-        return locator.locate(packageRoot, new AnnotationFileFilter(packageRoot, ANNOTATION_TO_FIND));
+        return locator.locate(packageRoot, new AnnotationFileFilter(packageRoot, BehaviourContext.class));
     }
 
     @Suggest("Pull this logic out into another class - PackageRootFinder?")

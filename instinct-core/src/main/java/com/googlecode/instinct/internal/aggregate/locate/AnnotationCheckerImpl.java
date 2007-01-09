@@ -19,9 +19,12 @@ final class AnnotationCheckerImpl implements AnnotationChecker {
 
     public <T extends Annotation> boolean isAnnotated(final File classFile, final Class<T> annotationType) {
         checkNotNull(classFile, annotationType);
-        final Class<T> annotationCandidate = instantiateClass(classFile);
-        final Annotation annotation = annotationCandidate.getAnnotation(annotationType);
-        return annotation != null;
+        final Class<T> candidateClass = instantiateClass(classFile);
+        return isAnnotated(candidateClass, annotationType);
+    }
+
+    private <T extends Annotation> boolean isAnnotated(final Class<T> candidateClass, final Class<T> annotationType) {
+        return candidateClass.getAnnotation(annotationType) != null;
     }
 
     @SuppressWarnings({"unchecked"})

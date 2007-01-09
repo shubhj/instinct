@@ -1,7 +1,0 @@
-com.googlecode.instinct.internal.aggregate.TestContext1
-com.googlecode.instinct.internal.runner.ContextContainerWithConstructors$AConstructorWithParameters
-com.googlecode.instinct.internal.runner.ContextContainerWithConstructors$APackageLocalConstructor
-com.googlecode.instinct.internal.runner.ContextContainerWithConstructors$APrivateConstructor
-com.googlecode.instinct.internal.runner.ContextContainerWithConstructors$AProtectedConstructor
-com.googlecode.instinct.internal.runner.ContextContainerWithConstructors$APublicConstructor
-com.googlecode.instinct.internal.runner.ContextContainerWithSetUpAndTearDown$AnEmbeddedPublicContext

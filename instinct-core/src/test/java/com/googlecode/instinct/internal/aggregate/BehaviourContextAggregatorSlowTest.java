@@ -6,7 +6,7 @@ import com.googlecode.instinct.internal.util.ClassName;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 public final class BehaviourContextAggregatorSlowTest extends InstinctTestCase {
-    private static final int EXPECTED_CONTEXTS = 17;
+    private static final int EXPECTED_CONTEXTS = 14;
     private BehaviourContextAggregator aggregator;
 
     public void testFindsCorrectNumberOfContexts() {

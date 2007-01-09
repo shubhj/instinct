@@ -11,7 +11,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import com.googlecode.instinct.internal.util.ClassName;
 
 public final class ClassLocatorSlowTest extends InstinctTestCase {
-    private static final int EXPECTED_CONTEXTS = 17;
+    private static final int EXPECTED_CONTEXTS = 14;
     private ClassLocator locator;
 
     public void testFindsCorrectNumberOfContexts() {

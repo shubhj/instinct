@@ -20,7 +20,7 @@
     <property name="checkstyle.lib.dir" value="${lib.dir}/checkstyle"/>
     <property name="main.src.dir" value="${src.dir}/java"/>
     <property name="test.src.dir" value="${test.dir}/java"/>
-    <property name="prod.classes.dir" value="${build.dir}/prod-classes"/>
+    <property name="main.classes.dir" value="${build.dir}/main-classes"/>
     <property name="test.classes.dir" value="${build.dir}/test-classes"/>
     <property name="dist.dir" value="${build.dir}/dist"/>
     <property name="javadoc.dir" value="${build.dir}/javadoc"/>
@@ -44,29 +44,17 @@
     <property name="out.instr.dir" value="${build.dir}/outinstr" />
     <property name="emma.filter" value="${main.package.name}.*AtomicTest" />
 
-    <patternset id="production.code.pattern">
+    <patternset id="all.code.pattern">
         <include name="**/*.java"/>
-        <exclude name="**/*Test*.java"/>
-    </patternset>
-    <patternset id="test.code.pattern">
-        <include name="**/*Test.java"/>
     </patternset>
     <patternset id="atomic.test.code.pattern">
         <include name="**/*AtomicTest.java"/>
     </patternset>
     <patternset id="slow.test.code.pattern">
-        <!--<include name="**/*SlowTest.java"/>-->
-        <!-- FIXME: Remove this! -->
-        <include name="**/AllBehaviourContextsSlowTest.java"/>
-    </patternset>
-    <patternset id="all.code.pattern">
-        <include name="**/*.java"/>
-    </patternset>
-    <patternset id="test.class.pattern">
-        <include name="**/*Test"/>
+        <include name="**/*SlowTest.java"/>
     </patternset>
 
-    <patternset id="production.classpath.pattern">
+    <patternset id="main.classpath.pattern">
         <include name="${lib.dir}/boost-982.jar"/>
         <include name="${lib.dir}/cglib-nodep-2.2_beta1.jar"/>
         <include name="${lib.dir}/junit-4.1.jar"/>
@@ -76,16 +64,16 @@
     </patternset>
 
     <patternset id="test.classpath.pattern">
-        <patternset refid="production.classpath.pattern"/>
+        <patternset refid="main.classpath.pattern"/>
         <include name="${lib.dir}/emma/emma-2.0.5312.jar"/>
         <include name="${lib.dir}/emma/emma_ant-2.0.5312.jar"/>
    </patternset>
 
-    <fileset id="production.code.fileset" dir="${main.src.dir}">
-        <patternset refid="production.code.pattern"/>
+    <fileset id="main.code.fileset" dir="${main.src.dir}">
+        <patternset refid="all.code.pattern"/>
     </fileset>
     <fileset id="test.code.fileset" dir="${test.src.dir}">
-        <patternset refid="test.code.pattern"/>
+        <patternset refid="all.code.pattern"/>
     </fileset>
     <fileset id="atomic.test.code.fileset" dir="${atomic.test.src.dir}">
         <patternset refid="atomic.test.code.pattern"/>
@@ -97,7 +85,7 @@
         <patternset refid="all.code.pattern"/>
     </fileset>
 
-    <path id="production.code.path">
+    <path id="main.code.path">
         <pathelement location="${main.src.dir}"/>
     </path>
     <path id="test.code.path">
@@ -110,13 +98,13 @@
         <path refid="test.code.path"/>
     </path>
     <path id="all.code.path">
-        <path refid="production.code.path"/>
+        <path refid="main.code.path"/>
         <path refid="test.code.path"/>
     </path>
 
-    <path id="production.class.path">
+    <path id="main.class.path">
         <fileset dir="${basedir}">
-            <patternset refid="production.classpath.pattern"/>
+            <patternset refid="main.classpath.pattern"/>
         </fileset>
     </path>
     <path id="test.class.path">
@@ -124,7 +112,7 @@
             <patternset refid="test.classpath.pattern"/>
         </fileset>
         <pathelement location="${out.instr.dir}/classes"/>
-        <pathelement location="${prod.classes.dir}"/>
+        <pathelement location="${main.classes.dir}"/>
         <pathelement location="${test.classes.dir}"/>
     </path>
 
