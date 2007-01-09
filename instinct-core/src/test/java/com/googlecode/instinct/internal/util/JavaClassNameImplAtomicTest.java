@@ -8,5 +8,6 @@ public final class JavaClassNameImplAtomicTest extends InstinctTestCase {
         final File classesRoot = new File("somepath");
         final File classFilePath = new File("somepath");
         final JavaClassName n = new JavaClassNameImpl(classesRoot, classFilePath);
+        String fqcn = n.getFullyQualifiedName();
     }
 }

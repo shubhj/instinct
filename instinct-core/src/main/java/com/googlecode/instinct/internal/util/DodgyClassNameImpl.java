@@ -12,11 +12,6 @@ public final class DodgyClassNameImpl implements DodgyClassName {
         fullyQualifiedClassName = convertClassFilePathToClassName(path);
     }
 
-    private String getPathRelativeToRoot(final String rootAbsolute, final String absolute) {
-        final int length = rootAbsolute.length();
-        return absolute.substring(length);
-    }
-
     public String getFullyQualifiedName() {
         return fullyQualifiedClassName;
     }
@@ -24,6 +19,11 @@ public final class DodgyClassNameImpl implements DodgyClassName {
     @Override
     public String toString() {
         return fullyQualifiedClassName;
+    }
+
+    private String getPathRelativeToRoot(final String rootAbsolute, final String absolute) {
+        final int length = rootAbsolute.length();
+        return absolute.substring(length);
     }
 
     @Suggest("Appears to be broken for some cases of rootDir & clsFile (empty or /)")
