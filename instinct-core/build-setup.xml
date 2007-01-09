@@ -8,7 +8,7 @@
     <property name="version-status" value=""/>
     <property name="project.version.full" value="${project.version.major}.${project.version.minor}${version-status}"/>
     <property name="project.jar" value="${project.shortname}-${project.version.full}.jar"/>
-    <property name="main.package.name" value="com.googlecode.instinct" />
+    <property name="main.package.name" value="com.googlecode.instinct"/>
 
     <property name="build.dir" value="build"/>
     <property name="doc.dir" value="doc"/>
@@ -40,18 +40,12 @@
     <property name="slow.test.results.dir" value="${build.dir}/slow-test-results"/>
     <property name="slow.test.results" value="${slow.test.results.dir}/Slow-Tests.xml"/>
     <property name="checkstyle.results.dir" value="${build.dir}/checkstyle"/>
-    <property name="coverage.dir" value="${build.dir}/coverage" />
-    <property name="out.instr.dir" value="${build.dir}/outinstr" />
-    <property name="emma.filter" value="${main.package.name}.*AtomicTest" />
+    <property name="coverage.dir" value="${build.dir}/coverage"/>
+    <property name="out.instr.dir" value="${build.dir}/outinstr"/>
+    <property name="emma.filter" value="${main.package.name}.*AtomicTest"/>
 
     <patternset id="all.code.pattern">
         <include name="**/*.java"/>
-    </patternset>
-    <patternset id="atomic.test.code.pattern">
-        <include name="**/*AtomicTest.java"/>
-    </patternset>
-    <patternset id="slow.test.code.pattern">
-        <include name="**/*SlowTest.java"/>
     </patternset>
 
     <patternset id="main.classpath.pattern">
@@ -67,7 +61,7 @@
         <patternset refid="main.classpath.pattern"/>
         <include name="${lib.dir}/emma/emma-2.0.5312.jar"/>
         <include name="${lib.dir}/emma/emma_ant-2.0.5312.jar"/>
-   </patternset>
+    </patternset>
 
     <fileset id="main.code.fileset" dir="${main.src.dir}">
         <patternset refid="all.code.pattern"/>
@@ -76,10 +70,10 @@
         <patternset refid="all.code.pattern"/>
     </fileset>
     <fileset id="atomic.test.code.fileset" dir="${atomic.test.src.dir}">
-        <patternset refid="atomic.test.code.pattern"/>
+        <include name="**/*AtomicTest.java"/>
     </fileset>
     <fileset id="slow.test.code.fileset" dir="${slow.test.src.dir}">
-        <patternset refid="slow.test.code.pattern"/>
+        <include name="**/*SlowTest.java"/>
     </fileset>
     <fileset id="all.code.fileset" dir="${main.src.dir}">
         <patternset refid="all.code.pattern"/>

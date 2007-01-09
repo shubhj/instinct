@@ -2,16 +2,16 @@ package com.googlecode.instinct.internal.aggregate;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.net.URL;
+import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
-import com.googlecode.instinct.core.annotate.BehaviourContext;
-import com.googlecode.instinct.test.InstinctTestCase;
 import com.googlecode.instinct.internal.util.ClassName;
+import com.googlecode.instinct.test.InstinctTestCase;
 
 public final class ClassLocatorSlowTest extends InstinctTestCase {
     private static final int EXPECTED_CONTEXTS = 14;
+    private PackageRootFinder packageRootFinder;
     private ClassLocator locator;
 
     public void testFindsCorrectNumberOfContexts() {
@@ -21,13 +21,12 @@ public final class ClassLocatorSlowTest extends InstinctTestCase {
     }
 
     private File getSpecPackageRoot() {
-        final URL resource = ClassLocatorSlowTest.class.getResource("/");
-        final String specRoot = resource.getFile();
-        return new File(specRoot);
+        return new File(packageRootFinder.getPackageRoot(ClassLocatorSlowTest.class));
     }
 
     @Override
     public void setUpSubjects() {
+        packageRootFinder = new PackageRootFinderImpl();
         locator = new ClassLocatorImpl();
     }
 }

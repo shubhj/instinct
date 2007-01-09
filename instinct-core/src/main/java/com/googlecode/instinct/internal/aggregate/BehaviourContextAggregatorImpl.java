@@ -1,15 +1,14 @@
 package com.googlecode.instinct.internal.aggregate;
 
 import java.io.File;
-import java.net.URL;
 import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.util.ClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 
 public final class BehaviourContextAggregatorImpl implements BehaviourContextAggregator {
+    private final PackageRootFinder finder = new PackageRootFinderImpl();
     private final Class<?> classInSpecTree;
     private final ClassLocator locator;
 
@@ -20,15 +19,7 @@ public final class BehaviourContextAggregatorImpl implements BehaviourContextAgg
     }
 
     public ClassName[] getContexts() {
-        final File packageRoot = getSpecPackageRoot();
+        final File packageRoot = new File(finder.getPackageRoot(classInSpecTree));
         return locator.locate(packageRoot, new AnnotationFileFilter(packageRoot, BehaviourContext.class));
-    }
-
-    @Suggest("Pull this logic out into another class - PackageRootFinder?")
-    private File getSpecPackageRoot() {
-        final String classResourceNoLeadingSlash = classInSpecTree.getName().replace('.', '/') + ".class";
-        final URL classResourceUrl = classInSpecTree.getResource('/' + classResourceNoLeadingSlash);
-        final String packageRootPath = classResourceUrl.getFile().replace(classResourceNoLeadingSlash, "");
-        return new File(packageRootPath);
     }
 }

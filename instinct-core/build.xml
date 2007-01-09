@@ -11,8 +11,7 @@
         <delete dir="${build.dir}"/>
     </target>
 
-    <!--<target name="compile" depends="checkstyle,-compile"/>-->
-    <target name="compile" depends="-compile"/>
+    <target name="compile" depends="checkstyle,-compile"/>
 
     <target name="dist" depends="compile,-dist-jar"/>
 
@@ -70,6 +69,7 @@
     <macrodef name="test.macro">
         <attribute name="type"/>
         <sequential>
+            <echo message="Running test"/>
             <mkdir dir="${@{type}.test.results.dir}"/>
             <mkdir dir="${coverage.dir}"/>
             <junit failureproperty="@{type}.test.failed" fork="true" forkmode="perBatch">
