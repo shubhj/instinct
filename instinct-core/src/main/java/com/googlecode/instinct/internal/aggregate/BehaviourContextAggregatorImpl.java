@@ -18,7 +18,7 @@ public final class BehaviourContextAggregatorImpl implements BehaviourContextAgg
         this.locator = locator;
     }
 
-    public ClassName[] getContexts() {
+    public ClassName[] getContextNames() {
         final File packageRoot = new File(finder.getPackageRoot(classInSpecTree));
         return locator.locate(packageRoot, new AnnotationFileFilter(packageRoot, BehaviourContext.class));
     }

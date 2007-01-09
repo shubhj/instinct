@@ -25,7 +25,7 @@ public final class JUnitTestSuiteBuilderImpl implements JUnitTestSuiteBuilder {
 
     public Test buildSuite(final String suiteName) {
         checkNotNull(suiteName);
-        final ClassName[] contextClasses = aggregator.getContexts();
+        final ClassName[] contextClasses = aggregator.getContextNames();
         return buildSuite(suiteName, contextClasses);
     }
 

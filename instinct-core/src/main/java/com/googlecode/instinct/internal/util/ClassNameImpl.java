@@ -32,9 +32,4 @@ public final class ClassNameImpl implements ClassName {
         final String noLeadingDot = dotsForSlashes.substring(1);
         return noLeadingDot.replaceAll(".class", "");
     }
-
-    @Suggest("Remove this")
-    public int compareTo(final ClassName o) {
-        return fullyQualifiedClassName.compareTo(o.getFullyQualifiedName());
-    }
 }

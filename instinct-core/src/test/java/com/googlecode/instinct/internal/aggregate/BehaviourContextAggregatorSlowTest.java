@@ -10,7 +10,7 @@ public final class BehaviourContextAggregatorSlowTest extends InstinctTestCase {
     private BehaviourContextAggregator aggregator;
 
     public void testFindsCorrectNumberOfContexts() {
-        final ClassName[] contexts = aggregator.getContexts();
+        final ClassName[] contexts = aggregator.getContextNames();
         assertEquals(EXPECTED_CONTEXTS, contexts.length);
     }
 

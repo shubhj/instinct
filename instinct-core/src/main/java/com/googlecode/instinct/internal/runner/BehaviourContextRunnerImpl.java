@@ -20,16 +20,18 @@ public final class BehaviourContextRunnerImpl implements BehaviourContextRunner 
     public <T> void run(final Class<T> behaviourContextClass) {
         checkNotNull(behaviourContextClass);
         final Method[] specificationMethods = getMethods(behaviourContextClass, Specification.class, new BehaviourContextNamingConvention());
-        final Method[] beforeTestMethods = getMethods(behaviourContextClass, BeforeSpecification.class, new BeforeSpecificationNamingConvention());
-        final Method[] afterTestmethods = getMethods(behaviourContextClass, AfterSpecification.class, new AfterSpecificationNamingConvention());
-        runSpecifications(behaviourContextClass, specificationMethods, beforeTestMethods, afterTestmethods);
+        final Method[] beforeSpecificationMethods = getMethods(behaviourContextClass, BeforeSpecification.class,
+                new BeforeSpecificationNamingConvention());
+        final Method[] afterSpecificationMethods = getMethods(behaviourContextClass, AfterSpecification.class,
+                new AfterSpecificationNamingConvention());
+        runSpecifications(behaviourContextClass, specificationMethods, beforeSpecificationMethods, afterSpecificationMethods);
     }
 
-    private <T> void runSpecifications(final Class<T> behaviourContextClass, final Method[] specificationMethods, final Method[] setUpMethods,
-            final Method[] tearDownMethods) {
+    private <T> void runSpecifications(final Class<T> behaviourContextClass, final Method[] specificationMethods,
+            final Method[] beforeSpecificationMethods, final Method[] afterSpecificationMethods) {
         for (final Method specificationMethod : specificationMethods) {
-            final SpecificationContext specificationContext =
-                    new SpecificationContextImpl(behaviourContextClass, setUpMethods, tearDownMethods, specificationMethod);
+            final SpecificationContext specificationContext = new SpecificationContextImpl(
+                    behaviourContextClass, beforeSpecificationMethods, afterSpecificationMethods, specificationMethod);
             specificationRunner.run(specificationContext);
         }
     }

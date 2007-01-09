@@ -13,6 +13,6 @@ import com.googlecode.instinct.internal.util.Suggest;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})
-@Suggest("COnsider using JUnit style before, before class, after & after class")
+@Suggest("Consider using JUnit style before, before class, after & after class")
 public @interface BeforeSpecification {
 }
