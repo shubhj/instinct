@@ -8,6 +8,6 @@ public final class ProxiedInstanceProvider implements InstanceProvider {
     @SuppressWarnings({"RawUseOfParameterizedType", "unchecked"})
     public Object newInstance(final Class cls) {
         throw new UnsupportedOperationException();
-//        return MockCreator.mock(cls);
+//        return Mocker.mock(cls);
     }
 }

@@ -2,7 +2,7 @@
 <project name="instinct" default="all" basedir=".">
 
     <import file="build-setup.xml"/>
-    <import file="build-checkstyle.xml"/>
+    <import file="build-quality.xml"/>
 
     <!--<target name="all" depends="clean,-enable-emma,test"/>-->
     <target name="all" depends="clean,test"/>
@@ -36,6 +36,7 @@
         </javadoc>
     </target>
 
+    <!-- FIXME: Make sure the instrumented classes don't appear in the JAR file -->
     <target name="-compile">
         <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}"
                 code.path="main.code.path" code.pattern="all.code.pattern"/>

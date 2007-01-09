@@ -61,6 +61,8 @@
         <patternset refid="main.classpath.pattern"/>
         <include name="${lib.dir}/emma/emma-2.0.5312.jar"/>
         <include name="${lib.dir}/emma/emma_ant-2.0.5312.jar"/>
+        <include name="${lib.dir}/jmock/jmock-1.1.0.jar"/>
+        <include name="${lib.dir}/jmock/jmock-cglib-1.1.0.jar"/>
     </patternset>
 
     <fileset id="main.code.fileset" dir="${main.src.dir}">
