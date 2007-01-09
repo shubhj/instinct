@@ -5,10 +5,12 @@ import com.googlecode.instinct.test.InstinctTestCase;
 
 public final class JavaClassNameImplAtomicTest extends InstinctTestCase {
     public void testGetFullyQualifiedClassName() {
-        final File classesRoot = new File("/home/me/projects/src/");
-        final File classFilePath = new File("/home/me/projects/src/com/foo/Bar.class");
-        final JavaClassName n = new JavaClassNameImpl(classesRoot, classFilePath);
-        final String fqcn = n.getFullyQualifiedName();
-        assertEquals("com.foo.Bar", fqcn);
+        checkGetFullyQualifiedClassName("/home/me/projects/src/", "/home/me/projects/src/com/foo/Bar.class", "com.foo.Bar");
+    }
+
+    private void checkGetFullyQualifiedClassName(final String classesRootPath, final String classFilePath,
+            final String expectedFullyQualifiedClassName) {
+        final JavaClassName className = new JavaClassNameImpl(new File(classesRootPath), new File(classFilePath));
+        assertEquals(expectedFullyQualifiedClassName, className.getFullyQualifiedName());
     }
 }
