@@ -2,9 +2,9 @@
 <module version="4" relativePaths="true" type="JAVA_MODULE">
   <component name="ModuleRootManager" />
   <component name="NewModuleRootManager" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/i-build/main/instinct" />
+    <output url="file://$MODULE_DIR$/i-build/main" />
     <exclude-output />
-    <output-test url="file://$MODULE_DIR$/i-build/test/instinct" />
+    <output-test url="file://$MODULE_DIR$/i-build/test" />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />

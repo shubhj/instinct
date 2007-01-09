@@ -9,7 +9,7 @@ public final class ClassNameImpl implements ClassName {
         final String rootAbsolute = rootDir.getAbsolutePath();
         final String clsAbsolute = clsFile.getAbsolutePath();
         final String path = getPathRelativeToRoot(rootAbsolute, clsAbsolute);
-        fullyQualifiedClassName = slashesToDots(path);
+        fullyQualifiedClassName = convertClassFilePathToClassName(path);
     }
 
     private String getPathRelativeToRoot(final String rootAbsolute, final String absolute) {
@@ -21,10 +21,10 @@ public final class ClassNameImpl implements ClassName {
         return fullyQualifiedClassName;
     }
 
-    @Suggest("Do we need to escape / as well?")
-    private String slashesToDots(final String path) {
-        final String deBillGates = path.replaceAll("[/\\\\]", ".");
-        final String noLeadingSlash = deBillGates.substring(1);
-        return noLeadingSlash.replaceAll(".class", "");
+    @Suggest("Appears to be broken for some cases of rootDir & clsFile (empty or /)")
+    private String convertClassFilePathToClassName(final String path) {
+        final String dotsForSlashes = path.replaceAll("[/\\\\]", ".");
+        final String noLeadingDot = dotsForSlashes.substring(1);
+        return noLeadingDot.replaceAll(".class", "");
     }
 }

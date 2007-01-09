@@ -18,7 +18,7 @@
     <property name="test.dir" value="src/test"/>
 
     <property name="checkstyle.lib.dir" value="${lib.dir}/checkstyle"/>
-    <property name="prod.src.dir" value="${src.dir}/java"/>
+    <property name="main.src.dir" value="${src.dir}/java"/>
     <property name="test.src.dir" value="${test.dir}/java"/>
     <property name="prod.classes.dir" value="${build.dir}/prod-classes"/>
     <property name="test.classes.dir" value="${build.dir}/test-classes"/>
@@ -33,8 +33,8 @@
     <property name="java.src.version" value="1.5"/>
     <property name="atomic.test.src.dir" value="${test.src.dir}"/>
     <property name="atomic.test.classes.dir" value="${test.classes.dir}"/>
-    <property name="atomic.test.results.dir" value="${build.dir}/unit-test-results"/>
-    <property name="atomic.test.results" value="${atomic.test.results.dir}/Unit-Tests.xml"/>
+    <property name="atomic.test.results.dir" value="${build.dir}/atomic-test-results"/>
+    <property name="atomic.test.results" value="${atomic.test.results.dir}/Atomic-Tests.xml"/>
     <property name="slow.test.src.dir" value="${test.src.dir}"/>
     <property name="slow.test.classes.dir" value="${test.classes.dir}"/>
     <property name="slow.test.results.dir" value="${build.dir}/slow-test-results"/>
@@ -79,7 +79,7 @@
         <include name="${lib.dir}/emma/emma_ant-2.0.5312.jar"/>
    </patternset>
 
-    <fileset id="production.code.fileset" dir="${prod.src.dir}">
+    <fileset id="production.code.fileset" dir="${main.src.dir}">
         <patternset refid="production.code.pattern"/>
     </fileset>
     <fileset id="test.code.fileset" dir="${test.src.dir}">
@@ -91,15 +91,12 @@
     <fileset id="slow.test.code.fileset" dir="${slow.test.src.dir}">
         <patternset refid="slow.test.code.pattern"/>
     </fileset>
-    <fileset id="all.code.fileset" dir="${prod.src.dir}">
+    <fileset id="all.code.fileset" dir="${main.src.dir}">
         <patternset refid="all.code.pattern"/>
     </fileset>
 
-    <path id="gen.code.path">
-        <pathelement location="${gen.src.dir}"/>
-    </path>
     <path id="production.code.path">
-        <pathelement location="${prod.src.dir}"/>
+        <pathelement location="${main.src.dir}"/>
     </path>
     <path id="test.code.path">
         <pathelement location="${test.src.dir}"/>
@@ -113,7 +110,6 @@
     <path id="all.code.path">
         <path refid="production.code.path"/>
         <path refid="test.code.path"/>
-        <path refid="gen.code.path"/>
     </path>
 
     <path id="production.class.path">

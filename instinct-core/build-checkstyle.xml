@@ -11,7 +11,7 @@
     <target name="checkstyle">
         <taskdef resource="checkstyletask.properties" classpath="${lib.dir}/checkstyle/checkstyle-all-4.2.jar"/>
         <checkstyle config="${etc.dir}/checkstyle/checkstyle-main.xml">
-            <fileset dir="${prod.src.dir}"/>
+            <fileset dir="${main.src.dir}"/>
         </checkstyle>
     </target>
 
