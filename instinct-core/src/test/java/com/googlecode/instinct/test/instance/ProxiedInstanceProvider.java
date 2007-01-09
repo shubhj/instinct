@@ -5,10 +5,9 @@ import com.googlecode.instinct.internal.util.Suggest;
 
 @Suggest("Rename this to proxied instance provider")
 public final class ProxiedInstanceProvider implements InstanceProvider {
-
     @SuppressWarnings({"RawUseOfParameterizedType", "unchecked"})
     public Object newInstance(final Class cls) {
         throw new UnsupportedOperationException();
-//        return MockCreator.createMock(cls);
+//        return MockCreator.mock(cls);
     }
 }
