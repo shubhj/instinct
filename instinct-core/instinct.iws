@@ -30,16 +30,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ParamChecker.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ParamChecker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/BehaviourContextTestCase.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/BehaviourContextTestCase.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/verify/VerificationException.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/verify/VerificationException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/BehaviourContextRunnerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/BehaviourContextRunnerImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/BehaviourContextConfigurationException.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/BehaviourContextConfigurationException.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/Suggest.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/Suggest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/example/StackImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/example/StackImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build-setup.xml" afterPath="$PROJECT_DIR$/build-setup.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/BehaviourContextMethodInterceptorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/BehaviourContextMethodInterceptorImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
     </list>
   </component>
@@ -197,19 +189,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="build-setup.xml" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="build-setup.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/build-setup.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="62" column="40" selection-start="3379" selection-end="3379" vertical-scroll-proportion="0.49122807">
+            <state line="44" column="72" selection-start="2793" selection-end="2793" vertical-scroll-proportion="0.3508772">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="35" selection-start="2493" selection-end="2493" vertical-scroll-proportion="0.3859649">
+            <state line="52" column="37" selection-start="2193" selection-end="2193" vertical-scroll-proportion="0.54385966">
               <folding />
             </state>
           </provider>
@@ -1274,16 +1266,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build-setup.xml">
+    <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="40" selection-start="3379" selection-end="3379" vertical-scroll-proportion="0.49122807">
+        <state line="52" column="37" selection-start="2193" selection-end="2193" vertical-scroll-proportion="0.54385966">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.xml">
+    <entry file="file://$PROJECT_DIR$/build-setup.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="35" selection-start="2493" selection-end="2493" vertical-scroll-proportion="0.3859649">
+        <state line="44" column="72" selection-start="2793" selection-end="2793" vertical-scroll-proportion="0.3508772">
           <folding />
         </state>
       </provider>

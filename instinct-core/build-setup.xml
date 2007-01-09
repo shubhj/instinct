@@ -42,7 +42,7 @@
     <property name="checkstyle.results.dir" value="${build.dir}/checkstyle"/>
     <property name="coverage.dir" value="${build.dir}/coverage" />
     <property name="out.instr.dir" value="${build.dir}/outinstr" />
-    <property name="emma.filter" value="${main.package.name}.*" />
+    <property name="emma.filter" value="${main.package.name}.*AtomicTest" />
 
     <patternset id="production.code.pattern">
         <include name="**/*.java"/>
