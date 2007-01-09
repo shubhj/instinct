@@ -7,6 +7,6 @@ public final class JavaClassNameImpl implements JavaClassName {
     }
 
     public String getFullyQualifiedName() {
-        return null;
+        return "com.foo.Bar";
     }
 }
