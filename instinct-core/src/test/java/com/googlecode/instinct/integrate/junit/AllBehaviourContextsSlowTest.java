@@ -2,17 +2,19 @@ package com.googlecode.instinct.integrate.junit;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
-import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
-import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregatorImpl;
-import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
-import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
-import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
-import com.googlecode.instinct.internal.util.ClassName;
-import com.googlecode.instinct.core.BehaviourContextConfigurationException;
-import com.googlecode.instinct.test.InstinctTestCase;
+import java.util.Collections;
+import java.util.List;
 import au.net.netstorm.boost.edge.EdgeException;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
+import com.googlecode.instinct.core.BehaviourContextConfigurationException;
+import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
+import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregatorImpl;
+import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
+import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
+import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
+import com.googlecode.instinct.internal.util.ClassName;
+import com.googlecode.instinct.test.InstinctTestCase;
 
 @SuppressWarnings({"ProhibitedExceptionThrown"})
 public final class AllBehaviourContextsSlowTest extends InstinctTestCase {
@@ -27,12 +29,25 @@ public final class AllBehaviourContextsSlowTest extends InstinctTestCase {
 
     private void runAllContexts() {
         final ClassName[] contextClasses = aggregator.getContexts();
-        System.out.println("contextClasses = " + Arrays.asList(contextClasses));
+        final List<ClassName> names = Arrays.asList(contextClasses);
+        Collections.sort(names);
+        System.out.println("contextClasses = " + names);
+        System.out.println("contextClasses.length = " + contextClasses.length);
         for (final ClassName contextClassName : contextClasses) {
             final Class<?> cls = edgeClass.forName(contextClassName.getFullyQualifiedName());
             invokeContextIgnoringConfigurationExceptions(cls);
         }
     }
+
+    /*
+    com.googlecode.instinct.internal.runner.ContextContainerWithConstructors$AConstructorWithParameters
+    com.googlecode.instinct.internal.aggregate.ContextContainer1$AnEmbeddedPackageLocalContext
+    com.googlecode.instinct.internal.runner.ContextContainerWithConstructors$APrivateConstructor
+
+    ANT: com.googlecode.instinct.internal.runner.ContextContainerWithConstructors$AProtectedConstructor, com.googlecode.instinct.internal.runner.ContextContainerWithConstructors$APublicConstructor, com.googlecode.instinct.internal.runner.ContextContainerWithSetUpAndTearDown, com.googlecode.instinct.internal.runner.ContextContainerWithSetUpAndTearDown$AnEmbeddedPublicContext
+
+    IDEA: com.googlecode.instinct.internal.aggregate.ContextContainer1$AnEmbeddedPrivateContext, com.googlecode.instinct.internal.aggregate.ContextContainer1$AnEmbeddedPublicContext, com.googlecode.instinct.internal.aggregate.ContextContainer2$AnEmbeddedPackageLocalContext, com.googlecode.instinct.internal.aggregate.ContextContainer2$AnEmbeddedPrivateContext, com.googlecode.instinct.internal.aggregate.ContextContainer2$AnEmbeddedPublicContext, com.googlecode.instinct.internal.runner.ASimpleContext, com.googlecode.instinct.internal.runner.ContextContainerWithConstructors$AConstructorWithParameters, com.googlecode.instinct.internal.runner.ContextContainerWithConstructors$APackageLocalConstructor, com.googlecode.instinct.internal.runner.ContextContainerWithConstructors$APrivateConstructor, com.googlecode.instinct.internal.runner.ContextContainerWithConstructors$AProtectedConstructor, com.googlecode.instinct.internal.runner.ContextContainerWithConstructors$APublicConstructor, com.googlecode.instinct.internal.runner.ContextContainerWithSetUpAndTearDown$AnEmbeddedPublicContext
+    */
 
     private <T> void invokeContextIgnoringConfigurationExceptions(final Class<T> cls) {
         try {

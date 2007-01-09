@@ -55,7 +55,9 @@
         <include name="**/*AtomicTest.java"/>
     </patternset>
     <patternset id="slow.test.code.pattern">
-        <include name="**/*SlowTest.java"/>
+        <!--<include name="**/*SlowTest.java"/>-->
+        <!-- FIXME: Remove this! -->
+        <include name="**/AllBehaviourContextsSlowTest.java"/>
     </patternset>
     <patternset id="all.code.pattern">
         <include name="**/*.java"/>

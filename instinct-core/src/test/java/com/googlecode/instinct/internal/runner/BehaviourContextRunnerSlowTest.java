@@ -10,16 +10,16 @@ public final class BehaviourContextRunnerSlowTest extends InstinctTestCase {
     private BehaviourContextRunner runner;
 
     public void testRunWithSuccess() {
-        runContext(TestContextWithSetUpAndTearDown.class);
-        runContext(TestContextWithSetUpAndTearDown.AnEmbeddedPublicContext.class);
-        runContext(TestContextWithConstructors.APublicConstructor.class);
+        runContext(ContextContainerWithSetUpAndTearDown.class);
+        runContext(ContextContainerWithSetUpAndTearDown.AnEmbeddedPublicContext.class);
+        runContext(ContextContainerWithConstructors.APublicConstructor.class);
     }
 
     public void testInvalidConstructorsThrowConfigException() {
-        checkInvalidConstructorsThrowConfigException(TestContextWithConstructors.AConstructorWithParameters.class);
-        checkInvalidConstructorsThrowConfigException(TestContextWithConstructors.APrivateConstructor.class);
-        checkInvalidConstructorsThrowConfigException(TestContextWithConstructors.APackageLocalConstructor.class);
-        checkInvalidConstructorsThrowConfigException(TestContextWithConstructors.AProtectedConstructor.class);
+        checkInvalidConstructorsThrowConfigException(ContextContainerWithConstructors.AConstructorWithParameters.class);
+        checkInvalidConstructorsThrowConfigException(ContextContainerWithConstructors.APrivateConstructor.class);
+        checkInvalidConstructorsThrowConfigException(ContextContainerWithConstructors.APackageLocalConstructor.class);
+        checkInvalidConstructorsThrowConfigException(ContextContainerWithConstructors.AProtectedConstructor.class);
     }
 
     private <T> void checkInvalidConstructorsThrowConfigException(final Class<T> cls) {

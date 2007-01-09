@@ -1,10 +1,9 @@
 package com.googlecode.instinct.internal.aggregate;
 
-import com.googlecode.instinct.core.annotate.BeforeSpecification;
 import com.googlecode.instinct.core.annotate.BehaviourContext;
 
 @SuppressWarnings({"EmptyClass", "PackageVisibleInnerClass", "UnusedDeclaration"})
-public final class TestContext3 {
+public final class ContextContainer1 {
     @BehaviourContext
     public static class AnEmbeddedPublicContext {
         public void whoCares() {
@@ -19,8 +18,7 @@ public final class TestContext3 {
 
     @BehaviourContext
     private static class AnEmbeddedPrivateContext {
-        @BeforeSpecification
-        public void aSetUpMethod() {
+        public void whoCares() {
         }
     }
 }

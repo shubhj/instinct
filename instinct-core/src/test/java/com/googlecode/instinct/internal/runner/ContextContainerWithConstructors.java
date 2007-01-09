@@ -4,7 +4,7 @@ import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.core.annotate.Specification;
 
 @SuppressWarnings({"EmptyClass", "UnusedDeclaration", "ProtectedMemberInFinalClass"})
-public final class TestContextWithConstructors {
+public final class ContextContainerWithConstructors {
     @BehaviourContext
     public static final class AConstructorWithParameters {
         public AConstructorWithParameters(final String someField) {
