@@ -30,8 +30,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
     </list>
   </component>
@@ -189,10 +187,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="JavaClassNameImplAtomicTest.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="JavaClassNameImplAtomicTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="42" selection-start="598" selection-end="598" vertical-scroll-proportion="0.27272728">
+            <state line="11" column="67" selection-start="714" selection-end="714" vertical-scroll-proportion="0.3">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -200,10 +198,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JavaClassNameImpl.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="JavaClassNameImpl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="1" selection-start="786" selection-end="786" vertical-scroll-proportion="0.5181818">
+            <state line="13" column="30" selection-start="395" selection-end="395" vertical-scroll-proportion="0.35454544">
               <folding />
             </state>
           </provider>
@@ -2279,12 +2277,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="42" selection-start="598" selection-end="598" vertical-scroll-proportion="0.27272728">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="13" column="30" selection-start="395" selection-end="395" vertical-scroll-proportion="0.35454544">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2295,10 +2291,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="1" selection-start="786" selection-end="786" vertical-scroll-proportion="0.5181818">
-          <folding />
+        <state line="11" column="67" selection-start="714" selection-end="714" vertical-scroll-proportion="0.3">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
