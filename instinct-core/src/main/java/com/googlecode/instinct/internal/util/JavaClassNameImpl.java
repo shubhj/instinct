@@ -12,9 +12,9 @@ public final class JavaClassNameImpl implements JavaClassName {
     }
 
     public String getFullyQualifiedName() {
-        final String relativeClassPath = classFile.getAbsolutePath().replace(classesRoot.getAbsolutePath(), "");
+        final String relativeClassPath = classFile.getAbsolutePath().substring(classesRoot.getAbsolutePath().length());
         final String dotsForSlashes = relativeClassPath.replaceAll("[/\\\\]", ".");
-        final String noLeadingDot = dotsForSlashes.substring(1);
+        final String noLeadingDot = dotsForSlashes.startsWith(".") ? dotsForSlashes.substring(1) : dotsForSlashes;
         return noLeadingDot.replace(".class", "");
     }
 }

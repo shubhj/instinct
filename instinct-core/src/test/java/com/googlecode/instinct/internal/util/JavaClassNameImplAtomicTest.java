@@ -8,7 +8,7 @@ public final class JavaClassNameImplAtomicTest extends InstinctTestCase {
     public void testGetFullyQualifiedClassName() {
         checkGetFullyQualifiedClassName("/home/me/projects/src/", "/home/me/projects/src/com/foo/Bar.class", "com.foo.Bar");
         checkGetFullyQualifiedClassName("/home/me/projects/src/", "/home/me/projects/src/com/foo/bar/Baz.class", "com.foo.bar.Baz");
-//        checkGetFullyQualifiedClassName("/", "/com/foo/bar/Baz.class", "com.foo.bar.Baz");
+        checkGetFullyQualifiedClassName("/", "/com/foo/bar/Baz.class", "com.foo.bar.Baz");
 //        checkGetFullyQualifiedClassName("", "com/foo/bar/Baz.class", "com.foo.bar.Baz");
 //        checkGetFullyQualifiedClassName("\\", "\\com\\foo\\bar\\Baz.class", "com.foo.bar.Baz");
 //        checkGetFullyQualifiedClassName("/", "/com/foo/bar/class/Baz.class", "com.foo.bar.class.Baz");

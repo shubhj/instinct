@@ -32,7 +32,6 @@
     <list default="true" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/DodgyClassNameImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/DodgyClassNameImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
     </list>
   </component>
@@ -193,7 +192,7 @@
       <file leaf-file-name="JavaClassNameImplAtomicTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="98" selection-start="936" selection-end="936" vertical-scroll-proportion="0.35454544">
+            <state line="10" column="42" selection-start="598" selection-end="598" vertical-scroll-proportion="0.27272728">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -204,7 +203,7 @@
       <file leaf-file-name="JavaClassNameImpl.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="22" selection-start="544" selection-end="544" vertical-scroll-proportion="0.4090909">
+            <state line="19" column="1" selection-start="786" selection-end="786" vertical-scroll-proportion="0.5181818">
               <folding />
             </state>
           </provider>
@@ -213,7 +212,7 @@
       <file leaf-file-name="DodgyClassNameImpl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/DodgyClassNameImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="0" selection-start="529" selection-end="1047" vertical-scroll-proportion="0.7909091">
+            <state line="25" column="0" selection-start="742" selection-end="851" vertical-scroll-proportion="0.6818182">
               <folding />
             </state>
           </provider>
@@ -2273,13 +2272,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/DodgyClassNameImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="529" selection-end="1047" vertical-scroll-proportion="0.7909091">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/lang/String.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1770" column="16" selection-start="70320" selection-end="70320" vertical-scroll-proportion="0.6333333">
@@ -2289,16 +2281,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="98" selection-start="936" selection-end="936" vertical-scroll-proportion="0.35454544">
+        <state line="10" column="42" selection-start="598" selection-end="598" vertical-scroll-proportion="0.27272728">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/DodgyClassNameImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="742" selection-end="851" vertical-scroll-proportion="0.6818182">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="22" selection-start="544" selection-end="544" vertical-scroll-proportion="0.4090909">
+        <state line="19" column="1" selection-start="786" selection-end="786" vertical-scroll-proportion="0.5181818">
           <folding />
         </state>
       </provider>
