@@ -30,10 +30,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/BeforeSpecificationNamingConventionAtomicTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/AfterSpecificationNamingConventionAtomicTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/BehaviourContextNamingConventionAtomicTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/SpecificationNamingConventionAtomicTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
     </list>
   </component>
@@ -194,7 +192,7 @@
       <file leaf-file-name="AfterSpecificationNamingConvention.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/AfterSpecificationNamingConvention.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="19" selection-start="178" selection-end="191" vertical-scroll-proportion="0.10909091">
+            <state line="4" column="19" selection-start="178" selection-end="191" vertical-scroll-proportion="0.08759124">
               <folding />
             </state>
           </provider>
@@ -203,16 +201,52 @@
       <file leaf-file-name="AfterSpecificationNamingConventionAtomicTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/AfterSpecificationNamingConventionAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="37" selection-start="138" selection-end="138" vertical-scroll-proportion="0.10909091">
+            <state line="4" column="37" selection-start="138" selection-end="138" vertical-scroll-proportion="0.08759124">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BeforeSpecificationNamingConventionAtomicTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="BeforeSpecificationNamingConventionAtomicTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/BeforeSpecificationNamingConventionAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="0" selection-start="327" selection-end="327" vertical-scroll-proportion="0.24545455">
+            <state line="9" column="0" selection-start="327" selection-end="327" vertical-scroll-proportion="0.1970803">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BehaviourContextNamingConventionAtomicTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/BehaviourContextNamingConventionAtomicTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="0" selection-start="332" selection-end="332" vertical-scroll-proportion="0.1970803">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SpecificationNamingConventionAtomicTest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/SpecificationNamingConventionAtomicTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="0" selection-start="314" selection-end="314" vertical-scroll-proportion="0.1970803">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SpecificationNamingConvention.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/SpecificationNamingConvention.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="18" selection-start="174" selection-end="181" vertical-scroll-proportion="0.08759124">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BehaviourContextNamingConvention.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/BehaviourContextNamingConvention.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="22" selection-start="176" selection-end="197" vertical-scroll-proportion="0.08759124">
               <folding />
             </state>
           </provider>
@@ -221,7 +255,7 @@
       <file leaf-file-name="BeforeSpecificationNamingConvention.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/BeforeSpecificationNamingConvention.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="19" selection-start="179" selection-end="189" vertical-scroll-proportion="0.10909091">
+            <state line="4" column="19" selection-start="179" selection-end="189" vertical-scroll-proportion="0.08759124">
               <folding />
             </state>
           </provider>
@@ -2067,11 +2101,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.googlecode.instinct.core.naming" />
       <recent name="com.googlecode.instinct.test.checker" />
       <recent name="au.id.adams.instinct.core.naming" />
       <recent name="au.id.adams.instinct.test.suite" />
       <recent name="au.id.adams.instinct.runner" />
-      <recent name="au.id.adams.instinct.aggregate" />
     </key>
     <key name="IntroduceConstantDialog.RECENTS_KEY">
       <recent name="" />
@@ -2330,7 +2364,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1920" height="1174" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
@@ -2339,14 +2373,14 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15803523" order="0" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32806692" order="1" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32434943" order="8" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1830855" order="8" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="6" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.0763481" order="1" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993513" order="8" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3336431" order="2" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3336431" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="File View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39962825" order="4" />
@@ -2481,36 +2515,6 @@
     <option name="myLastEditedConfigurable" value="Harvey Norman Inspection Profile" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorSlowTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="27" selection-start="580" selection-end="580" vertical-scroll-proportion="0.24545455">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/ClassLocatorSlowTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="83" selection-start="950" selection-end="950" vertical-scroll-proportion="0.3">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedClassLocatorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="46" selection-start="1991" selection-end="1991" vertical-scroll-proportion="0.76363635">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedClassLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="37" selection-start="206" selection-end="206" vertical-scroll-proportion="0.10909091">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/test/automock/DefaultAutoMocker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="6" selection-start="542" selection-end="542" vertical-scroll-proportion="0.13636364">
@@ -2632,28 +2636,56 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/AfterSpecificationNamingConvention.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="19" selection-start="178" selection-end="191" vertical-scroll-proportion="0.10909091">
+        <state line="4" column="19" selection-start="178" selection-end="191" vertical-scroll-proportion="0.08759124">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/AfterSpecificationNamingConventionAtomicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="37" selection-start="138" selection-end="138" vertical-scroll-proportion="0.10909091">
+        <state line="4" column="37" selection-start="138" selection-end="138" vertical-scroll-proportion="0.08759124">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/BeforeSpecificationNamingConvention.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="19" selection-start="179" selection-end="189" vertical-scroll-proportion="0.10909091">
+        <state line="4" column="19" selection-start="179" selection-end="189" vertical-scroll-proportion="0.08759124">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/BeforeSpecificationNamingConventionAtomicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="327" selection-end="327" vertical-scroll-proportion="0.24545455">
+        <state line="9" column="0" selection-start="327" selection-end="327" vertical-scroll-proportion="0.1970803">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/BehaviourContextNamingConvention.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="22" selection-start="176" selection-end="197" vertical-scroll-proportion="0.08759124">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/BehaviourContextNamingConventionAtomicTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="332" selection-end="332" vertical-scroll-proportion="0.1970803">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/SpecificationNamingConvention.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="18" selection-start="174" selection-end="181" vertical-scroll-proportion="0.08759124">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/SpecificationNamingConventionAtomicTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="314" selection-end="314" vertical-scroll-proportion="0.1970803">
           <folding />
         </state>
       </provider>
