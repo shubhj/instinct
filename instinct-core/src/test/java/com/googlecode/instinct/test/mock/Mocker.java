@@ -4,6 +4,14 @@ import com.googlecode.instinct.internal.util.Suggest;
 import org.jmock.Mock;
 import org.jmock.cglib.CGLIBCoreMock;
 import static org.jmock.core.AbstractDynamicMock.mockNameFromClass;
+import org.jmock.core.Constraint;
+import org.jmock.core.InvocationMatcher;
+import org.jmock.core.Stub;
+import org.jmock.core.constraint.IsAnything;
+import org.jmock.core.constraint.IsEqual;
+import org.jmock.core.constraint.IsSame;
+import org.jmock.core.matcher.InvokeOnceMatcher;
+import org.jmock.core.stub.ReturnStub;
 
 @SuppressWarnings({"unchecked"})
 @Suggest({"Move this into the production tree -> pull out an interface & make non-static"})
@@ -12,9 +20,13 @@ public final class Mocker {
         throw new UnsupportedOperationException();
     }
 
-    @Suggest("Will need to keep a track of the mock by adding it to a map so we can get to the control & the proxy")
-    public static <T> T mock(final Class<T> toMock) {
+    public static <T> Mock mockController(final Class<T> toMock) {
         return toMock.isInterface() ? newInterfaceMock(toMock) : newConcreteMock(toMock);
+    }
+
+    @Suggest({"Will need to keep a track of the mock by adding it to a map so we can get to the control & the proxy"})
+    public static <T> T mock(final Class<T> toMock) {
+        return (T) mockController(toMock).proxy();
     }
 
     @Suggest({"Use this in a similar way to EasyMock.expect()", "Define some interfaces that restrict what can be done or use JMock's."})
@@ -24,12 +36,32 @@ public final class Mocker {
         throw new UnsupportedOperationException();
     }
 
-    private static <T> T newInterfaceMock(final Class<T> toMock) {
-        return (T) new Mock(toMock).proxy();
+    public static InvocationMatcher once() {
+        return new InvokeOnceMatcher();
     }
 
-    private static <T> T newConcreteMock(final Class<T> toMock) {
-        return (T) new CGLIBCoreMock(toMock, mockNameFromClass(toMock)).proxy();
+    public static Constraint same(final Object argument) {
+        return new IsSame(argument);
+    }
+
+    public static Constraint anything() {
+        return new IsAnything();
+    }
+
+    public static Constraint eq(final Object argument) {
+        return new IsEqual(argument);
+    }
+
+    public static Stub returnValue(final Object returnValue) {
+        return new ReturnStub(returnValue);
+    }
+
+    private static <T> Mock newInterfaceMock(final Class<T> toMock) {
+        return new Mock(toMock);
+    }
+
+    private static <T> Mock newConcreteMock(final Class<T> toMock) {
+        return new Mock(new CGLIBCoreMock(toMock, mockNameFromClass(toMock)));
     }
 
 /*

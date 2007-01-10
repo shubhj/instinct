@@ -1,6 +1,7 @@
 package com.googlecode.instinct.internal.aggregate;
 
 import java.io.File;
+import java.io.FileFilter;
 import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
@@ -20,6 +21,7 @@ public final class BehaviourContextAggregatorImpl implements BehaviourContextAgg
 
     public JavaClassName[] getContextNames() {
         final File packageRoot = new File(finder.getPackageRoot(classInSpecTree));
-        return locator.locate(packageRoot, new AnnotationFileFilter(packageRoot, BehaviourContext.class));
+        final FileFilter filter = new AnnotationFileFilter(packageRoot, BehaviourContext.class);
+        return locator.locate(packageRoot, filter);
     }
 }
