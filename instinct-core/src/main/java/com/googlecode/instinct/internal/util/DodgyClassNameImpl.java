@@ -6,10 +6,7 @@ public final class DodgyClassNameImpl implements DodgyClassName {
     private final String fullyQualifiedClassName;
 
     public DodgyClassNameImpl(final File rootDir, final File clsFile) {
-        final String rootAbsolute = rootDir.getAbsolutePath();
-        final String clsAbsolute = clsFile.getAbsolutePath();
-        final String path = getPathRelativeToRoot(rootAbsolute, clsAbsolute);
-        fullyQualifiedClassName = convertClassFilePathToClassName(path);
+        fullyQualifiedClassName = getFullyQualifiedClassName(rootDir, clsFile);
     }
 
     public String getFullyQualifiedName() {
@@ -21,13 +18,11 @@ public final class DodgyClassNameImpl implements DodgyClassName {
         return fullyQualifiedClassName;
     }
 
-    private String getPathRelativeToRoot(final String rootAbsolute, final String absolute) {
+    private String getFullyQualifiedClassName(final File rootDir, final File clsFile) {
+        final String rootAbsolute = rootDir.getAbsolutePath();
+        final String clsAbsolute = clsFile.getAbsolutePath();
         final int length = rootAbsolute.length();
-        return absolute.substring(length);
-    }
-
-    @Suggest("Appears to be broken for some cases of rootDir & clsFile (empty or /)")
-    private String convertClassFilePathToClassName(final String path) {
+        final String path = clsAbsolute.substring(length);
         final String dotsForSlashes = path.replaceAll("[/\\\\]", ".");
         final String noLeadingDot = dotsForSlashes.substring(1);
         return noLeadingDot.replaceAll(".class", "");

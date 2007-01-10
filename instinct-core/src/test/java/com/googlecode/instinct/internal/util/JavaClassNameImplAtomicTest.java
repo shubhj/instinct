@@ -4,8 +4,14 @@ import java.io.File;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 public final class JavaClassNameImplAtomicTest extends InstinctTestCase {
+    @Suggest("Triangulate on classes root path")
     public void testGetFullyQualifiedClassName() {
         checkGetFullyQualifiedClassName("/home/me/projects/src/", "/home/me/projects/src/com/foo/Bar.class", "com.foo.Bar");
+        checkGetFullyQualifiedClassName("/home/me/projects/src/", "/home/me/projects/src/com/foo/bar/Baz.class", "com.foo.bar.Baz");
+//        checkGetFullyQualifiedClassName("/", "/com/foo/bar/Baz.class", "com.foo.bar.Baz");
+//        checkGetFullyQualifiedClassName("", "com/foo/bar/Baz.class", "com.foo.bar.Baz");
+//        checkGetFullyQualifiedClassName("\\", "\\com\\foo\\bar\\Baz.class", "com.foo.bar.Baz");
+//        checkGetFullyQualifiedClassName("/", "/com/foo/bar/class/Baz.class", "com.foo.bar.class.Baz");
     }
 
     private void checkGetFullyQualifiedClassName(final String classesRootPath, final String classFilePath,
