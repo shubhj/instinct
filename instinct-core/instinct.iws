@@ -32,7 +32,6 @@
     <list default="true" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mockery.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mockery.java" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -192,16 +191,7 @@
       <file leaf-file-name="BehaviourContextAggregatorImplAtomicTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="19" selection-start="646" selection-end="646" vertical-scroll-proportion="0.17349398">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Mockery.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mockery.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="5" selection-start="2179" selection-end="2179" vertical-scroll-proportion="0.4232558">
+            <state line="15" column="43" selection-start="783" selection-end="783" vertical-scroll-proportion="0.30361447">
               <folding />
             </state>
           </provider>
@@ -2810,7 +2800,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="828" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
@@ -2826,7 +2816,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.07673469" order="1" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993513" order="8" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3328767" order="2" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3328767" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="File View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39962825" order="4" />
@@ -3056,14 +3046,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mockery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="5" selection-start="2179" selection-end="2179" vertical-scroll-proportion="0.4232558">
+        <state line="48" column="29" selection-start="1912" selection-end="1912" vertical-scroll-proportion="0.33255813">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="19" selection-start="646" selection-end="646" vertical-scroll-proportion="0.17349398">
+        <state line="15" column="43" selection-start="783" selection-end="783" vertical-scroll-proportion="0.30361447">
           <folding />
         </state>
       </provider>

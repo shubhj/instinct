@@ -13,7 +13,7 @@ import static com.googlecode.instinct.test.mock.Mockery.verify;
 public final class BehaviourContextAggregatorImplAtomicTest extends InstinctTestCase {
 
     public void test() {
-        final JavaClassName[] classNames = new JavaClassName[]{mock(JavaClassName.class)};
+        final JavaClassName[] classNames = {mock(JavaClassName.class)};
         final ClassLocator classLocator = mock(ClassLocator.class);
         expects(classLocator, once()).method("locate").with(anything(), anything()).will(returnValue(classNames));
         final BehaviourContextAggregator aggregator = new BehaviourContextAggregatorImpl(BehaviourContextAggregatorImplAtomicTest.class,
