@@ -1,8 +1,8 @@
 package com.googlecode.instinct.test.mock;
 
 import org.jmock.Mock;
-import org.jmock.core.InvocationMatcher;
 import org.jmock.builder.NameMatchBuilder;
+import org.jmock.core.InvocationMatcher;
 
 public final class JMockMockControl implements MockControl {
     private final Mock mockController;

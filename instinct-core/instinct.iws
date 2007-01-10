@@ -30,7 +30,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControlStateBasedAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControl.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControl.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControlStateBasedAtomicTest.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControlAtomicTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
     </list>
   </component>
@@ -188,15 +190,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BehaviourContextAggregatorImplAtomicTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="17" selection-start="1397" selection-end="1397" vertical-scroll-proportion="0.4090909">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="MockControl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockControl.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -206,10 +199,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JMockMockControlStateBasedAtomicTest.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControlStateBasedAtomicTest.java">
+      <file leaf-file-name="JMockMockControlAtomicTest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControlAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="21" selection-start="226" selection-end="226" vertical-scroll-proportion="0.16363636">
+            <state line="18" column="4" selection-start="732" selection-end="732" vertical-scroll-proportion="0.4909091">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -220,10 +213,28 @@
       <file leaf-file-name="JMockMockControl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="27" selection-start="390" selection-end="390" vertical-scroll-proportion="0.35454544">
+            <state line="21" column="26" selection-start="607" selection-end="607" vertical-scroll-proportion="0.57272726">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NameMatchBuilder.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/builder/NameMatchBuilder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="24" selection-start="267" selection-end="267" vertical-scroll-proportion="0.27272728">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Mock.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/Mock.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="76" column="0" selection-start="1917" selection-end="1917" vertical-scroll-proportion="0.44242424">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -494,6 +505,28 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="proxy" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewLibrariesNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="util" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -2655,16 +2688,16 @@
     </key>
   </component>
   <component name="RestoreUpdateTree" />
-  <component name="RunManager" selected="JUnit.JMockMockControlStateBasedAtomicTest">
-    <tempConfiguration default="false" name="JMockMockControlStateBasedAtomicTest" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+  <component name="RunManager" selected="JUnit.JMockMockControlAtomicTest.testExpects">
+    <tempConfiguration default="false" name="JMockMockControlAtomicTest.testExpects" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <pattern value="com.googlecode.instinct.test.mock.*" />
       <module name="instinct" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.googlecode.instinct.test.mock" />
-      <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.test.mock.JMockMockControlStateBasedAtomicTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.test.mock.JMockMockControlAtomicTest" />
+      <option name="METHOD_NAME" value="testExpects" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -2802,6 +2835,28 @@
       <option name="VM_PARAMETERS" value="" />
       <option name="PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ADDITIONAL_CLASS_PATH" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method>
+        <option name="Make" value="true" />
+      </method>
+    </configuration>
+    <configuration default="false" name="JMockMockControlAtomicTest" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+      <pattern value="com.googlecode.instinct.test.mock.*" />
+      <module name="instinct" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.googlecode.instinct.test.mock" />
+      <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.test.mock.JMockMockControlAtomicTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="ADDITIONAL_CLASS_PATH" />
       <option name="TEST_SEARCH_SCOPE">
         <value defaultName="wholeProject" />
@@ -3045,48 +3100,6 @@
     <option name="myLastEditedConfigurable" value="Harvey Norman Inspection Profile" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/sql/Array.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="40" selection-start="3072" selection-end="3072" vertical-scroll-proportion="0.3272727">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="24" selection-start="957" selection-end="970" vertical-scroll-proportion="0.2631579">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/MockObjectTestCase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="0" selection-start="2452" selection-end="2534" vertical-scroll-proportion="0.01754386">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="17" selection-start="61" selection-end="61" vertical-scroll-proportion="0.03508772">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/core/AbstractDynamicMock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="16" selection-start="1781" selection-end="1781" vertical-scroll-proportion="0.4385965">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/core/Verifiable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="25" selection-start="454" selection-end="454" vertical-scroll-proportion="0.14035088">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockHolder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="21" selection-start="65" selection-end="65" vertical-scroll-proportion="0.03508772">
@@ -3152,13 +3165,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/Mock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="18" selection-start="1236" selection-end="1236" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mocker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="25" selection-start="803" selection-end="803" vertical-scroll-proportion="0.38181818">
@@ -3180,13 +3186,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="43" selection-start="206" selection-end="206" vertical-scroll-proportion="0.10909091">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/lang/Readable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="17" selection-start="477" selection-end="485" vertical-scroll-proportion="0.21818182">
@@ -3201,15 +3200,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="27" selection-start="390" selection-end="390" vertical-scroll-proportion="0.35454544">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/lang/Class.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="417" column="55" selection-start="17775" selection-end="17778" vertical-scroll-proportion="0.93333334">
@@ -3219,9 +3209,74 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControlStateBasedAtomicTest.java">
+    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/util/List.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="21" selection-start="226" selection-end="226" vertical-scroll-proportion="0.16363636">
+        <state line="187" column="12" selection-start="8011" selection-end="8011" vertical-scroll-proportion="0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/core/InvocationMocker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="18" selection-start="2031" selection-end="2031" vertical-scroll-proportion="0.36060607">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/core/StubMatchersCollection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="9" selection-start="174" selection-end="174" vertical-scroll-proportion="0.21818182">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/builder/InvocationMockerBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="159" column="22" selection-start="5220" selection-end="5220" vertical-scroll-proportion="0.72727275">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/builder/MatchBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="17" selection-start="203" selection-end="203" vertical-scroll-proportion="0.21818182">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="43" selection-start="206" selection-end="206" vertical-scroll-proportion="0.10909091">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/Mock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="0" selection-start="1917" selection-end="1917" vertical-scroll-proportion="0.44242424">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/builder/NameMatchBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="24" selection-start="267" selection-end="267" vertical-scroll-proportion="0.27272728">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="26" selection-start="607" selection-end="607" vertical-scroll-proportion="0.57272726">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControlAtomicTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="4" selection-start="732" selection-end="732" vertical-scroll-proportion="0.4909091">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
