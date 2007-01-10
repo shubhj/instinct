@@ -41,8 +41,7 @@
     <property name="slow.test.results" value="${slow.test.results.dir}/Slow-Tests.xml"/>
     <property name="checkstyle.results.dir" value="${build.dir}/checkstyle"/>
     <property name="coverage.dir" value="${build.dir}/coverage"/>
-    <property name="out.instr.dir" value="${build.dir}/outinstr"/>
-    <property name="emma.filter" value="${main.package.name}.*AtomicTest"/>
+    <property name="coverage.instrumented.dir" value="${coverage.dir}/instrumented"/>
 
     <patternset id="all.code.pattern">
         <include name="**/*.java"/>
@@ -59,8 +58,10 @@
 
     <patternset id="test.classpath.pattern">
         <patternset refid="main.classpath.pattern"/>
-        <include name="${lib.dir}/emma/emma-2.0.5312.jar"/>
-        <include name="${lib.dir}/emma/emma_ant-2.0.5312.jar"/>
+        <include name="${lib.dir}/cobertura/asm-2.2.1.jar"/>
+        <include name="${lib.dir}/cobertura/cobertura-1.8.jar"/>
+        <include name="${lib.dir}/cobertura/jakarta-oro-2.0.8.jar"/>
+        <include name="${lib.dir}/cobertura/log4j-1.2.9.jar"/>
         <include name="${lib.dir}/jmock/jmock-1.1.0.jar"/>
         <include name="${lib.dir}/jmock/jmock-cglib-1.1.0.jar"/>
     </patternset>
@@ -107,7 +108,7 @@
         <fileset dir="${basedir}">
             <patternset refid="test.classpath.pattern"/>
         </fileset>
-        <pathelement location="${out.instr.dir}/classes"/>
+        <pathelement location="${coverage.instrumented.dir}"/>
         <pathelement location="${main.classes.dir}"/>
         <pathelement location="${test.classes.dir}"/>
     </path>
@@ -122,6 +123,5 @@
     <target name="default">
         <echo message="Nothing to see here..."/>
     </target>
-
 
 </project>

@@ -4,26 +4,29 @@
     <import file="build-setup.xml"/>
     <import file="build-quality.xml"/>
 
-    <!--<target name="all" depends="clean,-enable-emma,test"/>-->
-    <target name="all" depends="clean,test"/>
+    <taskdef resource="tasks.properties" classpathref="test.class.path"/>
 
     <target name="clean">
         <delete dir="${build.dir}"/>
     </target>
 
-    <target name="compile" depends="checkstyle,-compile"/>
+    <target name="all" depends="clean,dist,test"/>
+    <target name="compile" depends="clean,checkstyle,-compile"/>
 
-    <target name="dist" depends="compile,-dist-jar"/>
+    <target name="dist" depends="clean,compile,-dist"/>
 
-    <target name="test" depends="atomic-test,slow-test"/>
+    <target name="test" depends="clean,-test"/>
 
-    <target name="atomic-test" depends="dist">
+
+    <target name="atomic-test" depends="-instrumented_compile">
         <test.macro type="atomic"/>
     </target>
 
-    <target name="slow-test" depends="dist">
+    <target name="slow-test" depends="-instrumented_compile">
         <test.macro type="slow"/>
     </target>
+
+    <target name="-test" depends="atomic-test,slow-test"/>
 
     <target name="javadoc" depends="-compile">
         <mkdir dir="${javadoc.dir}"/>
@@ -36,62 +39,38 @@
         </javadoc>
     </target>
 
-    <!-- FIXME: Make sure the instrumented classes don't appear in the JAR file -->
     <target name="-compile">
         <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}"
                 code.path="main.code.path" code.pattern="all.code.pattern"/>
         <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}"
                 code.path="test.code.path" code.pattern="all.code.pattern"/>
-        <taskdef resource="emma_ant.properties" classpathref="test.class.path"/>
-        <emma enabled="${emma.enabled}">
-            <instr instrpath="${main.classes.dir}" destdir="${out.instr.dir}/classes"
-                    metadatafile="${coverage.dir}/metadata.emma" merge="true">
-                <filter value="${emma.filter}"/>
-            </instr>
-        </emma>
         <!--<copy todir="${main.classes.dir}">-->
-            <!--<fileset dir="${main.src.dir}" includes="**/application-context.xml"/>-->
+        <!--<fileset dir="${main.src.dir}" includes="**/application-context.xml"/>-->
         <!--</copy>-->
     </target>
 
-    <target name="-dist-jar">
+    <target name="-dist">
         <mkdir dir="${dist.dir}"/>
         <jar destfile="${dist.dir}/${project.jar}">
             <fileset dir="${main.classes.dir}"/>
         </jar>
     </target>
 
-    <target name="-enable-emma">
-        <mkdir dir="${out.instr.dir}"/>
-        <mkdir dir="${coverage.dir}"/>
-        <property name="emma.enabled" value="true"/>
-    </target>
-
     <macrodef name="test.macro">
         <attribute name="type"/>
         <sequential>
-            <echo message="Running test"/>
             <mkdir dir="${@{type}.test.results.dir}"/>
-            <mkdir dir="${coverage.dir}"/>
             <junit failureproperty="@{type}.test.failed" fork="true" forkmode="perBatch">
                 <classpath refid="@{type}.test.class.path"/>
-                <formatter type="brief" usefile="false"/>
+                <sysproperty key="net.sourceforge.cobertura.datafile" file="${coverage.dir}/coverage.ser"/>
                 <batchtest todir="${@{type}.test.results.dir}">
                     <fileset refid="@{type}.test.code.fileset"/>
                 </batchtest>
-                <jvmarg value="-Demma.coverage.out.file=${coverage.dir}/coverage.emma"/>
                 <formatter type="xml"/>
                 <formatter type="brief" usefile="false"/>
             </junit>
             <fail if="@{type}.test.failed" message="@{type} tests failed."/>
-            <emma enabled="${emma.enabled}">
-                <report sourcepath="${main.src.dir}" depth="method">
-                    <fileset dir="${coverage.dir}">
-                        <include name="*.emma"/>
-                    </fileset>
-                    <html outfile="${coverage.dir}/coverage.html"/>
-                </report>
-            </emma>
+            <macro_cobertura_report/>
         </sequential>
     </macrodef>
 
