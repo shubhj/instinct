@@ -56,6 +56,19 @@
         </jar>
     </target>
 
+    <target name="-instrumented_compile" depends="-compile">
+        <mkdir dir="${coverage.dir}"/>
+        <mkdir dir="${coverage.instrumented.dir}"/>
+        <copy todir="${coverage.instrumented.dir}">
+            <fileset dir="${main.classes.dir}"/>
+        </copy>
+        <cobertura-instrument todir="${coverage.instrumented.dir}" datafile="${coverage.dir}/coverage.ser">
+            <fileset dir="${main.classes.dir}">
+                <include name="**/*.class"/>
+            </fileset>
+        </cobertura-instrument>
+    </target>
+
     <macrodef name="test.macro">
         <attribute name="type"/>
         <sequential>

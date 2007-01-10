@@ -46,4 +46,21 @@
         </sequential>
     </macrodef>
 
+    <macrodef name="macro_cobertura_report">
+        <sequential>
+            <mkdir dir="${coverage.dir}"/>
+            <cobertura-report destdir="${coverage.dir}" datafile="${coverage.dir}/coverage.ser">
+                <fileset dir="${main.src.dir}" includes="**/*.java"/>
+            </cobertura-report>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="macro_cobertura_check">
+        <attribute name="branch.limit"/>
+        <attribute name="line.limit"/>
+        <sequential>
+            <cobertura-check totalbranchrate="@{branch.limit}" totallinerate="@{line.limit}" failureproperty="coverage.failed" haltonfailure="true"
+                    datafile="${coverage.dir}/coverage.ser"/>
+        </sequential>
+    </macrodef>
 </project>

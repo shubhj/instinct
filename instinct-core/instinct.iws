@@ -30,14 +30,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/cobertura/cobertura-1.8.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/cobertura" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/cobertura/log4j-1.2.9.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/cobertura/asm-2.2.1.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/cobertura/jakarta-oro-2.0.8.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build-quality.xml" afterPath="$PROJECT_DIR$/build-quality.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build-setup.xml" afterPath="$PROJECT_DIR$/build-setup.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
     </list>
   </component>
@@ -198,7 +192,7 @@
       <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="95" column="0" selection-start="3956" selection-end="3956" vertical-scroll-proportion="0.7837838">
+            <state line="7" column="0" selection-start="243" selection-end="243" vertical-scroll-proportion="-1.945946">
               <folding />
             </state>
           </provider>
@@ -207,7 +201,7 @@
       <file leaf-file-name="build-quality.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/build-quality.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="78" column="4" selection-start="3299" selection-end="3299" vertical-scroll-proportion="2.108108">
+            <state line="47" column="0" selection-start="2014" selection-end="2014" vertical-scroll-proportion="0.35135135">
               <folding />
             </state>
           </provider>
@@ -1775,13 +1769,29 @@
   <component name="PropertiesComponent">
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="cvs_file_history_treeWidth0" value="451" />
+    <property name="cvs_file_history_flatWidth2" value="451" />
+    <property name="cvs_file_history_treeOrder1" value="1" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="cvs_file_history_flatOrder1" value="1" />
+    <property name="cvs_file_history_flatWidth1" value="450" />
+    <property name="cvs_file_history_treeWidth1" value="450" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
+    <property name="cvs_file_history_flatOrder2" value="2" />
+    <property name="cvs_file_history_treeWidth2" value="451" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="cvs_file_history_flatOrder3" value="3" />
+    <property name="RunManagerConfig.showSettingsBeforeRunnig" value="false" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="RunManagerConfig.compileBeforeRunning" value="true" />
-    <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="RunManagerConfig.showSettingsBeforeRunnig" value="false" />
+    <property name="cvs_file_history_flatOrder0" value="0" />
+    <property name="cvs_file_history_treeOrder3" value="3" />
+    <property name="cvs_file_history_treeOrder2" value="2" />
+    <property name="cvs_file_history_treeWidth3" value="450" />
+    <property name="cvs_file_history_flatWidth0" value="451" />
+    <property name="cvs_file_history_flatWidth3" value="450" />
+    <property name="cvs_file_history_treeOrder0" value="0" />
   </component>
   <component name="ReadonlyStatusHandler">
     <option name="SHOW_DIALOG" value="true" />
@@ -2073,7 +2083,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39962825" order="4" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="0" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32808155" order="8" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32806692" order="8" />
       <window_info id="Maven-2 Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="SVN Properties" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32993513" order="8" />
       <window_info id="Maven 2 Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
@@ -2364,14 +2374,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="0" selection-start="3956" selection-end="3956" vertical-scroll-proportion="0.7837838">
+        <state line="7" column="0" selection-start="243" selection-end="243" vertical-scroll-proportion="-1.945946">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build-quality.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="4" selection-start="3299" selection-end="3299" vertical-scroll-proportion="2.108108">
+        <state line="47" column="0" selection-start="2014" selection-end="2014" vertical-scroll-proportion="0.35135135">
           <folding />
         </state>
       </provider>
