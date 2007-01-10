@@ -4,7 +4,7 @@ import java.io.File;
 import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
-import com.googlecode.instinct.internal.util.DodgyClassName;
+import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class BehaviourContextAggregatorImpl implements BehaviourContextAggregator {
@@ -18,7 +18,7 @@ public final class BehaviourContextAggregatorImpl implements BehaviourContextAgg
         this.locator = locator;
     }
 
-    public DodgyClassName[] getContextNames() {
+    public JavaClassName[] getContextNames() {
         final File packageRoot = new File(finder.getPackageRoot(classInSpecTree));
         return locator.locate(packageRoot, new AnnotationFileFilter(packageRoot, BehaviourContext.class));
     }

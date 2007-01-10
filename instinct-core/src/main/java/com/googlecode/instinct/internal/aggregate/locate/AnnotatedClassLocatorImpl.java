@@ -1,9 +1,5 @@
 package com.googlecode.instinct.internal.aggregate.locate;
 
-import com.googlecode.instinct.internal.util.DodgyClassName;
-import com.googlecode.instinct.internal.util.DodgyClassNameImpl;
-import com.googlecode.instinct.internal.util.Suggest;
-
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
@@ -11,12 +7,15 @@ import static java.util.Arrays.asList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.internal.util.JavaClassNameImpl;
+import com.googlecode.instinct.internal.util.Suggest;
 
 public final class AnnotatedClassLocatorImpl implements AnnotatedClassLocator {
     private final Comparator<File> comparator = new FileComparator();
 
     @Suggest("Perhaps the filter is the param that should be passed, rather than the annotation. Could then make this a filtered class locator.")
-    public DodgyClassName[] locate(final File root, final FileFilter filter) {
+    public JavaClassName[] locate(final File root, final FileFilter filter) {
         final File[] files = sortedDeepLocate(root, filter);
         return toClasses(root, files);
     }
@@ -43,10 +42,10 @@ public final class AnnotatedClassLocatorImpl implements AnnotatedClassLocator {
         return dir.listFiles(filter);
     }
 
-    private DodgyClassName[] toClasses(final File root, final File[] files) {
-        final DodgyClassName[] result = new DodgyClassName[files.length];
+    private JavaClassName[] toClasses(final File root, final File[] files) {
+        final JavaClassName[] result = new JavaClassNameImpl[files.length];
         for (int i = 0; i < result.length; i++) {
-            result[i] = new DodgyClassNameImpl(root, files[i]);
+            result[i] = new JavaClassNameImpl(root, files[i]);
         }
         return result;
     }

@@ -7,14 +7,14 @@ import static java.util.Arrays.asList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import com.googlecode.instinct.internal.util.DodgyClassName;
-import com.googlecode.instinct.internal.util.DodgyClassNameImpl;
+import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.internal.util.JavaClassNameImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class ClassLocatorImpl implements ClassLocator {
     private final Comparator<File> comparator = new FileComparator();
 
-    public DodgyClassName[] locate(final File root, final FileFilter filter) {
+    public JavaClassName[] locate(final File root, final FileFilter filter) {
         checkNotNull(root, filter);
         final File[] files = sortedDeepLocate(root, filter);
         return toClasses(root, files);
@@ -41,10 +41,10 @@ public final class ClassLocatorImpl implements ClassLocator {
         return dir.listFiles(filter);
     }
 
-    private DodgyClassName[] toClasses(final File root, final File[] files) {
-        final DodgyClassName[] result = new DodgyClassName[files.length];
+    private JavaClassName[] toClasses(final File root, final File[] files) {
+        final JavaClassName[] result = new JavaClassNameImpl[files.length];
         for (int i = 0; i < result.length; i++) {
-            result[i] = new DodgyClassNameImpl(root, files[i]);
+            result[i] = new JavaClassNameImpl(root, files[i]);
         }
         return result;
     }

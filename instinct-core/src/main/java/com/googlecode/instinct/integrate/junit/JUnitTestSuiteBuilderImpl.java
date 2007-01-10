@@ -1,13 +1,13 @@
 package com.googlecode.instinct.integrate.junit;
 
+import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
+import au.net.netstorm.boost.edge.java.lang.EdgeClass;
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregatorImpl;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
-import com.googlecode.instinct.internal.util.DodgyClassName;
-import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
-import au.net.netstorm.boost.edge.java.lang.EdgeClass;
+import com.googlecode.instinct.internal.util.Suggest;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -25,25 +25,25 @@ public final class JUnitTestSuiteBuilderImpl implements JUnitTestSuiteBuilder {
 
     public Test buildSuite(final String suiteName) {
         checkNotNull(suiteName);
-        final DodgyClassName[] contextClasses = aggregator.getContextNames();
+        final JavaClassName[] contextClasses = aggregator.getContextNames();
         return buildSuite(suiteName, contextClasses);
     }
 
-    private TestSuite buildSuite(final String suiteName, final DodgyClassName[] contextClasses) {
+    private TestSuite buildSuite(final String suiteName, final JavaClassName[] contextClasses) {
         final TestSuite suite = new TestSuite(suiteName);
-        for (final DodgyClassName contextClass : contextClasses) {
+        for (final JavaClassName contextClass : contextClasses) {
             suite.addTest(createTestProxy(contextClass));
         }
         return suite;
     }
 
-    private Test createTestProxy(final DodgyClassName contextClass) {
+    private Test createTestProxy(final JavaClassName contextClass) {
         final Test test = new BehaviourContextTestCase(getClass(contextClass));
         return (Test) proxyGenerator.newProxy(Test.class, new BehaviourContextMethodInterceptorImpl(test));
     }
 
     @SuppressWarnings({"unchecked"})
-    private <T extends TestCase> Class<T> getClass(final DodgyClassName className) {
+    private <T extends TestCase> Class<T> getClass(final JavaClassName className) {
         final String qualified = className.getFullyQualifiedName();
         return edgeClass.forName(qualified);
     }

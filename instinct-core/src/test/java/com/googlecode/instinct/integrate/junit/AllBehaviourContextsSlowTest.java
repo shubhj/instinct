@@ -10,7 +10,7 @@ import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregatorImpl
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
-import com.googlecode.instinct.internal.util.DodgyClassName;
+import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 @SuppressWarnings({"ProhibitedExceptionThrown"})
@@ -25,8 +25,8 @@ public final class AllBehaviourContextsSlowTest extends InstinctTestCase {
     }
 
     private void runAllContexts() {
-        final DodgyClassName[] contextClasses = behaviourContextAggregator.getContextNames();
-        for (final DodgyClassName contextClassName : contextClasses) {
+        final JavaClassName[] contextClasses = behaviourContextAggregator.getContextNames();
+        for (final JavaClassName contextClassName : contextClasses) {
             final Class<?> cls = edgeClass.forName(contextClassName.getFullyQualifiedName());
             invokeContextIgnoringConfigurationExceptions(cls);
         }
