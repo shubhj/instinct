@@ -10,13 +10,11 @@
         <delete dir="${build.dir}"/>
     </target>
 
-    <target name="all" depends="clean,dist,test"/>
+    <!--<target name="all" depends="clean,dist,test"/>-->
+    <target name="all" depends="clean,dist,atomic-test"/>
     <target name="compile" depends="clean,checkstyle,-compile"/>
-
     <target name="dist" depends="clean,compile,-dist"/>
-
     <target name="test" depends="clean,-test"/>
-
 
     <target name="atomic-test" depends="-instrumented_compile">
         <test.macro type="atomic"/>
@@ -65,6 +63,7 @@
         <cobertura-instrument todir="${coverage.instrumented.dir}" datafile="${coverage.dir}/coverage.ser">
             <fileset dir="${main.classes.dir}">
                 <include name="**/*.class"/>
+                <exclude name="**/instinct/example/**"/>
             </fileset>
         </cobertura-instrument>
     </target>

@@ -35,7 +35,7 @@ public final class BehaviourContextRunnerSlowTest extends InstinctTestCase {
     }
 
     @Override
-    public void setUpSubjects() {
+    public void setUpSubject() {
         runner = new BehaviourContextRunnerImpl();
     }
 }

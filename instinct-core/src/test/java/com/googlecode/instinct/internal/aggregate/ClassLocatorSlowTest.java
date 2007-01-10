@@ -25,7 +25,7 @@ public final class ClassLocatorSlowTest extends InstinctTestCase {
     }
 
     @Override
-    public void setUpSubjects() {
+    public void setUpSubject() {
         packageRootFinder = new PackageRootFinderImpl();
         locator = new ClassLocatorImpl();
     }

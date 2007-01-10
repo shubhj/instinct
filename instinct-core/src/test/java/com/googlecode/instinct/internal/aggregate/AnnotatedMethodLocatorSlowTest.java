@@ -15,7 +15,7 @@ public final class AnnotatedMethodLocatorSlowTest extends InstinctTestCase {
     }
 
     @Override
-    public void setUpSubjects() {
+    public void setUpSubject() {
         locator = new AnnotatedMethodLocatorImpl();
     }
 }

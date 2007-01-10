@@ -7,12 +7,12 @@ public abstract class InstinctTestCase extends TestCase {
     @Override
     public final void setUp() throws Exception {
         setUpMocks();
-        setUpSubjects();
+        setUpSubject();
     }
 
     public void setUpMocks() {
     }
 
-    public void setUpSubjects() {
+    public void setUpSubject() {
     }
 }

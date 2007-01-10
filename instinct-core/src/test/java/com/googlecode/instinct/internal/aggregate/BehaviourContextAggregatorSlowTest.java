@@ -1,6 +1,5 @@
 package com.googlecode.instinct.internal.aggregate;
 
-import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.test.InstinctTestCase;
@@ -15,8 +14,7 @@ public final class BehaviourContextAggregatorSlowTest extends InstinctTestCase {
     }
 
     @Override
-    public void setUpSubjects() {
-        final ClassLocator locator = new ClassLocatorImpl();
-        aggregator = new BehaviourContextAggregatorImpl(BehaviourContextAggregatorSlowTest.class, locator);
+    public void setUpSubject() {
+        aggregator = new BehaviourContextAggregatorImpl(BehaviourContextAggregatorSlowTest.class, new ClassLocatorImpl());
     }
 }
