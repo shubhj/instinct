@@ -24,7 +24,6 @@ public final class Mockery {
         throw new UnsupportedOperationException();
     }
 
-    @Suggest({"Will need to keep a track of the mock by adding it to a map so we can get to the control & the proxy"})
     public static <T> T mock(final Class<T> toMock) {
         final Mock controller = createMockController(toMock);
         final Object mockedObject = controller.proxy();
