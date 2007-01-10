@@ -20,13 +20,13 @@ public final class Mocker {
         throw new UnsupportedOperationException();
     }
 
-    public static <T> Mock mockController(final Class<T> toMock) {
-        return toMock.isInterface() ? newInterfaceMock(toMock) : newConcreteMock(toMock);
-    }
-
     @Suggest({"Will need to keep a track of the mock by adding it to a map so we can get to the control & the proxy"})
     public static <T> T mock(final Class<T> toMock) {
         return (T) mockController(toMock).proxy();
+    }
+
+    public static <T> Mock mockController(final Class<T> toMock) {
+        return toMock.isInterface() ? createInterfaceMock(toMock) : createConcreteMock(toMock);
     }
 
     @Suggest({"Use this in a similar way to EasyMock.expect()", "Define some interfaces that restrict what can be done or use JMock's."})
@@ -56,11 +56,11 @@ public final class Mocker {
         return new ReturnStub(returnValue);
     }
 
-    private static <T> Mock newInterfaceMock(final Class<T> toMock) {
+    private static <T> Mock createInterfaceMock(final Class<T> toMock) {
         return new Mock(toMock);
     }
 
-    private static <T> Mock newConcreteMock(final Class<T> toMock) {
+    private static <T> Mock createConcreteMock(final Class<T> toMock) {
         return new Mock(new CGLIBCoreMock(toMock, mockNameFromClass(toMock)));
     }
 
