@@ -58,6 +58,10 @@ public final class Mockery {
         return new ReturnStub(returnValue);
     }
 
+    public static void verify() {
+        VERIFIER.verify();
+    }
+
     private static <T> Mock createMockController(final Class<T> toMock) {
         return toMock.isInterface() ? createInterfaceMock(toMock) : createConcreteMock(toMock);
     }

@@ -8,6 +8,7 @@ import static com.googlecode.instinct.test.mock.Mockery.expects;
 import static com.googlecode.instinct.test.mock.Mockery.mock;
 import static com.googlecode.instinct.test.mock.Mockery.once;
 import static com.googlecode.instinct.test.mock.Mockery.returnValue;
+import static com.googlecode.instinct.test.mock.Mockery.verify;
 
 public final class BehaviourContextAggregatorImplAtomicTest extends InstinctTestCase {
 
@@ -19,5 +20,6 @@ public final class BehaviourContextAggregatorImplAtomicTest extends InstinctTest
                 classLocator);
         final JavaClassName[] names = aggregator.getContextNames();
         assertNotNull(names);
+        verify();
     }
 }
