@@ -19,7 +19,7 @@ public final class BehaviourContextAggregatorImplAtomicTest extends InstinctTest
         final BehaviourContextAggregator aggregator = new BehaviourContextAggregatorImpl(BehaviourContextAggregatorImplAtomicTest.class,
                 classLocator);
         final JavaClassName[] names = aggregator.getContextNames();
-        assertNotNull(names);
+        assertSame(classNames, names);
         verify();
     }
 }
