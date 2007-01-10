@@ -16,6 +16,7 @@ public final class BehaviourContextAggregatorImplAtomicTest extends InstinctTest
         final JavaClassName[] classNames = {mock(JavaClassName.class)};
         final ClassLocator classLocator = mock(ClassLocator.class);
         expects(classLocator, once()).method("locate").with(anything(), anything()).will(returnValue(classNames));
+        //expects(classLocator).once().method("locate").with(anything(), anything()).will(returnValue(classNames));
         final BehaviourContextAggregator aggregator = new BehaviourContextAggregatorImpl(BehaviourContextAggregatorImplAtomicTest.class,
                 classLocator);
         final JavaClassName[] names = aggregator.getContextNames();

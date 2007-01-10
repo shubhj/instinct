@@ -1,14 +1,14 @@
 package com.googlecode.instinct.test.mock;
 
 import org.jmock.builder.NameMatchBuilder;
-import org.jmock.core.InvocationMatcher;
 import org.jmock.core.Constraint;
+import org.jmock.core.InvocationMatcher;
 import org.jmock.core.Stub;
-import org.jmock.core.stub.ReturnStub;
-import org.jmock.core.constraint.IsSame;
 import org.jmock.core.constraint.IsAnything;
 import org.jmock.core.constraint.IsEqual;
+import org.jmock.core.constraint.IsSame;
 import org.jmock.core.matcher.InvokeOnceMatcher;
+import org.jmock.core.stub.ReturnStub;
 
 public final class MockeryImpl implements Mockery {
     private final Verifier verifier = new VerifierImpl();
@@ -19,8 +19,8 @@ public final class MockeryImpl implements Mockery {
     public <T> T mock(final Class<T> toMock) {
         final MockControl mockControl = mockCreator.createMockController(toMock);
         final Object mockedObject = mockControl.getMockedObject();
-        verifier.addVerifiable(mockControl);
         holder.addControl(mockControl, mockedObject);
+        verifier.addVerifiable(mockControl);
         return (T) mockedObject;
     }
 
