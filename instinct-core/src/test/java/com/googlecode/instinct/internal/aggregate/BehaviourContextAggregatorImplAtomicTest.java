@@ -3,20 +3,22 @@ package com.googlecode.instinct.internal.aggregate;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.mock.Mocker.anything;
-import static com.googlecode.instinct.test.mock.Mocker.mock;
-import static com.googlecode.instinct.test.mock.Mocker.mockController;
-import static com.googlecode.instinct.test.mock.Mocker.once;
-import static com.googlecode.instinct.test.mock.Mocker.returnValue;
-import org.jmock.Mock;
+import static com.googlecode.instinct.test.mock.Mockery.anything;
+import static com.googlecode.instinct.test.mock.Mockery.expects;
+import static com.googlecode.instinct.test.mock.Mockery.mock;
+import static com.googlecode.instinct.test.mock.Mockery.once;
+import static com.googlecode.instinct.test.mock.Mockery.returnValue;
 
 public final class BehaviourContextAggregatorImplAtomicTest extends InstinctTestCase {
+    private JavaClassName[] classNames;
+    private ClassLocator classLocator;
+
     public void test() {
-        final JavaClassName[] classNames = {mock(JavaClassName.class)};
-        final Mock locatorController = mockController(ClassLocator.class);
-        locatorController.expects(once()).method("locate").with(anything(), anything()).will(returnValue(classNames));
+        classNames = new JavaClassName[]{mock(JavaClassName.class)};
+        classLocator = mock(ClassLocator.class);
+        expects(classLocator, once()).method("locate").with(anything(), anything()).will(returnValue(classNames));
         final BehaviourContextAggregator aggregator = new BehaviourContextAggregatorImpl(BehaviourContextAggregatorImplAtomicTest.class,
-                (ClassLocator) locatorController.proxy());
+                classLocator);
         final JavaClassName[] names = aggregator.getContextNames();
         assertNotNull(names);
     }

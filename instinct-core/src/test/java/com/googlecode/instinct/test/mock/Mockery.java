@@ -2,6 +2,7 @@ package com.googlecode.instinct.test.mock;
 
 import com.googlecode.instinct.internal.util.Suggest;
 import org.jmock.Mock;
+import org.jmock.builder.NameMatchBuilder;
 import org.jmock.cglib.CGLIBCoreMock;
 import static org.jmock.core.AbstractDynamicMock.mockNameFromClass;
 import org.jmock.core.Constraint;
@@ -15,25 +16,26 @@ import org.jmock.core.stub.ReturnStub;
 
 @SuppressWarnings({"unchecked"})
 @Suggest({"Move this into the production tree -> pull out an interface & make non-static"})
-public final class Mocker {
-    private Mocker() {
+public final class Mockery {
+    private static final VerifierImpl VERIFIER = new VerifierImpl();
+    private static final MockControllerHolder CONTROLLER_HOLDER = new MockControllerHolderImpl();
+
+    private Mockery() {
         throw new UnsupportedOperationException();
     }
 
     @Suggest({"Will need to keep a track of the mock by adding it to a map so we can get to the control & the proxy"})
     public static <T> T mock(final Class<T> toMock) {
-        return (T) mockController(toMock).proxy();
+        final Mock controller = createMockController(toMock);
+        final Object mockedObject = controller.proxy();
+        VERIFIER.addVerifiable(controller);
+        CONTROLLER_HOLDER.addControl(controller, mockedObject);
+        return (T) mockedObject;
     }
 
-    public static <T> Mock mockController(final Class<T> toMock) {
-        return toMock.isInterface() ? createInterfaceMock(toMock) : createConcreteMock(toMock);
-    }
-
-    @Suggest({"Use this in a similar way to EasyMock.expect()", "Define some interfaces that restrict what can be done or use JMock's."})
-    public static Mock expect() {
-        // mock(Object.class).method("toString").will(return("some string"))
-        // expect(Object.class, "toString").will(return("some string"))
-        throw new UnsupportedOperationException();
+    public static NameMatchBuilder expects(final Object mockedObject, final InvocationMatcher expectation) {
+        final Mock mockController = CONTROLLER_HOLDER.getMockController(mockedObject);
+        return mockController.expects(expectation);
     }
 
     public static InvocationMatcher once() {
@@ -56,6 +58,10 @@ public final class Mocker {
         return new ReturnStub(returnValue);
     }
 
+    private static <T> Mock createMockController(final Class<T> toMock) {
+        return toMock.isInterface() ? createInterfaceMock(toMock) : createConcreteMock(toMock);
+    }
+
     private static <T> Mock createInterfaceMock(final Class<T> toMock) {
         return new Mock(toMock);
     }
@@ -70,9 +76,9 @@ public static <T> T createNiceMock(final Class<T> toMock) {
 //        return MOCK_FACTORY.createNiceMock(toMock);
 }
 
-public static IMocksControl getControl(final Object mock) {
+public static IMocksControl getMockController(final Object mock) {
     throw new UnsupportedOperationException();
-//        return MOCK_FACTORY.getControl(mock);
+//        return MOCK_FACTORY.getMockController(mock);
 }
 
 public static IMocksControl createControl() {
