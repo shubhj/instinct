@@ -30,14 +30,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mocker.java" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockControllerHolder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockControllerHolderImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/UnkownMockException.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/ProxiedInstanceProvider.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/ProxiedInstanceProvider.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mockery.java" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -194,10 +188,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="BehaviourContextAggregatorImplAtomicTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="BehaviourContextAggregatorImplAtomicTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="0" selection-start="729" selection-end="729" vertical-scroll-proportion="0.60722893">
+            <state line="14" column="8" selection-start="684" selection-end="684" vertical-scroll-proportion="0.52048194">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -205,7 +199,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Mockery.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Mockery.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mockery.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="37" column="51" selection-start="1680" selection-end="1680" vertical-scroll-proportion="0.2116279">
@@ -3061,19 +3055,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="8" selection-start="684" selection-end="684" vertical-scroll-proportion="0.52048194">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mockery.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="37" column="51" selection-start="1680" selection-end="1680" vertical-scroll-proportion="0.2116279">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="729" selection-end="729" vertical-scroll-proportion="0.60722893">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

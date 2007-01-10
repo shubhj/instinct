@@ -10,12 +10,10 @@ import static com.googlecode.instinct.test.mock.Mockery.once;
 import static com.googlecode.instinct.test.mock.Mockery.returnValue;
 
 public final class BehaviourContextAggregatorImplAtomicTest extends InstinctTestCase {
-    private JavaClassName[] classNames;
-    private ClassLocator classLocator;
 
     public void test() {
-        classNames = new JavaClassName[]{mock(JavaClassName.class)};
-        classLocator = mock(ClassLocator.class);
+        final JavaClassName[] classNames = new JavaClassName[]{mock(JavaClassName.class)};
+        final ClassLocator classLocator = mock(ClassLocator.class);
         expects(classLocator, once()).method("locate").with(anything(), anything()).will(returnValue(classNames));
         final BehaviourContextAggregator aggregator = new BehaviourContextAggregatorImpl(BehaviourContextAggregatorImplAtomicTest.class,
                 classLocator);
