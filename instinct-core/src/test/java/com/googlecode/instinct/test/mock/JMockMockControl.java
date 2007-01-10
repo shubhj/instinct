@@ -22,4 +22,9 @@ public final class JMockMockControl implements MockControl {
     public void verify() {
         mockController.verify();
     }
+
+    @Override
+    public String toString() {
+        return mockController.toString();
+    }
 }

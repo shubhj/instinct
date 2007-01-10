@@ -30,20 +30,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockControllerHolder.java" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/UnkownMockException.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/UnkownMockException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockHolder.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockControllerHolderImpl.java" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockHolderImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mocker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/ProxiedInstanceProvider.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/ProxiedInstanceProvider.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockControl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockCreator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mockery.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mockery.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockeryImpl.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockeryImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControl.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
     </list>
   </component>
@@ -210,22 +197,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MockeryImpl.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockeryImpl.java">
+      <file leaf-file-name="MockControl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="8" selection-start="887" selection-end="887" vertical-scroll-proportion="0.25151515">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="6" column="17" selection-start="180" selection-end="180" vertical-scroll-proportion="0.10909091">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Mocker.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mocker.java">
+      <file leaf-file-name="JMockMockControl.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="26" selection-start="707" selection-end="707" vertical-scroll-proportion="0.54545456">
-              <folding />
+            <state line="7" column="38" selection-start="251" selection-end="251" vertical-scroll-proportion="0.19090909">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -3074,13 +3061,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockCreator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="46" selection-start="281" selection-end="281" vertical-scroll-proportion="0.0877193">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockCreator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="17" selection-start="61" selection-end="61" vertical-scroll-proportion="0.03508772">
@@ -3109,13 +3089,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockHolderImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="52" selection-start="203" selection-end="203" vertical-scroll-proportion="0.0877193">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/VerifierImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="19" selection-start="149" selection-end="149" vertical-scroll-proportion="0.13138686">
@@ -3132,26 +3105,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/Mock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="0" selection-start="1541" selection-end="1541" vertical-scroll-proportion="0.31578946">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mockery.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="10" selection-start="523" selection-end="523" vertical-scroll-proportion="0.33333334">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="19" selection-start="171" selection-end="171" vertical-scroll-proportion="0.10526316">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3176,9 +3133,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="25" selection-start="643" selection-end="643" vertical-scroll-proportion="0.38181818">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockHolderImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="17" selection-start="418" selection-end="418" vertical-scroll-proportion="0.3">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/Mock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="18" selection-start="1236" selection-end="1236" vertical-scroll-proportion="0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mocker.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="26" selection-start="707" selection-end="707" vertical-scroll-proportion="0.54545456">
+        <state line="27" column="25" selection-start="803" selection-end="803" vertical-scroll-proportion="0.38181818">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockeryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="66" selection-start="737" selection-end="878" vertical-scroll-proportion="0.3272727">
           <folding />
         </state>
       </provider>
@@ -3197,9 +3182,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockeryImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="8" selection-start="887" selection-end="887" vertical-scroll-proportion="0.25151515">
+        <state line="7" column="38" selection-start="251" selection-end="251" vertical-scroll-proportion="0.19090909">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
