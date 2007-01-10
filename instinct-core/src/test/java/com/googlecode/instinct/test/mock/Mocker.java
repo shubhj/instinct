@@ -33,11 +33,6 @@ public final class Mocker {
     }
 
 /*
-public static <T> T mock(final Class<T> toMock) {
-    throw new UnsupportedOperationException();
-//        return MOCK_FACTORY.mock(toMock);
-}
-
 public static <T> T createNiceMock(final Class<T> toMock) {
     throw new UnsupportedOperationException();
 //        return MOCK_FACTORY.createNiceMock(toMock);

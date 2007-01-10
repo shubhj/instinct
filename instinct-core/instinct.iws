@@ -30,8 +30,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build-quality.xml" afterPath="$PROJECT_DIR$/build-quality.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mocker.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mocker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/UberInstanceProvider.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/UberInstanceProvider.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/ConstructorTestChecker.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/ConcreteInstanceProvider.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/ConcreteInstanceProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/ProxiedInstanceProvider.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/ProxiedInstanceProvider.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/checker" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/checker/ClassChecker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
     </list>
   </component>
@@ -189,28 +196,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="build.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build.xml">
+      <file leaf-file-name="JavaClassNameImplAtomicTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="243" selection-end="243" vertical-scroll-proportion="-1.945946">
+            <state line="9" column="0" selection-start="311" selection-end="311" vertical-scroll-proportion="0.21818182">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build-quality.xml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/build-quality.xml">
+      <file leaf-file-name="JavaClassNameImpl.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="0" selection-start="2014" selection-end="2014" vertical-scroll-proportion="0.35135135">
+            <state line="10" column="39" selection-start="359" selection-end="359" vertical-scroll-proportion="0.27272728">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build-setup.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build-setup.xml">
+      <file leaf-file-name="ClassChecker.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/checker/ClassChecker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="28" selection-start="1615" selection-end="1628" vertical-scroll-proportion="0.45945945">
+            <state line="31" column="0" selection-start="2233" selection-end="2233" vertical-scroll-proportion="0.3060606">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConcreteInstanceProvider.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/ConcreteInstanceProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="32" selection-start="914" selection-end="914" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UberInstanceProvider.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/UberInstanceProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="38" column="5" selection-start="1648" selection-end="1648" vertical-scroll-proportion="0.6272727">
               <folding />
             </state>
           </provider>
@@ -875,6 +900,90 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/nursery" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.LibraryGroupNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/nursery" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/nursery/reflect" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/nursery/reflect/checker" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.LibraryGroupNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
           <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/edge" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
@@ -1158,6 +1267,52 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/test" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/test/java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/test/java/com" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/test/java/com/googlecode" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/test/java/com/googlecode/instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/checker" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -1798,25 +1953,25 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.googlecode.instinct.test.checker" />
       <recent name="au.id.adams.instinct.core.naming" />
       <recent name="au.id.adams.instinct.test.suite" />
       <recent name="au.id.adams.instinct.runner" />
       <recent name="au.id.adams.instinct.aggregate" />
-      <recent name="au.id.adams.instinct.annotate" />
     </key>
     <key name="IntroduceConstantDialog.RECENTS_KEY">
       <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.googlecode.instinct.test.checker" />
       <recent name="com.googlecode.instinct.internal.util" />
       <recent name="au.id.adams.instinct.integrate.junit" />
       <recent name="au.id.adams.instinct.core.naming" />
       <recent name="au.id.adams.instinct.core.marker" />
-      <recent name="au.id.adams.instinct.internal.runner" />
     </key>
   </component>
   <component name="RestoreUpdateTree" />
-  <component name="RunManager" selected="JUnit.All Tests">
+  <component name="RunManager" selected="JUnit.JavaClassNameImplAtomicTest">
     <tempConfiguration default="false" name="JavaClassNameImplAtomicTest" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <pattern value="com.googlecode.instinct.internal.util.*" />
       <module name="instinct" />
@@ -2068,7 +2223,7 @@
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992566" order="7" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15803523" order="0" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32806692" order="1" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32806692" order="1" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32434943" order="8" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="6" />
@@ -2077,7 +2232,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.0763481" order="1" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993513" order="8" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3336431" order="2" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3336431" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="File View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39962825" order="4" />
@@ -2212,80 +2367,6 @@
     <option name="myLastEditedConfigurable" value="Harvey Norman Inspection Profile" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassName.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="11" selection-start="92" selection-end="92" vertical-scroll-proportion="0.08181818">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/junit-4.1-src.jar!/org/junit/Assert.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="23" selection-start="3207" selection-end="3207" vertical-scroll-proportion="0.6756757">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/junit-4.1-src.jar!/junit/framework/TestCase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="22" selection-start="2438" selection-end="2438" vertical-scroll-proportion="0.16216215">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/InstinctTestCase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="48" selection-start="201" selection-end="201" vertical-scroll-proportion="0.13513513">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/lang/String.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1770" column="16" selection-start="70320" selection-end="70320" vertical-scroll-proportion="0.6333333">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/verify/Verify.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="50" selection-start="244" selection-end="244" vertical-scroll-proportion="0.19090909">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="123" selection-start="497" selection-end="497" vertical-scroll-proportion="0.21818182">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/ClassLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="17" selection-start="218" selection-end="218" vertical-scroll-proportion="0.13513513">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/ClassLocatorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="54" selection-start="515" selection-end="515" vertical-scroll-proportion="0.17117117">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="42" selection-start="770" selection-end="770" vertical-scroll-proportion="0.46363637">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/integrate/junit/AllBehaviourContextsSlowTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="79" selection-start="1489" selection-end="1489" vertical-scroll-proportion="0.43636364">
@@ -2344,13 +2425,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationCheckerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="27" selection-start="1361" selection-end="1361" vertical-scroll-proportion="0.6818182">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/test/automock/DefaultAutoMocker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="6" selection-start="542" selection-end="542" vertical-scroll-proportion="0.13636364">
@@ -2365,9 +2439,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build-setup.xml">
+    <entry file="file://$PROJECT_DIR$/build-quality.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="28" selection-start="1615" selection-end="1628" vertical-scroll-proportion="0.45945945">
+        <state line="47" column="0" selection-start="2014" selection-end="2014" vertical-scroll-proportion="0.35135135">
           <folding />
         </state>
       </provider>
@@ -2379,9 +2453,93 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build-quality.xml">
+    <entry file="file://$PROJECT_DIR$/build-setup.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="0" selection-start="2014" selection-end="2014" vertical-scroll-proportion="0.35135135">
+        <state line="28" column="28" selection-start="1615" selection-end="1628" vertical-scroll-proportion="0.45945945">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/nursery/reflect/checker/DefaultConstructorEmptyStringChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="78" selection-start="694" selection-end="756" vertical-scroll-proportion="0.35135135">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/nursery/reflect/checker/DefaultConstructorNullParameterTestChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="71" selection-start="706" selection-end="761" vertical-scroll-proportion="0.35135135">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/nursery/reflect/checker/DefaultMethodNullParameterTestChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="44" selection-start="691" selection-end="719" vertical-scroll-proportion="0.35135135">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/ProxiedInstanceProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="48" selection-start="264" selection-end="264" vertical-scroll-proportion="0.10810811">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mocker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="2" selection-start="1384" selection-end="1384" vertical-scroll-proportion="0.5135135">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/ConcreteInstanceProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="32" selection-start="914" selection-end="914" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationCheckerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="36" selection-start="1191" selection-end="1191" vertical-scroll-proportion="0.54545456">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/LifeCycleMethodValidatorImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="53" selection-start="1370" selection-end="1402" vertical-scroll-proportion="0.6272727">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/UberInstanceProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="5" selection-start="1648" selection-end="1648" vertical-scroll-proportion="0.6272727">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/checker/ClassChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="0" selection-start="2233" selection-end="2233" vertical-scroll-proportion="0.3060606">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="0" selection-start="311" selection-end="311" vertical-scroll-proportion="0.21818182">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="39" selection-start="359" selection-end="359" vertical-scroll-proportion="0.27272728">
           <folding />
         </state>
       </provider>

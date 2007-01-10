@@ -10,7 +10,7 @@ import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 public final class ConcreteInstanceProvider implements InstanceProvider {
     private static final Object OBJECT = new Object();
     private static final Object[] OBJECT_ARRAY = {OBJECT};
-//    private final InstanceProvider uberInstanceProvider = new com.yoogalu.gift.test.instance.UberInstanceProvider();
+    private final InstanceProvider uberInstanceProvider = new UberInstanceProvider();
     private final EdgeConstructor edgeConstructor = new DefaultEdgeConstructor();
 
     public Object newInstance(final Class cls) {
@@ -46,7 +46,7 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
 
     private Object createArray(final Class componentType) {
         final Object array = Array.newInstance(componentType, 1);
-//        Array.set(array, 0, uberInstanceProvider.newInstance(componentType));
+        Array.set(array, 0, uberInstanceProvider.newInstance(componentType));
         return array;
     }
 
@@ -89,7 +89,7 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
     private Object[] createParameterValues(final Class<?>[] paramTypes) {
         final Object[] paramValues = new Object[paramTypes.length];
         for (int i = 0; i < paramTypes.length; i++) {
-//            paramValues[i] = uberInstanceProvider.newInstance(paramTypes[i]);
+            paramValues[i] = uberInstanceProvider.newInstance(paramTypes[i]);
         }
         return paramValues;
     }

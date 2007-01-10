@@ -2,12 +2,15 @@ package com.googlecode.instinct.test.instance;
 
 import static java.lang.reflect.Modifier.isFinal;
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
+import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
+import au.net.netstorm.boost.edge.EdgeException;
+import com.googlecode.instinct.internal.util.Suggest;
 
 public final class UberInstanceProvider implements InstanceProvider {
     private static final InstanceProvider MOCKING_INSTANCE_PROVIDER = new ProxiedInstanceProvider();
     private static final InstanceProvider CONCRETE_INSTANCE_PROVIDER = new ConcreteInstanceProvider();
 
-    @SuppressWarnings({"RawUseOfParameterizedType"})
+    @SuppressWarnings({"RawUseOfParameterizedType", "unchecked"})
     public Object newInstance(final Class cls) {
         try {
             if (canBeMocked(cls)) {
@@ -29,8 +32,18 @@ public final class UberInstanceProvider implements InstanceProvider {
         return CONCRETE_INSTANCE_PROVIDER.newInstance(cls);
     }
 
-    private boolean canBeMocked(final Class<?> cls) {
+    @Suggest("May need to change if we turn this into proxied access")
+    private <T> boolean canBeMocked(final Class<T> cls) {
         final int modifiers = cls.getModifiers();
-        return cls.isInterface() || !isFinal(modifiers);
+        return cls.isInterface() || !isFinal(modifiers) && hasPublicNullaryConstructor(cls);
+    }
+
+    private <T> boolean hasPublicNullaryConstructor(final Class<T> cls) {
+        try {
+            new DefaultEdgeClass().getConstructor(cls, new Class[]{});
+            return true;
+        } catch (EdgeException e) {
+            return false;
+        }
     }
 }

@@ -6,6 +6,7 @@ public final class JavaClassNameImpl implements JavaClassName {
     private final File classesRoot;
     private final File classFile;
 
+    @Suggest("Null check this class")
     public JavaClassNameImpl(final File classesRoot, final File classFile) {
         this.classesRoot = classesRoot;
         this.classFile = classFile;

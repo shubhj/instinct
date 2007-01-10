@@ -4,6 +4,10 @@ import java.io.File;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 public final class JavaClassNameImplAtomicTest extends InstinctTestCase {
+//    public void testProperties() {
+//        checkClass(JavaClassNameImpl.class, JavaClassName.class);
+//    }
+
     public void testGetFullyQualifiedClassName() {
         checkGetFullyQualifiedClassName("/home/me/projects/src/", "/home/me/projects/src/com/foo/Bar.class", "com.foo.Bar");
         checkGetFullyQualifiedClassName("/home/me/projects/src", "/home/me/projects/src/com/foo/Bar.class", "com.foo.Bar");
