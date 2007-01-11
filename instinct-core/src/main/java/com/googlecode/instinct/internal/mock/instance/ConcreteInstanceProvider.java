@@ -6,6 +6,7 @@ import au.net.netstorm.boost.edge.java.lang.reflect.DefaultEdgeConstructor;
 import au.net.netstorm.boost.edge.java.lang.reflect.EdgeConstructor;
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 import com.googlecode.instinct.internal.util.Suggest;
+import org.easymock.classextension.internal.ClassInstantiatorFactory;
 
 // DEBT CyclomaticComplexity|NPathComplexity|MethodLength {
 @SuppressWarnings({"RawUseOfParameterizedType", "MagicNumber"})
@@ -74,10 +75,16 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
         throw new UnsupportedOperationException("Unable to return an instance of type " + type + " (please write the code)");
     }
 
+    @Suggest("Now bound to EasyMock!")
     private Object createConcreteInstance(final Class<?> implementationClass) {
-        final Constructor<?> constructor = getConstructors(implementationClass)[0];
-        final Object[] parameterValues = createParameterValues(constructor.getParameterTypes());
-        return edgeConstructor.newInstance(constructor, parameterValues);
+        try {
+            return ClassInstantiatorFactory.getInstantiator().newInstance(implementationClass);
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        }
+//        final Constructor<?> constructor = getConstructors(implementationClass)[0];
+//        final Object[] parameterValues = createParameterValues(constructor.getParameterTypes());
+//        return edgeConstructor.newInstance(constructor, parameterValues);
     }
 
     @Suggest("Do we need to find all constructors? use getDeclaredConstructors() instead.")

@@ -1,11 +1,10 @@
-package com.googlecode.instinct.integrate.junit;
+package com.googlecode.instinct.internal.mock.instance;
 
 import com.googlecode.instinct.internal.util.Suggest;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 
-@Suggest("Rename to ConcreteClassProxyGenerator")
-public final class ProxyGeneratorImpl implements ProxyGenerator {
+public final class ConcreteGeneratorImpl implements ProxyGenerator {
 //    private static final Map<Class<?>, Object> PROXIES = synchronizedMap(new WeakHashMap<Class<?>, Object>());
 
     @Suggest("Provide the ability to proxy more than one type")

@@ -8,6 +8,8 @@ import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.mock.instance.ProxyGenerator;
+import com.googlecode.instinct.internal.mock.instance.ConcreteGeneratorImpl;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -15,7 +17,7 @@ import junit.framework.TestSuite;
 @Suggest("Move this into a seperate distribution")
 public final class JUnitTestSuiteBuilderImpl implements JUnitTestSuiteBuilder {
     private final EdgeClass edgeClass = new DefaultEdgeClass();
-    private final ProxyGenerator proxyGenerator = new ProxyGeneratorImpl();
+    private final ProxyGenerator proxyGenerator = new ConcreteGeneratorImpl();
     private final BehaviourContextAggregator aggregator;
 
     public <T> JUnitTestSuiteBuilderImpl(final Class<T> classInSpecTree) {
