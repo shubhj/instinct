@@ -8,16 +8,21 @@ import org.jmock.core.matcher.AnyArgumentsMatcher;
 
 public final class JMockMockControlAtomicTest extends InstinctTestCase {
     public void testGetMockedObject() {
-        final MockControl mockControl = new JMockMockControl(new Mock(Readable.class));
-        final Object mock = mockControl.getMockedObject();
-        assertNotNull(mock);
-        assertTrue(mock instanceof Readable);
+        final Object mock = createControl().getMockedObject();
+        checkValue(mock, Readable.class);
     }
 
     public void testExpects() {
-        final MockControl mockControl = new JMockMockControl(new Mock(Readable.class));
-        final NameMatchBuilder matchBuilder = mockControl.expects(new AnyArgumentsMatcher());
-        assertNotNull(matchBuilder);
-        assertTrue(matchBuilder instanceof InvocationMockerBuilder);
+        final NameMatchBuilder matchBuilder = createControl().expects(new AnyArgumentsMatcher());
+        checkValue(matchBuilder, InvocationMockerBuilder.class);
+    }
+
+    private MockControl createControl() {
+        return new JMockMockControl(new Mock(Readable.class));
+    }
+
+    private <T> void checkValue(final Object toCheck, final Class<T> expectedClass) {
+        assertNotNull(toCheck);
+        assertTrue(expectedClass.isAssignableFrom(toCheck.getClass()));
     }
 }

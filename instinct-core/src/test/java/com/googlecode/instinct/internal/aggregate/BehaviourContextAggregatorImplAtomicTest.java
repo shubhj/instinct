@@ -11,15 +11,22 @@ import static com.googlecode.instinct.test.mock.Mocker.returnValue;
 import static com.googlecode.instinct.test.mock.Mocker.verify;
 
 public final class BehaviourContextAggregatorImplAtomicTest extends InstinctTestCase {
-
-    public void test() {
+    public void testGetContextNames() {
+        // create test objects
         final JavaClassName[] classNames = {mock(JavaClassName.class)};
         final ClassLocator classLocator = mock(ClassLocator.class);
-        expects(classLocator, once()).method("locate").with(anything(), anything()).will(returnValue(classNames));
-        //expects(classLocator).once().method("locate").with(anything(), anything()).will(returnValue(classNames));
         final BehaviourContextAggregator aggregator = new BehaviourContextAggregatorImpl(BehaviourContextAggregatorImplAtomicTest.class,
                 classLocator);
+
+        // setup expectations
+        expects(classLocator, once()).method("locate").with(anything(), anything()).will(returnValue(classNames));
+
+        //expects(classLocator).method("locate", once()).with(anything(), anything()).will(returnValue(classNames));
+
+        // do actual work
         final JavaClassName[] names = aggregator.getContextNames();
+
+        // run checks
         assertSame(classNames, names);
         verify();
     }
