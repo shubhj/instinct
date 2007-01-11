@@ -30,7 +30,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationCheckerImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationCheckerImplAtomicTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationCheckerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationCheckerImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/reflect" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/TestingException.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
     </list>
   </component>
@@ -191,7 +194,7 @@
       <file leaf-file-name="AnnotationCheckerImplAtomicTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationCheckerImplAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="386" selection-end="386" vertical-scroll-proportion="0.24793388">
+            <state line="27" column="13" selection-start="860" selection-end="860" vertical-scroll-proportion="0.47368422">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -202,7 +205,7 @@
       <file leaf-file-name="AnnotationCheckerImpl.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationCheckerImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="11" selection-start="626" selection-end="626" vertical-scroll-proportion="0.1983471">
+            <state line="20" column="48" selection-start="907" selection-end="907" vertical-scroll-proportion="0.24561404">
               <folding />
             </state>
           </provider>
@@ -833,6 +836,32 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
+          <option name="myItemId" value="lang" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="annotation" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewLibrariesNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
           <option name="myItemId" value="io" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
         </PATH_ELEMENT>
@@ -874,6 +903,28 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="splitter" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewLibrariesNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="au.net.netstorm.boost" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="reflect" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -3003,22 +3054,22 @@
       <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.googlecode.instinct.test" />
       <recent name="com.googlecode.instinct.internal.mock.instance" />
       <recent name="com.googlecode.instinct.internal.aggregate.locate" />
       <recent name="com.googlecode.instinct.mock" />
       <recent name="com.googlecode.instinct" />
-      <recent name="com.googlecode.instinct.core.naming" />
     </key>
   </component>
   <component name="RestoreUpdateTree" />
-  <component name="RunManager" selected="JUnit.BehaviourContextConfigurationExceptionAtomicTest">
-    <tempConfiguration default="false" name="BehaviourContextConfigurationExceptionAtomicTest" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
-      <pattern value="com.googlecode.instinct.core.*" />
+  <component name="RunManager" selected="JUnit.AnnotationCheckerImplAtomicTest">
+    <tempConfiguration default="false" name="AnnotationCheckerImplAtomicTest" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+      <pattern value="com.googlecode.instinct.internal.aggregate.locate.*" />
       <module name="instinct" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.googlecode.instinct.core" />
-      <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.core.BehaviourContextConfigurationExceptionAtomicTest" />
+      <option name="PACKAGE_NAME" value="com.googlecode.instinct.internal.aggregate.locate" />
+      <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.internal.aggregate.locate.AnnotationCheckerImplAtomicTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
@@ -3288,7 +3339,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.06620395" order="1" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993513" order="8" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27230483" order="2" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27230483" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="File View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39962825" order="4" />
@@ -3423,55 +3474,6 @@
     <option name="myLastEditedConfigurable" value="Harvey Norman Inspection Profile" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlAtomicTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="5" selection-start="727" selection-end="727" vertical-scroll-proportion="0.27272728">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/nursery/reflect/checker/DefaultAssertThrows.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="42" selection-start="952" selection-end="952" vertical-scroll-proportion="0.49586776">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="8" selection-start="439" selection-end="439" vertical-scroll-proportion="0.32231405">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/FileNameComparator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="5" selection-start="285" selection-end="285" vertical-scroll-proportion="0.17355372">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/ClassLocator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="17" selection-start="186" selection-end="186" vertical-scroll-proportion="0.09917355">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/ClassLocatorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="44" selection-start="1069" selection-end="1069" vertical-scroll-proportion="0.4214876">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build-quality.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="51" column="51" selection-start="2217" selection-end="2217" vertical-scroll-proportion="0.17355372">
@@ -3588,9 +3590,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/lang/annotation/Annotation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="17" selection-start="512" selection-end="512" vertical-scroll-proportion="0.12396694">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/reflect/DefaultClassMaster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="13" selection-start="210" selection-end="210" vertical-scroll-proportion="0.0877193">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/reflect/ReflectFieldMaster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="17" selection-start="119" selection-end="119" vertical-scroll-proportion="0.07017544">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/reflect/DefaultReflectMaster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="19" selection-start="294" selection-end="294" vertical-scroll-proportion="0.0877193">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/reflect/ReflectMaster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="17" selection-start="57" selection-end="57" vertical-scroll-proportion="0.03508772">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/reflect/DefaultReflectFieldMaster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="12" selection-start="434" selection-end="434" vertical-scroll-proportion="0.07017544">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/TestingException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="20" selection-start="59" selection-end="59" vertical-scroll-proportion="0.03508772">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationCheckerImplAtomicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="386" selection-end="386" vertical-scroll-proportion="0.24793388">
+        <state line="27" column="13" selection-start="860" selection-end="860" vertical-scroll-proportion="0.47368422">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -3599,7 +3650,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationCheckerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="11" selection-start="626" selection-end="626" vertical-scroll-proportion="0.1983471">
+        <state line="20" column="48" selection-start="907" selection-end="907" vertical-scroll-proportion="0.24561404">
           <folding />
         </state>
       </provider>

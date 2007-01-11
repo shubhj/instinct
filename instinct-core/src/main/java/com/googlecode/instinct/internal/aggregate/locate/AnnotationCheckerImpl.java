@@ -9,8 +9,8 @@ import com.googlecode.instinct.internal.util.JavaClassNameImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class AnnotationCheckerImpl implements AnnotationChecker {
-    private final EdgeClass edgeClass = new DefaultEdgeClass();
     private final File packageRoot;
+    private EdgeClass edgeClass = new DefaultEdgeClass();
 
     public AnnotationCheckerImpl(final File packageRoot) {
         checkNotNull(packageRoot);
