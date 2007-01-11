@@ -2,10 +2,10 @@ package com.googlecode.instinct.test;
 
 import junit.framework.TestCase;
 
-@SuppressWarnings({"ProhibitedExceptionDeclared", "NoopMethodInAbstractClass"})
+@SuppressWarnings("NoopMethodInAbstractClass")
 public abstract class InstinctTestCase extends TestCase {
     @Override
-    public final void setUp() throws Exception {
+    public final void setUp() {
         setUpMocks();
         setUpSubject();
     }

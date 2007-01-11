@@ -30,9 +30,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControlAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControlAtomicTest.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControlAtomicTest.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mocker.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mockery.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/InstinctTestCase.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/InstinctTestCase.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Verifier.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockeryImpl.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mocker.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mocker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/ProxiedInstanceProvider.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/ProxiedInstanceProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/UnkownMockException.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/UnkownMockException.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockCreator.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build-setup.xml" afterPath="$PROJECT_DIR$/build-setup.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/VerifierImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/VerifierImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/UnkownMockException.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockHolder.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockControl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockControl.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockHolderImpl.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Verifier.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Verifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mockery.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mockery.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockeryImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockeryImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolderImpl.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockControl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/VerifierImpl.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockCreator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockCreator.java" afterPath="" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -190,21 +220,19 @@
   <component name="FileEditorManager">
     <leaf>
       <file leaf-file-name="JMockMockControlAtomicTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControlAtomicTest.java">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="5" selection-start="489" selection-end="489" vertical-scroll-proportion="0.21818182">
+            <state line="8" column="19" selection-start="280" selection-end="280" vertical-scroll-proportion="0.07017544">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="JMockMockControl.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControl.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="26" selection-start="607" selection-end="607" vertical-scroll-proportion="0.57272726">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="20" column="0" selection-start="575" selection-end="575" vertical-scroll-proportion="0.31578946">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -745,10 +773,6 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="com.googlecode.instinct" />
-          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-        </PATH_ELEMENT>
-        <PATH_ELEMENT>
-          <option name="myItemId" value="test" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
@@ -2620,7 +2644,7 @@
       <showLibraryContents />
       <hideEmptyPackages ProjectPane="false" />
       <abbreviatePackageNames />
-      <showStructure Scope="false" ProjectPane="false" PackagesPane="false" Favorites="false" />
+      <showStructure Favorites="false" ProjectPane="false" Scope="false" PackagesPane="false" />
       <autoscrollToSource />
       <autoscrollFromSource PackagesPane="true" ProjectPane="true" />
       <sortByType />
@@ -2668,11 +2692,11 @@
       <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.googlecode.instinct.mock" />
+      <recent name="com.googlecode.instinct" />
       <recent name="com.googlecode.instinct.core.naming" />
       <recent name="com.googlecode.instinct.test.checker" />
       <recent name="com.googlecode.instinct.internal.util" />
-      <recent name="au.id.adams.instinct.integrate.junit" />
-      <recent name="au.id.adams.instinct.core.naming" />
     </key>
   </component>
   <component name="RestoreUpdateTree" />
@@ -2699,25 +2723,6 @@
         <option name="Make" value="true" />
       </method>
     </tempConfiguration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -2737,6 +2742,13 @@
         <option name="Make" value="true" />
       </method>
     </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
     <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
       <option name="MAIN_CLASS_NAME" />
       <option name="VM_PARAMETERS" />
@@ -2746,6 +2758,18 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <module name="" />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
     </configuration>
     <configuration default="false" name="JUnit Suite" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <pattern value="au.id.adams.instinct.integrate.junit.*" />
@@ -2838,8 +2862,8 @@
       <module name="instinct" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.googlecode.instinct.test.mock" />
-      <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.test.mock.JMockMockControlAtomicTest" />
+      <option name="PACKAGE_NAME" value="com.googlecode.instinct.mock" />
+      <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.mock.JMockMockControlAtomicTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
@@ -2953,7 +2977,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.06620395" order="1" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993513" order="8" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3336431" order="2" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3336431" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="File View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39962825" order="4" />
@@ -3088,20 +3112,6 @@
     <option name="myLastEditedConfigurable" value="Harvey Norman Inspection Profile" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mockery.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="10" selection-start="523" selection-end="523" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/UnkownMockException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="64" selection-start="108" selection-end="108" vertical-scroll-proportion="0.054545455">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/core/matcher/InvokeCountMatcher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="13" selection-start="82" selection-end="82" vertical-scroll-proportion="0.13636364">
@@ -3116,28 +3126,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockCreator.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockCreator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="25" selection-start="643" selection-end="643" vertical-scroll-proportion="0.38181818">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockHolderImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolderImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="17" selection-start="418" selection-end="418" vertical-scroll-proportion="0.3">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/Mocker.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mocker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="25" selection-start="803" selection-end="803" vertical-scroll-proportion="0.38181818">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockeryImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockeryImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="66" selection-start="737" selection-end="878" vertical-scroll-proportion="0.3272727">
           <folding />
@@ -3230,7 +3240,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/MockControl.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockControl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="43" selection-start="206" selection-end="206" vertical-scroll-proportion="0.07017544">
           <folding />
@@ -3244,26 +3254,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/InstinctTestCase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="45" selection-start="118" selection-end="118" vertical-scroll-proportion="0.10909091">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="67" selection-start="1445" selection-end="1445" vertical-scroll-proportion="0.4909091">
+        <state line="12" column="76" selection-start="667" selection-end="667" vertical-scroll-proportion="0.10909091">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControlAtomicTest.java">
+    <entry file="file://$PROJECT_DIR$/build-setup.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="5" selection-start="489" selection-end="489" vertical-scroll-proportion="0.21818182">
+        <state line="53" column="8" selection-start="3054" selection-end="3104" vertical-scroll-proportion="0.43636364">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/mock/JMockMockControl.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlAtomicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="26" selection-start="607" selection-end="607" vertical-scroll-proportion="0.57272726">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="8" column="19" selection-start="280" selection-end="280" vertical-scroll-proportion="0.07017544">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="0" selection-start="575" selection-end="575" vertical-scroll-proportion="0.31578946">
+          <folding />
         </state>
       </provider>
     </entry>

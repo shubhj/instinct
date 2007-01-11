@@ -3,12 +3,12 @@ package com.googlecode.instinct.internal.aggregate;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.mock.Mocker.anything;
-import static com.googlecode.instinct.test.mock.Mocker.expects;
-import static com.googlecode.instinct.test.mock.Mocker.mock;
-import static com.googlecode.instinct.test.mock.Mocker.once;
-import static com.googlecode.instinct.test.mock.Mocker.returnValue;
-import static com.googlecode.instinct.test.mock.Mocker.verify;
+import static com.googlecode.instinct.mock.Mocker.anything;
+import static com.googlecode.instinct.mock.Mocker.expects;
+import static com.googlecode.instinct.mock.Mocker.mock;
+import static com.googlecode.instinct.mock.Mocker.once;
+import static com.googlecode.instinct.mock.Mocker.returnValue;
+import static com.googlecode.instinct.mock.Mocker.verify;
 
 public final class BehaviourContextAggregatorImplAtomicTest extends InstinctTestCase {
     public void testGetContextNames() {

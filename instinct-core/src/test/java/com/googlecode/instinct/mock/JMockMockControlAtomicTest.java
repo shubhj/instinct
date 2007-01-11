@@ -1,4 +1,4 @@
-package com.googlecode.instinct.test.mock;
+package com.googlecode.instinct.mock;
 
 import com.googlecode.instinct.test.InstinctTestCase;
 import org.jmock.Mock;

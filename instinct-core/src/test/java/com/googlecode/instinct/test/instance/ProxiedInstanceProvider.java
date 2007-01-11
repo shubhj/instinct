@@ -2,7 +2,7 @@ package com.googlecode.instinct.test.instance;
 
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.test.mock.Mocker;
+import com.googlecode.instinct.mock.Mocker;
 
 @Suggest("Use dynamic proxies rather than mocks?")
 public final class ProxiedInstanceProvider implements InstanceProvider {
