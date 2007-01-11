@@ -9,42 +9,32 @@ import org.jmock.core.matcher.AnyArgumentsMatcher;
 import org.jmock.core.matcher.InvokeOnceMatcher;
 
 @SuppressWarnings({"ErrorNotRethrown"})
-public final class JMockMockControlStateBasedAtomicTest extends InstinctTestCase {
+public final class JMockMockControlAtomicTest extends InstinctTestCase {
     public void testGetMockedObject() {
-        final Object mock = createControl().getMockedObject();
+        final MockControl control = new JMockMockControl(new Mock(Readable.class));
+        final Object mock = control.getMockedObject();
         assertNotNull(mock);
         assertTrue(mock instanceof Readable);
     }
 
     public void testExpects() {
-        final NameMatchBuilder matchBuilder = createControl().expects(new AnyArgumentsMatcher());
+        final MockControl control = new JMockMockControl(new Mock(Readable.class));
+        final NameMatchBuilder matchBuilder = control.expects(new AnyArgumentsMatcher());
         assertNotNull(matchBuilder);
         assertTrue(matchBuilder instanceof InvocationMockerBuilder);
     }
 
     public void testVerify() {
         try {
-            final Mock mock = createMock();
+            final Mock mock = new Mock(Readable.class);
             mock.expects(new InvokeOnceMatcher()).method("read");
-            createControl(mock).verify();
+            new JMockMockControl(mock).verify();
             fail();
         } catch (AssertionFailedError expected) {
         }
     }
 
     public void testToString() {
-        assertEquals("mockReadable", createControl().toString());
-    }
-
-    private MockControl createControl() {
-        return createControl(createMock());
-    }
-
-    private MockControl createControl(final Mock mock) {
-        return new JMockMockControl(mock);
-    }
-
-    private Mock createMock() {
-        return new Mock(Readable.class);
+        assertEquals("mockReadable", new JMockMockControl(new Mock(Readable.class)).toString());
     }
 }
