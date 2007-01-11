@@ -7,12 +7,10 @@ import java.util.List;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class AnnotatedMethodLocatorImpl implements AnnotatedMethodLocator {
-
     public <A extends Annotation, T> Method[] locate(final Class<T> cls, final Class<A> annotationType) {
         checkNotNull(cls, annotationType);
         final List<Method> annotatedMethods = new ArrayList<Method>();
-        final Method[] allMethods = cls.getDeclaredMethods();
-        for (final Method method : allMethods) {
+        for (final Method method : cls.getDeclaredMethods()) {
             final A annotation = method.getAnnotation(annotationType);
             if (annotation != null) {
                 annotatedMethods.add(method);

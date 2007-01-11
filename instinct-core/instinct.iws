@@ -30,9 +30,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedClassLocator.java" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedClassLocatorImpl.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImplAtomicTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
     </list>
   </component>
@@ -189,7 +192,26 @@
     <option name="myCurrentFavoritesList" value="instinct" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="AnnotatedMethodLocatorImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="43" selection-start="609" selection-end="609" vertical-scroll-proportion="0.1983471">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AnnotatedMethodLocatorImplAtomicTest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImplAtomicTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="19" selection-start="134" selection-end="134" vertical-scroll-proportion="0.09917355">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -2984,11 +3006,11 @@
       <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.googlecode.instinct.internal.aggregate.locate" />
       <recent name="com.googlecode.instinct.internal.mock.instance" />
       <recent name="com.googlecode.instinct.mock" />
       <recent name="com.googlecode.instinct" />
       <recent name="com.googlecode.instinct.core.naming" />
-      <recent name="com.googlecode.instinct.test.checker" />
     </key>
   </component>
   <component name="RestoreUpdateTree" />
@@ -3404,20 +3426,6 @@
     <option name="myLastEditedConfigurable" value="Harvey Norman Inspection Profile" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/ConcreteInstanceProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="13" selection-start="2820" selection-end="2820" vertical-scroll-proportion="0.59504133">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/easymockclassextension-2.2-src.zip!/org/easymock/classextension/internal/ClassProxyFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="16" selection-start="3529" selection-end="3529" vertical-scroll-proportion="0.815427">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/builder/ArgumentsMatchBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="17" selection-start="266" selection-end="266" vertical-scroll-proportion="0.24793388">
@@ -3579,6 +3587,20 @@
     <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="51" column="51" selection-start="2217" selection-end="2217" vertical-scroll-proportion="0.17355372">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="43" selection-start="609" selection-end="609" vertical-scroll-proportion="0.1983471">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImplAtomicTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="19" selection-start="134" selection-end="134" vertical-scroll-proportion="0.09917355">
           <folding />
         </state>
       </provider>
