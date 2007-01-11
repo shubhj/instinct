@@ -200,7 +200,7 @@
       <file leaf-file-name="AnnotatedMethodLocatorImplAtomicTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImplAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="67" selection-start="675" selection-end="675" vertical-scroll-proportion="0.29752067">
+            <state line="21" column="40" selection-start="983" selection-end="983" vertical-scroll-proportion="0.4214876">
               <folding />
             </state>
           </provider>
@@ -3604,7 +3604,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImplAtomicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="67" selection-start="675" selection-end="675" vertical-scroll-proportion="0.29752067">
+        <state line="21" column="40" selection-start="983" selection-end="983" vertical-scroll-proportion="0.4214876">
           <folding />
         </state>
       </provider>
