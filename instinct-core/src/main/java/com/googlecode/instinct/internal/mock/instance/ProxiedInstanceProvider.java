@@ -1,4 +1,4 @@
-package com.googlecode.instinct.test.instance;
+package com.googlecode.instinct.internal.mock.instance;
 
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 import com.googlecode.instinct.internal.util.Suggest;

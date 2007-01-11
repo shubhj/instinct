@@ -30,20 +30,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockControl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Verifier.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Verifier.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlInteractionBasedAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlInteractionBasedAtomicTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mockery.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mockery.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/etc/checkstyle/checkstyle-test.xml" afterPath="$PROJECT_DIR$/etc/checkstyle/checkstyle-test.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/etc/checkstyle/checkstyle-main.xml" afterPath="$PROJECT_DIR$/etc/checkstyle/checkstyle-main.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/ConcreteClassMock.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/ProxyGeneratorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/ProxyGeneratorImpl.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mocker.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mocker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockeryImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockeryImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolderImpl.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControlAtomicTest.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockCreator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/UnkownMockException.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/UnkownMockException.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockCreator.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/ProxiedInstanceProvider.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/VerifierImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/VerifierImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/ConcreteInstanceProvider.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/UberInstanceProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iml" afterPath="$PROJECT_DIR$/instinct.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlAtomicTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/ConcreteInstanceProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockControl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockControl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/checker/ClassChecker.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/checker/ClassChecker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Verifier.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Verifier.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/instance/UberInstanceProvider.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mockery.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mockery.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlInteractionBasedAtomicTest.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/ProxiedInstanceProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockeryImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockeryImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolderImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockCreator.java" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -200,37 +216,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="JMockMockControlStateBasedAtomicTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlStateBasedAtomicTest.java">
+      <file leaf-file-name="JMockMockControlAtomicTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="49" selection-start="414" selection-end="450" vertical-scroll-proportion="0.0877193">
+            <state line="11" column="0" selection-start="369" selection-end="369" vertical-scroll-proportion="0.27576602">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JMockMockControlInteractionBasedAtomicTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlInteractionBasedAtomicTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="0" selection-start="388" selection-end="388" vertical-scroll-proportion="0.31578946">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JMockMockControl.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="JMockMockControl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="35" selection-start="723" selection-end="723" vertical-scroll-proportion="0.4385965">
+            <state line="9" column="4" selection-start="252" selection-end="252" vertical-scroll-proportion="0.17548746">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Mock.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/Mock.java">
+      <file leaf-file-name="JMockMockCreator.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockCreator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="31" selection-start="1280" selection-end="1280" vertical-scroll-proportion="0.01754386">
+            <state line="15" column="46" selection-start="621" selection-end="621" vertical-scroll-proportion="0.35097492">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ConcreteClassMock.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/ConcreteClassMock.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="46" column="24" selection-start="1876" selection-end="1876" vertical-scroll-proportion="0.69916433">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProxiedInstanceProvider.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/ProxiedInstanceProvider.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="0" selection-start="500" selection-end="500" vertical-scroll-proportion="0.27576602">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProxyGeneratorImpl.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/ProxyGeneratorImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="33" selection-start="219" selection-end="219" vertical-scroll-proportion="0.10027855">
               <folding />
             </state>
           </provider>
@@ -285,6 +319,46 @@
         <PATH_ELEMENT>
           <option name="myItemId" value="Libraries" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewLibrariesNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewLibrariesNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="sun" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewLibrariesNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="sun" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="reflect" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
         </PATH_ELEMENT>
       </PATH>
       <PATH>
@@ -479,6 +553,110 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewLibrariesNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
+          <option name="myItemId" value="org" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="easymock" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewLibrariesNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="org" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="easymock" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="internal" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewLibrariesNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="org" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="easymock" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="classextension" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewLibrariesNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="org" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="easymock" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="classextension" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="internal" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewLibrariesNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
           <option name="myItemId" value="net.sf.cglib" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
         </PATH_ELEMENT>
@@ -502,6 +680,28 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="proxy" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewLibrariesNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="net.sf.cglib" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="core" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -669,6 +869,28 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
+          <option name="myItemId" value="splitter" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewLibrariesNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="au.net.netstorm.boost" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
           <option name="myItemId" value="edge" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
         </PATH_ELEMENT>
@@ -700,6 +922,40 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="lang" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="Libraries" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewLibrariesNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="au.net.netstorm.boost" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="edge" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="lang" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="reflect" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -775,6 +1031,28 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
         </PATH_ELEMENT>
         <PATH_ELEMENT>
+          <option name="myItemId" value="test" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="checker" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="com.googlecode.instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
           <option name="myItemId" value="mock" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
         </PATH_ELEMENT>
@@ -816,6 +1094,54 @@
         </PATH_ELEMENT>
         <PATH_ELEMENT>
           <option name="myItemId" value="internal" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="com.googlecode.instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="internal" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="mock" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="com.googlecode.instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="internal" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="mock" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instance" />
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
         </PATH_ELEMENT>
       </PATH>
@@ -2691,23 +3017,23 @@
       <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.googlecode.instinct.internal.mock.instance" />
       <recent name="com.googlecode.instinct.mock" />
       <recent name="com.googlecode.instinct" />
       <recent name="com.googlecode.instinct.core.naming" />
       <recent name="com.googlecode.instinct.test.checker" />
-      <recent name="com.googlecode.instinct.internal.util" />
     </key>
   </component>
   <component name="RestoreUpdateTree" />
-  <component name="RunManager" selected="JUnit.JMockMockControlStateBasedAtomicTest">
-    <tempConfiguration default="false" name="JMockMockControlStateBasedAtomicTest.testVerify" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+  <component name="RunManager" selected="JUnit.JMockMockControlAtomicTest.testGetMockedObject">
+    <tempConfiguration default="false" name="JMockMockControlAtomicTest.testGetMockedObject" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <pattern value="com.googlecode.instinct.mock.*" />
       <module name="instinct" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.googlecode.instinct.mock" />
-      <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.mock.JMockMockControlStateBasedAtomicTest" />
-      <option name="METHOD_NAME" value="testVerify" />
+      <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.mock.JMockMockControlAtomicTest" />
+      <option name="METHOD_NAME" value="testGetMockedObject" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
@@ -2718,6 +3044,9 @@
       </option>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
+      <method>
+        <option name="Make" value="true" />
+      </method>
     </tempConfiguration>
     <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <module name="" />
@@ -2970,7 +3299,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.06620395" order="1" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993513" order="8" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30576208" order="2" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27973977" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="File View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39962825" order="4" />
@@ -3099,185 +3428,183 @@
   </component>
   <component name="com.intellij.openapi.roots.ui.configuration.projectRoot.ProjectRootMasterDetailsConfigurable" proportions="0.11111111" version="1">
     <option name="myPlainMode" value="false" />
-    <option name="myLastEditedConfigurable" value="instinct" />
+    <option name="myLastEditedConfigurable" value="easymockclassextension-2.2.jar" />
   </component>
   <component name="com.intellij.profile.ui.ErrorOptionsConfigurable" proportions="0.11111111,0.5285714" version="1">
     <option name="myLastEditedConfigurable" value="Harvey Norman Inspection Profile" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockeryImpl.java">
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/cglib-src-2.2_beta1.jar!/src/proxy/net/sf/cglib/core/VisibilityPredicate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="66" selection-start="737" selection-end="878" vertical-scroll-proportion="0.3272727">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/io/Reader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="41" selection-start="839" selection-end="839" vertical-scroll-proportion="0.19090909">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/lang/Class.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="417" column="55" selection-start="17775" selection-end="17778" vertical-scroll-proportion="0.93333334">
-          <folding>
-            <element signature="docComment;method#isAssignableFrom#0;class#Class#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/util/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="187" column="12" selection-start="8011" selection-end="8011" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/core/InvocationMocker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="18" selection-start="2031" selection-end="2031" vertical-scroll-proportion="0.36060607">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/core/StubMatchersCollection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="9" selection-start="174" selection-end="174" vertical-scroll-proportion="0.21818182">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/builder/InvocationMockerBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="159" column="22" selection-start="5220" selection-end="5220" vertical-scroll-proportion="0.72727275">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/builder/MatchBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="17" selection-start="203" selection-end="203" vertical-scroll-proportion="0.21818182">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/builder/NameMatchBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="24" selection-start="267" selection-end="267" vertical-scroll-proportion="0.1754386">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/integrate/junit/JUnitSuite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="40" selection-start="327" selection-end="327" vertical-scroll-proportion="0.19298245">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/example/ContextExample.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="21" selection-start="587" selection-end="587" vertical-scroll-proportion="0.14035088">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="43" selection-start="206" selection-end="206" vertical-scroll-proportion="0.07017544">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="49" selection-start="1203" selection-end="1222" vertical-scroll-proportion="0.4909091">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/InstinctTestCase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="45" selection-start="118" selection-end="118" vertical-scroll-proportion="0.10909091">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="76" selection-start="667" selection-end="667" vertical-scroll-proportion="0.10909091">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build-setup.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="8" selection-start="3054" selection-end="3104" vertical-scroll-proportion="0.43636364">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/core/AbstractInvocationDispatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="16" selection-start="678" selection-end="678" vertical-scroll-proportion="0.3508772">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/core/Verifiable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="25" selection-start="454" selection-end="454" vertical-scroll-proportion="0.14035088">
+        <state line="24" column="11" selection-start="835" selection-end="835" vertical-scroll-proportion="0.22562674">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/core/AbstractDynamicMock.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="36" selection-start="1714" selection-end="1714" vertical-scroll-proportion="0.40350878">
+        <state line="82" column="21" selection-start="2144" selection-end="2144" vertical-scroll-proportion="0.33286908">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/lang/Readable.java">
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/cglib-src-2.2_beta1.jar!/src/proxy/net/sf/cglib/proxy/Enhancer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="17" selection-start="1157" selection-end="1161" vertical-scroll-proportion="0.19298245">
+        <state line="255" column="16" selection-start="11387" selection-end="11387" vertical-scroll-proportion="0.33286908">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/lang/Object.java">
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/easymockclassextension-2.2-src.zip!/org/easymock/classextension/internal/IClassInstantiator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="207" column="18" selection-start="9969" selection-end="9969" vertical-scroll-proportion="0.33333334">
+        <state line="20" column="11" selection-start="612" selection-end="612" vertical-scroll-proportion="0.17548746">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlStateBasedAtomicTest.java">
+    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Classes/classes.jar!/sun/reflect/ReflectionFactory.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="49" selection-start="414" selection-end="450" vertical-scroll-proportion="0.0877193">
+        <state line="45" column="41" selection-start="2803" selection-end="2803" vertical-scroll-proportion="0.5135135">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/Mock.java">
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/easymockclassextension-2.2-src.zip!/org/easymock/classextension/internal/SunClassInstantiator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="31" selection-start="1280" selection-end="1280" vertical-scroll-proportion="0.01754386">
+        <state line="43" column="53" selection-start="1712" selection-end="1712" vertical-scroll-proportion="0.8022284">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlInteractionBasedAtomicTest.java">
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/easymockclassextension-2.2-src.zip!/org/easymock/classextension/internal/DefaultClassInstantiator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="388" selection-end="388" vertical-scroll-proportion="0.31578946">
+        <state line="111" column="21" selection-start="3906" selection-end="3906" vertical-scroll-proportion="0.30779943">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/easymockclassextension-2.2-src.zip!/org/easymock/classextension/internal/ClassInstantiatorFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="30" selection-start="1543" selection-end="1543" vertical-scroll-proportion="0.82729805">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/easymock-2.2-src.zip!/org/easymock/internal/MocksControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="40" selection-start="905" selection-end="905" vertical-scroll-proportion="0.43314764">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/easymockclassextension-2.2-src.zip!/org/easymock/classextension/EasyMock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="37" selection-start="806" selection-end="806" vertical-scroll-proportion="0.3579387">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/edge/java/lang/reflect/DefaultEdgeConstructor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="18" selection-start="285" selection-end="285" vertical-scroll-proportion="0.1253482">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/easymockclassextension-2.2-src.zip!/org/easymock/classextension/internal/ClassProxyFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="51" selection-start="865" selection-end="865" vertical-scroll-proportion="0.15041783">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/easymock-2.2-src.zip!/org/easymock/internal/JavaProxyFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="50" selection-start="284" selection-end="284" vertical-scroll-proportion="0.1253482">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="46" selection-start="621" selection-end="621" vertical-scroll-proportion="0.35097492">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="35" selection-start="723" selection-end="723" vertical-scroll-proportion="0.4385965">
+        <state line="9" column="4" selection-start="252" selection-end="252" vertical-scroll-proportion="0.17548746">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlAtomicTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="369" selection-end="369" vertical-scroll-proportion="0.27576602">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/splitter/DefaultOneToManyAtomicTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="136" column="0" selection-start="5587" selection-end="5587" vertical-scroll-proportion="0.8495822">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/etc/checkstyle/checkstyle-main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="49" selection-start="349" selection-end="349" vertical-scroll-proportion="0.17548746">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/etc/checkstyle/checkstyle-test.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="0" selection-start="225" selection-end="362" vertical-scroll-proportion="0.17923187">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/UberInstanceProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="0" selection-start="2177" selection-end="2177" vertical-scroll-proportion="1.2033427">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/checker/ClassChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="75" selection-start="1208" selection-end="1208" vertical-scroll-proportion="0.050139274">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/ConcreteInstanceProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="0" selection-start="3768" selection-end="3768" vertical-scroll-proportion="0.8746518">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/ConcreteClassMock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="24" selection-start="1876" selection-end="1876" vertical-scroll-proportion="0.69916433">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/ProxiedInstanceProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="0" selection-start="500" selection-end="500" vertical-scroll-proportion="0.27576602">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/ProxyGeneratorImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="33" selection-start="219" selection-end="219" vertical-scroll-proportion="0.10027855">
           <folding />
         </state>
       </provider>

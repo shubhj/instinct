@@ -4,8 +4,8 @@
 
 <module name="Checker">
     <module name="SuppressionCommentFilter">
-        <property name="offCommentFormat" value="CHECKSTYLE\:OFF ([\w\|]+)"/>
-        <property name="onCommentFormat" value="CHECKSTYLE\:ON ([\w\|]+)"/>
+        <property name="offCommentFormat" value="DEBT ([\w\|]+) \{"/>
+        <property name="onCommentFormat" value="\} DEBT ([\w\|]+)"/>
         <property name="checkFormat" value="$1"/>
     </module>
 

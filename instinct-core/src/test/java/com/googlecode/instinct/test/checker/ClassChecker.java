@@ -13,7 +13,7 @@ import au.net.netstorm.boost.test.reflect.checker.ClassTestChecker;
 import au.net.netstorm.boost.test.reflect.checker.DefaultClassTestChecker;
 import au.net.netstorm.boost.test.reflect.checker.DefaultModifierTestChecker;
 import au.net.netstorm.boost.test.reflect.checker.ModifierTestChecker;
-import com.googlecode.instinct.test.instance.UberInstanceProvider;
+import com.googlecode.instinct.internal.mock.instance.UberInstanceProvider;
 
 public final class ClassChecker {
     private static final ClassTestChecker CLASS_CHECKER = new DefaultClassTestChecker();

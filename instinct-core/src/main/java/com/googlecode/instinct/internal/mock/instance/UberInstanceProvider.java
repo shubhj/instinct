@@ -1,14 +1,17 @@
-package com.googlecode.instinct.test.instance;
+package com.googlecode.instinct.internal.mock.instance;
 
 import static java.lang.reflect.Modifier.isFinal;
-import au.net.netstorm.boost.nursery.instance.InstanceProvider;
-import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.EdgeException;
+import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
+import au.net.netstorm.boost.edge.java.lang.EdgeClass;
+import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 import com.googlecode.instinct.internal.util.Suggest;
 
 public final class UberInstanceProvider implements InstanceProvider {
-    private static final InstanceProvider MOCKING_INSTANCE_PROVIDER = new ProxiedInstanceProvider();
+    // Note. Needs to be static as is creates an instance of
     private static final InstanceProvider CONCRETE_INSTANCE_PROVIDER = new ConcreteInstanceProvider();
+    private final EdgeClass edgeClass = new DefaultEdgeClass();
+    private final InstanceProvider mockingInstanceProvider = new ProxiedInstanceProvider();
 
     @SuppressWarnings({"RawUseOfParameterizedType", "unchecked"})
     public Object newInstance(final Class cls) {
@@ -25,7 +28,7 @@ public final class UberInstanceProvider implements InstanceProvider {
     }
 
     private Object createMockInstance(final Class<?> cls) {
-        return MOCKING_INSTANCE_PROVIDER.newInstance(cls);
+        return mockingInstanceProvider.newInstance(cls);
     }
 
     private Object createConctreteInstance(final Class<?> cls) {
@@ -38,9 +41,10 @@ public final class UberInstanceProvider implements InstanceProvider {
         return cls.isInterface() || !isFinal(modifiers) && hasPublicNullaryConstructor(cls);
     }
 
+    @Suggest("May be able to remove this is we get the new JMock class mock controller working.")
     private <T> boolean hasPublicNullaryConstructor(final Class<T> cls) {
         try {
-            new DefaultEdgeClass().getConstructor(cls, new Class[]{});
+            edgeClass.getConstructor(cls, new Class[]{});
             return true;
         } catch (EdgeException e) {
             return false;

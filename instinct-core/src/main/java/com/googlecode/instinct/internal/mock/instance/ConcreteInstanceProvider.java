@@ -1,11 +1,13 @@
-package com.googlecode.instinct.test.instance;
+package com.googlecode.instinct.internal.mock.instance;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import au.net.netstorm.boost.edge.java.lang.reflect.DefaultEdgeConstructor;
 import au.net.netstorm.boost.edge.java.lang.reflect.EdgeConstructor;
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
+import com.googlecode.instinct.internal.util.Suggest;
 
+// DEBT CyclomaticComplexity|NPathComplexity|MethodLength {
 @SuppressWarnings({"RawUseOfParameterizedType", "MagicNumber"})
 public final class ConcreteInstanceProvider implements InstanceProvider {
     private static final Object OBJECT = new Object();
@@ -69,7 +71,7 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
         if (type == boolean.class) {
             return false;
         }
-        throw new UnsupportedOperationException("Please write the code for primitive type: " + type);
+        throw new UnsupportedOperationException("Unable to return an instance of type " + type + " (please write the code)");
     }
 
     private Object createConcreteInstance(final Class<?> implementationClass) {
@@ -78,6 +80,7 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
         return edgeConstructor.newInstance(constructor, parameterValues);
     }
 
+    @Suggest("Do we need to find all constructors? use getDeclaredConstructors() instead.")
     private Constructor[] getConstructors(final Class<?> cls) {
         final Constructor[] constructors = cls.getConstructors();
         if (constructors.length == 0) {
@@ -94,3 +97,4 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
         return paramValues;
     }
 }
+// } DEBT CyclomaticComplexity|NPathComplexity|MethodLength

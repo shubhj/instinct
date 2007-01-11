@@ -4,7 +4,7 @@ import com.googlecode.instinct.internal.util.Suggest;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 
-@Suggest("Can we ")
+@Suggest("Rename to ConcreteClassProxyGenerator")
 public final class ProxyGeneratorImpl implements ProxyGenerator {
 //    private static final Map<Class<?>, Object> PROXIES = synchronizedMap(new WeakHashMap<Class<?>, Object>());
 
