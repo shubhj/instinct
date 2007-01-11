@@ -36,11 +36,18 @@ public final class ClassChecker {
         emptyStringCheckParamters(implementationClass);
     }
 
-    private static <U, T extends U> void checkProperties(final Class<U> targetInterface, final Class<T> implementationClass) {
+    public static <U, T extends U> void checkProperties(final Class<U> targetInterface, final Class<T> implementationClass) {
         MODIFIER_CHECKER.checkPublic(targetInterface);
         MODIFIER_CHECKER.checkPublic(implementationClass);
         MODIFIER_CHECKER.checkFinal(implementationClass);
         CLASS_CHECKER.checkImplementsAndFinal(targetInterface, implementationClass);
+    }
+
+    public static <U, T extends U> void checkPropertiesSuperClass(final Class<U> superClass, final Class<T> subClass) {
+        MODIFIER_CHECKER.checkPublic(superClass);
+        MODIFIER_CHECKER.checkPublic(subClass);
+        MODIFIER_CHECKER.checkFinal(subClass);
+        CLASS_CHECKER.checkSubclassOf(subClass, superClass);
     }
 
     private static <U, T extends U> void nullCheckParameters(final Class<T> implementationClass) {

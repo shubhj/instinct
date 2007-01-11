@@ -1,9 +1,6 @@
 package com.googlecode.instinct.internal.mock.instance;
 
 import java.lang.reflect.Array;
-import java.lang.reflect.Constructor;
-import au.net.netstorm.boost.edge.java.lang.reflect.DefaultEdgeConstructor;
-import au.net.netstorm.boost.edge.java.lang.reflect.EdgeConstructor;
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 import com.googlecode.instinct.internal.util.Suggest;
 import org.easymock.classextension.internal.ClassInstantiatorFactory;
@@ -14,7 +11,7 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
     private static final Object OBJECT = new Object();
     private static final Object[] OBJECT_ARRAY = {OBJECT};
     private final InstanceProvider uberInstanceProvider = new UberInstanceProvider();
-    private final EdgeConstructor edgeConstructor = new DefaultEdgeConstructor();
+//    private final EdgeConstructor edgeConstructor = new DefaultEdgeConstructor();
 
     public Object newInstance(final Class cls) {
         if (cls.isEnum()) {
@@ -75,33 +72,33 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
         throw new UnsupportedOperationException("Unable to return an instance of type " + type + " (please write the code)");
     }
 
-    @Suggest("Now bound to EasyMock!")
+    @Suggest({"Now bound to EasyMock! Remove this dependency", "Or, replace this class altogether with just a dependency on easymock class ext"})
     private Object createConcreteInstance(final Class<?> implementationClass) {
         try {
             return ClassInstantiatorFactory.getInstantiator().newInstance(implementationClass);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
+        } catch (java.lang.InstantiationException e) {
+            throw new InstantiationException(e);
         }
 //        final Constructor<?> constructor = getConstructors(implementationClass)[0];
 //        final Object[] parameterValues = createParameterValues(constructor.getParameterTypes());
 //        return edgeConstructor.newInstance(constructor, parameterValues);
     }
 
-    @Suggest("Do we need to find all constructors? use getDeclaredConstructors() instead.")
-    private Constructor[] getConstructors(final Class<?> cls) {
-        final Constructor[] constructors = cls.getConstructors();
-        if (constructors.length == 0) {
-            throw new IllegalArgumentException("Class " + cls.getSimpleName() + " does not have a public constructor");
-        }
-        return constructors;
-    }
+//    @Suggest("Do we need to find all constructors? use getDeclaredConstructors() instead.")
+//    private Constructor[] getConstructors(final Class<?> cls) {
+//        final Constructor[] constructors = cls.getConstructors();
+//        if (constructors.length == 0) {
+//            throw new IllegalArgumentException("Class " + cls.getSimpleName() + " does not have a public constructor");
+//        }
+//        return constructors;
+//    }
 
-    private Object[] createParameterValues(final Class<?>[] paramTypes) {
-        final Object[] paramValues = new Object[paramTypes.length];
-        for (int i = 0; i < paramTypes.length; i++) {
-            paramValues[i] = uberInstanceProvider.newInstance(paramTypes[i]);
-        }
-        return paramValues;
-    }
+//    private Object[] createParameterValues(final Class<?>[] paramTypes) {
+//        final Object[] paramValues = new Object[paramTypes.length];
+//        for (int i = 0; i < paramTypes.length; i++) {
+//            paramValues[i] = uberInstanceProvider.newInstance(paramTypes[i]);
+//        }
+//        return paramValues;
+//    }
 }
 // } DEBT CyclomaticComplexity|NPathComplexity|MethodLength
