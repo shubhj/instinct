@@ -30,16 +30,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlStateBasedAtomicTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iml" afterPath="$PROJECT_DIR$/instinct.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlInteractionBasedAtomicTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockControl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockControl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolder.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Verifier.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Verifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlInteractionBasedAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlInteractionBasedAtomicTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mockery.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mockery.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mocker.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mocker.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControl.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlAtomicTest.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockeryImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockeryImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockHolderImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/MockCreator.java" />
@@ -212,16 +209,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JMockMockControlInteractionBasedAtomicTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="JMockMockControlInteractionBasedAtomicTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlInteractionBasedAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="19" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0877193">
+            <state line="18" column="0" selection-start="388" selection-end="388" vertical-scroll-proportion="0.31578946">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JMockMockControl.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="JMockMockControl.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControl.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="27" column="35" selection-start="723" selection-end="723" vertical-scroll-proportion="0.4385965">
@@ -233,7 +230,7 @@
       <file leaf-file-name="Mock.java" pinned="false" current="false" current-in-tab="false">
         <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/Mock.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="31" selection-start="1280" selection-end="1280" vertical-scroll-proportion="0.2417154">
+            <state line="51" column="31" selection-start="1280" selection-end="1280" vertical-scroll-proportion="0.01754386">
               <folding />
             </state>
           </provider>
@@ -2646,7 +2643,7 @@
       <showLibraryContents />
       <hideEmptyPackages ProjectPane="false" />
       <abbreviatePackageNames />
-      <showStructure Favorites="false" ProjectPane="false" Scope="false" PackagesPane="false" />
+      <showStructure PackagesPane="false" ProjectPane="false" Scope="false" Favorites="false" />
       <autoscrollToSource />
       <autoscrollFromSource PackagesPane="true" ProjectPane="true" />
       <sortByType />
@@ -2865,25 +2862,6 @@
       <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.mock.JMockMockControlStateBasedAtomicTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ADDITIONAL_CLASS_PATH" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="wholeProject" />
-      </option>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-    </configuration>
-    <configuration default="false" name="JMockMockControlStateBasedAtomicTest.testVerify" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
-      <pattern value="com.googlecode.instinct.mock.*" />
-      <module name="instinct" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.googlecode.instinct.mock" />
-      <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.mock.JMockMockControlStateBasedAtomicTest" />
-      <option name="METHOD_NAME" value="testVerify" />
-      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -3276,20 +3254,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/Mock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="31" selection-start="1280" selection-end="1280" vertical-scroll-proportion="0.2417154">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="35" selection-start="723" selection-end="723" vertical-scroll-proportion="0.4385965">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlStateBasedAtomicTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="49" selection-start="414" selection-end="450" vertical-scroll-proportion="0.0877193">
@@ -3297,9 +3261,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/Mock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="31" selection-start="1280" selection-end="1280" vertical-scroll-proportion="0.01754386">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/mock/JMockMockControlInteractionBasedAtomicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="19" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0877193">
+        <state line="18" column="0" selection-start="388" selection-end="388" vertical-scroll-proportion="0.31578946">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/JMockMockControl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="35" selection-start="723" selection-end="723" vertical-scroll-proportion="0.4385965">
           <folding />
         </state>
       </provider>
