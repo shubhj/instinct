@@ -64,6 +64,7 @@
             <fileset dir="${main.classes.dir}">
                 <include name="**/*.class"/>
                 <exclude name="**/instinct/example/**"/>
+                <exclude name="**/integrate/junit/**"/>
             </fileset>
         </cobertura-instrument>
     </target>
