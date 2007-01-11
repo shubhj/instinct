@@ -4,15 +4,15 @@ import java.io.File;
 import java.lang.annotation.Annotation;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
-import com.googlecode.instinct.internal.util.JavaClassNameImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.internal.util.JavaClassNameImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class AnnotationCheckerImpl implements AnnotationChecker {
     private final EdgeClass edgeClass = new DefaultEdgeClass();
     private final File packageRoot;
 
-    AnnotationCheckerImpl(final File packageRoot) {
+    public AnnotationCheckerImpl(final File packageRoot) {
         checkNotNull(packageRoot);
         this.packageRoot = packageRoot;
     }
