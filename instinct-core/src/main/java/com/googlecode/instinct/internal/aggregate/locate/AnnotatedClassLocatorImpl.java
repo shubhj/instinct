@@ -12,7 +12,7 @@ import com.googlecode.instinct.internal.util.JavaClassNameImpl;
 import com.googlecode.instinct.internal.util.Suggest;
 
 public final class AnnotatedClassLocatorImpl implements AnnotatedClassLocator {
-    private final Comparator<File> comparator = new FileComparator();
+    private final Comparator<File> comparator = new FileNameComparator();
 
     @Suggest("Perhaps the filter is the param that should be passed, rather than the annotation. Could then make this a filtered class locator.")
     public JavaClassName[] locate(final File root, final FileFilter filter) {

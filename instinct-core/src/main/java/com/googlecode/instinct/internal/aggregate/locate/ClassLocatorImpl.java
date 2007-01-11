@@ -12,7 +12,7 @@ import com.googlecode.instinct.internal.util.JavaClassNameImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class ClassLocatorImpl implements ClassLocator {
-    private final Comparator<File> comparator = new FileComparator();
+    private final Comparator<File> comparator = new FileNameComparator();
 
     public JavaClassName[] locate(final File root, final FileFilter filter) {
         checkNotNull(root, filter);
