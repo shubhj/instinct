@@ -30,12 +30,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.xml" afterPath="$PROJECT_DIR$/build.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedClassLocator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedClassLocatorImpl.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImplAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImplAtomicTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
     </list>
   </component>
@@ -196,7 +191,7 @@
       <file leaf-file-name="AnnotatedMethodLocatorImpl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="43" selection-start="609" selection-end="609" vertical-scroll-proportion="0.1983471">
+            <state line="16" column="13" selection-start="797" selection-end="797" vertical-scroll-proportion="0.29752067">
               <folding />
             </state>
           </provider>
@@ -205,7 +200,16 @@
       <file leaf-file-name="AnnotatedMethodLocatorImplAtomicTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImplAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="19" selection-start="134" selection-end="134" vertical-scroll-proportion="0.09917355">
+            <state line="15" column="67" selection-start="675" selection-end="675" vertical-scroll-proportion="0.29752067">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClassChecker.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/checker/ClassChecker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="32" column="40" selection-start="2283" selection-end="2283" vertical-scroll-proportion="0.33333334">
               <folding />
             </state>
           </provider>
@@ -3014,16 +3018,16 @@
     </key>
   </component>
   <component name="RestoreUpdateTree" />
-  <component name="RunManager" selected="JUnit.JMockMockControlAtomicTest.testVerify">
-    <tempConfiguration default="false" name="JMockMockControlAtomicTest.testVerify" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
-      <pattern value="com.googlecode.instinct.mock.*" />
+  <component name="RunManager" selected="JUnit.AnnotatedMethodLocatorImplAtomicTest">
+    <tempConfiguration default="false" name="AnnotatedMethodLocatorImplAtomicTest" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+      <pattern value="com.googlecode.instinct.internal.aggregate.locate.*" />
       <module name="instinct" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.googlecode.instinct.mock" />
-      <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.mock.JMockMockControlAtomicTest" />
-      <option name="METHOD_NAME" value="testVerify" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="com.googlecode.instinct.internal.aggregate.locate" />
+      <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.internal.aggregate.locate.AnnotatedMethodLocatorImplAtomicTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -3426,13 +3430,6 @@
     <option name="myLastEditedConfigurable" value="Harvey Norman Inspection Profile" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src/org/jmock/builder/ArgumentsMatchBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="17" selection-start="266" selection-end="266" vertical-scroll-proportion="0.24793388">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/etc/lib-src/junit-4.1-src.jar!/junit/framework/TestCase.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="126" column="16" selection-start="3627" selection-end="3627" vertical-scroll-proportion="0.35812673">
@@ -3593,14 +3590,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="43" selection-start="609" selection-end="609" vertical-scroll-proportion="0.1983471">
+        <state line="16" column="13" selection-start="797" selection-end="797" vertical-scroll-proportion="0.29752067">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/checker/ClassChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="40" selection-start="2283" selection-end="2283" vertical-scroll-proportion="0.33333334">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImplAtomicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="19" selection-start="134" selection-end="134" vertical-scroll-proportion="0.09917355">
+        <state line="15" column="67" selection-start="675" selection-end="675" vertical-scroll-proportion="0.29752067">
           <folding />
         </state>
       </provider>
