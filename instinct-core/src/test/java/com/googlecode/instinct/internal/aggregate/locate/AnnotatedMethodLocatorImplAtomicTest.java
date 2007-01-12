@@ -26,25 +26,4 @@ public final class AnnotatedMethodLocatorImplAtomicTest extends InstinctTestCase
     public void setUpSubject() {
         locator = new AnnotatedMethodLocatorImpl();
     }
-
-    private static class WithoutRuntimeAnnotatedMethods {
-        @Override
-        public String toString() {
-            return super.toString();
-        }
-    }
-
-    private static class WithRuntimeAnnotatedMethods {
-        @Override
-        @Specification
-        public String toString() {
-            return super.toString();
-        }
-
-        @Override
-        @Specification
-        public boolean equals(final Object obj) {
-            return super.equals(obj);
-        }
-    }
 }

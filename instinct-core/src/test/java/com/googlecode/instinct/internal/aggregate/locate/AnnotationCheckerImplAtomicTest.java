@@ -1,8 +1,8 @@
 package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.io.File;
-import java.lang.annotation.Annotation;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
+import com.googlecode.instinct.core.annotate.Specification;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.JavaClassNameFactory;
 import com.googlecode.instinct.internal.util.Suggest;
@@ -24,7 +24,7 @@ public final class AnnotationCheckerImplAtomicTest extends InstinctTestCase {
     private EdgeClass edgeClass;
     private JavaClassNameFactory classNameFactory;
     private JavaClassName className;
-    private Class<?> cls;
+    private Class<?> classWithoutAnnotation;
 
     public void testProperties() {
         checkClass(AnnotationCheckerImpl.class, AnnotationChecker.class);
@@ -33,8 +33,8 @@ public final class AnnotationCheckerImplAtomicTest extends InstinctTestCase {
     public void testIsAnnotated() {
         expects(classNameFactory, once()).method("create").with(same(packageRoot), same(classFile)).will(returnValue(className));
         expects(className, once()).method("getFullyQualifiedName").will(returnValue(FULLY_QUALIFIED_CLASS_NAME));
-        expects(edgeClass, once()).method("forName").with(same(FULLY_QUALIFIED_CLASS_NAME)).will(returnValue(cls));
-        checker.isAnnotated(classFile, Annotation.class);
+        expects(edgeClass, once()).method("forName").with(same(FULLY_QUALIFIED_CLASS_NAME)).will(returnValue(classWithoutAnnotation));
+        checker.isAnnotated(classFile, Specification.class);
     }
 
     @Override
@@ -44,7 +44,7 @@ public final class AnnotationCheckerImplAtomicTest extends InstinctTestCase {
         edgeClass = mock(EdgeClass.class);
         classNameFactory = mock(JavaClassNameFactory.class);
         className = mock(JavaClassName.class);
-        cls = Class.class;
+        classWithoutAnnotation = WithoutRuntimeAnnotatedMethods.class;
     }
 
     @Override
