@@ -10,6 +10,8 @@ public interface Mockery {
 
     <T> T mock(Class<T> toMock, String roleName);
 
+    NameMatchBuilder expects(Object mockedObject);
+
     NameMatchBuilder expects(Object mockedObject, InvocationMatcher expectation);
 
     InvocationMatcher once();

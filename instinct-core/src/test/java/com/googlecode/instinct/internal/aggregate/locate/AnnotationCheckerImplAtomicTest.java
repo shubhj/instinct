@@ -2,11 +2,11 @@ package com.googlecode.instinct.internal.aggregate.locate;
 
 import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkProperties;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
 public final class AnnotationCheckerImplAtomicTest extends InstinctTestCase {
     public void testProperties() {
-        checkProperties(AnnotationChecker.class, AnnotationCheckerImpl.class);
+        checkClass(AnnotationCheckerImpl.class, AnnotationChecker.class);
     }
 
     public void testIsAnnotated() {

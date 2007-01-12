@@ -2,17 +2,15 @@ package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.io.File;
 import java.lang.annotation.Annotation;
-import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
-import au.net.netstorm.boost.edge.java.lang.EdgeClass;
-import com.googlecode.instinct.internal.util.JavaClassName;
-import com.googlecode.instinct.internal.util.JavaClassNameFactory;
-import com.googlecode.instinct.internal.util.JavaClassNameFactoryImpl;
+import com.googlecode.instinct.internal.util.ClassInstantiator;
+import com.googlecode.instinct.internal.util.ClassInstantiatorFactory;
+import com.googlecode.instinct.internal.util.ClassInstantiatorFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class AnnotatedClassFileCheckerImpl implements AnnotatedClassFileChecker {
+    private AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
+    private ClassInstantiatorFactory instantiatorFactory = new ClassInstantiatorFactoryImpl();
     private final File packageRoot;
-    private EdgeClass edgeClass = new DefaultEdgeClass();
-    private JavaClassNameFactory classNameFactory = new JavaClassNameFactoryImpl();
 
     public AnnotatedClassFileCheckerImpl(final File packageRoot) {
         checkNotNull(packageRoot);
@@ -21,18 +19,8 @@ public final class AnnotatedClassFileCheckerImpl implements AnnotatedClassFileCh
 
     public <A extends Annotation> boolean isAnnotated(final File classFile, final Class<A> annotationType) {
         checkNotNull(classFile, annotationType);
-        final Class<A> candidateClass = instantiateClass(classFile);
-        return isAnnotated(candidateClass, annotationType);
-    }
-
-    @SuppressWarnings({"unchecked"})
-    private <T> Class<T> instantiateClass(final File classFile) {
-        final JavaClassName className = classNameFactory.create(packageRoot, classFile);
-        final String fullyQualifiedName = className.getFullyQualifiedName();
-        return (Class<T>) edgeClass.forName(fullyQualifiedName);
-    }
-
-    private <T extends Annotation> boolean isAnnotated(final Class<T> candidateClass, final Class<T> annotationType) {
-        return candidateClass.isAnnotationPresent(annotationType);
+        final ClassInstantiator instantiator = instantiatorFactory.create(packageRoot);
+        final Class<?> candidateClass = instantiator.instantiateClass(classFile);
+        return annotationChecker.isAnnotated(candidateClass, annotationType);
     }
 }

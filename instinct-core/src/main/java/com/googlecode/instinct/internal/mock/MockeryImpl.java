@@ -31,6 +31,10 @@ public final class MockeryImpl implements Mockery {
         return (T) mockedObject;
     }
 
+    public NameMatchBuilder expects(final Object mockedObject) {
+        return expects(mockedObject, once());
+    }
+
     public NameMatchBuilder expects(final Object mockedObject, final InvocationMatcher expectation) {
         final MockControl mockController = holder.getMockController(mockedObject);
         return mockController.expects(expectation);

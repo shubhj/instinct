@@ -1,11 +1,11 @@
 package com.googlecode.instinct.mock;
 
+import com.googlecode.instinct.internal.mock.Mockery;
+import com.googlecode.instinct.internal.mock.MockeryImpl;
 import org.jmock.builder.NameMatchBuilder;
 import org.jmock.core.Constraint;
 import org.jmock.core.InvocationMatcher;
 import org.jmock.core.Stub;
-import com.googlecode.instinct.internal.mock.Mockery;
-import com.googlecode.instinct.internal.mock.MockeryImpl;
 
 public final class Mocker {
     private static final Mockery MOCKERY = new MockeryImpl();
@@ -20,6 +20,10 @@ public final class Mocker {
 
     public static <T> T mock(final Class<T> toMock, final String roleName) {
         return MOCKERY.mock(toMock, roleName);
+    }
+
+    public static NameMatchBuilder expects(final Object mockedObject) {
+        return MOCKERY.expects(mockedObject);
     }
 
     public static NameMatchBuilder expects(final Object mockedObject, final InvocationMatcher expectation) {

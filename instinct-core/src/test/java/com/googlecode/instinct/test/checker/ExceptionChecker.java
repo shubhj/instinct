@@ -1,6 +1,6 @@
 package com.googlecode.instinct.test.checker;
 
-import static com.googlecode.instinct.test.checker.ClassChecker.checkPropertiesSuperClass;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClassPropertiesSuperClass;
 
 @SuppressWarnings({"ExceptionClassNameDoesntEndWithException"})
 public final class ExceptionChecker {
@@ -9,6 +9,6 @@ public final class ExceptionChecker {
     }
 
     public static <T extends RuntimeException> void checkException(final Class<T> exceptionClass) {
-        checkPropertiesSuperClass(RuntimeException.class, exceptionClass);
+        checkClassPropertiesSuperClass(RuntimeException.class, exceptionClass);
     }
 }

@@ -3,7 +3,7 @@ package com.googlecode.instinct.internal.util;
 import java.io.File;
 import static com.googlecode.instinct.mock.Mocker.mock;
 import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkProperties;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
 public final class JavaClassNameFactoryImplAtomicTest extends InstinctTestCase {
     private File classesRoot;
@@ -11,13 +11,13 @@ public final class JavaClassNameFactoryImplAtomicTest extends InstinctTestCase {
     private JavaClassNameFactory factory;
 
     public void testProperties() {
-        checkProperties(JavaClassNameFactory.class, JavaClassNameFactoryImpl.class);
+        checkClass(JavaClassNameFactoryImpl.class, JavaClassNameFactory.class);
     }
 
     public void testCreate() {
         final JavaClassName name = factory.create(classesRoot, fileDir);
         assertNotNull(name);
-        assertEquals(JavaClassNameImpl.class,  name.getClass());
+        assertEquals(JavaClassNameImpl.class, name.getClass());
     }
 
     @Override
