@@ -9,7 +9,7 @@ import static com.googlecode.instinct.mock.Mocker.returnValue;
 import static com.googlecode.instinct.mock.Mocker.same;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.ReflectUtil.insertFieldValue;
+import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;
 
 public final class ClassInstantiatorImplAtomicTest extends InstinctTestCase {
     @Suggest("This string becomes a dummy.")
