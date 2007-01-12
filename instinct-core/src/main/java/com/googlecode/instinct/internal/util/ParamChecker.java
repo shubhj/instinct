@@ -13,4 +13,16 @@ public final class ParamChecker {
     public static void checkNotNull(final Object... params) {
         NULL_MASTER.check(params);
     }
+
+    public static <T> void checkIsInterface(final Class<T> type) {
+        if (!type.isInterface()) {
+            throw new IllegalArgumentException(type.getSimpleName() + " must be an interface not a concrete class");
+        }
+    }
+
+    public static <T> void checkIsConcreteClass(final Class<T> type) {
+        if (type.isInterface()) {
+            throw new IllegalArgumentException(type.getSimpleName() + " must be a concrete class not an interface");
+        }
+    }
 }
