@@ -15,7 +15,8 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.ReflectUtil.insertFieldValue;
 
-public final class AnnotationCheckerImplAtomicTest extends InstinctTestCase {
+@Suggest("Come back and drop in an annotation checker once written")
+public final class AnnotatedClassFileCheckerImplAtomicTest extends InstinctTestCase {
     @Suggest("Make this a uniqie field, or dummy?")
     private static final String FULLY_QUALIFIED_CLASS_NAME = "FQN";
     private AnnotatedClassFileChecker checker;
