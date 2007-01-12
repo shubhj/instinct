@@ -9,12 +9,12 @@ import com.googlecode.instinct.core.naming.AfterSpecificationNamingConvention;
 import com.googlecode.instinct.core.naming.BeforeSpecificationNamingConvention;
 import com.googlecode.instinct.core.naming.BehaviourContextNamingConvention;
 import com.googlecode.instinct.core.naming.NamingConvention;
-import com.googlecode.instinct.internal.aggregate.locate.MethodLocator;
-import com.googlecode.instinct.internal.aggregate.locate.MethodLocatorImpl;
+import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
+import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class BehaviourContextRunnerImpl implements BehaviourContextRunner {
-    private final MethodLocator methodLocator = new MethodLocatorImpl();
+    private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
     private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
 
     public <T> void run(final Class<T> behaviourContextClass) {

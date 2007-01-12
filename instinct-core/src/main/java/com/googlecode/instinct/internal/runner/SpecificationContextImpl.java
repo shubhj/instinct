@@ -1,9 +1,11 @@
 package com.googlecode.instinct.internal.runner;
 
 import java.lang.reflect.Method;
+import au.net.netstorm.boost.primordial.Primordial;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
-final class SpecificationContextImpl implements SpecificationContext {
+@SuppressWarnings({"AssignmentToCollectionOrArrayFieldFromParameter"})
+final class SpecificationContextImpl extends Primordial implements SpecificationContext {
     private final Class<?> behaviourContextClass;
     private final Method[] beforeSpecificationMethods;
     private final Method[] afterSpecificationMethods;

@@ -6,7 +6,7 @@ import com.googlecode.instinct.core.naming.NamingConvention;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 
-public final class MethodLocatorImpl implements MethodLocator {
+public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
     private final AnnotatedMethodLocator annotatedMethodLocator = new AnnotatedMethodLocatorImpl();
 
     @Suggest("Write other locators, then include them here")

@@ -5,6 +5,7 @@ import au.net.netstorm.boost.edge.EdgeException;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
 import com.googlecode.instinct.core.BehaviourContextConfigurationException;
+import com.googlecode.instinct.core.LifeCycleMethodConfigurationException;
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregatorImpl;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
@@ -36,6 +37,7 @@ public final class AllBehaviourContextsSlowTest extends InstinctTestCase {
         try {
             contextRunner.run(cls);
         } catch (BehaviourContextConfigurationException ignored) {
+        } catch (LifeCycleMethodConfigurationException ignored) {
         } catch (EdgeException e) {
             if (e.getCause() instanceof InvocationTargetException) {
                 throw (RuntimeException) e.getCause().getCause();

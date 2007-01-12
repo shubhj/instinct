@@ -4,10 +4,11 @@ import com.googlecode.instinct.core.annotate.Specification;
 import com.googlecode.instinct.core.annotate.BehaviourContext;
 
 @BehaviourContext
-public class WithRuntimeAnnotatedMethods {
+public class WithRuntimeAnnotations {
     @Override
     @Specification
     public String toString() {
+        System.out.println("true = " + true);
         return super.toString();
     }
 

@@ -13,12 +13,12 @@ public final class AnnotatedMethodLocatorImplAtomicTest extends InstinctTestCase
     }
 
     public void testLocateOnAClassWithNoAnnotationsGiveNoMethod() {
-        final Method[] methods = locator.locate(WithoutRuntimeAnnotatedMethods.class, Specification.class);
+        final Method[] methods = locator.locate(WithoutRuntimeAnnotations.class, Specification.class);
         assertEquals(0, methods.length);
     }
 
     public void testLocateOnAClassWithSeveralAnnotationsGiveSeveralMethod() {
-        final Method[] methods = locator.locate(WithRuntimeAnnotatedMethods.class, Specification.class);
+        final Method[] methods = locator.locate(WithRuntimeAnnotations.class, Specification.class);
         assertEquals(2, methods.length);
     }
 

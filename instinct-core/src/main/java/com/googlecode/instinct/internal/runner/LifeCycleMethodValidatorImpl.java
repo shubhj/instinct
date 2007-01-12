@@ -2,6 +2,7 @@ package com.googlecode.instinct.internal.runner;
 
 import java.lang.reflect.Method;
 import com.googlecode.instinct.core.BehaviourContextConfigurationException;
+import com.googlecode.instinct.core.LifeCycleMethodConfigurationException;
 import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
@@ -17,8 +18,17 @@ final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
         checkNotNull(method);
         if (method.getParameterTypes().length > 0) {
             final String methodDetails = method.getDeclaringClass().getSimpleName() + '.' + method.getName() + "(...)";
-            final String message = "Unable to run context. Specification '" + methodDetails + "' cannot have parameters";
-            throw new BehaviourContextConfigurationException(message);
+            final String message = "Unable to run context. Method '" + methodDetails + "' cannot have parameters";
+            throw new LifeCycleMethodConfigurationException(message);
+        }
+    }
+
+    public void checkMethodHasNoReturnType(final Method method) {
+        checkNotNull(method);
+        if (!method.getReturnType().equals(Void.TYPE)) {
+            final String methodDetails = method.getDeclaringClass().getSimpleName() + '.' + method.getName() + "(...)";
+            final String message = "Unable to run context. Method '" + methodDetails + "' must have void return type";
+            throw new LifeCycleMethodConfigurationException(message);
         }
     }
 

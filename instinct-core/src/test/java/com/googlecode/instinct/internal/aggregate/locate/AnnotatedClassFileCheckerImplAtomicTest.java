@@ -31,8 +31,8 @@ public final class AnnotatedClassFileCheckerImplAtomicTest extends InstinctTestC
     }
 
     public void testIsAnnotated() {
-        checkIsAnnotated(WithoutRuntimeAnnotatedMethods.class, false);
-        checkIsAnnotated(WithRuntimeAnnotatedMethods.class, true);
+        checkIsAnnotated(WithoutRuntimeAnnotations.class, false);
+        checkIsAnnotated(WithRuntimeAnnotations.class, true);
     }
 
     private <T> void checkIsAnnotated(final Class<T> candidateClass, final boolean containsAnnotation) {
