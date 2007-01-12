@@ -1,4 +1,4 @@
-package com.googlecode.instinct.internal.mock;
+package com.googlecode.instinct.internal.testdouble;
 
 import com.googlecode.instinct.internal.util.Suggest;
 
