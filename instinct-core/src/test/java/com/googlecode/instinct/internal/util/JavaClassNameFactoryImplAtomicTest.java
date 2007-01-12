@@ -1,18 +1,33 @@
 package com.googlecode.instinct.internal.util;
 
 import java.io.File;
+import static com.googlecode.instinct.mock.Mocker.mock;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkProperties;
-import com.googlecode.instinct.mock.Mocker;
 
 public final class JavaClassNameFactoryImplAtomicTest extends InstinctTestCase {
+    private File classesRoot;
+    private File fileDir;
+    private JavaClassNameFactory factory;
+
     public void testProperties() {
         checkProperties(JavaClassNameFactory.class, JavaClassNameFactoryImpl.class);
     }
 
     public void testCreate() {
-        final File classesRoot = Mocker.mock(File.class);
-        final File fileDir = Mocker.mock(File.class);
-        final JavaClassName className = new JavaClassNameFactoryImpl().create(classesRoot, fileDir);
+        final JavaClassName name = factory.create(classesRoot, fileDir);
+        assertNotNull(name);
+        assertEquals(JavaClassNameImpl.class,  name.getClass());
+    }
+
+    @Override
+    public void setUpTestDoubles() {
+        classesRoot = mock(File.class);
+        fileDir = mock(File.class);
+    }
+
+    @Override
+    public void setUpSubject() {
+        factory = new JavaClassNameFactoryImpl();
     }
 }

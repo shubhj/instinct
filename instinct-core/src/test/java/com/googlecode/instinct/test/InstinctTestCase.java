@@ -8,7 +8,7 @@ public abstract class InstinctTestCase extends TestCase {
     @SuppressWarnings({"ProhibitedExceptionDeclared"})
     @Override
     public void runBare() throws Throwable {
-        setUpMocks();
+        setUpTestDoubles();
         setUpSubject();
         try {
             runTest();
@@ -22,7 +22,7 @@ public abstract class InstinctTestCase extends TestCase {
     public final void setUp() {
     }
 
-    public void setUpMocks() {
+    public void setUpTestDoubles() {
     }
 
     public void setUpSubject() {

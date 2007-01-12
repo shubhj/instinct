@@ -18,9 +18,16 @@ public final class MockeryImpl implements Mockery {
     @SuppressWarnings({"unchecked"})
     public <T> T mock(final Class<T> toMock) {
         final MockControl mockControl = mockCreator.createMockController(toMock);
-        final Object mockedObject = mockControl.getMockedObject();
-        holder.addControl(mockControl, mockedObject);
-        verifier.addVerifiable(mockControl);
+        final Object mockedObject = createMockedObject(mockControl);
+        register(mockControl, mockedObject);
+        return (T) mockedObject;
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public <T> T mock(final Class<T> toMock, final String roleName) {
+        final MockControl mockControl = mockCreator.createMockController(toMock, roleName);
+        final Object mockedObject = createMockedObject(mockControl);
+        register(mockControl, mockedObject);
         return (T) mockedObject;
     }
 
@@ -51,5 +58,15 @@ public final class MockeryImpl implements Mockery {
 
     public void verify() {
         verifier.verify();
+    }
+
+    @SuppressWarnings({"unchecked"})
+    private <T> T createMockedObject(final MockControl mockControl) {
+        return (T) mockControl.getMockedObject();
+    }
+
+    private void register(final MockControl mockControl, final Object mockedObject) {
+        holder.addControl(mockControl, mockedObject);
+        verifier.addVerifiable(mockControl);
     }
 }

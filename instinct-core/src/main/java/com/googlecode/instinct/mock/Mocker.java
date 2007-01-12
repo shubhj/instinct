@@ -16,6 +16,10 @@ public final class Mocker {
         return MOCKERY.mock(toMock);
     }
 
+    public static <T> T mock(final Class<T> toMock, final String roleName) {
+        return MOCKERY.mock(toMock, roleName);
+    }
+
     public static NameMatchBuilder expects(final Object mockedObject, final InvocationMatcher expectation) {
         return MOCKERY.expects(mockedObject, expectation);
     }

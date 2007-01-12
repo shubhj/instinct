@@ -8,6 +8,8 @@ import org.jmock.core.Stub;
 public interface Mockery {
     <T> T mock(Class<T> toMock);
 
+    <T> T mock(Class<T> toMock, String roleName);
+
     NameMatchBuilder expects(Object mockedObject, InvocationMatcher expectation);
 
     InvocationMatcher once();
