@@ -19,9 +19,9 @@ public final class AnnotatedClassFileCheckerImpl implements AnnotatedClassFileCh
         this.packageRoot = packageRoot;
     }
 
-    public <T extends Annotation> boolean isAnnotated(final File classFile, final Class<T> annotationType) {
+    public <A extends Annotation> boolean isAnnotated(final File classFile, final Class<A> annotationType) {
         checkNotNull(classFile, annotationType);
-        final Class<T> candidateClass = instantiateClass(classFile);
+        final Class<A> candidateClass = instantiateClass(classFile);
         return isAnnotated(candidateClass, annotationType);
     }
 

@@ -4,5 +4,5 @@ import java.io.File;
 import java.lang.annotation.Annotation;
 
 public interface AnnotatedClassFileChecker {
-    <T extends Annotation> boolean isAnnotated(final File classFile, final Class<T> annotationType);
+    <A extends Annotation> boolean isAnnotated(final File classFile, final Class<A> annotationType);
 }
