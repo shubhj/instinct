@@ -30,6 +30,7 @@ public final class AnnotationCheckerImpl implements AnnotationChecker {
     @SuppressWarnings({"unchecked"})
     private <T> Class<T> instantiateClass(final File classFile) {
         final JavaClassName className = new JavaClassNameImpl(packageRoot, classFile);
-        return (Class<T>) edgeClass.forName(className.getFullyQualifiedName());
+        final String fullyQualifiedName = className.getFullyQualifiedName();
+        return (Class<T>) edgeClass.forName(fullyQualifiedName);
     }
 }

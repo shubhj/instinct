@@ -1,8 +1,9 @@
 package com.googlecode.instinct.internal.util;
 
 import java.io.File;
+import au.net.netstorm.boost.primordial.Primordial;
 
-public final class JavaClassNameImpl implements JavaClassName {
+public final class JavaClassNameImpl extends Primordial implements JavaClassName {
     private final File classesRoot;
     private final File classFile;
 
