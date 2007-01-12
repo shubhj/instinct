@@ -1,8 +1,10 @@
 package com.googlecode.instinct.internal.aggregate.locate;
 
 import com.googlecode.instinct.core.annotate.Specification;
+import com.googlecode.instinct.core.annotate.BehaviourContext;
 
-class WithRuntimeAnnotatedMethods {
+@BehaviourContext
+public class WithRuntimeAnnotatedMethods {
     @Override
     @Specification
     public String toString() {

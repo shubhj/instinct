@@ -9,12 +9,12 @@ import com.googlecode.instinct.internal.util.JavaClassNameFactory;
 import com.googlecode.instinct.internal.util.JavaClassNameFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
-public final class AnnotationCheckerImpl implements AnnotationChecker {
+public final class AnnotatedClassFileCheckerImpl implements AnnotatedClassFileChecker {
     private final File packageRoot;
     private EdgeClass edgeClass = new DefaultEdgeClass();
     private JavaClassNameFactory classNameFactory = new JavaClassNameFactoryImpl();
 
-    public AnnotationCheckerImpl(final File packageRoot) {
+    public AnnotatedClassFileCheckerImpl(final File packageRoot) {
         checkNotNull(packageRoot);
         this.packageRoot = packageRoot;
     }
@@ -33,6 +33,6 @@ public final class AnnotationCheckerImpl implements AnnotationChecker {
     }
 
     private <T extends Annotation> boolean isAnnotated(final Class<T> candidateClass, final Class<T> annotationType) {
-        return candidateClass.getAnnotation(annotationType) != null;
+        return candidateClass.isAnnotationPresent(annotationType);
     }
 }

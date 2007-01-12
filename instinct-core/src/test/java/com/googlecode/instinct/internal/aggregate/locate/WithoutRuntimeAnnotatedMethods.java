@@ -1,6 +1,6 @@
 package com.googlecode.instinct.internal.aggregate.locate;
 
-class WithoutRuntimeAnnotatedMethods {
+public class WithoutRuntimeAnnotatedMethods {
     @Override
     public String toString() {
         return super.toString();
