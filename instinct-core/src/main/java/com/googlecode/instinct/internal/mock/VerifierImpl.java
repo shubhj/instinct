@@ -1,4 +1,4 @@
-package com.googlecode.instinct.mock;
+package com.googlecode.instinct.internal.mock;
 
 import java.util.List;
 import java.util.ArrayList;

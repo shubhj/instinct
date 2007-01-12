@@ -1,4 +1,4 @@
-package com.googlecode.instinct.mock;
+package com.googlecode.instinct.internal.mock;
 
 public interface MockCreator {
     <T> MockControl createMockController(Class<T> toMock);

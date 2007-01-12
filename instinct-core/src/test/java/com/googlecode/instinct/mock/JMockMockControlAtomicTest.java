@@ -1,6 +1,8 @@
 package com.googlecode.instinct.mock;
 
 import com.googlecode.instinct.test.InstinctTestCase;
+import com.googlecode.instinct.internal.mock.JMockMockControl;
+import com.googlecode.instinct.internal.mock.MockControl;
 import junit.framework.AssertionFailedError;
 import org.jmock.Mock;
 import org.jmock.builder.InvocationMockerBuilder;

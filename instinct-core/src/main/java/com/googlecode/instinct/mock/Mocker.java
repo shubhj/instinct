@@ -4,6 +4,8 @@ import org.jmock.builder.NameMatchBuilder;
 import org.jmock.core.Constraint;
 import org.jmock.core.InvocationMatcher;
 import org.jmock.core.Stub;
+import com.googlecode.instinct.internal.mock.Mockery;
+import com.googlecode.instinct.internal.mock.MockeryImpl;
 
 public final class Mocker {
     private static final Mockery MOCKERY = new MockeryImpl();

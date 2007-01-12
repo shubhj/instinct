@@ -1,4 +1,4 @@
-package com.googlecode.instinct.mock;
+package com.googlecode.instinct.internal.mock;
 
 public interface MockHolder {
     void addControl(MockControl mockControl, Object mockedObject);
