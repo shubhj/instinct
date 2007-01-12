@@ -1,5 +1,5 @@
 package com.googlecode.instinct.internal.mock;
 
-public interface MockAutoWirer {
+public interface TestDoubleAutoWirer {
     void wire(Object instance);
 }

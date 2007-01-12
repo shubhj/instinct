@@ -1,8 +1,8 @@
 package com.googlecode.instinct.internal.runner;
 
 import java.lang.reflect.Method;
-import com.googlecode.instinct.internal.mock.MockAutoWirer;
-import com.googlecode.instinct.internal.mock.MockAutoWirerImpl;
+import com.googlecode.instinct.internal.mock.TestDoubleAutoWirer;
+import com.googlecode.instinct.internal.mock.TestDoubleAutoWirerImpl;
 import com.googlecode.instinct.internal.mock.MockVerifier;
 import com.googlecode.instinct.internal.mock.MockVerifierImpl;
 import com.googlecode.instinct.internal.util.ConstructorInvoker;
@@ -15,14 +15,14 @@ final class SpecificationRunnerImpl implements SpecificationRunner {
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
     private MethodInvoker methodInvoker = new MethodInvokerImpl();
     private LifeCycleMethodValidator methodValidator = new LifeCycleMethodValidatorImpl();
-    private final MockAutoWirer mockAutoWirer = new MockAutoWirerImpl();
+    private final TestDoubleAutoWirer testDoubleAutoWirer = new TestDoubleAutoWirerImpl();
     private final MockVerifier mockVerifier = new MockVerifierImpl();
 
     public void run(final SpecificationContext context) {
         checkNotNull(context);
         final Object instance = invokeConstructor(context.getBehaviourContextClass());
         try {
-            mockAutoWirer.wire(instance);
+            testDoubleAutoWirer.wire(instance);
             runMethods(instance, context.getBeforeSpecificationMethods());
             attemptToInvoke(instance, context.getSpecificationMethod());
             mockVerifier.verify(instance);
