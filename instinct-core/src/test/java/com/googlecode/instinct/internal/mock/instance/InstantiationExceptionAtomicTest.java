@@ -7,9 +7,4 @@ public final class InstantiationExceptionAtomicTest extends InstinctTestCase {
     public void testProperties() {
         checkException(InstantiationException.class);
     }
-
-    public void testConstructor() {
-        final Throwable cause = new Throwable();
-        assertSame(cause, new InstantiationException(cause).getCause());
-    }
 }

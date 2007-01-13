@@ -22,10 +22,11 @@ public final class ObjectFactoryImpl implements ObjectFactory {
         return create(concreteClass, new Class<?>[]{}, new Object[]{});
     }
 
+    @SuppressWarnings({"unchecked"})
     public <T> T create(final Class<T> concreteClass, final Object... constructorArgumentValues) {
         checkNotNull(concreteClass, constructorArgumentValues);
-//        Constructor<T> bestConstructor = findConstructor(concreteClass, );
-        return null;
+        final Constructor<T> constructor = findConstructor(concreteClass, constructorArgumentValues);
+        return (T) edgeConstructor.newInstance(constructor, constructorArgumentValues);
     }
 
     @SuppressWarnings({"unchecked"})
@@ -34,5 +35,9 @@ public final class ObjectFactoryImpl implements ObjectFactory {
         checkIsConcreteClass(concreteClass);
         final Constructor<T> constructor = edgeClass.getConstructor(concreteClass, types);
         return (T) edgeConstructor.newInstance(constructor, values);
+    }
+
+    private <T> Constructor<T> findConstructor(final Class<T> cls, final Object[] argumentValues) {
+        return null;
     }
 }
