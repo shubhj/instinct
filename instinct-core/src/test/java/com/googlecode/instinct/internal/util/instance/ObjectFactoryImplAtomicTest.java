@@ -5,7 +5,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
-public final class ObjectFactoryAtomicTest extends InstinctTestCase {
+public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
     private static final Class<ObjectFactory> AN_INTERFACE_1 = ObjectFactory.class;
     private static final Class<Serializable> AN_INTERFACE_2 = Serializable.class;
 

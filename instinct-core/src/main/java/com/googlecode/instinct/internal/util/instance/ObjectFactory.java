@@ -2,11 +2,11 @@ package com.googlecode.instinct.internal.util.instance;
 
 import com.googlecode.instinct.internal.util.Suggest;
 
-@Suggest({"Add type inference of the objects.",
-        "Get the constructor of the concrete type where the number of arguments matches the passed in values.",
-        "Then work out if the objects are of compatible types."})
 public interface ObjectFactory {
-    <T> T create(Class<T> concreteClass);
+    @Suggest("Remove this method.")
+            <T> T create(Class<T> concreteClass);
 
-    <T> T create(Class<T> concreteClass, Class<?>[] types, Object[] values);
+    <T> T create(Class<T> concreteClass, Object... constructorArgumentValues);
+
+    <T, U> T create(Class<T> concreteClass, Class<U>[] types, Object[] values);
 }

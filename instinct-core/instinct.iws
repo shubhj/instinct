@@ -30,13 +30,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ParamChecker.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ParamChecker.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactory.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImplAtomicTest.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryAtomicTest.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryAtomicTest.java" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -193,10 +191,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ObjectFactoryAtomicTest.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryAtomicTest.java">
+      <file leaf-file-name="ObjectFactoryImpl.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="27" selection-start="772" selection-end="772" vertical-scroll-proportion="0.61165047">
+            <state line="25" column="8" selection-start="1339" selection-end="1339" vertical-scroll-proportion="0.5714286">
               <folding />
             </state>
           </provider>
@@ -205,19 +203,17 @@
       <file leaf-file-name="ObjectFactory.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="45" selection-start="157" selection-end="157" vertical-scroll-proportion="0.17475729">
+            <state line="8" column="78" selection-start="310" selection-end="310" vertical-scroll-proportion="0.28973842">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ObjectFactoryImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImpl.java">
+      <file leaf-file-name="ObjectFactoryImplAtomicTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImplAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="5" selection-start="950" selection-end="950" vertical-scroll-proportion="0.78640777">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="10" column="0" selection-start="542" selection-end="542" vertical-scroll-proportion="0.2535211">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1487,13 +1483,13 @@
     </UpdateInfo>
   </component>
   <component name="RunManager" selected="JUnit.All Tests">
-    <tempConfiguration default="false" name="ObjectFactoryAtomicTest" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+    <tempConfiguration default="false" name="ObjectFactoryImplAtomicTest" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <pattern value="com.googlecode.instinct.internal.util.instance.*" />
       <module name="instinct" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="com.googlecode.instinct.internal.util.instance" />
-      <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.internal.util.instance.ObjectFactoryAtomicTest" />
+      <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.internal.util.instance.ObjectFactoryImplAtomicTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
@@ -1505,9 +1501,6 @@
       </option>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
-      <method>
-        <option name="Make" value="true" />
-      </method>
     </tempConfiguration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
@@ -1674,6 +1667,25 @@
       <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.internal.aggregate.locate.AnnotatedClassFileCheckerImplAtomicTest" />
       <option name="METHOD_NAME" value="testIsAnnotated" />
       <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ADDITIONAL_CLASS_PATH" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+    </configuration>
+    <configuration default="false" name="ObjectFactoryImplAtomicTest" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
+      <pattern value="com.googlecode.instinct.internal.util.instance.*" />
+      <module name="instinct" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.googlecode.instinct.internal.util.instance" />
+      <option name="MAIN_CLASS_NAME" value="com.googlecode.instinct.internal.util.instance.ObjectFactoryImplAtomicTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -2090,14 +2102,14 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24006489" order="0" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31213018" order="1" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18047337" order="8" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18047337" order="8" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="6" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.10056772" order="1" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992566" order="8" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30621302" order="2" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30621302" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="File View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39962825" order="4" />
@@ -2382,25 +2394,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImplAtomicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="5" selection-start="950" selection-end="950" vertical-scroll-proportion="0.78640777">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="10" column="0" selection-start="542" selection-end="542" vertical-scroll-proportion="0.2535211">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="45" selection-start="157" selection-end="157" vertical-scroll-proportion="0.17475729">
+        <state line="8" column="78" selection-start="310" selection-end="310" vertical-scroll-proportion="0.28973842">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryAtomicTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="27" selection-start="772" selection-end="772" vertical-scroll-proportion="0.61165047">
+        <state line="25" column="8" selection-start="1339" selection-end="1339" vertical-scroll-proportion="0.5714286">
           <folding />
         </state>
       </provider>
