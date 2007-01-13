@@ -1,6 +1,7 @@
 package com.googlecode.instinct.internal.util.instance;
 
 import java.lang.reflect.Constructor;
+import static java.util.Arrays.asList;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
 import au.net.netstorm.boost.edge.java.lang.reflect.DefaultEdgeConstructor;
@@ -37,7 +38,28 @@ public final class ObjectFactoryImpl implements ObjectFactory {
         return (T) edgeConstructor.newInstance(constructor, values);
     }
 
-    private <T> Constructor<T> findConstructor(final Class<T> cls, final Object[] argumentValues) {
-        return null;
+    @SuppressWarnings({"unchecked"})
+    private <T> Constructor<T> findConstructor(final Class<T> cls, final Object... argumentValues) throws ObjectCreationException {
+        final Constructor<?>[] constructors = cls.getConstructors();
+        for (final Constructor<?> constructor : constructors) {
+            final Class<?>[] types = constructor.getParameterTypes();
+            if (argumentValues.length == types.length) {
+                checkTypes(cls, types, argumentValues);
+                return (Constructor<T>) constructor;
+            }
+        }
+        throw new ObjectCreationException(createFailureMessage(cls, argumentValues));
+    }
+
+    private <T> void checkTypes(final Class<T> cls, final Class<?>[] types, final Object... values) {
+        for (int i = 0; i < values.length; i++) {
+            if (!types[i].isAssignableFrom(values[i].getClass())) {
+                throw new ObjectCreationException(createFailureMessage(cls, values));
+            }
+        }
+    }
+
+    private <T> String createFailureMessage(final Class<T> cls, final Object... argumentValues) {
+        return cls.getSimpleName() + " does not contain a constructor with types: " + asList(argumentValues);
     }
 }
