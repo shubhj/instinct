@@ -2,65 +2,70 @@ package com.googlecode.instinct.internal.util.instance;
 
 import java.lang.reflect.Constructor;
 import static java.util.Arrays.asList;
+import java.util.Iterator;
+import au.net.netstorm.boost.edge.EdgeException;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
 import au.net.netstorm.boost.edge.java.lang.reflect.DefaultEdgeConstructor;
 import au.net.netstorm.boost.edge.java.lang.reflect.EdgeConstructor;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkIsConcreteClass;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 
-@Suggest({"Add type inference of the objects.",
-        "Get the constructor of the concrete type where the number of arguments matches the passed in values.",
-        "Then work out if the objects are of compatible types."})
+@SuppressWarnings({"unchecked"})
 public final class ObjectFactoryImpl implements ObjectFactory {
     private final EdgeClass edgeClass = new DefaultEdgeClass();
     private final EdgeConstructor edgeConstructor = new DefaultEdgeConstructor();
 
-    public <T> T create(final Class<T> concreteClass) {
-        checkNotNull(concreteClass);
-        checkIsConcreteClass(concreteClass);
-        return create(concreteClass, new Class<?>[]{}, new Object[]{});
-    }
-
-    @SuppressWarnings({"unchecked"})
     public <T> T create(final Class<T> concreteClass, final Object... constructorArgumentValues) {
         checkNotNull(concreteClass, constructorArgumentValues);
         checkIsConcreteClass(concreteClass);
         final Constructor<T> constructor = findConstructor(concreteClass, constructorArgumentValues);
-        return (T) edgeConstructor.newInstance(constructor, constructorArgumentValues);
+        return instantiate(constructor, constructorArgumentValues);
     }
 
-    @SuppressWarnings({"unchecked"})
-    public <T, U> T create(final Class<T> concreteClass, final Class<U>[] types, final Object[] values) {
-        checkNotNull(concreteClass, types, values);
+    public <T> T create(final Class<T> concreteClass, final Class<?>[] constructorArgumentTypes, final Object[] constructorArgumentValues) {
+        checkNotNull(concreteClass, constructorArgumentTypes, constructorArgumentValues);
         checkIsConcreteClass(concreteClass);
-        final Constructor<T> constructor = edgeClass.getConstructor(concreteClass, types);
-        return (T) edgeConstructor.newInstance(constructor, values);
+        final Constructor<T> constructor = edgeClass.getConstructor(concreteClass, constructorArgumentTypes);
+        return instantiate(constructor, constructorArgumentValues);
     }
 
-    @SuppressWarnings({"unchecked"})
     private <T> Constructor<T> findConstructor(final Class<T> cls, final Object... argumentValues) throws ObjectCreationException {
-        final Constructor<?>[] constructors = cls.getConstructors();
-        for (final Constructor<?> constructor : constructors) {
+        final Constructor<T>[] constructors = cls.getDeclaredConstructors();
+        for (final Constructor<T> constructor : constructors) {
             final Class<?>[] types = constructor.getParameterTypes();
-            if (argumentValues.length == types.length) {
-                checkTypes(cls, types, argumentValues);
-                return (Constructor<T>) constructor;
+            if (argumentValues.length == types.length && typesMatch(types, argumentValues)) {
+                return constructor;
             }
         }
         throw new ObjectCreationException(createFailureMessage(cls, argumentValues));
     }
 
-    private <T> void checkTypes(final Class<T> cls, final Class<?>[] types, final Object... values) {
-        for (int i = 0; i < values.length; i++) {
-            if (!types[i].isAssignableFrom(values[i].getClass())) {
-                throw new ObjectCreationException(createFailureMessage(cls, values));
-            }
+    private <T> T instantiate(final Constructor<T> constructor, final Object... values) {
+        try {
+            return (T) edgeConstructor.newInstance(constructor, values);
+        } catch (EdgeException e) {
+            throw new ObjectCreationException("Factory does not have permission to access constructor: " + constructor, e);
         }
     }
 
+    private boolean typesMatch(final Class<?>[] types, final Object... values) {
+        for (int i = 0; i < values.length; i++) {
+            if (!types[i].isAssignableFrom(values[i].getClass())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private <T> String createFailureMessage(final Class<T> cls, final Object... argumentValues) {
-        return cls.getSimpleName() + " does not contain a constructor with types: " + asList(argumentValues);
+        final StringBuilder builder = new StringBuilder();
+        for (final Iterator<Object> iterator = asList(argumentValues).iterator(); iterator.hasNext();) {
+            builder.append(iterator.next().getClass());
+            if (iterator.hasNext()) {
+                builder.append(',');
+            }
+        }
+        return cls.getSimpleName() + " does not contain a constructor with types: [" + builder + ']';
     }
 }

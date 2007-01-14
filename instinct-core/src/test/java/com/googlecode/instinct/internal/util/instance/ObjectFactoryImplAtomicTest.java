@@ -1,20 +1,22 @@
 package com.googlecode.instinct.internal.util.instance;
 
+import java.io.Reader;
 import java.io.Serializable;
-import com.googlecode.instinct.core.BehaviourContextConfigurationException;
+import java.io.Writer;
 import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.mock.Mocker.mock;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
-@SuppressWarnings({"ExceptionClassNameDoesntEndWithException"})
+@SuppressWarnings({"ALL"})
 public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
     private static final Class<ObjectFactory> AN_INTERFACE_1 = ObjectFactory.class;
     private static final Class<Serializable> AN_INTERFACE_2 = Serializable.class;
     private ObjectFactory factory;
-    private Throwable throwable;
-    private String message;
+    private Reader reader;
+    private Writer writer;
+    private String string;
 
     public void testProperties() {
         checkClass(ObjectFactoryImpl.class, ObjectFactory.class);
@@ -25,27 +27,37 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
         checkRejectsInterfaces(AN_INTERFACE_2);
     }
 
-    @Suggest({"Check ordering", "Check super classes/subclasses"})
+    @Suggest({"Check super classes/subclasses"})
     public void testCreatePerformsCorrectTypeInference() {
         checkSimpleArgumentsSucceed();
+        checkMultipleConstructorSucceeds();
         checkIncorrectOrderingFails();
         checkBadConstructorParametersFails();
         checkInstatiationOfInterfaceFails();
+        checkInstantiationConstructorsWithoutAccessFails();
+    }
+
+    private void checkInstantiationConstructorsWithoutAccessFails() {
+        checkFails(ClassWithConstructors.class);
     }
 
     private void checkSimpleArgumentsSucceed() {
         checkSucceeds(ObjectFactoryImpl.class);
-        checkSucceeds(BehaviourContextConfigurationException.class, message);
-        checkSucceeds(BehaviourContextConfigurationException.class, message, throwable);
+    }
+
+    private void checkMultipleConstructorSucceeds() {
+        checkSucceeds(ClassWithConstructors.class, reader);
+        checkSucceeds(ClassWithConstructors.class, string);
+        checkSucceeds(ClassWithConstructors.class, reader, writer);
     }
 
     private void checkIncorrectOrderingFails() {
-        checkFails(BehaviourContextConfigurationException.class, throwable, message);
+        checkFails(ClassWithConstructors.class, writer, reader);
     }
 
     private void checkBadConstructorParametersFails() {
         checkFails(ObjectCreationException.class);
-        checkFails(ObjectCreationException.class);
+        checkFails(ClassWithConstructors.class, writer, reader);
     }
 
     private void checkInstatiationOfInterfaceFails() {
@@ -80,12 +92,30 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
 
     @Override
     public void setUpTestDoubles() {
-        message = "Message";
-        throwable = mock(Throwable.class);
+        string = "Some string";
+        reader = mock(Reader.class);
+        writer = mock(Writer.class);
     }
 
     @Override
     public void setUpSubject() {
         factory = new ObjectFactoryImpl();
+    }
+
+    public static class ClassWithConstructors {
+        private ClassWithConstructors() {
+        }
+
+        ClassWithConstructors(Integer i) {
+        }
+
+        public ClassWithConstructors(final String s) {
+        }
+
+        public ClassWithConstructors(final Reader r) {
+        }
+
+        public ClassWithConstructors(final Reader r, final Writer w) {
+        }
     }
 }
