@@ -1,9 +1,12 @@
 package com.googlecode.instinct.internal.util.instance;
 
+import java.io.FilterReader;
+import java.io.FilterWriter;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Serializable;
 import java.io.Writer;
-import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.mock.Mocker.mock;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
@@ -27,18 +30,14 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
         checkRejectsInterfaces(AN_INTERFACE_2);
     }
 
-    @Suggest({"Check super classes/subclasses"})
     public void testCreatePerformsCorrectTypeInference() {
         checkSimpleArgumentsSucceed();
         checkMultipleConstructorSucceeds();
+        checkSubclassTypeInferenceSucceed();
         checkIncorrectOrderingFails();
         checkBadConstructorParametersFails();
         checkInstatiationOfInterfaceFails();
         checkInstantiationConstructorsWithoutAccessFails();
-    }
-
-    private void checkInstantiationConstructorsWithoutAccessFails() {
-        checkFails(ClassWithConstructors.class);
     }
 
     private void checkSimpleArgumentsSucceed() {
@@ -49,6 +48,13 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
         checkSucceeds(ClassWithConstructors.class, reader);
         checkSucceeds(ClassWithConstructors.class, string);
         checkSucceeds(ClassWithConstructors.class, reader, writer);
+    }
+
+    private void checkSubclassTypeInferenceSucceed() {
+        checkSucceeds(ClassWithConstructors.class, reader, writer);
+        checkSucceeds(ClassWithConstructors.class, mock(InputStreamReader.class), mock(PrintWriter.class));
+        checkSucceeds(ClassWithConstructors.class, mock(InputStreamReader.class), mock(PrintWriter.class));
+        checkSucceeds(ClassWithConstructors.class, mock(FilterReader.class), mock(FilterWriter.class));
     }
 
     private void checkIncorrectOrderingFails() {
@@ -63,6 +69,10 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
     private void checkInstatiationOfInterfaceFails() {
         checkFailsWithException(IllegalArgumentException.class, ObjectFactory.class);
         checkFailsWithException(IllegalArgumentException.class, Serializable.class);
+    }
+
+    private void checkInstantiationConstructorsWithoutAccessFails() {
+        checkFails(ClassWithConstructors.class);
     }
 
     private <T> void checkSucceeds(final Class<T> toCreate, final Object... values) {

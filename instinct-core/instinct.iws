@@ -31,9 +31,6 @@
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImplAtomicTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactory.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectCreationException.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectCreationException.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
     </list>
   </component>
@@ -191,28 +188,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ObjectFactoryImplAtomicTest.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ObjectFactoryImplAtomicTest.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImplAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="5" selection-start="1489" selection-end="1489" vertical-scroll-proportion="0.36011904">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ObjectFactoryImpl.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="62" column="19" selection-start="3130" selection-end="3130" vertical-scroll-proportion="1.125">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ObjectFactory.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="18" selection-start="75" selection-end="75" vertical-scroll-proportion="0.05357143">
+            <state line="32" column="48" selection-start="1217" selection-end="1217" vertical-scroll-proportion="0.38690478">
               <folding />
             </state>
           </provider>
@@ -2515,7 +2494,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1920" height="1174" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="CVS" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
@@ -2531,7 +2510,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.10056772" order="1" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992566" order="8" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3224907" order="2" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3224907" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="File View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39962825" order="4" />
@@ -2666,20 +2645,6 @@
     <option name="myLastEditedConfigurable" value="Harvey Norman Inspection Profile" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/TestingException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="47" selection-start="221" selection-end="221" vertical-scroll-proportion="0.2184466">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/lang/RuntimeException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="1026" selection-end="1026" vertical-scroll-proportion="0.52427185">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/lib/boost-982.jar!/au/net/netstorm/boost/edge/java/lang/reflect/DefaultEdgeConstructor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="0" selection-start="357" selection-end="357" vertical-scroll-proportion="0.31343284">
@@ -2822,6 +2787,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="32" selection-start="671" selection-end="671" vertical-scroll-proportion="0.10714286">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="18" selection-start="75" selection-end="75" vertical-scroll-proportion="0.05357143">
@@ -2829,16 +2801,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImplAtomicTest.java">
+    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/io/FilterReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="5" selection-start="1489" selection-end="1489" vertical-scroll-proportion="0.36011904">
+        <state line="23" column="22" selection-start="630" selection-end="630" vertical-scroll-proportion="0.1875">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImpl.java">
+    <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/java/io/InputStreamReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="19" selection-start="3130" selection-end="3130" vertical-scroll-proportion="1.125">
+        <state line="53" column="11" selection-start="1596" selection-end="1596" vertical-scroll-proportion="0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImplAtomicTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="48" selection-start="1217" selection-end="1217" vertical-scroll-proportion="0.38690478">
           <folding />
         </state>
       </provider>
