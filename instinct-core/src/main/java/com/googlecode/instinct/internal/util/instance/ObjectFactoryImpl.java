@@ -26,6 +26,7 @@ public final class ObjectFactoryImpl implements ObjectFactory {
     @SuppressWarnings({"unchecked"})
     public <T> T create(final Class<T> concreteClass, final Object... constructorArgumentValues) {
         checkNotNull(concreteClass, constructorArgumentValues);
+        checkIsConcreteClass(concreteClass);
         final Constructor<T> constructor = findConstructor(concreteClass, constructorArgumentValues);
         return (T) edgeConstructor.newInstance(constructor, constructorArgumentValues);
     }
