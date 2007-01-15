@@ -4,12 +4,12 @@ import org.jmock.Mock;
 import static org.jmock.core.AbstractDynamicMock.mockNameFromClass;
 
 public final class JMockMockCreator implements MockCreator {
-    public <T> MockControl createMockController(final Class<T> toMock) {
+    public <T> TestDoubleControl createController(final Class<T> toMock) {
         final String roleName = mockNameFromClass(toMock);
         return toMock.isInterface() ? createInterfaceMock(toMock, roleName) : createConcreteMock(toMock, roleName);
     }
 
-    public <T> MockControl createMockController(final Class<T> toMock, final String roleName) {
+    public <T> TestDoubleControl createController(final Class<T> toMock, final String roleName) {
         return toMock.isInterface() ? createInterfaceMock(toMock, roleName) : createConcreteMock(toMock, roleName);
     }
 

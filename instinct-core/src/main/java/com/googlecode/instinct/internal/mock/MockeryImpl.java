@@ -1,5 +1,6 @@
 package com.googlecode.instinct.internal.mock;
 
+import com.googlecode.instinct.internal.util.Suggest;
 import org.jmock.builder.NameMatchBuilder;
 import org.jmock.core.Constraint;
 import org.jmock.core.InvocationMatcher;
@@ -13,22 +14,22 @@ import org.jmock.core.stub.ReturnStub;
 
 public final class MockeryImpl implements Mockery {
     private final Verifier verifier = new VerifierImpl();
-    private final MockHolder holder = new MockHolderImpl();
+    private final TestDoubleHolder holder = new TestDoubleHolderImpl();
     private final MockCreator mockCreator = new JMockMockCreator();
 
     @SuppressWarnings({"unchecked"})
     public <T> T mock(final Class<T> toMock) {
-        final MockControl mockControl = mockCreator.createMockController(toMock);
-        final Object mockedObject = createMockedObject(mockControl);
-        register(mockControl, mockedObject);
+        final TestDoubleControl control = mockCreator.createController(toMock);
+        final Object mockedObject = createMockedObject(control);
+        register(control, mockedObject);
         return (T) mockedObject;
     }
 
     @SuppressWarnings({"unchecked"})
     public <T> T mock(final Class<T> toMock, final String roleName) {
-        final MockControl mockControl = mockCreator.createMockController(toMock, roleName);
-        final Object mockedObject = createMockedObject(mockControl);
-        register(mockControl, mockedObject);
+        final TestDoubleControl control = mockCreator.createController(toMock, roleName);
+        final Object mockedObject = createMockedObject(control);
+        register(control, mockedObject);
         return (T) mockedObject;
     }
 
@@ -36,9 +37,14 @@ public final class MockeryImpl implements Mockery {
         return expects(mockedObject, once());
     }
 
+    @Suggest("Is there a better way to do the instance check? Maybe some interface like CanHaveExpectations set or such")
     public NameMatchBuilder expects(final Object mockedObject, final InvocationMatcher expectation) {
-        final MockControl mockController = holder.getMockController(mockedObject);
-        return mockController.expects(expectation);
+        final TestDoubleControl control = holder.getController(mockedObject);
+        if (control instanceof MockControl) {
+            return ((MockControl) control).expects(expectation);
+        } else {
+            throw new ExpectationNotAllowedException(mockedObject);
+        }
     }
 
     public InvocationMatcher once() {
@@ -70,11 +76,11 @@ public final class MockeryImpl implements Mockery {
     }
 
     @SuppressWarnings({"unchecked"})
-    private <T> T createMockedObject(final MockControl mockControl) {
-        return (T) mockControl.getMockedObject();
+    private <T> T createMockedObject(final TestDoubleControl mockControl) {
+        return (T) mockControl.createDoubleObject();
     }
 
-    private void register(final MockControl mockControl, final Object mockedObject) {
+    private void register(final TestDoubleControl mockControl, final Object mockedObject) {
         holder.addControl(mockControl, mockedObject);
         verifier.addVerifiable(mockControl);
     }

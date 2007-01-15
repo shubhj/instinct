@@ -12,7 +12,7 @@ import org.jmock.core.matcher.InvokeOnceMatcher;
 public final class JMockMockControlAtomicTest extends InstinctTestCase {
     public void testGetMockedObject() {
         final MockControl control = new JMockMockControl(new Mock(Readable.class));
-        final Object mock = control.getMockedObject();
+        final Object mock = control.createDoubleObject();
         assertNotNull(mock);
         assertTrue(mock instanceof Readable);
     }

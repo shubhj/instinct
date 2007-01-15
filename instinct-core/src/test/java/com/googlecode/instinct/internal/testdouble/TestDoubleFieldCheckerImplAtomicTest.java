@@ -47,7 +47,7 @@ public final class TestDoubleFieldCheckerImplAtomicTest extends InstinctTestCase
         fieldChecker = new TestDoubleFieldCheckerImpl();
     }
 
-    private static class ClassWithFields {
+    private static final class ClassWithFields {
         private final String invalidFinalField = "";
         private final String invalidFinalField2 = "";
         private String invalidNonNullField = "";
