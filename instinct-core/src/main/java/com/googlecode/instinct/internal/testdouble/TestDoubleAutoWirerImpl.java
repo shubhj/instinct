@@ -1,11 +1,23 @@
 package com.googlecode.instinct.internal.testdouble;
 
+import java.lang.reflect.Field;
+import com.googlecode.instinct.core.annotate.Dummy;
+import com.googlecode.instinct.core.naming.DummyNamingConvention;
+import com.googlecode.instinct.internal.aggregate.locate.MarkedFieldLocator;
+import com.googlecode.instinct.internal.aggregate.locate.MarkedFieldLocatorImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.util.instance.ObjectFactory;
+import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
 
 public final class TestDoubleAutoWirerImpl implements TestDoubleAutoWirer {
-    @Suggest("Come back here after creating an annotated field locator")
+    private ObjectFactory objectFactory = new ObjectFactoryImpl();
+    private MarkedFieldLocator fieldLocator = new MarkedFieldLocatorImpl();
+
+    @Suggest("Come back here after creating an marked field locator & use it here")
     public void wire(final Object instance) {
         checkNotNull(instance);
+        instance.getClass();
+        final Field[] dummyFields = fieldLocator.locateAll(instance.getClass(), Dummy.class, objectFactory.create(DummyNamingConvention.class));
     }
 }

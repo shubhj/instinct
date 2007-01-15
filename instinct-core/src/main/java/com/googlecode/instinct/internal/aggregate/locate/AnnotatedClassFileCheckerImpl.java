@@ -6,7 +6,9 @@ import com.googlecode.instinct.internal.util.ClassInstantiator;
 import com.googlecode.instinct.internal.util.ClassInstantiatorFactory;
 import com.googlecode.instinct.internal.util.ClassInstantiatorFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 
+@Suggest("What does this do???")
 public final class AnnotatedClassFileCheckerImpl implements AnnotatedClassFileChecker {
     private AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
     private ClassInstantiatorFactory instantiatorFactory = new ClassInstantiatorFactoryImpl();

@@ -25,16 +25,16 @@ public final class Reflector {
         }
     }
 
-    public static Field getField(final Object instance, final String fieldName) {
-        return getField(instance.getClass(), fieldName);
-    }
-
     public static <T> Field getField(final Class<T> cls, final String fieldName) {
         try {
             return cls.getDeclaredField(fieldName);
         } catch (NoSuchFieldException e) {
             throw new TestingException("Unable to find field '" + fieldName + "' on class " + cls, e);
         }
+    }
+
+    private static Field getField(final Object instance, final String fieldName) {
+        return getField(instance.getClass(), fieldName);
     }
 
     private static void setValue(final Field field, final Object instance, final Object value) {

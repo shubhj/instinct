@@ -4,7 +4,6 @@ import java.io.File;
 import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.internal.util.ClassInstantiator;
 import com.googlecode.instinct.internal.util.ClassInstantiatorFactory;
-import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.mock.Mocker.eq;
 import static com.googlecode.instinct.mock.Mocker.expects;
 import static com.googlecode.instinct.mock.Mocker.mock;
@@ -14,7 +13,6 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;
 
-@Suggest("Come back and drop in an annotation checker once written")
 public final class AnnotatedClassFileCheckerImplAtomicTest extends InstinctTestCase {
     private AnnotatedClassFileChecker checker;
     private File packageRoot;

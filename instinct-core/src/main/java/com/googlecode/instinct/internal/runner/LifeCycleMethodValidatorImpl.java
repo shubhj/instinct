@@ -1,15 +1,14 @@
 package com.googlecode.instinct.internal.runner;
 
 import java.lang.reflect.Method;
-import com.googlecode.instinct.core.BehaviourContextConfigurationException;
-import com.googlecode.instinct.core.LifeCycleMethodConfigurationException;
-import com.googlecode.instinct.internal.util.Suggest;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import au.net.netstorm.boost.edge.EdgeException;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
-import au.net.netstorm.boost.edge.EdgeException;
+import com.googlecode.instinct.core.BehaviourContextConfigurationException;
+import com.googlecode.instinct.core.LifeCycleMethodConfigurationException;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 
-@Suggest("Should we check for void?")
 final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
     private final EdgeClass edgeClass = new DefaultEdgeClass();
 

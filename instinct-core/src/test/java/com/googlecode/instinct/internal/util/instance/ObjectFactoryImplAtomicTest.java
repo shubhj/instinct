@@ -1,5 +1,6 @@
 package com.googlecode.instinct.internal.util.instance;
 
+import java.io.FileReader;
 import java.io.FilterReader;
 import java.io.FilterWriter;
 import java.io.InputStreamReader;
@@ -7,6 +8,7 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Serializable;
 import java.io.Writer;
+import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.mock.Mocker.mock;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
@@ -30,6 +32,7 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
         checkRejectsInterfaces(AN_INTERFACE_2);
     }
 
+    @Suggest("Check for two constructors with params of the same type, one subtype of the other.")
     public void testCreatePerformsCorrectTypeInference() {
         checkSimpleArgumentsSucceed();
         checkMultipleConstructorSucceeds();
@@ -123,6 +126,9 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
         }
 
         public ClassWithConstructors(final Reader r) {
+        }
+
+        public ClassWithConstructors(final FileReader r) {
         }
 
         public ClassWithConstructors(final Reader r, final Writer w) {
