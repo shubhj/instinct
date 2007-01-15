@@ -10,7 +10,9 @@ import java.util.List;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.JavaClassNameImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 
+@Suggest("Test drive this class")
 public final class ClassLocatorImpl implements ClassLocator {
     private final Comparator<File> comparator = new FileNameComparator();
 
@@ -24,7 +26,7 @@ public final class ClassLocatorImpl implements ClassLocator {
         final List<File> result = new ArrayList<File>();
         recursiveLocate(root, filter, result);
         sort(result);
-        return result.toArray(new File[]{});
+        return result.toArray(new File[result.size()]);
     }
 
     private void recursiveLocate(final File searchBase, final FileFilter filter, final List<File> result) {
