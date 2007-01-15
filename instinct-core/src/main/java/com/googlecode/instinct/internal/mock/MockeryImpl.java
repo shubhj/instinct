@@ -7,6 +7,7 @@ import org.jmock.core.Stub;
 import org.jmock.core.constraint.IsAnything;
 import org.jmock.core.constraint.IsEqual;
 import org.jmock.core.constraint.IsSame;
+import org.jmock.core.matcher.InvokeCountMatcher;
 import org.jmock.core.matcher.InvokeOnceMatcher;
 import org.jmock.core.stub.ReturnStub;
 
@@ -42,6 +43,10 @@ public final class MockeryImpl implements Mockery {
 
     public InvocationMatcher once() {
         return new InvokeOnceMatcher();
+    }
+
+    public InvocationMatcher times(final int expectedNumberOfCalls) {
+        return new InvokeCountMatcher(expectedNumberOfCalls);
     }
 
     public Constraint same(final Object argument) {

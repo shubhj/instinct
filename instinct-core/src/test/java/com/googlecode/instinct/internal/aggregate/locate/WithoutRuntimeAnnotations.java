@@ -1,10 +1,10 @@
 package com.googlecode.instinct.internal.aggregate.locate;
 
 public class WithoutRuntimeAnnotations {
-    private final String string;
+    private final String string1;
 
-    public WithoutRuntimeAnnotations(final String string) {
-        this.string = string;
+    public WithoutRuntimeAnnotations(final String string1) {
+        this.string1 = string1;
     }
 
     @Override
@@ -12,7 +12,7 @@ public class WithoutRuntimeAnnotations {
         return super.toString();
     }
 
-    public String getString() {
-        return string;
+    public String getString1() {
+        return string1;
     }
 }

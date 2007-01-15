@@ -1,10 +1,13 @@
 package com.googlecode.instinct.internal.aggregate.locate;
 
-import java.lang.reflect.Method;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedElement;
 import com.googlecode.instinct.core.annotate.BehaviourContext;
+import com.googlecode.instinct.core.annotate.Dummy;
 import com.googlecode.instinct.core.annotate.Specification;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import static com.googlecode.instinct.test.reflect.Reflector.getField;
 import static com.googlecode.instinct.test.reflect.Reflector.getMethod;
 
 public final class AnnotationCheckerImplAtomicTest extends InstinctTestCase {
@@ -13,22 +16,23 @@ public final class AnnotationCheckerImplAtomicTest extends InstinctTestCase {
     }
 
     public void testClassIsAnnotated() {
-        checkIsAnnotated(WithRuntimeAnnotations.class, true);
-        checkIsAnnotated(WithoutRuntimeAnnotations.class, false);
+        checkIsAnnotated(WithRuntimeAnnotations.class, BehaviourContext.class, true);
+        checkIsAnnotated(WithoutRuntimeAnnotations.class, BehaviourContext.class, false);
     }
 
     public void testMethodIsAnnotated() {
-        checkIsAnnotated(getMethod(WithRuntimeAnnotations.class, "toString"), true);
-        checkIsAnnotated(getMethod(WithoutRuntimeAnnotations.class, "toString"), false);
+        checkIsAnnotated(getMethod(WithRuntimeAnnotations.class, "toString"), Specification.class, true);
+        checkIsAnnotated(getMethod(WithoutRuntimeAnnotations.class, "toString"), Specification.class, false);
     }
 
-    private <T> void checkIsAnnotated(final Class<T> subject, final boolean expectingAnnotation) {
-        final AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
-        assertEquals(expectingAnnotation, annotationChecker.isAnnotated(subject, BehaviourContext.class));
+    public void testFieldIsAnnotated() {
+        checkIsAnnotated(getField(WithRuntimeAnnotations.class, "string1"), Dummy.class, true);
+        checkIsAnnotated(getField(WithoutRuntimeAnnotations.class, "string1"), Dummy.class, false);
     }
 
-    private void checkIsAnnotated(final Method method, final boolean expectingAnnotation) {
+    private <A extends Annotation> void checkIsAnnotated(final AnnotatedElement annotatedElement, final Class<A> expectedAnnotation,
+            final boolean expectingAnnotation) {
         final AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
-        assertEquals(expectingAnnotation, annotationChecker.isAnnotated(method, Specification.class));
+        assertEquals(expectingAnnotation, annotationChecker.isAnnotated(annotatedElement, expectedAnnotation));
     }
 }

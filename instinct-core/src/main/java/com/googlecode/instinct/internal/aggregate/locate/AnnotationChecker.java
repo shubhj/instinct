@@ -1,10 +1,8 @@
 package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
+import java.lang.reflect.AnnotatedElement;
 
 public interface AnnotationChecker {
-    <T, A extends Annotation> boolean isAnnotated(Class<T> candidateClass, Class<A> annotationType);
-
-    <A extends Annotation> boolean isAnnotated(Method method, Class<A> annotationType);
+    <A extends Annotation> boolean isAnnotated(AnnotatedElement annotatedElement, Class<A> annotationType);
 }
