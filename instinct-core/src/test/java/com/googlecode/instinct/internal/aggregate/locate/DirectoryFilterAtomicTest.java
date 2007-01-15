@@ -9,6 +9,9 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
 public final class DirectoryFilterAtomicTest extends InstinctTestCase {
+    private File pathname;
+    private FileFilter filter;
+
     public void testProperties() {
         checkClass(DirectoryFilter.class, FileFilter.class);
     }
@@ -19,8 +22,17 @@ public final class DirectoryFilterAtomicTest extends InstinctTestCase {
     }
 
     private void checkAccept(final boolean value) {
-        final File pathname = mock(File.class);
         expects(pathname).method("isDirectory").will(returnValue(value));
-        assertEquals(value, new DirectoryFilter().accept(pathname));
+        assertEquals(value, filter.accept(pathname));
+    }
+
+    @Override
+    public void setUpTestDoubles() {
+        pathname = mock(File.class);
+    }
+
+    @Override
+    public void setUpSubject() {
+        filter = new DirectoryFilter();
     }
 }

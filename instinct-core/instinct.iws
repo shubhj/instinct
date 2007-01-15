@@ -191,7 +191,7 @@
       <file leaf-file-name="DirectoryFilterAtomicTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/DirectoryFilterAtomicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="26" selection-start="885" selection-end="885" vertical-scroll-proportion="0.45535713">
+            <state line="15" column="60" selection-start="643" selection-end="643" vertical-scroll-proportion="0.24107143">
               <folding />
             </state>
           </provider>
@@ -2915,7 +2915,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/DirectoryFilterAtomicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="26" selection-start="885" selection-end="885" vertical-scroll-proportion="0.45535713">
+        <state line="15" column="60" selection-start="643" selection-end="643" vertical-scroll-proportion="0.24107143">
           <folding />
         </state>
       </provider>
