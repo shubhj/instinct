@@ -30,25 +30,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/DummyTestDoubleCreatorAtomicTest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/TestDoubleAutoWirer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/TestDoubleAutoWirerImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/testdouble/TestDoubleAutoWirerImplAtomicTest.java" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/TestDoubleFieldChecker.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/TestDoubleAutoWirerImplAtomicTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/TestDoubleAutoWirerImpl.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/testdouble/TestDoubleFieldCheckerImplAtomicTest.java" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/TestDoubleFieldCheckerImpl.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/TestDoubleFieldCheckerImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/TestDoubleCreator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/TestDoubleFieldChecker.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/SpecificationRunnerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/SpecificationRunnerImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/TestDoubleCreator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/TestDoubleAutoWirer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/TestDoubleFieldCheckerImplAtomicTest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/testdouble/DummyTestDoubleCreatorAtomicTest.java" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/DummyTestDoubleCreator.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/DummyTestDoubleCreator.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/testdouble" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
     </list>
   </component>
