@@ -14,14 +14,8 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.mock;
 
-import java.lang.reflect.Field;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-
-public final class DummyTestDoubleCreator implements TestDoubleCreator {
-    public Object createValue(final Field field) {
-        checkNotNull(field);
-        return new Object();
-    }
+public interface TestDoubleAutoWirer {
+    void wire(Object instance);
 }

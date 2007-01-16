@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.mock;
 
 import java.lang.reflect.Field;
 import static java.lang.reflect.Modifier.isFinal;

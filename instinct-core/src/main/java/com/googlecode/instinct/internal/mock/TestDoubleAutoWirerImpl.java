@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.mock;
 
 import com.googlecode.instinct.core.annotate.Dummy;
 import com.googlecode.instinct.core.naming.DummyNamingConvention;

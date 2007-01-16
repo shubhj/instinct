@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.mock;
 
 import java.lang.reflect.Field;
 
-public interface TestDoubleCreator {
-    Object createValue(Field field);
+public interface TestDoubleFieldChecker {
+    void checkField(Field field, Object instance);
 }

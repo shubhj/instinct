@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.mock;
 
 import com.googlecode.instinct.core.annotate.Dummy;
 import com.googlecode.instinct.core.naming.DummyNamingConvention;
 import com.googlecode.instinct.core.naming.NamingConvention;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedFieldLocator;
 import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.internal.mock.TestDoubleAutoWirer;
+import com.googlecode.instinct.internal.mock.TestDoubleAutoWirerImpl;
 import static com.googlecode.instinct.mock.Mocker.anything;
 import static com.googlecode.instinct.mock.Mocker.eq;
 import static com.googlecode.instinct.mock.Mocker.expects;

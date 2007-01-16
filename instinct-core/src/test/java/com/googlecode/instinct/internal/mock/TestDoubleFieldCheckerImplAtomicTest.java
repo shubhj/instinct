@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.mock;
 
 import java.lang.reflect.Field;
 import com.googlecode.instinct.core.TestDoubleConfigurationException;
@@ -22,6 +22,8 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.Reflector.getField;
+import com.googlecode.instinct.internal.mock.TestDoubleFieldCheckerImpl;
+import com.googlecode.instinct.internal.mock.TestDoubleFieldChecker;
 
 @SuppressWarnings({"UnusedDeclaration", "FieldMayBeStatic"})
 public final class TestDoubleFieldCheckerImplAtomicTest extends InstinctTestCase {
