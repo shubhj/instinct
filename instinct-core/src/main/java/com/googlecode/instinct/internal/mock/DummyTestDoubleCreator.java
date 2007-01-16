@@ -18,8 +18,11 @@ package com.googlecode.instinct.internal.mock;
 
 import java.lang.reflect.Field;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 
 public final class DummyTestDoubleCreator implements TestDoubleCreator {
+    @Suggest({"Seems like we need to keep a single Mockery around per behaviour context or specification run.",
+            "This is so that we can have the dummies available for use in specifications"})
     public Object createValue(final Field field) {
         checkNotNull(field);
         return new Object();

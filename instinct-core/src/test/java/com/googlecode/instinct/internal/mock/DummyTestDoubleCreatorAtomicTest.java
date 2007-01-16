@@ -18,8 +18,6 @@ package com.googlecode.instinct.internal.mock;
 
 import java.lang.reflect.Field;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.internal.mock.TestDoubleCreator;
-import com.googlecode.instinct.internal.mock.DummyTestDoubleCreator;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.Reflector.getField;

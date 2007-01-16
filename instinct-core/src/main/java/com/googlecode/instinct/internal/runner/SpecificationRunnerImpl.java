@@ -26,6 +26,7 @@ import com.googlecode.instinct.internal.util.ConstructorInvokerImpl;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 
 final class SpecificationRunnerImpl implements SpecificationRunner {
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
@@ -34,6 +35,8 @@ final class SpecificationRunnerImpl implements SpecificationRunner {
     private final TestDoubleAutoWirer testDoubleAutoWirer = new TestDoubleAutoWirerImpl();
     private final MockVerifier mockVerifier = new MockVerifierImpl();
 
+    @Suggest(
+            "Does each specification get it's own Mockery? How will this work if we want to allow manual mocking? Need access to the same statics...")
     public void run(final SpecificationContext context) {
         checkNotNull(context);
         final Object instance = invokeConstructor(context.getBehaviourContextClass());
