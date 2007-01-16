@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.instance;
+package com.googlecode.instinct.internal.util;
 
 import java.io.FileReader;
 import java.io.FilterReader;
@@ -24,13 +24,12 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Serializable;
 import java.io.Writer;
-import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.mock.Mocker.mock;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
-@SuppressWarnings({"ALL"})
+@SuppressWarnings({"ExceptionClassNameDoesntEndWithException", "UnusedDeclaration"})
 public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
     private static final Class<ObjectFactory> AN_INTERFACE_1 = ObjectFactory.class;
     private static final Class<Serializable> AN_INTERFACE_2 = Serializable.class;
@@ -131,11 +130,12 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
         factory = new ObjectFactoryImpl();
     }
 
+    @SuppressWarnings({"UtilityClassWithPublicConstructor", "ClassWithTooManyConstructors"})
     public static class ClassWithConstructors {
         private ClassWithConstructors() {
         }
 
-        ClassWithConstructors(Integer i) {
+        ClassWithConstructors(final Integer i) {
         }
 
         public ClassWithConstructors(final String s) {

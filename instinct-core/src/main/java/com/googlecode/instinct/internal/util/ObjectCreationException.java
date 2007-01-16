@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.instance;
+package com.googlecode.instinct.internal.util;
 
 public final class ObjectCreationException extends RuntimeException {
     private static final long serialVersionUID = -5779614900053228294L;

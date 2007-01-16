@@ -20,9 +20,8 @@ import java.lang.reflect.Field;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import com.googlecode.instinct.test.reflect.Reflector;
+import static com.googlecode.instinct.test.reflect.Reflector.getField;
 
-@SuppressWarnings({"UnusedDeclaration"})
 public final class DummyTestDoubleCreatorAtomicTest extends InstinctTestCase {
     private TestDoubleCreator creator;
 
@@ -32,7 +31,7 @@ public final class DummyTestDoubleCreatorAtomicTest extends InstinctTestCase {
 
     @Suggest("Lyall & Tom were here!")
     public void testCreateValue() {
-        final Field field = Reflector.getField(AClassIsAWonderfulThing.class, "aFieldOfGrass");
+        final Field field = getField(AClassIsAWonderfulThing.class, "aFieldOfGrass");
         final Object dummyValue = creator.createValue(field);
         assertNotNull(dummyValue);
     }

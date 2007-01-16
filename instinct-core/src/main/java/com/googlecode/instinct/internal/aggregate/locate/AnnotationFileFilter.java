@@ -19,9 +19,9 @@ package com.googlecode.instinct.internal.aggregate.locate;
 import java.io.File;
 import java.io.FileFilter;
 import java.lang.annotation.Annotation;
+import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.instance.ObjectFactory;
-import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
 
 public final class AnnotationFileFilter implements FileFilter {
     private ObjectFactory objectFactory = new ObjectFactoryImpl();

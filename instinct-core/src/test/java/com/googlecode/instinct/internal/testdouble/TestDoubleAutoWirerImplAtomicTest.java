@@ -20,7 +20,7 @@ import com.googlecode.instinct.core.annotate.Dummy;
 import com.googlecode.instinct.core.naming.DummyNamingConvention;
 import com.googlecode.instinct.core.naming.NamingConvention;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedFieldLocator;
-import com.googlecode.instinct.internal.util.instance.ObjectFactory;
+import com.googlecode.instinct.internal.util.ObjectFactory;
 import static com.googlecode.instinct.mock.Mocker.anything;
 import static com.googlecode.instinct.mock.Mocker.eq;
 import static com.googlecode.instinct.mock.Mocker.expects;

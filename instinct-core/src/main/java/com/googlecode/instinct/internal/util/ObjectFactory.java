@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.instance;
+package com.googlecode.instinct.internal.util;
 
 public interface ObjectFactory {
     <T> T create(Class<T> concreteClass, Object... constructorArgumentValues);

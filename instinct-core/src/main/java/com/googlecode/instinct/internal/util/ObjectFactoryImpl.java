@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.instance;
+package com.googlecode.instinct.internal.util;
 
 import java.lang.reflect.Constructor;
 import static java.util.Arrays.asList;

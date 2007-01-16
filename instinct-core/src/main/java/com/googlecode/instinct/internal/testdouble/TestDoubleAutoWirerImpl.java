@@ -20,10 +20,10 @@ import com.googlecode.instinct.core.annotate.Dummy;
 import com.googlecode.instinct.core.naming.DummyNamingConvention;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedFieldLocator;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedFieldLocatorImpl;
+import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.internal.util.instance.ObjectFactory;
-import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
 
 public final class TestDoubleAutoWirerImpl implements TestDoubleAutoWirer {
     private ObjectFactory objectFactory = new ObjectFactoryImpl();
