@@ -30,12 +30,177 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/LICENCE.txt" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/RELEASE-NOTES" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/README.txt" afterPath="" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LICENCE" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/JMockMockControl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/JMockMockControl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/BehaviourContextRunnerSlowTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/BehaviourContextRunnerSlowTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/TestDoubleHolder.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/TestDoubleHolder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/TestDoubleConfigurationExceptionAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/TestDoubleConfigurationExceptionAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/annotate/BehaviourContext.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/annotate/BehaviourContext.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ClassInstantiator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ClassInstantiator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/ContextContainer1.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/ContextContainer1.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationFileFilterAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationFileFilterAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/ClassLocatorImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/ClassLocatorImplAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/StubNamingConventionAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/StubNamingConventionAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/MarkedFieldLocator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/MarkedFieldLocator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationCheckerImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationCheckerImplAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.ipr" afterPath="$PROJECT_DIR$/instinct.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/Suggest.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/Suggest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ASimpleContext.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ASimpleContext.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectCreationException.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectCreationException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/example/ContextExample.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/example/ContextExample.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/NamingConvention.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/NamingConvention.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/ClassLocatorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/ClassLocatorImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ContextWithInvalidlyMarkedSpecification2.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ContextWithInvalidlyMarkedSpecification2.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImplAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/ConcreteInstanceProvider.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/ConcreteInstanceProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/Verifier.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/Verifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/BehaviourContextNamingConvention.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/BehaviourContextNamingConvention.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/PackageRootFinderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/PackageRootFinderImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/BehaviourContextMethodInterceptorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/BehaviourContextMethodInterceptorImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ClassInstantiatorFactory.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ClassInstantiatorFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassName.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassName.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/example/Stack.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/example/Stack.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/SpecificationContextImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/SpecificationContextImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/LifeCycleMethodValidator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/LifeCycleMethodValidator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/integrate/junit/JUnitSuite.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/integrate/junit/JUnitSuite.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameFactoryImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameFactoryImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/PackageRootFinderImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/PackageRootFinderImplAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/AssertTestChecker.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/AssertTestChecker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/annotate/Specification.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/annotate/Specification.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/Mockery.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/Mockery.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/ConcreteClassMock.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/ConcreteClassMock.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ContextWithInvalidlyMarkedBeforeSpecification1.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ContextWithInvalidlyMarkedBeforeSpecification1.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/AnnotatedMethodLocatorSlowTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/AnnotatedMethodLocatorSlowTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/MarkedMethodLocatorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/MarkedMethodLocatorImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/instance/InstantiationExceptionAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/instance/InstantiationExceptionAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/DummyNamingConventionAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/DummyNamingConventionAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/JMockMockCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/JMockMockCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/testdouble/DummyTestDoubleCreatorAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/testdouble/DummyTestDoubleCreatorAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/MethodInvokerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/MethodInvokerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/MarkedMethodLocator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/MarkedMethodLocator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/DirectoryFilterAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/DirectoryFilterAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedFieldLocator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedFieldLocator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/suite/AtomicTestSuite.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/suite/AtomicTestSuite.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ContextContainerWithConstructors.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ContextContainerWithConstructors.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedFieldLocatorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedFieldLocatorImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ClassInstantiatorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ClassInstantiatorImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/InstinctTestCase.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/InstinctTestCase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/SpecificationRunnerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/SpecificationRunnerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mocker.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/mock/Mocker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedFieldLocatorImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedFieldLocatorImplAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/RELEASE-NOTES" afterPath="$PROJECT_DIR$/RELEASE-NOTES" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/testdouble/TestDoubleAutoWirerImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/testdouble/TestDoubleAutoWirerImplAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/ProxyGenerator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/ProxyGenerator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ContextWithInvalidlyMarkedBeforeSpecification2.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ContextWithInvalidlyMarkedBeforeSpecification2.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/WithRuntimeAnnotations.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/WithRuntimeAnnotations.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/BehaviourContextNamingConventionAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/BehaviourContextNamingConventionAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/suite/AllTestSuite.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/suite/AllTestSuite.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/ClassInstantiatorFactoryImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/ClassInstantiatorFactoryImplAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/JUnitTestSuiteBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/JUnitTestSuiteBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/verify/VerificationException.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/verify/VerificationException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/MockVerifier.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/MockVerifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/MockControl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/MockControl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/verify/Verify.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/verify/Verify.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/DirectoryFilter.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/DirectoryFilter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/MarkedFieldLocatorImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/MarkedFieldLocatorImplAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/annotate/Mock.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/annotate/Mock.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ContextWithInvalidlyMarkedAfterSpecification1.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ContextWithInvalidlyMarkedAfterSpecification1.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/VerifierImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/VerifierImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameFactoryImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameFactoryImplAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/annotate/Stub.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/annotate/Stub.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/LifeCycleMethodConfigurationExceptionAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/LifeCycleMethodConfigurationExceptionAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/MockNamingConvention.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/MockNamingConvention.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedClassFileChecker.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedClassFileChecker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ConstructorInvoker.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ConstructorInvoker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/SpecificationNamingConvention.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/SpecificationNamingConvention.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/AfterSpecificationNamingConvention.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/AfterSpecificationNamingConvention.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/TestDoubleControl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/TestDoubleControl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/checker/ExceptionChecker.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/checker/ExceptionChecker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/MockInstanceProvider.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/MockInstanceProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/LifeCycleMethodValidatorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/LifeCycleMethodValidatorImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/BehaviourContextConfigurationException.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/BehaviourContextConfigurationException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ClassInstantiatorFactoryImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ClassInstantiatorFactoryImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/ClassLocatorSlowTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/ClassLocatorSlowTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationFileFilter.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationFileFilter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorSlowTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorSlowTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ConstructorInvokerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ConstructorInvokerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/TestDoubleHolderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/TestDoubleHolderImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ParamChecker.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/ParamChecker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/MethodInvoker.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/MethodInvoker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/BehaviourContextRunnerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/BehaviourContextRunnerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/MockCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/MockCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/TestDoubleAutoWirerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/TestDoubleAutoWirerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/suite/SlowTestSuite.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/suite/SlowTestSuite.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/TestingException.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/TestingException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedClassFileCheckerImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedClassFileCheckerImplAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/TestDoubleConfigurationException.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/TestDoubleConfigurationException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/SpecificationContext.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/SpecificationContext.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/WithoutRuntimeAnnotations.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/WithoutRuntimeAnnotations.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactoryImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImplAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/MarkedFieldLocatorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/MarkedFieldLocatorImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/ContextContainer2.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/ContextContainer2.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/ClassLocator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/ClassLocator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/annotate/AfterSpecification.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/annotate/AfterSpecification.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/MockeryImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/MockeryImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iml" afterPath="$PROJECT_DIR$/instinct.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/TestDoubleFieldChecker.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/TestDoubleFieldChecker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/checker/ClassChecker.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/checker/ClassChecker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/ConcreteGeneratorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/ConcreteGeneratorImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationCheckerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationCheckerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/TestContext1.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/TestContext1.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/testdouble/TestDoubleFieldCheckerImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/testdouble/TestDoubleFieldCheckerImplAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/StubNamingConvention.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/StubNamingConvention.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/BehaviourContextRunner.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/BehaviourContextRunner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/example/StackImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/example/StackImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/BeforeSpecificationNamingConventionAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/BeforeSpecificationNamingConventionAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/SpecificationRunnerSlowTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/SpecificationRunnerSlowTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImplAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/ClassInstantiatorImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/ClassInstantiatorImplAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/integrate/junit/AllBehaviourContextsSlowTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/integrate/junit/AllBehaviourContextsSlowTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/ExpectationNotAllowedExceptionAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/ExpectationNotAllowedExceptionAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedClassFileCheckerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedClassFileCheckerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/AfterSpecificationNamingConventionAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/AfterSpecificationNamingConventionAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ContextWithInvalidlyMarkedAfterSpecification2.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ContextWithInvalidlyMarkedAfterSpecification2.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactory.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/instance/ObjectFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/MockNamingConventionAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/MockNamingConventionAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/UberInstanceProvider.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/UberInstanceProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/DummyTestDoubleCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/DummyTestDoubleCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/UnkownTestDoubleException.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/UnkownTestDoubleException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameFactory.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/TestDoubleFieldCheckerImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/TestDoubleFieldCheckerImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotatedMethodLocatorImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/UnkownTestDoubleExceptionAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/UnkownTestDoubleExceptionAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/LifeCycleMethodConfigurationException.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/LifeCycleMethodConfigurationException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/TestDoubleAutoWirer.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/TestDoubleAutoWirer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationChecker.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/AnnotationChecker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/BehaviourContextAggregatorImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/SpecificationNamingConventionAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/SpecificationNamingConventionAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/reflect/Reflector.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/reflect/Reflector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ContextContainerWithSetUpAndTearDown.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ContextContainerWithSetUpAndTearDown.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/JUnitTestSuiteBuilderImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/JUnitTestSuiteBuilderImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance/ObjectCreationExceptionAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/instance/ObjectCreationExceptionAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/checker/AssertThrowsChecker.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/test/checker/AssertThrowsChecker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/BehaviourContextTestCase.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/BehaviourContextTestCase.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/FileNameComparator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/locate/FileNameComparator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/DummyNamingConvention.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/DummyNamingConvention.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/ExpectationNotAllowedException.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/ExpectationNotAllowedException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/BehaviourContextConfigurationExceptionAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/BehaviourContextConfigurationExceptionAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/PackageRootFinder.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/aggregate/PackageRootFinder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/marker/BehaviourContext.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/marker/BehaviourContext.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/SpecificationRunner.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/runner/SpecificationRunner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/MockVerifierImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/MockVerifierImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/BeforeSpecificationNamingConvention.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/naming/BeforeSpecificationNamingConvention.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/InstantiationException.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/InstantiationException.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/JMockMockControlAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/JMockMockControlAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/annotate/Dummy.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/annotate/Dummy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/annotate/BeforeSpecification.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/annotate/BeforeSpecification.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/TestDoubleCreator.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/testdouble/TestDoubleCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ContextWithInvalidlyMarkedSpecification1.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/runner/ContextWithInvalidlyMarkedSpecification1.java" />
     </list>
   </component>
   <component name="ChangeListSynchronizer" />
@@ -192,37 +357,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="README" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README">
+      <file leaf-file-name="StackImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/example/StackImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="0" selection-start="258" selection-end="258" vertical-scroll-proportion="0.1875">
+            <state line="27" column="15" selection-start="828" selection-end="828" vertical-scroll-proportion="0.28363636">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LICENCE" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/LICENCE">
+      <file leaf-file-name="UberInstanceProvider.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/UberInstanceProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+            <state line="25" column="30" selection-start="1157" selection-end="1157" vertical-scroll-proportion="0.21818182">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RELEASE-NOTES" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/RELEASE-NOTES">
+      <file leaf-file-name="JUnitTestSuiteBuilderImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/JUnitTestSuiteBuilderImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="25" selection-start="52" selection-end="52" vertical-scroll-proportion="0.026785715">
+            <state line="63" column="13" selection-start="2877" selection-end="2877" vertical-scroll-proportion="0.76">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build-setup.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/build-setup.xml">
+      <file leaf-file-name="ConcreteClassMock.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/ConcreteClassMock.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="49" selection-start="311" selection-end="311" vertical-scroll-proportion="0.13392857">
+            <state line="71" column="12" selection-start="3042" selection-end="3042" vertical-scroll-proportion="0.76">
               <folding />
             </state>
           </provider>
@@ -376,6 +541,330 @@
           <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
         </PATH_ELEMENT>
       </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct/example" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
+      <PATH>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct.ipr" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+        <PATH_ELEMENT>
+          <option name="myItemId" value="PsiDirectory:$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core" />
+          <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+        </PATH_ELEMENT>
+      </PATH>
     </subPane>
   </component>
   <component name="ProjectReloadState">
@@ -389,7 +878,7 @@
       <showLibraryContents />
       <hideEmptyPackages ProjectPane="false" />
       <abbreviatePackageNames />
-      <showStructure Favorites="false" ProjectPane="false" Scope="false" PackagesPane="false" />
+      <showStructure Favorites="false" PackagesPane="false" Scope="false" ProjectPane="false" />
       <autoscrollToSource />
       <autoscrollFromSource PackagesPane="true" ProjectPane="true" />
       <sortByType />
@@ -471,6 +960,23 @@
         <option name="Make" value="true" />
       </method>
     </tempConfiguration>
+    <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <module name="" />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <module name="" />
       <option name="MAIN_CLASS_NAME" />
@@ -482,16 +988,6 @@
       <option name="VM_PARAMETERS" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-    </configuration>
-    <configuration default="true" type="Application" factoryName="Application" enabled="false" merge="false">
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <module name="" />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <module name="" />
@@ -511,13 +1007,6 @@
       <method>
         <option name="Make" value="true" />
       </method>
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
     </configuration>
     <configuration default="false" name="JUnit Suite" type="JUnit" factoryName="JUnit" enabled="false" merge="false">
       <pattern value="au.id.adams.instinct.integrate.junit.*" />
@@ -1115,14 +1604,14 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16550988" order="0" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31040892" order="1" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="1" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1802974" order="8" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1802974" order="8" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" order="6" />
       <window_info id="Module Dependencies" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="8" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.10056772" order="1" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32992566" order="8" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3224907" order="2" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3224907" order="2" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" order="2" />
       <window_info id="File View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" order="3" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39962825" order="4" />
@@ -1259,48 +1748,6 @@
     <option name="myLastEditedConfigurable" value="Harvey Norman Inspection Profile" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="46" selection-start="46" selection-end="46" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameFactoryImplAtomicTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="19" selection-start="275" selection-end="275" vertical-scroll-proportion="0.10714286">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/instance/InstantiationExceptionAtomicTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="215" selection-end="215" vertical-scroll-proportion="0.10714286">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/ExpectationNotAllowedExceptionAtomicTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="206" selection-end="206" vertical-scroll-proportion="0.10714286">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/testdouble/DummyTestDoubleCreatorAtomicTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="19" selection-start="386" selection-end="386" vertical-scroll-proportion="0.13392857">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/naming/DummyNamingConventionAtomicTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="19" selection-start="196" selection-end="196" vertical-scroll-proportion="0.10714286">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/DirectoryFilterAtomicTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="19" selection-start="436" selection-end="436" vertical-scroll-proportion="0.10714286">
@@ -1399,21 +1846,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="258" selection-end="258" vertical-scroll-proportion="0.1875">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/LICENCE">
+    <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.xml">
+    <entry file="file://$PROJECT_DIR$/LICENCE">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="196" column="0" selection-start="11036" selection-end="11036" vertical-scroll-proportion="1.9824561">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="0" selection-start="258" selection-end="258" vertical-scroll-proportion="0.12280702">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RELEASE-NOTES">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
@@ -1422,14 +1876,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/build-setup.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="49" selection-start="311" selection-end="311" vertical-scroll-proportion="0.13392857">
+        <state line="5" column="49" selection-start="311" selection-end="311" vertical-scroll-proportion="0.01754386">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/RELEASE-NOTES">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/LifeCycleMethodConfigurationException.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="25" selection-start="52" selection-end="52" vertical-scroll-proportion="0.026785715">
+        <state line="18" column="19" selection-start="657" selection-end="657" vertical-scroll-proportion="0.07017544">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/core/BehaviourContextConfigurationException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="3" selection-start="597" selection-end="597" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/example/StackImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="15" selection-start="828" selection-end="828" vertical-scroll-proportion="0.28363636">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/instance/UberInstanceProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="30" selection-start="1157" selection-end="1157" vertical-scroll-proportion="0.21818182">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/integrate/junit/JUnitTestSuiteBuilderImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="13" selection-start="2877" selection-end="2877" vertical-scroll-proportion="0.76">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/ConcreteClassMock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="12" selection-start="3042" selection-end="3042" vertical-scroll-proportion="0.76">
           <folding />
         </state>
       </provider>
