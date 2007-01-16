@@ -30,21 +30,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/JMockMockControl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/JMockMockControl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/README.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/testdouble/DummyTestDoubleCreatorAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/testdouble/DummyTestDoubleCreatorAtomicTest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/UnkownTestDoubleExceptionImplAtomicTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/LICENCE" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/MarkedFieldLocatorImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/locate/MarkedFieldLocatorImplAtomicTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/MockeryImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/MockeryImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/util/JavaClassNameImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/JMockMockControlAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/JMockMockControlAtomicTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/LifeCycleMethodConfigurationExceptionAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/core/LifeCycleMethodConfigurationExceptionAtomicTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/LICENCE.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/PackageRootFinderImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/aggregate/PackageRootFinderImplAtomicTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/TestDoubleControl.java" afterPath="$PROJECT_DIR$/src/main/java/com/googlecode/instinct/internal/mock/TestDoubleControl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/util/JavaClassNameImplAtomicTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/com/googlecode/instinct/internal/mock/UnkownTestDoubleExceptionAtomicTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.txt" afterPath="$PROJECT_DIR$/README.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instinct.iws" afterPath="$PROJECT_DIR$/instinct.iws" />
     </list>
   </component>
@@ -205,7 +191,7 @@
       <file leaf-file-name="README.txt" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="0" selection-start="185" selection-end="185" vertical-scroll-proportion="0.13392857">
+            <state line="7" column="0" selection-start="258" selection-end="258" vertical-scroll-proportion="0.1875">
               <folding />
             </state>
           </provider>
@@ -1606,7 +1592,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/README.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="185" selection-end="185" vertical-scroll-proportion="0.13392857">
+        <state line="7" column="0" selection-start="258" selection-end="258" vertical-scroll-proportion="0.1875">
           <folding />
         </state>
       </provider>
