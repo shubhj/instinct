@@ -12,7 +12,7 @@ import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;
 
 public final class MarkedFieldLocatorImplAtomicTest extends InstinctTestCase {
-    private static final Class<WithRuntimeAnnotations> SOME_CLASS = WithRuntimeAnnotations.class;
+    private static final Class<WithRuntimeAnnotations> CLASS_WITH_ANNOTATIONS = WithRuntimeAnnotations.class;
     private MarkedFieldLocator fieldLocator;
     private AnnotatedFieldLocator annotatedFieldLocator;
     private Field[] annotatedFields;
@@ -22,8 +22,8 @@ public final class MarkedFieldLocatorImplAtomicTest extends InstinctTestCase {
     }
 
     public void testUsesAnnotatedLocator() {
-        expects(annotatedFieldLocator).method("locate").with(same(SOME_CLASS), same(Dummy.class)).will(returnValue(annotatedFields));
-        final Field[] fields = fieldLocator.locateAll(SOME_CLASS, Dummy.class, new DummyNamingConvention());
+        expects(annotatedFieldLocator).method("locate").with(same(CLASS_WITH_ANNOTATIONS), same(Dummy.class)).will(returnValue(annotatedFields));
+        final Field[] fields = fieldLocator.locateAll(CLASS_WITH_ANNOTATIONS, Dummy.class, new DummyNamingConvention());
         assertSame(annotatedFields, fields);
     }
 

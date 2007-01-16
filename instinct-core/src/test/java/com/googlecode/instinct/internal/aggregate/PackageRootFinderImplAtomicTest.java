@@ -1,10 +1,10 @@
 package com.googlecode.instinct.internal.aggregate;
 
 import com.googlecode.instinct.test.InstinctTestCase;
-import com.googlecode.instinct.test.checker.ClassChecker;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
 public final class PackageRootFinderImplAtomicTest extends InstinctTestCase {
     public void testProperties() {
-        ClassChecker.checkClass(PackageRootFinderImpl.class, PackageRootFinder.class);
+        checkClass(PackageRootFinderImpl.class, PackageRootFinder.class);
     }
 }

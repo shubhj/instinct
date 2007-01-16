@@ -11,7 +11,7 @@ public final class JMockMockControl implements MockControl {
         this.mockController = mockController;
     }
 
-    public Object createDoubleObject() {
+    public Object createTestDouble() {
         return mockController.proxy();
     }
 

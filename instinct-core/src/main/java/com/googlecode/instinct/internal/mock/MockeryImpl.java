@@ -77,7 +77,7 @@ public final class MockeryImpl implements Mockery {
 
     @SuppressWarnings({"unchecked"})
     private <T> T createMockedObject(final TestDoubleControl mockControl) {
-        return (T) mockControl.createDoubleObject();
+        return (T) mockControl.createTestDouble();
     }
 
     private void register(final TestDoubleControl mockControl, final Object mockedObject) {

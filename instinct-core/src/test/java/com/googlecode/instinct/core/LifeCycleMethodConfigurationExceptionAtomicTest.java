@@ -1,10 +1,10 @@
 package com.googlecode.instinct.core;
 
 import com.googlecode.instinct.test.InstinctTestCase;
-import com.googlecode.instinct.test.checker.ExceptionChecker;
+import static com.googlecode.instinct.test.checker.ExceptionChecker.checkException;
 
 public final class LifeCycleMethodConfigurationExceptionAtomicTest extends InstinctTestCase {
     public void testProperties() {
-        ExceptionChecker.checkException(LifeCycleMethodConfigurationException.class);
+        checkException(LifeCycleMethodConfigurationException.class);
     }
 }

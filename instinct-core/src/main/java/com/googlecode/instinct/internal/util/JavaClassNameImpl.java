@@ -2,6 +2,7 @@ package com.googlecode.instinct.internal.util;
 
 import java.io.File;
 import au.net.netstorm.boost.primordial.Primordial;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class JavaClassNameImpl extends Primordial implements JavaClassName {
     private final File classesRoot;
@@ -9,6 +10,7 @@ public final class JavaClassNameImpl extends Primordial implements JavaClassName
 
     @Suggest("Null check this class")
     public JavaClassNameImpl(final File classesRoot, final File classFile) {
+        checkNotNull(classesRoot, classFile);
         this.classesRoot = classesRoot;
         this.classFile = classFile;
     }
