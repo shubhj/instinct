@@ -37,7 +37,8 @@
         </javadoc>
     </target>
 
-    <target name="-compile" depends="checkstyle">
+    <!--<target name="-compile" depends="checkstyle">-->
+    <target name="-compile">
         <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}"
                 code.path="main.code.path" code.pattern="all.code.pattern"/>
         <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}"

@@ -30,7 +30,7 @@
 
         <taskdef name="instinct" classname="com.googlecode.instinct.integrate.ant.InstinctAntTask" classpathref="spec.class.path"/>
         <instinct failureproperty="specifications-failed">
-            <annotatedspecificationaggregator root="src/spec/java"/>
+            <annotatedspecificationaggregator specificationroot="src/spec/java"/>
         </instinct>
 
 

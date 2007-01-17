@@ -16,25 +16,36 @@
 
 package com.googlecode.instinct.integrate.ant;
 
+import java.io.File;
+import java.io.FileFilter;
+import java.util.Arrays;
+import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
+import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
+import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 
 public final class AnnotatedSpecificationAggregatorImpl implements AnnotatedSpecificationAggregator {
-    private String root;
+    private String specificationRoot;
 
     public BehaviourContextAggregator getAggregator() {
         return null;
     }
 
-    public void setRoot(final String root) {
-        checkNotWhitespace(root);
-        this.root = root;
+    public void setSpecificationRoot(final String specificationRoot) {
+        checkNotWhitespace(specificationRoot);
+        System.out.println("specificationRoot = " + specificationRoot);
+        this.specificationRoot = specificationRoot;
     }
 
     public JavaClassName[] getContextNames() {
-//        final FileFilter filter = objectFactory.create(AnnotationFileFilter.class, packageRoot, BehaviourContext.class);
-//        return classLocator.locate(packageRoot, filter);
-        return null;
+        // validate the path
+        // resolve the absolute path (if neccessary)?
+        final File packageRoot = new File(specificationRoot);
+        final FileFilter filter = new AnnotationFileFilter(packageRoot, BehaviourContext.class);
+        final JavaClassName[] names = new ClassLocatorImpl().locate(packageRoot, filter);
+        System.out.println("Arrays.asList(names) = " + Arrays.asList(names));
+        return names;
     }
 }

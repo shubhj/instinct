@@ -4,6 +4,9 @@ o http://www.oracle.com/technology/pub/articles/hunter_meta_2.html
 rSpec
 o http://rspec.rubyforge.org/examples.html
 
+Rehersal
+o http://rehersal.sourceforge.net/documentation.shtml
+
 Terminology
 o http://martinfowler.com/bliki/TestDouble.html
 o http://agilesoftwaredevelopment.com/node/29
