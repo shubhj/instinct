@@ -51,6 +51,8 @@
         <mkdir dir="${dist.dir}"/>
         <jar destfile="${dist.dir}/${project.jar}">
             <fileset dir="${main.classes.dir}"/>
+            <fileset dir="${main.src.dir}"/>
+            <fileset dir="${properties.src.dir}"/>
         </jar>
     </target>
 

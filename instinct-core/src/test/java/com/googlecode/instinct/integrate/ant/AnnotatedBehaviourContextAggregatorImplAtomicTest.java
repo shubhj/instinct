@@ -14,22 +14,13 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.aggregate;
+package com.googlecode.instinct.integrate.ant;
 
-import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
-public final class BehaviourContextAggregatorSlowTest extends InstinctTestCase {
-    public static final int EXPECTED_CONTEXTS = 21;
-    private BehaviourContextAggregator aggregator;
-
-    public void testFindsCorrectNumberOfContexts() {
-        final JavaClassName[] contexts = aggregator.getContextNames();
-        assertEquals(EXPECTED_CONTEXTS, contexts.length);
-    }
-
-    @Override
-    public void setUpSubject() {
-        aggregator = new AnnotatedBehaviourContextAggregatorImpl(BehaviourContextAggregatorSlowTest.class);
+public final class AnnotatedBehaviourContextAggregatorImplAtomicTest extends InstinctTestCase {
+    public void testProperties() {
+        checkClass(AnnotatedBehaviourContextAggregatorImpl.class, AnnotatedBehaviourContextAggregator.class);
     }
 }

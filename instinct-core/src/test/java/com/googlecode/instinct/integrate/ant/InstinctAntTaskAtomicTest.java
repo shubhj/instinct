@@ -19,21 +19,28 @@ package com.googlecode.instinct.integrate.ant;
 import com.googlecode.instinct.test.InstinctTestCase;
 import com.googlecode.instinct.test.TestingException;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClassPropertiesSuperClass;
+import com.googlecode.instinct.internal.util.Suggest;
 import org.apache.tools.ant.Task;
 
 @SuppressWarnings({"LocalVariableOfConcreteClass"})
-public final class InstinctAntTaskImplAtomicTest extends InstinctTestCase {
+public final class InstinctAntTaskAtomicTest extends InstinctTestCase {
     public void testProperties() {
         checkClassPropertiesSuperClass(InstinctAntTask.class, Task.class);
     }
 
-    public void testContainsANoArgumentConstructor() {
-        new InstinctAntTask();
+    public void testContainsASinngleNoArgumentConstructor() {
+        assertEquals(1, InstinctAntTask.class.getConstructors().length);
+        assertEquals(0, InstinctAntTask.class.getConstructors()[0].getParameterTypes().length);
     }
 
     public void testSetFailureProperty() {
         final InstinctAntTask task = new InstinctAntTask();
         task.setFailureProperty("specifications-failed");
+    }
+
+    @Suggest("Implement task here.")
+    public void testExecute() {
+        new InstinctAntTask().execute();
     }
 
     public void testHasACloneMethodToSupportTaskApi() {

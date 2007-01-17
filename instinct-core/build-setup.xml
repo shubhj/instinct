@@ -20,6 +20,7 @@
     <property name="checkstyle.lib.dir" value="${lib.dir}/checkstyle"/>
     <property name="main.src.dir" value="${src.dir}/java"/>
     <property name="test.src.dir" value="${test.dir}/java"/>
+    <property name="properties.src.dir" value="${src.dir}/properties"/>
     <property name="main.classes.dir" value="${build.dir}/main-classes"/>
     <property name="test.classes.dir" value="${build.dir}/test-classes"/>
     <property name="dist.dir" value="${build.dir}/dist"/>

@@ -19,8 +19,7 @@ package com.googlecode.instinct.integrate.junit;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
-import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregatorImpl;
-import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
+import com.googlecode.instinct.internal.aggregate.AnnotatedBehaviourContextAggregatorImpl;
 import com.googlecode.instinct.internal.mock.instance.ConcreteGeneratorImpl;
 import com.googlecode.instinct.internal.mock.instance.ProxyGenerator;
 import com.googlecode.instinct.internal.util.JavaClassName;
@@ -38,7 +37,7 @@ public final class JUnitTestSuiteBuilderImpl implements JUnitTestSuiteBuilder {
 
     public <T> JUnitTestSuiteBuilderImpl(final Class<T> classInSpecTree) {
         checkNotNull(classInSpecTree);
-        aggregator = new BehaviourContextAggregatorImpl(classInSpecTree, new ClassLocatorImpl());
+        aggregator = new AnnotatedBehaviourContextAggregatorImpl(classInSpecTree);
     }
 
     public Test buildSuite(final String suiteName) {

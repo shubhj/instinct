@@ -10,9 +10,7 @@
             <!--<fileset dir="${src.tests}">-->
             <!--<include name="**/*BehaviourContext.java"/>-->
             <!--</fileset>-->
-            <contextlocator>
-                <annotation/>
-            </contextlocator>
+            <annotatedbehaviourcontextaggregator root="src/spec"/>
         </instinct>
 
     </target>

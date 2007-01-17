@@ -23,8 +23,7 @@ import au.net.netstorm.boost.edge.java.lang.EdgeClass;
 import com.googlecode.instinct.core.BehaviourContextConfigurationException;
 import com.googlecode.instinct.core.LifeCycleMethodConfigurationException;
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
-import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregatorImpl;
-import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
+import com.googlecode.instinct.internal.aggregate.AnnotatedBehaviourContextAggregatorImpl;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
@@ -33,8 +32,6 @@ import com.googlecode.instinct.test.InstinctTestCase;
 @SuppressWarnings({"ProhibitedExceptionThrown"})
 public final class AllBehaviourContextsSlowTest extends InstinctTestCase {
     private final EdgeClass edgeClass = new DefaultEdgeClass();
-    private final BehaviourContextAggregator behaviourContextAggregator = new BehaviourContextAggregatorImpl(AllBehaviourContextsSlowTest.class,
-            new ClassLocatorImpl());
     private final BehaviourContextRunner contextRunner = new BehaviourContextRunnerImpl();
 
     public void testRunAllContexts() {
@@ -42,6 +39,7 @@ public final class AllBehaviourContextsSlowTest extends InstinctTestCase {
     }
 
     private void runAllContexts() {
+        final BehaviourContextAggregator behaviourContextAggregator = new AnnotatedBehaviourContextAggregatorImpl(AllBehaviourContextsSlowTest.class);
         final JavaClassName[] contextClasses = behaviourContextAggregator.getContextNames();
         for (final JavaClassName contextClassName : contextClasses) {
             final Class<?> cls = edgeClass.forName(contextClassName.getFullyQualifiedName());
