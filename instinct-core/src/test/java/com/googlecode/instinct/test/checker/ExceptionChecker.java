@@ -26,7 +26,7 @@ import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 import com.googlecode.instinct.internal.mock.instance.UberInstanceProvider;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.TestingException;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkClassPropertiesSuperClass;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
 
 @SuppressWarnings({"ExceptionClassNameDoesntEndWithException"})
 public final class ExceptionChecker {
@@ -39,7 +39,7 @@ public final class ExceptionChecker {
     }
 
     public static <T extends RuntimeException> void checkException(final Class<T> exceptionClass) {
-        checkClassPropertiesSuperClass(exceptionClass, RuntimeException.class);
+        checkClassWithoutParamChecks(exceptionClass, RuntimeException.class);
         checkSuperClassMethods(exceptionClass);
     }
 

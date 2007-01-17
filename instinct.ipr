@@ -2,6 +2,22 @@
 <project version="4" relativePaths="true">
   <component name="AntConfiguration">
     <defaultAnt bundledAnt="true" />
+    <buildFile url="file://$PROJECT_DIR$/instinct-core/build.xml">
+      <additionalClassPath>
+        <entry path="file://$PROJECT_DIR$/instinct-core/lib/junit-4.1.jar" />
+      </additionalClassPath>
+      <antReference projectDefault="true" />
+      <customJdkName value="" />
+      <maximumHeapSize value="128" />
+      <properties />
+    </buildFile>
+    <buildFile url="file://$PROJECT_DIR$/instinct-example/build.xml">
+      <additionalClassPath />
+      <antReference projectDefault="true" />
+      <customJdkName value="" />
+      <maximumHeapSize value="128" />
+      <properties />
+    </buildFile>
   </component>
   <component name="BuildJarProjectSettings">
     <option name="BUILD_JARS_ON_MAKE" value="false" />
@@ -13,6 +29,8 @@
   <component name="CodeStyleSettingsManager">
     <option name="PER_PROJECT_SETTINGS">
       <value>
+        <option name="ALIGN_MULTILINE_PARAMETERS" value="false" />
+        <option name="ALIGN_MULTILINE_FOR" value="false" />
         <option name="KEEP_BLANK_LINES_IN_CODE" value="0" />
         <option name="PREFER_LONGER_NAMES" value="false" />
         <option name="IMPORT_LAYOUT_TABLE">
@@ -49,7 +67,7 @@
         <option name="ENUM_CONSTANTS_WRAP" value="1" />
       </value>
     </option>
-    <option name="USE_PER_PROJECT_SETTINGS" value="true" />
+    <option name="USE_PER_PROJECT_SETTINGS" value="false" />
   </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
@@ -836,6 +854,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/instinct-core/instinct-core.iml" filepath="$PROJECT_DIR$/instinct-core/instinct-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/instinct-example/instinct-example.iml" filepath="$PROJECT_DIR$/instinct-example/instinct-example.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" assert-keyword="true" jdk-15="true" project-jdk-name="1.5" project-jdk-type="JavaSDK">

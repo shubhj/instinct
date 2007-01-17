@@ -16,7 +16,10 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-@SuppressWarnings({"MarkerInterface"})
-public interface AnnotatedBehaviourContextAggregator extends BehaviourContextAggregator {
-    // Note. Marker interface required for Ant to create the correct type based on XML binding.
+import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
+
+public final class AnnotatedSpecificationAggregatorImpl implements AnnotatedSpecificationAggregator {
+    public BehaviourContextAggregator getAggregator() {
+        return null;
+    }
 }

@@ -16,6 +16,10 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-public interface BehaviourContextAggregator {
-    com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator getAggregator();
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
+
+public final class InstinctAntTaskDelegateImpl implements InstinctAntTaskDelegate {
+    public void setFailureProperty(final String failureProperty) {
+        checkNotWhitespace(failureProperty);
+    }
 }

@@ -16,16 +16,24 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import com.googlecode.instinct.test.InstinctTestCase;
-import com.googlecode.instinct.test.TestingException;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkClassPropertiesSuperClass;
 import com.googlecode.instinct.internal.util.Suggest;
+import static com.googlecode.instinct.mock.Mocker.eq;
+import static com.googlecode.instinct.mock.Mocker.expects;
+import static com.googlecode.instinct.mock.Mocker.mock;
+import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import com.googlecode.instinct.test.reflect.Reflector;
 import org.apache.tools.ant.Task;
 
-@SuppressWarnings({"LocalVariableOfConcreteClass"})
+@SuppressWarnings({"InstanceVariableOfConcreteClass"})
 public final class InstinctAntTaskAtomicTest extends InstinctTestCase {
+    private InstinctAntTask antTask;
+    private InstinctAntTaskDelegate taskDelegate;
+    private static final String FAILURE_PROPERTY = "specifications-failed";
+    private AnnotatedSpecificationAggregator behaviourContextAggregator;
+
     public void testProperties() {
-        checkClassPropertiesSuperClass(InstinctAntTask.class, Task.class);
+        checkClass(InstinctAntTask.class, Task.class);
     }
 
     public void testContainsASinngleNoArgumentConstructor() {
@@ -34,20 +42,32 @@ public final class InstinctAntTaskAtomicTest extends InstinctTestCase {
     }
 
     public void testSetFailureProperty() {
-        final InstinctAntTask task = new InstinctAntTask();
-        task.setFailureProperty("specifications-failed");
+        expects(taskDelegate).method("setFailureProperty").with(eq(FAILURE_PROPERTY));
+        antTask.setFailureProperty(FAILURE_PROPERTY);
+    }
+
+    public void testCreateAnnotatedBehaviourContextAggregator() {
+        assertNotNull(antTask.createAnnotatedSpecificationAggregator());
     }
 
     @Suggest("Implement task here.")
     public void testExecute() {
-        new InstinctAntTask().execute();
+        antTask.execute();
     }
 
-    public void testHasACloneMethodToSupportTaskApi() {
-        try {
-            new InstinctAntTask().clone();
-        } catch (CloneNotSupportedException e) {
-            throw new TestingException(e);
-        }
+    public void testHasACloneMethodToSupportTaskApi() throws CloneNotSupportedException {
+        antTask.clone();
+    }
+
+    @Override
+    public void setUpTestDoubles() {
+        taskDelegate = mock(InstinctAntTaskDelegate.class);
+        behaviourContextAggregator = mock(AnnotatedSpecificationAggregator.class);
+    }
+
+    @Override
+    public void setUpSubject() {
+        antTask = new InstinctAntTask();
+        Reflector.insertFieldValue(antTask, "taskDelegate", taskDelegate);
     }
 }

@@ -52,18 +52,19 @@ public final class ClassChecker {
         emptyStringCheckParamters(implementationClass);
     }
 
-    public static <U, T extends U> void checkClassProperties(final Class<T> implementationClass, final Class<U> targetInterface) {
-        MODIFIER_CHECKER.checkPublic(targetInterface);
-        MODIFIER_CHECKER.checkPublic(implementationClass);
-        MODIFIER_CHECKER.checkFinal(implementationClass);
-        CLASS_CHECKER.checkImplementsAndFinal(targetInterface, implementationClass);
+    public static <U, T extends U> void checkClassWithoutParamChecks(final Class<T> subClass, final Class<U> superClass) {
+        checkClassProperties(subClass, superClass);
     }
 
-    public static <U, T extends U> void checkClassPropertiesSuperClass(final Class<T> subClass, final Class<U> superClass) {
-        MODIFIER_CHECKER.checkPublic(superClass);
-        MODIFIER_CHECKER.checkPublic(subClass);
-        MODIFIER_CHECKER.checkFinal(subClass);
-        CLASS_CHECKER.checkSubclassOf(subClass, superClass);
+    private static <U, T extends U> void checkClassProperties(final Class<T> implementationClass, final Class<U> parentType) {
+        MODIFIER_CHECKER.checkPublic(parentType);
+        MODIFIER_CHECKER.checkPublic(implementationClass);
+        MODIFIER_CHECKER.checkFinal(implementationClass);
+        if (parentType.isInterface()) {
+            CLASS_CHECKER.checkImplementsAndFinal(parentType, implementationClass);
+        } else {
+            CLASS_CHECKER.checkSubclassOf(implementationClass, parentType);
+        }
     }
 
     private static <U, T extends U> void nullCheckParameters(final Class<T> implementationClass) {

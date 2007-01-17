@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="instinct-example" default="run-specs" basedir=".">
+
+    <property name="build.dir" value="build"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="src.dir" value="src/main"/>
+    <property name="spec.dir" value="src/spec"/>
+
+
+    <path id="spec.class.path">
+        <fileset dir="${basedir}">
+            <include name="${lib.dir}/boost-982.jar"/>
+            <include name="${lib.dir}/cglib-nodep-2.2_beta1.jar"/>
+            <include name="${lib.dir}/jmock-1.1.0.jar"/>
+            <include name="${lib.dir}/jmock-cglib-1.1.0.jar"/>
+            <include name="${lib.dir}/easymockclassextension-2.2.jar"/>
+            <include name="${lib.dir}/ant-1.7.0.jar"/>
+
+        </fileset>
+    </path>
+
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="run-specs">
+
+        <taskdef name="instinct" classname="com.googlecode.instinct.integrate.ant.InstinctAntTask" classpathref="spec.class.path"/>
+        <!--<taskdef resource="instincttask.properties" classpathref="spec.class.path"/>-->
+
+        <instinct failureproperty="specifications-failed">
+            <!-- Include the fileset once we have the aggregator that finds based on naming convention -->
+            <!--<fileset dir="${src.tests}">-->
+            <!--<include name="**/*BehaviourContext.java"/>-->
+            <!--</fileset>-->
+            <annotatedspecificationaggregator root="src/spec"/>
+        </instinct>
+
+    </target>
+
+</project>

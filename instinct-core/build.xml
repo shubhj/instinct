@@ -13,7 +13,7 @@
     <!--<target name="all" depends="clean,dist,test"/>-->
     <target name="all" depends="clean,dist,atomic-test,javadoc"/>
     <target name="compile" depends="clean,checkstyle,-compile"/>
-    <target name="dist" depends="clean,compile,-dist"/>
+    <target name="dist" depends="clean,-dist"/>
     <target name="test" depends="clean,-test"/>
     <target name="javadoc" depends="clean,-javadoc"/>
 
@@ -47,7 +47,7 @@
         <!--</copy>-->
     </target>
 
-    <target name="-dist">
+    <target name="-dist" depends="-compile">
         <mkdir dir="${dist.dir}"/>
         <jar destfile="${dist.dir}/${project.jar}">
             <fileset dir="${main.classes.dir}"/>

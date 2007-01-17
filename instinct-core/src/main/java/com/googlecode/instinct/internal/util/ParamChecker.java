@@ -30,6 +30,15 @@ public final class ParamChecker {
         NULL_MASTER.check(params);
     }
 
+    public static void checkNotWhitespace(final String... params) {
+        checkNotNull(params);
+        for (int i = 0; i < params.length; i++) {
+            if (params[i] == null || params[i].trim().length() == 0) {
+                throw new IllegalArgumentException("Parameter " + i + " should not be null, the empty string or exclusively whitespace");
+            }
+        }
+    }
+
     public static <T> void checkIsInterface(final Class<T> type) {
         if (!type.isInterface()) {
             throw new IllegalArgumentException(type.getSimpleName() + " must be an interface not a concrete class");

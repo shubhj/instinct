@@ -18,8 +18,6 @@ package com.googlecode.instinct.integrate.ant;
 
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
 
-public final class AnnotatedBehaviourContextAggregatorImpl implements AnnotatedBehaviourContextAggregator {
-    public BehaviourContextAggregator getAggregator() {
-        return null;
-    }
+public interface SpecificationAggregator {
+    BehaviourContextAggregator getAggregator();
 }
