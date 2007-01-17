@@ -39,7 +39,7 @@ public final class ExceptionChecker {
     }
 
     public static <T extends RuntimeException> void checkException(final Class<T> exceptionClass) {
-        checkClassPropertiesSuperClass(RuntimeException.class, exceptionClass);
+        checkClassPropertiesSuperClass(exceptionClass, RuntimeException.class);
         checkSuperClassMethods(exceptionClass);
     }
 

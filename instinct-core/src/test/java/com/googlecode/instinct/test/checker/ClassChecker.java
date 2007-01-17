@@ -59,7 +59,7 @@ public final class ClassChecker {
         CLASS_CHECKER.checkImplementsAndFinal(targetInterface, implementationClass);
     }
 
-    public static <U, T extends U> void checkClassPropertiesSuperClass(final Class<U> superClass, final Class<T> subClass) {
+    public static <U, T extends U> void checkClassPropertiesSuperClass(final Class<T> subClass, final Class<U> superClass) {
         MODIFIER_CHECKER.checkPublic(superClass);
         MODIFIER_CHECKER.checkPublic(subClass);
         MODIFIER_CHECKER.checkFinal(subClass);

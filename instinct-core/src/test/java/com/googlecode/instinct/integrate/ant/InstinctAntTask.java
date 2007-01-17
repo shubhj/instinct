@@ -16,15 +16,10 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkClassPropertiesSuperClass;
 import org.apache.tools.ant.Task;
 
-public final class InstinctAntTaskImplAtomicTest extends InstinctTestCase {
-    public void testProperties() {
-        checkClassPropertiesSuperClass(InstinctAntTask.class, Task.class);
-    }
+public final class InstinctAntTask extends Task {
 
-    public void testFailureProperty() {
-    }
+
+
 }

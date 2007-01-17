@@ -11,10 +11,11 @@
     </target>
 
     <!--<target name="all" depends="clean,dist,test"/>-->
-    <target name="all" depends="clean,dist,atomic-test"/>
+    <target name="all" depends="clean,dist,atomic-test,javadoc"/>
     <target name="compile" depends="clean,checkstyle,-compile"/>
     <target name="dist" depends="clean,compile,-dist"/>
     <target name="test" depends="clean,-test"/>
+    <target name="javadoc" depends="clean,-javadoc"/>
 
     <target name="atomic-test" depends="-instrumented_compile">
         <test.macro type="atomic"/>
@@ -26,10 +27,10 @@
 
     <target name="-test" depends="atomic-test,slow-test"/>
 
-    <target name="javadoc" depends="-compile">
+    <target name="-javadoc" depends="-compile">
         <mkdir dir="${javadoc.dir}"/>
         <javadoc destdir="${javadoc.dir}" author="true" version="true"
-                packagenames="${main.package.name}.*" sourcepath="${main.src.dir}" classpath="${main.classes.dir}" failonerror="true"
+                packagenames="${main.package.name}.*" sourcepath="${main.src.dir}" classpathref="main.class.path" failonerror="true"
                 additionalparam="-breakiterator" Use="true" source="${java.src.version}"
                 windowtitle="${project.longname} ${project.version.full}"
                 doctitle="${project.longname} ${project.version.full}">
