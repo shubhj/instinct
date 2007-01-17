@@ -12,7 +12,7 @@
 
     <!--<target name="all" depends="clean,dist,test"/>-->
     <target name="all" depends="clean,dist,atomic-test,javadoc"/>
-    <target name="compile" depends="clean,checkstyle,-compile"/>
+    <target name="compile" depends="clean,-compile"/>
     <target name="dist" depends="clean,-dist"/>
     <target name="test" depends="clean,-test"/>
     <target name="javadoc" depends="clean,-javadoc"/>
@@ -37,7 +37,7 @@
         </javadoc>
     </target>
 
-    <target name="-compile">
+    <target name="-compile" depends="checkstyle">
         <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}"
                 code.path="main.code.path" code.pattern="all.code.pattern"/>
         <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}"

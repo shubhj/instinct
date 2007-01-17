@@ -41,7 +41,6 @@ public final class InstinctAntTask extends Task {
     @Override
     public void execute() throws BuildException {
         //getDescription()
-        System.out.println("Huzzah!");
     }
 
     @Override
