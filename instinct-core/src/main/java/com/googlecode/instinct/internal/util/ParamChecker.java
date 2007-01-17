@@ -31,7 +31,7 @@ public final class ParamChecker {
     }
 
     public static void checkNotWhitespace(final String... params) {
-        checkNotNull(params);
+        checkNotNull((Object) params);
         for (int i = 0; i < params.length; i++) {
             if (params[i] == null || params[i].trim().length() == 0) {
                 throw new IllegalArgumentException("Parameter " + i + " should not be null, the empty string or exclusively whitespace");

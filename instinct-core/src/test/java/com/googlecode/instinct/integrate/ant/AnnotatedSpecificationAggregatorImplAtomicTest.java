@@ -19,7 +19,7 @@ package com.googlecode.instinct.integrate.ant;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
-public final class AnnotatedBehaviourContextAggregatorImplAtomicTest extends InstinctTestCase {
+public final class AnnotatedSpecificationAggregatorImplAtomicTest extends InstinctTestCase {
     public void testProperties() {
         checkClass(AnnotatedSpecificationAggregatorImpl.class, AnnotatedSpecificationAggregator.class);
     }

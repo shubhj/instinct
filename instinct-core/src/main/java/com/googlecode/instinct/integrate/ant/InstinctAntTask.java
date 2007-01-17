@@ -16,11 +16,15 @@
 
 package com.googlecode.instinct.integrate.ant;
 
+import java.util.ArrayList;
+import java.util.List;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
 public final class InstinctAntTask extends Task {
+    private final List<SpecificationAggregator> aggregators = new ArrayList<SpecificationAggregator>();
     private InstinctAntTaskDelegate taskDelegate = new InstinctAntTaskDelegateImpl();
 
     public void setFailureProperty(final String failureProperty) {
@@ -28,13 +32,15 @@ public final class InstinctAntTask extends Task {
         taskDelegate.setFailureProperty(failureProperty);
     }
 
-    public AnnotatedSpecificationAggregator createAnnotatedSpecificationAggregator() {
-        return new AnnotatedSpecificationAggregatorImpl();
+    public void addAnnotatedSpecificationAggregator(final AnnotatedSpecificationAggregator aggregator) {
+        checkNotNull(aggregator);
+        aggregators.add(aggregator);
     }
 
     @Override
     public void execute() throws BuildException {
-
+        //getDescription()
+        System.out.println("Huzzah!");
     }
 
     @Override

@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.mock.Mocker.eq;
 import static com.googlecode.instinct.mock.Mocker.expects;
 import static com.googlecode.instinct.mock.Mocker.mock;
@@ -44,15 +43,6 @@ public final class InstinctAntTaskAtomicTest extends InstinctTestCase {
     public void testSetFailureProperty() {
         expects(taskDelegate).method("setFailureProperty").with(eq(FAILURE_PROPERTY));
         antTask.setFailureProperty(FAILURE_PROPERTY);
-    }
-
-    public void testCreateAnnotatedBehaviourContextAggregator() {
-        assertNotNull(antTask.createAnnotatedSpecificationAggregator());
-    }
-
-    @Suggest("Implement task here.")
-    public void testExecute() {
-        antTask.execute();
     }
 
     public void testHasACloneMethodToSupportTaskApi() throws CloneNotSupportedException {

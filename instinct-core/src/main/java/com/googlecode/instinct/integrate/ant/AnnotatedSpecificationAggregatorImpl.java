@@ -17,9 +17,14 @@
 package com.googlecode.instinct.integrate.ant;
 
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 
 public final class AnnotatedSpecificationAggregatorImpl implements AnnotatedSpecificationAggregator {
     public BehaviourContextAggregator getAggregator() {
         return null;
+    }
+
+    public void setRoot(final String root) {
+        checkNotWhitespace(root);
     }
 }

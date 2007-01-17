@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-@SuppressWarnings({"MarkerInterface"})
 public interface AnnotatedSpecificationAggregator extends SpecificationAggregator {
-    // Note. Marker interface required for Ant to create the correct type based on XML binding.
+    void setRoot(String root);
 }
