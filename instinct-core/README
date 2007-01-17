@@ -19,6 +19,7 @@ Instinct is bundled as a single Jar file: instinct.jar.
 
 Source code is included in the Jar for convenience (TODO add this!).
 
+
 * Building From Source *
 
 TODO
@@ -29,13 +30,18 @@ TODO
 Instinct depends on the following runtime libraries:
 
 o boost-982.jar
+o cglib-nodep-2.2_beta1.jar
 o jmock-1.1.0.jar
 o jmock-cglib-1.1.0.jar
 o easymockclassextension-2.2.jar
 
-To use the Instinct Ant Task, you'll also need:
+To use the Instinct Ant Task, you'll need:
 
 o ant-1.6.5.jar
+
+To use the JUnit 4 runners, you'll need:
+
+o junit-4.1.jar
 
 
 * Documentation *

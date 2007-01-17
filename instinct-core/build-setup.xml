@@ -54,6 +54,7 @@
         <include name="${lib.dir}/jmock/jmock-1.1.0.jar"/>
         <include name="${lib.dir}/jmock/jmock-cglib-1.1.0.jar"/>
         <include name="${lib.dir}/easymock/easymockclassextension-2.2.jar"/>
+        <include name="${lib.dir}/ant/ant-1.6.5.jar"/>
         <!--<include name="${lib.dir}/spring/spring-beans-2.0.1.jar"/>-->
         <!--<include name="${lib.dir}/spring/spring-core-2.0.1.jar"/>-->
         <!--<include name="${lib.dir}/jakarta-commons/commons-logging-1.0.4.jar"/>-->
