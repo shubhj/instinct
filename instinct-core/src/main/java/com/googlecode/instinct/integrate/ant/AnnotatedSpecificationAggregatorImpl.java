@@ -17,14 +17,24 @@
 package com.googlecode.instinct.integrate.ant;
 
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
+import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 
 public final class AnnotatedSpecificationAggregatorImpl implements AnnotatedSpecificationAggregator {
+    private String root;
+
     public BehaviourContextAggregator getAggregator() {
         return null;
     }
 
     public void setRoot(final String root) {
         checkNotWhitespace(root);
+        this.root = root;
+    }
+
+    public JavaClassName[] getContextNames() {
+//        final FileFilter filter = objectFactory.create(AnnotationFileFilter.class, packageRoot, BehaviourContext.class);
+//        return classLocator.locate(packageRoot, filter);
+        return null;
     }
 }

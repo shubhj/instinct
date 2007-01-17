@@ -6,7 +6,6 @@
     <property name="src.dir" value="src/main"/>
     <property name="spec.dir" value="src/spec"/>
 
-
     <path id="spec.class.path">
         <fileset dir="${basedir}">
             <include name="${lib.dir}/instinct-0.0.1.jar"/>
@@ -20,23 +19,20 @@
         </fileset>
     </path>
 
+    <target name="clean" depends="-clean"/>
+    <target name="run-specs" depends="clean,-run-specs"/>
 
-    <target name="clean">
+    <target name="-clean">
         <delete dir="${build.dir}"/>
     </target>
 
-    <target name="run-specs">
+    <target name="-run-specs">
 
         <taskdef name="instinct" classname="com.googlecode.instinct.integrate.ant.InstinctAntTask" classpathref="spec.class.path"/>
-        <!--<taskdef resource="instincttask.properties" classpathref="spec.class.path"/>-->
-
         <instinct failureproperty="specifications-failed">
-            <!-- Include the fileset once we have the aggregator that finds based on naming convention -->
-            <!--<fileset dir="${src.tests}">-->
-            <!--<include name="**/*BehaviourContext.java"/>-->
-            <!--</fileset>-->
-            <annotatedspecificationaggregator root="src/spec"/>
+            <annotatedspecificationaggregator root="src/spec/java"/>
         </instinct>
+
 
     </target>
 

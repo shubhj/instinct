@@ -32,7 +32,8 @@ public final class InstinctAntTask extends Task {
         taskDelegate.setFailureProperty(failureProperty);
     }
 
-    public void addAnnotatedSpecificationAggregator(final AnnotatedSpecificationAggregator aggregator) {
+    @SuppressWarnings({"MethodParameterOfConcreteClass"})
+    public void addAnnotatedSpecificationAggregator(final AnnotatedSpecificationAggregatorImpl aggregator) {
         checkNotNull(aggregator);
         aggregators.add(aggregator);
     }
