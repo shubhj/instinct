@@ -17,9 +17,10 @@
 package com.googlecode.instinct.integrate.ant;
 
 import com.googlecode.instinct.test.InstinctTestCase;
+import com.googlecode.instinct.test.checker.ClassChecker;
 
 public final class InstinctAntTaskImplAtomicTest extends InstinctTestCase {
     public void testProperties() {
-//        ClassChecker.checkClass();
+        ClassChecker.checkClass();
     }
 }
