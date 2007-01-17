@@ -19,7 +19,14 @@ package com.googlecode.instinct.integrate.ant;
 import org.apache.tools.ant.Task;
 
 public final class InstinctAntTask extends Task {
+    private String failureProperty;
 
+    public void setFailureProperty(final String failureProperty) {
+        this.failureProperty = failureProperty;
+    }
 
-
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }

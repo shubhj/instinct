@@ -111,7 +111,9 @@
           <root url="jar://$MODULE_DIR$/lib/ant/ant-1.7.0.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/etc/lib-src/ant-1.7.0-src.zip!/main" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntryProperties />

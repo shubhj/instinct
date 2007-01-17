@@ -17,14 +17,30 @@
 package com.googlecode.instinct.integrate.ant;
 
 import com.googlecode.instinct.test.InstinctTestCase;
+import com.googlecode.instinct.test.TestingException;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClassPropertiesSuperClass;
 import org.apache.tools.ant.Task;
 
+@SuppressWarnings({"LocalVariableOfConcreteClass"})
 public final class InstinctAntTaskImplAtomicTest extends InstinctTestCase {
     public void testProperties() {
         checkClassPropertiesSuperClass(InstinctAntTask.class, Task.class);
     }
 
-    public void testFailureProperty() {
+    public void testContainsANoArgumentConstructor() {
+        new InstinctAntTask();
+    }
+
+    public void testSetFailureProperty() {
+        final InstinctAntTask task = new InstinctAntTask();
+        task.setFailureProperty("specifications-failed");
+    }
+
+    public void testHasACloneMethodToSupportTaskApi() {
+        try {
+            new InstinctAntTask().clone();
+        } catch (CloneNotSupportedException e) {
+            throw new TestingException(e);
+        }
     }
 }
