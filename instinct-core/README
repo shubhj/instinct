@@ -13,11 +13,15 @@ creation of mocks, stubs, test subjects & unique fields; a verification API
 (similar to JUnit's Assert); unique utilities; and JUnit test runner integration.
 
 
-* Binaries*
+* Binaries *
 
 Instinct is bundled as a single Jar file: instinct.jar.
 
 Source code is included in the Jar for convenience (TODO add this!).
+
+* Building From Source *
+
+TODO
 
 
 * Dependencies *
@@ -28,6 +32,10 @@ o boost-982.jar
 o jmock-1.1.0.jar
 o jmock-cglib-1.1.0.jar
 o easymockclassextension-2.2.jar
+
+To use the Instinct Ant Task, you'll also need:
+
+o ant-1.6.5.jar
 
 
 * Documentation *
