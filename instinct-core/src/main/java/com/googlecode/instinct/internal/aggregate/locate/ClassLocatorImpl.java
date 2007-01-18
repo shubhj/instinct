@@ -40,18 +40,18 @@ public final class ClassLocatorImpl implements ClassLocator {
 
     private File[] sortedDeepLocate(final File root, final FileFilter filter) {
         final List<File> result = new ArrayList<File>();
-        recursiveLocate(root, filter, result);
+        recursiveLocate(result, root, filter);
         sort(result);
         return result.toArray(new File[result.size()]);
     }
 
-    private void recursiveLocate(final File searchBase, final FileFilter filter, final List<File> result) {
+    private void recursiveLocate(final List<File> result, final File searchBase, final FileFilter filter) {
         ensureDir(searchBase);
         final File[] subdirs = getSubdirectories(searchBase);
         for (final File subdir : subdirs) {
-            recursiveLocate(subdir, filter, result);
+            recursiveLocate(result, subdir, filter);
         }
-        findMatchingClasses(searchBase, filter, result);
+        findMatchingClasses(result, searchBase, filter);
     }
 
     private File[] getSubdirectories(final File dir) {
@@ -67,7 +67,7 @@ public final class ClassLocatorImpl implements ClassLocator {
         return result;
     }
 
-    private void findMatchingClasses(final File dir, final FileFilter filter, final List<File> result) {
+    private void findMatchingClasses(final List<File> result, final File dir, final FileFilter filter) {
         final List<File> list = asList(dir.listFiles(filter));
         result.addAll(list);
     }

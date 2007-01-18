@@ -16,19 +16,15 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import static com.googlecode.instinct.mock.Mocker.eq;
-import static com.googlecode.instinct.mock.Mocker.expects;
 import static com.googlecode.instinct.mock.Mocker.mock;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import com.googlecode.instinct.test.reflect.Reflector;
 import org.apache.tools.ant.Task;
 
 @SuppressWarnings({"InstanceVariableOfConcreteClass"})
 public final class InstinctAntTaskAtomicTest extends InstinctTestCase {
-    private InstinctAntTask antTask;
-    private InstinctAntTaskDelegate taskDelegate;
     private static final String FAILURE_PROPERTY = "specifications-failed";
+    private InstinctAntTask antTask;
     private AnnotatedSpecificationAggregator behaviourContextAggregator;
 
     public void testProperties() {
@@ -41,7 +37,6 @@ public final class InstinctAntTaskAtomicTest extends InstinctTestCase {
     }
 
     public void testSetFailureProperty() {
-        expects(taskDelegate).method("setFailureProperty").with(eq(FAILURE_PROPERTY));
         antTask.setFailureProperty(FAILURE_PROPERTY);
     }
 
@@ -51,13 +46,11 @@ public final class InstinctAntTaskAtomicTest extends InstinctTestCase {
 
     @Override
     public void setUpTestDoubles() {
-        taskDelegate = mock(InstinctAntTaskDelegate.class);
         behaviourContextAggregator = mock(AnnotatedSpecificationAggregator.class);
     }
 
     @Override
     public void setUpSubject() {
         antTask = new InstinctAntTask();
-        Reflector.insertFieldValue(antTask, "taskDelegate", taskDelegate);
     }
 }

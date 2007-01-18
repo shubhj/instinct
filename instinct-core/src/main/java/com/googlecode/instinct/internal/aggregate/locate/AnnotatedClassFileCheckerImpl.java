@@ -18,27 +18,36 @@ package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.io.File;
 import java.lang.annotation.Annotation;
+import au.net.netstorm.boost.edge.EdgeException;
 import com.googlecode.instinct.internal.util.ClassInstantiator;
 import com.googlecode.instinct.internal.util.ClassInstantiatorFactory;
 import com.googlecode.instinct.internal.util.ClassInstantiatorFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 
-@Suggest("What does this do???")
 public final class AnnotatedClassFileCheckerImpl implements AnnotatedClassFileChecker {
     private AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
     private ClassInstantiatorFactory instantiatorFactory = new ClassInstantiatorFactoryImpl();
-    private final File packageRoot;
+    private ClassInstantiator instantiator;
 
     public AnnotatedClassFileCheckerImpl(final File packageRoot) {
         checkNotNull(packageRoot);
-        this.packageRoot = packageRoot;
+        instantiator = instantiatorFactory.create(packageRoot);
     }
 
+    @Suggest("Write test that ensures that we reject non-classes & return false for EdgeExceptions")
     public <A extends Annotation> boolean isAnnotated(final File classFile, final Class<A> annotationType) {
         checkNotNull(classFile, annotationType);
-        final ClassInstantiator instantiator = instantiatorFactory.create(packageRoot);
-        final Class<?> candidateClass = instantiator.instantiateClass(classFile);
-        return annotationChecker.isAnnotated(candidateClass, annotationType);
+        System.out.println("classFile = " + classFile);
+        return classFile.getName().endsWith(".class") && checkClass(classFile, annotationType);
+    }
+
+    private <A extends Annotation> boolean checkClass(final File classFile, final Class<A> annotationType) {
+        try {
+            final Class<?> candidateClass = instantiator.instantiateClass(classFile);
+            return annotationChecker.isAnnotated(candidateClass, annotationType);
+        } catch (EdgeException e) {
+            return false;
+        }
     }
 }

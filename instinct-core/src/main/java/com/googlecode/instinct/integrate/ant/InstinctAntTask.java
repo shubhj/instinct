@@ -17,7 +17,12 @@
 package com.googlecode.instinct.integrate.ant;
 
 import java.util.ArrayList;
+import static java.util.Arrays.asList;
 import java.util.List;
+import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
+import au.net.netstorm.boost.edge.java.lang.EdgeClass;
+import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
+import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import org.apache.tools.ant.BuildException;
@@ -25,11 +30,10 @@ import org.apache.tools.ant.Task;
 
 public final class InstinctAntTask extends Task {
     private final List<SpecificationAggregator> aggregators = new ArrayList<SpecificationAggregator>();
-    private InstinctAntTaskDelegate taskDelegate = new InstinctAntTaskDelegateImpl();
+    private final EdgeClass edgeClass = new DefaultEdgeClass();
 
     public void setFailureProperty(final String failureProperty) {
         checkNotWhitespace(failureProperty);
-        taskDelegate.setFailureProperty(failureProperty);
     }
 
     @SuppressWarnings({"MethodParameterOfConcreteClass"})
@@ -38,9 +42,31 @@ public final class InstinctAntTask extends Task {
         aggregators.add(aggregator);
     }
 
+    @SuppressWarnings({"CatchGenericClass"})
     @Override
     public void execute() throws BuildException {
-        //getDescription()
+        try {
+            final List<JavaClassName> contextClasses = findBehaviourContextsFromAllAggregators();
+            runAllContexts(contextClasses);
+        } catch (Throwable e) {
+            throw new BuildException(e);
+        }
+    }
+
+    private void runAllContexts(final List<JavaClassName> contextClasses) {
+        for (final JavaClassName contextClass : contextClasses) {
+            System.out.println("contextClass = " + contextClass.getFullyQualifiedName());
+            final Class<?> cls = edgeClass.forName(contextClass.getFullyQualifiedName());
+            new BehaviourContextRunnerImpl().run(cls);
+        }
+    }
+
+    private List<JavaClassName> findBehaviourContextsFromAllAggregators() {
+        final List<JavaClassName> contextClasses = new ArrayList<JavaClassName>();
+        for (final SpecificationAggregator aggregator : aggregators) {
+            contextClasses.addAll(asList(aggregator.getContextNames()));
+        }
+        return contextClasses;
     }
 
     @Override

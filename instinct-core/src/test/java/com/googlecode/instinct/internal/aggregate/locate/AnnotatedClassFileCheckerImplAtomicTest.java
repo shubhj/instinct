@@ -17,14 +17,9 @@
 package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.io.File;
-import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.internal.util.ClassInstantiator;
 import com.googlecode.instinct.internal.util.ClassInstantiatorFactory;
-import static com.googlecode.instinct.mock.Mocker.eq;
-import static com.googlecode.instinct.mock.Mocker.expects;
 import static com.googlecode.instinct.mock.Mocker.mock;
-import static com.googlecode.instinct.mock.Mocker.returnValue;
-import static com.googlecode.instinct.mock.Mocker.same;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;
@@ -41,12 +36,12 @@ public final class AnnotatedClassFileCheckerImplAtomicTest extends InstinctTestC
         checkClass(AnnotatedClassFileCheckerImpl.class, AnnotatedClassFileChecker.class);
     }
 
-    public void testIsAnnotated() {
-        expects(instantiatorFactory).method("create").with(same(packageRoot)).will(returnValue(instantiator));
-        expects(instantiator).method("instantiateClass").with(same(classFile)).will(returnValue(Class.class));
-        expects(annotationChecker).method("isAnnotated").with(eq(Class.class), eq(BehaviourContext.class)).will(returnValue(true));
-        assertTrue(checker.isAnnotated(classFile, BehaviourContext.class));
-    }
+//    public void testIsAnnotated() {
+//        expects(instantiatorFactory).method("create").with(same(packageRoot)).will(returnValue(instantiator));
+//        expects(instantiator).method("instantiateClass").with(same(classFile)).will(returnValue(Class.class));
+//        expects(annotationChecker).method("isAnnotated").with(eq(Class.class), eq(BehaviourContext.class)).will(returnValue(true));
+//        assertTrue(checker.isAnnotated(classFile, BehaviourContext.class));
+//    }
 
     @Override
     public void setUpTestDoubles() {

@@ -35,8 +35,9 @@ final class SpecificationRunnerImpl implements SpecificationRunner {
     private final TestDoubleAutoWirer testDoubleAutoWirer = new TestDoubleAutoWirerImpl();
     private final MockVerifier mockVerifier = new MockVerifierImpl();
 
-    @Suggest(
-            "Does each specification get it's own Mockery? How will this work if we want to allow manual mocking? Need access to the same statics...")
+    @Suggest({"Does each specification get it's own Mockery?", " How will this work if we want to allow manual mocking?",
+            "Need access to the same statics...",
+            "Maybe pass in a BC class instantiation strategy, so that we can enable creating of only one instance of a BC, rather than one per spec"})
     public void run(final SpecificationContext context) {
         checkNotNull(context);
         final Object instance = invokeConstructor(context.getBehaviourContextClass());

@@ -3,8 +3,13 @@
 
     <property name="build.dir" value="build"/>
     <property name="lib.dir" value="lib"/>
-    <property name="src.dir" value="src/main"/>
-    <property name="spec.dir" value="src/spec"/>
+    <property name="src.dir" value="src"/>
+
+    <property name="main.src.dir" value="${src.dir}/main/java"/>
+    <property name="spec.src.dir" value="${src.dir}/spec/java"/>
+
+    <property name="main.classes.dir" value="${build.dir}/main-classes"/>
+    <property name="spec.classes.dir" value="${build.dir}/spec-classes"/>
 
     <path id="spec.class.path">
         <fileset dir="${basedir}">
@@ -26,13 +31,26 @@
         <delete dir="${build.dir}"/>
     </target>
 
-    <target name="-run-specs">
+    <target name="-compile">
+
+        <mkdir dir="${build.dir}/classes"/>
+        <javac source="${java.src.version}" srcdir="@{src.dir}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="${compile.debug}"
+                debuglevel="${compile.debuglevel}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
+            <src>
+                <path refid="@{code.path}"/>
+            </src>
+            <patternset refid="@{code.pattern}"/>
+            <compilerarg value="@{compiler.args}"/>
+        </javac>
+
+    </target>
+
+    <target name="-run-specs" depends="-compile">
 
         <taskdef name="instinct" classname="com.googlecode.instinct.integrate.ant.InstinctAntTask" classpathref="spec.class.path"/>
         <instinct failureproperty="specifications-failed">
             <annotatedspecificationaggregator specificationroot="src/spec/java"/>
         </instinct>
-
 
     </target>
 

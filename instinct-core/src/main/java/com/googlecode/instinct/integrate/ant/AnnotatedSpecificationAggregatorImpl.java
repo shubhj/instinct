@@ -17,35 +17,42 @@
 package com.googlecode.instinct.integrate.ant;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.util.Arrays;
 import com.googlecode.instinct.core.annotate.BehaviourContext;
-import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
+import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
+import org.apache.tools.ant.Project;
 
 public final class AnnotatedSpecificationAggregatorImpl implements AnnotatedSpecificationAggregator {
-    private String specificationRoot;
+    private final ClassLocator classLocator = new ClassLocatorImpl();
+    private final Project project;
+    private File specPackageRoot;
 
-    public BehaviourContextAggregator getAggregator() {
-        return null;
+    public AnnotatedSpecificationAggregatorImpl(final Project project) {
+        checkNotNull(project);
+        this.project = project;
     }
 
     public void setSpecificationRoot(final String specificationRoot) {
         checkNotWhitespace(specificationRoot);
-        System.out.println("specificationRoot = " + specificationRoot);
-        this.specificationRoot = specificationRoot;
+        specPackageRoot = new File(project.getBaseDir(), specificationRoot);
     }
 
     public JavaClassName[] getContextNames() {
-        // validate the path
-        // resolve the absolute path (if neccessary)?
-        final File packageRoot = new File(specificationRoot);
-        final FileFilter filter = new AnnotationFileFilter(packageRoot, BehaviourContext.class);
-        final JavaClassName[] names = new ClassLocatorImpl().locate(packageRoot, filter);
+        checkPreconditions();
+        System.out.println("packageRoot.getAbsolutePath() = " + specPackageRoot.getAbsolutePath());
+        final JavaClassName[] names = classLocator.locate(specPackageRoot, new AnnotationFileFilter(specPackageRoot, BehaviourContext.class));
         System.out.println("Arrays.asList(names) = " + Arrays.asList(names));
         return names;
+    }
+
+    private void checkPreconditions() {
+        if (specPackageRoot == null) {
+            throw new IllegalStateException("Specification root was not specified");
+        }
     }
 }

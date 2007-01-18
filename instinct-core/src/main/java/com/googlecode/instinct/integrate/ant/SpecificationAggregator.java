@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
+import com.googlecode.instinct.internal.util.JavaClassName;
 
 public interface SpecificationAggregator {
-    BehaviourContextAggregator getAggregator();
+    JavaClassName[] getContextNames();
 }
