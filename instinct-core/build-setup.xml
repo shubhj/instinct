@@ -72,17 +72,11 @@
     <fileset id="main.code.fileset" dir="${main.src.dir}">
         <patternset refid="all.code.pattern"/>
     </fileset>
-    <fileset id="test.code.fileset" dir="${test.src.dir}">
-        <patternset refid="all.code.pattern"/>
-    </fileset>
     <fileset id="atomic.test.code.fileset" dir="${atomic.test.src.dir}">
         <include name="**/*AtomicTest.java"/>
     </fileset>
     <fileset id="slow.test.code.fileset" dir="${slow.test.src.dir}">
         <include name="**/*SlowTest.java"/>
-    </fileset>
-    <fileset id="all.code.fileset" dir="${main.src.dir}">
-        <patternset refid="all.code.pattern"/>
     </fileset>
 
     <path id="main.code.path">
@@ -90,16 +84,6 @@
     </path>
     <path id="test.code.path">
         <pathelement location="${test.src.dir}"/>
-    </path>
-    <path id="atomic.test.code.path">
-        <path refid="test.code.path"/>
-    </path>
-    <path id="slow.test.code.path">
-        <path refid="test.code.path"/>
-    </path>
-    <path id="all.code.path">
-        <path refid="main.code.path"/>
-        <path refid="test.code.path"/>
     </path>
 
     <path id="main.class.path">

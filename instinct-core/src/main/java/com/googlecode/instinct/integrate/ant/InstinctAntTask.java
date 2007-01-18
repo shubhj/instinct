@@ -22,7 +22,9 @@ import java.util.List;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
+import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
 import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import org.apache.tools.ant.BuildException;
@@ -31,6 +33,7 @@ import org.apache.tools.ant.Task;
 public final class InstinctAntTask extends Task {
     private final List<SpecificationAggregator> aggregators = new ArrayList<SpecificationAggregator>();
     private final EdgeClass edgeClass = new DefaultEdgeClass();
+    private final BehaviourContextRunner behaviourContextRunner = new BehaviourContextRunnerImpl();
 
     public void setFailureProperty(final String failureProperty) {
         checkNotWhitespace(failureProperty);
@@ -53,11 +56,12 @@ public final class InstinctAntTask extends Task {
         }
     }
 
+    @Suggest("How do report statistics? Decorate runner with a statistics reporter?")
     private void runAllContexts(final List<JavaClassName> contextClasses) {
         for (final JavaClassName contextClass : contextClasses) {
             System.out.println("contextClass = " + contextClass.getFullyQualifiedName());
             final Class<?> cls = edgeClass.forName(contextClass.getFullyQualifiedName());
-            new BehaviourContextRunnerImpl().run(cls);
+            behaviourContextRunner.run(cls);
         }
     }
 

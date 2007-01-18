@@ -28,11 +28,14 @@ import com.googlecode.instinct.core.naming.NamingConvention;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 
 public final class BehaviourContextRunnerImpl implements BehaviourContextRunner {
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
     private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
 
+    @Suggest({"Make this return a metadata object containing the number of tests that were run",
+            "Don't want to stop running contexts on the first specification failure, need to track errors and report them back through metadata"})
     public <T> void run(final Class<T> behaviourContextClass) {
         checkNotNull(behaviourContextClass);
         final Method[] specificationMethods = getMethods(behaviourContextClass, Specification.class, new BehaviourContextNamingConvention());

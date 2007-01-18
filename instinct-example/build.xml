@@ -11,6 +11,8 @@
     <property name="main.classes.dir" value="${build.dir}/main-classes"/>
     <property name="spec.classes.dir" value="${build.dir}/spec-classes"/>
 
+    <path id="main.class.path">
+    </path>
     <path id="spec.class.path">
         <fileset dir="${basedir}">
             <include name="${lib.dir}/instinct-0.0.1.jar"/>
@@ -20,8 +22,9 @@
             <include name="${lib.dir}/jmock-cglib-1.1.0.jar"/>
             <include name="${lib.dir}/easymockclassextension-2.2.jar"/>
             <include name="${lib.dir}/ant-1.7.0.jar"/>
-
         </fileset>
+        <pathelement location="${main.classes.dir}"/>
+        <pathelement location="${spec.classes.dir}"/>
     </path>
 
     <target name="clean" depends="-clean"/>
@@ -31,25 +34,36 @@
         <delete dir="${build.dir}"/>
     </target>
 
+    <macrodef name="compile.macro">
+        <attribute name="src.dir"/>
+        <attribute name="output.dir"/>
+        <attribute name="classpath.ref"/>
+        <attribute name="src.path"/>
+        <sequential>
+            <mkdir dir="@{output.dir}"/>
+            <javac source="1.5" srcdir="@{src.dir}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="true"
+                    debuglevel="source,lines,vars" deprecation="false" optimize="true">
+                <src>
+                    <path path="@{src.path}"/>
+                </src>
+                <patternset includes="**/*.java"/>
+                <compilerarg value="-Xlint"/>
+            </javac>
+        </sequential>
+    </macrodef>
+
     <target name="-compile">
-
-        <mkdir dir="${main.classes.dir}"/>
-        <javac source="1.5" srcdir="${spec.src.dir}" destdir="${main.classes.dir}" classpathref="spec.class.path" debug="true"
-                debuglevel="source,lines,vars" deprecation="false" optimize="true">
-            <src>
-                <path refid="@{code.path}"/>
-            </src>
-            <patternset refid="@{code.pattern}"/>
-            <compilerarg value="-Xlint"/>
-        </javac>
-
+        <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}"
+                src.path="${main.src.dir}"/>
+        <compile.macro src.dir="${spec.src.dir}" classpath.ref="spec.class.path" output.dir="${spec.classes.dir}"
+                src.path="${spec.src.dir}"/>
     </target>
 
     <target name="-run-specs" depends="-compile">
 
         <taskdef name="instinct" classname="com.googlecode.instinct.integrate.ant.InstinctAntTask" classpathref="spec.class.path"/>
         <instinct failureproperty="specifications-failed">
-            <annotatedspecificationaggregator specificationroot="src/spec/java"/>
+            <annotatedspecificationaggregator specificationroot="${spec.classes.dir}"/>
         </instinct>
 
     </target>

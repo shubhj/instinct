@@ -40,12 +40,9 @@
     <!--<target name="-compile" depends="checkstyle">-->
     <target name="-compile">
         <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}"
-                code.path="main.code.path" code.pattern="all.code.pattern"/>
+                src.path="main.code.path" src.pattern="all.code.pattern"/>
         <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}"
-                code.path="test.code.path" code.pattern="all.code.pattern"/>
-        <!--<copy todir="${main.classes.dir}">-->
-        <!--<fileset dir="${main.src.dir}" includes="**/application-context.xml"/>-->
-        <!--</copy>-->
+                src.path="test.code.path" src.pattern="all.code.pattern"/>
     </target>
 
     <target name="-dist" depends="-compile">
@@ -94,17 +91,17 @@
         <attribute name="src.dir"/>
         <attribute name="output.dir"/>
         <attribute name="classpath.ref"/>
-        <attribute name="code.path"/>
-        <attribute name="code.pattern"/>
+        <attribute name="src.path"/>
+        <attribute name="src.pattern"/>
         <attribute name="compiler.args" default="-Xlint"/>
         <sequential>
             <mkdir dir="@{output.dir}"/>
             <javac source="${java.src.version}" srcdir="@{src.dir}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="${compile.debug}"
                     debuglevel="${compile.debuglevel}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
                 <src>
-                    <path refid="@{code.path}"/>
+                    <path refid="@{src.path}"/>
                 </src>
-                <patternset refid="@{code.pattern}"/>
+                <patternset refid="@{src.pattern}"/>
                 <compilerarg value="@{compiler.args}"/>
             </javac>
         </sequential>
