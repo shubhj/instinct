@@ -38,7 +38,6 @@ public final class AnnotatedClassFileCheckerImpl implements AnnotatedClassFileCh
     @Suggest("Write test that ensures that we reject non-classes & return false for EdgeExceptions")
     public <A extends Annotation> boolean isAnnotated(final File classFile, final Class<A> annotationType) {
         checkNotNull(classFile, annotationType);
-        System.out.println("classFile = " + classFile);
         return classFile.getName().endsWith(".class") && checkClass(classFile, annotationType);
     }
 

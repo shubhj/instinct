@@ -33,14 +33,14 @@
 
     <target name="-compile">
 
-        <mkdir dir="${build.dir}/classes"/>
-        <javac source="${java.src.version}" srcdir="@{src.dir}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="${compile.debug}"
-                debuglevel="${compile.debuglevel}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
+        <mkdir dir="${main.classes.dir}"/>
+        <javac source="1.5" srcdir="${spec.src.dir}" destdir="${main.classes.dir}" classpathref="spec.class.path" debug="true"
+                debuglevel="source,lines,vars" deprecation="false" optimize="true">
             <src>
                 <path refid="@{code.path}"/>
             </src>
             <patternset refid="@{code.pattern}"/>
-            <compilerarg value="@{compiler.args}"/>
+            <compilerarg value="-Xlint"/>
         </javac>
 
     </target>
