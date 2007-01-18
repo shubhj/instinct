@@ -60,12 +60,10 @@
     </target>
 
     <target name="-run-specs" depends="-compile">
-
-        <taskdef name="instinct" classname="com.googlecode.instinct.integrate.ant.InstinctAntTask" classpathref="spec.class.path"/>
+        <taskdef name="instinct" classname="com.googlecode.instinct.integrate.ant.Instinct" classpathref="spec.class.path"/>
         <instinct failureproperty="specifications-failed">
             <annotatedspecificationaggregator specificationroot="${spec.classes.dir}"/>
         </instinct>
-
     </target>
 
 </project>

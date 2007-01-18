@@ -17,7 +17,7 @@
 package com.googlecode.instinct.integrate.ant;
 
 import java.io.File;
-import java.util.Arrays;
+import java.io.FileFilter;
 import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
@@ -44,10 +44,8 @@ public final class AnnotatedSpecificationAggregatorImpl implements AnnotatedSpec
 
     public JavaClassName[] getContextNames() {
         checkPreconditions();
-        System.out.println("packageRoot.getAbsolutePath() = " + specPackageRoot.getAbsolutePath());
-        final JavaClassName[] names = classLocator.locate(specPackageRoot, new AnnotationFileFilter(specPackageRoot, BehaviourContext.class));
-        System.out.println("Arrays.asList(names) = " + Arrays.asList(names));
-        return names;
+        final FileFilter filter = new AnnotationFileFilter(specPackageRoot, BehaviourContext.class);
+        return classLocator.locate(specPackageRoot, filter);
     }
 
     private void checkPreconditions() {

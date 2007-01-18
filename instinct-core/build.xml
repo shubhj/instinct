@@ -10,7 +10,7 @@
         <delete dir="${build.dir}"/>
     </target>
 
-    <!--<target name="all" depends="clean,dist,test"/>-->
+    <!--<target name="all" depends="clean,dist,test,javadoc"/>-->
     <target name="all" depends="clean,dist,atomic-test,javadoc"/>
     <target name="compile" depends="clean,-compile"/>
     <target name="dist" depends="clean,-dist"/>
@@ -24,68 +24,6 @@
     <target name="slow-test" depends="-instrumented_compile">
         <test.macro type="slow"/>
     </target>
-
-    <target name="-test" depends="atomic-test,slow-test"/>
-
-    <target name="-javadoc" depends="-compile">
-        <mkdir dir="${javadoc.dir}"/>
-        <javadoc destdir="${javadoc.dir}" author="true" version="true"
-                packagenames="${main.package.name}.*" sourcepath="${main.src.dir}" classpathref="main.class.path" failonerror="true"
-                additionalparam="-breakiterator" Use="true" source="${java.src.version}" excludepackagenames="${main.package.name}.internal.*"
-                windowtitle="${project.longname} ${project.version.full}" doctitle="${project.longname} ${project.version.full}">
-            <link href="http://java.sun.com/j2se/1.5.0/docs/api"/>
-        </javadoc>
-    </target>
-
-    <!--<target name="-compile" depends="checkstyle">-->
-    <target name="-compile">
-        <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}"
-                src.path="main.code.path" src.pattern="all.code.pattern"/>
-        <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}"
-                src.path="test.code.path" src.pattern="all.code.pattern"/>
-    </target>
-
-    <target name="-dist" depends="-compile">
-        <mkdir dir="${dist.dir}"/>
-        <jar destfile="${dist.dir}/${project.jar}">
-            <fileset dir="${main.classes.dir}"/>
-            <fileset dir="${main.src.dir}"/>
-            <fileset dir="${properties.src.dir}"/>
-        </jar>
-    </target>
-
-    <target name="-instrumented_compile" depends="-compile">
-        <mkdir dir="${coverage.dir}"/>
-        <mkdir dir="${coverage.instrumented.dir}"/>
-        <copy todir="${coverage.instrumented.dir}">
-            <fileset dir="${main.classes.dir}"/>
-        </copy>
-        <cobertura-instrument todir="${coverage.instrumented.dir}" datafile="${coverage.dir}/coverage.ser">
-            <fileset dir="${main.classes.dir}">
-                <include name="**/*.class"/>
-                <exclude name="**/instinct/example/**"/>
-                <exclude name="**/integrate/junit/**"/>
-            </fileset>
-        </cobertura-instrument>
-    </target>
-
-    <macrodef name="test.macro">
-        <attribute name="type"/>
-        <sequential>
-            <mkdir dir="${@{type}.test.results.dir}"/>
-            <junit failureproperty="@{type}.test.failed" fork="true" forkmode="perBatch">
-                <classpath refid="@{type}.test.class.path"/>
-                <sysproperty key="net.sourceforge.cobertura.datafile" file="${coverage.dir}/coverage.ser"/>
-                <batchtest todir="${@{type}.test.results.dir}">
-                    <fileset refid="@{type}.test.code.fileset"/>
-                </batchtest>
-                <formatter type="xml"/>
-                <formatter type="brief" usefile="false"/>
-            </junit>
-            <fail if="@{type}.test.failed" message="@{type} tests failed."/>
-            <macro_cobertura_report/>
-        </sequential>
-    </macrodef>
 
     <macrodef name="compile.macro">
         <attribute name="src.dir"/>
@@ -106,5 +44,66 @@
             </javac>
         </sequential>
     </macrodef>
+
+    <macrodef name="test.macro">
+        <attribute name="type"/>
+        <sequential>
+            <mkdir dir="${@{type}.test.results.dir}"/>
+            <junit failureproperty="@{type}.test.failed" fork="true" forkmode="perBatch">
+                <classpath refid="@{type}.test.class.path"/>
+                <sysproperty key="net.sourceforge.cobertura.datafile" file="${coverage.dir}/coverage.ser"/>
+                <batchtest todir="${@{type}.test.results.dir}">
+                    <fileset refid="@{type}.test.code.fileset"/>
+                </batchtest>
+                <formatter type="xml"/>
+                <formatter type="brief" usefile="false"/>
+            </junit>
+            <fail if="@{type}.test.failed" message="@{type} tests failed."/>
+            <macro_cobertura_report/>
+        </sequential>
+    </macrodef>
+
+    <target name="-test" depends="atomic-test,slow-test"/>
+
+    <target name="-javadoc" depends="-compile">
+        <mkdir dir="${javadoc.dir}"/>
+        <javadoc destdir="${javadoc.dir}" author="true" version="true"
+                packagenames="${main.package.name}.*" sourcepath="${main.src.dir}" classpathref="main.class.path" failonerror="true"
+                additionalparam="-breakiterator" Use="true" source="${java.src.version}" excludepackagenames="${main.package.name}.internal.*"
+                windowtitle="${project.longname} ${project.version.full}" doctitle="${project.longname} ${project.version.full}">
+            <link href="http://java.sun.com/j2se/1.5.0/docs/api"/>
+        </javadoc>
+    </target>
+
+    <target name="-compile" depends="checkstyle">
+    <!--<target name="-compile">-->
+        <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}" src.path="main.code.path"
+                src.pattern="all.code.pattern"/>
+        <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}" src.path="test.code.path"
+                src.pattern="all.code.pattern"/>
+    </target>
+
+    <target name="-dist" depends="-compile">
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/${project.jar}">
+            <fileset dir="${main.classes.dir}"/>
+            <fileset dir="${main.src.dir}"/>
+            <fileset dir="${properties.src.dir}"/>
+        </jar>
+    </target>
+
+    <target name="-instrumented_compile" depends="-compile">
+        <mkdir dir="${coverage.dir}"/>
+        <mkdir dir="${coverage.instrumented.dir}"/>
+        <copy todir="${coverage.instrumented.dir}">
+            <fileset dir="${main.classes.dir}"/>
+        </copy>
+        <cobertura-instrument todir="${coverage.instrumented.dir}" datafile="${coverage.dir}/coverage.ser">
+            <fileset dir="${main.classes.dir}">
+                <include name="**/*.class"/>
+                <exclude name="**/integrate/junit/**"/>
+            </fileset>
+        </cobertura-instrument>
+    </target>
 
 </project>

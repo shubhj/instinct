@@ -30,7 +30,7 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitesp
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
-public final class InstinctAntTask extends Task {
+public final class Instinct extends Task {
     private final List<SpecificationAggregator> aggregators = new ArrayList<SpecificationAggregator>();
     private final EdgeClass edgeClass = new DefaultEdgeClass();
     private final BehaviourContextRunner behaviourContextRunner = new BehaviourContextRunnerImpl();
@@ -45,21 +45,30 @@ public final class InstinctAntTask extends Task {
         aggregators.add(aggregator);
     }
 
-    @SuppressWarnings({"CatchGenericClass"})
     @Override
     public void execute() throws BuildException {
+        doExecute();
+    }
+
+    @SuppressWarnings({"CatchGenericClass"})
+    // DEBT IllegalCatch {
+    private void doExecute() {
         try {
-            final List<JavaClassName> contextClasses = findBehaviourContextsFromAllAggregators();
-            runAllContexts(contextClasses);
+            runContexts();
         } catch (Throwable e) {
             throw new BuildException(e);
         }
+    }
+    // } DEBT IllegalCatch 
+
+    private void runContexts() {
+        final List<JavaClassName> contextClasses = findBehaviourContextsFromAllAggregators();
+        runAllContexts(contextClasses);
     }
 
     @Suggest("How do report statistics? Decorate runner with a statistics reporter?")
     private void runAllContexts(final List<JavaClassName> contextClasses) {
         for (final JavaClassName contextClass : contextClasses) {
-            System.out.println("contextClass = " + contextClass.getFullyQualifiedName());
             final Class<?> cls = edgeClass.forName(contextClass.getFullyQualifiedName());
             behaviourContextRunner.run(cls);
         }
