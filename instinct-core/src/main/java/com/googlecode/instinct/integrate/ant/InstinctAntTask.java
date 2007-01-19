@@ -21,12 +21,13 @@ import static java.util.Arrays.asList;
 import java.util.List;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
-import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
+import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
+import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
-import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
+import com.googlecode.instinct.internal.util.Suggest;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
@@ -34,9 +35,11 @@ public final class InstinctAntTask extends Task {
     private final List<SpecificationAggregator> aggregators = new ArrayList<SpecificationAggregator>();
     private final EdgeClass edgeClass = new DefaultEdgeClass();
     private final BehaviourContextRunner behaviourContextRunner = new BehaviourContextRunnerImpl();
+    private String failureProperty;
 
     public void setFailureProperty(final String failureProperty) {
         checkNotWhitespace(failureProperty);
+        this.failureProperty = failureProperty;
     }
 
     @SuppressWarnings({"MethodParameterOfConcreteClass"})
@@ -47,7 +50,13 @@ public final class InstinctAntTask extends Task {
 
     @Override
     public void execute() throws BuildException {
+        checkPreconditions();
         doExecute();
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     @SuppressWarnings({"CatchGenericClass"})
@@ -66,11 +75,16 @@ public final class InstinctAntTask extends Task {
         runAllContexts(contextClasses);
     }
 
-    @Suggest("How do report statistics? Decorate runner with a statistics reporter?")
+    @Suggest("Cleanup - do something with the runner")
     private void runAllContexts(final List<JavaClassName> contextClasses) {
+        final BehaviourContextRunner runner = new StatusLoggingBehaviourContextRunner(behaviourContextRunner, new AntStatusLogger(getProject()));
+        log("foo");
         for (final JavaClassName contextClass : contextClasses) {
             final Class<?> cls = edgeClass.forName(contextClass.getFullyQualifiedName());
-            behaviourContextRunner.run(cls);
+            final BehaviourContextResult result = runner.run(cls);
+            if (!result.completedSuccessfully()) {
+                getProject().setProperty(failureProperty, "true");
+            }
         }
     }
 
@@ -82,8 +96,9 @@ public final class InstinctAntTask extends Task {
         return contextClasses;
     }
 
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    private void checkPreconditions() {
+        if (failureProperty == null) {
+            throw new IllegalStateException("Attribute failureProperty must be specified");
+        }
     }
 }

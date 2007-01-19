@@ -24,4 +24,14 @@ public interface BehaviourContextResult {
     List<SpecificationResult> getSpecificationResults();
 
     boolean completedSuccessfully();
+
+    String getBehaviourContextName();
+
+    int getNumberOfSpecificationsRun();
+
+    int getNumberOfSuccesses();
+
+    int getNumberOfFailures();
+
+    long getExecutionTime();
 }

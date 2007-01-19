@@ -22,9 +22,9 @@ public final class BehaviourContextRunnerSlowTest extends InstinctTestCase {
     private BehaviourContextRunner runner;
 
     public void testRunWithSuccess() {
-        runContext(ContextContainerWithSetUpAndTearDown.class);
-        runContext(ContextContainerWithSetUpAndTearDown.AnEmbeddedPublicContext.class);
-        runContext(ContextContainerWithConstructors.APublicConstructor.class);
+        runner.run(ContextContainerWithSetUpAndTearDown.class);
+        runner.run(ContextContainerWithSetUpAndTearDown.AnEmbeddedPublicContext.class);
+        runner.run(ContextContainerWithConstructors.APublicConstructor.class);
     }
 
     public void testInvalidConstructorsThrowConfigException() {
@@ -35,15 +35,11 @@ public final class BehaviourContextRunnerSlowTest extends InstinctTestCase {
     }
 
     private <T> void checkInvalidConstructorsGivesFailedStatus(final Class<T> cls) {
-        final BehaviourContextResult result = runContext(cls);
+        final BehaviourContextResult result = runner.run(cls);
         assertFalse(result.completedSuccessfully());
         for (final SpecificationResult specificationResult : result.getSpecificationResults()) {
             assertFalse(specificationResult.completedSuccessfully());
         }
-    }
-
-    private <T> BehaviourContextResult runContext(final Class<T> cls) {
-        return runner.run(cls);
     }
 
     @Override

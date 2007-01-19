@@ -19,9 +19,20 @@ package com.googlecode.instinct.internal.runner;
 import java.util.ArrayList;
 import java.util.List;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 
 public final class BehaviourContextResultImpl implements BehaviourContextResult {
     private final List<SpecificationResult> specificationResults = new ArrayList<SpecificationResult>();
+    private final String behaviourContextName;
+
+    public BehaviourContextResultImpl(final String behaviourContextName) {
+        checkNotWhitespace(behaviourContextName);
+        this.behaviourContextName = behaviourContextName;
+    }
+
+    public String getBehaviourContextName() {
+        return behaviourContextName;
+    }
 
     public void addSpecificationResult(final SpecificationResult specificationResult) {
         checkNotNull(specificationResult);
@@ -39,5 +50,35 @@ public final class BehaviourContextResultImpl implements BehaviourContextResult 
             }
         }
         return true;
+    }
+
+    public int getNumberOfSpecificationsRun() {
+        return getSpecificationResults().size();
+    }
+
+    public int getNumberOfSuccesses() {
+        return countStatus(true);
+    }
+
+    public int getNumberOfFailures() {
+        return countStatus(false);
+    }
+
+    public long getExecutionTime() {
+        long executionTime = 0L;
+        for (final SpecificationResult specificationResult : getSpecificationResults()) {
+            executionTime += specificationResult.getExecutionTime();
+        }
+        return executionTime;
+    }
+
+    private int countStatus(final boolean succeeded) {
+        int number = 0;
+        for (final SpecificationResult specificationResult : getSpecificationResults()) {
+            if (specificationResult.completedSuccessfully() == succeeded) {
+                number++;
+            }
+        }
+        return number;
     }
 }

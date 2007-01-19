@@ -16,11 +16,20 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
+import org.apache.tools.ant.Project;
 
-public final class AnnotatedSpecificationAggregatorImplAtomicTest extends InstinctTestCase {
-    public void testProperties() {
-        checkClass(AnnotatedSpecificationAggregatorImpl.class, SpecificationAggregator.class);
+public final class AntStatusLogger implements StatusLogger {
+    private final Project project;
+
+    public AntStatusLogger(final Project project) {
+        checkNotNull(project);
+        this.project = project;
+    }
+
+    public void log(final String message) {
+        checkNotWhitespace(message);
+        project.log(message);
     }
 }

@@ -16,9 +16,6 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import com.googlecode.instinct.internal.util.Suggest;
-
-@Suggest("Can we remove this?")
-public interface AnnotatedSpecificationAggregator extends SpecificationAggregator {
-    void setSpecificationRoot(String specificationRoot);
+public interface StatusLogger {
+    void log(String message);
 }

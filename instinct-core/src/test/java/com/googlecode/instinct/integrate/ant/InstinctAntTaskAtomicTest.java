@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import static com.googlecode.instinct.mock.Mocker.mock;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import org.apache.tools.ant.Task;
@@ -25,7 +24,6 @@ import org.apache.tools.ant.Task;
 public final class InstinctAntTaskAtomicTest extends InstinctTestCase {
     private static final String FAILURE_PROPERTY = "specifications-failed";
     private InstinctAntTask antTask;
-    private AnnotatedSpecificationAggregator behaviourContextAggregator;
 
     public void testProperties() {
         checkClass(InstinctAntTask.class, Task.class);
@@ -42,11 +40,6 @@ public final class InstinctAntTaskAtomicTest extends InstinctTestCase {
 
     public void testHasACloneMethodToSupportTaskApi() throws CloneNotSupportedException {
         antTask.clone();
-    }
-
-    @Override
-    public void setUpTestDoubles() {
-        behaviourContextAggregator = mock(AnnotatedSpecificationAggregator.class);
     }
 
     @Override
