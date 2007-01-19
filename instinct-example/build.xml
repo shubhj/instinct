@@ -12,12 +12,7 @@
     <property name="spec.classes.dir" value="${build.dir}/spec-classes"/>
 
 
-    <path id="main.class.path">
-        <fileset dir="${basedir}">
-            <patternset refid="main.classpath.pattern"/>
-        </fileset>
-    </path>
-
+    <path id="main.class.path"/>
     <path id="main.class.path">
         <pathelement location="${main.classes.dir}"/>
     </path>
