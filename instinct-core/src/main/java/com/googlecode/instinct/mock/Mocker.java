@@ -54,6 +54,18 @@ public final class Mocker {
         return MOCKERY.times(expectedNumberOfCalls);
     }
 
+//    public static InvocationMatcher times(final int minNumberOfCalls, final int maxNumberOfCalls) {
+//        return MOCKERY.times(minNumberOfCalls, maxNumberOfCalls);
+//    }
+
+    public static InvocationMatcher atLeastOnce() {
+        return MOCKERY.atLeastOnce();
+    }
+
+    public static InvocationMatcher anyTimes() {
+        return MOCKERY.anyTimes();
+    }
+
     public static Constraint same(final Object argument) {
         return MOCKERY.same(argument);
     }

@@ -23,7 +23,7 @@ import junit.framework.TestCase;
 public abstract class InstinctTestCase extends TestCase {
     @SuppressWarnings({"ProhibitedExceptionDeclared"})
     @Override
-    public void runBare() throws Throwable {
+    public final void runBare() throws Throwable {
         setUpTestDoubles();
         setUpSubject();
         try {

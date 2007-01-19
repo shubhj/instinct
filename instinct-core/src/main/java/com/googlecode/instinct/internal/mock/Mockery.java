@@ -34,6 +34,12 @@ public interface Mockery {
 
     InvocationMatcher times(int expectedNumberOfCalls);
 
+//    InvocationMatcher times(int minNumberOfCalls, int maxNumberOfCalls);
+
+    InvocationMatcher atLeastOnce();
+
+    InvocationMatcher anyTimes();
+
     Constraint same(Object argument);
 
     Constraint anything();
