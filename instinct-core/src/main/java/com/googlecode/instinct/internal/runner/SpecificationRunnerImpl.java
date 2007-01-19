@@ -21,6 +21,9 @@ import com.googlecode.instinct.internal.mock.MockVerifier;
 import com.googlecode.instinct.internal.mock.MockVerifierImpl;
 import com.googlecode.instinct.internal.mock.TestDoubleAutoWirer;
 import com.googlecode.instinct.internal.mock.TestDoubleAutoWirerImpl;
+import static com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus.VERIFICATION_SUCCESS;
+import com.googlecode.instinct.internal.util.Clock;
+import com.googlecode.instinct.internal.util.ClockImpl;
 import com.googlecode.instinct.internal.util.ConstructorInvoker;
 import com.googlecode.instinct.internal.util.ConstructorInvokerImpl;
 import com.googlecode.instinct.internal.util.MethodInvoker;
@@ -30,24 +33,44 @@ import com.googlecode.instinct.internal.util.Suggest;
 
 final class SpecificationRunnerImpl implements SpecificationRunner {
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
-    private MethodInvoker methodInvoker = new MethodInvokerImpl();
-    private LifeCycleMethodValidator methodValidator = new LifeCycleMethodValidatorImpl();
     private final TestDoubleAutoWirer testDoubleAutoWirer = new TestDoubleAutoWirerImpl();
     private final MockVerifier mockVerifier = new MockVerifierImpl();
+    private final Clock clock = new ClockImpl();
+    private MethodInvoker methodInvoker = new MethodInvokerImpl();
+    private LifeCycleMethodValidator methodValidator = new LifeCycleMethodValidatorImpl();
 
     @Suggest({"Does each specification get it's own Mockery?", " How will this work if we want to allow manual mocking?",
-            "Need access to the same statics...",
+            "Need access to the same statics",
             "Maybe pass in a BC class instantiation strategy, so that we can enable creating of only one instance of a BC, rather than one per spec"})
-    public void run(final SpecificationContext context) {
+    public SpecificationResult run(final SpecificationContext context) {
         checkNotNull(context);
-        final Object instance = invokeConstructor(context.getBehaviourContextClass());
+        return doRun(context);
+    }
+
+    @SuppressWarnings({"CatchGenericClass"})
+    // DEBT IllegalCatch {
+    private SpecificationResult doRun(final SpecificationContext specificationContext) {
+        final long startTime = clock.getCurrentTime();
         try {
-            testDoubleAutoWirer.wire(instance);
-            runMethods(instance, context.getBeforeSpecificationMethods());
-            attemptToInvoke(instance, context.getSpecificationMethod());
-            mockVerifier.verify(instance);
+            final Object instance = invokeConstructor(specificationContext.getBehaviourContextClass());
+            runSpecificationLifecycle(instance, specificationContext);
+            return new SpecificationResultImpl(specificationContext.getSpecificationMethod().getName(), VERIFICATION_SUCCESS,
+                    clock.getElapsedTime(startTime));
+        } catch (Throwable e) {
+            final SpecificationRunStatus status = new SpecificationRunFailureStatus(e);
+            return new SpecificationResultImpl(specificationContext.getSpecificationMethod().getName(), status, clock.getElapsedTime(startTime));
+        }
+    }
+    // } DEBT IllegalCatch
+
+    private void runSpecificationLifecycle(final Object behaviourContext, final SpecificationContext specificationContext) {
+        try {
+            testDoubleAutoWirer.wire(behaviourContext);
+            runMethods(behaviourContext, specificationContext.getBeforeSpecificationMethods());
+            attemptToInvoke(behaviourContext, specificationContext.getSpecificationMethod());
+            mockVerifier.verify(behaviourContext);
         } finally {
-            runMethods(instance, context.getAfterSpecificationMethods());
+            runMethods(behaviourContext, specificationContext.getAfterSpecificationMethods());
         }
     }
 

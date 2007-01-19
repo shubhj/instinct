@@ -21,27 +21,27 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitesp
 
 public final class SpecificationResultImpl implements SpecificationResult {
     private final String specificationName;
-    private final SpecificationRunError error;
+    private final SpecificationRunStatus status;
     private final long executionTime;
 
-    public SpecificationResultImpl(final String specificationName, final SpecificationRunError error, final long executionTime) {
+    public SpecificationResultImpl(final String specificationName, final SpecificationRunStatus status, final long executionTime) {
         checkNotWhitespace(specificationName);
-        checkNotNull(error);
+        checkNotNull(status);
         this.specificationName = specificationName;
-        this.error = error;
+        this.status = status;
         this.executionTime = executionTime;
     }
 
     public boolean completedSuccessfully() {
-        return NoErrorSpecificationRunError.class.isAssignableFrom(error.getClass());
+        return SpecificationRunSuccessStatus.class.isAssignableFrom(status.getClass());
     }
 
     public String getSpecificationName() {
         return specificationName;
     }
 
-    public SpecificationRunError getError() {
-        return error;
+    public SpecificationRunStatus getError() {
+        return status;
     }
 
     public long getExecutionTime() {

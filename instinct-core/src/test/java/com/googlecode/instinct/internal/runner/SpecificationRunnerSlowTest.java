@@ -18,7 +18,6 @@ package com.googlecode.instinct.internal.runner;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import com.googlecode.instinct.core.LifeCycleMethodConfigurationException;
 import com.googlecode.instinct.core.annotate.AfterSpecification;
 import com.googlecode.instinct.core.annotate.BeforeSpecification;
 import com.googlecode.instinct.core.annotate.Specification;
@@ -29,7 +28,6 @@ import com.googlecode.instinct.core.naming.SpecificationNamingConvention;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
 import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 
 @SuppressWarnings({"OverlyCoupledClass"})
 public final class SpecificationRunnerSlowTest extends InstinctTestCase {
@@ -55,16 +53,9 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
     private <T> void checkInvalidMethodsBarf(final Class<T> cls) {
         final SpecificationContext[] contexts = findContexts(cls);
         for (final SpecificationContext context : contexts) {
-            runSpecificationExpectingException(context);
+            final SpecificationResult specificationResult = runner.run(context);
+            assertFalse(specificationResult.completedSuccessfully());
         }
-    }
-
-    private void runSpecificationExpectingException(final SpecificationContext context) {
-        assertThrows(LifeCycleMethodConfigurationException.class, new Runnable() {
-            public void run() {
-                runner.run(context);
-            }
-        });
     }
 
     private <T> SpecificationContext[] findContexts(final Class<T> cls) {

@@ -14,8 +14,19 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.runner;
+package com.googlecode.instinct.internal.util;
 
-public interface SpecificationRunError {
-    Throwable getCauseOfError();
+import com.googlecode.instinct.internal.edge.java.lang.SystemEdge;
+import com.googlecode.instinct.internal.edge.java.lang.SystemEdgeImpl;
+
+public final class ClockImpl implements Clock {
+    private final SystemEdge systemEdge = new SystemEdgeImpl();
+
+    public long getCurrentTime() {
+        return systemEdge.currentTimeMillis();
+    }
+
+    public long getElapsedTime(final long startTime) {
+        return getCurrentTime() - startTime;
+    }
 }

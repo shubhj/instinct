@@ -16,8 +16,16 @@
 
 package com.googlecode.instinct.internal.runner;
 
-public final class NoErrorSpecificationRunError implements SpecificationRunError {
-    public Throwable getCauseOfError() {
-        throw new UnsupportedOperationException();
+import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+
+public final class SpecificationRunSuccessStatusAtomicTest extends InstinctTestCase {
+    public void testProperties() {
+        checkClass(SpecificationRunSuccessStatus.class, SpecificationRunStatus.class);
+    }
+
+    public void testGetDetailedStatusReturnsSuccessMessage() {
+        final SpecificationRunStatus runStatus = new SpecificationRunSuccessStatus();
+        assertEquals("Specification of behaviour verified correctly", (String) runStatus.getDetailedStatus());
     }
 }

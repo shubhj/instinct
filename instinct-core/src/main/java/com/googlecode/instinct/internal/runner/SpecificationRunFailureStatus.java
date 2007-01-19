@@ -16,18 +16,17 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import static com.googlecode.instinct.mock.Mocker.mock;
-import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
-public final class SpecificationRunErrorImplAtomicTest extends InstinctTestCase {
-    public void testProperties() {
-        checkClass(SpecificationRunErrorImpl.class, SpecificationRunError.class);
+public final class SpecificationRunFailureStatus implements SpecificationRunStatus {
+    private final Throwable error;
+
+    public SpecificationRunFailureStatus(final Throwable error) {
+        checkNotNull(error);
+        this.error = error;
     }
 
-    public void testGetCauseOfError() {
-        final Throwable error = mock(Throwable.class);
-        final SpecificationRunError runError = new SpecificationRunErrorImpl(error);
-        assertSame(error, runError.getCauseOfError());
+    public Object getDetailedStatus() {
+        return error;
     }
 }

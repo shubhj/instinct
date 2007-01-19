@@ -17,20 +17,10 @@
 package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
-public final class NoErrorSpecificationRunErrorAtomicTest extends InstinctTestCase {
+public final class SpecificationResultImplAtomicTest extends InstinctTestCase {
     public void testProperties() {
-        checkClass(NoErrorSpecificationRunError.class, SpecificationRunError.class);
-    }
-
-    public void testGetCauseOfErrorThrowsException() {
-        assertThrows(UnsupportedOperationException.class, new Runnable() {
-            public void run() {
-                final SpecificationRunError runError = new NoErrorSpecificationRunError();
-                runError.getCauseOfError();
-            }
-        });
+        checkClass(SpecificationResultImpl.class, SpecificationResult.class);
     }
 }

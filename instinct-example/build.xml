@@ -11,9 +11,18 @@
     <property name="main.classes.dir" value="${build.dir}/main-classes"/>
     <property name="spec.classes.dir" value="${build.dir}/spec-classes"/>
 
+
     <path id="main.class.path">
+        <fileset dir="${basedir}">
+            <patternset refid="main.classpath.pattern"/>
+        </fileset>
+    </path>
+
+    <path id="main.class.path">
+        <pathelement location="${main.classes.dir}"/>
     </path>
     <path id="spec.class.path">
+        <path refid="main.class.path"/>
         <fileset dir="${basedir}">
             <include name="${lib.dir}/instinct-0.0.1.jar"/>
             <include name="${lib.dir}/boost-982.jar"/>
@@ -23,7 +32,6 @@
             <include name="${lib.dir}/easymockclassextension-2.2.jar"/>
             <include name="${lib.dir}/ant-1.7.0.jar"/>
         </fileset>
-        <pathelement location="${main.classes.dir}"/>
         <pathelement location="${spec.classes.dir}"/>
     </path>
 
@@ -60,7 +68,7 @@
     </target>
 
     <target name="-run-specs" depends="-compile">
-        <taskdef name="instinct" classname="com.googlecode.instinct.integrate.ant.Instinct" classpathref="spec.class.path"/>
+        <taskdef name="instinct" classname="com.googlecode.instinct.integrate.ant.InstinctAntTask" classpathref="spec.class.path"/>
         <instinct failureproperty="specifications-failed">
             <annotatedspecificationaggregator specificationroot="${spec.classes.dir}"/>
         </instinct>

@@ -22,18 +22,18 @@ import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import org.apache.tools.ant.Task;
 
 @SuppressWarnings({"InstanceVariableOfConcreteClass"})
-public final class InstinctAtomicTest extends InstinctTestCase {
+public final class InstinctAntTaskAtomicTest extends InstinctTestCase {
     private static final String FAILURE_PROPERTY = "specifications-failed";
-    private Instinct antTask;
+    private InstinctAntTask antTask;
     private AnnotatedSpecificationAggregator behaviourContextAggregator;
 
     public void testProperties() {
-        checkClass(Instinct.class, Task.class);
+        checkClass(InstinctAntTask.class, Task.class);
     }
 
     public void testContainsASinngleNoArgumentConstructor() {
-        assertEquals(1, Instinct.class.getConstructors().length);
-        assertEquals(0, Instinct.class.getConstructors()[0].getParameterTypes().length);
+        assertEquals(1, InstinctAntTask.class.getConstructors().length);
+        assertEquals(0, InstinctAntTask.class.getConstructors()[0].getParameterTypes().length);
     }
 
     public void testSetFailureProperty() {
@@ -51,6 +51,6 @@ public final class InstinctAtomicTest extends InstinctTestCase {
 
     @Override
     public void setUpSubject() {
-        antTask = new Instinct();
+        antTask = new InstinctAntTask();
     }
 }

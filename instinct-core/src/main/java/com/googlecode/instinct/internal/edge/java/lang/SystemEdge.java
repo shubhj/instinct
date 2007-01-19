@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.runner;
+package com.googlecode.instinct.internal.edge.java.lang;
 
-public interface BehaviourContextRunner {
-    <T> BehaviourContextResult run(final Class<T> behaviourContextClass);
+public interface SystemEdge {
+    long currentTimeMillis();
 }
-

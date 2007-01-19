@@ -30,7 +30,7 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitesp
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
-public final class Instinct extends Task {
+public final class InstinctAntTask extends Task {
     private final List<SpecificationAggregator> aggregators = new ArrayList<SpecificationAggregator>();
     private final EdgeClass edgeClass = new DefaultEdgeClass();
     private final BehaviourContextRunner behaviourContextRunner = new BehaviourContextRunnerImpl();
@@ -59,7 +59,7 @@ public final class Instinct extends Task {
             throw new BuildException(e);
         }
     }
-    // } DEBT IllegalCatch 
+    // } DEBT IllegalCatch
 
     private void runContexts() {
         final List<JavaClassName> contextClasses = findBehaviourContextsFromAllAggregators();

@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.internal.runner;
 
-public interface BehaviourContextRunner {
-    <T> BehaviourContextResult run(final Class<T> behaviourContextClass);
+public interface SpecificationRunStatus {
+    Object getDetailedStatus();
 }
-

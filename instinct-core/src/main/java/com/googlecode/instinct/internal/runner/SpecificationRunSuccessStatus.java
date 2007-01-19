@@ -16,7 +16,13 @@
 
 package com.googlecode.instinct.internal.runner;
 
-public interface BehaviourContextRunner {
-    <T> BehaviourContextResult run(final Class<T> behaviourContextClass);
-}
+import com.googlecode.instinct.internal.util.Suggest;
 
+@Suggest("Implement readObject() & writeObject() to ensure only ever one VERIFICATION_SUCCESS")
+public final class SpecificationRunSuccessStatus implements SpecificationRunStatus {
+    public static final SpecificationRunStatus VERIFICATION_SUCCESS = new SpecificationRunSuccessStatus();
+
+    public Object getDetailedStatus() {
+        return "Specification of behaviour verified correctly";
+    }
+}

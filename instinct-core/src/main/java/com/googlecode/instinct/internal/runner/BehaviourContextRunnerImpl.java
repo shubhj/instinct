@@ -28,31 +28,30 @@ import com.googlecode.instinct.core.naming.NamingConvention;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 
 public final class BehaviourContextRunnerImpl implements BehaviourContextRunner {
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
     private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
 
-    @Suggest({"Make this return a metadata object containing the number of tests that were run",
-            "Don't want to stop running contexts on the first specification failure, need to track errors and report them back through metadata"})
-    public <T> void run(final Class<T> behaviourContextClass) {
+    public <T> BehaviourContextResult run(final Class<T> behaviourContextClass) {
         checkNotNull(behaviourContextClass);
         final Method[] specificationMethods = getMethods(behaviourContextClass, Specification.class, new BehaviourContextNamingConvention());
         final Method[] beforeSpecificationMethods = getMethods(behaviourContextClass, BeforeSpecification.class,
                 new BeforeSpecificationNamingConvention());
         final Method[] afterSpecificationMethods = getMethods(behaviourContextClass, AfterSpecification.class,
                 new AfterSpecificationNamingConvention());
-        runSpecifications(behaviourContextClass, specificationMethods, beforeSpecificationMethods, afterSpecificationMethods);
+        return runSpecifications(behaviourContextClass, specificationMethods, beforeSpecificationMethods, afterSpecificationMethods);
     }
 
-    private <T> void runSpecifications(final Class<T> behaviourContextClass, final Method[] specificationMethods,
+    private <T> BehaviourContextResult runSpecifications(final Class<T> behaviourContextClass, final Method[] specificationMethods,
             final Method[] beforeSpecificationMethods, final Method[] afterSpecificationMethods) {
+        final BehaviourContextResult behaviourContextResult = new BehaviourContextResultImpl();
         for (final Method specificationMethod : specificationMethods) {
-            final SpecificationContext specificationContext = new SpecificationContextImpl(
-                    behaviourContextClass, beforeSpecificationMethods, afterSpecificationMethods, specificationMethod);
-            specificationRunner.run(specificationContext);
+            final SpecificationContext specificationContext = new SpecificationContextImpl(behaviourContextClass, beforeSpecificationMethods,
+                    afterSpecificationMethods, specificationMethod);
+            behaviourContextResult.addSpecificationResult(specificationRunner.run(specificationContext));
         }
+        return behaviourContextResult;
     }
 
     private <T> Method[] getMethods(final Class<T> behaviourContextClass, final Class<? extends Annotation> annotationType,

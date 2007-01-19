@@ -16,8 +16,6 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.core.BehaviourContextConfigurationException;
-import static com.googlecode.instinct.test.AssertTestChecker.assertThrows;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 public final class BehaviourContextRunnerSlowTest extends InstinctTestCase {
@@ -30,22 +28,22 @@ public final class BehaviourContextRunnerSlowTest extends InstinctTestCase {
     }
 
     public void testInvalidConstructorsThrowConfigException() {
-        checkInvalidConstructorsThrowConfigException(ContextContainerWithConstructors.AConstructorWithParameters.class);
-        checkInvalidConstructorsThrowConfigException(ContextContainerWithConstructors.APrivateConstructor.class);
-        checkInvalidConstructorsThrowConfigException(ContextContainerWithConstructors.APackageLocalConstructor.class);
-        checkInvalidConstructorsThrowConfigException(ContextContainerWithConstructors.AProtectedConstructor.class);
+        checkInvalidConstructorsGivesFailedStatus(ContextContainerWithConstructors.AConstructorWithParameters.class);
+        checkInvalidConstructorsGivesFailedStatus(ContextContainerWithConstructors.APrivateConstructor.class);
+        checkInvalidConstructorsGivesFailedStatus(ContextContainerWithConstructors.APackageLocalConstructor.class);
+        checkInvalidConstructorsGivesFailedStatus(ContextContainerWithConstructors.AProtectedConstructor.class);
     }
 
-    private <T> void checkInvalidConstructorsThrowConfigException(final Class<T> cls) {
-        assertThrows(BehaviourContextConfigurationException.class, new Runnable() {
-            public void run() {
-                runContext(cls);
-            }
-        });
+    private <T> void checkInvalidConstructorsGivesFailedStatus(final Class<T> cls) {
+        final BehaviourContextResult result = runContext(cls);
+        assertFalse(result.completedSuccessfully());
+        for (final SpecificationResult specificationResult : result.getSpecificationResults()) {
+            assertFalse(specificationResult.completedSuccessfully());
+        }
     }
 
-    private <T> void runContext(final Class<T> cls) {
-        runner.run(cls);
+    private <T> BehaviourContextResult runContext(final Class<T> cls) {
+        return runner.run(cls);
     }
 
     @Override
