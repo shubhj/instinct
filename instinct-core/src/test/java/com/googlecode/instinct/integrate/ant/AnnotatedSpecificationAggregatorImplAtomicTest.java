@@ -21,6 +21,6 @@ import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
 public final class AnnotatedSpecificationAggregatorImplAtomicTest extends InstinctTestCase {
     public void testProperties() {
-        checkClass(AnnotatedSpecificationAggregatorImpl.class, SpecificationAggregator.class);
+        checkClass(AnnotatedSpecificationAggregator.class, SpecificationAggregator.class);
     }
 }

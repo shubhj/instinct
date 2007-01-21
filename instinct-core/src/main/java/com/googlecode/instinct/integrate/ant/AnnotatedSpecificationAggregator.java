@@ -27,12 +27,12 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import org.apache.tools.ant.Project;
 
-public final class AnnotatedSpecificationAggregatorImpl implements SpecificationAggregator {
+public final class AnnotatedSpecificationAggregator implements SpecificationAggregator {
     private final ClassLocator classLocator = new ClassLocatorImpl();
     private final Project project;
     private File specPackageRoot;
 
-    public AnnotatedSpecificationAggregatorImpl(final Project project) {
+    public AnnotatedSpecificationAggregator(final Project project) {
         checkNotNull(project);
         this.project = project;
     }
