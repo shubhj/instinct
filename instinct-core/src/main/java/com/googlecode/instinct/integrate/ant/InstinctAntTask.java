@@ -31,6 +31,8 @@ import com.googlecode.instinct.internal.util.Suggest;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
+@Suggest({"Will probably need formatters that are specified in the build config", "brief (what is there now)", "plain - each spec on a new line",
+        "verbose"})
 public final class InstinctAntTask extends Task {
     private final List<SpecificationAggregator> aggregators = new ArrayList<SpecificationAggregator>();
     private final EdgeClass edgeClass = new DefaultEdgeClass();
