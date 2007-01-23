@@ -24,7 +24,7 @@ public final class Formatter {
     public void setType(final String type) {
         checkNotWhitespace(type);
         if (!type.equals("brief") && !type.equals("verbose")) {
-            throw new UnsupportedOperationException("Formatter type " + type + " is not supported");
+            throw new UnsupportedOperationException("Formatter type '" + type + "' is not supported, supported types are 'brief' & 'verbose'");
         }
         this.type = type;
     }

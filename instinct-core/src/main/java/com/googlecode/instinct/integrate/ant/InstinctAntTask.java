@@ -79,7 +79,7 @@ public final class InstinctAntTask extends Task implements StatusLogger {
 
     private void runContexts() {
         final List<JavaClassName> contextClasses = findBehaviourContextsFromAllAggregators();
-        final BehaviourContextRunner runner = new StatusLoggingBehaviourContextRunner(new BehaviourContextRunnerImpl(),
+        final BehaviourContextRunner runner = new AntBehaviourContextRunner(new BehaviourContextRunnerImpl(),
                 formatter.createMessageBuilder(), this);
         runContexts(runner, contextClasses);
     }

@@ -17,8 +17,7 @@
 package com.googlecode.instinct.integrate.ant;
 
 import com.googlecode.instinct.internal.runner.BehaviourContextResult;
-import com.googlecode.instinct.internal.runner.SpecificationResult;
 
 public interface BehaviourContextResultMessageBuilder {
-    String buildMessage(BehaviourContextResult behaviourContextResult, SpecificationResult specificationResult);
+    String buildMessage(BehaviourContextResult behaviourContextResult);
 }

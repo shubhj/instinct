@@ -17,13 +17,14 @@
 package com.googlecode.instinct.integrate.ant;
 
 import com.googlecode.instinct.internal.runner.BehaviourContextResult;
-import com.googlecode.instinct.internal.runner.SpecificationResult;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class BriefBehaviourContextResultMessageBuilder implements BehaviourContextResultMessageBuilder {
     private static final double MILLISECONDS_IN_SECONDS = 1000.0;
     private static final String SPACER = ", ";
 
-    public String buildMessage(final BehaviourContextResult behaviourContextResult, final SpecificationResult specificationResult) {
+    public String buildMessage(final BehaviourContextResult behaviourContextResult) {
+        checkNotNull(behaviourContextResult);
         return buildContextSummary(behaviourContextResult);
     }
 

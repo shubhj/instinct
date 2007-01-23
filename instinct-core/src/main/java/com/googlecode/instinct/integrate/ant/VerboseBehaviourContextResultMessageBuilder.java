@@ -16,34 +16,79 @@
 
 package com.googlecode.instinct.integrate.ant;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintWriter;
 import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
-import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 final class VerboseBehaviourContextResultMessageBuilder implements BehaviourContextResultMessageBuilder {
     private static final double MILLISECONDS_IN_SECONDS = 1000.0;
+    private static final String TAB = "\t";
     private static final String SPACER = ", ";
+    private static final char NEW_LINE = '\n';
 
-    @Suggest("Implement this.")
-    public String buildMessage(final BehaviourContextResult behaviourContextResult, final SpecificationResult specificationResult) {
-        return buildContextSummary(behaviourContextResult);
+    public String buildMessage(final BehaviourContextResult behaviourContextResult) {
+        checkNotNull(behaviourContextResult);
+        final StringBuilder builder = new StringBuilder();
+        appendSummary(builder, behaviourContextResult);
+        appendSpecifications(builder, behaviourContextResult);
+        builder.append(NEW_LINE);
+        return builder.toString();
     }
 
-    private String buildContextSummary(final BehaviourContextResult behaviourContextResult) {
-        final StringBuilder builder = new StringBuilder();
+    private void appendSpecifications(final StringBuilder builder, final BehaviourContextResult behaviourContextResult) {
+        for (final SpecificationResult specificationResult : behaviourContextResult.getSpecificationResults()) {
+            appendSpecification(builder, specificationResult);
+        }
+    }
+
+    private void appendSummary(final StringBuilder builder, final BehaviourContextResult behaviourContextResult) {
         builder.append("Behaviour context: ").append(behaviourContextResult.getBehaviourContextName()).append(SPACER);
         builder.append("Specifications run: ").append(getNumberOfSpecsRun(behaviourContextResult)).append(SPACER);
         builder.append("Successes: ").append(behaviourContextResult.getNumberOfSuccesses()).append(SPACER);
         builder.append("Failures: ").append(behaviourContextResult.getNumberOfFailures()).append(SPACER);
-        builder.append("Time elapsed: ").append(getExecutionTime(behaviourContextResult)).append(" seconds");
-        return builder.toString();
+        builder.append("Total time elapsed: ").append(getExecutionTime(behaviourContextResult)).append(" seconds");
+        builder.append(NEW_LINE);
     }
+
+    private void appendSpecification(final StringBuilder builder, final SpecificationResult specificationResult) {
+        builder.append(TAB).append(specificationResult.getSpecificationName()).append(' ').append(
+                specificationResult.completedSuccessfully() ? "succeeded" : "FAILED").append(SPACER);
+        builder.append("time elapsed: ").append(millisToSeconds(specificationResult.getExecutionTime())).append(" seconds");
+        if (!specificationResult.completedSuccessfully()) {
+            builder.append(NEW_LINE).append(TAB).append("Cause: ");
+            appendFailureCause(specificationResult.getError(), builder);
+        }
+        builder.append(NEW_LINE);
+    }
+
+    private void appendFailureCause(final SpecificationRunStatus status, final StringBuilder builder) {
+        // Note. The nesting is deep as we are going through reflection via an edge.
+        final Throwable failureCause = ((Throwable) status.getDetailedStatus()).getCause().getCause();
+        final String stackTrace = getFailureStackTrace(failureCause);
+        final String s = stackTrace.replace(TAB, TAB + TAB);
+        builder.append(s);
+    }
+
+    // DEBT GenericIllegalRegexp {
+    private String getFailureStackTrace(final Throwable failureCause) {
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        failureCause.printStackTrace(new PrintWriter(out, true));
+        return out.toString();
+    }
+    // } DEBT GenericIllegalRegexp
 
     private int getNumberOfSpecsRun(final BehaviourContextResult behaviourContextResult) {
         return behaviourContextResult.getSpecificationResults().size();
     }
 
     private double getExecutionTime(final BehaviourContextResult behaviourContextResult) {
-        return (double) behaviourContextResult.getExecutionTime() / MILLISECONDS_IN_SECONDS;
+        return millisToSeconds(behaviourContextResult.getExecutionTime());
+    }
+
+    private double millisToSeconds(final long millis) {
+        return (double) millis / MILLISECONDS_IN_SECONDS;
     }
 }
