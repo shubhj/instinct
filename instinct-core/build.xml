@@ -10,12 +10,13 @@
         <delete dir="${build.dir}"/>
     </target>
 
-    <!--<target name="all" depends="clean,dist,test,javadoc"/>-->
-    <target name="all" depends="clean,dist,atomic-test,javadoc"/>
+    <!-- FIXME: Add slow tests back into the mixture. -->
+    <target name="all" depends="clean,release"/>
     <target name="compile" depends="clean,-compile"/>
-    <target name="dist" depends="clean,-dist"/>
     <target name="test" depends="clean,-test"/>
     <target name="javadoc" depends="clean,-javadoc"/>
+    <target name="jar" depends="clean,-jar"/>
+    <target name="release" depends="clean,-release"/>
 
     <target name="atomic-test" depends="-instrumented_compile">
         <test.macro type="atomic"/>
@@ -24,6 +25,27 @@
     <target name="slow-test" depends="-instrumented_compile">
         <test.macro type="slow"/>
     </target>
+
+    <target name="-release" depends="atomic-test,-jar,javadoc">
+        <mkdir dir="${release.dir}"/>
+        <zip destfile="${release.dir}/${project.zip}">
+            <!-- FIXME: source, instinct jar, dependency libraries, readme, licence, release notes -->
+            <fileset dir="${basedir}">
+                <include name="README"/>
+                <include name="LICENCE"/>
+                <include name="RELEASE-NOTES"/>
+            </fileset>
+            <fileset dir="${build.dir}" includes="${project.jar}"/>
+            <zipfileset dir="${lib.dir}/ant" prefix="lib" includes="ant-1.*.jar"/>
+            <zipfileset dir="${lib.dir}" prefix="lib" includes="boost-*"/>
+            <zipfileset dir="${lib.dir}" prefix="lib" includes="cglib-nodep-*.jar"/>
+            <zipfileset dir="${lib.dir}/easymock" prefix="lib" includes="easymockclassextension-*.jar,easymock-license.txt"/>
+            <zipfileset dir="${lib.dir}/jmock" prefix="lib" includes="*"/>
+            <zipfileset dir="${javadoc.dir}" prefix="docs/api"/>
+        </zip>
+        <!-- FIXME: Build zip file -->
+    </target>
+
 
     <macrodef name="compile.macro">
         <attribute name="src.dir"/>
@@ -76,16 +98,15 @@
     </target>
 
     <target name="-compile" depends="checkstyle">
-    <!--<target name="-compile">-->
+        <!--<target name="-compile">-->
         <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}" src.path="main.code.path"
                 src.pattern="all.code.pattern"/>
         <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}" src.path="test.code.path"
                 src.pattern="all.code.pattern"/>
     </target>
 
-    <target name="-dist" depends="-compile">
-        <mkdir dir="${dist.dir}"/>
-        <jar destfile="${dist.dir}/${project.jar}">
+    <target name="-jar" depends="-compile">
+        <jar destfile="${build.dir}/${project.jar}">
             <fileset dir="${main.classes.dir}"/>
             <fileset dir="${main.src.dir}"/>
             <fileset dir="${properties.src.dir}"/>

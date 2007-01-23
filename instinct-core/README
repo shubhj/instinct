@@ -13,21 +13,20 @@ creation of mocks, stubs, test subjects & unique fields; a verification API
 (similar to JUnit's Assert); unique utilities; and JUnit test runner integration.
 
 
-* Binaries *
+* Distribution Contents *
 
-Instinct is bundled as a single Jar file: instinct.jar.
+The distribution contains the following contents:
 
-Source code is included in the Jar for convenience (TODO add this!).
-
-
-* Building From Source *
-
-TODO
+o ...
+o lib
 
 
-* Dependencies *
+(TODO: Add a listing of contents)
 
-Instinct depends on the following runtime libraries:
+Instinct is bundled as a single Jar file: instinct-<version>.jar, source code is
+included in the Jar for convenience.
+
+Instinct depends on the following runtime libraries, packaged within the "lib" directory.
 
 o boost-982.jar
 o cglib-nodep-2.2_beta1.jar
@@ -35,24 +34,26 @@ o jmock-1.1.0.jar
 o jmock-cglib-1.1.0.jar
 o easymockclassextension-2.2.jar
 
-To use the Instinct Ant Task, you'll need:
+In addition, to use the Instinct Ant task, you'll need:
 
-o ant-1.6.5.jar
+o ant-1.7.0.jar
 
-To use the JUnit 4 runners, you'll need:
+In addition, to use the JUnit 4 runners, you'll need:
 
 o junit-4.1.jar
 
 
 * Documentation *
 
-Documentation can be found at: http://code.google.com/p/instinct/w/list
+Documentation can be found at: http://code.google.com/p/instinct/wiki/Overview.
 
 
 * Source *
 
 Source code is available within the distribution Jars, complete source is
 available at: http://code.google.com/p/instinct/source
+
+Building From Source - TODO
 
 
 * Contributions *
@@ -64,4 +65,4 @@ o Lyall Ward
 Thanks to the work done on RSpec, jMock EasyMock, Boost & JRDF. These libraries
 inspired Instinct.
 
-Instinct development is supported by Workingmouse: http://workingmouse.com/
+Instinct development is supported by Workingmouse: http://workingmouse.com/.
