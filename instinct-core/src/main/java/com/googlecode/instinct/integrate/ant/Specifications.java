@@ -23,7 +23,6 @@ import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
-import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import org.apache.tools.ant.Project;
@@ -38,10 +37,15 @@ public final class Specifications {
         this.project = project;
     }
 
-    @Suggest("What if the dir given is absolute?")
     public void setDir(final String dir) {
         checkNotWhitespace(dir);
-        specPackageRoot = new File(project.getBaseDir(), dir);
+        specPackageRoot = new File(dir);
+        if (!specPackageRoot.exists()) {
+            specPackageRoot = new File(project.getBaseDir(), dir);
+            if (!specPackageRoot.exists()) {
+                throw new IllegalArgumentException("Specifications directory '" + dir + "' does not exist");
+            }
+        }
     }
 
     public JavaClassName[] getContextNames() {

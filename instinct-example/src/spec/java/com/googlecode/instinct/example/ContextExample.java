@@ -42,33 +42,11 @@ public final class ContextExample {
         }
 
         @Specification
-        void mustBeAlwaysTrue() {
-            mustBeTrue(true);
-        }
-
-        @Specification
-        void mustBeAlwaysTrue2() {
-            mustBeTrue(true);
-        }
-
-        @Specification
         void mustNoLongerBeEmptyAfterPush() {
             stack.push(new Object());
             mustBeFalse(stack.isEmpty());
         }
     }
-
-// Goal:
-//    @BehaviourContext
-//    final class AnEmptyStack {
-//        @Fixture
-//        private Stack stack;
-//
-//        @Specification
-//        void shouldBeEmpty() {
-//            mustBeTrue(stack.isEmpty());
-//        }
-//    }
 
     @BehaviourContext
     public static final class AFullStack {
