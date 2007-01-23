@@ -18,6 +18,7 @@ package com.googlecode.instinct.integrate.ant;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
+import static java.lang.System.getProperty;
 import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
@@ -27,7 +28,7 @@ final class VerboseBehaviourContextResultMessageBuilder implements BehaviourCont
     private static final double MILLISECONDS_IN_SECONDS = 1000.0;
     private static final String TAB = "\t";
     private static final String SPACER = ", ";
-    private static final char NEW_LINE = '\n';
+    private static final String NEW_LINE = getProperty("line.separator");
 
     public String buildMessage(final BehaviourContextResult behaviourContextResult) {
         checkNotNull(behaviourContextResult);
@@ -54,9 +55,9 @@ final class VerboseBehaviourContextResultMessageBuilder implements BehaviourCont
     }
 
     private void appendSpecification(final StringBuilder builder, final SpecificationResult specificationResult) {
-        builder.append(TAB).append("Specification ").append(specificationResult.getSpecificationName()).append(' ').append(
-                specificationResult.completedSuccessfully() ? "succeeded" : "FAILED").append(SPACER);
-        builder.append("time elapsed: ").append(millisToSeconds(specificationResult.getExecutionTime())).append(" seconds");
+        builder.append(TAB).append("Specification ").append(specificationResult.getSpecificationName()).append(SPACER);
+        builder.append("time elapsed: ").append(millisToSeconds(specificationResult.getExecutionTime())).append(" seconds").append(SPACER);
+        builder.append("status: ").append(specificationResult.completedSuccessfully() ? "succeeded" : "FAILED");
         if (!specificationResult.completedSuccessfully()) {
             builder.append(NEW_LINE).append(TAB).append("Cause: ");
             appendFailureCause(specificationResult.getError(), builder);

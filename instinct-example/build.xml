@@ -65,8 +65,8 @@
     <target name="-run-specs" depends="-compile">
         <taskdef name="instinct" classname="com.googlecode.instinct.integrate.ant.InstinctAntTask" classpathref="spec.class.path"/>
         <instinct failureproperty="specs-failed">
-            <annotatedspecificationaggregator specificationroot="${spec.classes.dir}"/>
-            <formatter type="verbose"/>
+            <specifications dir="${spec.classes.dir}"/>
+            <formatter type="brief"/>
         </instinct>
         <fail if="${specs-failed}" message="Specifications failed"/>
     </target>

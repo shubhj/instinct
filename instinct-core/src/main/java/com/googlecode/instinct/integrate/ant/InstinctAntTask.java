@@ -27,14 +27,12 @@ import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
-import com.googlecode.instinct.internal.util.Suggest;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
 @SuppressWarnings({"MethodParameterOfConcreteClass", "InstanceVariableOfConcreteClass"})
-@Suggest({"Will probably need formatters that are specified in the build config", "brief (what is there now)", "verbose - each spec on a new line"})
 public final class InstinctAntTask extends Task implements StatusLogger {
-    private final List<SpecificationAggregator> aggregators = new ArrayList<SpecificationAggregator>();
+    private final List<Specifications> locators = new ArrayList<Specifications>();
     private final EdgeClass edgeClass = new DefaultEdgeClass();
     private String failureProperty;
     private Formatter formatter;
@@ -44,9 +42,9 @@ public final class InstinctAntTask extends Task implements StatusLogger {
         this.failureProperty = failureProperty;
     }
 
-    public void addAnnotatedSpecificationAggregator(final AnnotatedSpecificationAggregator aggregator) {
-        checkNotNull(aggregator);
-        aggregators.add(aggregator);
+    public void addSpecifications(final Specifications specifications) {
+        checkNotNull(specifications);
+        locators.add(specifications);
     }
 
     public void addFormatter(final Formatter formatter) {
@@ -86,7 +84,7 @@ public final class InstinctAntTask extends Task implements StatusLogger {
 
     private List<JavaClassName> findBehaviourContextsFromAllAggregators() {
         final List<JavaClassName> contextClasses = new ArrayList<JavaClassName>();
-        for (final SpecificationAggregator aggregator : aggregators) {
+        for (final Specifications aggregator : locators) {
             contextClasses.addAll(asList(aggregator.getContextNames()));
         }
         return contextClasses;

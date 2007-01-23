@@ -40,6 +40,22 @@ public final class ContextExample {
         void mustBeEmpty() {
             mustBeTrue(stack.isEmpty());
         }
+
+        @Specification
+        void mustBeAlwaysTrue() {
+            mustBeTrue(true);
+        }
+
+        @Specification
+        void mustBeAlwaysTrue2() {
+            mustBeTrue(true);
+        }
+
+        @Specification
+        void mustNoLongerBeEmptyAfterPush() {
+            stack.push(new Object());
+            mustBeFalse(stack.isEmpty());
+        }
     }
 
 // Goal:

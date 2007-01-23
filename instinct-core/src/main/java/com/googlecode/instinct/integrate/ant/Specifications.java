@@ -23,23 +23,25 @@ import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import org.apache.tools.ant.Project;
 
-public final class AnnotatedSpecificationAggregator implements SpecificationAggregator {
+public final class Specifications {
     private final ClassLocator classLocator = new ClassLocatorImpl();
     private final Project project;
     private File specPackageRoot;
 
-    public AnnotatedSpecificationAggregator(final Project project) {
+    public Specifications(final Project project) {
         checkNotNull(project);
         this.project = project;
     }
 
-    public void setSpecificationRoot(final String specificationRoot) {
-        checkNotWhitespace(specificationRoot);
-        specPackageRoot = new File(project.getBaseDir(), specificationRoot);
+    @Suggest("What if the dir given is absolute?")
+    public void setDir(final String dir) {
+        checkNotWhitespace(dir);
+        specPackageRoot = new File(project.getBaseDir(), dir);
     }
 
     public JavaClassName[] getContextNames() {
