@@ -20,6 +20,14 @@ The distribution contains the following contents:
 o ...
 o lib
 
+o LICENCE
+o NOTICE
+o README
+o RELEASE-NOTES
+o instinct-0.0.1.jar
+o lib/
+
+
 
 (TODO: Add a listing of contents)
 
@@ -45,7 +53,7 @@ o junit-4.1.jar
 
 * Documentation *
 
-Documentation can be found at: http://code.google.com/p/instinct/wiki/Overview.
+Documentation can be found at: http://code.google.com/p/instinct/.
 
 
 * Source *

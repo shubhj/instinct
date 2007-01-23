@@ -29,21 +29,20 @@
     <target name="-release" depends="atomic-test,-jar,javadoc">
         <mkdir dir="${release.dir}"/>
         <zip destfile="${release.dir}/${project.zip}">
-            <!-- FIXME: source, instinct jar, dependency libraries, readme, licence, release notes -->
             <fileset dir="${basedir}">
                 <include name="README"/>
                 <include name="LICENCE"/>
                 <include name="RELEASE-NOTES"/>
+                <include name="NOTICE"/>
             </fileset>
             <fileset dir="${build.dir}" includes="${project.jar}"/>
-            <zipfileset dir="${lib.dir}/ant" prefix="lib" includes="ant-1.*.jar"/>
+            <zipfileset dir="${lib.dir}/ant" prefix="lib" includes="ant-1.*.jar,ant-license.txt"/>
             <zipfileset dir="${lib.dir}/boost" prefix="lib"/>
             <zipfileset dir="${lib.dir}/cglib" prefix="lib"/>
-            <zipfileset dir="${lib.dir}/easymock" prefix="lib" includes="easymockclassextension-*.jar,easymock-license.txt"/>
+            <zipfileset dir="${lib.dir}/easymock" prefix="lib" excludes="easymockclassextension-*.jar,easymock-license.txt"/>
             <zipfileset dir="${lib.dir}/jmock" prefix="lib"/>
             <zipfileset dir="${javadoc.dir}" prefix="docs/api"/>
         </zip>
-        <!-- FIXME: Build zip file -->
     </target>
 
 
