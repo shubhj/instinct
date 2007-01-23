@@ -37,10 +37,10 @@
             </fileset>
             <fileset dir="${build.dir}" includes="${project.jar}"/>
             <zipfileset dir="${lib.dir}/ant" prefix="lib" includes="ant-1.*.jar"/>
-            <zipfileset dir="${lib.dir}" prefix="lib" includes="boost-*"/>
-            <zipfileset dir="${lib.dir}" prefix="lib" includes="cglib-nodep-*.jar"/>
+            <zipfileset dir="${lib.dir}/boost" prefix="lib"/>
+            <zipfileset dir="${lib.dir}/cglib" prefix="lib"/>
             <zipfileset dir="${lib.dir}/easymock" prefix="lib" includes="easymockclassextension-*.jar,easymock-license.txt"/>
-            <zipfileset dir="${lib.dir}/jmock" prefix="lib" includes="*"/>
+            <zipfileset dir="${lib.dir}/jmock" prefix="lib"/>
             <zipfileset dir="${javadoc.dir}" prefix="docs/api"/>
         </zip>
         <!-- FIXME: Build zip file -->

@@ -51,16 +51,13 @@
     </patternset>
 
     <patternset id="main.classpath.pattern">
-        <include name="${lib.dir}/boost-982.jar"/>
-        <include name="${lib.dir}/cglib-nodep-2.2_beta1.jar"/>
-        <include name="${lib.dir}/junit-4.1.jar"/>
+        <include name="${lib.dir}/boost/boost-982.jar"/>
+        <include name="${lib.dir}/cglib/cglib-nodep-2.2_beta1.jar"/>
+        <include name="${lib.dir}/junit/junit-4.1.jar"/>
         <include name="${lib.dir}/jmock/jmock-1.1.0.jar"/>
         <include name="${lib.dir}/jmock/jmock-cglib-1.1.0.jar"/>
         <include name="${lib.dir}/easymock/easymockclassextension-2.2.jar"/>
         <include name="${lib.dir}/ant/ant-1.7.0.jar"/>
-        <!--<include name="${lib.dir}/spring/spring-beans-2.0.1.jar"/>-->
-        <!--<include name="${lib.dir}/spring/spring-core-2.0.1.jar"/>-->
-        <!--<include name="${lib.dir}/jakarta-commons/commons-logging-1.0.4.jar"/>-->
     </patternset>
 
     <patternset id="test.classpath.pattern">
