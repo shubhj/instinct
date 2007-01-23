@@ -26,26 +26,6 @@
         <test.macro type="slow"/>
     </target>
 
-    <target name="-release" depends="atomic-test,-jar,javadoc">
-        <mkdir dir="${release.dir}"/>
-        <zip destfile="${release.dir}/${project.zip}">
-            <fileset dir="${basedir}">
-                <include name="README"/>
-                <include name="LICENCE"/>
-                <include name="RELEASE-NOTES"/>
-                <include name="NOTICE"/>
-            </fileset>
-            <fileset dir="${build.dir}" includes="${project.jar}"/>
-            <zipfileset dir="${lib.dir}/ant" prefix="lib" includes="ant-1.*.jar,ant-license.txt"/>
-            <zipfileset dir="${lib.dir}/boost" prefix="lib"/>
-            <zipfileset dir="${lib.dir}/cglib" prefix="lib"/>
-            <zipfileset dir="${lib.dir}/easymock" prefix="lib" excludes="easymockclassextension-*.jar,easymock-license.txt"/>
-            <zipfileset dir="${lib.dir}/jmock" prefix="lib"/>
-            <zipfileset dir="${javadoc.dir}" prefix="docs/api"/>
-        </zip>
-    </target>
-
-
     <macrodef name="compile.macro">
         <attribute name="src.dir"/>
         <attribute name="output.dir"/>
@@ -94,6 +74,9 @@
                 windowtitle="${project.longname} ${project.version.full}" doctitle="${project.longname} ${project.version.full}">
             <link href="http://java.sun.com/j2se/1.5.0/docs/api"/>
         </javadoc>
+        <zip destfile="${build.dir}/${javadoc.zip}">
+            <fileset dir="${javadoc.dir}"/>
+        </zip>
     </target>
 
     <target name="-compile" depends="checkstyle">
@@ -124,6 +107,26 @@
                 <exclude name="**/integrate/junit/**"/>
             </fileset>
         </cobertura-instrument>
+    </target>
+
+    <target name="-release" depends="atomic-test,-jar,javadoc">
+        <mkdir dir="${release.dir}"/>
+        <zip destfile="${release.dir}/${project.zip}">
+            <fileset dir="${basedir}">
+                <include name="README"/>
+                <include name="LICENCE"/>
+                <include name="RELEASE-NOTES"/>
+                <include name="NOTICE"/>
+            </fileset>
+            <fileset dir="${build.dir}" includes="${project.jar}"/>
+            <fileset dir="${build.dir}" includes="${javadoc.zip}"/>
+            <zipfileset dir="${lib.dir}/ant" prefix="lib" includes="ant-1.*.jar,ant-license.txt"/>
+            <zipfileset dir="${lib.dir}/boost" prefix="lib"/>
+            <zipfileset dir="${lib.dir}/cglib" prefix="lib"/>
+            <zipfileset dir="${lib.dir}/easymock" prefix="lib" excludes="easymockclassextension-*.jar,easymock-license.txt"/>
+            <zipfileset dir="${lib.dir}/jmock" prefix="lib"/>
+            <zipfileset dir="${lib.dir}/junit" prefix="lib"/>
+        </zip>
     </target>
 
 </project>
