@@ -4,37 +4,29 @@
 
                       <http://code.google.com/p/instinct/>
 
+
 * What is Instinct? *
 
-Instinct is a Driven Development (BDD) framework for Java. Inspired by RSpec,
-Instinct provides flexible annotation of contexts, specifications, mocks, etc.
-(via Java 1.5 annotations, marker interfaces or naming conventions); automatic
-creation of mocks, stubs, test subjects & unique fields; a verification API
-(similar to JUnit's Assert); unique utilities; and JUnit test runner integration.
+Instinct is a Behaviour Driven Development (BDD) framework for Java. Inspired
+by RSpec, Instinct provides flexible annotation of contexts, specifications,
+mocks, etc. (via Java 1.5 annotations, marker interfaces or naming conventions);
+automatic creation of test doubles (dummies, mocks & stubs) & test subjects; a
+verification API (similar to JUnit's Assert); and JUnit test runner integration.
 
 
 * Distribution Contents *
 
 The distribution contains the following contents:
 
-o ...
-o lib
+o README                    - This readme file.
+o LICENCE                   - Instinct licence file.
+o NOTICE                    - Licence notices for libraries used in Instinct.
+o RELEASE-NOTES             - Release notes for this & previous releases.
+o instinct-<version>.jar    - Instinct Jar file, source code is included in the Jar for convenience.
+o lib/                      - Libraries required by Instinct at runtime, see below for details.
+o docs/api/                 - Instinct API javadoc (does not include internal API).
 
-o LICENCE
-o NOTICE
-o README
-o RELEASE-NOTES
-o instinct-0.0.1.jar
-o lib/
-
-
-
-(TODO: Add a listing of contents)
-
-Instinct is bundled as a single Jar file: instinct-<version>.jar, source code is
-included in the Jar for convenience.
-
-Instinct depends on the following runtime libraries, packaged within the "lib" directory.
+Instinct depends on the following libraries at runtime.
 
 o boost-982.jar
 o cglib-nodep-2.2_beta1.jar
