@@ -36,9 +36,8 @@ import org.apache.tools.ant.Task;
 public final class InstinctAntTask extends Task implements StatusLogger {
     private final List<SpecificationAggregator> aggregators = new ArrayList<SpecificationAggregator>();
     private final EdgeClass edgeClass = new DefaultEdgeClass();
-    private final BehaviourContextRunner behaviourContextRunner = new BehaviourContextRunnerImpl();
     private String failureProperty;
-    private BehaviourContextResultMessageBuilder messageBuilder;
+    private Formatter formatter;
 
     public void setFailureProperty(final String failureProperty) {
         checkNotWhitespace(failureProperty);
@@ -52,8 +51,8 @@ public final class InstinctAntTask extends Task implements StatusLogger {
 
     public void addFormatter(final Formatter formatter) {
         checkNotNull(formatter);
-        checkMessageBuilderNotAlreadyAssigned();
-        messageBuilder = formatter.createMessageBuilder();
+        checkFormatterNotAlreadyAssigned();
+        this.formatter = formatter;
     }
 
     @Override
@@ -80,19 +79,9 @@ public final class InstinctAntTask extends Task implements StatusLogger {
 
     private void runContexts() {
         final List<JavaClassName> contextClasses = findBehaviourContextsFromAllAggregators();
-        runAllContexts(contextClasses);
-    }
-
-    @Suggest("Cleanup - do something with the runner: field, etc.")
-    private void runAllContexts(final List<JavaClassName> contextClasses) {
-        final BehaviourContextRunner runner = new StatusLoggingBehaviourContextRunner(behaviourContextRunner, messageBuilder, this);
-        for (final JavaClassName contextClass : contextClasses) {
-            final Class<?> cls = edgeClass.forName(contextClass.getFullyQualifiedName());
-            final BehaviourContextResult result = runner.run(cls);
-            if (!result.completedSuccessfully()) {
-                getProject().setProperty(failureProperty, "true");
-            }
-        }
+        final BehaviourContextRunner runner = new StatusLoggingBehaviourContextRunner(new BehaviourContextRunnerImpl(),
+                formatter.createMessageBuilder(), this);
+        runContexts(runner, contextClasses);
     }
 
     private List<JavaClassName> findBehaviourContextsFromAllAggregators() {
@@ -103,14 +92,28 @@ public final class InstinctAntTask extends Task implements StatusLogger {
         return contextClasses;
     }
 
+    private void runContexts(final BehaviourContextRunner behaviourContextRunner, final List<JavaClassName> contextClasses) {
+        for (final JavaClassName contextClass : contextClasses) {
+            runContext(behaviourContextRunner, contextClass);
+        }
+    }
+
+    private void runContext(final BehaviourContextRunner runner, final JavaClassName contextClass) {
+        final Class<?> cls = edgeClass.forName(contextClass.getFullyQualifiedName());
+        final BehaviourContextResult result = runner.run(cls);
+        if (!result.completedSuccessfully()) {
+            getProject().setProperty(failureProperty, "true");
+        }
+    }
+
     private void checkExecutePreconditions() {
         if (failureProperty == null) {
             throw new IllegalStateException("Attribute failureProperty must be specified");
         }
     }
 
-    private void checkMessageBuilderNotAlreadyAssigned() {
-        if (messageBuilder != null) {
+    private void checkFormatterNotAlreadyAssigned() {
+        if (formatter != null) {
             throw new IllegalStateException("Only one formatter element is allowed");
         }
     }
