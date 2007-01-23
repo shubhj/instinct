@@ -54,7 +54,7 @@ final class VerboseBehaviourContextResultMessageBuilder implements BehaviourCont
     }
 
     private void appendSpecification(final StringBuilder builder, final SpecificationResult specificationResult) {
-        builder.append(TAB).append(specificationResult.getSpecificationName()).append(' ').append(
+        builder.append(TAB).append("Specification ").append(specificationResult.getSpecificationName()).append(' ').append(
                 specificationResult.completedSuccessfully() ? "succeeded" : "FAILED").append(SPACER);
         builder.append("time elapsed: ").append(millisToSeconds(specificationResult.getExecutionTime())).append(" seconds");
         if (!specificationResult.completedSuccessfully()) {
