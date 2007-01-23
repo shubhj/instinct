@@ -16,20 +16,24 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
-import org.apache.tools.ant.Project;
 
-public final class AntStatusLogger implements StatusLogger {
-    private final Project project;
+public final class Formatter {
+    private String type;
 
-    public AntStatusLogger(final Project project) {
-        checkNotNull(project);
-        this.project = project;
+    public void setType(final String type) {
+        checkNotWhitespace(type);
+        if (!type.equals("brief") && !type.equals("verbose")) {
+            throw new UnsupportedOperationException("Formatter type " + type + " is not supported");
+        }
+        this.type = type;
     }
 
-    public void log(final String message) {
-        checkNotWhitespace(message);
-        project.log(message);
+    public BehaviourContextResultMessageBuilder createMessageBuilder() {
+        if (type.equals("brief")) {
+            return new BriefBehaviourContextResultMessageBuilder();
+        } else {
+            return new VerboseBehaviourContextResultMessageBuilder();
+        }
     }
 }

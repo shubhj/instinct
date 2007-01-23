@@ -19,3 +19,6 @@ ASM/javassist
 o http://www.csg.is.titech.ac.jp/~chiba/javassist/
 o http://www-128.ibm.com/developerworks/java/library/j-dyn0203.html
 o http://www.jboss.org/products/javassist
+
+Ant
+o http://ant.apache.org/manual/develop.html
