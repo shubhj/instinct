@@ -16,7 +16,8 @@
     <target name="test" depends="clean,-test"/>
     <target name="javadoc" depends="clean,-javadoc"/>
     <target name="jar" depends="clean,-jar"/>
-    <target name="release" depends="clean,-release"/>
+    <target name="release" depends="clean,-release-zip"/>
+    <target name="tag" depends="clean,-tag-repository"/>
 
     <target name="atomic-test" depends="-instrumented_compile">
         <test.macro type="atomic"/>
@@ -109,7 +110,7 @@
         </cobertura-instrument>
     </target>
 
-    <target name="-release" depends="atomic-test,-jar,javadoc">
+    <target name="-release-zip" depends="atomic-test,-jar,javadoc">
         <mkdir dir="${release.dir}"/>
         <zip destfile="${release.dir}/${project.zip}">
             <fileset dir="${basedir}">
@@ -128,5 +129,19 @@
             <zipfileset dir="${lib.dir}/junit" prefix="lib"/>
         </zip>
     </target>
+    <target name="-tag-repository" depends="release">
+        <!-- Note. Assumes latest changes are in svn trunk. -->
+        <java classname="org.tmatesoft.svn.cli.SVN" fork="true">
+            <classpath>
+                <fileset dir="${lib.dir}/svn" includes="javasvn.jar"/>
+                <fileset dir="${lib.dir}/svn" includes="javasvn-cli.jar"/>
+            </classpath>
+            <arg value="copy -m 'Release ${project.version.full}'"/>
+            <arg value="https://instinct.googlecode.com/svn/trunk"/>
+            <arg value="https://instinct.googlecode.com/svn/tags/Release-${project.version.full}"/>
+        </java>
+    </target>
+    <!-- FIXME: Implement this - see etc/googlecode/googlecode-upload.py. -->
+    <target name="-upload-to-googlecode"/>
 
 </project>
