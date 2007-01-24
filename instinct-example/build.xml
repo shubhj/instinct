@@ -66,9 +66,9 @@
         <taskdef name="instinct" classname="com.googlecode.instinct.integrate.ant.InstinctAntTask" classpathref="spec.class.path"/>
         <instinct failureproperty="specs-failed">
             <specifications dir="${spec.classes.dir}"/>
-            <formatter type="brief"/>
+            <formatter type="verbose"/>
         </instinct>
-        <fail if="${specs-failed}" message="Specifications failed"/>
+        <fail if="specs-failed" message="Specifications failed"/>
     </target>
 
 </project>

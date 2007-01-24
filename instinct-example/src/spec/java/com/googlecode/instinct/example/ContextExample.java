@@ -68,21 +68,8 @@ public final class ContextExample {
         }
     }
 
-    /*
-    context "An empty stack" do
-  setup do
-    @stack = Stack.new
-  end
-
-  specify "should be empty" do
-    @stack.should_be_empty
-  end
-
-  specify "should no longer be empty after 'push'" do
-    @stack.push "anything"
-    @stack.should_not_be_empty
-  end
-
+/* Still to implement:
+context "An empty stack" do
   specify "should complain when sent 'peek'" do
     lambda { @stack.peek }.should_raise StackUnderflowError
   end
@@ -91,6 +78,6 @@ public final class ContextExample {
     lambda { @stack.pop }.should_raise StackUnderflowError
   end
 end
-     */
+*/
 }
 

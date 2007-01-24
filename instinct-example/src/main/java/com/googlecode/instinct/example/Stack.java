@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.example;
 
-interface Stack {
+public interface Stack {
     boolean isEmpty();
 
     void push(Object o);
