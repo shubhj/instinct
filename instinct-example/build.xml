@@ -63,7 +63,7 @@
     </target>
 
     <target name="-run-specs" depends="-compile">
-        <taskdef name="instinct" classname="com.googlecode.instinct.integrate.ant.InstinctAntTask" classpathref="spec.class.path"/>
+        <taskdef resource="instincttask.properties" classpathref="spec.class.path"/>
         <instinct failureproperty="specs-failed">
             <specifications dir="${spec.classes.dir}"/>
             <formatter type="verbose"/>
