@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="instinct" default="all" basedir=".">
+
+    <import file="build-setup.xml"/>
+    <import file="build-quality.xml"/>
+
+    <taskdef resource="tasks.properties" classpathref="test.class.path"/>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <!-- FIXME: Add slow tests back into the mixture. -->
+    <target name="all" depends="clean,release"/>
+    <target name="compile" depends="clean,-compile"/>
+    <target name="test" depends="clean,-test"/>
+    <target name="javadoc" depends="clean,-javadoc"/>
+    <target name="jar" depends="clean,-jar"/>
+    <target name="release" depends="clean,-release"/>
+
+    <target name="atomic-test" depends="-instrumented_compile">
+        <test.macro type="atomic"/>
+    </target>
+
+    <target name="slow-test" depends="-instrumented_compile">
+        <test.macro type="slow"/>
+    </target>
+
+    <macrodef name="compile.macro">
+        <attribute name="src.dir"/>
+        <attribute name="output.dir"/>
+        <attribute name="classpath.ref"/>
+        <attribute name="src.path"/>
+        <attribute name="src.pattern"/>
+        <attribute name="compiler.args" default="-Xlint"/>
+        <sequential>
+            <mkdir dir="@{output.dir}"/>
+            <javac source="${java.src.version}" srcdir="@{src.dir}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="${compile.debug}"
+                    debuglevel="${compile.debuglevel}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
+                <src>
+                    <path refid="@{src.path}"/>
+                </src>
+                <patternset refid="@{src.pattern}"/>
+                <compilerarg value="@{compiler.args}"/>
+            </javac>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="test.macro">
+        <attribute name="type"/>
+        <sequential>
+            <mkdir dir="${@{type}.test.results.dir}"/>
+            <junit failureproperty="@{type}.test.failed" fork="true" forkmode="perBatch">
+                <classpath refid="@{type}.test.class.path"/>
+                <sysproperty key="net.sourceforge.cobertura.datafile" file="${coverage.dir}/coverage.ser"/>
+                <batchtest todir="${@{type}.test.results.dir}">
+                    <fileset refid="@{type}.test.code.fileset"/>
+                </batchtest>
+                <formatter type="xml"/>
+                <formatter type="brief" usefile="false"/>
+            </junit>
+            <fail if="@{type}.test.failed" message="@{type} tests failed."/>
+            <macro_cobertura_report/>
+        </sequential>
+    </macrodef>
+
+    <target name="-test" depends="atomic-test,slow-test"/>
+
+    <target name="-javadoc" depends="-compile">
+        <mkdir dir="${javadoc.dir}"/>
+        <javadoc destdir="${javadoc.dir}" author="true" version="true"
+                packagenames="${main.package.name}.*" sourcepath="${main.src.dir}" classpathref="main.class.path" failonerror="true"
+                additionalparam="-breakiterator" Use="true" source="${java.src.version}" excludepackagenames="${main.package.name}.internal.*"
+                windowtitle="${project.longname} ${project.version.full}" doctitle="${project.longname} ${project.version.full}">
+            <link href="http://java.sun.com/j2se/1.5.0/docs/api"/>
+        </javadoc>
+        <zip destfile="${build.dir}/${javadoc.zip}">
+            <fileset dir="${javadoc.dir}"/>
+        </zip>
+    </target>
+
+    <target name="-compile" depends="checkstyle">
+        <!--<target name="-compile">-->
+        <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}" src.path="main.code.path"
+                src.pattern="all.code.pattern"/>
+        <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}" src.path="test.code.path"
+                src.pattern="all.code.pattern"/>
+    </target>
+
+    <target name="-jar" depends="-compile">
+        <jar destfile="${build.dir}/${project.jar}">
+            <fileset dir="${main.classes.dir}"/>
+            <fileset dir="${main.src.dir}"/>
+            <fileset dir="${properties.src.dir}"/>
+        </jar>
+    </target>
+
+    <target name="-instrumented_compile" depends="-compile">
+        <mkdir dir="${coverage.dir}"/>
+        <mkdir dir="${coverage.instrumented.dir}"/>
+        <copy todir="${coverage.instrumented.dir}">
+            <fileset dir="${main.classes.dir}"/>
+        </copy>
+        <cobertura-instrument todir="${coverage.instrumented.dir}" datafile="${coverage.dir}/coverage.ser">
+            <fileset dir="${main.classes.dir}">
+                <include name="**/*.class"/>
+                <exclude name="**/integrate/junit/**"/>
+            </fileset>
+        </cobertura-instrument>
+    </target>
+
+    <target name="-release" depends="atomic-test,-jar,javadoc">
+        <mkdir dir="${release.dir}"/>
+        <zip destfile="${release.dir}/${project.zip}">
+            <fileset dir="${basedir}">
+                <include name="README"/>
+                <include name="LICENCE"/>
+                <include name="RELEASE-NOTES"/>
+                <include name="NOTICE"/>
+            </fileset>
+            <fileset dir="${build.dir}" includes="${project.jar}"/>
+            <fileset dir="${build.dir}" includes="${javadoc.zip}"/>
+            <zipfileset dir="${lib.dir}/ant" prefix="lib" includes="ant-1.*.jar,ant-license.txt"/>
+            <zipfileset dir="${lib.dir}/boost" prefix="lib"/>
+            <zipfileset dir="${lib.dir}/cglib" prefix="lib"/>
+            <zipfileset dir="${lib.dir}/easymock" prefix="lib" excludes="easymockclassextension-*.jar,easymock-license.txt"/>
+            <zipfileset dir="${lib.dir}/jmock" prefix="lib"/>
+            <zipfileset dir="${lib.dir}/junit" prefix="lib"/>
+        </zip>
+    </target>
+
+</project>

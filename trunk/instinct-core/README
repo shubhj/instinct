@@ -1,0 +1,71 @@
+                                  ************
+*********************************** Instinct ***********************************
+                                  ************
+
+                      <http://code.google.com/p/instinct/>
+
+
+* What is Instinct? *
+
+Instinct is a Behaviour Driven Development (BDD) framework for Java. Inspired
+by RSpec, Instinct provides flexible annotation of contexts, specifications,
+mocks, etc. (via Java 1.5 annotations, marker interfaces or naming conventions);
+automatic creation of test doubles (dummies, mocks & stubs) & test subjects; a
+verification API (similar to JUnit's Assert); and JUnit test runner integration.
+
+
+* Distribution Contents *
+
+The distribution contains the following contents:
+
+o README                            - This readme file.
+o LICENCE                           - Instinct licence file.
+o NOTICE                            - Licence notices for libraries used in Instinct.
+o RELEASE-NOTES                     - Release notes for this & previous releases.
+o instinct-<version>.jar            - Instinct Jar file, source code is included in the
+                                      Jar for convenience.
+o instinct-<version>-javadoc.jar    - Instinct API javadoc (does not include internal API).
+                                      Jar for convenience.
+o lib/                              - Libraries required by Instinct at runtime (including
+                                      licences), see below for details.
+
+Instinct depends on the following libraries at runtime.
+
+o boost-982.jar
+o cglib-nodep-2.2_beta1.jar
+o jmock-1.1.0.jar
+o jmock-cglib-1.1.0.jar
+o easymockclassextension-2.2.jar
+
+In addition, to use the Instinct Ant task, you'll need:
+
+o ant-1.7.0.jar
+
+In addition, to use the JUnit 4 runners, you'll need:
+
+o junit-4.1.jar
+
+
+* Documentation *
+
+Documentation can be found at: http://code.google.com/p/instinct/.
+
+
+* Source *
+
+Source code is available within the distribution Jars, complete source is
+available at: http://code.google.com/p/instinct/source
+
+Building From Source - TODO
+
+
+* Contributions *
+
+Developers:
+o Tom Adams
+o Lyall Ward
+
+Thanks to the work done on RSpec, jMock EasyMock, Boost & JRDF. These libraries
+inspired Instinct.
+
+Instinct development is supported by Workingmouse: http://workingmouse.com/.

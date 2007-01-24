@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="instinct-setup" default="default" basedir=".">
+
+    <property name="project.longname" value="Instinct Behaviour Driven Development (BDD) Framework"/>
+    <property name="project.shortname" value="instinct"/>
+    <property name="project.version.major" value="0"/>
+    <property name="project.version.minor" value="1.0"/>
+    <property name="version-status" value=""/>
+    <property name="project.version.full" value="${project.version.major}.${project.version.minor}${version-status}"/>
+    <property name="project.jar" value="${project.shortname}-${project.version.full}.jar"/>
+    <property name="project.zip" value="${project.shortname}-${project.version.full}.zip"/>
+    <property name="javadoc.zip" value="${project.shortname}-${project.version.full}-javadoc.zip"/>
+    <property name="main.package.name" value="com.googlecode.instinct"/>
+
+    <property name="build.dir" value="build"/>
+    <property name="doc.dir" value="doc"/>
+    <property name="etc.dir" value="etc"/>
+    <property name="lib.dir" value="lib"/>
+    <property name="src.dir" value="src/main"/>
+    <property name="test.dir" value="src/test"/>
+
+    <property name="checkstyle.lib.dir" value="${lib.dir}/checkstyle"/>
+    <property name="main.src.dir" value="${src.dir}/java"/>
+    <property name="test.src.dir" value="${test.dir}/java"/>
+    <property name="properties.src.dir" value="${src.dir}/properties"/>
+    <property name="main.classes.dir" value="${build.dir}/main-classes"/>
+    <property name="test.classes.dir" value="${build.dir}/test-classes"/>
+    <property name="release.dir" value="${build.dir}/release"/>
+    <property name="javadoc.dir" value="${build.dir}/javadoc"/>
+    <property name="test.results.dir" value="${build.dir}/test-results"/>
+
+    <property name="test.results" value="${test.results.dir}/All-Tests.xml"/>
+    <property name="compile.debug" value="true"/>
+    <property name="compile.debuglevel" value="source,lines,vars"/>
+    <property name="compile.deprecation" value="false"/>
+    <property name="compile.optimize" value="true"/>
+    <property name="java.src.version" value="1.5"/>
+    <property name="atomic.test.src.dir" value="${test.src.dir}"/>
+    <property name="atomic.test.classes.dir" value="${test.classes.dir}"/>
+    <property name="atomic.test.results.dir" value="${build.dir}/atomic-test-results"/>
+    <property name="atomic.test.results" value="${atomic.test.results.dir}/Atomic-Tests.xml"/>
+    <property name="slow.test.src.dir" value="${test.src.dir}"/>
+    <property name="slow.test.classes.dir" value="${test.classes.dir}"/>
+    <property name="slow.test.results.dir" value="${build.dir}/slow-test-results"/>
+    <property name="slow.test.results" value="${slow.test.results.dir}/Slow-Tests.xml"/>
+    <property name="checkstyle.results.dir" value="${build.dir}/checkstyle"/>
+    <property name="coverage.dir" value="${build.dir}/coverage"/>
+    <property name="coverage.instrumented.dir" value="${coverage.dir}/instrumented"/>
+
+    <patternset id="all.code.pattern">
+        <include name="**/*.java"/>
+    </patternset>
+
+    <patternset id="main.classpath.pattern">
+        <include name="${lib.dir}/boost/boost-982.jar"/>
+        <include name="${lib.dir}/cglib/cglib-nodep-2.2_beta1.jar"/>
+        <include name="${lib.dir}/junit/junit-4.1.jar"/>
+        <include name="${lib.dir}/jmock/jmock-1.1.0.jar"/>
+        <include name="${lib.dir}/jmock/jmock-cglib-1.1.0.jar"/>
+        <include name="${lib.dir}/easymock/easymockclassextension-2.2.jar"/>
+        <include name="${lib.dir}/ant/ant-1.7.0.jar"/>
+    </patternset>
+
+    <patternset id="test.classpath.pattern">
+        <patternset refid="main.classpath.pattern"/>
+        <include name="${lib.dir}/cobertura/asm-2.2.1.jar"/>
+        <include name="${lib.dir}/cobertura/cobertura-1.8.jar"/>
+        <include name="${lib.dir}/cobertura/jakarta-oro-2.0.8.jar"/>
+        <include name="${lib.dir}/cobertura/log4j-1.2.9.jar"/>
+    </patternset>
+
+    <fileset id="main.code.fileset" dir="${main.src.dir}">
+        <patternset refid="all.code.pattern"/>
+    </fileset>
+    <fileset id="atomic.test.code.fileset" dir="${atomic.test.src.dir}">
+        <include name="**/*AtomicTest.java"/>
+    </fileset>
+    <fileset id="slow.test.code.fileset" dir="${slow.test.src.dir}">
+        <include name="**/*SlowTest.java"/>
+    </fileset>
+
+    <path id="main.code.path">
+        <pathelement location="${main.src.dir}"/>
+    </path>
+    <path id="test.code.path">
+        <pathelement location="${test.src.dir}"/>
+    </path>
+
+    <path id="main.class.path">
+        <pathelement location="${main.classes.dir}"/>
+        <fileset dir="${basedir}">
+            <patternset refid="main.classpath.pattern"/>
+        </fileset>
+    </path>
+    <path id="test.class.path">
+        <path refid="main.class.path"/>
+        <pathelement location="${test.classes.dir}"/>
+        <pathelement location="${coverage.instrumented.dir}"/>
+        <fileset dir="${basedir}">
+            <patternset refid="test.classpath.pattern"/>
+        </fileset>
+    </path>
+
+    <path id="atomic.test.class.path">
+        <path refid="test.class.path"/>
+    </path>
+    <path id="slow.test.class.path">
+        <path refid="test.class.path"/>
+    </path>
+
+    <target name="default">
+        <echo message="Nothing to see here..."/>
+    </target>
+
+</project>
