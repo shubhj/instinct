@@ -20,19 +20,19 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import au.net.netstorm.boost.edge.EdgeException;
 import com.googlecode.instinct.core.annotate.Specification;
-import com.googlecode.instinct.internal.aggregate.locate.AnnotatedMethodLocator;
-import com.googlecode.instinct.internal.aggregate.locate.AnnotatedMethodLocatorImpl;
+import com.googlecode.instinct.core.naming.SpecificationNamingConvention;
+import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
+import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import static com.googlecode.instinct.internal.util.Suggest.Priority.LOW;
 import junit.framework.Protectable;
 import junit.framework.Test;
 import junit.framework.TestResult;
 
 public final class BehaviourContextTestCase implements Test {
-    private final AnnotatedMethodLocator methodLocator = new AnnotatedMethodLocatorImpl();
+    private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
     private final BehaviourContextRunner contextRunner = new BehaviourContextRunnerImpl();
     private final Class<?> specificationClass;
 
@@ -68,6 +68,7 @@ public final class BehaviourContextTestCase implements Test {
 
     @SuppressWarnings({"ProhibitedExceptionThrown"})
     private void handleException(final EdgeException e) {
+        // Note. Need to dig down as reflection is pushed behind an edge.
         if (e.getCause() instanceof InvocationTargetException) {
             throw (RuntimeException) e.getCause().getCause();
         } else {
@@ -75,10 +76,9 @@ public final class BehaviourContextTestCase implements Test {
         }
     }
 
-    @Suggest(value = "Should we cache this?", priority = LOW)
+    @Suggest("Should we cache this?")
     private int getNumberOfSpecificationMethods() {
-        // This will break if we allow different ways to specify specifications
-        final Method[] methods = methodLocator.locate(specificationClass, Specification.class);
+        final Method[] methods = methodLocator.locateAll(specificationClass, Specification.class, new SpecificationNamingConvention());
         return methods.length;
     }
 

@@ -20,7 +20,7 @@ import com.googlecode.instinct.internal.util.Suggest;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 
-public final class ConcreteGeneratorImpl implements ProxyGenerator {
+public final class ConcreteProxyGenerator implements ProxyGenerator {
 //    private static final Map<Class<?>, Object> PROXIES = synchronizedMap(new WeakHashMap<Class<?>, Object>());
 
     @Suggest("Provide the ability to proxy more than one type")
@@ -28,7 +28,7 @@ public final class ConcreteGeneratorImpl implements ProxyGenerator {
         return createProxy(classToProxy, methodInterceptor);
     }
 
-    @Suggest("Use JavaAssist and return an instumented class instead")
+    @Suggest("Use JavaAssist and return an instumented class instead as we can't proxy Class.getDeclaredMethods()")
     private <T> Object createProxy(final Class<T> classToProxy, final MethodInterceptor methodInterceptor) {
         final Enhancer enhancer = new Enhancer();
         enhancer.setSuperclass(classToProxy);

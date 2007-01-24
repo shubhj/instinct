@@ -20,7 +20,7 @@ import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
 import com.googlecode.instinct.internal.aggregate.AnnotatedBehaviourContextAggregatorImpl;
-import com.googlecode.instinct.internal.mock.instance.ConcreteGeneratorImpl;
+import com.googlecode.instinct.internal.mock.instance.ConcreteProxyGenerator;
 import com.googlecode.instinct.internal.mock.instance.ProxyGenerator;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
@@ -32,7 +32,7 @@ import junit.framework.TestSuite;
 @Suggest("Move this into a seperate distribution")
 public final class JUnitTestSuiteBuilderImpl implements JUnitTestSuiteBuilder {
     private final EdgeClass edgeClass = new DefaultEdgeClass();
-    private final ProxyGenerator proxyGenerator = new ConcreteGeneratorImpl();
+    private final ProxyGenerator proxyGenerator = new ConcreteProxyGenerator();
     private final BehaviourContextAggregator aggregator;
 
     public <T> JUnitTestSuiteBuilderImpl(final Class<T> classInSpecTree) {
@@ -49,14 +49,9 @@ public final class JUnitTestSuiteBuilderImpl implements JUnitTestSuiteBuilder {
     private TestSuite buildSuite(final String suiteName, final JavaClassName[] contextClasses) {
         final TestSuite suite = new TestSuite(suiteName);
         for (final JavaClassName contextClass : contextClasses) {
-            suite.addTest(createTestProxy(contextClass));
+            suite.addTest(new BehaviourContextTestCase(getClass(contextClass)));
         }
         return suite;
-    }
-
-    private Test createTestProxy(final JavaClassName contextClass) {
-        final Test test = new BehaviourContextTestCase(getClass(contextClass));
-        return (Test) proxyGenerator.newProxy(Test.class, new BehaviourContextMethodInterceptorImpl(test));
     }
 
     @SuppressWarnings({"unchecked", "JUnitTestCaseInProductSource"})
