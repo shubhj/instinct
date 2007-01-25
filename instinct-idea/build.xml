@@ -1,13 +1,13 @@
-<project name="testngrunner" default="dist">
+<project name="instinct-idea" default="dist" basedir=".">
 
-    <property name="src.dir" value="src"/>
-    <property name="test.dir" value="tests"/>
+    <property name="src.dir" value="src/main/java"/>
+    <property name="test.dir" value="src/test/java"/>
     <property name="lib.dir" value="lib"/>
-    <property name="bin.dir" value="build"/>
-    <property name="dst.dir" value="dist"/>
-
-    <property name="idea.home" value="${user.home}/app/idea"/>
-    <property name="idea.plugins.home" value="${user.home}/.IntelliJIdea60/config/plugins"/>
+    <property name="build.dir" value="build"/>
+    <property name="dist.dir" value="dist"/>
+    <property name="idea.home" value="/Applications/IntelliJ IDEA 6.0.4.app"/>
+    <!--<property name="idea.plugins.home" value="${user.home}/.IntelliJIdea60/config/plugins"/>-->
+    <property name="idea.plugins.home" value="${user.home}/Library/Application Support/IntelliJIDEA60"/>
 
     <path id="compile.classpath">
         <fileset dir="${idea.home}/lib">
@@ -32,7 +32,6 @@
         </fileset>
     </path>
 
-
     <path id="uidesigner.classpath">
         <fileset dir="${idea.home}/lib">
             <include name="jdom.jar"/>
@@ -49,26 +48,23 @@
         </fileset>
     </path>
 
-    <taskdef name="javac2"
-             classname="com.intellij.ant.Javac2"
-             classpathref="uidesigner.classpath"/>
-
     <target name="init">
-        <mkdir dir="${bin.dir}/classes"/>
-        <mkdir dir="${bin.dir}/classes.test"/>
-        <mkdir dir="${bin.dir}/jars"/>
-        <mkdir dir="${dst.dir}"/>
+        <mkdir dir="${build.dir}/classes"/>
+        <mkdir dir="${build.dir}/classes.test"/>
+        <mkdir dir="${build.dir}/jars"/>
+        <mkdir dir="${dist.dir}"/>
     </target>
 
     <target name="clean">
-        <delete dir="${bin.dir}"/>
-        <delete dir="${dst.dir}"/>
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
     </target>
 
     <target name="compile" depends="init">
-        <javac2 srcdir="${src.dir}" destdir="${bin.dir}/classes" debug="true" classpathref="compile.classpath"
-                deprecation="true" source="1.5" target="jsr14"/>
-        <copy todir="${bin.dir}/classes">
+        <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="uidesigner.classpath"/>
+        <javac2 srcdir="${src.dir}" destdir="${build.dir}/main-classes" debug="true" classpathref="compile.classpath" deprecation="true" source="1.5"
+                target="jsr14"/>
+        <copy todir="${build.dir}/main-classes">
             <fileset dir="${src.dir}">
                 <include name="**/*.properties"/>
             </fileset>
@@ -80,18 +76,18 @@
 
     <target name="dist" depends="build">
 
-        <jar jarfile="${bin.dir}/jars/${ant.project.name}.jar">
-            <zipfileset dir="${bin.dir}/classes"/>
+        <jar jarfile="${build.dir}/jars/${ant.project.name}.jar">
+            <zipfileset dir="${build.dir}/main-classes"/>
             <zipfileset dir="${src.dir}/resources" prefix="resources"/>
             <zipfileset dir="META-INF" prefix="META-INF">
                 <include name="plugin.xml"/>
             </zipfileset>
         </jar>
-        <zip destfile="${dst.dir}/${ant.project.name}.zip" compress="true">
+        <zip destfile="${dist.dir}/${ant.project.name}.zip" compress="true">
             <zipfileset dir="${lib.dir}" prefix="${ant.project.name}/lib">
                 <include name="testng-jdk15.jar"/>
             </zipfileset>
-            <zipfileset dir="${bin.dir}/jars" prefix="${ant.project.name}/lib" includes="${ant.project.name}.jar"/>
+            <zipfileset dir="${build.dir}/jars" prefix="${ant.project.name}/lib" includes="${ant.project.name}.jar"/>
             <zipfileset dir="${lib.dir}" prefix="${ant.project.name}/testng">
                 <include name="testng-jdk14.jar"/>
             </zipfileset>
@@ -103,7 +99,7 @@
     </target>
 
     <target name="deploy" depends="dist">
-        <unzip src="${dst.dir}/${ant.project.name}.zip" dest="${idea.plugins.home}"/>
+        <unzip src="${dist.dir}/${ant.project.name}.zip" dest="${idea.plugins.home}"/>
     </target>
 
 </project>
