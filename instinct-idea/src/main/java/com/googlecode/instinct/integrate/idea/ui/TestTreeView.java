@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.ui;
+package com.googlecode.instinct.integrate.idea.ui;
 
 import javax.swing.*;
 import javax.swing.plaf.TreeUI;
@@ -22,9 +22,9 @@ import com.intellij.util.EditSourceOnDoubleClickHandler;
 import com.intellij.util.containers.Convertor;
 import com.intellij.util.ui.Tree;
 import com.intellij.util.ui.tree.TreeUtil;
-import com.theoryinpractice.testng.model.TestNGConsoleProperties;
-import com.theoryinpractice.testng.model.TestNodeDescriptor;
-import com.theoryinpractice.testng.model.TestProxy;
+import com.googlecode.instinct.integrate.idea.model.TestNGConsoleProperties;
+import com.googlecode.instinct.integrate.idea.model.TestNodeDescriptor;
+import com.googlecode.instinct.integrate.idea.model.TestProxy;
 
 /**
  * @author Hani Suleiman Date: Aug 1, 2005 Time: 11:33:12 AM

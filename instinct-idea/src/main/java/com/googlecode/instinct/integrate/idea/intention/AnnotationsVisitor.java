@@ -4,7 +4,7 @@
  * Date: 11/09/2006
  * Time: 19:51:32
  */
-package com.theoryinpractice.testng.intention;
+package com.googlecode.instinct.integrate.idea.intention;
 
 import com.intellij.psi.PsiAnnotation;
 import com.intellij.psi.PsiModifierList;

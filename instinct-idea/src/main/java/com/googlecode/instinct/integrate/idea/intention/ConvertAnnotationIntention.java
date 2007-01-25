@@ -1,11 +1,11 @@
-package com.theoryinpractice.testng.intention;
+package com.googlecode.instinct.integrate.idea.intention;
 
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.util.IncorrectOperationException;
-import com.theoryinpractice.testng.util.Intentions;
-import com.theoryinpractice.testng.util.TestNGUtil;
+import com.googlecode.instinct.integrate.idea.util.Intentions;
+import com.googlecode.instinct.integrate.idea.util.TestNGUtil;
 
 /**
  * @author Hani Suleiman Date: Aug 3, 2005 Time: 4:17:59 PM

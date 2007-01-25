@@ -4,10 +4,10 @@
  * Date: Jul 11, 2005
  * Time: 9:02:27 PM
  */
-package com.theoryinpractice.testng.model;
+package com.googlecode.instinct.integrate.idea.model;
 
 import org.testng.remote.strprotocol.*;
-import com.theoryinpractice.testng.TestNGConsoleView;
+import com.googlecode.instinct.integrate.idea.TestNGConsoleView;
 
 public class TestNGRemoteListener implements IRemoteSuiteListener, IRemoteTestListener {
     private TestNGConsoleView console;

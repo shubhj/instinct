@@ -4,7 +4,7 @@
  * Date: Jul 2, 2005
  * Time: 12:22:07 AM
  */
-package com.theoryinpractice.testng;
+package com.googlecode.instinct.integrate.idea;
 
 import java.io.*;
 import java.net.*;
@@ -35,8 +35,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.pom.java.LanguageLevel;
 import com.intellij.psi.*;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.theoryinpractice.testng.model.*;
-import com.theoryinpractice.testng.util.TestNGUtil;
+import com.googlecode.instinct.integrate.idea.model.*;
+import com.googlecode.instinct.integrate.idea.util.TestNGUtil;
 import org.testng.TestNG;
 import org.testng.TestNGCommandLineArgs;
 import org.testng.xml.*;

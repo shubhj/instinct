@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.model;
+package com.googlecode.instinct.integrate.idea.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,7 +8,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
-import com.theoryinpractice.testng.Printable;
+import com.googlecode.instinct.integrate.idea.Printable;
 import org.testng.remote.strprotocol.MessageHelper;
 import org.testng.remote.strprotocol.TestResultMessage;
 

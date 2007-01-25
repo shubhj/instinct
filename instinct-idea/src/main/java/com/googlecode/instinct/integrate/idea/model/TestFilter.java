@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.model;
+package com.googlecode.instinct.integrate.idea.model;
 
 import java.util.*;
 
@@ -124,4 +124,4 @@ public abstract class TestFilter
         NOT_LEAF = LEAF.not();
         DEFECTIVE_LEAF = DEFECT.and(LEAF);
     }
-}  
+}

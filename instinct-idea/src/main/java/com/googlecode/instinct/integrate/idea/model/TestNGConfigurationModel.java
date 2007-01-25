@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.model;
+package com.googlecode.instinct.integrate.idea.model;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
@@ -9,8 +9,8 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiClass;
-import com.theoryinpractice.testng.TestNGConfiguration;
-import com.theoryinpractice.testng.TestNGConfigurationEditor;
+import com.googlecode.instinct.integrate.idea.TestNGConfiguration;
+import com.googlecode.instinct.integrate.idea.TestNGConfigurationEditor;
 
 /**
  * @author Hani Suleiman Date: Jul 21, 2005 Time: 1:20:14 PM

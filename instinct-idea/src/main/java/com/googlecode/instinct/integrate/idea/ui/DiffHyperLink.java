@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.ui;
+package com.googlecode.instinct.integrate.idea.ui;
 
 import java.io.File;
 
@@ -9,7 +9,7 @@ import com.intellij.openapi.diff.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.theoryinpractice.testng.Printable;
+import com.googlecode.instinct.integrate.idea.Printable;
 
 /**
  * @author Hani Suleiman Date: Dec 1, 2006 Time: 12:14:04 PM
@@ -42,7 +42,7 @@ public class DiffHyperLink implements Printable
         diff.setContentTitles(s, "Actual value");
         diff.addHint(DiffTool.HINT_SHOW_NOT_MODAL_DIALOG);
         diff.addHint(DiffTool.HINT_DO_NOT_IGNORE_WHITESPACES);
-        diff.setGroupKey('#' + com.theoryinpractice.testng.ui.TestNGResults.class.getName());
+        diff.setGroupKey('#' + com.googlecode.instinct.integrate.idea.ui.TestNGResults.class.getName());
         DiffManager.getInstance().getIdeaDiffTool().show(diff);
     }
 

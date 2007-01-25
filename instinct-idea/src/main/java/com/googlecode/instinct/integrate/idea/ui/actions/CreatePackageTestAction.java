@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.ui.actions;
+package com.googlecode.instinct.integrate.idea.ui.actions;
 
 import com.intellij.execution.RunManager;
 import com.intellij.execution.RunnerAndConfigurationSettings;
@@ -9,8 +9,8 @@ import com.intellij.openapi.module.Module;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiPackage;
-import com.theoryinpractice.testng.TestNGConfiguration;
-import com.theoryinpractice.testng.TestNGConfigurationType;
+import com.googlecode.instinct.integrate.idea.TestNGConfiguration;
+import com.googlecode.instinct.integrate.idea.TestNGConfigurationType;
 
 /**
  * @author Hani Suleiman Date: Dec 1, 2006 Time: 9:40:24 PM

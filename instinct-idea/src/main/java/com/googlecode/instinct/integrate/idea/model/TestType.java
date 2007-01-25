@@ -4,7 +4,7 @@
  * Date: Jul 24, 2005
  * Time: 9:54:02 PM
  */
-package com.theoryinpractice.testng.model;
+package com.googlecode.instinct.integrate.idea.model;
 
 public class TestType
 {
@@ -14,7 +14,7 @@ public class TestType
     public static final TestType METHOD = new TestType("METHOD", 2);
     public static final TestType GROUP = new TestType("GROUP", 3);
     public static final TestType SUITE = new TestType("SUITE", 4);
-    
+
     public final String type;
     public final int value;
 
@@ -30,7 +30,7 @@ public class TestType
     public int getValue() {
         return value;
     }
-    
+
     public static TestType valueOf(String type)
     {
         if(INVALID.type.equals(type))

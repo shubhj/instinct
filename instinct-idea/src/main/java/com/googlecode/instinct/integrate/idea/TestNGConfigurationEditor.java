@@ -4,7 +4,7 @@
  * Date: Jul 3, 2005
  * Time: 6:15:22 PM
  */
-package com.theoryinpractice.testng;
+package com.googlecode.instinct.integrate.idea;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,7 +30,7 @@ import com.intellij.ui.TabbedPaneWrapper;
 import com.intellij.ui.table.TableView;
 import com.intellij.uiDesigner.core.*;
 import static com.intellij.uiDesigner.core.GridConstraints.*;
-import com.theoryinpractice.testng.model.*;
+import com.googlecode.instinct.integrate.idea.model.*;
 
 public class TestNGConfigurationEditor extends SettingsEditor<TestNGConfiguration>
 {

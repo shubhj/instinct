@@ -1,14 +1,14 @@
-package com.theoryinpractice.testng.ui.actions;
+package com.googlecode.instinct.integrate.idea.ui.actions;
 
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.util.config.*;
-import com.theoryinpractice.testng.model.TestNGConsoleProperties;
-import com.theoryinpractice.testng.ui.TestNGResults;
+import com.googlecode.instinct.integrate.idea.model.TestNGConsoleProperties;
+import com.googlecode.instinct.integrate.idea.ui.TestNGResults;
 
 public class ScrollToTestSourceAction extends ToggleBooleanProperty.Disablable
 {
     private TestNGResults results;
-    
+
     public ScrollToTestSourceAction(TestNGConsoleProperties properties)
     {
         super("Auto Scroll to Source", "Open selected test in editor", IconLoader.getIcon("/general/autoscrollToSource.png"), properties, TestNGConsoleProperties.SCROLL_TO_SOURCE);

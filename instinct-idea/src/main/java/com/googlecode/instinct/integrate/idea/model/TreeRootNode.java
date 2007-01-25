@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.model;
+package com.googlecode.instinct.integrate.idea.model;
 
 /**
  * @author Hani Suleiman Date: Jul 31, 2005 Time: 10:15:02 PM
@@ -6,7 +6,7 @@ package com.theoryinpractice.testng.model;
 public class TreeRootNode extends TestProxy
 {
     private boolean inProgress;
-    
+
     public TreeRootNode() {
     }
 

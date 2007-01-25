@@ -1,9 +1,9 @@
-package com.theoryinpractice.testng.model;
+package com.googlecode.instinct.integrate.idea.model;
 
 import com.intellij.openapi.util.JDOMExternalizable;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
-import com.theoryinpractice.testng.TestNGConfiguration;
+import com.googlecode.instinct.integrate.idea.TestNGConfiguration;
 import org.jdom.Element;
 
 /**
@@ -20,7 +20,7 @@ public interface TestSearchScope
         public Wrapper() {
             testScope = TestSearchScope.WHOLE_PROJECT;
         }
-        
+
         public void readExternal(Element element)
             throws InvalidDataException
         {
@@ -55,7 +55,7 @@ public interface TestSearchScope
             testScope = testseachscope;
         }
     }
-    
+
     public abstract SourceScope getSourceScope(TestNGConfiguration config);
 
     public static final TestSearchScope WHOLE_PROJECT = new TestSearchScope() {
@@ -71,7 +71,7 @@ public interface TestSearchScope
             return "WHOLE_PROJECT";
         }
     };
-    
+
     public static final TestSearchScope SINGLE_MODULE = new TestSearchScope() {
 
         public SourceScope getSourceScope(TestNGConfiguration config)
@@ -85,7 +85,7 @@ public interface TestSearchScope
             return "SINGLE_MODULE";
         }
     };
-    
+
     public static final TestSearchScope MODULE_WITH_DEPENDENCIES = new TestSearchScope() {
 
         public SourceScope getSourceScope(TestNGConfiguration config)

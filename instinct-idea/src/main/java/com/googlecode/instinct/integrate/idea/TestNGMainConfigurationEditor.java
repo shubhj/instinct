@@ -4,7 +4,7 @@
  * Date: 14/07/2006
  * Time: 20:01:09
  */
-package com.theoryinpractice.testng;
+package com.googlecode.instinct.integrate.idea;
 
 import javax.swing.*;
 

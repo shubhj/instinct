@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.util;
+package com.googlecode.instinct.integrate.idea.util;
 
 import java.util.Arrays;
 import java.util.List;

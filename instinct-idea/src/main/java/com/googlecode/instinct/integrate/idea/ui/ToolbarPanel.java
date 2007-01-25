@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.ui;
+package com.googlecode.instinct.integrate.idea.ui;
 
 import com.intellij.execution.junit2.ui.TestsUIUtil;
 import com.intellij.ide.OccurenceNavigator;
@@ -6,9 +6,9 @@ import com.intellij.ide.actions.*;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.util.config.ToggleBooleanProperty;
-import com.theoryinpractice.testng.model.TestNGConsoleProperties;
-import com.theoryinpractice.testng.ui.actions.TestNGActions;
-import com.theoryinpractice.testng.ui.actions.ScrollToTestSourceAction;
+import com.googlecode.instinct.integrate.idea.model.TestNGConsoleProperties;
+import com.googlecode.instinct.integrate.idea.ui.actions.TestNGActions;
+import com.googlecode.instinct.integrate.idea.ui.actions.ScrollToTestSourceAction;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -19,10 +19,10 @@ public class ToolbarPanel extends JPanel implements OccurenceNavigator
     private TestTreeExpander expander = new TestTreeExpander();
     private FailedTestsNavigator failedTestsNavigator = new FailedTestsNavigator();
     private ScrollToTestSourceAction scrollToSource;
-    
+
     public ToolbarPanel()
     {}
-    
+
     public ToolbarPanel(TestNGConsoleProperties properties, TestNGResults results)
     {
         super(new BorderLayout());
@@ -91,6 +91,6 @@ public class ToolbarPanel extends JPanel implements OccurenceNavigator
         expander.setResults(null);
         expander = null;
         failedTestsNavigator.setResults(null);
-        failedTestsNavigator = null;        
+        failedTestsNavigator = null;
     }
 }

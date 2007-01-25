@@ -7,29 +7,29 @@
     <idea-version since-build="6148"/>
     <!--<application-components>-->
         <!--<component>-->
-            <!--<implementation-class>com.theoryinpractice.testng.TestNGConfigurationType</implementation-class>-->
+            <!--<implementation-class>com.googlecode.instinct.integrate.idea.TestNGConfigurationType</implementation-class>-->
             <!--<option name="workspace" value="true"/>-->
         <!--</component>-->
     <!--</application-components>-->
     <!--<project-components>-->
         <!--<component>-->
-            <!--<implementation-class>com.theoryinpractice.testng.intention.ConvertJUnitIntention</implementation-class>-->
+            <!--<implementation-class>com.googlecode.instinct.integrate.idea.intention.ConvertJUnitIntention</implementation-class>-->
         <!--</component>-->
         <!--<component>-->
-            <!--<implementation-class>com.theoryinpractice.testng.intention.ConvertJavadocIntention</implementation-class>-->
+            <!--<implementation-class>com.googlecode.instinct.integrate.idea.intention.ConvertJavadocIntention</implementation-class>-->
         <!--</component>-->
         <!--<component>-->
             <!--<implementation-class>-->
-                <!--com.theoryinpractice.testng.intention.ConvertAnnotationIntention-->
+                <!--com.googlecode.instinct.integrate.idea.intention.ConvertAnnotationIntention-->
             <!--</implementation-class>-->
         <!--</component>-->
         <!--<component>-->
             <!--<implementation-class>-->
-                <!--com.theoryinpractice.testng.intention.ConvertOldAnnotationIntention-->
+                <!--com.googlecode.instinct.integrate.idea.intention.ConvertOldAnnotationIntention-->
             <!--</implementation-class>-->
         <!--</component>-->
         <!--<component>-->
-            <!--<implementation-class>com.theoryinpractice.testng.TestNGDefaultConfigurationComponent</implementation-class>-->
+            <!--<implementation-class>com.googlecode.instinct.integrate.idea.TestNGDefaultConfigurationComponent</implementation-class>-->
             <!--<option name="workspace" value="true"/>-->
         <!--</component>-->
     <!--</project-components>-->

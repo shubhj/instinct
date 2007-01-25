@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng;
+package com.googlecode.instinct.integrate.idea;
 
 import com.intellij.psi.PsiPackage;
 import com.intellij.openapi.project.Project;

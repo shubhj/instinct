@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.intention;
+package com.googlecode.instinct.integrate.idea.intention;
 
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;

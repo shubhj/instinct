@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.util;
+package com.googlecode.instinct.integrate.idea.util;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -16,7 +16,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.PsiSearchHelper;
 import com.intellij.psi.util.PsiElementFilter;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.theoryinpractice.testng.model.TestClassFilter;
+import com.googlecode.instinct.integrate.idea.model.TestClassFilter;
 import org.testng.TestNG;
 import org.testng.annotations.*;
 

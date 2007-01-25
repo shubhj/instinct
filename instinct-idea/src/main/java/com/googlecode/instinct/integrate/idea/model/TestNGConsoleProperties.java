@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.model;
+package com.googlecode.instinct.integrate.idea.model;
 
 import com.intellij.debugger.DebuggerManagerEx;
 import com.intellij.debugger.impl.DebuggerSession;
@@ -6,8 +6,8 @@ import com.intellij.execution.util.StoringPropertyContainer;
 import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.config.*;
-import com.theoryinpractice.testng.TestNGConfiguration;
-import com.theoryinpractice.testng.TestNGConsoleView;
+import com.googlecode.instinct.integrate.idea.TestNGConfiguration;
+import com.googlecode.instinct.integrate.idea.TestNGConsoleView;
 
 import java.util.*;
 
@@ -92,7 +92,7 @@ public class TestNGConsoleProperties extends StoringPropertyContainer
     {
         myListeners.clear();
     }
-    
+
     @Override
     protected void onPropertyChanged(AbstractProperty property, Object obj)
     {

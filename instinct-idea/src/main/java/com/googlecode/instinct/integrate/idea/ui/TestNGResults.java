@@ -4,7 +4,7 @@
  * Date: Jul 6, 2005
  * Time: 10:49:05 PM
  */
-package com.theoryinpractice.testng.ui;
+package com.googlecode.instinct.integrate.idea.ui;
 
 import java.awt.*;
 import java.util.List;
@@ -27,10 +27,10 @@ import com.intellij.ui.GuiUtils;
 import com.intellij.ui.table.TableView;
 import com.intellij.util.OpenSourceUtil;
 import com.intellij.util.ui.tree.TreeUtil;
-import com.theoryinpractice.testng.TestNGConsoleView;
-import com.theoryinpractice.testng.Printable;
-import com.theoryinpractice.testng.model.*;
-import com.theoryinpractice.testng.ui.actions.ScrollToTestSourceAction;
+import com.googlecode.instinct.integrate.idea.TestNGConsoleView;
+import com.googlecode.instinct.integrate.idea.Printable;
+import com.googlecode.instinct.integrate.idea.model.*;
+import com.googlecode.instinct.integrate.idea.ui.actions.ScrollToTestSourceAction;
 import org.testng.remote.strprotocol.MessageHelper;
 import org.testng.remote.strprotocol.TestResultMessage;
 

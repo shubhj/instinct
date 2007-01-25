@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng;
+package com.googlecode.instinct.integrate.idea;
 
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -9,7 +9,7 @@ import com.intellij.execution.junit2.configuration.BrowseModuleValueActionListen
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ex.MessagesEx;
 import com.intellij.openapi.module.Module;
-import com.theoryinpractice.testng.model.TestClassFilter;
+import com.googlecode.instinct.integrate.idea.model.TestClassFilter;
 
 /**
  * @author Hani Suleiman

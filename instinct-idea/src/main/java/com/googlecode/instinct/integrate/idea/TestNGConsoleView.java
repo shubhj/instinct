@@ -4,7 +4,7 @@
  * Date: Jul 9, 2005
  * Time: 4:19:20 PM
  */
-package com.theoryinpractice.testng;
+package com.googlecode.instinct.integrate.idea;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +18,9 @@ import com.intellij.execution.ui.ConsoleView;
 import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
-import com.theoryinpractice.testng.model.TestNGConsoleProperties;
-import com.theoryinpractice.testng.ui.TestNGResults;
-import com.theoryinpractice.testng.ui.DiffHyperLink;
+import com.googlecode.instinct.integrate.idea.model.TestNGConsoleProperties;
+import com.googlecode.instinct.integrate.idea.ui.TestNGResults;
+import com.googlecode.instinct.integrate.idea.ui.DiffHyperLink;
 import org.testng.remote.strprotocol.MessageHelper;
 import org.testng.remote.strprotocol.TestResultMessage;
 
@@ -151,7 +151,7 @@ public class TestNGConsoleView implements ConsoleView
         }
         return printables;
     }
-    
+
     public void print(String s, ConsoleViewContentType contentType) {
         Chunk chunk = new Chunk(s, contentType);
         synchronized (allOutput) {

@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.intention;
+package com.googlecode.instinct.integrate.idea.intention;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.editor.Editor;
@@ -6,7 +6,7 @@ import com.intellij.psi.*;
 import com.intellij.psi.javadoc.PsiDocTag;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.pom.java.LanguageLevel;
-import com.theoryinpractice.testng.util.Intentions;
+import com.googlecode.instinct.integrate.idea.util.Intentions;
 
 /**
  * @author Hani Suleiman Date: Aug 3, 2005 Time: 4:18:11 PM

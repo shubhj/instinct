@@ -1,9 +1,9 @@
-package com.theoryinpractice.testng;
+package com.googlecode.instinct.integrate.idea;
 
 import com.intellij.openapi.ui.DialogBuilder;
 import com.intellij.psi.*;
 import com.intellij.ui.*;
-import com.theoryinpractice.testng.util.TestNGUtil;
+import com.googlecode.instinct.integrate.idea.util.TestNGUtil;
 
 import java.awt.BorderLayout;
 import java.util.Comparator;

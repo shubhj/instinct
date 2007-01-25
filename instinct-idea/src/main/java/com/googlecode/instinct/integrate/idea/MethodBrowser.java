@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng;
+package com.googlecode.instinct.integrate.idea;
 
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.project.Project;

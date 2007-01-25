@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.model;
+package com.googlecode.instinct.integrate.idea.model;
 
 import java.io.File;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ui.order.AdditionalClasspath;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.psi.*;
-import com.theoryinpractice.testng.TestNGConfiguration;
+import com.googlecode.instinct.integrate.idea.TestNGConfiguration;
 
 /**
  * @author Hani Suleiman Date: Jul 20, 2005 Time: 1:11:01 PM
@@ -197,7 +197,7 @@ public class TestData implements Cloneable
         PACKAGE_NAME = pkg.getQualifiedName();
         return null;
     }
-    
+
     public Module setMainClass(PsiClass psiclass) {
         MAIN_CLASS_NAME = ExecutionUtil.getRuntimeQualifiedName(psiclass);
         PsiPackage psipackage = JUnitUtil.getContainingPackage(psiclass);

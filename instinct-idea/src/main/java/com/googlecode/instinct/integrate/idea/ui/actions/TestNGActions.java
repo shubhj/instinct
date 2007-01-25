@@ -1,10 +1,10 @@
-package com.theoryinpractice.testng.ui.actions;
+package com.googlecode.instinct.integrate.idea.ui.actions;
 
 import com.intellij.util.config.AbstractProperty;
-import com.theoryinpractice.testng.ui.TestNGResults;
-import com.theoryinpractice.testng.model.TestNGConsoleProperties;
-import com.theoryinpractice.testng.model.TestNGPropertyListener;
-import com.theoryinpractice.testng.model.TestFilter;
+import com.googlecode.instinct.integrate.idea.ui.TestNGResults;
+import com.googlecode.instinct.integrate.idea.model.TestNGConsoleProperties;
+import com.googlecode.instinct.integrate.idea.model.TestNGPropertyListener;
+import com.googlecode.instinct.integrate.idea.model.TestFilter;
 
 public class TestNGActions
 {

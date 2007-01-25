@@ -1,11 +1,11 @@
-package com.theoryinpractice.testng.model;
+package com.googlecode.instinct.integrate.idea.model;
 
 import com.intellij.ide.util.TreeClassChooser;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.PsiClass;
 import com.intellij.openapi.project.Project;
 import com.intellij.execution.configurations.ConfigurationUtil;
-import com.theoryinpractice.testng.util.TestNGUtil;
+import com.googlecode.instinct.integrate.idea.util.TestNGUtil;
 
 /**
  * @author Hani Suleiman
@@ -17,7 +17,7 @@ public class TestClassFilter implements TreeClassChooser.ClassFilterWithScope
     private final GlobalSearchScope scope;
     private final Project project;
     private boolean includeConfig;
-    
+
     public TestClassFilter(GlobalSearchScope scope, Project project, boolean includeConfig) {
         this.scope = scope;
         this.project = project;

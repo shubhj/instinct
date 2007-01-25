@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.ui;
+package com.googlecode.instinct.integrate.idea.ui;
 
 import com.intellij.ide.OccurenceNavigator;
 import com.intellij.pom.Navigatable;
@@ -6,8 +6,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiMethod;
 import com.intellij.openapi.fileEditor.OpenFileDescriptor;
-import com.theoryinpractice.testng.model.TestProxy;
-import com.theoryinpractice.testng.model.TestFilter;
+import com.googlecode.instinct.integrate.idea.model.TestProxy;
+import com.googlecode.instinct.integrate.idea.model.TestFilter;
 
 import java.util.List;
 

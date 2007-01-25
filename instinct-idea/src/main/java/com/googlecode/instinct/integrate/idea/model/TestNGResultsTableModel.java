@@ -4,7 +4,7 @@
  * Date: Jul 9, 2005
  * Time: 3:37:27 PM
  */
-package com.theoryinpractice.testng.model;
+package com.googlecode.instinct.integrate.idea.model;
 
 import java.util.ArrayList;
 import java.util.List;

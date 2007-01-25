@@ -1,9 +1,9 @@
-package com.theoryinpractice.testng.ui;
+package com.googlecode.instinct.integrate.idea.ui;
 
 import com.intellij.util.Alarm;
 import com.intellij.execution.junit2.ui.TestsUIUtil;
-import com.theoryinpractice.testng.model.TestProxy;
-import com.theoryinpractice.testng.model.TestTreeBuilder;
+import com.googlecode.instinct.integrate.idea.model.TestProxy;
+import com.googlecode.instinct.integrate.idea.model.TestTreeBuilder;
 
 import javax.swing.*;
 

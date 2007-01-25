@@ -4,7 +4,7 @@
  * Date: 11/11/2006
  * Time: 16:15:10
  */
-package com.theoryinpractice.testng;
+package com.googlecode.instinct.integrate.idea;
 
 import javax.swing.*;
 
@@ -13,8 +13,8 @@ import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.*;
-import com.theoryinpractice.testng.ui.defaultsettings.DefaultSettings;
-import com.theoryinpractice.testng.ui.defaultsettings.DefaultSettingsPanel;
+import com.googlecode.instinct.integrate.idea.ui.defaultsettings.DefaultSettings;
+import com.googlecode.instinct.integrate.idea.ui.defaultsettings.DefaultSettingsPanel;
 import org.jdom.Element;
 import org.jetbrains.annotations.*;
 

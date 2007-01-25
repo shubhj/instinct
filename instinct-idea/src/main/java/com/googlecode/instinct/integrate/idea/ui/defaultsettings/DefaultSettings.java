@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.ui.defaultsettings;
+package com.googlecode.instinct.integrate.idea.ui.defaultsettings;
 
 import java.util.HashMap;
 import java.util.List;

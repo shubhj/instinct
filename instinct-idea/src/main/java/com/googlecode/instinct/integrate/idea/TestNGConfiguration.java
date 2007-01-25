@@ -4,16 +4,25 @@
  * Date: Jul 2, 2005
  * Time: 12:16:02 AM
  */
-package com.theoryinpractice.testng;
+
+package com.googlecode.instinct.integrate.idea;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
+import com.googlecode.instinct.integrate.idea.model.TestData;
+import com.googlecode.instinct.integrate.idea.model.TestType;
 import com.intellij.execution.ExecutionUtil;
 import com.intellij.execution.Location;
 import com.intellij.execution.RunJavaConfiguration;
-import com.intellij.execution.configurations.*;
+import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.execution.configurations.ConfigurationPerRunnerSettings;
+import com.intellij.execution.configurations.ModuleBasedConfiguration;
+import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.configurations.RunConfigurationModule;
+import com.intellij.execution.configurations.RunProfileState;
+import com.intellij.execution.configurations.RunnerSettings;
+import com.intellij.execution.configurations.RuntimeConfigurationException;
 import com.intellij.execution.configurations.coverage.CoverageEnabledConfiguration;
 import com.intellij.execution.junit.JUnitConfiguration;
 import com.intellij.execution.runners.RunnerInfo;
@@ -24,14 +33,14 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.DefaultJDOMExternalizer;
 import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.WriteExternalException;
-import com.intellij.psi.*;
-import com.theoryinpractice.testng.model.TestData;
-import com.theoryinpractice.testng.model.TestType;
+import com.intellij.psi.PsiClass;
+import com.intellij.psi.PsiManager;
+import com.intellij.psi.PsiMethod;
+import com.intellij.psi.PsiPackage;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 
-public class TestNGConfiguration extends CoverageEnabledConfiguration implements RunJavaConfiguration
-{
+public class TestNGConfiguration extends CoverageEnabledConfiguration implements RunJavaConfiguration {
     //private TestNGResultsContainer resultsContainer;
     protected TestData data;
     protected transient Project project;
@@ -48,7 +57,8 @@ public class TestNGConfiguration extends CoverageEnabledConfiguration implements
         this.project = project;
     }
 
-    public RunProfileState getState(DataContext dataContext, RunnerInfo runnerInfo, RunnerSettings runnerSettings, ConfigurationPerRunnerSettings configurationPerRunnerSettings) {
+    public RunProfileState getState(DataContext dataContext, RunnerInfo runnerInfo, RunnerSettings runnerSettings,
+            ConfigurationPerRunnerSettings configurationPerRunnerSettings) {
         return new TestNGRunnableState(
                 runnerSettings,
                 configurationPerRunnerSettings,
@@ -75,7 +85,8 @@ public class TestNGConfiguration extends CoverageEnabledConfiguration implements
     @Override
     protected ModuleBasedConfiguration createInstance() {
         try {
-            return new TestNGConfiguration(getName(), getProject(), (TestData) data.clone(), TestNGConfigurationType.getInstance().getConfigurationFactories()[0]);
+            return new TestNGConfiguration(getName(), getProject(), (TestData) data.clone(),
+                    TestNGConfigurationType.getInstance().getConfigurationFactories()[0]);
         }
         catch (CloneNotSupportedException e) {
             //can't happen right?
@@ -103,12 +114,14 @@ public class TestNGConfiguration extends CoverageEnabledConfiguration implements
         }
         if (TestType.PACKAGE.getType().equals(data.TEST_OBJECT)) {
             String s = getName();
-            if (!isGeneratedName())
+            if (!isGeneratedName()) {
                 return '\"' + s + '\"';
-            if (data.getPackageName().trim().length() > 0)
+            }
+            if (data.getPackageName().trim().length() > 0) {
                 return "Tests in \"" + data.getPackageName() + '\"';
-            else
+            } else {
                 return "All Tests";
+            }
         }
         if (TestType.METHOD.getType().equals(data.TEST_OBJECT)) {
             return data.getMethodName() + "()";
@@ -158,13 +171,16 @@ public class TestNGConfiguration extends CoverageEnabledConfiguration implements
     @Override
     public void checkConfiguration() throws RuntimeConfigurationException {
         if (data.TEST_OBJECT == TestType.CLASS.getType() || data.TEST_OBJECT == TestType.METHOD.getType()) {
-            PsiClass psiClass = PsiManager.getInstance(project).findClass(data.getMainClassName(), data.getScope().getSourceScope(this).getGlobalSearchScope());
-            if (psiClass == null)
+            PsiClass psiClass = PsiManager.getInstance(project).findClass(data.getMainClassName(),
+                    data.getScope().getSourceScope(this).getGlobalSearchScope());
+            if (psiClass == null) {
                 throw new RuntimeConfigurationException("Invalid class '" + data.getMainClassName() + "'specified");
+            }
         } else if (data.TEST_OBJECT == TestType.PACKAGE.getType()) {
             PsiPackage psiPackage = PsiManager.getInstance(project).findPackage(data.getPackageName());
-            if (psiPackage == null)
+            if (psiPackage == null) {
                 throw new RuntimeConfigurationException("Invalid package '" + data.getMainClassName() + "'specified");
+            }
         }
         //TODO add various checks here
     }
@@ -176,7 +192,6 @@ public class TestNGConfiguration extends CoverageEnabledConfiguration implements
         readModule(element);
         DefaultJDOMExternalizer.readExternal(this, element);
         DefaultJDOMExternalizer.readExternal(getPersistantData(), element);
-
         Map<String, String> properties = getPersistantData().TEST_PROPERTIES;
         Element propertiesElement = element.getChild("properties");
         if (propertiesElement != null) {
@@ -194,13 +209,11 @@ public class TestNGConfiguration extends CoverageEnabledConfiguration implements
         writeModule(element);
         DefaultJDOMExternalizer.writeExternal(this, element);
         DefaultJDOMExternalizer.writeExternal(getPersistantData(), element);
-
         Element propertiesElement = element.getChild("properties");
         if (propertiesElement == null) {
             propertiesElement = new Element("properties");
             element.addContent(propertiesElement);
         }
-
         Map<String, String> properties = getPersistantData().TEST_PROPERTIES;
         for (Map.Entry<String, String> entry : properties.entrySet()) {
             Element property = new Element("property");
@@ -208,7 +221,5 @@ public class TestNGConfiguration extends CoverageEnabledConfiguration implements
             property.setAttribute("value", entry.getValue());
             propertiesElement.addContent(property);
         }
-
     }
-
 }

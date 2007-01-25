@@ -4,7 +4,7 @@
  * Date: 11/11/2006
  * Time: 16:29:03
  */
-package com.theoryinpractice.testng.ui.defaultsettings;
+package com.googlecode.instinct.integrate.idea.ui.defaultsettings;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,7 +16,7 @@ import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.ui.table.TableView;
-import com.theoryinpractice.testng.model.TestNGParametersTableModel;
+import com.googlecode.instinct.integrate.idea.model.TestNGParametersTableModel;
 
 public class DefaultSettingsPanel
 {

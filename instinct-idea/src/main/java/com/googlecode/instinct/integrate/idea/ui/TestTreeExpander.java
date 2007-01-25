@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.ui;
+package com.googlecode.instinct.integrate.idea.ui;
 
 import javax.swing.*;
 

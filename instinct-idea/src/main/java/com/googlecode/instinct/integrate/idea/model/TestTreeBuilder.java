@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.model;
+package com.googlecode.instinct.integrate.idea.model;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;

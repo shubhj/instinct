@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.ui;
+package com.googlecode.instinct.integrate.idea.ui;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -7,7 +7,7 @@ import com.intellij.debugger.impl.DebuggerSession;
 import com.intellij.execution.junit2.ui.PoolOfTestIcons;
 import com.intellij.ui.ColoredTreeCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
-import com.theoryinpractice.testng.model.*;
+import com.googlecode.instinct.integrate.idea.model.*;
 import org.testng.remote.strprotocol.MessageHelper;
 import org.testng.remote.strprotocol.TestResultMessage;
 

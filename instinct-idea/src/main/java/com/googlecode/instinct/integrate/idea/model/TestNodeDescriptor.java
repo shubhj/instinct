@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng.model;
+package com.googlecode.instinct.integrate.idea.model;
 
 import com.intellij.ide.util.treeView.NodeDescriptor;
 import com.intellij.openapi.project.Project;
@@ -15,7 +15,7 @@ public class TestNodeDescriptor extends NodeDescriptor<TestProxy>
         this.node = node;
         myName = node.getName();
     }
-    
+
     @Override
     public boolean update() {
         return false;

@@ -4,7 +4,7 @@
  * Date: Jul 2, 2005
  * Time: 12:10:47 AM
  */
-package com.theoryinpractice.testng;
+package com.googlecode.instinct.integrate.idea;
 
 import javax.swing.*;
 
@@ -20,9 +20,9 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.theoryinpractice.testng.inspection.JUnitConvertTool;
-import com.theoryinpractice.testng.model.TestData;
-import com.theoryinpractice.testng.util.TestNGUtil;
+import com.googlecode.instinct.integrate.idea.inspection.JUnitConvertTool;
+import com.googlecode.instinct.integrate.idea.model.TestData;
+import com.googlecode.instinct.integrate.idea.util.TestNGUtil;
 
 public class TestNGConfigurationType implements LocatableConfigurationType, InspectionToolProvider
 {

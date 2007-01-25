@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng;
+package com.googlecode.instinct.integrate.idea;
 
 import com.intellij.ide.structureView.impl.StructureNodeRenderer;
 import com.intellij.openapi.ui.DialogBuilder;
@@ -6,7 +6,7 @@ import com.intellij.openapi.util.Condition;
 import com.intellij.psi.*;
 import com.intellij.psi.util.PsiFormatUtil;
 import com.intellij.ui.*;
-import com.theoryinpractice.testng.util.TestNGUtil;
+import com.googlecode.instinct.integrate.idea.util.TestNGUtil;
 
 import java.awt.BorderLayout;
 import java.util.Comparator;
@@ -33,7 +33,7 @@ public class MethodList extends JPanel
             return TestNGUtil.hasTest(method);
         }
     }
-    
+
     public MethodList(PsiClass psiClass)
     {
         super(new BorderLayout());

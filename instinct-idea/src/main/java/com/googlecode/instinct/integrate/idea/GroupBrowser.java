@@ -1,4 +1,4 @@
-package com.theoryinpractice.testng;
+package com.googlecode.instinct.integrate.idea;
 
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.project.Project;
@@ -6,8 +6,8 @@ import com.intellij.openapi.module.Module;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.execution.junit2.configuration.BrowseModuleValueActionListener;
-import com.theoryinpractice.testng.model.TestClassFilter;
-import com.theoryinpractice.testng.util.TestNGUtil;
+import com.googlecode.instinct.integrate.idea.model.TestClassFilter;
+import com.googlecode.instinct.integrate.idea.util.TestNGUtil;
 
 /**
  * @author Hani Suleiman
@@ -25,7 +25,7 @@ public class GroupBrowser extends BrowseModuleValueActionListener
 
     @Override
     protected String showDialog() {
-        Module module = editor.getModuleSelector().getModule();        
+        Module module = editor.getModuleSelector().getModule();
         TestClassFilter filter = new TestClassFilter(GlobalSearchScope.moduleScope(module), module.getProject(), false);
         PsiClass[] classes = TestNGUtil.getAllTestClasses(filter);
         if(classes.length == 0) {
