@@ -858,6 +858,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/instinct-core/instinct-core.iml" filepath="$PROJECT_DIR$/instinct-core/instinct-core.iml" />
       <module fileurl="file://$PROJECT_DIR$/instinct-example/instinct-example.iml" filepath="$PROJECT_DIR$/instinct-example/instinct-example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/instinct-idea/instinct-idea.iml" filepath="$PROJECT_DIR$/instinct-idea/instinct-idea.iml" />
     </modules>
   </component>
   <component name="ProjectRootManager" version="2" assert-keyword="true" jdk-15="true" project-jdk-name="1.5" project-jdk-type="JavaSDK">
