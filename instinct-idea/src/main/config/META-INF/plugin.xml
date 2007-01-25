@@ -1,0 +1,40 @@
+<!DOCTYPE idea-plugin PUBLIC "Plugin/DTD" "http://plugins.intellij.net/plugin.dtd">
+<idea-plugin>
+    <name>InstinctIDEA</name>
+    <description>Instinct IntelliJ IDEA Integration</description>
+    <version>0.1.0</version>
+    <vendor logo="/resources/testng.gif">adams.id.au</vendor>
+    <idea-version since-build="6148"/>
+    <!--<application-components>-->
+        <!--<component>-->
+            <!--<implementation-class>com.theoryinpractice.testng.TestNGConfigurationType</implementation-class>-->
+            <!--<option name="workspace" value="true"/>-->
+        <!--</component>-->
+    <!--</application-components>-->
+    <!--<project-components>-->
+        <!--<component>-->
+            <!--<implementation-class>com.theoryinpractice.testng.intention.ConvertJUnitIntention</implementation-class>-->
+        <!--</component>-->
+        <!--<component>-->
+            <!--<implementation-class>com.theoryinpractice.testng.intention.ConvertJavadocIntention</implementation-class>-->
+        <!--</component>-->
+        <!--<component>-->
+            <!--<implementation-class>-->
+                <!--com.theoryinpractice.testng.intention.ConvertAnnotationIntention-->
+            <!--</implementation-class>-->
+        <!--</component>-->
+        <!--<component>-->
+            <!--<implementation-class>-->
+                <!--com.theoryinpractice.testng.intention.ConvertOldAnnotationIntention-->
+            <!--</implementation-class>-->
+        <!--</component>-->
+        <!--<component>-->
+            <!--<implementation-class>com.theoryinpractice.testng.TestNGDefaultConfigurationComponent</implementation-class>-->
+            <!--<option name="workspace" value="true"/>-->
+        <!--</component>-->
+    <!--</project-components>-->
+    <change-notes>
+        <![CDATA[<li>Initial release.</li>
+        ]]>
+    </change-notes>
+</idea-plugin>
