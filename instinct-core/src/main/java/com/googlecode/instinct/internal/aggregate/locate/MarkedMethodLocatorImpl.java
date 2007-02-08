@@ -22,6 +22,7 @@ import com.googlecode.instinct.core.naming.NamingConvention;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 
+@Suggest("Need to remove duplicate methods.")
 public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
     private final AnnotatedMethodLocator annotatedMethodLocator = new AnnotatedMethodLocatorImpl();
 

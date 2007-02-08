@@ -31,7 +31,7 @@ import com.googlecode.instinct.internal.util.MethodInvokerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 
-final class SpecificationRunnerImpl implements SpecificationRunner {
+public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
     private final TestDoubleAutoWirer testDoubleAutoWirer = new TestDoubleAutoWirerImpl();
     private final MockVerifier mockVerifier = new MockVerifierImpl();

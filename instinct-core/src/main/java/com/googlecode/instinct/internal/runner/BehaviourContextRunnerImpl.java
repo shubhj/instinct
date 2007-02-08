@@ -51,7 +51,8 @@ public final class BehaviourContextRunnerImpl implements BehaviourContextRunner 
         for (final Method specificationMethod : specificationMethods) {
             final SpecificationContext specificationContext = new SpecificationContextImpl(behaviourContextClass, beforeSpecificationMethods,
                     afterSpecificationMethods, specificationMethod);
-            behaviourContextResult.addSpecificationResult(specificationRunner.run(specificationContext));
+            final SpecificationResult specificationResult = specificationRunner.run(specificationContext);
+            behaviourContextResult.addSpecificationResult(specificationResult);
         }
         return behaviourContextResult;
     }

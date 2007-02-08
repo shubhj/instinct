@@ -33,26 +33,21 @@ public final class BehaviourContextTestSuite extends TestSuite implements Test {
     private Method[] specificationMethods;
 
     public <T> BehaviourContextTestSuite(final Class<T> specificationClass) {
-        super(specificationClass.getSimpleName());
+        super(specificationClass == null ? "" : specificationClass.getSimpleName());
         checkNotNull(specificationClass);
         this.specificationClass = specificationClass;
         specificationMethods = methodLocator.locateAll(specificationClass, Specification.class, new SpecificationNamingConvention());
     }
 
     public int countTestCases() {
-        return getNumberOfSpecificationMethods();
-    }
-
-    private int getNumberOfSpecificationMethods() {
         return specificationMethods.length;
     }
 
     @Suggest("Do we need to do this in the constructor?")
     public void run(final TestResult result) {
-        System.out.println("result = " + result);
         checkNotNull(result);
         for (final Method specificationMethod : specificationMethods) {
-            addTest(new XxxBehaviourContextTestSuite(specificationMethod));
+            addTest(new XxxBehaviourContextTestSuite(specificationClass, specificationMethod));
         }
     }
 

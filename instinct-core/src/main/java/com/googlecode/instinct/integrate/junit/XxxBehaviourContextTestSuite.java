@@ -13,10 +13,13 @@ import junit.framework.TestResult;
 @Suggest("Rename to testcase")
 public final class XxxBehaviourContextTestSuite extends TestCase implements Test {
     //    private final SpecificationRunner contextRunner = new BehaviourContextRunnerImpl();
+    private final Class<?> specificationClass;
     private final Method specificationMethod;
 
-    public XxxBehaviourContextTestSuite(final Method specificationMethod) {
+    public XxxBehaviourContextTestSuite(final Class<?> specificationClass, final Method specificationMethod) {
+        super(specificationMethod == null ? "" : specificationMethod.getName());
         checkNotNull(specificationMethod);
+        this.specificationClass = specificationClass;
         this.specificationMethod = specificationMethod;
     }
 

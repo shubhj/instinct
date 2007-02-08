@@ -16,6 +16,6 @@
 
 package com.googlecode.instinct.internal.runner;
 
-interface SpecificationRunner {
+public interface SpecificationRunner {
     SpecificationResult run(SpecificationContext context);
 }
