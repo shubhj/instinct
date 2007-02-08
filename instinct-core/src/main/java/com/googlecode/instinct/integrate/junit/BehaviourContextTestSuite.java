@@ -16,85 +16,48 @@
 
 package com.googlecode.instinct.integrate.junit;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import au.net.netstorm.boost.edge.EdgeException;
 import com.googlecode.instinct.core.annotate.Specification;
 import com.googlecode.instinct.core.naming.SpecificationNamingConvention;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
-import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
-import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import junit.framework.Protectable;
 import junit.framework.Test;
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
 
 public final class BehaviourContextTestSuite extends TestSuite implements Test {
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
-    private final BehaviourContextRunner contextRunner = new BehaviourContextRunnerImpl();
     private final Class<?> specificationClass;
+    private Method[] specificationMethods;
 
     public <T> BehaviourContextTestSuite(final Class<T> specificationClass) {
         super(specificationClass.getSimpleName());
         checkNotNull(specificationClass);
         this.specificationClass = specificationClass;
+        specificationMethods = methodLocator.locateAll(specificationClass, Specification.class, new SpecificationNamingConvention());
     }
 
     public int countTestCases() {
         return getNumberOfSpecificationMethods();
     }
 
+    private int getNumberOfSpecificationMethods() {
+        return specificationMethods.length;
+    }
+
+    @Suggest("Do we need to do this in the constructor?")
     public void run(final TestResult result) {
+        System.out.println("result = " + result);
         checkNotNull(result);
-        try {
-            runContext(result);
-        } catch (EdgeException e) {
-            handleException(e);
+        for (final Method specificationMethod : specificationMethods) {
+            addTest(new XxxBehaviourContextTestSuite(specificationMethod));
         }
     }
 
     @Override
     public String toString() {
         return specificationClass.getName();
-    }
-
-    // Note. This is heavily influenced to the implementation of junit.framework.TestResult.run().
-    private void runContext(final TestResult result) {
-        result.startTest(this);
-        result.runProtected(this, new ContextProtectable(contextRunner, specificationClass));
-        result.endTest(this);
-    }
-
-    @SuppressWarnings({"ProhibitedExceptionThrown"})
-    private void handleException(final EdgeException e) {
-        // Note. Need to dig down as reflection is pushed behind an edge.
-        if (e.getCause() instanceof InvocationTargetException) {
-            throw (RuntimeException) e.getCause().getCause();
-        } else {
-            throw e;
-        }
-    }
-
-    @Suggest("Should we cache this?")
-    private int getNumberOfSpecificationMethods() {
-        final Method[] methods = methodLocator.locateAll(specificationClass, Specification.class, new SpecificationNamingConvention());
-        return methods.length;
-    }
-
-    private static final class ContextProtectable implements Protectable {
-        private final BehaviourContextRunner contextRunner;
-        private final Class<?> specificationClass;
-
-        private <T> ContextProtectable(final BehaviourContextRunner contextRunner, final Class<T> specificationClass) {
-            this.contextRunner = contextRunner;
-            this.specificationClass = specificationClass;
-        }
-
-        public void protect() {
-            contextRunner.run(specificationClass);
-        }
     }
 }
