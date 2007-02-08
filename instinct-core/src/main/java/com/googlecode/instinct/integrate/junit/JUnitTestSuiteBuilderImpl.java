@@ -18,21 +18,18 @@ package com.googlecode.instinct.integrate.junit;
 
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
-import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
+import com.googlecode.instinct.core.marker.BehaviourContext;
 import com.googlecode.instinct.internal.aggregate.AnnotatedBehaviourContextAggregatorImpl;
-import com.googlecode.instinct.internal.mock.instance.ConcreteProxyGenerator;
-import com.googlecode.instinct.internal.mock.instance.ProxyGenerator;
+import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import junit.framework.Test;
-import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 @Suggest("Move this into a seperate distribution")
 public final class JUnitTestSuiteBuilderImpl implements JUnitTestSuiteBuilder {
     private final EdgeClass edgeClass = new DefaultEdgeClass();
-    private final ProxyGenerator proxyGenerator = new ConcreteProxyGenerator();
     private final BehaviourContextAggregator aggregator;
 
     public <T> JUnitTestSuiteBuilderImpl(final Class<T> classInSpecTree) {
@@ -49,13 +46,13 @@ public final class JUnitTestSuiteBuilderImpl implements JUnitTestSuiteBuilder {
     private TestSuite buildSuite(final String suiteName, final JavaClassName[] contextClasses) {
         final TestSuite suite = new TestSuite(suiteName);
         for (final JavaClassName contextClass : contextClasses) {
-            suite.addTest(new BehaviourContextTestCase(getClass(contextClass)));
+            suite.addTest(new BehaviourContextTestSuite(getClass(contextClass)));
         }
         return suite;
     }
 
     @SuppressWarnings({"unchecked", "JUnitTestCaseInProductSource"})
-    private <T extends TestCase> Class<T> getClass(final JavaClassName className) {
+    private <T extends BehaviourContext> Class<T> getClass(final JavaClassName className) {
         final String qualified = className.getFullyQualifiedName();
         return edgeClass.forName(qualified);
     }

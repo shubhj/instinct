@@ -25,8 +25,6 @@ public final class JUnitSuite {
     }
 
     public static Test suite() {
-//        final TestSuite test = (TestSuite) new JUnitTestSuiteBuilderImpl(AllTestSuite.class).buildSuite("Behaviour Contexts");
-//        return test.testAt(0);
         return new JUnitTestSuiteBuilderImpl(AllTestSuite.class).buildSuite("Behaviour Contexts");
     }
 }
