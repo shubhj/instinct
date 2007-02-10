@@ -6,10 +6,8 @@ import java.lang.reflect.Method;
 import au.net.netstorm.boost.edge.EdgeException;
 import com.googlecode.instinct.core.annotate.AfterSpecification;
 import com.googlecode.instinct.core.annotate.BeforeSpecification;
-import com.googlecode.instinct.core.annotate.Specification;
 import com.googlecode.instinct.core.naming.AfterSpecificationNamingConvention;
 import com.googlecode.instinct.core.naming.BeforeSpecificationNamingConvention;
-import com.googlecode.instinct.core.naming.BehaviourContextNamingConvention;
 import com.googlecode.instinct.core.naming.NamingConvention;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
@@ -19,11 +17,13 @@ import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import junit.framework.Protectable;
+import com.googlecode.instinct.verify.VerificationException;
+import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 
-@Suggest("Try and just use the interface Test rather than concrete extension.")
+@Suggest({"Try and just use the interface Test rather than concrete extension.",
+        "Could clean this up by using something like JDave's runners"})
 @SuppressWarnings({"UnconstructableJUnitTestCase", "JUnitTestCaseWithNoTests", "JUnitTestCaseInProductSource"})
 public final class XxxBehaviourContextTestCase extends TestCase {
     private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
@@ -62,20 +62,27 @@ public final class XxxBehaviourContextTestCase extends TestCase {
 
     @Suggest("This contains heavy duplication with BehaviourContextRunnerImpl, figure out how to remove it")
     private void runSpecification(final TestResult result) {
-
-        final Method[] specificationMethods = getMethods(behaviourContextClass, Specification.class, new BehaviourContextNamingConvention());
         final Method[] beforeSpecificationMethods = getMethods(behaviourContextClass, BeforeSpecification.class,
                 new BeforeSpecificationNamingConvention());
         final Method[] afterSpecificationMethods = getMethods(behaviourContextClass, AfterSpecification.class,
                 new AfterSpecificationNamingConvention());
         final SpecificationContext specificationContext = new SpecificationContextImpl(behaviourContextClass, beforeSpecificationMethods,
                 afterSpecificationMethods, specificationMethod);
-
         // Note. This is heavily influenced to the implementation of junit.framework.TestResult.run().
         result.startTest(this);
-        result.runProtected(this, new ContextProtectable(specificationRunner, specificationContext));
+        runProtected(result, specificationContext);
         result.endTest(this);
-        // need to also do TestResult.runProtected(Test test, Protectable p) in order to 
+    }
+
+    @SuppressWarnings({"CatchGenericClass"})
+    private void runProtected(final TestResult result, final SpecificationContext specificationContext) {
+        try {
+            specificationRunner.run(specificationContext);
+        } catch (VerificationException e) {
+            result.addFailure(this, new AssertionFailedError(e.getMessage()));
+        } catch (Throwable e) {
+            result.addError(this, e);
+        }
     }
 
     @SuppressWarnings({"ProhibitedExceptionThrown"})
@@ -92,20 +99,5 @@ public final class XxxBehaviourContextTestCase extends TestCase {
     private <T> Method[] getMethods(final Class<T> behaviourContextClass, final Class<? extends Annotation> annotationType,
             final NamingConvention namingConvention) {
         return methodLocator.locateAll(behaviourContextClass, annotationType, namingConvention);
-    }
-
-    private static final class ContextProtectable implements Protectable {
-        private final SpecificationRunner specificationRunner;
-        private final SpecificationContext specificationContext;
-
-        private ContextProtectable(final SpecificationRunner specificationRunner, final SpecificationContext specificationContext) {
-            this.specificationRunner = specificationRunner;
-            this.specificationContext = specificationContext;
-        }
-
-        @Suggest("What do we do with the result? Adapt it into a TestResult?")
-        public void protect() {
-            specificationRunner.run(specificationContext);
-        }
     }
 }
