@@ -19,15 +19,18 @@ package com.googlecode.instinct.internal.runner;
 import java.lang.reflect.Method;
 import au.net.netstorm.boost.primordial.Primordial;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 
 @SuppressWarnings({"AssignmentToCollectionOrArrayFieldFromParameter"})
-final class SpecificationContextImpl extends Primordial implements SpecificationContext {
+public final class SpecificationContextImpl extends Primordial implements SpecificationContext {
     private final Class<?> behaviourContextClass;
     private final Method[] beforeSpecificationMethods;
     private final Method[] afterSpecificationMethods;
     private final Method specificationMethod;
 
-    SpecificationContextImpl(final Class<?> behaviourContextClass, final Method[] beforeSpecificationMethods,
+    @Suggest({"All methods bar spec need to go into another object so that they can be resued.",
+            "This class then takes that object."})
+    public SpecificationContextImpl(final Class<?> behaviourContextClass, final Method[] beforeSpecificationMethods,
             final Method[] afterSpecificationMethods, final Method specificationMethod) {
         checkNotNull(behaviourContextClass, beforeSpecificationMethods, afterSpecificationMethods, specificationMethod);
         this.behaviourContextClass = behaviourContextClass;

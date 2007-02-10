@@ -23,11 +23,11 @@ import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import junit.framework.Test;
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
 
-public final class BehaviourContextTestSuite extends TestSuite implements Test {
+@Suggest("Try and just use the interface Test rather than concrete extension.")
+public final class BehaviourContextTestSuite extends TestSuite {
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
     private final Class<?> specificationClass;
     private Method[] specificationMethods;
@@ -39,11 +39,13 @@ public final class BehaviourContextTestSuite extends TestSuite implements Test {
         specificationMethods = methodLocator.locateAll(specificationClass, Specification.class, new SpecificationNamingConvention());
     }
 
+    @Override
     public int countTestCases() {
         return specificationMethods.length;
     }
 
     @Suggest("Do we need to do this in the constructor?")
+    @Override
     public void run(final TestResult result) {
         checkNotNull(result);
         for (final Method specificationMethod : specificationMethods) {

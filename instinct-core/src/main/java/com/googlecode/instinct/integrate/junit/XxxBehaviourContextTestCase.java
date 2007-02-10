@@ -13,22 +13,26 @@ import com.googlecode.instinct.core.naming.BehaviourContextNamingConvention;
 import com.googlecode.instinct.core.naming.NamingConvention;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
+import com.googlecode.instinct.internal.runner.SpecificationContext;
+import com.googlecode.instinct.internal.runner.SpecificationContextImpl;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import junit.framework.Protectable;
-import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 
-@Suggest("Rename to testcase")
-public final class XxxBehaviourContextTestCase extends TestCase implements Test {
+@Suggest("Try and just use the interface Test rather than concrete extension.")
+@SuppressWarnings({"UnconstructableJUnitTestCase", "JUnitTestCaseWithNoTests", "JUnitTestCaseInProductSource"})
+public final class XxxBehaviourContextTestCase extends TestCase {
     private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
     private final Class<?> behaviourContextClass;
     private final Method specificationMethod;
 
+    @Suggest({"Should probably only pass the methods in, not the context class"})
+    @SuppressWarnings({"JUnitTestCaseWithNonTrivialConstructors"})
     public XxxBehaviourContextTestCase(final Class<?> behaviourContextClass, final Method specificationMethod) {
         super(specificationMethod == null ? "" : specificationMethod.getName());
         checkNotNull(behaviourContextClass, specificationMethod);
@@ -36,6 +40,7 @@ public final class XxxBehaviourContextTestCase extends TestCase implements Test 
         this.specificationMethod = specificationMethod;
     }
 
+    @Override
     public void run(final TestResult result) {
         checkNotNull(result);
         try {
@@ -46,12 +51,16 @@ public final class XxxBehaviourContextTestCase extends TestCase implements Test 
     }
 
     @Override
+    public String getName() {
+        return specificationMethod.getName();
+    }
+
+    @Override
     public String toString() {
         return specificationMethod.getName();
     }
 
     @Suggest("This contains heavy duplication with BehaviourContextRunnerImpl, figure out how to remove it")
-    // Note. This is heavily influenced to the implementation of junit.framework.TestResult.run().
     private void runSpecification(final TestResult result) {
 
         final Method[] specificationMethods = getMethods(behaviourContextClass, Specification.class, new BehaviourContextNamingConvention());
@@ -59,11 +68,14 @@ public final class XxxBehaviourContextTestCase extends TestCase implements Test 
                 new BeforeSpecificationNamingConvention());
         final Method[] afterSpecificationMethods = getMethods(behaviourContextClass, AfterSpecification.class,
                 new AfterSpecificationNamingConvention());
+        final SpecificationContext specificationContext = new SpecificationContextImpl(behaviourContextClass, beforeSpecificationMethods,
+                afterSpecificationMethods, specificationMethod);
 
-
+        // Note. This is heavily influenced to the implementation of junit.framework.TestResult.run().
         result.startTest(this);
-        result.runProtected(this, new ContextProtectable());
+        result.runProtected(this, new ContextProtectable(specificationRunner, specificationContext));
         result.endTest(this);
+        // need to also do TestResult.runProtected(Test test, Protectable p) in order to 
     }
 
     @SuppressWarnings({"ProhibitedExceptionThrown"})
@@ -83,16 +95,17 @@ public final class XxxBehaviourContextTestCase extends TestCase implements Test 
     }
 
     private static final class ContextProtectable implements Protectable {
-//        private final BehaviourContextRunner contextRunner;
-//        private final Class<?> specificationClass;
+        private final SpecificationRunner specificationRunner;
+        private final SpecificationContext specificationContext;
 
-//        private <T> ContextProtectable(final BehaviourContextRunner contextRunner, final Class<T> specificationClass) {
-//            this.contextRunner = contextRunner;
-//            this.specificationClass = specificationClass;
-//        }
+        private ContextProtectable(final SpecificationRunner specificationRunner, final SpecificationContext specificationContext) {
+            this.specificationRunner = specificationRunner;
+            this.specificationContext = specificationContext;
+        }
 
+        @Suggest("What do we do with the result? Adapt it into a TestResult?")
         public void protect() {
-//            contextRunner.run(specificationClass);
+            specificationRunner.run(specificationContext);
         }
     }
 }
