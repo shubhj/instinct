@@ -49,13 +49,18 @@ public final class NewJUnitTestSuite extends TestSuite implements BehaviourConte
     public SpecificationResult onSpecification(final SpecificationMethod specificationMethod) {
         currentSuite.addTest(new TestCase(specificationMethod.getName()) {
             private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
+            private TestResult result;
 
             @Override
             public void run(final TestResult result) {
+                this.result = result;
+                super.run(result);
+            }
+
+            @Override
+            public void runBare() {
                 try {
-                    result.startTest(this);
                     runSpecification(result, specificationMethod.getSpecificationContext());
-                    result.endTest(this);
                 } catch (EdgeException e) {
                     handleException(e);
                 }
