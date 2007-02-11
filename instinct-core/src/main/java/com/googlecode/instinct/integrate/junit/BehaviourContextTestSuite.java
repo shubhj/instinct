@@ -49,7 +49,8 @@ public final class BehaviourContextTestSuite extends TestSuite {
     public void run(final TestResult result) {
         checkNotNull(result);
         for (final Method specificationMethod : specificationMethods) {
-            addTest(new XxxBehaviourContextTestCase(specificationClass, specificationMethod));
+            final XxxBehaviourContextTestCase testCase = new XxxBehaviourContextTestCase(specificationClass, specificationMethod);
+            runTest(testCase, result);
         }
     }
 

@@ -42,12 +42,25 @@ public final class XxxBehaviourContextTestCase extends TestCase {
 
     @Override
     public void run(final TestResult result) {
+        // In superclass, calls result.run() which calls runBare()
         checkNotNull(result);
+        System.out.println("1 - Running spec: " + specificationMethod);
         try {
             runSpecification(result);
         } catch (EdgeException e) {
             handleException(e);
         }
+    }
+
+    public void runBare() throws Throwable {
+        // In superclass, calls
+        System.out.println("2 - Running spec: " + specificationMethod);
+        super.runBare();
+    }
+
+    protected void runTest() throws Throwable {
+        System.out.println("3 - Running spec: " + specificationMethod);
+        super.runTest();
     }
 
     @Override
