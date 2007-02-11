@@ -76,6 +76,7 @@ public final class SpecificationTestCase extends TestCase {
     }
 
     @SuppressWarnings({"CatchGenericClass"})
+    // DEBT IllegalCatch {
     private void runSpecification(final TestResult result, final SpecificationContext specificationContext) {
         try {
             specificationRunner.run(specificationContext);
@@ -85,6 +86,7 @@ public final class SpecificationTestCase extends TestCase {
             result.addError(this, e);
         }
     }
+    // } DEBT IllegalCatch
 
     @SuppressWarnings({"ProhibitedExceptionThrown"})
     private void handleException(final EdgeException e) {

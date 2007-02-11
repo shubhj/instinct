@@ -37,11 +37,17 @@ public final class BehaviourContextTestSuite extends TestSuite {
         checkNotNull(behaviourContextClass);
         this.behaviourContextClass = behaviourContextClass;
         specificationMethods = methodLocator.locateAll(behaviourContextClass, Specification.class, new SpecificationNamingConvention());
+        setName("Foo");
+        runIt();
     }
 
     @Override
     public int countTestCases() {
         return specificationMethods.length;
+    }
+
+    private void runIt() {
+        setName("Something");
     }
 
     @Suggest("Do we need to do this in the constructor?")
@@ -54,6 +60,11 @@ public final class BehaviourContextTestSuite extends TestSuite {
             System.out.println("testCase = " + testCase);
             runTest(testCase, result);
         }
+    }
+
+    @Override
+    public String getName() {
+        return behaviourContextClass.getName();
     }
 
     @Override
