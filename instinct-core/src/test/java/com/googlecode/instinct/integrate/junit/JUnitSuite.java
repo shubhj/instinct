@@ -16,9 +16,11 @@
 
 package com.googlecode.instinct.integrate.junit;
 
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.suite.AllTestSuite;
 import junit.framework.Test;
 
+@Suggest("Note this as an example of how to aggregate contexts as JUnit suites.")
 public final class JUnitSuite {
     private JUnitSuite() {
         throw new UnsupportedOperationException();

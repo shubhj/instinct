@@ -22,10 +22,9 @@ import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 
-@Suggest({"Try and just use the interface Test rather than concrete extension.",
-        "Could clean this up by using something like JDave's runners"})
+@Suggest({"Try and just use the interface Test rather than concrete extension."})
 @SuppressWarnings({"UnconstructableJUnitTestCase", "JUnitTestCaseWithNoTests", "JUnitTestCaseInProductSource"})
-public final class SpecificationTestCase extends TestCase {
+public final class DeleteMeSpecificationTestCase extends TestCase {
     private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
     private final Class<?> behaviourContextClass;
@@ -33,7 +32,7 @@ public final class SpecificationTestCase extends TestCase {
 
     @Suggest({"Should probably only pass the methods in, not the context class"})
     @SuppressWarnings({"JUnitTestCaseWithNonTrivialConstructors"})
-    public SpecificationTestCase(final Class<?> behaviourContextClass, final Method specificationMethod) {
+    public DeleteMeSpecificationTestCase(final Class<?> behaviourContextClass, final Method specificationMethod) {
         super(specificationMethod == null ? "" : specificationMethod.getName());
         checkNotNull(behaviourContextClass, specificationMethod);
         this.behaviourContextClass = behaviourContextClass;

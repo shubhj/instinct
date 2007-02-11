@@ -18,7 +18,7 @@ import junit.framework.TestCase;
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
 
-@Suggest("Rename to BehaviourContextTestSuite")
+@Suggest({"Rename to BehaviourContextTestSuite", "Try and just use the interface Test rather than concrete extension."})
 public final class NewJUnitTestSuite extends TestSuite implements BehaviourContextRunStrategy, SpecificationRunStrategy {
     @Suggest("Do we need to make this a field? Does it need to be shared to make JUnit integration work?")
     private TestSuite currentSuite;

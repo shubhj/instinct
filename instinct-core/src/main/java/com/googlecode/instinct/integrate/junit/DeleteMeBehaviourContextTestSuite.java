@@ -27,12 +27,12 @@ import junit.framework.TestResult;
 import junit.framework.TestSuite;
 
 @Suggest("Try and just use the interface Test rather than concrete extension.")
-public final class BehaviourContextTestSuite extends TestSuite {
+public final class DeleteMeBehaviourContextTestSuite extends TestSuite {
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
     private final Class<?> behaviourContextClass;
     private Method[] specificationMethods;
 
-    public <T> BehaviourContextTestSuite(final Class<T> behaviourContextClass) {
+    public <T> DeleteMeBehaviourContextTestSuite(final Class<T> behaviourContextClass) {
         super(behaviourContextClass == null ? "" : behaviourContextClass.getSimpleName());
         checkNotNull(behaviourContextClass);
         this.behaviourContextClass = behaviourContextClass;
@@ -50,7 +50,7 @@ public final class BehaviourContextTestSuite extends TestSuite {
     public void run(final TestResult result) {
         checkNotNull(result);
         for (final Method specificationMethod : specificationMethods) {
-            final SpecificationTestCase testCase = new SpecificationTestCase(behaviourContextClass, specificationMethod);
+            final DeleteMeSpecificationTestCase testCase = new DeleteMeSpecificationTestCase(behaviourContextClass, specificationMethod);
             System.out.println("testCase = " + testCase);
             runTest(testCase, result);
         }
