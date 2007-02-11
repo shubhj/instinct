@@ -29,14 +29,14 @@ import junit.framework.TestSuite;
 @Suggest("Try and just use the interface Test rather than concrete extension.")
 public final class BehaviourContextTestSuite extends TestSuite {
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
-    private final Class<?> specificationClass;
+    private final Class<?> behaviourContextClass;
     private Method[] specificationMethods;
 
-    public <T> BehaviourContextTestSuite(final Class<T> specificationClass) {
-        super(specificationClass == null ? "" : specificationClass.getSimpleName());
-        checkNotNull(specificationClass);
-        this.specificationClass = specificationClass;
-        specificationMethods = methodLocator.locateAll(specificationClass, Specification.class, new SpecificationNamingConvention());
+    public <T> BehaviourContextTestSuite(final Class<T> behaviourContextClass) {
+        super(behaviourContextClass == null ? "" : behaviourContextClass.getSimpleName());
+        checkNotNull(behaviourContextClass);
+        this.behaviourContextClass = behaviourContextClass;
+        specificationMethods = methodLocator.locateAll(behaviourContextClass, Specification.class, new SpecificationNamingConvention());
     }
 
     @Override
@@ -49,13 +49,13 @@ public final class BehaviourContextTestSuite extends TestSuite {
     public void run(final TestResult result) {
         checkNotNull(result);
         for (final Method specificationMethod : specificationMethods) {
-            final XxxBehaviourContextTestCase testCase = new XxxBehaviourContextTestCase(specificationClass, specificationMethod);
+            final XxxBehaviourContextTestCase testCase = new XxxBehaviourContextTestCase(behaviourContextClass, specificationMethod);
             runTest(testCase, result);
         }
     }
 
     @Override
     public String toString() {
-        return specificationClass.getName();
+        return behaviourContextClass.getName();
     }
 }
