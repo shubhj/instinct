@@ -25,7 +25,7 @@ import junit.framework.TestResult;
 @Suggest({"Try and just use the interface Test rather than concrete extension.",
         "Could clean this up by using something like JDave's runners"})
 @SuppressWarnings({"UnconstructableJUnitTestCase", "JUnitTestCaseWithNoTests", "JUnitTestCaseInProductSource"})
-public final class XxxBehaviourContextTestCase extends TestCase {
+public final class SpecificationTestCase extends TestCase {
     private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
     private final Class<?> behaviourContextClass;
@@ -33,12 +33,11 @@ public final class XxxBehaviourContextTestCase extends TestCase {
 
     @Suggest({"Should probably only pass the methods in, not the context class"})
     @SuppressWarnings({"JUnitTestCaseWithNonTrivialConstructors"})
-    public XxxBehaviourContextTestCase(final Class<?> behaviourContextClass, final Method specificationMethod) {
+    public SpecificationTestCase(final Class<?> behaviourContextClass, final Method specificationMethod) {
         super(specificationMethod == null ? "" : specificationMethod.getName());
         checkNotNull(behaviourContextClass, specificationMethod);
         this.behaviourContextClass = behaviourContextClass;
         this.specificationMethod = specificationMethod;
-        setName(specificationMethod.getName());
     }
 
     @Override
@@ -72,12 +71,12 @@ public final class XxxBehaviourContextTestCase extends TestCase {
                 afterSpecificationMethods, specificationMethod);
         // Note. This is heavily influenced to the implementation of junit.framework.TestResult.run().
         result.startTest(this);
-        runProtected(result, specificationContext);
+        runSpecification(result, specificationContext);
         result.endTest(this);
     }
 
     @SuppressWarnings({"CatchGenericClass"})
-    private void runProtected(final TestResult result, final SpecificationContext specificationContext) {
+    private void runSpecification(final TestResult result, final SpecificationContext specificationContext) {
         try {
             specificationRunner.run(specificationContext);
         } catch (VerificationException e) {

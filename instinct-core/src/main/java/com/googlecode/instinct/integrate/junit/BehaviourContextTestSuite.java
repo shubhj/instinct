@@ -48,8 +48,10 @@ public final class BehaviourContextTestSuite extends TestSuite {
     @Override
     public void run(final TestResult result) {
         checkNotNull(result);
+        System.out.println("Running context class = " + behaviourContextClass);
         for (final Method specificationMethod : specificationMethods) {
-            final XxxBehaviourContextTestCase testCase = new XxxBehaviourContextTestCase(behaviourContextClass, specificationMethod);
+            final SpecificationTestCase testCase = new SpecificationTestCase(behaviourContextClass, specificationMethod);
+            System.out.println("testCase = " + testCase);
             runTest(testCase, result);
         }
     }
