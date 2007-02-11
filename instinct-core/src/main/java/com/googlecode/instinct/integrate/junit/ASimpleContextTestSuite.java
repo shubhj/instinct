@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
 
-public final class ASimpleContextTestSuite extends TestSuite implements BehaviourContextRunStrategy {
+public final class ASimpleContextTestSuite extends TestSuite implements BehaviourContextRunListener, SpecificationRunListener {
     private TestSuite suite;
 
     public ASimpleContextTestSuite() {

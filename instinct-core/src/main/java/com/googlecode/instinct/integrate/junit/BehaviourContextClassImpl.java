@@ -1,8 +1,10 @@
 package com.googlecode.instinct.integrate.junit;
 
+import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class BehaviourContextClassImpl implements BehaviourContextClass {
+    private final BehaviourContextRunner contextRunner = new BehaviourContextRunner();
     private final Class<?> behaviourContext;
 
     public <T> BehaviourContextClassImpl(final Class<T> behaviourContext) {
@@ -10,11 +12,12 @@ public final class BehaviourContextClassImpl implements BehaviourContextClass {
         this.behaviourContext = behaviourContext;
     }
 
-    public String getName() {
-        return "RemoveMe_" + behaviourContext.getSimpleName();
+    public BehaviourContextResult run(final BehaviourContextRunListener runListener) {
+        checkNotNull(runListener);
+        return contextRunner.run(this, runListener);
     }
 
-    public void run(final BehaviourContextRunStrategy runStrategy) {
-        new BehaviourContextRunner().run(this, runStrategy);
+    public String getName() {
+        return "RemoveMe_" + behaviourContext.getSimpleName();
     }
 }

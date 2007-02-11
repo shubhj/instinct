@@ -1,7 +1,9 @@
 package com.googlecode.instinct.integrate.junit;
 
-public interface BehaviourContextClass {
-    String getName();
+import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 
-    void run(BehaviourContextRunStrategy runStrategy);
+public interface BehaviourContextClass {
+    BehaviourContextResult run(BehaviourContextRunListener runListener);
+
+    String getName();
 }

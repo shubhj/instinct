@@ -1,7 +1,5 @@
 package com.googlecode.instinct.integrate.junit;
 
-public interface BehaviourContextRunStrategy {
+public interface BehaviourContextRunListener {
     void onBehaviourContext(BehaviourContextClass behaviourContext);
-
-    void onSpecification(SpecificationMethod specification);
 }
