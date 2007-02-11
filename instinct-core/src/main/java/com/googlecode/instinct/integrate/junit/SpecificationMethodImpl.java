@@ -1,15 +1,27 @@
 package com.googlecode.instinct.integrate.junit;
 
-import java.lang.reflect.Method;
+import com.googlecode.instinct.internal.runner.SpecificationContext;
+import com.googlecode.instinct.internal.runner.SpecificationResult;
+import com.googlecode.instinct.internal.runner.SpecificationRunner;
+import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 
 public final class SpecificationMethodImpl implements SpecificationMethod {
-    private final Method specificationMethod;
+    private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
+    private final SpecificationContext specificationContext;
 
-    public SpecificationMethodImpl(final Method specificationMethod) {
-        this.specificationMethod = specificationMethod;
+    public SpecificationMethodImpl(final SpecificationContext specificationContext) {
+        this.specificationContext = specificationContext;
+    }
+
+    public SpecificationResult run(final SpecificationRunStrategy specificationRunStrategy) {
+        return specificationRunStrategy.onSpecification(this);
+    }
+
+    public SpecificationContext getSpecificationContext() {
+        return specificationContext;
     }
 
     public String getName() {
-        return specificationMethod.getName();
+        return specificationContext.getSpecificationMethod().getName();
     }
 }

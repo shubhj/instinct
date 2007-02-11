@@ -12,9 +12,10 @@ public final class BehaviourContextClassImpl implements BehaviourContextClass {
         this.behaviourContext = behaviourContext;
     }
 
-    public BehaviourContextResult run(final BehaviourContextRunListener runListener) {
-        checkNotNull(runListener);
-        return contextRunner.run(this, runListener);
+    public BehaviourContextResult run(final BehaviourContextRunStrategy behaviourContextRunStrategy,
+            final SpecificationRunStrategy specificationRunStrategy) {
+        checkNotNull(behaviourContextRunStrategy);
+        return contextRunner.run(this, behaviourContextRunStrategy, specificationRunStrategy);
     }
 
     public String getName() {
