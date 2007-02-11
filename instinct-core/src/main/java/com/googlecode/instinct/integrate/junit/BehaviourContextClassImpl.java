@@ -5,11 +5,11 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class BehaviourContextClassImpl implements BehaviourContextClass {
     private final BehaviourContextRunner contextRunner = new BehaviourContextRunner();
-    private final Class<?> behaviourContext;
+    private final Class<?> behaviourContextType;
 
-    public <T> BehaviourContextClassImpl(final Class<T> behaviourContext) {
-        checkNotNull(behaviourContext);
-        this.behaviourContext = behaviourContext;
+    public <T> BehaviourContextClassImpl(final Class<T> behaviourContextType) {
+        checkNotNull(behaviourContextType);
+        this.behaviourContextType = behaviourContextType;
     }
 
     public BehaviourContextResult run(final BehaviourContextRunStrategy behaviourContextRunStrategy,
@@ -18,7 +18,11 @@ public final class BehaviourContextClassImpl implements BehaviourContextClass {
         return contextRunner.run(this, behaviourContextRunStrategy, specificationRunStrategy);
     }
 
+    public Class getType() {
+        return behaviourContextType;
+    }
+
     public String getName() {
-        return "RemoveMe_" + behaviourContext.getSimpleName();
+        return "RemoveMe_" + behaviourContextType.getSimpleName();
     }
 }

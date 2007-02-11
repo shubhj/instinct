@@ -31,27 +31,42 @@ public final class BehaviourContextRunner {
 
     @Suggest("Return the spec results")
     private void runSpecifications(final BehaviourContextClass behaviourContextClass, final SpecificationRunStrategy specificationRunStrategy) {
-        final Method[] specificationMethods = getMethods(behaviourContextClass, Specification.class, new SpecificationNamingConvention());
+        System.out.println("Running specifications");
+        final Method[] specificationMethods = getSpecificationMethods(behaviourContextClass);
+        System.out.println("specificationMethods = " + specificationMethods.length);
         for (final Method specificationMethod : specificationMethods) {
             final SpecificationContext specificationContext = createSpecificationContext(behaviourContextClass, specificationMethod);
             // save the results
+            System.out.println("Running specification = " + specificationContext);
             new SpecificationMethodImpl(specificationContext).run(specificationRunStrategy);
         }
     }
 
     private SpecificationContext createSpecificationContext(final BehaviourContextClass behaviourContextClass,
-            final Method method) {
-        final Method[] beforeSpecificationMethods = getMethods(behaviourContextClass, BeforeSpecification.class,
-                new BeforeSpecificationNamingConvention());
-        final Method[] afterSpecificationMethods = getMethods(behaviourContextClass, AfterSpecification.class,
-                new AfterSpecificationNamingConvention());
+            final Method specificationMethod) {
+        final Method[] beforeSpecificationMethods = getBeforeSpecificationMethods(behaviourContextClass);
+        final Method[] afterSpecificationMethods = getAfterSpecificationMethods(behaviourContextClass);
         return new SpecificationContextImpl(behaviourContextClass.getClass(), beforeSpecificationMethods,
-                afterSpecificationMethods, method);
+                afterSpecificationMethods, specificationMethod);
+    }
+
+    private Method[] getBeforeSpecificationMethods(final BehaviourContextClass behaviourContextClass) {
+        return getMethods(behaviourContextClass, BeforeSpecification.class,
+                new BeforeSpecificationNamingConvention());
+    }
+
+    private Method[] getAfterSpecificationMethods(final BehaviourContextClass behaviourContextClass) {
+        return getMethods(behaviourContextClass, AfterSpecification.class,
+                new AfterSpecificationNamingConvention());
+    }
+
+    private Method[] getSpecificationMethods(final BehaviourContextClass behaviourContextClass) {
+        return getMethods(behaviourContextClass, Specification.class, new SpecificationNamingConvention());
     }
 
     @Suggest("This contains heavy duplication with BehaviourContextRunnerImpl, figure out how to remove it")
     private Method[] getMethods(final BehaviourContextClass behaviourContextClass, final Class<? extends Annotation> annotationType,
             final NamingConvention namingConvention) {
-        return methodLocator.locateAll(behaviourContextClass.getClass(), annotationType, namingConvention);
+        return methodLocator.locateAll(behaviourContextClass.getType(), annotationType, namingConvention);
     }
 }

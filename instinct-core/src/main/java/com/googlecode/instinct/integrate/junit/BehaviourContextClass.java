@@ -5,5 +5,7 @@ import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 public interface BehaviourContextClass {
     BehaviourContextResult run(BehaviourContextRunStrategy behaviourContextRunStrategy, SpecificationRunStrategy specificationRunStrategy);
 
+    Class getType();
+
     String getName();
 }
