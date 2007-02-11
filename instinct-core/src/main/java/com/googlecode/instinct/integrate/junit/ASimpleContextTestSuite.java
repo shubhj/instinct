@@ -22,7 +22,9 @@ public final class ASimpleContextTestSuite extends TestSuite implements Behaviou
     }
 
     public static Test suite() {
-        return new ASimpleContextTestSuite();
+        final ASimpleContextTestSuite suite = new ASimpleContextTestSuite();
+        suite.setName("Instinct JUnit Integration");
+        return suite;
     }
 
     private void run(final BehaviourContextClass behaviourContext) {
@@ -32,19 +34,17 @@ public final class ASimpleContextTestSuite extends TestSuite implements Behaviou
 
     @Suggest("To make contexts and specs symmetric, we should do more here..., rather than doing the work in the BehaviourContextRunner")
     public BehaviourContextResult onBehaviourContext(final BehaviourContextClass behaviourContext) {
-        System.out.println("behaviourContext = " + behaviourContext);
         suite = new TestSuite(behaviourContext.getName());
         addTest(suite);
         return null;
     }
 
     public SpecificationResult onSpecification(final SpecificationMethod specification) {
-        System.out.println("specification = " + specification);
         suite.addTest(new TestCase(specification.getName()) {
             @Override
             public void run(final TestResult result) {
                 System.out.println("Running...!");
-                super.run(result);
+//                super.run(result);
             }
         });
         return null;

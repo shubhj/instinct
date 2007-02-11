@@ -31,13 +31,10 @@ public final class BehaviourContextRunner {
 
     @Suggest("Return the spec results")
     private void runSpecifications(final BehaviourContextClass behaviourContextClass, final SpecificationRunStrategy specificationRunStrategy) {
-        System.out.println("Running specifications");
         final Method[] specificationMethods = getSpecificationMethods(behaviourContextClass);
-        System.out.println("specificationMethods = " + specificationMethods.length);
         for (final Method specificationMethod : specificationMethods) {
             final SpecificationContext specificationContext = createSpecificationContext(behaviourContextClass, specificationMethod);
             // save the results
-            System.out.println("Running specification = " + specificationContext);
             new SpecificationMethodImpl(specificationContext).run(specificationRunStrategy);
         }
     }

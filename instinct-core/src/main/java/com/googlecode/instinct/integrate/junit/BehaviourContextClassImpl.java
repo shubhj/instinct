@@ -18,8 +18,9 @@ public final class BehaviourContextClassImpl implements BehaviourContextClass {
         return contextRunner.run(this, behaviourContextRunStrategy, specificationRunStrategy);
     }
 
-    public Class getType() {
-        return behaviourContextType;
+    @SuppressWarnings({"unchecked"})
+    public <T> Class<T> getType() {
+        return (Class<T>) behaviourContextType;
     }
 
     public String getName() {
