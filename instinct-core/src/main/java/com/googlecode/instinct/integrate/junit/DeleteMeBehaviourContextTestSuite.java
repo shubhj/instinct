@@ -51,7 +51,6 @@ public final class DeleteMeBehaviourContextTestSuite extends TestSuite {
         checkNotNull(result);
         for (final Method specificationMethod : specificationMethods) {
             final DeleteMeSpecificationTestCase testCase = new DeleteMeSpecificationTestCase(behaviourContextClass, specificationMethod);
-            System.out.println("testCase = " + testCase);
             runTest(testCase, result);
         }
     }

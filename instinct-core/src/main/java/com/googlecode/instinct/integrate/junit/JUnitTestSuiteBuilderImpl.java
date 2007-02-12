@@ -27,7 +27,7 @@ import com.googlecode.instinct.internal.util.Suggest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-@Suggest("Move this into a seperate distribution")
+@Suggest("Move this (& all JUnit stuff) into a seperate distribution")
 public final class JUnitTestSuiteBuilderImpl implements JUnitTestSuiteBuilder {
     private final EdgeClass edgeClass = new DefaultEdgeClass();
     private final BehaviourContextAggregator aggregator;
