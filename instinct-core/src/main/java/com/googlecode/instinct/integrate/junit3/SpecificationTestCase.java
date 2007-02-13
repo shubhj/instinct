@@ -9,7 +9,6 @@ import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 
@@ -58,7 +57,7 @@ public final class SpecificationTestCase extends TestCase {
         if (!specificationResult.completedSuccessfully()) {
             final SpecificationRunStatus status = specificationResult.getStatus();
             final Throwable error = (Throwable) status.getDetailedStatus();
-            result.addFailure(this, new AssertionFailedError(getRealCause(error).getMessage()));
+            result.addFailure(this, new ChainableAssertionFailedError(getRealCause(error)));
         }
     }
 
