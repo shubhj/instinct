@@ -10,18 +10,18 @@ import junit.framework.Test;
 import junit.framework.TestSuite;
 
 @Suggest({"Rename to BehaviourContextTestSuite", "Try and just use the interface Test rather than concrete extension."})
-public final class NewJUnitTestSuite extends TestSuite implements BehaviourContextRunStrategy, SpecificationRunStrategy {
+public final class BehaviourContextTestSuite extends TestSuite implements BehaviourContextRunStrategy, SpecificationRunStrategy {
     @Suggest("Do we need to make this a field? Does it need to be shared to make JUnit integration work?")
     private TestSuite currentContextSuite;
 
     @Suggest("Do we need to do this in the constructor?")
-    public <T> NewJUnitTestSuite(final Class<T> behaviourContextType) {
+    public <T> BehaviourContextTestSuite(final Class<T> behaviourContextType) {
         run(new BehaviourContextClassImpl(behaviourContextType));
     }
 
     @Suggest("Remove once finished experimenting.")
     public static Test suite() {
-        final TestSuite suite = new NewJUnitTestSuite(ASimpleContext.class);
+        final TestSuite suite = new BehaviourContextTestSuite(ASimpleContext.class);
         suite.setName("Instinct JUnit Integration");
         return suite;
     }

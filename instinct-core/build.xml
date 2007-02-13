@@ -102,10 +102,12 @@
         <copy todir="${coverage.instrumented.dir}">
             <fileset dir="${main.classes.dir}"/>
         </copy>
+        <!-- FIXME: Enable different coverage for atomic vs. slow tests. -->
         <cobertura-instrument todir="${coverage.instrumented.dir}" datafile="${coverage.dir}/coverage.ser">
             <fileset dir="${main.classes.dir}">
                 <include name="**/*.class"/>
                 <exclude name="**/integrate/junit/**"/>
+                <exclude name="**/integrate/ant/**"/>
             </fileset>
         </cobertura-instrument>
     </target>
