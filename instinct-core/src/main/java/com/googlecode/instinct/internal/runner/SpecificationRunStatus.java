@@ -16,6 +16,11 @@
 
 package com.googlecode.instinct.internal.runner;
 
+import com.googlecode.instinct.internal.util.Suggest;
+
 public interface SpecificationRunStatus {
     Object getDetailedStatus();
+
+    @Suggest("Test this.")
+    boolean runSuccessful();
 }

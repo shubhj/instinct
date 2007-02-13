@@ -29,4 +29,8 @@ public final class SpecificationRunFailureStatus implements SpecificationRunStat
     public Object getDetailedStatus() {
         return error;
     }
+
+    public boolean runSuccessful() {
+        return false;
+    }
 }

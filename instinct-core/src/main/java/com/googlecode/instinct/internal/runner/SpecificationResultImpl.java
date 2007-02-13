@@ -33,14 +33,14 @@ public final class SpecificationResultImpl implements SpecificationResult {
     }
 
     public boolean completedSuccessfully() {
-        return SpecificationRunSuccessStatus.class.isAssignableFrom(status.getClass());
+        return status.runSuccessful();
     }
 
     public String getSpecificationName() {
         return specificationName;
     }
 
-    public SpecificationRunStatus getError() {
+    public SpecificationRunStatus getStatus() {
         return status;
     }
 

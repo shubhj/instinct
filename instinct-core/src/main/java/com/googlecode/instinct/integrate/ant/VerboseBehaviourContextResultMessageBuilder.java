@@ -60,7 +60,7 @@ final class VerboseBehaviourContextResultMessageBuilder implements BehaviourCont
         builder.append("status: ").append(specificationResult.completedSuccessfully() ? "succeeded" : "FAILED");
         if (!specificationResult.completedSuccessfully()) {
             builder.append(NEW_LINE).append(TAB).append("Cause: ");
-            appendFailureCause(specificationResult.getError(), builder);
+            appendFailureCause(specificationResult.getStatus(), builder);
         }
         builder.append(NEW_LINE);
     }

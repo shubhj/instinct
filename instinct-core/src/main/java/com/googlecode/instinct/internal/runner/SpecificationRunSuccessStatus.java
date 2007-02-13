@@ -25,4 +25,8 @@ public final class SpecificationRunSuccessStatus implements SpecificationRunStat
     public Object getDetailedStatus() {
         return "Specification of behaviour verified correctly";
     }
+
+    public boolean runSuccessful() {
+        return true;
+    }
 }

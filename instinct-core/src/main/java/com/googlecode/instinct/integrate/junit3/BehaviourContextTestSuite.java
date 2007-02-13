@@ -53,12 +53,12 @@ public final class BehaviourContextTestSuite extends TestSuite implements Behavi
             @Specification
             public void toCheckVerification() {
                 mustBeTrue(true);
+                mustBeTrue(false);
             }
 
-            @Specification
+            //            @Specification
             public void toCheckVerificationAgain() {
                 mustBeTrue(true);
-                mustBeTrue(false);
             }
         }
     }

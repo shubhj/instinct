@@ -3,11 +3,12 @@ package com.googlecode.instinct.integrate.junit3;
 import java.lang.reflect.InvocationTargetException;
 import au.net.netstorm.boost.edge.EdgeException;
 import com.googlecode.instinct.internal.runner.SpecificationContext;
+import com.googlecode.instinct.internal.runner.SpecificationResult;
+import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.verify.VerificationException;
 import junit.framework.AssertionFailedError;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
@@ -45,17 +46,21 @@ public final class SpecificationTestCase extends TestCase {
     // DEBT IllegalCatch {
     private void runSpecification(final TestResult result, final SpecificationContext specificationContext) {
         try {
-            specificationRunner.run(specificationContext);
-            System.out.println("specificationContext = " + specificationContext);
-        } catch (VerificationException e) {
-            result.addFailure(this, new AssertionFailedError(e.getMessage()));
-            System.out.println("e = " + e);
+            final SpecificationResult specificationResult = specificationRunner.run(specificationContext);
+            processResult(specificationResult, result);
         } catch (Throwable e) {
-            System.out.println("e = " + e);
             result.addError(this, e);
         }
     }
     // } DEBT IllegalCatch
+
+    private void processResult(final SpecificationResult specificationResult, final TestResult result) {
+        if (!specificationResult.completedSuccessfully()) {
+            final SpecificationRunStatus status = specificationResult.getStatus();
+            final Throwable error = (Throwable) status.getDetailedStatus();
+            result.addFailure(this, new AssertionFailedError(getRealCause(error).getMessage()));
+        }
+    }
 
     @Suggest("Do we need to do this elsewhere in the JUnit integration? Method finding, etc.?")
     @SuppressWarnings({"ProhibitedExceptionThrown"})
@@ -65,6 +70,14 @@ public final class SpecificationTestCase extends TestCase {
             throw (RuntimeException) e.getCause().getCause();
         } else {
             throw e;
+        }
+    }
+
+    private Throwable getRealCause(final Throwable throwable) {
+        if (throwable.getCause() != null) {
+            return throwable.getCause().getCause() != null ? throwable.getCause().getCause() : throwable.getCause();
+        } else {
+            return throwable;
         }
     }
 }

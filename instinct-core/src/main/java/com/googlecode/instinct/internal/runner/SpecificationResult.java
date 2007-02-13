@@ -23,5 +23,5 @@ public interface SpecificationResult {
 
     long getExecutionTime();
 
-    SpecificationRunStatus getError();
+    SpecificationRunStatus getStatus();
 }

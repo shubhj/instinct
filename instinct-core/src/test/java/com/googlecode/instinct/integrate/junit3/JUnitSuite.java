@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.integrate.junit;
+package com.googlecode.instinct.integrate.junit3;
 
-import com.googlecode.instinct.integrate.junit3.JUnitTestSuiteBuilderImpl;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.suite.AllTestSuite;
 import junit.framework.Test;

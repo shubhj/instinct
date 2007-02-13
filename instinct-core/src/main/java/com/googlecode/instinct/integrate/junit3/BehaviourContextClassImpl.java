@@ -4,7 +4,7 @@ import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class BehaviourContextClassImpl implements BehaviourContextClass {
-    private final BehaviourContextRunner contextRunner = new BehaviourContextRunner();
+    private final BehaviourContextRunner contextRunner = new BehaviourContextRunnerImpl();
     private final Class<?> behaviourContextType;
 
     public <T> BehaviourContextClassImpl(final Class<T> behaviourContextType) {
