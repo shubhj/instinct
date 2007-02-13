@@ -46,9 +46,12 @@ public final class SpecificationTestCase extends TestCase {
     private void runSpecification(final TestResult result, final SpecificationContext specificationContext) {
         try {
             specificationRunner.run(specificationContext);
+            System.out.println("specificationContext = " + specificationContext);
         } catch (VerificationException e) {
             result.addFailure(this, new AssertionFailedError(e.getMessage()));
+            System.out.println("e = " + e);
         } catch (Throwable e) {
+            System.out.println("e = " + e);
             result.addError(this, e);
         }
     }

@@ -19,12 +19,12 @@ package com.googlecode.instinct.verify;
 import static java.text.MessageFormat.format;
 import com.googlecode.instinct.internal.util.Suggest;
 
+@Suggest({"This code belongs in a utility, delegated to from here.", "This should be a just a static wrapper."})
 public final class Verify {
     private Verify() {
         throw new UnsupportedOperationException();
     }
 
-    @Suggest("This code belongs in a utility, delegated to from here")
     public static void mustEqual(final Object expected, final Object actual) {
         if (expected == null && actual == null) {
             return;
@@ -35,14 +35,12 @@ public final class Verify {
         fail(format("Must be: <{0}>, but was: <{1}>", expected, actual));
     }
 
-    @Suggest("This code belongs in a utility, delegated to from here")
     public static void mustBeTrue(final boolean test) {
         if (!test) {
             fail("Must be true");
         }
     }
 
-    @Suggest("This code belongs in a utility, delegated to from here")
     public static void mustBeFalse(final boolean test) {
         if (test) {
             fail("Must be false");

@@ -9,8 +9,8 @@ import static com.googlecode.instinct.verify.Verify.mustBeTrue;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-@Suggest({"Try and just use the interface Test rather than concrete extension.",
-        "Get working for embedded contexts", "Why do we need to do suite.testAt(0) on an instance of one of these?"})
+@Suggest({"Try and just use the interface Test rather than concrete extension.", "Get working for embedded contexts",
+        "Why do we need to do suite.testAt(0) on an instance of one of these to get a nice heirarchy?"})
 public final class BehaviourContextTestSuite extends TestSuite implements BehaviourContextRunStrategy, SpecificationRunStrategy {
     @Suggest("Do we need to make this a field? Does it need to be shared to make JUnit integration work?")
     private TestSuite currentContextSuite;
@@ -58,6 +58,7 @@ public final class BehaviourContextTestSuite extends TestSuite implements Behavi
             @Specification
             public void toCheckVerificationAgain() {
                 mustBeTrue(true);
+                mustBeTrue(false);
             }
         }
     }
