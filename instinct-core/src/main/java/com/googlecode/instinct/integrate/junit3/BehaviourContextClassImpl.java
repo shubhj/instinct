@@ -1,4 +1,4 @@
-package com.googlecode.instinct.integrate.junit;
+package com.googlecode.instinct.integrate.junit3;
 
 import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
@@ -24,6 +24,6 @@ public final class BehaviourContextClassImpl implements BehaviourContextClass {
     }
 
     public String getName() {
-        return "RemoveMe_" + behaviourContextType.getSimpleName();
+        return behaviourContextType.getSimpleName();
     }
 }

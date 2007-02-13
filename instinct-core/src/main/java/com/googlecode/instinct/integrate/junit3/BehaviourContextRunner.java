@@ -1,4 +1,4 @@
-package com.googlecode.instinct.integrate.junit;
+package com.googlecode.instinct.integrate.junit3;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -17,6 +17,7 @@ import com.googlecode.instinct.internal.runner.SpecificationContextImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 
+@Suggest("Pull out interface, and pull into main packages.")
 public final class BehaviourContextRunner {
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
 

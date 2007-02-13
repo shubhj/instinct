@@ -1,4 +1,4 @@
-package com.googlecode.instinct.integrate.junit;
+package com.googlecode.instinct.integrate.junit3;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;

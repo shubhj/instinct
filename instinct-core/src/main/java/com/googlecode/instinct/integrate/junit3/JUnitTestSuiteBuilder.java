@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.integrate.junit;
+package com.googlecode.instinct.integrate.junit3;
 
 import junit.framework.Test;
 

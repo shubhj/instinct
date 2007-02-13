@@ -1,4 +1,4 @@
-package com.googlecode.instinct.integrate.junit;
+package com.googlecode.instinct.integrate.junit3;
 
 import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.core.annotate.Specification;
@@ -9,12 +9,12 @@ import static com.googlecode.instinct.verify.Verify.mustBeTrue;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-@Suggest({"Rename to BehaviourContextTestSuite", "Try and just use the interface Test rather than concrete extension."})
+@Suggest({"Try and just use the interface Test rather than concrete extension."})
 public final class BehaviourContextTestSuite extends TestSuite implements BehaviourContextRunStrategy, SpecificationRunStrategy {
     @Suggest("Do we need to make this a field? Does it need to be shared to make JUnit integration work?")
     private TestSuite currentContextSuite;
 
-    @Suggest("Do we need to do this in the constructor?")
+    @Suggest("Do we need to do run() in the constructor?")
     public <T> BehaviourContextTestSuite(final Class<T> behaviourContextType) {
         run(new BehaviourContextClassImpl(behaviourContextType));
     }
@@ -38,6 +38,7 @@ public final class BehaviourContextTestSuite extends TestSuite implements Behavi
         return null;
     }
 
+    @Suggest("Do we need to do this callback business?")
     public SpecificationResult onSpecification(final SpecificationMethod specificationMethod) {
         currentContextSuite.addTest(new SpecificationTestCase(specificationMethod));
         return null;

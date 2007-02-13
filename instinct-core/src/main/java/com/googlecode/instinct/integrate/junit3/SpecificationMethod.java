@@ -1,4 +1,4 @@
-package com.googlecode.instinct.integrate.junit;
+package com.googlecode.instinct.integrate.junit3;
 
 import com.googlecode.instinct.internal.runner.SpecificationContext;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
