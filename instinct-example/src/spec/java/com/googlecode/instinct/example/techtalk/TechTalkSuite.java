@@ -9,11 +9,9 @@ public final class TechTalkSuite {
     }
 
     public static TestSuite suite() {
-        final TestSuite suite = new BehaviourContextTestSuite(ContextExample.class);
-        suite.setName("Instinct JUnit Integration");
+        final TestSuite suite = new TestSuite("Instinct Tech Talk");
+        suite.addTest(new BehaviourContextTestSuite(AnEmptyStack.class).testAt(0));
+        suite.addTest(new BehaviourContextTestSuite(AFullStack.class).testAt(0));
         return suite;
-//        final TestSuite suite = new TestSuite();
-//        suite.addTest(new BehaviourContextTestSuite(ContextExample.class));
-//        return suite;
     }
 }

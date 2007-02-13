@@ -9,26 +9,23 @@ import static com.googlecode.instinct.verify.Verify.mustBeTrue;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-@Suggest({"Try and just use the interface Test rather than concrete extension."})
+@Suggest({"Try and just use the interface Test rather than concrete extension.",
+        "Get working for embedded contexts", "Why do we need to do suite.testAt(0) on an instance of one of these?"})
 public final class BehaviourContextTestSuite extends TestSuite implements BehaviourContextRunStrategy, SpecificationRunStrategy {
     @Suggest("Do we need to make this a field? Does it need to be shared to make JUnit integration work?")
     private TestSuite currentContextSuite;
 
-    @Suggest("Do we need to do run() in the constructor?")
+    @Suggest({"Do we need to do run() in the constructor?", "Do we need to set the name?"})
     public <T> BehaviourContextTestSuite(final Class<T> behaviourContextType) {
         run(new BehaviourContextClassImpl(behaviourContextType));
     }
 
     @Suggest("Remove once finished experimenting.")
     public static Test suite() {
-        final TestSuite suite = new BehaviourContextTestSuite(ASimpleContext.class);
+        final TestSuite suite = new BehaviourContextTestSuite(SimpleContextContainer.SimpleContext.class);
+//        final TestSuite suite = new BehaviourContextTestSuite(SimpleContextContainer.class);
         suite.setName("Instinct JUnit Integration");
         return suite;
-    }
-
-    private void run(final BehaviourContextClass behaviourContext) {
-        setName(behaviourContext.getName());
-        behaviourContext.run(this, this);
     }
 
     @Suggest("To make contexts and specs symmetric, we should do more here..., rather than doing the work in the BehaviourContextRunner")
@@ -44,17 +41,24 @@ public final class BehaviourContextTestSuite extends TestSuite implements Behavi
         return null;
     }
 
-    @Suggest("Remove, once experimenting is done")
-    @BehaviourContext
-    public static final class ASimpleContext {
-        @Specification
-        public void toCheckVerification() {
-            mustBeTrue(true);
-        }
+    private void run(final BehaviourContextClass behaviourContext) {
+        setName(behaviourContext.getName());
+        behaviourContext.run(this, this);
+    }
 
-        @Specification
-        public void toCheckVerificationAgain() {
-            mustBeTrue(true);
+    @SuppressWarnings({"EmptyClass"})
+    private static final class SimpleContextContainer {
+        @BehaviourContext
+        public static final class SimpleContext {
+            @Specification
+            public void toCheckVerification() {
+                mustBeTrue(true);
+            }
+
+            @Specification
+            public void toCheckVerificationAgain() {
+                mustBeTrue(true);
+            }
         }
     }
 }
