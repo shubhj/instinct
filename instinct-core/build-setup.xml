@@ -93,9 +93,9 @@
         </fileset>
     </path>
     <path id="test.class.path">
+        <pathelement location="${coverage.instrumented.dir}"/>
         <path refid="main.class.path"/>
         <pathelement location="${test.classes.dir}"/>
-        <pathelement location="${coverage.instrumented.dir}"/>
         <fileset dir="${basedir}">
             <patternset refid="test.classpath.pattern"/>
         </fileset>

@@ -10,22 +10,13 @@
         <delete dir="${build.dir}"/>
     </target>
 
-    <!-- FIXME: Add slow tests back into the mixture. -->
-    <target name="all" depends="clean,release"/>
+    <target name="all" depends="clean,test,release"/>
     <target name="compile" depends="clean,-compile"/>
     <target name="test" depends="clean,-test"/>
     <target name="javadoc" depends="clean,-javadoc"/>
     <target name="jar" depends="clean,-jar"/>
     <target name="release" depends="clean,-release-zip"/>
     <target name="tag" depends="clean,-tag-repository"/>
-
-    <target name="atomic-test" depends="-instrumented_compile">
-        <test.macro type="atomic"/>
-    </target>
-
-    <target name="slow-test" depends="-instrumented_compile">
-        <test.macro type="slow"/>
-    </target>
 
     <macrodef name="compile.macro">
         <attribute name="src.dir"/>
@@ -37,7 +28,7 @@
         <sequential>
             <mkdir dir="@{output.dir}"/>
             <javac source="${java.src.version}" srcdir="@{src.dir}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="${compile.debug}"
-                    debuglevel="${compile.debuglevel}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
+                   debuglevel="${compile.debuglevel}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
                 <src>
                     <path refid="@{src.path}"/>
                 </src>
@@ -53,6 +44,7 @@
             <mkdir dir="${@{type}.test.results.dir}"/>
             <junit failureproperty="@{type}.test.failed" fork="true" forkmode="perBatch">
                 <classpath refid="@{type}.test.class.path"/>
+                <classpath refid="@{type}.test.class.path"/>
                 <sysproperty key="net.sourceforge.cobertura.datafile" file="${coverage.dir}/coverage.ser"/>
                 <batchtest todir="${@{type}.test.results.dir}">
                     <fileset refid="@{type}.test.code.fileset"/>
@@ -65,14 +57,22 @@
         </sequential>
     </macrodef>
 
+    <target name="atomic-test" depends="-instrumented_compile">
+        <test.macro type="atomic"/>
+    </target>
+
+    <target name="slow-test" depends="-instrumented_compile">
+        <test.macro type="slow"/>
+    </target>
+
     <target name="-test" depends="atomic-test,slow-test"/>
 
     <target name="-javadoc" depends="-compile">
         <mkdir dir="${javadoc.dir}"/>
         <javadoc destdir="${javadoc.dir}" author="true" version="true"
-                packagenames="${main.package.name}.*" sourcepath="${main.src.dir}" classpathref="main.class.path" failonerror="true"
-                additionalparam="-breakiterator" Use="true" source="${java.src.version}" excludepackagenames="${main.package.name}.internal.*"
-                windowtitle="${project.longname} ${project.version.full}" doctitle="${project.longname} ${project.version.full}">
+                 packagenames="${main.package.name}.*" sourcepath="${main.src.dir}" classpathref="main.class.path" failonerror="true"
+                 additionalparam="-breakiterator" Use="true" source="${java.src.version}" excludepackagenames="${main.package.name}.internal.*"
+                 windowtitle="${project.longname} ${project.version.full}" doctitle="${project.longname} ${project.version.full}">
             <link href="http://java.sun.com/j2se/1.5.0/docs/api"/>
         </javadoc>
         <zip destfile="${build.dir}/${javadoc.zip}">
@@ -83,9 +83,9 @@
     <target name="-compile" depends="checkstyle">
         <!--<target name="-compile">-->
         <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}" src.path="main.code.path"
-                src.pattern="all.code.pattern"/>
+                       src.pattern="all.code.pattern"/>
         <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}" src.path="test.code.path"
-                src.pattern="all.code.pattern"/>
+                       src.pattern="all.code.pattern"/>
     </target>
 
     <target name="-jar" depends="-compile">
@@ -110,7 +110,7 @@
         </cobertura-instrument>
     </target>
 
-    <target name="-release-zip" depends="atomic-test,-jar,javadoc">
+    <target name="-release-zip" depends="-jar,javadoc">
         <mkdir dir="${release.dir}"/>
         <zip destfile="${release.dir}/${project.zip}">
             <fileset dir="${basedir}">
