@@ -17,7 +17,6 @@ public final class AnEmptyStack {
     @Specification
     void mustBeEmpty() {
         Verify.mustBeTrue(stack.isEmpty());
-//            mustBeFalse(stack.isEmpty());
     }
 
     @Specification
