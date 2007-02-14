@@ -9,8 +9,12 @@ import static com.googlecode.instinct.mock.Mocker.mock;
 import static com.googlecode.instinct.mock.Mocker.same;
 
 @SuppressWarnings({"unchecked"})
-@Suggest({"TechTalk: Drive out a magazine rack, using a mock stack to show interactions.",
-        "TechTalk: Use this to show how to do automocking"})
+@Suggest({
+        "TechTalk: Create MagazineRack interface & class, addToPile().",
+        "TechTalk: Add Stack<Magazine> collaborator in constructor, drive out addToPile().",
+        "TechTalk: Show how removing setUp() simplifies code but removes explicitness.",
+        "TechTalk: Show how annotating mocks & subject adds a level of explicitness."
+        })
 @BehaviourContext
 public final class AnEmptyMagazineRack {
     private MagazineRack magazineRack;
