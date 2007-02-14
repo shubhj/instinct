@@ -1,6 +1,6 @@
 package com.googlecode.instinct.example.techtalk;
 
-import com.googlecode.instinct.integrate.junit.BehaviourContextTestSuite;
+import com.googlecode.instinct.integrate.junit3.BehaviourContextTestSuite;
 import junit.framework.TestSuite;
 
 public final class TechTalkSuite {
