@@ -1,9 +1,9 @@
 package com.googlecode.instinct.example.techtalk;
 
-public interface Stack {
+public interface Stack<T> {
     boolean isEmpty();
 
-    void push(Object o);
+    void push(T t);
 
-    Object pop();
+    T pop();
 }

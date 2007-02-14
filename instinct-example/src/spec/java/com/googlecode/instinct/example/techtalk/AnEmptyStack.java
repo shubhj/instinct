@@ -8,11 +8,11 @@ import static com.googlecode.instinct.verify.Verify.mustBeTrue;
 
 @BehaviourContext
 public final class AnEmptyStack {
-    private Stack stack;
+    private Stack<Object> stack;
 
     @BeforeSpecification
     void setUp() {
-        stack = new StackImpl();
+        stack = new StackImpl<Object>();
     }
 
     @Specification
