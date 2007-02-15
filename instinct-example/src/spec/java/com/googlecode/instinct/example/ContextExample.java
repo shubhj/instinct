@@ -16,16 +16,12 @@
 
 package com.googlecode.instinct.example;
 
-import com.googlecode.instinct.core.annotate.BeforeSpecification;
-import com.googlecode.instinct.core.annotate.BehaviourContext;
-import com.googlecode.instinct.core.annotate.Specification;
 import com.googlecode.instinct.internal.util.Suggest;
-import static com.googlecode.instinct.verify.Verify.mustBeFalse;
-import static com.googlecode.instinct.verify.Verify.mustBeTrue;
 
 @SuppressWarnings({"EmptyClass"})
 @Suggest("Implement all features of: http://rspec.rubyforge.org/examples.html")
 public final class ContextExample {
+/*
     @BehaviourContext
     public static final class AnEmptyStack {
         @Suggest("Label this a @Fixture, and remove use of new in setUp")
@@ -68,6 +64,7 @@ public final class ContextExample {
         }
     }
 
+*/
 /* Still to implement:
 context "An empty stack" do
   specify "should complain when sent 'peek'" do
@@ -78,6 +75,8 @@ context "An empty stack" do
     lambda { @stack.pop }.should_raise StackUnderflowError
   end
 end
+*/
+/*
 */
 }
 

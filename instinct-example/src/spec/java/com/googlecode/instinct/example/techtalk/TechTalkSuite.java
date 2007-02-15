@@ -10,10 +10,19 @@ public final class TechTalkSuite {
 
     public static TestSuite suite() {
         final TestSuite suite = new TestSuite("Instinct Tech Talk");
-        suite.addTest(new BehaviourContextTestSuite(AnEmptyStack.class).testAt(0));
-        suite.addTest(new BehaviourContextTestSuite(AFullStack.class).testAt(0));
-        suite.addTest(new BehaviourContextTestSuite(AnEmptyMagazineRack.class).testAt(0));
-        suite.addTest(new BehaviourContextTestSuite(AGlossyMagazine.class).testAt(0));
+        addContextToSuite(suite, AnEmptyStack.class);
+        addContextToSuite(suite, AFullStack.class);
+        addContextToSuite(suite, AnEmptyMagazineRack.class);
+        addContextToSuite(suite, AGlossyMagazine.class);
+        addContextToSuite(suite, MagazinePileContext.class);
         return suite;
+    }
+
+    private static <T> void addContextToSuite(final TestSuite suite, final Class<T> contextClass) {
+        suite.addTest(newSuite(contextClass).testAt(0));
+    }
+
+    private static <T> BehaviourContextTestSuite newSuite(final Class<T> contextClass) {
+        return new BehaviourContextTestSuite(contextClass);
     }
 }

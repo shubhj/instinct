@@ -1,5 +1,6 @@
 package com.googlecode.instinct.example.techtalk;
 
+import com.googlecode.instinct.core.annotate.AfterSpecification;
 import com.googlecode.instinct.core.annotate.BeforeSpecification;
 import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.core.annotate.Specification;
@@ -7,6 +8,7 @@ import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.mock.Mocker.expects;
 import static com.googlecode.instinct.mock.Mocker.mock;
 import static com.googlecode.instinct.mock.Mocker.same;
+import static com.googlecode.instinct.mock.Mocker.verify;
 
 @SuppressWarnings({"unchecked"})
 @Suggest({
@@ -16,21 +18,26 @@ import static com.googlecode.instinct.mock.Mocker.same;
         "TechTalk: Show how annotating mocks & subject adds a level of explicitness."
         })
 @BehaviourContext
-public final class AnEmptyMagazineRack {
-    private MagazineRack magazineRack;
-    private Stack<Magazine> stack;
+public final class MagazinePileContext {
     private Magazine magazine;
+    private Stack<Magazine> stack;
+    private MagazinePile magazinePile;
 
     @BeforeSpecification
-    public void setUp() {
-        stack = mock(Stack.class);
+    public void setup() {
         magazine = mock(Magazine.class);
-        magazineRack = new MagazineRackImpl(stack);
+        stack = mock(Stack.class);
+        magazinePile = new MagazinePileImpl(stack);
+    }
+
+    @AfterSpecification
+    public void tearDown() {
+        verify();
     }
 
     @Specification
     void callsPushOnStackWhenAddAMagazineIsAddedToThePile() {
         expects(stack).method("push").with(same(magazine));
-        magazineRack.addToPile(magazine);
+        magazinePile.addToPile(magazine);
     }
 }
