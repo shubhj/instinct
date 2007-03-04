@@ -12,13 +12,30 @@ public final class BehaviourExpect {
     private final Mockery mockery = new MockeryImpl();
 
     public void testOfBehaviourExpectationApi() {
-        expect.that(one(mockery).anything());
-        will(returnValue(null));
-//        expect.that(one(mockery).verify()); will(returnValue(null));
+        // methods that return something
+        expect.that(one(mockery).anything()).will(returnValue(null));
+
+        // void return types
+        expect.that().one(mockery).verify();
+
+        expect.that(new Expectation() {
+            {
+                one(mockery).verify();
+                one(mockery).anything();
+                will(returnValue(null));
+            }
+        });
     }
 
     public <T> T one(final T mockedObject) {
         return mockedObject;
+    }
+
+    public BehaviourExpect that() {
+        return null;
+    }
+
+    public void that(final Expectation expectation) {
     }
 
     public <T> StubBuilder that(final T mockedObject) {
@@ -170,4 +187,10 @@ JMock2
 
     private final Matcher<Bid> anyBid = IsAnything.anything();
 */
+
+    private class Expectation {
+        public <T> T one(final T mockedObject) {
+            return mockedObject;
+        }
+    }
 }
