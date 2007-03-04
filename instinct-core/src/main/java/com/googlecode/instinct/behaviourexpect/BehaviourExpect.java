@@ -20,13 +20,10 @@ public final class BehaviourExpect {
         expect.that().one(mockery).verify();
 
         // jMock 2 style
-        expect.that(new CollaboratorBehaviour() {
-            {
-                one(mockery).verify();
-                one(mockery).anything();
-                will(returnValue(null));
-            }
-        });
+        expect.that(new CollaboratorBehaviour() {{
+            one(mockery).verify();
+            one(mockery).anything(); will(returnValue(null));
+        }});
     }
 
     public <T> T one(final T mockedObject) {
