@@ -10,6 +10,7 @@ import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.core.annotate.Specification;
 
 // DEBT Indentation {
+@SuppressWarnings({"AccessStaticViaInstance", "EmptyClass"})
 @BehaviourContext
 public final class BehaviourExpectationsContext {
     private final List<String> strings = new ArrayList<String>();
@@ -26,8 +27,9 @@ public final class BehaviourExpectationsContext {
         expect.that().one(strings).clear();
 
         // Option 3 - jMock 2 style
-        expect.that(new Expectations() { {
-            one(strings).add("abc"); will(returnValue('E'));
+        expect.that(new Expectations() {{
+            one(strings).add("abc");
+            will(returnValue('E'));
             one(strings).clear();
         }});
 
@@ -42,6 +44,8 @@ public final class BehaviourExpectationsContext {
         }
 
         void doStuff() {
+            strings.add("abc");
+            strings.clear();
         }
     }
 }
