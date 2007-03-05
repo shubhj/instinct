@@ -1,29 +1,30 @@
 package com.googlecode.instinct.behaviourexpect;
 
-import com.googlecode.instinct.internal.mock.Mockery;
-import com.googlecode.instinct.internal.mock.MockeryImpl;
+import java.util.ArrayList;
+import java.util.List;
 import org.jmock.builder.IdentityBuilder;
 import org.jmock.builder.StubBuilder;
 import org.jmock.core.Stub;
 import org.jmock.core.stub.ReturnStub;
 
 public final class BehaviourExpect {
-    public static final BehaviourExpect expect = new BehaviourExpect();
-    private final Mockery mockery = new MockeryImpl();
+    private static final BehaviourExpect expect = new BehaviourExpect();
+    private final List<String> strings = new ArrayList<String>();
+    private final SomeClass someClass = new SomeClass(strings);
 
     public void testOfBehaviourExpectationApi() {
 
-        // methods that return something
-        expect.that(one(mockery).anything()).will(returnValue(null));
+        // Option 1
+        expect.that(one(strings).add("abc")).will(returnValue(true));
+        expect.that().one(strings).clear();
 
-        // void return types
-        expect.that().one(mockery).verify();
-
-        // jMock 2 style
-        expect.that(new CollaboratorsBehaveAsFollows() {{
-            one(mockery).verify();
-            one(mockery).anything(); will(returnValue(null));
+        // Option 2 - jMock 2 style
+        expect.that(new Expectations() {{
+            one(strings).add("abc"); will(returnValue('E'));
+            one(strings).clear();
         }});
+
+        someClass.doStuff();
     }
 
     public <T> T one(final T mockedObject) {
@@ -34,7 +35,7 @@ public final class BehaviourExpect {
         return this;
     }
 
-    public void that(final CollaboratorsBehaveAsFollows expectation) {
+    public void that(final Expectations expectation) {
     }
 
     public <T> StubBuilder that(final T mockedObject) {
@@ -47,6 +48,21 @@ public final class BehaviourExpect {
 
     public Stub returnValue(final Object returnValue) {
         return new ReturnStub(returnValue);
+    }
+
+    private static class SomeClass {
+        private final List<String> strings;
+
+        private SomeClass(final List<String> strings) {
+            this.strings = strings;
+        }
+
+        void doStuff() {
+        }
+    }
+
+    // jMock2 class
+    private static class Expectations {
     }
 
 /*
@@ -100,9 +116,4 @@ public final class BehaviourExpect {
 
 */
 
-    private static class CollaboratorsBehaveAsFollows {
-        public <T> T one(final T mockedObject) {
-            return mockedObject;
-        }
-    }
 }
