@@ -6,10 +6,16 @@
  */
 package com.googlecode.instinct.integrate.idea;
 
-import javax.swing.*;
-
+import javax.swing.Icon;
+import com.googlecode.instinct.integrate.idea.model.TestData;
+import com.googlecode.instinct.integrate.idea.util.TestNGUtil;
 import com.intellij.codeInspection.InspectionToolProvider;
-import com.intellij.execution.*;
+import com.intellij.execution.ExecutionUtil;
+import com.intellij.execution.LocatableConfigurationType;
+import com.intellij.execution.Location;
+import com.intellij.execution.PsiLocation;
+import com.intellij.execution.RunManager;
+import com.intellij.execution.RunnerAndConfigurationSettings;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.application.ApplicationManager;
@@ -20,9 +26,6 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.googlecode.instinct.integrate.idea.inspection.JUnitConvertTool;
-import com.googlecode.instinct.integrate.idea.model.TestData;
-import com.googlecode.instinct.integrate.idea.util.TestNGUtil;
 
 public class TestNGConfigurationType implements LocatableConfigurationType, InspectionToolProvider
 {
@@ -44,7 +47,8 @@ public class TestNGConfigurationType implements LocatableConfigurationType, Insp
     }
 
     public Class[] getInspectionClasses() {
-        return new Class[] {JUnitConvertTool.class};
+        return new Class[] {Class.class};
+//        return new Class[] {JUnitConvertTool.class};
     }
 
     public static TestNGConfigurationType getInstance() {
