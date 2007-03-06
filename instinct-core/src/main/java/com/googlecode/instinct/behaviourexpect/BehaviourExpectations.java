@@ -2,7 +2,6 @@ package com.googlecode.instinct.behaviourexpect;
 
 import org.jmock.builder.IdentityBuilder;
 import org.jmock.builder.NameMatchBuilder;
-import org.jmock.builder.StubBuilder;
 import org.jmock.core.Stub;
 
 interface BehaviourExpectations {
@@ -14,7 +13,7 @@ interface BehaviourExpectations {
 
     void that(final Expectations expectations);
 
-    <T> StubBuilder that(final T mockedObject);
+    <T> MethodInvocations that(final T mockedObject);
 
     IdentityBuilder will(final Stub stubAction);
 

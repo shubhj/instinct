@@ -20,7 +20,8 @@ public final class BehaviourExpectationsContext {
     void playingWithBehaviourExpectations() {
 
         // Option 1 - jMock 1 fallback
-        expect.that().call(strings).method("abc").will(returnValue(true));
+        expect.that(strings).method("abc").will(returnValue(true));
+        expect.that(strings).method("clear");
 
         // Option 2 - DSL w/ method completion
         expect.that(one(strings).add("abc")).will(returnValue(true));
@@ -28,8 +29,7 @@ public final class BehaviourExpectationsContext {
 
         // Option 3 - jMock 2 style
         expect.that(new Expectations() {{
-            one(strings).add("abc");
-            will(returnValue('E'));
+            one(strings).add("abc"); will(returnValue(true));
             one(strings).clear();
         }});
 

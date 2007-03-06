@@ -1,12 +1,13 @@
 package com.googlecode.instinct.behaviourexpect;
 
+import com.googlecode.instinct.internal.util.Suggest;
 import org.jmock.builder.IdentityBuilder;
 import org.jmock.builder.NameMatchBuilder;
-import org.jmock.builder.StubBuilder;
 import org.jmock.core.Stub;
 
 // DEBT ConstantName {
 public final class BehaviourExpect {
+    @Suggest("Merge this field and the next one. Follow Ben's lead with the static expectations.")
     public static final BehaviourExpect expect = new BehaviourExpect();
     private static final BehaviourExpectations BEHAVIOUR_EXPECTATIONS = new BehaviourExpectationsImpl();
 
@@ -30,7 +31,7 @@ public final class BehaviourExpect {
         BEHAVIOUR_EXPECTATIONS.that(expectations);
     }
 
-    public static <T> StubBuilder that(final T mockedObject) {
+    public static <T> MethodInvocations that(final T mockedObject) {
         return BEHAVIOUR_EXPECTATIONS.that(mockedObject);
     }
 
