@@ -4,7 +4,7 @@ import org.jmock.builder.IdentityBuilder;
 import org.jmock.builder.NameMatchBuilder;
 import org.jmock.core.Stub;
 
-interface BehaviourExpectations {
+public interface BehaviourExpectations {
     <T> T one(final T mockedObject);
 
     <T> NameMatchBuilder call(final T mockedObject);
