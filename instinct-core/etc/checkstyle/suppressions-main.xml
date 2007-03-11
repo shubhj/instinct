@@ -1,0 +1,12 @@
+<!DOCTYPE suppressions PUBLIC
+        "-//Puppy Crawl//DTD Suppressions 1.0//EN"
+        "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
+
+<suppressions>
+    <suppress checks="ConstantName"
+              files="Expect.java"/>
+    <suppress checks="VisibilityModifier"
+              files="ObjectCheckerImpl.java"/>
+    <suppress checks="IllegalToken"
+              files="ObjectCheckerImpl.java"/>
+</suppressions>
