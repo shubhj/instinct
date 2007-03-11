@@ -3,9 +3,7 @@ package com.googlecode.instinct.example.techtalk;
 import com.googlecode.instinct.core.annotate.BeforeSpecification;
 import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.core.annotate.Specification;
-import com.googlecode.instinct.verify.Verify;
-import static com.googlecode.instinct.verify.Verify.mustBeFalse;
-import static com.googlecode.instinct.verify.Verify.mustBeTrue;
+import static com.googlecode.instinct.expect.Expect.expect;
 
 @BehaviourContext
 public final class AnEmptyStack {
@@ -20,19 +18,19 @@ public final class AnEmptyStack {
 
     @Specification
     void mustBeEmpty() {
-        mustBeTrue(stack.isEmpty());
+        expect.that(stack.isEmpty()).equalTo(true);
     }
 
     @Specification
     void mustNoLongerBeEmptyAfterPush() {
-        stack.push(object);
-        mustBeFalse(stack.isEmpty());
+        stack.push(new Object());
+        expect.that(stack.isEmpty()).equalTo(false);
     }
 
     @Specification
     void willReturnTheSameObjectWhenPushed() {
         stack.push(object);
         final Object o = stack.pop();
-        Verify.mustBeTrue(o == object);
+        expect.that(o).sameInstanceAs(object);
     }
 }

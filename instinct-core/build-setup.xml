@@ -59,6 +59,7 @@
         <include name="${lib.dir}/jmock/jmock-cglib-1.1.0.jar"/>
         <include name="${lib.dir}/easymock/easymockclassextension-2.2.jar"/>
         <include name="${lib.dir}/ant/ant-1.7.0.jar"/>
+        <include name="${lib.dir}/hamcrest/hamcrest-all-1.0.jar"/>
     </patternset>
 
     <patternset id="test.classpath.pattern">

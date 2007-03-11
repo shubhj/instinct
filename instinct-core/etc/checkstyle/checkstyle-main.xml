@@ -3,6 +3,11 @@
         "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
 
 <module name="Checker">
+
+    <module name="SuppressionFilter">
+        <property name="file" value="etc/checkstyle/suppressions-main.xml"/>
+    </module>
+
     <module name="SuppressionCommentFilter">
         <property name="offCommentFormat" value="DEBT ([\w\|]+) \{"/>
         <property name="onCommentFormat" value="\} DEBT ([\w\|]+)"/>
@@ -146,11 +151,12 @@
 
         <!-- Strict rules -->
         <module name="FinalLocalVariable"/>
-        <module name="FinalParameters"/>
+        <!--module name="FinalParameters"/-->
 
         <!-- Stricter Rules -->
         <module name="IllegalToken">
-            <property name="tokens" value="LITERAL_PROTECTED,ABSTRACT,LITERAL_SWITCH,LITERAL_CASE,LITERAL_BREAK,LITERAL_CONTINUE,LITERAL_ASSERT"/>
+            <property name="tokens"
+                      value="LITERAL_PROTECTED,ABSTRACT,LITERAL_SWITCH,LITERAL_CASE,LITERAL_BREAK,LITERAL_CONTINUE,LITERAL_ASSERT"/>
         </module>
 
     </module>

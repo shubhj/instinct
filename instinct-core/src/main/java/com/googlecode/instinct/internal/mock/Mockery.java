@@ -46,6 +46,8 @@ public interface Mockery {
 
     Constraint eq(Object argument);
 
+    Constraint sameElements(Object[] argument);
+
     Stub returnValue(Object returnValue);
 
     void verify();

@@ -17,6 +17,7 @@
 package com.googlecode.instinct.internal.mock;
 
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.mock.constraint.ArrayElementsSame;
 import org.jmock.builder.NameMatchBuilder;
 import org.jmock.core.Constraint;
 import org.jmock.core.InvocationMatcher;
@@ -94,6 +95,10 @@ public final class MockeryImpl implements Mockery {
 
     public Constraint eq(final Object argument) {
         return new IsEqual(argument);
+    }
+
+    public Constraint sameElements(Object[] argument) {
+        return new ArrayElementsSame(argument);
     }
 
     public Stub returnValue(final Object returnValue) {

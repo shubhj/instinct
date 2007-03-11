@@ -78,6 +78,10 @@ public final class Mocker {
         return MOCKERY.eq(argument);
     }
 
+    public static Constraint sameElements(final Object[] argument) {
+        return MOCKERY.sameElements(argument);
+    }
+
     public static Stub returnValue(final Object returnValue) {
         return MOCKERY.returnValue(returnValue);
     }

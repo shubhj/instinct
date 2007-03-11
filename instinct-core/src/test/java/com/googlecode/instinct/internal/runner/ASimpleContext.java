@@ -16,11 +16,11 @@
 
 package com.googlecode.instinct.internal.runner;
 
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.core.annotate.AfterSpecification;
 import com.googlecode.instinct.core.annotate.BeforeSpecification;
 import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.core.annotate.Specification;
-import static com.googlecode.instinct.verify.Verify.mustBeTrue;
 
 @BehaviourContext
 public final class ASimpleContext {
@@ -34,7 +34,7 @@ public final class ASimpleContext {
 
     @Specification
     public void toCheckVerification() {
-        mustBeTrue(true);
+        expect.that(true).equals(true);
     }
 
     @AfterSpecification

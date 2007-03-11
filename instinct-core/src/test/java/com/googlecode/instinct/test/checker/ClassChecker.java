@@ -34,6 +34,8 @@ import com.googlecode.instinct.internal.mock.instance.UberInstanceProvider;
 public final class ClassChecker {
     private static final ClassTestChecker CLASS_CHECKER = new DefaultClassTestChecker();
     private static final ModifierTestChecker MODIFIER_CHECKER = new DefaultModifierTestChecker();
+    // TODO This returns mocks - which aint much use when testing a specific implementation
+    // see ExpectThatImplAtomicTest.
     private static final InstanceProvider INSTANCE_PROVIDER = new UberInstanceProvider();
     private static final ConstructorNullParameterTestChecker CONSTRUCTOR_NULL_CHECKER = new DefaultConstructorNullParameterTestChecker(
             INSTANCE_PROVIDER);
@@ -72,6 +74,8 @@ public final class ClassChecker {
         checkPublicMethodsRejectNull(newInstance(implementationClass));
     }
 
+    /* TODO - may be valid for clients to call methods/constructors for checking
+     that strings are empty...*/
     private static <U, T extends U> void emptyStringCheckParamters(final Class<T> implementationClass) {
         checkPublicConstructorsRejectEmptyString(implementationClass);
         checkPublicMethodsRejectEmptyString(newInstance(implementationClass));

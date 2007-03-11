@@ -34,13 +34,13 @@ public final class ContextExample {
 
         @Specification
         void mustBeEmpty() {
-            mustBeTrue(stack.isEmpty());
+            expect.that(stack.isEmpty()).equalTo(true);
         }
 
         @Specification
         void mustNoLongerBeEmptyAfterPush() {
             stack.push(new Object());
-            mustBeFalse(stack.isEmpty());
+            expect.that(stack.isEmpty()).equalTo(false);
         }
     }
 
@@ -60,7 +60,7 @@ public final class ContextExample {
         @Specification
         void mustNoLongerBeFullAfterPop() {
             stack.pop();
-            mustBeFalse(stack.isEmpty());
+            expect.that(stack.isEmpty()).equalTo(false);
         }
     }
 

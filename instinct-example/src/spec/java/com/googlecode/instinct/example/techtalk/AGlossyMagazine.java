@@ -1,8 +1,9 @@
 package com.googlecode.instinct.example.techtalk;
 
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.core.annotate.Specification;
-import static com.googlecode.instinct.verify.Verify.mustEqual;
+import com.googlecode.instinct.expect.Expect;
 
 @BehaviourContext
 public final class AGlossyMagazine {
@@ -17,6 +18,6 @@ public final class AGlossyMagazine {
 
     private void checkSavesTitleGivenInConstructor(final String title) {
         final Magazine magazine = new MagazineImpl(title);
-        mustEqual(title, magazine.getTitle());
+        expect.that(magazine.getTitle()).equalTo(title);
     }
 }
