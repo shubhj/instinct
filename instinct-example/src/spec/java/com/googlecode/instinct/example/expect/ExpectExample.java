@@ -1,25 +1,25 @@
 package com.googlecode.instinct.example.expect;
 
-import org.hamcrest.Matchers;
-import static com.googlecode.instinct.expect.Expect.expect;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.EventObject;
-
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.internal.util.Suggest;
 import junit.framework.TestCase;
+import org.hamcrest.Matchers;
 
-/* The examples below illustrate a basic expectation API built on top of the
- * Hamcrest Matcher API.
+/**
+ * The examples below illustrate a basic expectation API built on top of the Hamcrest Matcher API.
  * The wrapper objects enable:
  * 1. IDE code completion reduced to the methods that apply to the type object being checked.
  * 2. A more english like (and longer) flow.
- * 3. The standard Hamcrest Matchers or custom Matcher implementations to be
- * passed in as well.
+ * 3. The standard Hamcrest Matchers or custom Matcher implementations to be passed in as well.
  */
-public class ExpectExample extends TestCase {
+@SuppressWarnings({"MagicNumber", "unchecked"})
+@Suggest("Move to be a BehaviourContext")
+public final class ExpectExample extends TestCase {
 
     public void testShowSomeObjectStuff() {
         expect.that("fred").equalTo("fred");
@@ -29,8 +29,7 @@ public class ExpectExample extends TestCase {
         expect.that(this).instanceOf(ExpectExample.class);
         expect.that(this).notNull();
         // Mixing with standard Hamcrest matchers
-        expect.that("fred").matchesAllOf(Matchers.startsWith("fr"),
-                Matchers.containsString("ed"));
+        expect.that("fred").matchesAllOf(Matchers.startsWith("fr"), Matchers.containsString("ed"));
         expect.that("fred", Matchers.equalTo("fred"));
     }
 
@@ -38,7 +37,6 @@ public class ExpectExample extends TestCase {
         expect.that(String.class).typeCompatibleWith(Comparable.class);
         expect.that(Comparable.class).notTypeCompatibleWith(String.class);
     }
-
 
     public void testShowSomeStringStuff() {
         expect.that("andersdabeerz").equalsIgnoringCase("AndersDaBeerz");
@@ -50,11 +48,11 @@ public class ExpectExample extends TestCase {
     }
 
     public void testShowSomeComparableStuff() {
-       expect.that(1).equalTo(1);
-       expect.that(1).greaterThan(0);
-       expect.that(1).greaterThanOrEqualTo(0);
-       expect.that(1).lessThan(2);
-       expect.that(1).lessThanOrEqualTo(2);
+        expect.that(1).equalTo(1);
+        expect.that(1).greaterThan(0);
+        expect.that(1).greaterThanOrEqualTo(0);
+        expect.that(1).lessThan(2);
+        expect.that(1).lessThanOrEqualTo(2);
     }
 
     public void testShowSomeCollectionAndIterableStuff() {
@@ -70,11 +68,11 @@ public class ExpectExample extends TestCase {
     }
 
     public void testShowSomeArrayStuff() {
-       String[] strings = {"hi", "there"};
-       expect.that(strings).hasLength(2);
-       expect.that(strings).containsItem("hi");
-       expect.that(strings).notContainItem("bye");
-       expect.that(strings).notContainItem(Matchers.greaterThan("zip"));
+        String[] strings = {"hi", "there"};
+        expect.that(strings).hasLength(2);
+        expect.that(strings).containsItem("hi");
+        expect.that(strings).notContainItem("bye");
+        expect.that(strings).notContainItem(Matchers.greaterThan("zip"));
     }
 
     public void testShowSomeMapStuff() {
@@ -89,21 +87,22 @@ public class ExpectExample extends TestCase {
     }
 
     public void testShowDoubleStuff() {
-        expect.that(1.1).closeTo(1, 0.11);
-        expect.that(1.1).notCloseTo(1, 0.1);
+        expect.that(1.1).closeTo(1.0, 0.11);
+        expect.that(1.1).notCloseTo(1.0, 0.1);
     }
-
 
     public void testShowSomeEventStuff() {
         Object object = new Object();
-        MyEventObject myEventObject = new MyEventObject(object);
+        EventObject myEventObject = new MyEventObject(object);
         expect.that(myEventObject).eventFrom(MyEventObject.class, object);
         expect.that(myEventObject).eventFrom(object);
         expect.that(myEventObject).notEventFrom(new Object());
     }
 
     private static class MyEventObject extends EventObject {
-        public MyEventObject(Object o) {
+        private static final long serialVersionUID = -2001716596031438536L;
+
+        private MyEventObject(Object o) {
             super(o);
         }
     }
