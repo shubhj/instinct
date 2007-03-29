@@ -56,23 +56,23 @@ public final class ExpectExample extends TestCase {
     }
 
     public void testShowSomeCollectionAndIterableStuff() {
-        List<String> aList = new ArrayList<String>();
-        expect.that(aList).isEmpty();
-        aList.add("fred");
-        aList.add("wilma");
-        expect.that(aList).notEmpty();
-        expect.that(aList).hasSize(2);
-        expect.that(aList).containsItems("fred", "wilma");
-        expect.that(aList).containsItem("fred");
-        expect.that(aList).notContainItems("barney", "betty");
+        List<String> people = new ArrayList<String>();
+        expect.that(people).isEmpty();
+        people.add("fred");
+        people.add("wilma");
+        expect.that(people).notEmpty();
+        expect.that(people).hasSize(2);
+        expect.that(people).containsItems("fred", "wilma");
+        expect.that(people).containsItem("fred");
+        expect.that(people).notContainItems("barney", "betty");
     }
 
     public void testShowSomeArrayStuff() {
-        String[] strings = {"hi", "there"};
-        expect.that(strings).hasLength(2);
-        expect.that(strings).containsItem("hi");
-        expect.that(strings).notContainItem("bye");
-        expect.that(strings).notContainItem(Matchers.greaterThan("zip"));
+        String[] greatings = {"hi", "there"};
+        expect.that(greatings).hasLength(2);
+        expect.that(greatings).containsItem("hi");
+        expect.that(greatings).notContainItem("bye");
+        expect.that(greatings).notContainItem(Matchers.greaterThan("zip"));
     }
 
     public void testShowSomeMapStuff() {

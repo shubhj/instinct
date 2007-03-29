@@ -878,7 +878,9 @@
     <option name="ADDITIONAL_OPTIONS_STRING" value="" />
   </component>
   <component name="StarteamVcsAdapter" />
-  <component name="ToggleTest" />
+  <component name="ToggleTest">
+    <toggle from="^(\w)Impl" to="$1Context" />
+  </component>
   <component name="VssVcs" />
   <component name="com.intellij.jsf.UserDefinedFacesConfigs">
     <option name="USER_DEFINED_CONFIGS">
