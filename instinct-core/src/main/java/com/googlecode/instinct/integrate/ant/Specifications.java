@@ -23,6 +23,7 @@ import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import org.apache.tools.ant.Project;
@@ -48,6 +49,8 @@ public final class Specifications {
         }
     }
 
+    @Suggest({"This should return BehaviourContextClass's, that way we don't need to instantiate them.",
+            "Don't return an array, use an ordered set."})
     public JavaClassName[] getContextClasses() {
         checkPreconditions();
         final FileFilter filter = new AnnotationFileFilter(specPackageRoot, BehaviourContext.class);
