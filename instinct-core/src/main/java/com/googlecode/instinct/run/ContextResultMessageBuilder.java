@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.integrate.ant;
+package com.googlecode.instinct.run;
 
-import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 
-public interface SpecificationAggregator {
-    JavaClassName[] getContextNames();
+public interface ContextResultMessageBuilder {
+    String buildMessage(BehaviourContextResult behaviourContextResult);
 }

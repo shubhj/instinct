@@ -30,7 +30,8 @@ import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 
-@Suggest({"Pass the specification runner to this class, rather than newing it, that way we can pass in logging versions"})
+@Suggest({"Pass the specification runner to this class, rather than newing it, that way we can pass in logging versions",
+        "Figure out a way to break this class up, it's too procedural."})
 public final class BehaviourContextRunnerImpl implements BehaviourContextRunner {
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
     private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();

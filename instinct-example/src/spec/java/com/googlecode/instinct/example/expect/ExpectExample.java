@@ -68,11 +68,11 @@ public final class ExpectExample extends TestCase {
     }
 
     public void testShowSomeArrayStuff() {
-        String[] greatings = {"hi", "there"};
-        expect.that(greatings).hasLength(2);
-        expect.that(greatings).containsItem("hi");
-        expect.that(greatings).notContainItem("bye");
-        expect.that(greatings).notContainItem(Matchers.greaterThan("zip"));
+        String[] greetings = {"hi", "there"};
+        expect.that(greetings).hasLength(2);
+        expect.that(greetings).containsItem("hi");
+        expect.that(greetings).notContainItem("bye");
+        expect.that(greetings).notContainItem(Matchers.greaterThan("zip"));
     }
 
     public void testShowSomeMapStuff() {

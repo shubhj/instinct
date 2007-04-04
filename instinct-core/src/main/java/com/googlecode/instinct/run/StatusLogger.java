@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.integrate.ant;
+package com.googlecode.instinct.run;
 
 public interface StatusLogger {
     void log(String message);

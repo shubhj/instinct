@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.integrate.ant;
+package com.googlecode.instinct.run;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
@@ -24,7 +24,7 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
-final class VerboseBehaviourContextResultMessageBuilder implements BehaviourContextResultMessageBuilder {
+public final class VerboseContextResultMessageBuilder implements ContextResultMessageBuilder {
     private static final double MILLISECONDS_IN_SECONDS = 1000.0;
     private static final String TAB = "\t";
     private static final String SPACER = ", ";

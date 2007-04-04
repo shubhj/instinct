@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.integrate.ant;
+package com.googlecode.instinct.run;
 
 import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
-public final class BriefBehaviourContextResultMessageBuilder implements BehaviourContextResultMessageBuilder {
+public final class BriefContextResultMessageBuilder implements ContextResultMessageBuilder {
     private static final double MILLISECONDS_IN_SECONDS = 1000.0;
     private static final String SPACER = ", ";
 

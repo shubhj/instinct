@@ -14,28 +14,30 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.integrate.ant;
+package com.googlecode.instinct.run;
 
 import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 
-public final class AntBehaviourContextRunner implements BehaviourContextRunner {
-    private final BehaviourContextRunner wrappedRunner;
-    private final BehaviourContextResultMessageBuilder messageBuilder;
+public final class StatusLoggingContextRunner implements BehaviourContextRunner {
+    private final BehaviourContextRunner delegate;
+    private final ContextResultMessageBuilder messageBuilder;
     private final StatusLogger statusLogger;
 
-    public AntBehaviourContextRunner(final BehaviourContextRunner wrappedRunner, final BehaviourContextResultMessageBuilder messageBuilder,
+    public StatusLoggingContextRunner(final BehaviourContextRunner delegate, final ContextResultMessageBuilder messageBuilder,
             final StatusLogger statusLogger) {
-        checkNotNull(wrappedRunner, messageBuilder, statusLogger);
-        this.wrappedRunner = wrappedRunner;
+        checkNotNull(delegate, messageBuilder, statusLogger);
+        this.delegate = delegate;
         this.messageBuilder = messageBuilder;
         this.statusLogger = statusLogger;
     }
 
+    @Suggest("This logging should be done on the fly by the runner, potentially removing the need for this class.")
     public <T> BehaviourContextResult run(final Class<T> behaviourContextClass) {
         checkNotNull(behaviourContextClass);
-        final BehaviourContextResult behaviourContextResult = wrappedRunner.run(behaviourContextClass);
+        final BehaviourContextResult behaviourContextResult = delegate.run(behaviourContextClass);
         logResults(behaviourContextResult);
         return behaviourContextResult;
     }

@@ -48,7 +48,7 @@ public final class Specifications {
         }
     }
 
-    public JavaClassName[] getContextNames() {
+    public JavaClassName[] getContextClasses() {
         checkPreconditions();
         final FileFilter filter = new AnnotationFileFilter(specPackageRoot, BehaviourContext.class);
         return classLocator.locate(specPackageRoot, filter);
@@ -56,7 +56,7 @@ public final class Specifications {
 
     private void checkPreconditions() {
         if (specPackageRoot == null) {
-            throw new IllegalStateException("Specification root was not specified");
+            throw new IllegalStateException("Specification package root must be specified");
         }
     }
 }

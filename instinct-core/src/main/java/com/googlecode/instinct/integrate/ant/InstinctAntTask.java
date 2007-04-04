@@ -27,12 +27,14 @@ import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
+import com.googlecode.instinct.run.StatusLoggingContextRunner;
+import com.googlecode.instinct.run.StatusLogger;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
 @SuppressWarnings({"MethodParameterOfConcreteClass", "InstanceVariableOfConcreteClass"})
 public final class InstinctAntTask extends Task implements StatusLogger {
-    private final List<Specifications> locators = new ArrayList<Specifications>();
+    private final List<Specifications> specificationLocators = new ArrayList<Specifications>();
     private final EdgeClass edgeClass = new DefaultEdgeClass();
     private String failureProperty;
     private Formatter formatter;
@@ -42,9 +44,9 @@ public final class InstinctAntTask extends Task implements StatusLogger {
         this.failureProperty = failureProperty;
     }
 
-    public void addSpecifications(final Specifications specifications) {
-        checkNotNull(specifications);
-        locators.add(specifications);
+    public void addSpecifications(final Specifications specificationLocator) {
+        checkNotNull(specificationLocator);
+        specificationLocators.add(specificationLocator);
     }
 
     public void addFormatter(final Formatter formatter) {
@@ -69,23 +71,23 @@ public final class InstinctAntTask extends Task implements StatusLogger {
     private void doExecute() {
         try {
             runContexts();
-        } catch (Throwable e) {
-            throw new BuildException(e);
+        } catch (Throwable t) {
+            throw new BuildException(t);
         }
     }
     // } DEBT IllegalCatch
 
     private void runContexts() {
         final List<JavaClassName> contextClasses = findBehaviourContextsFromAllAggregators();
-        final BehaviourContextRunner runner = new AntBehaviourContextRunner(new BehaviourContextRunnerImpl(),
+        final BehaviourContextRunner runner = new StatusLoggingContextRunner(new BehaviourContextRunnerImpl(),
                 formatter.createMessageBuilder(), this);
         runContexts(runner, contextClasses);
     }
 
     private List<JavaClassName> findBehaviourContextsFromAllAggregators() {
         final List<JavaClassName> contextClasses = new ArrayList<JavaClassName>();
-        for (final Specifications aggregator : locators) {
-            contextClasses.addAll(asList(aggregator.getContextNames()));
+        for (final Specifications specificationLocator : specificationLocators) {
+            contextClasses.addAll(asList(specificationLocator.getContextClasses()));
         }
         return contextClasses;
     }
