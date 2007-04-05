@@ -9,9 +9,10 @@
 
 Instinct is a Behaviour Driven Development (BDD) framework for Java. Inspired
 by RSpec, Instinct provides flexible annotation of contexts, specifications,
-mocks, etc. (via Java 1.5 annotations, marker interfaces or naming conventions);
-automatic creation of test doubles (dummies, mocks & stubs) & test subjects; a
-verification API (similar to JUnit's Assert); and JUnit test runner integration.
+test actors, etc. (via Java 1.5 annotations, marker interfaces or naming
+conventions); automatic creation of test doubles (dummies, mocks & stubs) &
+test subjects; state and behavioural (mocks) expectation API; JUnit test runner
+integration & Ant tasks.
 
 
 * Distribution Contents *
@@ -41,7 +42,7 @@ In addition, to use the Instinct Ant task, you'll need:
 
 o ant-1.7.0.jar
 
-In addition, to use the JUnit 4 runners, you'll need:
+In addition, to use the JUnit 3/4 runners, you'll need:
 
 o junit-4.1.jar
 
@@ -63,9 +64,10 @@ Building From Source - TODO
 
 Developers:
 o Tom Adams
+o Ben Warren
 o Lyall Ward
 
-Thanks to the work done on RSpec, jMock EasyMock, Boost & JRDF. These libraries
+Thanks to the work done on RSpec, jMock, EasyMock, Boost & JRDF. These libraries
 inspired Instinct.
 
 Instinct development is supported by Workingmouse: http://workingmouse.com/.
