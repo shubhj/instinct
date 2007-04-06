@@ -18,9 +18,7 @@ package com.googlecode.instinct.test.reflect;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.test.TestingException;
 
 public final class Reflector {
@@ -34,21 +32,21 @@ public final class Reflector {
         setValue(field, instance, value);
     }
 
-    public static void insertFieldValue(final Object instance, final Class valueType, final Object value) {
+    public static <T> void insertFieldValue(final Object instance, final Class<T> valueType, final Object value) {
         checkNotNull(instance, value);
         final Field field = getField(instance.getClass(), valueType);
         setValue(field, instance, value);
     }
 
-    private static Field getField(Class aClass, Class fieldClass) {
-        Field[] declaredFields = aClass.getDeclaredFields();
-        for (Field declaredField : declaredFields) {
+    private static <T, U> Field getField(final Class<T> cls, final Class<U> fieldClass) {
+        final Field[] declaredFields = cls.getDeclaredFields();
+        for (final Field declaredField : declaredFields) {
             if (declaredField.getType().equals(fieldClass)) {
                 return declaredField;
             }
         }
         throw new TestingException("Unable to find field of type '" + fieldClass.getName() +
-                "' on class " + aClass.getName());
+                "' on class " + cls.getName());
     }
 
     public static <T> Method getMethod(final Class<T> cls, final String methodName, final Class<?>... paramTypes) {
