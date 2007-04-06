@@ -1,15 +1,16 @@
 package com.googlecode.instinct.test.triangulate;
 
+import static java.lang.reflect.Array.newInstance;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import java.util.*;
-import java.lang.reflect.Array;
-
-public class TestTriangulationProviderImpl implements TestTriangulationProvider {
-
+@SuppressWarnings({"unchecked"})
+public final class TestTriangulationProviderImpl implements TestTriangulationProvider {
     private final au.net.netstorm.boost.test.atom.TestTriangulationProvider delegate =
             new au.net.netstorm.boost.test.atom.TestTriangulationProvider();
     private final RandomProvider randomProvider = new RandomProviderImpl();
-
 
     public <T> List<T> getListInstance(Class<T> elementType) {
         List<T> result = new ArrayList<T>();
@@ -20,8 +21,8 @@ public class TestTriangulationProviderImpl implements TestTriangulationProvider 
         return result;
     }
 
-    public <K,V> Map<K, V> getMapInstance(Class<K> keyType, Class<V> valueType) {
-        Map<K, V> result = new HashMap<K,V>();
+    public <K, V> Map<K, V> getMapInstance(Class<K> keyType, Class<V> valueType) {
+        Map<K, V> result = new HashMap<K, V>();
         int numElements = intInRange(1, 5);
         for (int i = 0; i < numElements; i++) {
             result.put(getInstance(keyType), getInstance(valueType));
@@ -30,8 +31,8 @@ public class TestTriangulationProviderImpl implements TestTriangulationProvider 
     }
 
     public <T> T[] getArrayInstance(Class<T> elementType) {
-        List<T> elementList =  getListInstance(elementType);
-        T[] result = (T[]) Array.newInstance(elementType, elementList.size());
+        List<T> elementList = getListInstance(elementType);
+        T[] result = (T[]) newInstance(elementType, elementList.size());
         return elementList.toArray(result);
     }
 

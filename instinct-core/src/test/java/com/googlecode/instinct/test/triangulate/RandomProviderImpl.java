@@ -1,11 +1,12 @@
 package com.googlecode.instinct.test.triangulate;
 
-import au.net.netstorm.boost.test.atom.DefaultRandomProvider;
-
 import java.util.Random;
+import au.net.netstorm.boost.test.atom.DefaultRandomProvider;
+import com.googlecode.instinct.internal.util.Suggest;
 
-public class RandomProviderImpl implements RandomProvider {
-
+@SuppressWarnings({"unchecked"})
+@Suggest("How does this differ from TriangulationProvider? Can they be merged?")
+public final class RandomProviderImpl implements RandomProvider {
     private DefaultRandomProvider randomProvider = new DefaultRandomProvider();
     private Random random = new Random();
 
@@ -14,9 +15,8 @@ public class RandomProviderImpl implements RandomProvider {
     }
 
     public int intInRange(int min, int max) {
-
         if (min >= max) {
-           throw new IllegalArgumentException("min of range must be less than max");
+            throw new IllegalArgumentException("min of range must be less than max");
         }
         // Add one as nextInt(high) is exclusive
         int partitionSize = (max - min) + 1;

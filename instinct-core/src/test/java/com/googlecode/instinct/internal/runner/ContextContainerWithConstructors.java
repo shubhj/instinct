@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.core.annotate.BehaviourContext;
-import com.googlecode.instinct.core.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Specification;
 
 @SuppressWarnings({"EmptyClass", "UnusedDeclaration", "ProtectedMemberInFinalClass"})
 public final class ContextContainerWithConstructors {

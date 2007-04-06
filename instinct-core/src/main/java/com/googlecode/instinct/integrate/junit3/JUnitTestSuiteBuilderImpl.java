@@ -18,12 +18,12 @@ package com.googlecode.instinct.integrate.junit3;
 
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
-import com.googlecode.instinct.core.marker.BehaviourContext;
 import com.googlecode.instinct.internal.aggregate.AnnotatedBehaviourContextAggregatorImpl;
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.iface.BehaviourContext;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 

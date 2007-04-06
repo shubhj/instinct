@@ -17,9 +17,10 @@
 package com.googlecode.instinct.expect;
 
 public final class Expect {
-    // Lower case name to read nicely
+    // Note. Lower case name to read nicely when statically imported.
     public static final ExpectThat expect = new ExpectThatImpl();
 
     private Expect() {
+        throw new UnsupportedOperationException();
     }
 }

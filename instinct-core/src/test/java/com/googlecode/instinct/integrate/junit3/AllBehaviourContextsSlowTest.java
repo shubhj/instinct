@@ -20,13 +20,13 @@ import java.lang.reflect.InvocationTargetException;
 import au.net.netstorm.boost.edge.EdgeException;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
-import com.googlecode.instinct.core.BehaviourContextConfigurationException;
-import com.googlecode.instinct.core.LifeCycleMethodConfigurationException;
 import com.googlecode.instinct.internal.aggregate.AnnotatedBehaviourContextAggregatorImpl;
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.marker.BehaviourContextConfigurationException;
+import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 @SuppressWarnings({"ProhibitedExceptionThrown"})

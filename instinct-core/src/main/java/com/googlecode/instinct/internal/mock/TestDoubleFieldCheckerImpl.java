@@ -20,9 +20,9 @@ import java.lang.reflect.Field;
 import static java.lang.reflect.Modifier.isFinal;
 import au.net.netstorm.boost.edge.java.lang.reflect.DefaultEdgeField;
 import au.net.netstorm.boost.edge.java.lang.reflect.EdgeField;
-import com.googlecode.instinct.core.TestDoubleConfigurationException;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.TestDoubleConfigurationException;
 
 public final class TestDoubleFieldCheckerImpl implements TestDoubleFieldChecker {
     @Suggest({"Add getModifiers() to edge", "Create EdgeModifer"})

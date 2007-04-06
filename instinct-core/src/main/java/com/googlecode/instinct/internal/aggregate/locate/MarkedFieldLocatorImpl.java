@@ -18,9 +18,9 @@ package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import com.googlecode.instinct.core.naming.NamingConvention;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.naming.NamingConvention;
 
 public final class MarkedFieldLocatorImpl implements MarkedFieldLocator {
     private AnnotatedFieldLocator annotatedFieldLocator = new AnnotatedFieldLocatorImpl();

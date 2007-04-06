@@ -30,6 +30,7 @@ import au.net.netstorm.boost.test.reflect.checker.DefaultClassTestChecker;
 import au.net.netstorm.boost.test.reflect.checker.DefaultModifierTestChecker;
 import au.net.netstorm.boost.test.reflect.checker.ModifierTestChecker;
 import com.googlecode.instinct.internal.mock.instance.UberInstanceProvider;
+import com.googlecode.instinct.internal.util.Suggest;
 
 public final class ClassChecker {
     private static final ClassTestChecker CLASS_CHECKER = new DefaultClassTestChecker();
@@ -48,12 +49,14 @@ public final class ClassChecker {
         throw new UnsupportedOperationException();
     }
 
+    @Suggest("Infer the interface from the concrete class.")
     public static <U, T extends U> void checkClass(final Class<T> implementationClass, final Class<U> targetInterface) {
         checkClassProperties(implementationClass, targetInterface);
         nullCheckParameters(implementationClass);
         emptyStringCheckParamters(implementationClass);
     }
 
+    @Suggest("Infer the interface from the concrete class.")
     public static <U, T extends U> void checkClassWithoutParamChecks(final Class<T> subClass, final Class<U> superClass) {
         checkClassProperties(subClass, superClass);
     }

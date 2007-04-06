@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.lang.reflect.Field;
-import com.googlecode.instinct.core.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Dummy;
 import static com.googlecode.instinct.mock.Mocker.eq;
 import static com.googlecode.instinct.mock.Mocker.expects;
 import static com.googlecode.instinct.mock.Mocker.mock;

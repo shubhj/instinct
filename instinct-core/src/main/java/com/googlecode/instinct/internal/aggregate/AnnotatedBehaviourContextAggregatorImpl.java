@@ -18,7 +18,6 @@ package com.googlecode.instinct.internal.aggregate;
 
 import java.io.File;
 import java.io.FileFilter;
-import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
@@ -26,6 +25,7 @@ import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.marker.annotate.BehaviourContext;
 
 public final class AnnotatedBehaviourContextAggregatorImpl implements BehaviourContextAggregator {
     private PackageRootFinder packageRootFinder = new PackageRootFinderImpl();

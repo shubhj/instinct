@@ -16,19 +16,20 @@
 
 package com.googlecode.instinct.expect.check;
 
+import java.util.Map;
+import com.googlecode.instinct.internal.util.Suggest;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-import java.util.Map;
-
 // TODO Test this
-public class MapCheckerImpl<K,V> extends ObjectCheckerImpl<Map<K,V>>
-        implements MapChecker<K,V> {
-
+@SuppressWarnings({"unchecked"})
+@Suggest("Consider removing inheritance, this would forsce you to save a typesafe form of subject, and not have to perform casts.")
+public class MapCheckerImpl<K, V> extends ObjectCheckerImpl<Map<K, V>> implements MapChecker<K, V> {
     public MapCheckerImpl(Map<K, V> subject) {
         super(subject);
     }
 
-    public final void containsEntry(org.hamcrest.Matcher<K> matcher, org.hamcrest.Matcher<V> matcher1) {
+    public final void containsEntry(Matcher<K> matcher, Matcher<V> matcher1) {
         getAsserter().expectThat(subject, Matchers.hasEntry(matcher, matcher1));
     }
 
@@ -36,7 +37,7 @@ public class MapCheckerImpl<K,V> extends ObjectCheckerImpl<Map<K,V>>
         getAsserter().expectThat(subject, Matchers.hasEntry(k, v));
     }
 
-    public final void notContainEntry(org.hamcrest.Matcher<K> matcher, org.hamcrest.Matcher<V> matcher1) {
+    public final void notContainEntry(Matcher<K> matcher, Matcher<V> matcher1) {
         getAsserter().expectNotThat(subject, Matchers.hasEntry(matcher, matcher1));
     }
 
@@ -44,36 +45,36 @@ public class MapCheckerImpl<K,V> extends ObjectCheckerImpl<Map<K,V>>
         getAsserter().expectNotThat(subject, Matchers.hasEntry(k, v));
     }
 
-    public final void containsKey(org.hamcrest.Matcher<K> matcher) {
-        getAsserter().expectThat((Map<K,Object>) subject, Matchers.hasKey(matcher));
+    public final void containsKey(Matcher<K> matcher) {
+        getAsserter().expectThat((Map<K, Object>) subject, Matchers.hasKey(matcher));
     }
 
     public final void containsKey(K k) {
-        getAsserter().expectThat((Map<K,Object>) subject, Matchers.hasKey(k));
+        getAsserter().expectThat((Map<K, Object>) subject, Matchers.hasKey(k));
     }
 
-    public final void notContainKey(org.hamcrest.Matcher<K> matcher) {
-        getAsserter().expectNotThat((Map<K,Object>) subject, Matchers.hasKey(matcher));
+    public final void notContainKey(Matcher<K> matcher) {
+        getAsserter().expectNotThat((Map<K, Object>) subject, Matchers.hasKey(matcher));
     }
 
     public final void notContainKey(K k) {
-        getAsserter().expectNotThat((Map<K,Object>) subject, Matchers.hasKey(k));
+        getAsserter().expectNotThat((Map<K, Object>) subject, Matchers.hasKey(k));
     }
 
-    public final void containsValue(org.hamcrest.Matcher<V> matcher) {
-        getAsserter().expectThat((Map<Object,V>) subject, Matchers.hasValue(matcher));
+    public final void containsValue(Matcher<V> matcher) {
+        getAsserter().expectThat((Map<Object, V>) subject, Matchers.hasValue(matcher));
     }
 
     public final void containsValue(V v) {
-        getAsserter().expectThat((Map<Object,V>) subject, Matchers.hasValue(v));
+        getAsserter().expectThat((Map<Object, V>) subject, Matchers.hasValue(v));
     }
 
-    public final void notContainValue(org.hamcrest.Matcher<V> matcher) {
-        getAsserter().expectNotThat((Map<Object,V>) subject, Matchers.hasValue(matcher));
+    public final void notContainValue(Matcher<V> matcher) {
+        getAsserter().expectNotThat((Map<Object, V>) subject, Matchers.hasValue(matcher));
     }
 
     public final void notContainValue(V v) {
-        getAsserter().expectNotThat((Map<Object,V>) subject, Matchers.hasValue(v));
+        getAsserter().expectNotThat((Map<Object, V>) subject, Matchers.hasValue(v));
     }
 
     public final void isEmpty() {

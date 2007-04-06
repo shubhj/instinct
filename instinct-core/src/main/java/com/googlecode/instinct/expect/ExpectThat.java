@@ -1,5 +1,8 @@
 package com.googlecode.instinct.expect;
 
+import java.util.Collection;
+import java.util.EventObject;
+import java.util.Map;
 import com.googlecode.instinct.expect.check.ArrayChecker;
 import com.googlecode.instinct.expect.check.ClassChecker;
 import com.googlecode.instinct.expect.check.CollectionChecker;
@@ -11,11 +14,8 @@ import com.googlecode.instinct.expect.check.MapChecker;
 import com.googlecode.instinct.expect.check.NodeChecker;
 import com.googlecode.instinct.expect.check.ObjectChecker;
 import com.googlecode.instinct.expect.check.StringChecker;
+import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
-
-import java.util.Collection;
-import java.util.EventObject;
-import java.util.Map;
 
 public interface ExpectThat {
     <T> ObjectChecker<T> that(T object);
@@ -40,7 +40,7 @@ public interface ExpectThat {
 
     <T extends Node> NodeChecker<T> that(T node);
 
-    <T> void that(T t, org.hamcrest.Matcher<T> hamcrestMatcher);
+    <T> void that(T t, Matcher<T> hamcrestMatcher);
 
-    <T> void notThat(T t, org.hamcrest.Matcher<T> hamcrestMatcher);
+    <T> void notThat(T t, Matcher<T> hamcrestMatcher);
 }

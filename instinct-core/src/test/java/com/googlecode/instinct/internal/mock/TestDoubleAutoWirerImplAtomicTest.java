@@ -16,13 +16,11 @@
 
 package com.googlecode.instinct.internal.mock;
 
-import com.googlecode.instinct.core.annotate.Dummy;
-import com.googlecode.instinct.core.naming.DummyNamingConvention;
-import com.googlecode.instinct.core.naming.NamingConvention;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedFieldLocator;
 import com.googlecode.instinct.internal.util.ObjectFactory;
-import com.googlecode.instinct.internal.mock.TestDoubleAutoWirer;
-import com.googlecode.instinct.internal.mock.TestDoubleAutoWirerImpl;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.naming.DummyNamingConvention;
+import com.googlecode.instinct.marker.naming.NamingConvention;
 import static com.googlecode.instinct.mock.Mocker.anything;
 import static com.googlecode.instinct.mock.Mocker.eq;
 import static com.googlecode.instinct.mock.Mocker.expects;

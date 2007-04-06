@@ -18,9 +18,9 @@ package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
-import com.googlecode.instinct.core.annotate.BehaviourContext;
-import com.googlecode.instinct.core.annotate.Dummy;
-import com.googlecode.instinct.core.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.Reflector.getField;

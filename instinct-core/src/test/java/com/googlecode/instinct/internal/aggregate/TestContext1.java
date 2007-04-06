@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.internal.aggregate;
 
-import com.googlecode.instinct.core.annotate.BehaviourContext;
-import com.googlecode.instinct.core.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Specification;
 
 @SuppressWarnings({"ProtectedMemberInFinalClass", "UnusedDeclaration"})
 @BehaviourContext

@@ -16,15 +16,16 @@
 
 package com.googlecode.instinct.internal.edge.org.hamcrest;
 
+import org.hamcrest.Matcher;
+import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 
 public final class MatcherAssertEdgeImpl implements MatcherAssertEdge {
-
-    public <T> void expectThat(T t, org.hamcrest.Matcher<T> matcher) {
-        org.hamcrest.MatcherAssert.assertThat(t, matcher);
+    public <T> void expectThat(T t, Matcher<T> matcher) {
+        MatcherAssert.assertThat(t, matcher);
     }
 
-    public <T> void expectNotThat(T t, org.hamcrest.Matcher<T> matcher) {
-        org.hamcrest.MatcherAssert.assertThat(t, Matchers.not(matcher));
+    public <T> void expectNotThat(T t, Matcher<T> matcher) {
+        MatcherAssert.assertThat(t, Matchers.not(matcher));
     }
 }

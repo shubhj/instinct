@@ -4,12 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 public final class Triangulation {
+    private static final TestTriangulationProvider TRIANAGULATION_PROVIDER = new TestTriangulationProviderImpl();
 
     private Triangulation() {
+        throw new UnsupportedOperationException();
     }
-
-    private static final TestTriangulationProviderImpl TRIANAGULATION_PROVIDER
-            = new TestTriangulationProviderImpl();
 
     public static <T> List<T> getListInstance(Class<T> elementType) {
         return TRIANAGULATION_PROVIDER.getListInstance(elementType);

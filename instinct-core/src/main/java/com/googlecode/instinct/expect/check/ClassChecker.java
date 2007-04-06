@@ -1,7 +1,7 @@
 package com.googlecode.instinct.expect.check;
 
 public interface ClassChecker<T> extends ObjectChecker<Class<T>> {
-    void typeCompatibleWith(Class<?> aClass);
+    <U> void typeCompatibleWith(Class<U> cls);
 
-    void notTypeCompatibleWith(Class<?> aClass);
+    <U> void notTypeCompatibleWith(Class<U> cls);
 }

@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.expect.check;
 
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 // TODO Test this
@@ -30,7 +31,7 @@ public class IterableCheckerImpl<E, T extends Iterable<E>>
         getAsserter().expectThat(subject, Matchers.hasItem(element));
     }
 
-    public final void containsItem(org.hamcrest.Matcher<E> matcher) {
+    public final void containsItem(Matcher<E> matcher) {
         getAsserter().expectThat(subject, Matchers.hasItem(matcher));
     }
 
@@ -38,11 +39,11 @@ public class IterableCheckerImpl<E, T extends Iterable<E>>
         getAsserter().expectNotThat(subject, Matchers.hasItem(item));
     }
 
-    public final void notContainItem(org.hamcrest.Matcher<E> matcher) {
+    public final void notContainItem(Matcher<E> matcher) {
         getAsserter().expectNotThat(subject, Matchers.hasItem(matcher));
     }
 
-    public final void containsItems(org.hamcrest.Matcher<E>... matchers) {
+    public final void containsItems(Matcher<E>... matchers) {
         getAsserter().expectThat(subject, Matchers.hasItems(matchers));
     }
 
@@ -50,7 +51,7 @@ public class IterableCheckerImpl<E, T extends Iterable<E>>
         getAsserter().expectThat(subject, Matchers.hasItems(items));
     }
 
-    public final void notContainItems(org.hamcrest.Matcher<E>... matchers) {
+    public final void notContainItems(Matcher<E>... matchers) {
         getAsserter().expectNotThat(subject, Matchers.hasItems(matchers));
     }
 

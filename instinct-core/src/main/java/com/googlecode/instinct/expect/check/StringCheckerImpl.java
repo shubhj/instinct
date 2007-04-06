@@ -20,7 +20,6 @@ import org.hamcrest.Matchers;
 
 // TODO Test this
 public class StringCheckerImpl extends ComparableCheckerImpl<String> implements StringChecker {
-
     public StringCheckerImpl(String subject) {
         super(subject);
     }

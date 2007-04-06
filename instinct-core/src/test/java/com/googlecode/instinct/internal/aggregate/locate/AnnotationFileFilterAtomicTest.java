@@ -18,8 +18,8 @@ package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.io.File;
 import java.io.FileFilter;
-import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.marker.annotate.BehaviourContext;
 import static com.googlecode.instinct.mock.Mocker.eq;
 import static com.googlecode.instinct.mock.Mocker.expects;
 import static com.googlecode.instinct.mock.Mocker.mock;

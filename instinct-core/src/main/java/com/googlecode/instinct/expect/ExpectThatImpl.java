@@ -16,7 +16,9 @@
 
 package com.googlecode.instinct.expect;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import java.util.Collection;
+import java.util.EventObject;
+import java.util.Map;
 import com.googlecode.instinct.expect.check.ArrayChecker;
 import com.googlecode.instinct.expect.check.ArrayCheckerImpl;
 import com.googlecode.instinct.expect.check.ClassChecker;
@@ -43,14 +45,12 @@ import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdgeImpl;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 
-import java.util.Collection;
-import java.util.EventObject;
-import java.util.Map;
-
+@SuppressWarnings({"unchecked"})
 public final class ExpectThatImpl implements ExpectThat {
-
     private MatcherAssertEdge matcher = new MatcherAssertEdgeImpl();
     private ObjectFactory objectFactory = new ObjectFactoryImpl();
 
@@ -98,12 +98,12 @@ public final class ExpectThatImpl implements ExpectThat {
         return (NodeChecker<T>) createChecker(NodeCheckerImpl.class, node);
     }
 
-    public <T> void that(T t, org.hamcrest.Matcher<T> hamcrestMatcher) {
+    public <T> void that(T t, Matcher<T> hamcrestMatcher) {
         checkNotNull(t, hamcrestMatcher);
         matcher.expectThat(t, hamcrestMatcher);
     }
 
-    public <T> void notThat(T t, org.hamcrest.Matcher<T> hamcrestMatcher) {
+    public <T> void notThat(T t, Matcher<T> hamcrestMatcher) {
         checkNotNull(t, hamcrestMatcher);
         matcher.expectNotThat(t, hamcrestMatcher);
     }

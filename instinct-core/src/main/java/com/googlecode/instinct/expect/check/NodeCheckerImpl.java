@@ -22,7 +22,6 @@ import org.w3c.dom.Node;
 
 // TODO Test this
 public class NodeCheckerImpl<T extends Node> extends ObjectCheckerImpl<T> implements NodeChecker<T> {
-
     public NodeCheckerImpl(T subject) {
         super(subject);
     }

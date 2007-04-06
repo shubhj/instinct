@@ -18,14 +18,14 @@ package com.googlecode.instinct.integrate.ant;
 
 import java.io.File;
 import java.io.FileFilter;
-import com.googlecode.instinct.core.annotate.BehaviourContext;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
-import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
+import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.annotate.BehaviourContext;
 import org.apache.tools.ant.Project;
 
 public final class Specifications {

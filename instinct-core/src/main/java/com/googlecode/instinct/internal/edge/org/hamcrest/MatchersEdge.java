@@ -1,97 +1,102 @@
 package com.googlecode.instinct.internal.edge.org.hamcrest;
 
+import java.util.EventObject;
+import java.util.Map;
+import org.hamcrest.Matcher;
+import org.w3c.dom.Node;
+
 public interface MatchersEdge {
-    <T> org.hamcrest.Matcher<T> is(org.hamcrest.Matcher<T> param1);
+    <T> Matcher<T> is(Matcher<T> param1);
 
-    <T> org.hamcrest.Matcher<T> is(T param1);
+    <T> Matcher<T> is(T param1);
 
-    <T> org.hamcrest.Matcher<T> is(Class<T> param1);
+    <T> Matcher<T> is(Class<T> param1);
 
-    <T> org.hamcrest.Matcher<T> not(org.hamcrest.Matcher<T> param1);
+    <T> Matcher<T> not(Matcher<T> param1);
 
-    <T> org.hamcrest.Matcher<T> not(T param1);
+    <T> Matcher<T> not(T param1);
 
-    <T> org.hamcrest.Matcher<T> equalTo(T param1);
+    <T> Matcher<T> equalTo(T param1);
 
-    <T> org.hamcrest.Matcher<T> instanceOf(Class<T> param1);
+    <T> Matcher<T> instanceOf(Class<T> param1);
 
-    <T> org.hamcrest.Matcher<T> allOf(org.hamcrest.Matcher<T>... param1);
+    <T> Matcher<T> allOf(Matcher<T>... param1);
 
-    <T> org.hamcrest.Matcher<T> allOf(Iterable<org.hamcrest.Matcher<T>> param1);
+    <T> Matcher<T> allOf(Iterable<Matcher<T>> param1);
 
-    <T> org.hamcrest.Matcher<T> anyOf(org.hamcrest.Matcher<T>... param1);
+    <T> Matcher<T> anyOf(Matcher<T>... param1);
 
-    <T> org.hamcrest.Matcher<T> anyOf(Iterable<org.hamcrest.Matcher<T>> param1);
+    <T> Matcher<T> anyOf(Iterable<Matcher<T>> param1);
 
-    <T> org.hamcrest.Matcher<T> sameInstance(T param1);
+    <T> Matcher<T> sameInstance(T param1);
 
-    <T> org.hamcrest.Matcher<T> nullValue();
+    <T> Matcher<T> nullValue();
 
-    <T> org.hamcrest.Matcher<T> notNullValue();
+    <T> Matcher<T> notNullValue();
 
-    <T> org.hamcrest.Matcher<T> describedAs(String param1, org.hamcrest.Matcher<T> param2, Object... param3);
+    <T> Matcher<T> describedAs(String param1, Matcher<T> param2, Object... param3);
 
-    <T> org.hamcrest.Matcher<T[]> hasItemInArray(org.hamcrest.Matcher<T> param1);
+    <T> Matcher<T[]> hasItemInArray(Matcher<T> param1);
 
-    <T> org.hamcrest.Matcher<T[]> hasItemInArray(T param1);
+    <T> Matcher<T[]> hasItemInArray(T param1);
 
-    <T> org.hamcrest.Matcher<Iterable<T>> hasItem(T param1);
+    <T> Matcher<Iterable<T>> hasItem(T param1);
 
-    <T> org.hamcrest.Matcher<Iterable<T>> hasItem(org.hamcrest.Matcher<T> param1);
+    <T> Matcher<Iterable<T>> hasItem(Matcher<T> param1);
 
-    <T> org.hamcrest.Matcher<Iterable<T>> hasItems(org.hamcrest.Matcher<T>... param1);
+    <T> Matcher<Iterable<T>> hasItems(Matcher<T>... param1);
 
-    <T> org.hamcrest.Matcher<Iterable<T>> hasItems(T... param1);
+    <T> Matcher<Iterable<T>> hasItems(T... param1);
 
-    <K, V> org.hamcrest.Matcher<java.util.Map<K, V>> hasEntry(org.hamcrest.Matcher<K> param1, org.hamcrest.Matcher<V> param2);
+    <K, V> Matcher<Map<K, V>> hasEntry(Matcher<K> param1, Matcher<V> param2);
 
-    <K, V> org.hamcrest.Matcher<java.util.Map<K, V>> hasEntry(K param1, V param2);
+    <K, V> Matcher<Map<K, V>> hasEntry(K param1, V param2);
 
-    <K, V> org.hamcrest.Matcher<java.util.Map<K, V>> hasKey(org.hamcrest.Matcher<K> param1);
+    <K, V> Matcher<Map<K, V>> hasKey(Matcher<K> param1);
 
-    <K, V> org.hamcrest.Matcher<java.util.Map<K, V>> hasKey(K param1);
+    <K, V> Matcher<Map<K, V>> hasKey(K param1);
 
-    <K, V> org.hamcrest.Matcher<java.util.Map<K, V>> hasValue(org.hamcrest.Matcher<V> param1);
+    <K, V> Matcher<Map<K, V>> hasValue(Matcher<V> param1);
 
-    <K, V> org.hamcrest.Matcher<java.util.Map<K, V>> hasValue(V param1);
+    <K, V> Matcher<Map<K, V>> hasValue(V param1);
 
-    org.hamcrest.Matcher<Double> closeTo(double param1, double param2);
+    Matcher<Double> closeTo(double param1, double param2);
 
-    <T extends Comparable<T>> org.hamcrest.Matcher<T> greaterThan(T param1);
+    <T extends Comparable<T>> Matcher<T> greaterThan(T param1);
 
-    <T extends Comparable<T>> org.hamcrest.Matcher<T> greaterThanOrEqualTo(T param1);
+    <T extends Comparable<T>> Matcher<T> greaterThanOrEqualTo(T param1);
 
-    <T extends Comparable<T>> org.hamcrest.Matcher<T> lessThan(T param1);
+    <T extends Comparable<T>> Matcher<T> lessThan(T param1);
 
-    <T extends Comparable<T>> org.hamcrest.Matcher<T> lessThanOrEqualTo(T param1);
+    <T extends Comparable<T>> Matcher<T> lessThanOrEqualTo(T param1);
 
-    org.hamcrest.Matcher<String> equalToIgnoringCase(String param1);
+    Matcher<String> equalToIgnoringCase(String param1);
 
-    org.hamcrest.Matcher<String> equalToIgnoringWhiteSpace(String param1);
+    Matcher<String> equalToIgnoringWhiteSpace(String param1);
 
-    org.hamcrest.Matcher<String> containsString(String param1);
+    Matcher<String> containsString(String param1);
 
-    org.hamcrest.Matcher<String> endsWith(String param1);
+    Matcher<String> endsWith(String param1);
 
-    org.hamcrest.Matcher<String> startsWith(String param1);
+    Matcher<String> startsWith(String param1);
 
-    <T> org.hamcrest.Matcher<T> hasToString(org.hamcrest.Matcher<String> param1);
+    <T> Matcher<T> hasToString(Matcher<String> param1);
 
-    <T> org.hamcrest.Matcher<Class<?>> typeCompatibleWith(Class<T> param1);
+    <T> Matcher<Class<?>> typeCompatibleWith(Class<T> param1);
 
-    org.hamcrest.Matcher<java.util.EventObject> eventFrom(Class<? extends java.util.EventObject> param1, Object param2);
+    Matcher<EventObject> eventFrom(Class<? extends EventObject> param1, Object param2);
 
-    org.hamcrest.Matcher<java.util.EventObject> eventFrom(Object param1);
+    Matcher<EventObject> eventFrom(Object param1);
 
-    <T> org.hamcrest.Matcher<T> hasProperty(String param1);
+    <T> Matcher<T> hasProperty(String param1);
 
-    <T> org.hamcrest.Matcher<T> hasProperty(String param1, org.hamcrest.Matcher param2);
+    <T> Matcher<T> hasProperty(String param1, Matcher param2);
 
-    org.hamcrest.Matcher<org.w3c.dom.Node> hasXPath(String param1, org.hamcrest.Matcher<String> param2);
+    Matcher<Node> hasXPath(String param1, Matcher<String> param2);
 
-    org.hamcrest.Matcher<org.w3c.dom.Node> hasXPath(String param1);
+    Matcher<Node> hasXPath(String param1);
 
-    <T> org.hamcrest.Matcher<T> anything();
+    <T> Matcher<T> anything();
 
-    <T> org.hamcrest.Matcher<T> anything(String param1);
+    <T> Matcher<T> anything(String param1);
 }

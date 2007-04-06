@@ -16,9 +16,8 @@
 
 package com.googlecode.instinct.expect.check;
 
-import org.hamcrest.Matchers;
-
 import java.util.EventObject;
+import org.hamcrest.Matchers;
 
 // TODO Test this
 public class EventObjectCheckerImpl<T extends EventObject>
@@ -28,8 +27,8 @@ public class EventObjectCheckerImpl<T extends EventObject>
         super(subject);
     }
 
-    public final void eventFrom(Class<? extends EventObject> aClass, Object object) {
-        getAsserter().expectThat(subject, Matchers.eventFrom(aClass, object));
+    public final void eventFrom(Class<? extends EventObject> cls, Object object) {
+        getAsserter().expectThat(subject, Matchers.eventFrom(cls, object));
     }
 
     public final void eventFrom(Object object) {

@@ -16,14 +16,14 @@
 
 package com.googlecode.instinct.expect.check;
 
+import java.util.Collection;
 import org.hamcrest.Matchers;
 
-import java.util.Collection;
-
 // TODO Test this - especially desc strings
+
 // or make custom matchers?
-public class CollectionCheckerImpl<E, T extends Collection<E>>
-        extends IterableCheckerImpl<E, T> implements CollectionChecker<E, T> {
+public class CollectionCheckerImpl<E, T extends Collection<E>> extends IterableCheckerImpl<E, T>
+        implements CollectionChecker<E, T> {
 
     public CollectionCheckerImpl(T subject) {
         super(subject);

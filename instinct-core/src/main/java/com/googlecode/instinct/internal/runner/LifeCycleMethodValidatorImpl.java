@@ -20,10 +20,10 @@ import java.lang.reflect.Method;
 import au.net.netstorm.boost.edge.EdgeException;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
-import com.googlecode.instinct.core.BehaviourContextConfigurationException;
-import com.googlecode.instinct.core.LifeCycleMethodConfigurationException;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.BehaviourContextConfigurationException;
+import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
 
 final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
     private final EdgeClass edgeClass = new DefaultEdgeClass();

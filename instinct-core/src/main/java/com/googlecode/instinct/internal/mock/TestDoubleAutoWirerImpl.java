@@ -16,14 +16,14 @@
 
 package com.googlecode.instinct.internal.mock;
 
-import com.googlecode.instinct.core.annotate.Dummy;
-import com.googlecode.instinct.core.naming.DummyNamingConvention;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedFieldLocator;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedFieldLocatorImpl;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.naming.DummyNamingConvention;
 
 public final class TestDoubleAutoWirerImpl implements TestDoubleAutoWirer {
     private ObjectFactory objectFactory = new ObjectFactoryImpl();

@@ -17,9 +17,9 @@
 package com.googlecode.instinct.internal.aggregate;
 
 import java.lang.reflect.Method;
-import com.googlecode.instinct.core.annotate.Specification;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotatedMethodLocator;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotatedMethodLocatorImpl;
+import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 public final class AnnotatedMethodLocatorSlowTest extends InstinctTestCase {

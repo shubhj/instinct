@@ -20,16 +20,15 @@ import org.hamcrest.Matchers;
 
 // TODO Test this
 public class ClassCheckerImpl<T> extends ObjectCheckerImpl<Class<T>> implements ClassChecker<T> {
-
     public ClassCheckerImpl(Class<T> subject) {
         super(subject);
     }
 
-    public final void typeCompatibleWith(java.lang.Class<?> aClass) {
-        getAsserter().expectThat(subject, Matchers.typeCompatibleWith(aClass));
+    public final <U> void typeCompatibleWith(Class<U> cls) {
+        getAsserter().expectThat(subject, Matchers.typeCompatibleWith(cls));
     }
 
-    public final void notTypeCompatibleWith(java.lang.Class<?> aClass) {
-        getAsserter().expectNotThat(subject, Matchers.typeCompatibleWith(aClass));
+    public final <U> void notTypeCompatibleWith(Class<U> cls) {
+        getAsserter().expectNotThat(subject, Matchers.typeCompatibleWith(cls));
     }
 }

@@ -2,13 +2,6 @@ package com.googlecode.instinct.integrate.junit3;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import com.googlecode.instinct.core.annotate.AfterSpecification;
-import com.googlecode.instinct.core.annotate.BeforeSpecification;
-import com.googlecode.instinct.core.annotate.Specification;
-import com.googlecode.instinct.core.naming.AfterSpecificationNamingConvention;
-import com.googlecode.instinct.core.naming.BeforeSpecificationNamingConvention;
-import com.googlecode.instinct.core.naming.NamingConvention;
-import com.googlecode.instinct.core.naming.SpecificationNamingConvention;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
 import com.googlecode.instinct.internal.runner.BehaviourContextResult;
@@ -16,8 +9,15 @@ import com.googlecode.instinct.internal.runner.SpecificationContext;
 import com.googlecode.instinct.internal.runner.SpecificationContextImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.annotate.AfterSpecification;
+import com.googlecode.instinct.marker.annotate.BeforeSpecification;
+import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.naming.AfterSpecificationNamingConvention;
+import com.googlecode.instinct.marker.naming.BeforeSpecificationNamingConvention;
+import com.googlecode.instinct.marker.naming.NamingConvention;
+import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 
-@Suggest("Oull into main packages.")
+@Suggest("Pull into main packages.")
 public final class BehaviourContextRunnerImpl implements BehaviourContextRunner {
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
 

@@ -18,11 +18,11 @@ package com.googlecode.instinct.expect.check;
 
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdgeImpl;
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 // TODO Test this
 public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
-
     protected final T subject;
     private MatcherAssertEdge asserter = new MatcherAssertEdgeImpl();
 
@@ -38,12 +38,12 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectNotThat(subject, Matchers.equalTo(t));
     }
 
-    public final void instanceOf(Class<T> aClass) {
-        getAsserter().expectThat(subject, Matchers.instanceOf(aClass));
+    public final void instanceOf(Class<T> cls) {
+        getAsserter().expectThat(subject, Matchers.instanceOf(cls));
     }
 
-    public final void notInstanceOf(Class<T> aClass) {
-        getAsserter().expectNotThat(subject, Matchers.instanceOf(aClass));
+    public final void notInstanceOf(Class<T> cls) {
+        getAsserter().expectNotThat(subject, Matchers.instanceOf(cls));
     }
 
     public final void sameInstanceAs(T t) {
@@ -62,47 +62,47 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectThat(subject, Matchers.notNullValue());
     }
 
-    public final void hasToString(org.hamcrest.Matcher<java.lang.String> matcher) {
+    public final void hasToString(Matcher<String> matcher) {
         getAsserter().expectThat(subject, Matchers.hasToString(matcher));
     }
 
-    public final void matchesAllOf(org.hamcrest.Matcher<T>... matchers) {
+    public final void matchesAllOf(Matcher<T>... matchers) {
         getAsserter().expectThat(subject, Matchers.allOf(matchers));
     }
 
-    public final void matchesAllOf(java.lang.Iterable<org.hamcrest.Matcher<T>> iterable) {
+    public final void matchesAllOf(Iterable<Matcher<T>> iterable) {
         getAsserter().expectThat(subject, Matchers.allOf(iterable));
     }
 
-    public final void notMatchAllOf(org.hamcrest.Matcher<T>... matchers) {
+    public final void notMatchAllOf(Matcher<T>... matchers) {
         getAsserter().expectNotThat(subject, Matchers.allOf(matchers));
     }
 
-    public final void notMatchAllOf(java.lang.Iterable<org.hamcrest.Matcher<T>> iterable) {
+    public final void notMatchAllOf(Iterable<Matcher<T>> iterable) {
         getAsserter().expectNotThat(subject, Matchers.allOf(iterable));
     }
 
-    public final void matchesAnyOf(org.hamcrest.Matcher<T>... matchers) {
+    public final void matchesAnyOf(Matcher<T>... matchers) {
         getAsserter().expectThat(subject, Matchers.anyOf(matchers));
     }
 
-    public final void matchesAnyOf(java.lang.Iterable<org.hamcrest.Matcher<T>> iterable) {
+    public final void matchesAnyOf(Iterable<Matcher<T>> iterable) {
         getAsserter().expectThat(subject, Matchers.anyOf(iterable));
     }
 
-    public final void notMatchAnyOf(org.hamcrest.Matcher<T>... matchers) {
+    public final void notMatchAnyOf(Matcher<T>... matchers) {
         getAsserter().expectNotThat(subject, Matchers.anyOf(matchers));
     }
 
-    public final void notMatchAnyOf(java.lang.Iterable<org.hamcrest.Matcher<T>> iterable) {
+    public final void notMatchAnyOf(Iterable<Matcher<T>> iterable) {
         getAsserter().expectNotThat(subject, Matchers.anyOf(iterable));
     }
 
-    public final void hasBeanProperty(java.lang.String string) {
+    public final void hasBeanProperty(String string) {
         getAsserter().expectThat(subject, Matchers.hasProperty(string));
     }
 
-    public final void hasBeanProperty(java.lang.String string, org.hamcrest.Matcher matcher) {
+    public final void hasBeanProperty(String string, Matcher matcher) {
         getAsserter().expectThat(subject, Matchers.hasProperty(string, matcher));
     }
 

@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.lang.reflect.Method;
-import com.googlecode.instinct.core.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 

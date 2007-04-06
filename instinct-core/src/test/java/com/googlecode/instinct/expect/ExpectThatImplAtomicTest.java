@@ -1,5 +1,10 @@
 package com.googlecode.instinct.expect;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.EventObject;
+import java.util.HashMap;
+import java.util.Map;
 import com.googlecode.instinct.expect.check.ArrayChecker;
 import com.googlecode.instinct.expect.check.ArrayCheckerImpl;
 import com.googlecode.instinct.expect.check.ClassChecker;
@@ -31,14 +36,8 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;
 import org.hamcrest.Matcher;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EventObject;
-import java.util.HashMap;
-import java.util.Map;
-
+@SuppressWarnings({"unchecked", "RawUseOfParameterizedType"})
 public class ExpectThatImplAtomicTest extends InstinctTestCase {
-
     private ObjectFactory objectFactory;
     private MatcherAssertEdge matcherAssert;
     private ExpectThat expectThat;

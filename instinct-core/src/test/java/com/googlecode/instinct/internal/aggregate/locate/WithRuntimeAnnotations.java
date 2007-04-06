@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.internal.aggregate.locate;
 
-import com.googlecode.instinct.core.annotate.BehaviourContext;
-import com.googlecode.instinct.core.annotate.Dummy;
-import com.googlecode.instinct.core.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Specification;
 
 @SuppressWarnings({"UnusedDeclaration", "PackageVisibleField", "FieldCanBeLocal", "ProtectedField"})
 @BehaviourContext

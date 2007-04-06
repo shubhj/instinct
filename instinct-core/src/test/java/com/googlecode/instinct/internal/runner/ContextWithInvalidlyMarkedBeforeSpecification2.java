@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.core.annotate.BeforeSpecification;
-import com.googlecode.instinct.core.annotate.BehaviourContext;
-import com.googlecode.instinct.core.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.BeforeSpecification;
+import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Specification;
 
 @BehaviourContext
 public class ContextWithInvalidlyMarkedBeforeSpecification2 {

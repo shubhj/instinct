@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.expect.check;
 
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 // TODO Test this
@@ -25,7 +26,7 @@ public class ArrayCheckerImpl<T> extends ObjectCheckerImpl<T[]> implements Array
         super(subject);
     }
 
-    public final void containsItem(org.hamcrest.Matcher<T> matcher) {
+    public final void containsItem(Matcher<T> matcher) {
         getAsserter().expectThat(subject, Matchers.hasItemInArray(matcher));
     }
 
@@ -33,7 +34,7 @@ public class ArrayCheckerImpl<T> extends ObjectCheckerImpl<T[]> implements Array
         getAsserter().expectThat(subject, Matchers.hasItemInArray(t));
     }
 
-    public final void notContainItem(org.hamcrest.Matcher<T> matcher) {
+    public final void notContainItem(Matcher<T> matcher) {
         getAsserter().expectNotThat(subject, Matchers.hasItemInArray(matcher));
     }
 

@@ -17,10 +17,10 @@
 package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.core.annotate.AfterSpecification;
-import com.googlecode.instinct.core.annotate.BeforeSpecification;
-import com.googlecode.instinct.core.annotate.BehaviourContext;
-import com.googlecode.instinct.core.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.AfterSpecification;
+import com.googlecode.instinct.marker.annotate.BeforeSpecification;
+import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Specification;
 
 @BehaviourContext
 public final class ASimpleContext {

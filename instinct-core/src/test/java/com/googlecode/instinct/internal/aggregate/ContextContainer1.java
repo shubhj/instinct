@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.internal.aggregate;
 
-import com.googlecode.instinct.core.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.BehaviourContext;
 
 @SuppressWarnings({"EmptyClass", "PackageVisibleInnerClass", "UnusedDeclaration"})
 public final class ContextContainer1 {
