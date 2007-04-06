@@ -1,15 +1,15 @@
 package com.googlecode.instinct.example.techtalk;
 
-import com.googlecode.instinct.core.annotate.BeforeSpecification;
-import com.googlecode.instinct.core.annotate.BehaviourContext;
-import com.googlecode.instinct.core.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.BeforeSpecification;
+import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.util.Suggest;
 
 @BehaviourContext
 public final class AFullStack {
-    private Stack<Integer> stack;
     private static final int SIZE = 10;
+    private Stack<Integer> stack;
 
     @BeforeSpecification
     void fillUpStack() {

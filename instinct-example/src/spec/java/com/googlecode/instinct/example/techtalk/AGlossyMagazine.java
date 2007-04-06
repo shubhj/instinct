@@ -1,8 +1,8 @@
 package com.googlecode.instinct.example.techtalk;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.core.annotate.BehaviourContext;
-import com.googlecode.instinct.core.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.expect.Expect;
 
 @BehaviourContext

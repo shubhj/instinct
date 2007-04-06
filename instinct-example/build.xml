@@ -16,14 +16,14 @@
     <path id="main.class.path">
         <!-- Put this here to allow suggestions in the spec code -->
         <fileset dir="${basedir}">
-           <include name="${lib.dir}/instinct-0.1.1.jar"/>
+           <include name="${lib.dir}/instinct-0.1.2.jar"/>
         </fileset>
         <pathelement location="${main.classes.dir}"/>
     </path>
     <path id="spec.class.path">
         <path refid="main.class.path"/>
         <fileset dir="${basedir}">
-            <include name="${lib.dir}/instinct-0.1.1.jar"/>
+            <include name="${lib.dir}/instinct-0.1.2.jar"/>
             <include name="${lib.dir}/boost-982.jar"/>
             <include name="${lib.dir}/cglib-nodep-2.2_beta1.jar"/>
             <include name="${lib.dir}/jmock-1.1.0.jar"/>
