@@ -29,7 +29,7 @@ public final class Reflector {
     public static void insertFieldValue(final Object instance, final String fieldName, final Object value) {
         checkNotNull(instance, fieldName, value);
         final Field field = getField(instance, fieldName);
-        setValue(field, instance, v3alue);
+        setValue(field, instance, value);
     }
 
     public static <T> void insertFieldValue(final Object instance, final Class<T> valueType, final Object value) {
