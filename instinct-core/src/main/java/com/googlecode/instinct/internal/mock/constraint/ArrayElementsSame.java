@@ -9,18 +9,19 @@ import org.jmock.core.Constraint;
 public final class ArrayElementsSame implements Constraint {
     private Object[] expectedArray;
 
-    public ArrayElementsSame(Object[] expectedArray) {
+    public ArrayElementsSame(final Object[] expectedArray) {
         checkNotNull(expectedArray);
         this.expectedArray = expectedArray;
     }
 
-    public boolean eval(final Object object) {
-        checkNotNull(object);
-        if (!(object instanceof Object[])) {
+    @Suggest("Might need to come up with a better exception to throw on mock failure, a jMock one?")
+    public boolean eval(final Object o) {
+        checkNotNull(o);
+        if (!(o instanceof Object[])) {
             throw new RuntimeException("I can only compare arrays!");
         }
 
-        return checkArrayElements((Object[]) object);
+        return checkArrayElements((Object[]) o);
     }
 
     public StringBuffer describeTo(final StringBuffer buffer) {
@@ -28,7 +29,7 @@ public final class ArrayElementsSame implements Constraint {
         return buffer.append("sameElements(").append(Arrays.toString(expectedArray)).append(')');
     }
 
-    private boolean checkArrayElements(Object[] actualArray) {
+    private boolean checkArrayElements(final Object[] actualArray) {
         if (actualArray.length != expectedArray.length) {
             return false;
         }

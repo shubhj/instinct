@@ -2,17 +2,18 @@ package com.googlecode.instinct.behaviourexpect;
 
 import java.util.ArrayList;
 import java.util.List;
+import static com.googlecode.instinct.behaviourexpect.BehaviourExpect.eq;
 import static com.googlecode.instinct.behaviourexpect.BehaviourExpect.expect;
 import static com.googlecode.instinct.behaviourexpect.BehaviourExpect.one;
 import static com.googlecode.instinct.behaviourexpect.BehaviourExpect.returnValue;
-import static com.googlecode.instinct.behaviourexpect.BehaviourExpect.will;
 import com.googlecode.instinct.marker.annotate.BehaviourContext;
 import com.googlecode.instinct.marker.annotate.Specification;
+import org.jmock.Expectations;
 
 // DEBT Indentation {
 @SuppressWarnings({"AccessStaticViaInstance", "EmptyClass"})
 @BehaviourContext
-public final class BehaviourExpectationsContext {
+public final class BehaviourExpectationsExample {
     private final List<String> strings = new ArrayList<String>();
     private final SomeClass someClass = new SomeClass(strings);
 
@@ -20,7 +21,7 @@ public final class BehaviourExpectationsContext {
     void playingWithBehaviourExpectations() {
 
         // Option 1 - jMock 1 fallback
-        expect.that(strings).method("abc").will(returnValue(true));
+        expect.that(strings).method("add").with(eq("abc")).will(returnValue(true));
         expect.that(strings).method("clear");
 
         // Option 2 - DSL w/ method completion

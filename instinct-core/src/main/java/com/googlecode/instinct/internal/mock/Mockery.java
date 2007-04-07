@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.internal.mock;
 
+import com.googlecode.instinct.internal.util.Suggest;
 import org.jmock.builder.NameMatchBuilder;
 import org.jmock.core.Constraint;
 import org.jmock.core.InvocationMatcher;
@@ -26,6 +27,7 @@ public interface Mockery {
 
     <T> T mock(Class<T> toMock, String roleName);
 
+    @Suggest("From here below moves out into expectations.")
     NameMatchBuilder expects(Object mockedObject);
 
     NameMatchBuilder expects(Object mockedObject, InvocationMatcher expectation);

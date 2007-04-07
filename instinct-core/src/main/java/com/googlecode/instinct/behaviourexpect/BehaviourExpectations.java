@@ -1,21 +1,10 @@
 package com.googlecode.instinct.behaviourexpect;
 
-import org.jmock.builder.IdentityBuilder;
-import org.jmock.builder.NameMatchBuilder;
-import org.jmock.core.Stub;
+import com.googlecode.instinct.behaviourexpect.behaviour.jmock1.JMock1Expectations;
+import com.googlecode.instinct.behaviourexpect.behaviour.jmock2.JMock2Expectations;
+import com.googlecode.instinct.internal.util.Suggest;
 
-public interface BehaviourExpectations {
-    <T> T one(final T mockedObject);
-
-    <T> NameMatchBuilder call(final T mockedObject);
-
-    MethodInvocations that();
-
-    void that(final Expectations expectations);
-
-    <T> MethodInvocations that(final T mockedObject);
-
-    IdentityBuilder will(final Stub stubAction);
-
-    Stub returnValue(Object returnValue);
+public interface BehaviourExpectations extends DslExpectations, JMock1Expectations, JMock2Expectations {
+    @Suggest("Find a home for this method.")
+            <T> T one(final T mockedObject);
 }

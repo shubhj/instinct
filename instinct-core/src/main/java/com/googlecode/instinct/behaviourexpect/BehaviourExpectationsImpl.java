@@ -1,28 +1,46 @@
 package com.googlecode.instinct.behaviourexpect;
 
+import com.googlecode.instinct.internal.mock.Mockery;
+import com.googlecode.instinct.internal.mock.MockeryImpl;
+import com.googlecode.instinct.internal.util.Suggest;
+import org.jmock.Expectations;
 import org.jmock.builder.IdentityBuilder;
-import org.jmock.builder.NameMatchBuilder;
+import org.jmock.core.Constraint;
+import org.jmock.core.InvocationMatcher;
 import org.jmock.core.Stub;
+import org.jmock.core.stub.ThrowStub;
 
+@Suggest({"Null checks.",
+        "This class should just delegate to the relevent mockery, instinct or jMock."})
 public final class BehaviourExpectationsImpl implements BehaviourExpectations {
+    private final Mockery instinctMockery = new MockeryImpl();
+    private final org.jmock.Mockery jMock2Mockery = new org.jmock.Mockery();
 
     public <T> T one(final T mockedObject) {
         return null;
     }
 
-    public <T> NameMatchBuilder call(final T mockedObject) {
+    public MethodCardinalityInvocations that() {
         return null;
     }
 
-    public MethodInvocations that() {
+    public <T> MethodCardinalityInvocations that(final T mockedObject) {
         return null;
     }
 
-    public void that(final Expectations expectations) {
-
+    public InvocationMatcher once() {
+        return null;
     }
 
-    public <T> MethodInvocations that(final T mockedObject) {
+    public InvocationMatcher times(final int expectedNumberOfCalls) {
+        return null;
+    }
+
+    public InvocationMatcher atLeastOnce() {
+        return null;
+    }
+
+    public InvocationMatcher anyTimes() {
         return null;
     }
 
@@ -32,5 +50,29 @@ public final class BehaviourExpectationsImpl implements BehaviourExpectations {
 
     public Stub returnValue(final Object returnValue) {
         return null;
+    }
+
+    public Stub throwException(final Throwable throwable) {
+        return new ThrowStub(throwable);
+    }
+
+    public Constraint same(final Object argument) {
+        return null;
+    }
+
+    public Constraint anything() {
+        return null;
+    }
+
+    public Constraint eq(final Object argument) {
+        return null;
+    }
+
+    public Constraint sameElements(final Object[] argument) {
+        return null;
+    }
+
+    public void that(final Expectations expectations) {
+        jMock2Mockery.checking(expectations);
     }
 }
