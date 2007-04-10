@@ -14,9 +14,12 @@ import com.googlecode.instinct.expect.check.MapChecker;
 import com.googlecode.instinct.expect.check.NodeChecker;
 import com.googlecode.instinct.expect.check.ObjectChecker;
 import com.googlecode.instinct.expect.check.StringChecker;
+import com.googlecode.instinct.internal.util.Suggest;
 import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 
+@Suggest({"Move these methods into state.StateExpectations & checks into state.check.",
+        "Make this implement state & behaviour expectations.."})
 public interface ExpectThat {
     <T> ObjectChecker<T> that(T object);
 

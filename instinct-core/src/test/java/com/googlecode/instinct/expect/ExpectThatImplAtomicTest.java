@@ -27,6 +27,7 @@ import com.googlecode.instinct.expect.check.StringChecker;
 import com.googlecode.instinct.expect.check.StringCheckerImpl;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
 import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.mock.Mocker.expects;
 import static com.googlecode.instinct.mock.Mocker.mock;
 import static com.googlecode.instinct.mock.Mocker.returnValue;
@@ -36,8 +37,9 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;
 import org.hamcrest.Matcher;
 
-@SuppressWarnings({"unchecked", "RawUseOfParameterizedType"})
-public class ExpectThatImplAtomicTest extends InstinctTestCase {
+@Suggest("Change name to StateExpectations.")
+@SuppressWarnings({"unchecked", "RawUseOfParameterizedType", "OverlyCoupledClass"})
+public final class ExpectThatImplAtomicTest extends InstinctTestCase {
     private ObjectFactory objectFactory;
     private MatcherAssertEdge matcherAssert;
     private ExpectThat expectThat;
@@ -138,9 +140,7 @@ public class ExpectThatImplAtomicTest extends InstinctTestCase {
     }
 
     private <T, I extends ObjectChecker<T>, C extends ObjectCheckerImpl<T>> I expectCheckerCreated(
-            Class<I> checkerInterfaceClass,
-            Class<C> checkerImplClass,
-            T checkerSubject) {
+            Class<I> checkerInterfaceClass, Class<C> checkerImplClass, T checkerSubject) {
         I expectedChecker = mock(checkerInterfaceClass);
         expects(objectFactory).method("create")
                 .with(same(checkerImplClass), sameElements(new Object[]{checkerSubject}))
