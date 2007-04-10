@@ -1,13 +1,15 @@
 package com.googlecode.instinct.behaviourexpect.behaviour.jmock1;
 
-import com.googlecode.instinct.behaviourexpect.MethodCardinalityInvocations;
+import com.googlecode.instinct.behaviourexpect.MethodInvocationMatcher;
 import org.jmock.builder.IdentityBuilder;
 import org.jmock.core.Constraint;
 import org.jmock.core.InvocationMatcher;
 import org.jmock.core.Stub;
 
 public interface JMock1Expectations {
-    <T> MethodCardinalityInvocations that(T mockedObject);
+    <T> MethodInvocationMatcher that(T mockedObject);
+
+    <T> MethodInvocationMatcher that(T mockedObject, InvocationMatcher numberOfTimes);
 
     IdentityBuilder will(final Stub stubAction);
 

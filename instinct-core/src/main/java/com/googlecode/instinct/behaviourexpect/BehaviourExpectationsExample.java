@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static com.googlecode.instinct.behaviourexpect.BehaviourExpect.eq;
 import static com.googlecode.instinct.behaviourexpect.BehaviourExpect.expect;
+import static com.googlecode.instinct.behaviourexpect.BehaviourExpect.once;
 import static com.googlecode.instinct.behaviourexpect.BehaviourExpect.one;
 import static com.googlecode.instinct.behaviourexpect.BehaviourExpect.returnValue;
 import com.googlecode.instinct.marker.annotate.BehaviourContext;
@@ -21,7 +22,7 @@ public final class BehaviourExpectationsExample {
     void playingWithBehaviourExpectations() {
 
         // Option 1 - jMock 1 fallback
-        expect.that(strings).method("add").with(eq("abc")).will(returnValue(true));
+        expect.that(strings, once()).method("add").with(eq("abc")).will(returnValue(true));
         expect.that(strings).method("clear");
 
         // Option 2 - DSL w/ method completion

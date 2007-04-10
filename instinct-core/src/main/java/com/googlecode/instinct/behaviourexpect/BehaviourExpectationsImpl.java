@@ -4,6 +4,7 @@ import com.googlecode.instinct.internal.mock.Mockery;
 import com.googlecode.instinct.internal.mock.MockeryImpl;
 import com.googlecode.instinct.internal.util.Suggest;
 import org.jmock.Expectations;
+import org.jmock.builder.ArgumentsMatchBuilder;
 import org.jmock.builder.IdentityBuilder;
 import org.jmock.core.Constraint;
 import org.jmock.core.InvocationMatcher;
@@ -20,16 +21,28 @@ public final class BehaviourExpectationsImpl implements BehaviourExpectations {
         return null;
     }
 
-    public MethodCardinalityInvocations that() {
+    public ArgumentsMatchBuilder method(final String name) {
         return null;
     }
 
-    public <T> MethodCardinalityInvocations that(final T mockedObject) {
+    public ArgumentsMatchBuilder method(final Constraint nameConstraint) {
+        return null;
+    }
+
+    public MethodInvocationMatcher that() {
+        return null;
+    }
+
+    public <T> MethodInvocationMatcher that(final T mockedObject) {
+        return null;
+    }
+
+    public <T> MethodInvocationMatcher that(final T mockedObject, final InvocationMatcher numberOfTimes) {
         return null;
     }
 
     public InvocationMatcher once() {
-        return null;
+        return instinctMockery.once();
     }
 
     public InvocationMatcher times(final int expectedNumberOfCalls) {
