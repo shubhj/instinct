@@ -46,7 +46,7 @@ public final class VerboseContextResultMessageBuilder implements ContextResultMe
     }
 
     private void appendSummary(final StringBuilder builder, final BehaviourContextResult behaviourContextResult) {
-        builder.append("Behaviour context: ").append(behaviourContextResult.getBehaviourContextName()).append(SPACER);
+        builder.append("Context: ").append(behaviourContextResult.getBehaviourContextName()).append(SPACER);
         builder.append("Specifications run: ").append(getNumberOfSpecsRun(behaviourContextResult)).append(SPACER);
         builder.append("Successes: ").append(behaviourContextResult.getNumberOfSuccesses()).append(SPACER);
         builder.append("Failures: ").append(behaviourContextResult.getNumberOfFailures()).append(SPACER);
@@ -74,6 +74,7 @@ public final class VerboseContextResultMessageBuilder implements ContextResultMe
     }
 
     // DEBT GenericIllegalRegexp {
+    @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
     private String getFailureStackTrace(final Throwable failureCause) {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         failureCause.printStackTrace(new PrintWriter(out, true));

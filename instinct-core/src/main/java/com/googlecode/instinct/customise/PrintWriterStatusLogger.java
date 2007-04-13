@@ -14,6 +14,5 @@ public final class PrintWriterStatusLogger implements StatusLogger {
     public void log(final String message) {
         checkNotNull(message);
         writer.println(message);
-        writer.flush();
     }
 }

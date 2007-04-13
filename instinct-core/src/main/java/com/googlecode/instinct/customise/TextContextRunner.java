@@ -31,12 +31,16 @@ public final class TextContextRunner implements BehaviourContextRunner {
     @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
     public TextContextRunner(final ContextResultMessageBuilder messageBuilder, final OutputStream output) {
         checkNotNull(messageBuilder, output);
-        final StatusLogger statusLogger = new PrintWriterStatusLogger(new PrintWriter(new BufferedWriter(new OutputStreamWriter(output))));
-        contextRunner = new StatusLoggingContextRunner(new BehaviourContextRunnerImpl(), messageBuilder, statusLogger);
+        contextRunner = new StatusLoggingContextRunner(new BehaviourContextRunnerImpl(), messageBuilder, createLogger(output));
     }
 
     public <T> BehaviourContextResult run(final Class<T> behaviourContextClass) {
         checkNotNull(behaviourContextClass);
         return contextRunner.run(behaviourContextClass);
+    }
+
+    @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
+    private StatusLogger createLogger(final OutputStream output) {
+        return new PrintWriterStatusLogger(new PrintWriter(new BufferedWriter(new OutputStreamWriter(output)), true));
     }
 }
