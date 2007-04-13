@@ -16,63 +16,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/javassist-3.4.jar!/" />
-        </CLASSES>
-        <JAVADOC>
-          <root url="jar://$MODULE_DIR$/etc/lib-doc/javassist-3.4-doc.zip!/" />
-        </JAVADOC>
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/etc/lib-src/javassist-3.4-src.zip!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/jmock/jmock-cglib-1.1.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/extensions/cglib/src" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/jmock/jmock-1.1.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/etc/lib-src/jmock-1.1.0-src.zip!/jmock-1.1.0/core/src" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/easymock/easymock-2.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/etc/lib-src/easymock-2.2-src.zip!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/easymock/easymockclassextension-2.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/etc/lib-src/easymockclassextension-2.2-src.zip!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/ant/ant-1.7.0.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -81,65 +24,18 @@
         </SOURCES>
       </library>
     </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/boost/boost-982.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/lib/boost/boost-982.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/cglib/cglib-nodep-2.2_beta1.jar!/" />
-        </CLASSES>
-        <JAVADOC>
-          <root url="jar://$MODULE_DIR$/etc/lib-doc/cglib-docs-2.2_beta1.jar!/" />
-        </JAVADOC>
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/etc/lib-src/cglib-src-2.2_beta1.jar!/src/proxy" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/junit/junit-4.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/etc/lib-src/junit-4.1-src.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/hamcrest/hamcrest-all-1.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/etc/lib-src/hamcrest-1.0-src.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/jmock/jmock-2.0.0-RC1.jar!/" />
-        </CLASSES>
-        <JAVADOC>
-          <root url="jar://$MODULE_DIR$/etc/lib-doc/jmock-2.0.0-RC1-javadoc.zip!/jmock-2.0.0-RC1-javadoc" />
-        </JAVADOC>
-        <SOURCES>
-          <root url="jar://$MODULE_DIR$/lib/jmock/jmock-2.0.0-RC1.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
+    <orderEntry type="library" name="boost" level="project" />
+    <orderEntry type="library" name="cglib" level="project" />
+    <orderEntry type="library" name="easymock" level="project" />
+    <orderEntry type="library" name="jmock2" level="project" />
+    <orderEntry type="library" name="junit" level="project" />
+    <orderEntry type="library" name="boost" level="project" />
+    <orderEntry type="library" name="cglib" level="project" />
+    <orderEntry type="library" name="easymock" level="project" />
+    <orderEntry type="library" name="hamcrest-all-1.0" level="project" />
+    <orderEntry type="library" name="jmock2" level="project" />
+    <orderEntry type="library" name="jmock1" level="project" />
+    <orderEntry type="library" name="junit" level="project" />
     <orderEntryProperties />
   </component>
   <component name="copyright">

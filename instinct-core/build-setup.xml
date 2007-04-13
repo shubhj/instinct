@@ -4,7 +4,7 @@
     <property name="project.longname" value="Instinct Behaviour Driven Development (BDD) Framework"/>
     <property name="project.shortname" value="instinct"/>
     <property name="project.version.major" value="0"/>
-    <property name="project.version.minor" value="1.2"/>
+    <property name="project.version.minor" value="1.3"/>
     <property name="version-status" value=""/>
     <property name="project.version.full" value="${project.version.major}.${project.version.minor}${version-status}"/>
     <property name="project.jar" value="${project.shortname}-${project.version.full}.jar"/>
@@ -54,10 +54,10 @@
     <patternset id="main.classpath.pattern">
         <include name="${lib.dir}/boost/boost-982.jar"/>
         <include name="${lib.dir}/cglib/cglib-nodep-2.2_beta1.jar"/>
-        <include name="${lib.dir}/junit/junit-4.1.jar"/>
-        <include name="${lib.dir}/jmock/jmock-1.1.0.jar"/>
-        <include name="${lib.dir}/jmock/jmock-cglib-1.1.0.jar"/>
-        <include name="${lib.dir}/jmock/jmock-2.0.0-RC1.jar"/>
+        <include name="${lib.dir}/junit/junit-4.3.1.jar"/>
+        <include name="${lib.dir}/jmock/jmock-core-1.2.0.jar"/>
+        <include name="${lib.dir}/jmock/jmock-cglib-1.2.0.jar"/>
+        <include name="${lib.dir}/jmock/jmock-2.0.0.jar"/>
         <include name="${lib.dir}/easymock/easymockclassextension-2.2.jar"/>
         <include name="${lib.dir}/ant/ant-1.7.0.jar"/>
         <include name="${lib.dir}/hamcrest/hamcrest-all-1.0.jar"/>

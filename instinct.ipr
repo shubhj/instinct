@@ -1062,7 +1062,79 @@
       <option name="useAlternate" value="false" />
     </LanguageOptions>
   </component>
-  <component name="libraryTable" />
+  <component name="libraryTable">
+    <library name="junit">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/instinct-core/lib/junit/junit-4.3.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/instinct-core/etc/lib-src/junit-4.3.1-src.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="boost">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/instinct-core/lib/boost/boost-982.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/instinct-core/lib/boost/boost-982.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="cglib">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/instinct-core/lib/cglib/cglib-nodep-2.2_beta1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/instinct-core/etc/lib-doc/cglib-docs-2.2_beta1.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/instinct-core/etc/lib-src/cglib-src-2.2_beta1.jar!/src/proxy" />
+      </SOURCES>
+    </library>
+    <library name="easymock">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/instinct-core/lib/easymock/easymockclassextension-2.2.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/instinct-core/etc/lib-src/easymockclassextension-2.2-src.zip!/" />
+      </SOURCES>
+    </library>
+    <library name="hamcrest-all-1.0">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/instinct-core/lib/hamcrest/hamcrest-all-1.0.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/instinct-core/etc/lib-src/hamcrest-1.0-src.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="jmock2">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/instinct-core/lib/jmock/jmock-2.0.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/instinct-core/etc/lib-doc/jmock-2.0.0-javadoc.zip!/jmock-2.0.0" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/instinct-core/lib/jmock/jmock-2.0.0.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="jmock1">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/instinct-core/lib/jmock/jmock-cglib-1.2.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/instinct-core/lib/jmock/jmock-core-1.2.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/instinct-core/etc/lib-doc/jmock-1.2.0-javadoc.zip!/javadoc-1.2.0" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/instinct-core/lib/jmock/jmock-cglib-1.2.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/instinct-core/lib/jmock/jmock-core-1.2.0.jar!/" />
+      </SOURCES>
+    </library>
+  </component>
   <component name="uidesigner-configuration">
     <option name="INSTRUMENT_CLASSES" value="true" />
     <option name="COPY_FORMS_RUNTIME_TO_OUTPUT" value="true" />

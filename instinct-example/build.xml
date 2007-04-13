@@ -11,7 +11,6 @@
     <property name="main.classes.dir" value="${build.dir}/main-classes"/>
     <property name="spec.classes.dir" value="${build.dir}/spec-classes"/>
 
-
     <path id="main.class.path"/>
     <path id="main.class.path">
         <!-- Put this here to allow suggestions in the spec code -->
@@ -26,11 +25,12 @@
             <include name="${lib.dir}/instinct-0.1.2.jar"/>
             <include name="${lib.dir}/boost-982.jar"/>
             <include name="${lib.dir}/cglib-nodep-2.2_beta1.jar"/>
-            <include name="${lib.dir}/jmock-1.1.0.jar"/>
-            <include name="${lib.dir}/jmock-cglib-1.1.0.jar"/>
+            <include name="${lib.dir}/jmock-core-1.2.0.jar"/>
+            <include name="${lib.dir}/jmock-cglib-1.2.0.jar"/>
+            <include name="${lib.dir}/jmock-2.0.0.jar"/>
             <include name="${lib.dir}/easymockclassextension-2.2.jar"/>
             <include name="${lib.dir}/ant-1.7.0.jar"/>
-            <include name="${lib.dir}/junit-4.1.jar"/>
+            <include name="${lib.dir}/junit-4.3.1.jar"/>
             <include name="${lib.dir}/hamcrest-all-1.0.jar"/>
         </fileset>
         <pathelement location="${spec.classes.dir}"/>

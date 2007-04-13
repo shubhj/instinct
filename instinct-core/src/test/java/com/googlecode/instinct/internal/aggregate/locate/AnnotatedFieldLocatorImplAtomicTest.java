@@ -41,7 +41,7 @@ public final class AnnotatedFieldLocatorImplAtomicTest extends InstinctTestCase 
         expects(checker).method("isAnnotated").withAnyArguments().will(returnValue(false));
         final Field[] fields = locator.locate(WithoutRuntimeAnnotations.class, Dummy.class);
         assertNotNull(fields);
-        Assert.assertEquals(new Field[]{}, fields);
+        Assert.assertArrayEquals(new Field[]{}, fields);
     }
 
     public void testLocateOnAClassWithAnnotationsReturnsFields() {
