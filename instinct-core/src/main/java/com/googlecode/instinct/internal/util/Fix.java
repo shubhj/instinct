@@ -30,12 +30,12 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 import java.lang.annotation.Target;
 
 /**
- * A suggestion for improvement.
+ * A note indicating a problem with a piece of code that must be fixed.
  */
 @Documented
 @Retention(SOURCE)
 @Target({TYPE, FIELD, METHOD, PARAMETER, CONSTRUCTOR, LOCAL_VARIABLE, ANNOTATION_TYPE, PACKAGE})
-public @interface Suggest {
+public @interface Fix {
     String[] value();
 
     String card() default "None";
