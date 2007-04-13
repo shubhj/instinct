@@ -16,10 +16,10 @@
 
 package com.googlecode.instinct.integrate.ant;
 
+import com.googlecode.instinct.customise.BriefContextResultMessageBuilder;
+import com.googlecode.instinct.customise.ContextResultMessageBuilder;
+import com.googlecode.instinct.customise.VerboseContextResultMessageBuilder;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
-import com.googlecode.instinct.run.ContextResultMessageBuilder;
-import com.googlecode.instinct.run.BriefContextResultMessageBuilder;
-import com.googlecode.instinct.run.VerboseContextResultMessageBuilder;
 
 public final class Formatter {
     private String type;

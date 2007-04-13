@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.run;
+package com.googlecode.instinct.customise;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;

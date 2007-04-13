@@ -21,14 +21,14 @@ import static java.util.Arrays.asList;
 import java.util.List;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
+import com.googlecode.instinct.customise.StatusLogger;
+import com.googlecode.instinct.customise.StatusLoggingContextRunner;
 import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
-import com.googlecode.instinct.run.StatusLoggingContextRunner;
-import com.googlecode.instinct.run.StatusLogger;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 

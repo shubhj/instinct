@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.run;
+package com.googlecode.instinct.customise;
 
 import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;

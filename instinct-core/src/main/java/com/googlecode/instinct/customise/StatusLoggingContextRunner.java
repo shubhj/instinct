@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.run;
+package com.googlecode.instinct.customise;
 
 import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 
+@Suggest("Pull out a text logger that logs to std out.")
 public final class StatusLoggingContextRunner implements BehaviourContextRunner {
     private final BehaviourContextRunner delegate;
     private final ContextResultMessageBuilder messageBuilder;
