@@ -23,12 +23,13 @@ import java.io.PrintWriter;
 import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
+import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
+@Fix("Write atomic test for this.")
 public final class TextContextRunner implements BehaviourContextRunner {
     private final BehaviourContextRunner contextRunner;
 
-    @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
     public TextContextRunner(final OutputStream output, final ContextResultMessageBuilder messageBuilder) {
         checkNotNull(output, messageBuilder);
         contextRunner = new StatusLoggingContextRunner(new BehaviourContextRunnerImpl(), messageBuilder, createLogger(output));
