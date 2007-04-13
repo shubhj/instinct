@@ -16,7 +16,7 @@ public final class TextContextRunnerSlowTest extends InstinctTestCase {
 
     @Override
     public void setUpSubject() {
-        contextRunner = new TextContextRunner(new BriefContextResultMessageBuilder(), out);
+        contextRunner = new TextContextRunner(out, new BriefContextResultMessageBuilder());
     }
 
     public void testRunnerSendsSpeciciationResultsToOutput() {

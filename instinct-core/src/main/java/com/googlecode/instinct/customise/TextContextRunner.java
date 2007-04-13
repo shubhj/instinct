@@ -29,8 +29,8 @@ public final class TextContextRunner implements BehaviourContextRunner {
     private final BehaviourContextRunner contextRunner;
 
     @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
-    public TextContextRunner(final ContextResultMessageBuilder messageBuilder, final OutputStream output) {
-        checkNotNull(messageBuilder, output);
+    public TextContextRunner(final OutputStream output, final ContextResultMessageBuilder messageBuilder) {
+        checkNotNull(output, messageBuilder);
         contextRunner = new StatusLoggingContextRunner(new BehaviourContextRunnerImpl(), messageBuilder, createLogger(output));
     }
 
