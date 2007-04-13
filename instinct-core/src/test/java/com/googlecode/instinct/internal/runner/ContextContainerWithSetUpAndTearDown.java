@@ -24,12 +24,12 @@ import com.googlecode.instinct.marker.annotate.BehaviourContext;
 public final class ContextContainerWithSetUpAndTearDown {
     @BehaviourContext
     public static class AnEmbeddedPublicContext {
-        @BeforeSpecification
-        public void aSetUpMethod() {
+        @AfterSpecification
+        protected void drop() {
         }
 
         @BeforeSpecification
-        private void anotherSetUpMethod() {
+        public void aSetUpMethod() {
         }
 
         @AfterSpecification
@@ -37,11 +37,11 @@ public final class ContextContainerWithSetUpAndTearDown {
         }
 
         @AfterSpecification
-        protected void drop() {
+        void down() {
         }
 
-        @AfterSpecification
-        void down() {
+        @BeforeSpecification
+        private void anotherSetUpMethod() {
         }
 
         @AfterSpecification
