@@ -1,7 +1,7 @@
 * Instinct Release 0.1.3 *
 
-o Behavioural expectation API (interaction-based/mocking) - com.googlecode.instinct.expect.Expect.
-o Merged state & bahavioural expectation API.
+o Behavioural expectation API (ie. mocking) - com.googlecode.instinct.expect.Expect.
+o "Merged" state & bahavioural expectation API (both accessible from same class).
 o Upgraded libraries to jMock 1.2.0, jMock 2.0.0 & JUnit 4.3.1.
 
 
