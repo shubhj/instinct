@@ -18,11 +18,11 @@ package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.lang.reflect.Field;
 import com.googlecode.instinct.marker.annotate.Dummy;
-import static com.googlecode.instinct.mock.Mocker.eq;
-import static com.googlecode.instinct.mock.Mocker.expects;
-import static com.googlecode.instinct.mock.Mocker.mock;
-import static com.googlecode.instinct.mock.Mocker.returnValue;
-import static com.googlecode.instinct.mock.Mocker.same;
+import static com.googlecode.instinct.expect.Mocker.eq;
+import static com.googlecode.instinct.expect.Mocker.expects;
+import static com.googlecode.instinct.expect.Mocker.mock;
+import static com.googlecode.instinct.expect.Mocker.returnValue;
+import static com.googlecode.instinct.expect.Mocker.same;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import com.googlecode.instinct.test.reflect.Reflector;

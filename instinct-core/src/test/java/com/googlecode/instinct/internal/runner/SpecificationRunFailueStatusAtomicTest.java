@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import static com.googlecode.instinct.mock.Mocker.mock;
+import static com.googlecode.instinct.expect.Mocker.mock;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 

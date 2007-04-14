@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.test;
 
-import static com.googlecode.instinct.mock.Mocker.verify;
+import static com.googlecode.instinct.expect.Mocker.verify;
 import junit.framework.TestCase;
 
 @SuppressWarnings({"NoopMethodInAbstractClass", "ProhibitedExceptionDeclared"})

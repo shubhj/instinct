@@ -18,11 +18,11 @@ package com.googlecode.instinct.internal.util;
 
 import java.io.File;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
-import static com.googlecode.instinct.mock.Mocker.eq;
-import static com.googlecode.instinct.mock.Mocker.expects;
-import static com.googlecode.instinct.mock.Mocker.mock;
-import static com.googlecode.instinct.mock.Mocker.returnValue;
-import static com.googlecode.instinct.mock.Mocker.same;
+import static com.googlecode.instinct.expect.Mocker.eq;
+import static com.googlecode.instinct.expect.Mocker.expects;
+import static com.googlecode.instinct.expect.Mocker.mock;
+import static com.googlecode.instinct.expect.Mocker.returnValue;
+import static com.googlecode.instinct.expect.Mocker.same;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;

@@ -23,11 +23,11 @@ import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.marker.annotate.BehaviourContext;
-import static com.googlecode.instinct.mock.Mocker.eq;
-import static com.googlecode.instinct.mock.Mocker.expects;
-import static com.googlecode.instinct.mock.Mocker.mock;
-import static com.googlecode.instinct.mock.Mocker.returnValue;
-import static com.googlecode.instinct.mock.Mocker.same;
+import static com.googlecode.instinct.expect.Mocker.eq;
+import static com.googlecode.instinct.expect.Mocker.expects;
+import static com.googlecode.instinct.expect.Mocker.mock;
+import static com.googlecode.instinct.expect.Mocker.returnValue;
+import static com.googlecode.instinct.expect.Mocker.same;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;
 

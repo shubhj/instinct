@@ -18,10 +18,10 @@ package com.googlecode.instinct.internal.runner;
 
 import java.util.List;
 import com.googlecode.instinct.internal.util.Suggest;
-import static com.googlecode.instinct.mock.Mocker.atLeastOnce;
-import static com.googlecode.instinct.mock.Mocker.expects;
-import static com.googlecode.instinct.mock.Mocker.mock;
-import static com.googlecode.instinct.mock.Mocker.returnValue;
+import static com.googlecode.instinct.expect.Mocker.atLeastOnce;
+import static com.googlecode.instinct.expect.Mocker.expects;
+import static com.googlecode.instinct.expect.Mocker.mock;
+import static com.googlecode.instinct.expect.Mocker.returnValue;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 

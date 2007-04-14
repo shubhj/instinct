@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.mock;
+package com.googlecode.instinct.expect;
 
 import com.googlecode.instinct.internal.mock.Mockery;
 import com.googlecode.instinct.internal.mock.MockeryImpl;
@@ -24,7 +24,7 @@ import org.jmock.core.Constraint;
 import org.jmock.core.InvocationMatcher;
 import org.jmock.core.Stub;
 
-@Suggest("This becomes the JMock 1.1 implementation of behavioural expectations.")
+@Suggest("This becomes the jMock 1.1 implementation of BehaviourExpectations.")
 public final class Mocker {
     private static final Mockery MOCKERY = new MockeryImpl();
 
