@@ -20,7 +20,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
 public final class ClassLocatorImplAtomicTest extends InstinctTestCase {
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(ClassLocatorImpl.class, ClassLocator.class);
     }
 }

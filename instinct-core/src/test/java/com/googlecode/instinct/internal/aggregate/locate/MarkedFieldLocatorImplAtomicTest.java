@@ -33,7 +33,7 @@ public final class MarkedFieldLocatorImplAtomicTest extends InstinctTestCase {
     private AnnotatedFieldLocator annotatedFieldLocator;
     private Field[] annotatedFields;
 
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(MarkedFieldLocatorImpl.class, MarkedFieldLocator.class);
     }
 

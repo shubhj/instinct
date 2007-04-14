@@ -26,7 +26,7 @@ public final class JavaClassNameFactoryImplAtomicTest extends InstinctTestCase {
     private File fileDir;
     private JavaClassNameFactory factory;
 
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(JavaClassNameFactoryImpl.class, JavaClassNameFactory.class);
     }
 

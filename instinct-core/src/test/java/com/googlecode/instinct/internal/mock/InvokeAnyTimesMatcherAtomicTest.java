@@ -23,7 +23,7 @@ import org.jmock.core.Invocation;
 import org.jmock.core.InvocationMatcher;
 
 public final class InvokeAnyTimesMatcherAtomicTest extends InstinctTestCase {
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(InvokeAnyTimesMatcher.class, InvocationMatcher.class);
     }
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.customise.invoke;
+package com.googlecode.instinct.runner;
 
 import java.io.BufferedWriter;
 import java.io.OutputStream;
@@ -25,6 +25,9 @@ import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.report.ContextResultMessageBuilder;
+import com.googlecode.instinct.report.PrintWriterStatusLogger;
+import com.googlecode.instinct.report.StatusLogger;
 
 @Fix("Write atomic test for this.")
 public final class TextContextRunner implements BehaviourContextRunner {

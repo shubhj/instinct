@@ -19,8 +19,8 @@ package com.googlecode.instinct.test;
 import static com.googlecode.instinct.mock.Mocker.verify;
 import junit.framework.TestCase;
 
+@SuppressWarnings({"NoopMethodInAbstractClass", "ProhibitedExceptionDeclared"})
 public abstract class InstinctTestCase extends TestCase {
-    @SuppressWarnings({"ProhibitedExceptionDeclared"})
     @Override
     public final void runBare() throws Throwable {
         setUpTestDoubles();
@@ -33,16 +33,13 @@ public abstract class InstinctTestCase extends TestCase {
         }
     }
 
-    @SuppressWarnings({"NoopMethodInAbstractClass"})
     @Override
     public final void setUp() {
     }
 
-    @SuppressWarnings({"NoopMethodInAbstractClass"})
     public void setUpTestDoubles() {
     }
 
-    @SuppressWarnings({"NoopMethodInAbstractClass"})
     public void setUpSubject() {
     }
 }

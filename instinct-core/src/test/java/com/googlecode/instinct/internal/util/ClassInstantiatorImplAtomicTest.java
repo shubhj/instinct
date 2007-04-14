@@ -37,7 +37,7 @@ public final class ClassInstantiatorImplAtomicTest extends InstinctTestCase {
     private JavaClassNameFactory classNameFactory;
     private JavaClassName className;
 
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(ClassInstantiatorImpl.class, ClassInstantiator.class);
     }
 

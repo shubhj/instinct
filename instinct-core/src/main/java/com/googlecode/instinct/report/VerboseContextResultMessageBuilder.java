@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.customise.invoke;
+package com.googlecode.instinct.report;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
@@ -23,6 +23,7 @@ import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Fix;
 
 public final class VerboseContextResultMessageBuilder implements ContextResultMessageBuilder {
     private static final double MILLISECONDS_IN_SECONDS = 1000.0;
@@ -65,6 +66,7 @@ public final class VerboseContextResultMessageBuilder implements ContextResultMe
         builder.append(NEW_LINE);
     }
 
+    @Fix("This fails when the context is bad")
     private void appendFailureCause(final SpecificationRunStatus status, final StringBuilder builder) {
         // Note. The nesting is deep as we are going through reflection via an edge.
         final Throwable failureCause = ((Throwable) status.getDetailedStatus()).getCause().getCause();

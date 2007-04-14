@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.customise.invoke;
+package com.googlecode.instinct.report;
 
-public interface StatusLogger {
-    void log(String message);
+import com.googlecode.instinct.internal.runner.BehaviourContextResult;
+
+public interface ContextResultMessageBuilder {
+    String buildMessage(BehaviourContextResult behaviourContextResult);
 }

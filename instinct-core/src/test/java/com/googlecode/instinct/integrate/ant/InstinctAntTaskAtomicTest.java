@@ -25,7 +25,7 @@ public final class InstinctAntTaskAtomicTest extends InstinctTestCase {
     private static final String FAILURE_PROPERTY = "specifications-failed";
     private InstinctAntTask antTask;
 
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(InstinctAntTask.class, Task.class);
     }
 

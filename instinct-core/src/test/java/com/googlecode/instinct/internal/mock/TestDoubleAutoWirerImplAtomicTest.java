@@ -37,7 +37,7 @@ public final class TestDoubleAutoWirerImplAtomicTest extends InstinctTestCase {
     private ObjectFactory objectFactory;
     private NamingConvention dummyNamingConvention;
 
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(TestDoubleAutoWirerImpl.class, TestDoubleAutoWirer.class);
     }
 

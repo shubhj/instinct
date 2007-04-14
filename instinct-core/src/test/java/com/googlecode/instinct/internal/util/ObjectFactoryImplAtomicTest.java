@@ -38,7 +38,7 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
     private Writer writer;
     private String string;
 
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(ObjectFactoryImpl.class, ObjectFactory.class);
     }
 

@@ -20,7 +20,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
 public final class DummyNamingConventionAtomicTest extends InstinctTestCase {
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(DummyNamingConvention.class, NamingConvention.class);
     }
 

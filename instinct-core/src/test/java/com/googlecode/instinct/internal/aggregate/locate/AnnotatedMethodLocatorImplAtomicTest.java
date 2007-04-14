@@ -24,7 +24,7 @@ import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 public final class AnnotatedMethodLocatorImplAtomicTest extends InstinctTestCase {
     private AnnotatedMethodLocator locator;
 
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(AnnotatedMethodLocatorImpl.class, AnnotatedMethodLocator.class);
     }
 

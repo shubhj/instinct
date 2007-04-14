@@ -1,49 +1,7 @@
 package com.googlecode.instinct.expect;
 
-import java.util.Collection;
-import java.util.EventObject;
-import java.util.Map;
-import com.googlecode.instinct.expect.state.ArrayChecker;
-import com.googlecode.instinct.expect.state.ClassChecker;
-import com.googlecode.instinct.expect.state.CollectionChecker;
-import com.googlecode.instinct.expect.state.ComparableChecker;
-import com.googlecode.instinct.expect.state.DoubleChecker;
-import com.googlecode.instinct.expect.state.EventObjectChecker;
-import com.googlecode.instinct.expect.state.IterableChecker;
-import com.googlecode.instinct.expect.state.MapChecker;
-import com.googlecode.instinct.expect.state.NodeChecker;
-import com.googlecode.instinct.expect.state.ObjectChecker;
-import com.googlecode.instinct.expect.state.StringChecker;
-import com.googlecode.instinct.internal.util.Suggest;
-import org.hamcrest.Matcher;
-import org.w3c.dom.Node;
+import com.googlecode.instinct.expect.behaviour.BehaviourExpectations;
+import com.googlecode.instinct.expect.state.StateExpectations;
 
-@Suggest({"Move these methods into state.StateExpectations & checks into state.check.",
-        "Make this implement state & behaviour expectations.."})
-public interface ExpectThat {
-    <T> ObjectChecker<T> that(T object);
-
-    StringChecker that(String string);
-
-    <T extends Comparable<T>> ComparableChecker<T> that(T comparable);
-
-    <E, T extends Iterable<E>> IterableChecker<E, T> that(T iterable);
-
-    <E, T extends Collection<E>> CollectionChecker<E, T> that(T collection);
-
-    <T> ArrayChecker<T> that(T[] array);
-
-    <K, V> MapChecker<K, V> that(Map<K, V> map);
-
-    DoubleChecker that(Double d);
-
-    <T> ClassChecker<T> that(Class<T> aClass);
-
-    <T extends EventObject> EventObjectChecker<T> that(T eventObject);
-
-    <T extends Node> NodeChecker<T> that(T node);
-
-    <T> void that(T t, Matcher<T> hamcrestMatcher);
-
-    <T> void notThat(T t, Matcher<T> hamcrestMatcher);
+public interface ExpectThat extends StateExpectations, BehaviourExpectations {
 }

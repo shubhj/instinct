@@ -1,4 +1,4 @@
-package com.googlecode.instinct.customise.invoke;
+package com.googlecode.instinct.report;
 
 import java.io.PrintWriter;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;

@@ -17,20 +17,20 @@
 package com.googlecode.instinct.internal.runner;
 
 import java.util.List;
+import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.mock.Mocker.atLeastOnce;
 import static com.googlecode.instinct.mock.Mocker.expects;
 import static com.googlecode.instinct.mock.Mocker.mock;
 import static com.googlecode.instinct.mock.Mocker.returnValue;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import com.googlecode.instinct.internal.util.Suggest;
 
 @Suggest("Test new getters")
 public final class BehaviourContextResultImplAtomicTest extends InstinctTestCase {
     private BehaviourContextResult contextResult;
     private SpecificationResult specificationResult;
 
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(BehaviourContextResultImpl.class, BehaviourContextResult.class);
     }
 

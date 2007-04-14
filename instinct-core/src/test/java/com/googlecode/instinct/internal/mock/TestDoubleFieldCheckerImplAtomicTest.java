@@ -21,14 +21,14 @@ import com.googlecode.instinct.marker.TestDoubleConfigurationException;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.Reflector.getField;
+import static com.googlecode.instinct.test.reflect.Reflector.getFieldByName;
 
 @SuppressWarnings({"UnusedDeclaration", "FieldMayBeStatic"})
 public final class TestDoubleFieldCheckerImplAtomicTest extends InstinctTestCase {
     private TestDoubleFieldChecker fieldChecker;
     private Object instance;
 
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(TestDoubleFieldCheckerImpl.class, TestDoubleFieldChecker.class);
     }
 
@@ -40,12 +40,12 @@ public final class TestDoubleFieldCheckerImplAtomicTest extends InstinctTestCase
     }
 
     public void testValidFieldIsANoOp() {
-        final Field field = getField(ClassWithFields.class, "validField");
+        final Field field = getFieldByName(ClassWithFields.class, "validField");
         fieldChecker.checkField(field, instance);
     }
 
     private void checkInvalidFieldThrowsException(final String fieldName, final String expectedMessage) {
-        final Field field = getField(ClassWithFields.class, fieldName);
+        final Field field = getFieldByName(ClassWithFields.class, fieldName);
         assertThrows(TestDoubleConfigurationException.class, expectedMessage, new Runnable() {
             public void run() {
                 fieldChecker.checkField(field, instance);

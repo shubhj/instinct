@@ -20,7 +20,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ExceptionChecker.checkException;
 
 public final class TestDoubleConfigurationExceptionAtomicTest extends InstinctTestCase {
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkException(TestDoubleConfigurationException.class);
     }
 }

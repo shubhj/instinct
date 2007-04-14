@@ -21,7 +21,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
 public final class SpecificationRunFailueStatusAtomicTest extends InstinctTestCase {
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(SpecificationRunFailureStatus.class, SpecificationRunStatus.class);
     }
 

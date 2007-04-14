@@ -12,7 +12,7 @@ public class ArrayElementsSameAtomicTest extends InstinctTestCase {
     private String[] nonEmptyArray = getArrayInstance(String.class);
     private String[] anotherNonEmptyArray = getArrayInstance(String.class);
 
-    public void testClassProperties() {
+    public void testConformsToClassTraits() {
         ClassChecker.checkClass(ArrayElementsSame.class, Constraint.class);
     }
 

@@ -28,7 +28,7 @@ public final class DirectoryFilterAtomicTest extends InstinctTestCase {
     private File pathname;
     private FileFilter filter;
 
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(DirectoryFilter.class, FileFilter.class);
     }
 

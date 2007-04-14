@@ -32,7 +32,7 @@ public final class AnnotatedClassFileCheckerImplAtomicTest extends InstinctTestC
     private ClassInstantiator instantiator;
     private ClassInstantiatorFactory instantiatorFactory;
 
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(AnnotatedClassFileCheckerImpl.class, AnnotatedClassFileChecker.class);
     }
 

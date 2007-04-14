@@ -23,11 +23,11 @@ import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.Reflector.getField;
+import static com.googlecode.instinct.test.reflect.Reflector.getFieldByName;
 import static com.googlecode.instinct.test.reflect.Reflector.getMethod;
 
 public final class AnnotationCheckerImplAtomicTest extends InstinctTestCase {
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(AnnotationCheckerImpl.class, AnnotationChecker.class);
     }
 
@@ -42,8 +42,8 @@ public final class AnnotationCheckerImplAtomicTest extends InstinctTestCase {
     }
 
     public void testFieldIsAnnotated() {
-        checkIsAnnotated(getField(WithRuntimeAnnotations.class, "string1"), Dummy.class, true);
-        checkIsAnnotated(getField(WithoutRuntimeAnnotations.class, "string1"), Dummy.class, false);
+        checkIsAnnotated(getFieldByName(WithRuntimeAnnotations.class, "string1"), Dummy.class, true);
+        checkIsAnnotated(getFieldByName(WithoutRuntimeAnnotations.class, "string1"), Dummy.class, false);
     }
 
     private <A extends Annotation> void checkIsAnnotated(final AnnotatedElement annotatedElement, final Class<A> expectedAnnotation,

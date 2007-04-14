@@ -33,7 +33,7 @@ public final class AnnotatedFieldLocatorImplAtomicTest extends InstinctTestCase 
     private AnnotatedFieldLocator locator;
     private AnnotationChecker checker;
 
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(AnnotatedFieldLocatorImpl.class, AnnotatedFieldLocator.class);
     }
 
@@ -65,7 +65,7 @@ public final class AnnotatedFieldLocatorImplAtomicTest extends InstinctTestCase 
     }
 
     private Field getField(final String fieldName) {
-        return Reflector.getField(WithRuntimeAnnotations.class, fieldName);
+        return Reflector.getFieldByName(WithRuntimeAnnotations.class, fieldName);
     }
 
     @Override

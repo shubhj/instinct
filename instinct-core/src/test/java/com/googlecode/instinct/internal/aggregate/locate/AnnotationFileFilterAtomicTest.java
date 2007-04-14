@@ -36,7 +36,7 @@ public final class AnnotationFileFilterAtomicTest extends InstinctTestCase {
     private ObjectFactory objectFactory;
     private AnnotatedClassFileChecker checker;
 
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         checkClass(AnnotationFileFilter.class, FileFilter.class);
     }
 
