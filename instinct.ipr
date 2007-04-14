@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="4" relativePaths="true">
+<project relativePaths="true" version="4">
   <component name="AntConfiguration">
     <defaultAnt bundledAnt="true" />
     <buildFile url="file://$PROJECT_DIR$/instinct-core/build.xml">
       <additionalClassPath>
-        <entry path="file://$PROJECT_DIR$/instinct-core/lib/junit-4.1.jar" />
+        <entry path="file://$PROJECT_DIR$/instinct-core/lib/junit/junit-4.3.1.jar" />
         <entry path="file://$PROJECT_DIR$/instinct-core/lib/cobertura/cobertura-1.8.jar" />
+        <entry path="file://$PROJECT_DIR$/instinct-core/lib/cobertura/log4j-1.2.9.jar" />
+        <entry path="file://$PROJECT_DIR$/instinct-core/lib/cobertura/asm-2.2.1.jar" />
+        <entry path="file://$PROJECT_DIR$/instinct-core/lib/cobertura/jakarta-oro-2.0.8.jar" />
       </additionalClassPath>
       <antReference projectDefault="true" />
       <customJdkName value="" />
@@ -14,7 +17,7 @@
     </buildFile>
     <buildFile url="file://$PROJECT_DIR$/instinct-example/build.xml">
       <additionalClassPath>
-        <entry path="file://$PROJECT_DIR$/instinct-example/lib/instinct-0.0.1.jar" />
+        <entry path="file://$PROJECT_DIR$/instinct-example/lib/instinct-0.1.2.jar" />
       </additionalClassPath>
       <antReference projectDefault="true" />
       <customJdkName value="" />
@@ -25,6 +28,7 @@
   <component name="BuildJarProjectSettings">
     <option name="BUILD_JARS_ON_MAKE" value="false" />
   </component>
+  <component name="ClearCase" />
   <component name="CodeStyleProjectProfileManger">
     <option name="PROJECT_PROFILE" />
     <option name="USE_PROJECT_LEVEL_SETTINGS" value="false" />
@@ -68,6 +72,15 @@
         <option name="PARAMETER_ANNOTATION_WRAP" value="1" />
         <option name="VARIABLE_ANNOTATION_WRAP" value="2" />
         <option name="ENUM_CONSTANTS_WRAP" value="1" />
+        <ADDITIONAL_INDENT_OPTIONS fileType="js">
+          <option name="INDENT_SIZE" value="4" />
+          <option name="CONTINUATION_INDENT_SIZE" value="8" />
+          <option name="TAB_SIZE" value="4" />
+          <option name="USE_TAB_CHARACTER" value="false" />
+          <option name="SMART_TABS" value="false" />
+          <option name="LABEL_INDENT_SIZE" value="0" />
+          <option name="LABEL_INDENT_ABSOLUTE" value="false" />
+        </ADDITIONAL_INDENT_OPTIONS>
       </value>
     </option>
     <option name="USE_PER_PROJECT_SETTINGS" value="false" />
@@ -111,7 +124,7 @@
     <option name="MAXIMUM_HEAP_SIZE" value="128" />
   </component>
   <component name="EntryPointsManager">
-    <entry_points />
+    <entry_points version="2.0" />
   </component>
   <component name="ExportToHTMLSettings">
     <option name="PRINT_LINE_NUMBERS" value="false" />
@@ -196,7 +209,9 @@
         </inspection_tool>
         <inspection_tool class="MarkerInterface" level="WARNING" enabled="true" />
         <inspection_tool class="MissingDeprecatedAnnotation" level="WARNING" enabled="true" />
-        <inspection_tool class="MissingOverrideAnnotation" level="WARNING" enabled="true" />
+        <inspection_tool class="MissingOverrideAnnotation" level="WARNING" enabled="true">
+          <option name="useJdk6Rules" value="false" />
+        </inspection_tool>
         <inspection_tool class="MultipleTopLevelClassesInFile" level="WARNING" enabled="true" />
         <inspection_tool class="NoopMethodInAbstractClass" level="WARNING" enabled="true" />
         <inspection_tool class="ProtectedMemberInFinalClass" level="WARNING" enabled="true" />
@@ -211,7 +226,9 @@
         <inspection_tool class="CloneableImplementsClone" level="WARNING" enabled="true">
           <option name="m_ignoreCloneableDueToInheritance" value="false" />
         </inspection_tool>
-        <inspection_tool class="ObsoleteCollection" level="WARNING" enabled="true" />
+        <inspection_tool class="ObsoleteCollection" level="WARNING" enabled="true">
+          <option name="ignoreLibraryArguments" value="false" />
+        </inspection_tool>
         <inspection_tool class="CStyleArrayDeclaration" level="WARNING" enabled="true" />
         <inspection_tool class="ChainedEquality" level="WARNING" enabled="true" />
         <inspection_tool class="ConstantOnLHSOfComparison" level="WARNING" enabled="true" />
@@ -272,20 +289,22 @@
         <inspection_tool class="PackageVisibleField" level="WARNING" enabled="true" />
         <inspection_tool class="ProtectedField" level="WARNING" enabled="true" />
         <inspection_tool class="ProtectedInnerClass" level="WARNING" enabled="true" />
-        <inspection_tool class="PublicField" level="WARNING" enabled="true" />
+        <inspection_tool class="PublicField" level="WARNING" enabled="true">
+          <option name="ignoreEnums" value="false" />
+        </inspection_tool>
         <inspection_tool class="CatchGenericClass" level="WARNING" enabled="true" />
         <inspection_tool class="InstanceofCatchParameter" level="WARNING" enabled="true" />
         <inspection_tool class="ErrorRethrown" level="WARNING" enabled="true" />
         <inspection_tool class="ThreadDeathRethrown" level="WARNING" enabled="true" />
         <inspection_tool class="BadExceptionCaught" level="WARNING" enabled="true">
-          <option name="exceptionCheckString" value="java.lang.NullPointerException,java.lang.IllegalMonitorStateException,java.lang.ArrayIndexOutOfBoundsException" />
+          <option name="exceptionsString" value="java.lang.NullPointerException,java.lang.IllegalMonitorStateException,java.lang.ArrayIndexOutOfBoundsException" />
         </inspection_tool>
         <inspection_tool class="BadExceptionDeclared" level="WARNING" enabled="true">
-          <option name="exceptionCheckString" value="java.lang.Throwable,java.lang.Exception,java.lang.Error,java.lang.RuntimeException,java.lang.NullPointerException,java.lang.ClassCastException,java.lang.ArrayIndexOutOfBoundsException" />
+          <option name="exceptionsString" value="java.lang.Throwable,java.lang.Exception,java.lang.Error,java.lang.RuntimeException,java.lang.NullPointerException,java.lang.ClassCastException,java.lang.ArrayIndexOutOfBoundsException" />
           <option name="ignoreTestCases" value="false" />
         </inspection_tool>
         <inspection_tool class="BadExceptionThrown" level="WARNING" enabled="true">
-          <option name="exceptionCheckString" value="java.lang.Throwable,java.lang.Exception,java.lang.Error,java.lang.RuntimeException,java.lang.NullPointerException,java.lang.ClassCastException,java.lang.ArrayIndexOutOfBoundsException" />
+          <option name="exceptionsString" value="java.lang.Throwable,java.lang.Exception,java.lang.Error,java.lang.RuntimeException,java.lang.NullPointerException,java.lang.ClassCastException,java.lang.ArrayIndexOutOfBoundsException" />
         </inspection_tool>
         <inspection_tool class="ThrowCaughtLocally" level="WARNING" enabled="true">
           <option name="ignoreRethrownExceptions" value="false" />
@@ -438,12 +457,16 @@
         <inspection_tool class="StringBufferReplaceableByString" level="WARNING" enabled="true" />
         <inspection_tool class="FieldMayBeStatic" level="WARNING" enabled="true" />
         <inspection_tool class="InnerClassMayBeStatic" level="WARNING" enabled="true" />
-        <inspection_tool class="MultiplyOrDivideByPowerOfTwo" level="WARNING" enabled="true" />
+        <inspection_tool class="MultiplyOrDivideByPowerOfTwo" level="WARNING" enabled="true">
+          <option name="checkDivision" value="false" />
+        </inspection_tool>
         <inspection_tool class="StringReplaceableByStringBuffer" level="WARNING" enabled="true" />
         <inspection_tool class="SubstringZero" level="WARNING" enabled="true" />
         <inspection_tool class="LengthOneStringsInConcatenation" level="WARNING" enabled="true" />
         <inspection_tool class="LengthOneStringInIndexOf" level="WARNING" enabled="true" />
-        <inspection_tool class="SizeReplaceableByIsEmpty" level="WARNING" enabled="true" />
+        <inspection_tool class="SizeReplaceableByIsEmpty" level="WARNING" enabled="true">
+          <option name="ignoreNegations" value="false" />
+        </inspection_tool>
         <inspection_tool class="StringConcatenationInLoops" level="WARNING" enabled="true">
           <option name="m_ignoreUnlessAssigned" value="false" />
         </inspection_tool>
@@ -505,7 +528,9 @@
         <inspection_tool class="ThreadStopSuspendResume" level="WARNING" enabled="true" />
         <inspection_tool class="SleepWhileHoldingLock" level="WARNING" enabled="true" />
         <inspection_tool class="ExtendsThread" level="WARNING" enabled="true" />
-        <inspection_tool class="DoubleCheckedLocking" level="WARNING" enabled="true" />
+        <inspection_tool class="DoubleCheckedLocking" level="WARNING" enabled="true">
+          <option name="ignoreOnVolatileVariables" value="false" />
+        </inspection_tool>
         <inspection_tool class="EmptySynchronizedStatement" level="WARNING" enabled="true" />
         <inspection_tool class="FieldAccessedSynchronizedAndUnsynchronized" level="WARNING" enabled="true">
           <option name="countGettersAndSetters" value="false" />
@@ -521,7 +546,9 @@
         <inspection_tool class="VolatileArrayField" level="WARNING" enabled="true" />
         <inspection_tool class="VolatileLongOrDoubleField" level="WARNING" enabled="true" />
         <inspection_tool class="WaitNotInSynchronizedContext" level="WARNING" enabled="true" />
-        <inspection_tool class="WhileLoopSpinsOnField" level="WARNING" enabled="true" />
+        <inspection_tool class="WhileLoopSpinsOnField" level="WARNING" enabled="true">
+          <option name="ignoreNonEmtpyLoops" value="false" />
+        </inspection_tool>
         <inspection_tool class="ClassEscapesItsScope" level="WARNING" enabled="true" />
         <inspection_tool class="MethodOverridesStaticMethod" level="WARNING" enabled="true" />
         <inspection_tool class="IncrementDecrementUsedAsExpression" level="WARNING" enabled="true" />
@@ -654,6 +681,7 @@
         <inspection_tool class="EmptyCatchBlock" level="WARNING" enabled="false">
           <option name="m_includeComments" value="true" />
           <option name="m_ignoreTestCases" value="true" />
+          <option name="m_ignoreIgnoreParameter" value="true" />
         </inspection_tool>
         <inspection_tool class="UnnecessaryUnboxing" level="WARNING" enabled="false" />
         <inspection_tool class="ParametersPerMethod" level="WARNING" enabled="true">
@@ -870,6 +898,13 @@
     <RUBY_DOC NAME="DEFAULTS" VALUE="TRUE" />
     <RUBY_DOC NAME="NUMBER" VALUE="0" />
   </component>
+  <component name="ResourceManagerContainer">
+    <option name="myResourceBundles">
+      <value>
+        <list size="0" />
+      </value>
+    </option>
+  </component>
   <component name="RmicSettings">
     <option name="IS_EANABLED" value="false" />
     <option name="DEBUGGING_INFO" value="true" />
@@ -878,8 +913,12 @@
     <option name="ADDITIONAL_OPTIONS_STRING" value="" />
   </component>
   <component name="StarteamVcsAdapter" />
+  <component name="SvnBranchConfigurationManager" />
   <component name="ToggleTest">
     <toggle from="^(\w)Impl" to="$1Context" />
+  </component>
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="svn" />
   </component>
   <component name="VssVcs" />
   <component name="com.intellij.jsf.UserDefinedFacesConfigs">
@@ -1135,11 +1174,6 @@
       </SOURCES>
     </library>
   </component>
-  <component name="uidesigner-configuration">
-    <option name="INSTRUMENT_CLASSES" value="true" />
-    <option name="COPY_FORMS_RUNTIME_TO_OUTPUT" value="true" />
-    <option name="DEFAULT_LAYOUT_MANAGER" value="GridLayoutManager" />
-  </component>
-  <UsedPathMacros />
+  <component name="uidesigner-configuration" />
 </project>
 

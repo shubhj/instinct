@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import com.googlecode.instinct.customise.BriefContextResultMessageBuilder;
-import com.googlecode.instinct.customise.ContextResultMessageBuilder;
-import com.googlecode.instinct.customise.VerboseContextResultMessageBuilder;
+import com.googlecode.instinct.customise.invoke.BriefContextResultMessageBuilder;
+import com.googlecode.instinct.customise.invoke.ContextResultMessageBuilder;
+import com.googlecode.instinct.customise.invoke.VerboseContextResultMessageBuilder;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 
 public final class Formatter {

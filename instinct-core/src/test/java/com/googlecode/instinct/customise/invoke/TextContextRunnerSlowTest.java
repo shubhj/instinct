@@ -1,9 +1,11 @@
-package com.googlecode.instinct.customise;
+package com.googlecode.instinct.customise.invoke;
 
 import java.io.ByteArrayOutputStream;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
 import com.googlecode.instinct.test.InstinctTestCase;
+import com.googlecode.instinct.customise.invoke.BriefContextResultMessageBuilder;
+import com.googlecode.instinct.customise.invoke.TextContextRunner;
 
 public final class TextContextRunnerSlowTest extends InstinctTestCase {
     private BehaviourContextRunner contextRunner;

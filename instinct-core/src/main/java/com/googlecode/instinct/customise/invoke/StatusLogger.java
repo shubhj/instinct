@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.customise;
+package com.googlecode.instinct.customise.invoke;
 
 public interface StatusLogger {
     void log(String message);
