@@ -72,7 +72,8 @@
         <javadoc destdir="${javadoc.dir}" author="true" version="true"
                  packagenames="${main.package.name}.*" sourcepath="${main.src.dir}" classpathref="main.class.path" failonerror="true"
                  additionalparam="-breakiterator" Use="true" source="${java.src.version}" excludepackagenames="${main.package.name}.internal.*"
-                 windowtitle="${project.longname} ${project.version.full}" doctitle="${project.longname} ${project.version.full}">
+                 windowtitle="${project.longname} ${project.version.full}" doctitle="${project.longname} ${project.version.full}"
+                 useexternalfile="true">
             <link href="http://java.sun.com/j2se/1.5.0/docs/api"/>
         </javadoc>
         <zip destfile="${build.dir}/${javadoc.zip}">
