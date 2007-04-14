@@ -20,7 +20,7 @@ import com.googlecode.instinct.marker.annotate.BehaviourContext;
 import com.googlecode.instinct.marker.annotate.Specification;
 
 @BehaviourContext
-public class ContextWithInvalidlyMarkedSpecification2 {
+public class ContextWithSpecificationMethodContainingParameter {
     @Specification
     public void specificationTakesAParam(final String param1) {
     }

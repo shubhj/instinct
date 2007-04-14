@@ -43,7 +43,7 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
 
     public void testInvalidMethodsBarf() {
         checkInvalidMethodsBarf(ContextWithInvalidlyMarkedSpecification1.class);
-        checkInvalidMethodsBarf(ContextWithInvalidlyMarkedSpecification2.class);
+        checkInvalidMethodsBarf(ContextWithSpecificationMethodContainingParameter.class);
         checkInvalidMethodsBarf(ContextWithInvalidlyMarkedAfterSpecification1.class);
         checkInvalidMethodsBarf(ContextWithInvalidlyMarkedAfterSpecification2.class);
         checkInvalidMethodsBarf(ContextWithInvalidlyMarkedBeforeSpecification1.class);

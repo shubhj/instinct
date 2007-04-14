@@ -22,14 +22,16 @@ import static java.lang.System.getProperty;
 import com.googlecode.instinct.internal.runner.BehaviourContextResult;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
+import com.googlecode.instinct.internal.util.ExceptionFinder;
+import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Fix;
 
 public final class VerboseContextResultMessageBuilder implements ContextResultMessageBuilder {
     private static final double MILLISECONDS_IN_SECONDS = 1000.0;
     private static final String TAB = "\t";
     private static final String SPACER = ", ";
     private static final String NEW_LINE = getProperty("line.separator");
+    private final ExceptionFinder exceptionFinder = new ExceptionFinderImpl();
 
     public String buildMessage(final BehaviourContextResult behaviourContextResult) {
         checkNotNull(behaviourContextResult);
@@ -66,11 +68,9 @@ public final class VerboseContextResultMessageBuilder implements ContextResultMe
         builder.append(NEW_LINE);
     }
 
-    @Fix("This fails when the context is bad")
     private void appendFailureCause(final SpecificationRunStatus status, final StringBuilder builder) {
-        // Note. The nesting is deep as we are going through reflection via an edge.
-        final Throwable failureCause = ((Throwable) status.getDetailedStatus()).getCause().getCause();
-        final String stackTrace = getFailureStackTrace(failureCause);
+        final Throwable rootCause = exceptionFinder.getRootCause((Throwable) status.getDetailedStatus());
+        final String stackTrace = getFailureStackTrace(rootCause);
         final String s = stackTrace.replace(TAB, TAB + TAB);
         builder.append(s);
     }
