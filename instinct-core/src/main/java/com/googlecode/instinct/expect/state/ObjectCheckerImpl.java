@@ -18,16 +18,22 @@ package com.googlecode.instinct.expect.state;
 
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdgeImpl;
+import com.googlecode.instinct.internal.util.Fix;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-// TODO Test this
+// SUPPRESS VisibilityModifier|IllegalToken {
+@Fix("Test this.")
 public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
     protected final T subject;
     private MatcherAssertEdge asserter = new MatcherAssertEdgeImpl();
 
     public ObjectCheckerImpl(T subject) {
         this.subject = subject;
+    }
+
+    protected final MatcherAssertEdge getAsserter() {
+        return asserter;
     }
 
     public final void equalTo(T t) {
@@ -105,8 +111,5 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
     public final void hasBeanProperty(String string, Matcher matcher) {
         getAsserter().expectThat(subject, Matchers.hasProperty(string, matcher));
     }
-
-    protected final MatcherAssertEdge getAsserter() {
-        return asserter;
-    }
 }
+// } SUPPRESS VisibilityModifier|IllegalToken

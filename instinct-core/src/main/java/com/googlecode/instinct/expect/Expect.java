@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.expect;
 
+// SUPPRESS ConstantName {
 public final class Expect {
     // Note. Lower case name to read nicely when statically imported.
     public static final ExpectThat expect = new ExpectThatImpl();
@@ -24,3 +25,4 @@ public final class Expect {
         throw new UnsupportedOperationException();
     }
 }
+// } SUPPRESS ConstantName
