@@ -21,7 +21,7 @@ import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 import com.googlecode.instinct.internal.util.Suggest;
 import org.easymock.classextension.internal.ClassInstantiatorFactory;
 
-// DEBT CyclomaticComplexity|NPathComplexity|MethodLength {
+// SUPPRESS CyclomaticComplexity|NPathComplexity|MethodLength {
 @SuppressWarnings({"RawUseOfParameterizedType", "MagicNumber"})
 public final class ConcreteInstanceProvider implements InstanceProvider {
     private static final Object OBJECT = new Object();
@@ -117,4 +117,4 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
 //        return paramValues;
 //    }
 }
-// } DEBT CyclomaticComplexity|NPathComplexity|MethodLength
+// } SUPPRESS CyclomaticComplexity|NPathComplexity|MethodLength

@@ -1,12 +1,12 @@
 package com.googlecode.instinct.example.techtalk;
 
+import static com.googlecode.instinct.expect.Mocker.expects;
+import static com.googlecode.instinct.expect.Mocker.mock;
+import static com.googlecode.instinct.expect.Mocker.same;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.BehaviourContext;
 import com.googlecode.instinct.marker.annotate.Specification;
-import static com.googlecode.instinct.mock.Mocker.expects;
-import static com.googlecode.instinct.mock.Mocker.mock;
-import static com.googlecode.instinct.mock.Mocker.same;
 
 @SuppressWarnings({"unchecked"})
 @Suggest({

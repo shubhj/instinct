@@ -27,15 +27,32 @@ import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.report.ContextResultMessageBuilder;
 import com.googlecode.instinct.report.PrintWriterStatusLogger;
+import com.googlecode.instinct.report.ResultFormat;
+import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import com.googlecode.instinct.report.StatusLogger;
 
 @Fix("Write atomic test for this.")
 public final class TextContextRunner implements BehaviourContextRunner {
     private final BehaviourContextRunner contextRunner;
 
-    public TextContextRunner(final OutputStream output, final ContextResultMessageBuilder messageBuilder) {
-        checkNotNull(output, messageBuilder);
-        contextRunner = new StatusLoggingContextRunner(new BehaviourContextRunnerImpl(), messageBuilder, createLogger(output));
+    /**
+     * Create a new context runner that sends output to the given output stream using {@linkplain ResultFormat.BRIEF brief} formatting.
+     * @param output The output stream to send results to.
+     */
+    public TextContextRunner(final OutputStream output) {
+        this(output, BRIEF);
+    }
+
+    /**
+     * Create a new context runner that sends output to the given output stream using the given message builder.
+     * @param output The output stream to send results to.
+     * @param resultFormat The format the specification results should be printed using.
+     */
+    public TextContextRunner(final OutputStream output, final ResultFormat resultFormat) {
+        checkNotNull(output, resultFormat);
+        final BehaviourContextRunner runner = new BehaviourContextRunnerImpl();
+        final ContextResultMessageBuilder messageBuilder = resultFormat.getMessageBuilder();
+        contextRunner = new StatusLoggingContextRunner(runner, messageBuilder, createLogger(output));
     }
 
     public <T> BehaviourContextResult run(final Class<T> behaviourContextClass) {

@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import com.googlecode.instinct.internal.runner.ContextWithSpecificationMethodContainingParameter;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
+import static com.googlecode.instinct.report.ResultFormat.VERBOSE;
 import com.googlecode.instinct.runner.TextContextRunner;
 import com.googlecode.instinct.test.InstinctTestCase;
 
@@ -20,7 +21,7 @@ public final class VerboseContextResultMessageBuilderSlowTest extends InstinctTe
 
     @Override
     public void setUpSubject() {
-        contextRunner = new TextContextRunner(output, new VerboseContextResultMessageBuilder());
+        contextRunner = new TextContextRunner(output, VERBOSE);
     }
 
     public void testDoesNotThrowNullPointerErrorWhenReportingLifecycleConfigurationErrors() {

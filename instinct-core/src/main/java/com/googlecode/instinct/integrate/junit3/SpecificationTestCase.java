@@ -7,10 +7,10 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
+import com.googlecode.instinct.internal.util.ExceptionFinder;
 import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.internal.util.ExceptionFinder;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 
@@ -45,7 +45,7 @@ public final class SpecificationTestCase extends TestCase {
     }
 
     @SuppressWarnings({"CatchGenericClass"})
-    // DEBT IllegalCatch {
+    // SUPPRESS IllegalCatch {
     private void runSpecification(final TestResult result, final SpecificationContext specificationContext) {
         try {
             final SpecificationResult specificationResult = specificationRunner.run(specificationContext);
@@ -54,7 +54,7 @@ public final class SpecificationTestCase extends TestCase {
             result.addError(this, e);
         }
     }
-    // } DEBT IllegalCatch
+    // } SUPPRESS IllegalCatch
 
     private void processResult(final SpecificationResult specificationResult, final TestResult result) {
         if (!specificationResult.completedSuccessfully()) {

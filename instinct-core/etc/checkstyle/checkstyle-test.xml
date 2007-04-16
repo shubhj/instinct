@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!DOCTYPE module PUBLIC
-    "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+        "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
 <module name="Checker">
     <module name="SuppressionCommentFilter">
-        <property name="offCommentFormat" value="DEBT ([\w\|]+) {"/>
-        <property name="onCommentFormat" value="} DEBT ([\w\|]+)"/>
+        <property name="offCommentFormat" value="SUPPRESS ([\w\|]+) {"/>
+        <property name="onCommentFormat" value="} SUPPRESS ([\w\|]+)"/>
         <property name="checkFormat" value="$1"/>
     </module>
     <module name="TreeWalker">

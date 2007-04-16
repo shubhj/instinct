@@ -75,14 +75,14 @@ public final class VerboseContextResultMessageBuilder implements ContextResultMe
         builder.append(s);
     }
 
-    // DEBT GenericIllegalRegexp {
+    // SUPPRESS GenericIllegalRegexp {
     @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
     private String getFailureStackTrace(final Throwable failureCause) {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         failureCause.printStackTrace(new PrintWriter(out, true));
         return out.toString();
     }
-    // } DEBT GenericIllegalRegexp
+    // } SUPPRESS GenericIllegalRegexp
 
     private int getNumberOfSpecsRun(final BehaviourContextResult behaviourContextResult) {
         return behaviourContextResult.getSpecificationResults().size();

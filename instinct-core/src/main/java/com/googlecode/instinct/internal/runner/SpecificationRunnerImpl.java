@@ -48,7 +48,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     }
 
     @SuppressWarnings({"CatchGenericClass"})
-    // DEBT IllegalCatch {
+    // SUPPRESS IllegalCatch {
     private SpecificationResult doRun(final SpecificationContext specificationContext) {
         final long startTime = clock.getCurrentTime();
         try {
@@ -61,7 +61,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
             return new SpecificationResultImpl(specificationContext.getSpecificationMethod().getName(), status, clock.getElapsedTime(startTime));
         }
     }
-    // } DEBT IllegalCatch
+    // } SUPPRESS IllegalCatch
 
     private void runSpecificationLifecycle(final Object behaviourContext, final SpecificationContext specificationContext) {
         try {

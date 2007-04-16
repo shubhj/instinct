@@ -10,9 +10,9 @@ import org.jmock.core.Stub;
 
 @Suggest("Merge or combine with state-based Expect.")
 public final class BehaviourExpect {
-    // DEBT ConstantName {
+    // SUPPRESS ConstantName {
     public static final BehaviourExpectations expect = new BehaviourExpectationsImpl();
-    // } DEBT ConstantName
+    // } SUPPRESS ConstantName
 
     private BehaviourExpect() {
         throw new UnsupportedOperationException();

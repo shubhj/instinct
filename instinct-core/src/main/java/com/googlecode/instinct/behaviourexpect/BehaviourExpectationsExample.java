@@ -11,7 +11,7 @@ import com.googlecode.instinct.marker.annotate.BehaviourContext;
 import com.googlecode.instinct.marker.annotate.Specification;
 import org.jmock.Expectations;
 
-// DEBT Indentation {
+// SUPPRESS Indentation {
 @SuppressWarnings({"AccessStaticViaInstance", "EmptyClass"})
 @BehaviourContext
 public final class BehaviourExpectationsExample {
@@ -54,4 +54,4 @@ public final class BehaviourExpectationsExample {
         }
     }
 }
-// } DEBT Indentation
+// } SUPPRESS Indentation

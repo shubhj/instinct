@@ -9,8 +9,8 @@
     </module>
 
     <module name="SuppressionCommentFilter">
-        <property name="offCommentFormat" value="DEBT ([\w\|]+) \{"/>
-        <property name="onCommentFormat" value="\} DEBT ([\w\|]+)"/>
+        <property name="offCommentFormat" value="SUPPRESS ([\w\|]+) \{"/>
+        <property name="onCommentFormat" value="\} SUPPRESS ([\w\|]+)"/>
         <property name="checkFormat" value="$1"/>
     </module>
 

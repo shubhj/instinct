@@ -62,7 +62,7 @@ public final class ConcreteClassMock extends AbstractDynamicMock implements Meth
         return proxy;
     }
 
-    // DEBT IllegalCatch {
+    // SUPPRESS IllegalCatch {
     @SuppressWarnings({"ProhibitedExceptionThrown"})
     @Suggest("Handle this exception better.")
     public Object intercept(final Object obj, final Method method, final Object[] args, final MethodProxy proxy) {
@@ -72,5 +72,5 @@ public final class ConcreteClassMock extends AbstractDynamicMock implements Meth
             throw new RuntimeException(throwable);
         }
     }
-    // } DEBT IllegalCatch
+    // } SUPPRESS IllegalCatch
 }

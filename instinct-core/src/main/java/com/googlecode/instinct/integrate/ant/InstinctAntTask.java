@@ -67,7 +67,7 @@ public final class InstinctAntTask extends Task implements StatusLogger {
     }
 
     @SuppressWarnings({"CatchGenericClass"})
-    // DEBT IllegalCatch {
+    // SUPPRESS IllegalCatch {
     private void doExecute() {
         try {
             runContexts();
@@ -75,7 +75,7 @@ public final class InstinctAntTask extends Task implements StatusLogger {
             throw new BuildException(t);
         }
     }
-    // } DEBT IllegalCatch
+    // } SUPPRESS IllegalCatch
 
     private void runContexts() {
         final List<JavaClassName> contextClasses = findBehaviourContextsFromAllAggregators();

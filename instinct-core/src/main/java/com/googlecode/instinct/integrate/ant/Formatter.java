@@ -16,27 +16,27 @@
 
 package com.googlecode.instinct.integrate.ant;
 
+import static java.util.Arrays.asList;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
-import com.googlecode.instinct.report.BriefContextResultMessageBuilder;
 import com.googlecode.instinct.report.ContextResultMessageBuilder;
-import com.googlecode.instinct.report.VerboseContextResultMessageBuilder;
+import com.googlecode.instinct.report.ResultFormat;
+import static com.googlecode.instinct.report.ResultFormat.BRIEF;
+import static com.googlecode.instinct.report.ResultFormat.VERBOSE;
+import static com.googlecode.instinct.report.ResultFormat.valueOf;
 
 public final class Formatter {
-    private String type;
+    private ResultFormat type;
 
     public void setType(final String type) {
         checkNotWhitespace(type);
-        if (!type.equals("brief") && !type.equals("verbose")) {
-            throw new UnsupportedOperationException("Formatter type '" + type + "' is not supported, supported types are 'brief' & 'verbose'");
+        if (!type.equalsIgnoreCase(BRIEF.name()) && !type.equalsIgnoreCase(VERBOSE.name())) {
+            throw new UnsupportedOperationException(
+                    "Formatter type '" + type + "' is not supported, supported types " + asList(ResultFormat.values()));
         }
-        this.type = type;
+        this.type = valueOf(type);
     }
 
     public ContextResultMessageBuilder createMessageBuilder() {
-        if (type.equals("brief")) {
-            return new BriefContextResultMessageBuilder();
-        } else {
-            return new VerboseContextResultMessageBuilder();
-        }
+        return type.getMessageBuilder();
     }
 }
