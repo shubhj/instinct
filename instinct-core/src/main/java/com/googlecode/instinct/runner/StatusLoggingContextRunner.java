@@ -16,20 +16,20 @@
 
 package com.googlecode.instinct.runner;
 
-import com.googlecode.instinct.internal.runner.BehaviourContextResult;
-import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
+import com.googlecode.instinct.internal.runner.ContextResult;
+import com.googlecode.instinct.internal.runner.ContextRunner;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ContextResultMessageBuilder;
 import com.googlecode.instinct.report.StatusLogger;
 
 @Suggest("Pull out a text logger that logs to std out.")
-public final class StatusLoggingContextRunner implements BehaviourContextRunner {
-    private final BehaviourContextRunner delegate;
+public final class StatusLoggingContextRunner implements ContextRunner {
+    private final ContextRunner delegate;
     private final ContextResultMessageBuilder messageBuilder;
     private final StatusLogger statusLogger;
 
-    public StatusLoggingContextRunner(final BehaviourContextRunner delegate, final ContextResultMessageBuilder messageBuilder,
+    public StatusLoggingContextRunner(final ContextRunner delegate, final ContextResultMessageBuilder messageBuilder,
             final StatusLogger statusLogger) {
         checkNotNull(delegate, messageBuilder, statusLogger);
         this.delegate = delegate;
@@ -38,15 +38,15 @@ public final class StatusLoggingContextRunner implements BehaviourContextRunner 
     }
 
     @Suggest("This logging should be done on the fly by the runner, potentially removing the need for this class.")
-    public <T> BehaviourContextResult run(final Class<T> behaviourContextClass) {
-        checkNotNull(behaviourContextClass);
-        final BehaviourContextResult behaviourContextResult = delegate.run(behaviourContextClass);
-        logResults(behaviourContextResult);
-        return behaviourContextResult;
+    public <T> ContextResult run(final Class<T> contextClass) {
+        checkNotNull(contextClass);
+        final ContextResult contextResult = delegate.run(contextClass);
+        logResults(contextResult);
+        return contextResult;
     }
 
-    private void logResults(final BehaviourContextResult behaviourContextResult) {
-        final String message = messageBuilder.buildMessage(behaviourContextResult);
+    private void logResults(final ContextResult contextResult) {
+        final String message = messageBuilder.buildMessage(contextResult);
         statusLogger.log(message);
     }
 }

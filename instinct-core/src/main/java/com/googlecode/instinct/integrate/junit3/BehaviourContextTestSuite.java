@@ -1,6 +1,6 @@
 package com.googlecode.instinct.integrate.junit3;
 
-import com.googlecode.instinct.internal.runner.BehaviourContextResult;
+import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.util.Suggest;
 import junit.framework.TestSuite;
@@ -16,8 +16,8 @@ public final class BehaviourContextTestSuite extends TestSuite implements Behavi
         run(new BehaviourContextClassImpl(behaviourContextType));
     }
 
-    @Suggest("To make contexts and specs symmetric, we should do more here..., rather than doing the work in the BehaviourContextRunner")
-    public BehaviourContextResult onBehaviourContext(final BehaviourContextClass behaviourContext) {
+    @Suggest("To make contexts and specs symmetric, we should do more here..., rather than doing the work in the ContextRunner")
+    public ContextResult onBehaviourContext(final BehaviourContextClass behaviourContext) {
         currentContextSuite = new TestSuite(behaviourContext.getName());
         addTest(currentContextSuite);
         return null;

@@ -19,7 +19,7 @@ package com.googlecode.instinct.internal.runner;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 public final class BehaviourContextRunnerSlowTest extends InstinctTestCase {
-    private BehaviourContextRunner runner;
+    private ContextRunner runner;
 
     public void testRunWithSuccess() {
         runner.run(ContextContainerWithSetUpAndTearDown.class);
@@ -35,7 +35,7 @@ public final class BehaviourContextRunnerSlowTest extends InstinctTestCase {
     }
 
     private <T> void checkInvalidConstructorsGivesFailedStatus(final Class<T> cls) {
-        final BehaviourContextResult result = runner.run(cls);
+        final ContextResult result = runner.run(cls);
         assertFalse(result.completedSuccessfully());
         for (final SpecificationResult specificationResult : result.getSpecificationResults()) {
             assertFalse(specificationResult.completedSuccessfully());
@@ -44,6 +44,6 @@ public final class BehaviourContextRunnerSlowTest extends InstinctTestCase {
 
     @Override
     public void setUpSubject() {
-        runner = new BehaviourContextRunnerImpl();
+        runner = new StandardContextRunner();
     }
 }

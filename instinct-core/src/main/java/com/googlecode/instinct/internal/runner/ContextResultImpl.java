@@ -21,11 +21,11 @@ import java.util.List;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 
-public final class BehaviourContextResultImpl implements BehaviourContextResult {
+public final class ContextResultImpl implements ContextResult {
     private final List<SpecificationResult> specificationResults = new ArrayList<SpecificationResult>();
     private final String behaviourContextName;
 
-    public BehaviourContextResultImpl(final String behaviourContextName) {
+    public ContextResultImpl(final String behaviourContextName) {
         checkNotWhitespace(behaviourContextName);
         this.behaviourContextName = behaviourContextName;
     }

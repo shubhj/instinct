@@ -1,8 +1,8 @@
 package com.googlecode.instinct.integrate.junit3;
 
-import com.googlecode.instinct.internal.runner.BehaviourContextResult;
+import com.googlecode.instinct.internal.runner.ContextResult;
 
 interface BehaviourContextRunner {
-    BehaviourContextResult run(BehaviourContextClass behaviourContextClass,
+    ContextResult run(BehaviourContextClass behaviourContextClass,
             BehaviourContextRunStrategy behaviourContextRunStrategy, SpecificationRunStrategy specificationRunStrategy);
 }

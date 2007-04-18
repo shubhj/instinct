@@ -20,9 +20,9 @@ import java.io.BufferedWriter;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import com.googlecode.instinct.internal.runner.BehaviourContextResult;
-import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
-import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
+import com.googlecode.instinct.internal.runner.ContextResult;
+import com.googlecode.instinct.internal.runner.ContextRunner;
+import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.report.ContextResultMessageBuilder;
@@ -32,11 +32,18 @@ import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import com.googlecode.instinct.report.StatusLogger;
 
 @Fix("Write atomic test for this.")
-public final class TextContextRunner implements BehaviourContextRunner {
-    private final BehaviourContextRunner contextRunner;
+public final class TextContextRunner implements ContextRunner {
+    private final ContextRunner contextRunner;
+
+    /** Create a new context runner that sends output to standard out using brief formatting. */
+    public TextContextRunner() {
+        // SUPPRESS GenericIllegalRegexp {
+        this(System.out);
+        // } SUPPRESS GenericIllegalRegexp
+    }
 
     /**
-     * Create a new context runner that sends output to the given output stream using {@linkplain ResultFormat.BRIEF brief} formatting.
+     * Create a new context runner that sends output to the given output stream using brief formatting.
      * @param output The output stream to send results to.
      */
     public TextContextRunner(final OutputStream output) {
@@ -50,14 +57,30 @@ public final class TextContextRunner implements BehaviourContextRunner {
      */
     public TextContextRunner(final OutputStream output, final ResultFormat resultFormat) {
         checkNotNull(output, resultFormat);
-        final BehaviourContextRunner runner = new BehaviourContextRunnerImpl();
+        final ContextRunner runner = new StandardContextRunner();
         final ContextResultMessageBuilder messageBuilder = resultFormat.getMessageBuilder();
         contextRunner = new StatusLoggingContextRunner(runner, messageBuilder, createLogger(output));
     }
 
-    public <T> BehaviourContextResult run(final Class<T> behaviourContextClass) {
-        checkNotNull(behaviourContextClass);
-        return contextRunner.run(behaviourContextClass);
+    /**
+     * Runs the given context.
+     * @param contextClass A class containing specifications (a behaviour/specification context).
+     * @return The results of running the given context class.
+     */
+    public <T> ContextResult run(final Class<T> contextClass) {
+        checkNotNull(contextClass);
+        return contextRunner.run(contextClass);
+    }
+
+    /**
+     * Runs the given contexts sending the results to standard out.
+     * @param contextClasses An array of classes containing specifications (a behaviour/specification context) to run.
+     */
+    public static void runContexts(final Class<?>... contextClasses) {
+        final ContextRunner runner = new TextContextRunner();
+        for (final Class<?> contextClass : contextClasses) {
+            runner.run(contextClass);
+        }
     }
 
     @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})

@@ -1,4 +1,4 @@
-package com.googlecode.instinct.report;
+package com.googlecode.instinct.internal.report;
 
 import java.io.ByteArrayOutputStream;
 import com.googlecode.instinct.internal.runner.ContextWithSpecificationMethodContainingParameter;

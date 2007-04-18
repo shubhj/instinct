@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.report;
 
-import com.googlecode.instinct.internal.runner.BehaviourContextResult;
+import com.googlecode.instinct.internal.runner.ContextResult;
 
 public interface ContextResultMessageBuilder {
-    String buildMessage(BehaviourContextResult behaviourContextResult);
+    String buildMessage(ContextResult contextResult);
 }

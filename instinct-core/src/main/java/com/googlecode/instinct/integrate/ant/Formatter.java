@@ -33,7 +33,7 @@ public final class Formatter {
             throw new UnsupportedOperationException(
                     "Formatter type '" + type + "' is not supported, supported types " + asList(ResultFormat.values()));
         }
-        this.type = valueOf(type);
+        this.type = valueOf(type.toUpperCase());
     }
 
     public ContextResultMessageBuilder createMessageBuilder() {

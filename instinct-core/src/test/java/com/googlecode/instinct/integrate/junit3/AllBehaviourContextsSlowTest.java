@@ -22,8 +22,8 @@ import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
 import com.googlecode.instinct.internal.aggregate.AnnotatedBehaviourContextAggregatorImpl;
 import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
-import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
-import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
+import com.googlecode.instinct.internal.runner.ContextRunner;
+import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.marker.BehaviourContextConfigurationException;
 import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
@@ -32,7 +32,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 @SuppressWarnings({"ProhibitedExceptionThrown"})
 public final class AllBehaviourContextsSlowTest extends InstinctTestCase {
     private final EdgeClass edgeClass = new DefaultEdgeClass();
-    private final BehaviourContextRunner contextRunner = new BehaviourContextRunnerImpl();
+    private final ContextRunner contextRunner = new StandardContextRunner();
 
     public void testRunAllContexts() {
         runAllContexts();

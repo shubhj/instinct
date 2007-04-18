@@ -17,21 +17,21 @@
 package com.googlecode.instinct.internal.runner;
 
 import java.util.List;
-import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.expect.Mocker.atLeastOnce;
 import static com.googlecode.instinct.expect.Mocker.expects;
 import static com.googlecode.instinct.expect.Mocker.mock;
 import static com.googlecode.instinct.expect.Mocker.returnValue;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
 @Suggest("Test new getters")
 public final class BehaviourContextResultImplAtomicTest extends InstinctTestCase {
-    private BehaviourContextResult contextResult;
+    private ContextResult contextResult;
     private SpecificationResult specificationResult;
 
     public void testConformsToClassTraits() {
-        checkClass(BehaviourContextResultImpl.class, BehaviourContextResult.class);
+        checkClass(ContextResultImpl.class, ContextResult.class);
     }
 
     public void testGetBehaviourContextName() {
@@ -64,7 +64,7 @@ public final class BehaviourContextResultImplAtomicTest extends InstinctTestCase
     }
 
     private void checkGetBahaviourContextName(final String behaviourContextName) {
-        final BehaviourContextResult result = new BehaviourContextResultImpl(behaviourContextName);
+        final ContextResult result = new ContextResultImpl(behaviourContextName);
         assertEquals(behaviourContextName, result.getBehaviourContextName());
     }
 
@@ -75,6 +75,6 @@ public final class BehaviourContextResultImplAtomicTest extends InstinctTestCase
 
     @Override
     public void setUpSubject() {
-        contextResult = new BehaviourContextResultImpl("AnEmptyStack");
+        contextResult = new ContextResultImpl("AnEmptyStack");
     }
 }

@@ -1,5 +1,7 @@
 package com.googlecode.instinct.report;
 
+import com.googlecode.instinct.internal.report.BriefContextResultMessageBuilder;
+import com.googlecode.instinct.internal.report.VerboseContextResultMessageBuilder;
 import com.googlecode.instinct.internal.util.Suggest;
 
 @Suggest("Figure out how to test this sucker.")
@@ -16,7 +18,6 @@ public enum ResultFormat {
         }
     };
 
-    @Suggest("Is this the best way to define this?")
     // SUPPRESS IllegalToken {
     public abstract ContextResultMessageBuilder getMessageBuilder();
     // } SUPPRESS IllegalToken

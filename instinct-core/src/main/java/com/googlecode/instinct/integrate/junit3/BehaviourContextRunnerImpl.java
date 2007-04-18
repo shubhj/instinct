@@ -4,7 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
-import com.googlecode.instinct.internal.runner.BehaviourContextResult;
+import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.SpecificationContext;
 import com.googlecode.instinct.internal.runner.SpecificationContextImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
@@ -21,7 +21,7 @@ import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 public final class BehaviourContextRunnerImpl implements BehaviourContextRunner {
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
 
-    public BehaviourContextResult run(final BehaviourContextClass behaviourContextClass,
+    public ContextResult run(final BehaviourContextClass behaviourContextClass,
             final BehaviourContextRunStrategy behaviourContextRunStrategy, final SpecificationRunStrategy specificationRunStrategy) {
         checkNotNull(behaviourContextClass, behaviourContextRunStrategy);
         behaviourContextRunStrategy.onBehaviourContext(behaviourContextClass);
@@ -63,7 +63,7 @@ public final class BehaviourContextRunnerImpl implements BehaviourContextRunner 
         return getMethods(behaviourContextClass, Specification.class, new SpecificationNamingConvention());
     }
 
-    @Suggest("This contains heavy duplication with BehaviourContextRunnerImpl, figure out how to remove it")
+    @Suggest("This contains heavy duplication with StandardContextRunner, figure out how to remove it")
     private Method[] getMethods(final BehaviourContextClass behaviourContextClass, final Class<? extends Annotation> annotationType,
             final NamingConvention namingConvention) {
         return methodLocator.locateAll(behaviourContextClass.getType(), annotationType, namingConvention);

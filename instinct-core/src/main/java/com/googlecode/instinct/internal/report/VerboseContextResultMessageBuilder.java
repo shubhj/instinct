@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.report;
+package com.googlecode.instinct.internal.report;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 import static java.lang.System.getProperty;
-import com.googlecode.instinct.internal.runner.BehaviourContextResult;
+import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
 import com.googlecode.instinct.internal.util.ExceptionFinder;
 import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.report.ContextResultMessageBuilder;
 
 public final class VerboseContextResultMessageBuilder implements ContextResultMessageBuilder {
     private static final double MILLISECONDS_IN_SECONDS = 1000.0;
@@ -33,27 +34,27 @@ public final class VerboseContextResultMessageBuilder implements ContextResultMe
     private static final String NEW_LINE = getProperty("line.separator");
     private final ExceptionFinder exceptionFinder = new ExceptionFinderImpl();
 
-    public String buildMessage(final BehaviourContextResult behaviourContextResult) {
-        checkNotNull(behaviourContextResult);
+    public String buildMessage(final ContextResult contextResult) {
+        checkNotNull(contextResult);
         final StringBuilder builder = new StringBuilder();
-        appendSummary(builder, behaviourContextResult);
-        appendSpecifications(builder, behaviourContextResult);
+        appendSummary(builder, contextResult);
+        appendSpecifications(builder, contextResult);
         builder.append(NEW_LINE);
         return builder.toString();
     }
 
-    private void appendSpecifications(final StringBuilder builder, final BehaviourContextResult behaviourContextResult) {
-        for (final SpecificationResult specificationResult : behaviourContextResult.getSpecificationResults()) {
+    private void appendSpecifications(final StringBuilder builder, final ContextResult contextResult) {
+        for (final SpecificationResult specificationResult : contextResult.getSpecificationResults()) {
             appendSpecification(builder, specificationResult);
         }
     }
 
-    private void appendSummary(final StringBuilder builder, final BehaviourContextResult behaviourContextResult) {
-        builder.append("Context: ").append(behaviourContextResult.getBehaviourContextName()).append(SPACER);
-        builder.append("Specifications run: ").append(getNumberOfSpecsRun(behaviourContextResult)).append(SPACER);
-        builder.append("Successes: ").append(behaviourContextResult.getNumberOfSuccesses()).append(SPACER);
-        builder.append("Failures: ").append(behaviourContextResult.getNumberOfFailures()).append(SPACER);
-        builder.append("Total time elapsed: ").append(getExecutionTime(behaviourContextResult)).append(" seconds");
+    private void appendSummary(final StringBuilder builder, final ContextResult contextResult) {
+        builder.append("Context: ").append(contextResult.getBehaviourContextName()).append(SPACER);
+        builder.append("Specifications run: ").append(getNumberOfSpecsRun(contextResult)).append(SPACER);
+        builder.append("Successes: ").append(contextResult.getNumberOfSuccesses()).append(SPACER);
+        builder.append("Failures: ").append(contextResult.getNumberOfFailures()).append(SPACER);
+        builder.append("Total time elapsed: ").append(getExecutionTime(contextResult)).append(" seconds");
         builder.append(NEW_LINE);
     }
 
@@ -84,12 +85,12 @@ public final class VerboseContextResultMessageBuilder implements ContextResultMe
     }
     // } SUPPRESS GenericIllegalRegexp
 
-    private int getNumberOfSpecsRun(final BehaviourContextResult behaviourContextResult) {
-        return behaviourContextResult.getSpecificationResults().size();
+    private int getNumberOfSpecsRun(final ContextResult contextResult) {
+        return contextResult.getSpecificationResults().size();
     }
 
-    private double getExecutionTime(final BehaviourContextResult behaviourContextResult) {
-        return millisToSeconds(behaviourContextResult.getExecutionTime());
+    private double getExecutionTime(final ContextResult contextResult) {
+        return millisToSeconds(contextResult.getExecutionTime());
     }
 
     private double millisToSeconds(final long millis) {

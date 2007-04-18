@@ -34,10 +34,10 @@ import com.googlecode.instinct.internal.util.Suggest;
 public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
     private final TestDoubleAutoWirer testDoubleAutoWirer = new TestDoubleAutoWirerImpl();
-    private final MockVerifier mockVerifier = new MockVerifierImpl();
     private final Clock clock = new ClockImpl();
     private MethodInvoker methodInvoker = new MethodInvokerImpl();
     private LifeCycleMethodValidator methodValidator = new LifeCycleMethodValidatorImpl();
+    private final MockVerifier mockVerifier = new MockVerifierImpl();
 
     @Suggest({"Does each specification get it's own Mockery?", " How will this work if we want to allow manual mocking?",
             "Need access to the same statics",
@@ -49,6 +49,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
 
     @SuppressWarnings({"CatchGenericClass"})
     // SUPPRESS IllegalCatch {
+    @Suggest("Make a clock wrapper that looks like org.jbehave.core.util.Timer.")
     private SpecificationResult doRun(final SpecificationContext specificationContext) {
         final long startTime = clock.getCurrentTime();
         try {

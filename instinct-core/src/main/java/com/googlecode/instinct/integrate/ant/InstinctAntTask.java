@@ -21,9 +21,9 @@ import static java.util.Arrays.asList;
 import java.util.List;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
-import com.googlecode.instinct.internal.runner.BehaviourContextResult;
-import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
-import com.googlecode.instinct.internal.runner.BehaviourContextRunnerImpl;
+import com.googlecode.instinct.internal.runner.ContextResult;
+import com.googlecode.instinct.internal.runner.ContextRunner;
+import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
@@ -79,7 +79,7 @@ public final class InstinctAntTask extends Task implements StatusLogger {
 
     private void runContexts() {
         final List<JavaClassName> contextClasses = findBehaviourContextsFromAllAggregators();
-        final BehaviourContextRunner runner = new StatusLoggingContextRunner(new BehaviourContextRunnerImpl(),
+        final ContextRunner runner = new StatusLoggingContextRunner(new StandardContextRunner(),
                 formatter.createMessageBuilder(), this);
         runContexts(runner, contextClasses);
     }
@@ -92,15 +92,15 @@ public final class InstinctAntTask extends Task implements StatusLogger {
         return contextClasses;
     }
 
-    private void runContexts(final BehaviourContextRunner behaviourContextRunner, final List<JavaClassName> contextClasses) {
+    private void runContexts(final ContextRunner contextRunner, final List<JavaClassName> contextClasses) {
         for (final JavaClassName contextClass : contextClasses) {
-            runContext(behaviourContextRunner, contextClass);
+            runContext(contextRunner, contextClass);
         }
     }
 
-    private void runContext(final BehaviourContextRunner runner, final JavaClassName contextClass) {
+    private void runContext(final ContextRunner runner, final JavaClassName contextClass) {
         final Class<?> cls = edgeClass.forName(contextClass.getFullyQualifiedName());
-        final BehaviourContextResult result = runner.run(cls);
+        final ContextResult result = runner.run(cls);
         if (!result.completedSuccessfully()) {
             getProject().setProperty(failureProperty, "true");
         }

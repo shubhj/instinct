@@ -18,7 +18,7 @@ package com.googlecode.instinct.internal.runner;
 
 import java.util.List;
 
-public interface BehaviourContextResult {
+public interface ContextResult {
     void addSpecificationResult(SpecificationResult specificationResult);
 
     List<SpecificationResult> getSpecificationResults();

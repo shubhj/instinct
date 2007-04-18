@@ -40,7 +40,7 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitesp
 import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 
-@Fix({"Add javadoc"})
+@Fix({"Add javadoc", "Come up with a better way to compose these interfaces into one, perhaps a proxy."})
 public final class ExpectThatImpl implements ExpectThat {
     private StateExpectations stateExpectations = new StateExpectationsImpl();
     private BehaviourExpectations behaviourExpectations = new BehaviourExpectationsImpl();
@@ -52,59 +52,61 @@ public final class ExpectThatImpl implements ExpectThat {
 
     public StringChecker that(final String string) {
         checkNotWhitespace(string);
-        return null;
+        return stateExpectations.that(string);
     }
 
     public <T extends Comparable<T>> ComparableChecker<T> that(final T comparable) {
         checkNotNull(comparable);
-        return null;
+        return stateExpectations.that(comparable);
     }
 
     public <E, T extends Iterable<E>> IterableChecker<E, T> that(final T iterable) {
         checkNotNull(iterable);
-        return null;
+        return stateExpectations.that(iterable);
     }
 
     public <E, T extends Collection<E>> CollectionChecker<E, T> that(final T collection) {
         checkNotNull(collection);
-        return null;
+        return stateExpectations.that(collection);
     }
 
     public <T> ArrayChecker<T> that(final T[] array) {
         checkNotNull(array);
-        return null;
+        return stateExpectations.that(array);
     }
 
     public <K, V> MapChecker<K, V> that(final Map<K, V> map) {
         checkNotNull(map);
-        return null;
+        return stateExpectations.that(map);
     }
 
     public DoubleChecker that(final Double d) {
         checkNotNull(d);
-        return null;
+        return stateExpectations.that(d);
     }
 
     public <T> ClassChecker<T> that(final Class<T> aClass) {
         checkNotNull(aClass);
-        return null;
+        return stateExpectations.that(aClass);
     }
 
     public <T extends EventObject> EventObjectChecker<T> that(final T eventObject) {
         checkNotNull(eventObject);
-        return null;
+        return stateExpectations.that(eventObject);
     }
 
     public <T extends Node> NodeChecker<T> that(final T node) {
         checkNotNull(node);
-        return null;
+        return stateExpectations.that(node);
     }
 
     public <T> void that(final T t, final Matcher<T> hamcrestMatcher) {
         checkNotNull(t, hamcrestMatcher);
+        stateExpectations.that(hamcrestMatcher);
     }
 
     public <T> void notThat(final T t, final Matcher<T> hamcrestMatcher) {
         checkNotNull(t, hamcrestMatcher);
+        stateExpectations.that(hamcrestMatcher);
     }
 }

@@ -1,40 +1,54 @@
 package com.googlecode.instinct.runner;
 
 import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import static java.lang.System.setOut;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
-import com.googlecode.instinct.internal.runner.BehaviourContextRunner;
-import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.runner.ContextContainerWithSetUpAndTearDown;
+import com.googlecode.instinct.internal.runner.ContextRunner;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
+import static com.googlecode.instinct.runner.TextContextRunner.runContexts;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 public final class TextContextRunnerSlowTest extends InstinctTestCase {
-    private BehaviourContextRunner contextRunner;
-    private ByteArrayOutputStream out;
+    private ContextRunner contextRunner;
+    private ByteArrayOutputStream outputBuffer;
 
     @Override
     public void setUpTestDoubles() {
-        out = new ByteArrayOutputStream();
+        outputBuffer = new ByteArrayOutputStream();
     }
 
     @Override
     public void setUpSubject() {
-        contextRunner = new TextContextRunner(out, BRIEF);
+        contextRunner = new TextContextRunner(outputBuffer, BRIEF);
     }
 
-    public void testRunnerSendsSpeciciationResultsToOutput() {
-        contextRunner.run(ASimpleContext.class);
-        checkRunnerSendsSpeciciationResultsToOutput();
+    public void testSendsSpeciciationResultsToOutput() {
+        checkSendsSpeciciationResultsToOutput(ASimpleContext.class);
+        checkSendsSpeciciationResultsToOutput(ContextContainerWithSetUpAndTearDown.class);
     }
 
-    @Suggest("Implement this.")
-    public void testNotSpecifyingBuilderCausesRunnerToSendSpeciciationResultsToOutputUsingBriefFormatter() {
-        contextRunner.run(ASimpleContext.class);
-        checkRunnerSendsSpeciciationResultsToOutput();
+    public void testCanBeCalledStaticallySendingResultsToStandardOut() {
+        final PrintStream defaultStdOut = System.out;
+        try {
+            setOut(new PrintStream(outputBuffer));
+            runContexts(ASimpleContext.class, ContextContainerWithSetUpAndTearDown.class);
+            checkRunnerSendsSpeciciationResultsToOutput(ASimpleContext.class);
+            checkRunnerSendsSpeciciationResultsToOutput(ContextContainerWithSetUpAndTearDown.class);
+        } finally {
+            setOut(defaultStdOut);
+        }
     }
 
-    private void checkRunnerSendsSpeciciationResultsToOutput() {
-        final String runnerOutput = new String(out.toByteArray());
-        assertTrue(runnerOutput.contains("Context: ASimpleContext"));
+    private <T> void checkSendsSpeciciationResultsToOutput(final Class<T> contextClass) {
+        contextRunner.run(contextClass);
+        checkRunnerSendsSpeciciationResultsToOutput(contextClass);
+    }
+
+    private <T> void checkRunnerSendsSpeciciationResultsToOutput(final Class<T> contextClass) {
+        final String runnerOutput = new String(outputBuffer.toByteArray());
+        assertTrue(runnerOutput.contains("Context: " + contextClass.getSimpleName()));
         assertTrue(runnerOutput.contains("Specifications run:"));
     }
 }
