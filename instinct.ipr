@@ -152,7 +152,7 @@
           </warning>
           <information>
             <option name="myName" value="INFO" />
-            <option name="myVal" value="100" />
+            <option name="myVal" value="200" />
           </information>
           <server>
             <option name="myName" value="SERVER PROBLEM" />
