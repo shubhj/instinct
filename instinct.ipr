@@ -897,7 +897,10 @@
   <component name="StarteamVcsAdapter" />
   <component name="SvnBranchConfigurationManager" />
   <component name="ToggleTest">
-    <toggle from="^(\w)Impl" to="$1Context" />
+    <toggle from="*AtomicTest" to="*SlowTest" />
+    <toggle from="*SlowTest" to="*" />
+    <toggle from="*" to="*AtomicTest" />
+    <toggle from="*" to="*Context" />
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="svn" />
