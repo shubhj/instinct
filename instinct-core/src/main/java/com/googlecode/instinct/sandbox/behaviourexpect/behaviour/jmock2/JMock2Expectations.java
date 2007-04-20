@@ -1,4 +1,4 @@
-package com.googlecode.instinct.behaviourexpect.behaviour.jmock2;
+package com.googlecode.instinct.sandbox.behaviourexpect.behaviour.jmock2;
 
 import org.jmock.Expectations;
 

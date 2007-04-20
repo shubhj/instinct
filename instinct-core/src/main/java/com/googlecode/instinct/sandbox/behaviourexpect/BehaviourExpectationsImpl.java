@@ -1,4 +1,4 @@
-package com.googlecode.instinct.behaviourexpect;
+package com.googlecode.instinct.sandbox.behaviourexpect;
 
 import com.googlecode.instinct.internal.mock.Mockery;
 import com.googlecode.instinct.internal.mock.MockeryImpl;

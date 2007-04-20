@@ -1,14 +1,14 @@
-package com.googlecode.instinct.behaviourexpect;
+package com.googlecode.instinct.sandbox.behaviourexpect;
 
 import java.util.ArrayList;
 import java.util.List;
-import static com.googlecode.instinct.behaviourexpect.BehaviourExpect.eq;
-import static com.googlecode.instinct.behaviourexpect.BehaviourExpect.expect;
-import static com.googlecode.instinct.behaviourexpect.BehaviourExpect.once;
-import static com.googlecode.instinct.behaviourexpect.BehaviourExpect.one;
-import static com.googlecode.instinct.behaviourexpect.BehaviourExpect.returnValue;
 import com.googlecode.instinct.marker.annotate.BehaviourContext;
 import com.googlecode.instinct.marker.annotate.Specification;
+import static com.googlecode.instinct.sandbox.behaviourexpect.BehaviourExpect.eq;
+import static com.googlecode.instinct.sandbox.behaviourexpect.BehaviourExpect.expect;
+import static com.googlecode.instinct.sandbox.behaviourexpect.BehaviourExpect.once;
+import static com.googlecode.instinct.sandbox.behaviourexpect.BehaviourExpect.one;
+import static com.googlecode.instinct.sandbox.behaviourexpect.BehaviourExpect.returnValue;
 import org.jmock.Expectations;
 
 // SUPPRESS Indentation {

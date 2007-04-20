@@ -1,4 +1,4 @@
-package com.googlecode.instinct.behaviourexpect;
+package com.googlecode.instinct.sandbox.behaviourexpect;
 
 import org.jmock.builder.ArgumentsMatchBuilder;
 

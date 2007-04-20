@@ -1,6 +1,6 @@
-package com.googlecode.instinct.behaviourexpect.behaviour.jmock1;
+package com.googlecode.instinct.sandbox.behaviourexpect.behaviour.jmock1;
 
-import com.googlecode.instinct.behaviourexpect.MethodInvocationMatcher;
+import com.googlecode.instinct.sandbox.behaviourexpect.MethodInvocationMatcher;
 import org.jmock.builder.IdentityBuilder;
 import org.jmock.core.Constraint;
 import org.jmock.core.InvocationMatcher;

@@ -1,4 +1,4 @@
-package com.googlecode.instinct.behaviourexpect;
+package com.googlecode.instinct.sandbox.behaviourexpect;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
