@@ -126,7 +126,7 @@
             <zipfileset dir="${lib.dir}/ant" prefix="lib" includes="ant-1.*.jar,ant-license.txt"/>
             <zipfileset dir="${lib.dir}/boost" prefix="lib"/>
             <zipfileset dir="${lib.dir}/cglib" prefix="lib"/>
-            <zipfileset dir="${lib.dir}/easymock" prefix="lib" excludes="easymockclassextension-*.jar,easymock-license.txt"/>
+            <zipfileset dir="${lib.dir}/objenesis" prefix="lib"/>
             <zipfileset dir="${lib.dir}/jmock" prefix="lib"/>
             <zipfileset dir="${lib.dir}/junit" prefix="lib"/>
         </zip>
