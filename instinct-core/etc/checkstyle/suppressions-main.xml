@@ -3,5 +3,6 @@
         "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
 
 <suppressions>
-    <!--<suppress checks="ConstantName" files="Expect.java"/>-->
+    <suppress checks="ConstantName" files="Expect.java"/>
+    <suppress checks="GenericIllegalRegexp" files="TextContextRunner.java"/>
 </suppressions>

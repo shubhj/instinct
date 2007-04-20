@@ -33,13 +33,14 @@ import com.googlecode.instinct.report.StatusLogger;
 
 @Fix("Write atomic test for this.")
 public final class TextContextRunner implements ContextRunner {
+    private static final boolean AUTO_FLUSH_OUTPUT = true;
     private final ContextRunner contextRunner;
 
-    /** Create a new context runner that sends output to standard out using brief formatting. */
+    /**
+     * Create a new context runner that sends output to standard out using brief formatting.
+     */
     public TextContextRunner() {
-        // SUPPRESS GenericIllegalRegexp {
         this(System.out);
-        // } SUPPRESS GenericIllegalRegexp
     }
 
     /**
@@ -85,6 +86,6 @@ public final class TextContextRunner implements ContextRunner {
 
     @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
     private StatusLogger createLogger(final OutputStream output) {
-        return new PrintWriterStatusLogger(new PrintWriter(new BufferedWriter(new OutputStreamWriter(output)), true));
+        return new PrintWriterStatusLogger(new PrintWriter(new BufferedWriter(new OutputStreamWriter(output)), AUTO_FLUSH_OUTPUT));
     }
 }
