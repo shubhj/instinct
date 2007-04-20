@@ -6,39 +6,39 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.util.Suggest;
-import junit.framework.TestCase;
+import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Specification;
 import org.hamcrest.Matchers;
 
 /**
- * The examples below illustrate a basic expectation API built on top of the Hamcrest Matcher API.
- * The wrapper objects enable:
- * 1. IDE code completion reduced to the methods that apply to the type object being checked.
- * 2. A more english like (and longer) flow.
- * 3. The standard Hamcrest Matchers or custom Matcher implementations to be passed in as well.
+ * The examples below illustrate Instinct's state-based expectation API.
+ * @see com.googlecode.instinct.expect.state.StateExpectations
  */
 @SuppressWarnings({"MagicNumber", "unchecked"})
-@Suggest("Move to be a BehaviourContext")
-public final class ExpectExample extends TestCase {
+@BehaviourContext
+public final class StateExpectationsContext {
 
-    public void testShowSomeObjectStuff() {
+    @Specification
+    public void providesMatchersForMakingAssertionsAboutObjects() {
         expect.that("fred").equalTo("fred");
         expect.that("fred").notEqualTo("barney");
         expect.that(this).sameInstanceAs(this);
         expect.that("fred").notSameInstanceAs("barney");
-        expect.that(this).instanceOf(ExpectExample.class);
+        expect.that(this).instanceOf(StateExpectationsContext.class);
         expect.that(this).notNull();
         // Mixing with standard Hamcrest matchers
         expect.that("fred").matchesAllOf(Matchers.startsWith("fr"), Matchers.containsString("ed"));
         expect.that("fred", Matchers.equalTo("fred"));
     }
 
-    public void testShowSomeClassStuff() {
+    @Specification
+    public void providesMatchersForMakingAssertionsAboutClasses() {
         expect.that(String.class).typeCompatibleWith(Comparable.class);
         expect.that(Comparable.class).notTypeCompatibleWith(String.class);
     }
 
-    public void testShowSomeStringStuff() {
+    @Specification
+    public void providesMatchersForMakingAssertionsAboutStrings() {
         expect.that("andersdabeerz").equalsIgnoringCase("AndersDaBeerz");
         expect.that("andersdabeerz").startsWith("anders");
         expect.that("andersdabeerz").containsString("da");
@@ -47,7 +47,8 @@ public final class ExpectExample extends TestCase {
         expect.that("andersdabeerz").notContainString("water");
     }
 
-    public void testShowSomeComparableStuff() {
+    @Specification
+    public void providesMatchersForMakingAssertionsAboutComparables() {
         expect.that(1).equalTo(1);
         expect.that(1).greaterThan(0);
         expect.that(1).greaterThanOrEqualTo(0);
@@ -55,7 +56,8 @@ public final class ExpectExample extends TestCase {
         expect.that(1).lessThanOrEqualTo(2);
     }
 
-    public void testShowSomeCollectionAndIterableStuff() {
+    @Specification
+    public void providesMatchersForMakingAssertionsAboutCollectionsAndIterables() {
         List<String> people = new ArrayList<String>();
         expect.that(people).isEmpty();
         people.add("fred");
@@ -67,7 +69,8 @@ public final class ExpectExample extends TestCase {
         expect.that(people).notContainItems("barney", "betty");
     }
 
-    public void testShowSomeArrayStuff() {
+    @Specification
+    public void providesMatchersForMakingAssertionsAboutArrays() {
         String[] greetings = {"hi", "there"};
         expect.that(greetings).hasLength(2);
         expect.that(greetings).containsItem("hi");
@@ -75,7 +78,8 @@ public final class ExpectExample extends TestCase {
         expect.that(greetings).notContainItem(Matchers.greaterThan("zip"));
     }
 
-    public void testShowSomeMapStuff() {
+    @Specification
+    public void providesMatchersForMakingAssertionsAboutMaps() {
         Map<String, String> map = new HashMap<String, String>();
         expect.that(map).isEmpty();
         map.put("key", "value");
@@ -86,12 +90,14 @@ public final class ExpectExample extends TestCase {
         expect.that(map).containsEntry("key", "value");
     }
 
-    public void testShowDoubleStuff() {
+    @Specification
+    public void providesMatchersForMakingAssertionsAboutDoubles() {
         expect.that(1.1).closeTo(1.0, 0.11);
         expect.that(1.1).notCloseTo(1.0, 0.1);
     }
 
-    public void testShowSomeEventStuff() {
+    @Specification
+    public void providesMatchersForMakingAssertionsAboutEvents() {
         Object object = new Object();
         EventObject myEventObject = new MyEventObject(object);
         expect.that(myEventObject).eventFrom(MyEventObject.class, object);

@@ -16,6 +16,15 @@
 
 package com.googlecode.instinct.expect;
 
+/**
+ * Static wrapper for making expectations about an object. This class is designed to be statically imported, usage is as follows:
+ * <pre>
+ * import static com.googlecode.instinct.expect.Expect.expect;
+ * ...
+ * expect.that("instinct").equalTo("instinct");
+ * </pre>
+ * If you prefer not to statically import, create an instance of an {@link com.googlecode.instinct.expect.ExpectThat} implementation directly.
+ */
 public final class Expect {
     // Note. Lower case name to read nicely when statically imported.
     public static final ExpectThat expect = new ExpectThatImpl();

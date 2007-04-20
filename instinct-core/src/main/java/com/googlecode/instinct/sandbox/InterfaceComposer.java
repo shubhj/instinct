@@ -1,7 +1,3 @@
-package com.googlecode.instinct.sandbox;
-
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Proxy;
 /*
  * Copyright 2006-2007 Ben Warren
  *
@@ -17,6 +13,10 @@ import java.lang.reflect.Proxy;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.googlecode.instinct.sandbox;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Proxy;
 
 public final class InterfaceComposer {
 

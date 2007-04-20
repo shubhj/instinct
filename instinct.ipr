@@ -1160,13 +1160,6 @@
         <root url="jar://$PROJECT_DIR$/instinct-core/etc/lib-src/objenesis-1.0-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="clover">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/../../../Library/Application Support/IntelliJIDEA70/clover-idea6.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES />
-    </library>
   </component>
   <component name="uidesigner-configuration" />
 </project>

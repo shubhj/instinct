@@ -1,11 +1,3 @@
-package com.googlecode.instinct.sandbox;
-
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
-
 /*
 * Copyright 2006-2007 Ben Warren
 *
@@ -21,6 +13,14 @@ import java.util.List;
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
+package com.googlecode.instinct.sandbox;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
 public final class ComposingInvocationHandler<T> implements InvocationHandler {
     private Object[] implementers;
 

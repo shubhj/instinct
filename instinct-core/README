@@ -53,6 +53,34 @@ o junit-4.3.1.jar
 Documentation can be found at: http://code.google.com/p/instinct/.
 
 
+
+* Package Structure *
+
+Instinct is organsed into published APIs and internal packages. You should use the published API
+
+You are welcome to use the internal classes,
+  however relying on the internal APIs is not advised, as these will change from release to release.
+
+
+Published packages
+
+TODO
+
+Internal packages
+
+com.googlecode.instinct.sandbox
+  New ideas, not ready for production usage. Feel free to use this code, but it may be deleted or moved without warning.
+
+
+Plug-in Points
+
+com.googlecode.instinct.report
+  
+
+com.googlecode.instinct.runner
+  Context runners for running Instinct contexts outside of the provided Ant, JUnit or IDE runners.
+
+
 * Source *
 
 Source code is available within the distribution Jars, complete source is
@@ -69,6 +97,8 @@ o Ben Warren
 o Lyall Ward
 
 Thanks to the work done on RSpec, jMock, EasyMock, Boost & JRDF. These libraries
-inspired Instinct.
+inspired Instinct. Thanks also to the EasyDoc team, past & present, your work is
+inspirational.
 
 Instinct development is supported by Workingmouse: http://workingmouse.com/.
+Code coverage is provided by Clover: http://cenqua.com/clover.

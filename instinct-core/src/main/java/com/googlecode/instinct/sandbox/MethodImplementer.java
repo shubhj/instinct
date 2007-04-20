@@ -1,8 +1,3 @@
-package com.googlecode.instinct.sandbox;
-
-import java.lang.reflect.Method;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 /*
  * Copyright 2006-2007 Ben Warren
  *
@@ -18,6 +13,11 @@ import java.util.Arrays;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.googlecode.instinct.sandbox;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 
 final class MethodImplementer {
 
