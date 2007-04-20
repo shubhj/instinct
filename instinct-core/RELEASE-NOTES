@@ -1,9 +1,19 @@
+* Instinct Release 0.1.4 *
+
+o Behavioural expectation API (ie. mocking) - com.googlecode.instinct.expect.Expect.
+o Removed the need for specification methods to have a void return type (helps
+  Groovy integration).
+o Added Clover code coverage.
+o Removed EasyMock dependency, added Objenisis for mocking concrete classes.
+
+
 * Instinct Release 0.1.3 *
 
 o "Merged" state & bahavioural expectation API (both accessible from same class).
+  Behaviour API still under development.
 o Upgraded libraries to jMock 1.2.0, jMock 2.0.0 & JUnit 4.3.1.
-o Added external integration points for runners & reporting. Thanks to Paul King for Groovy integration.
-o Removed the need for specification methods to have a void return type (helps Groovy integration).
+o Added external integration points for runners & reporting. Thanks to Paul King
+  for Groovy integration.
 
 
 * Instinct Release 0.1.2 *
