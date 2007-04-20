@@ -82,7 +82,6 @@
     </target>
 
     <target name="-compile" depends="checkstyle">
-        <!--<target name="-compile">-->
         <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}" src.path="main.code.path"
                        src.pattern="all.code.pattern"/>
         <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}" src.path="test.code.path"
