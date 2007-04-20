@@ -1116,15 +1116,6 @@
         <root url="jar://$PROJECT_DIR$/instinct-core/etc/lib-src/cglib-src-2.2_beta1.jar!/src/proxy" />
       </SOURCES>
     </library>
-    <library name="easymock">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/instinct-core/lib/easymock/easymockclassextension-2.2.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/instinct-core/etc/lib-src/easymockclassextension-2.2-src.zip!/" />
-      </SOURCES>
-    </library>
     <library name="hamcrest-all-1.0">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/instinct-core/lib/hamcrest/hamcrest-all-1.0.jar!/" />
