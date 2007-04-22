@@ -29,42 +29,51 @@ import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
 
-@SuppressWarnings({"OverlyCoupledClass"})
 public final class SpecificationRunnerSlowTest extends InstinctTestCase {
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
     private SpecificationRunner runner;
 
+    @Override
+    public void setUpSubject() {
+        runner = new SpecificationRunnerImpl();
+    }
+
     public void testRunWithSuccess() {
-        final SpecificationContext[] contexts = findContexts(ContextContainerWithSetUpAndTearDown.class);
+        checkContextsRunWithoutError(ContextContainerWithSetUpAndTearDown.class);
+        checkContextsRunWithoutError(ContextWithSpecificationWithReturnType.class);
+        checkContextsRunWithoutError(ContextWithBeforeSpecificationWithReturnType.class);
+        checkContextsRunWithoutError(ContextWithAfterSpecificationWithReturnType.class);
+    }
+
+    public void testInvalidMethodsBarf() {
+        checkInvalidMethodsBarf(ContextWithSpecificationMethodContainingParameter.class);
+        checkInvalidMethodsBarf(ContextWithInvalidlyMarkedAfterSpecification2.class);
+        checkInvalidMethodsBarf(ContextWithInvalidlyMarkedBeforeSpecification2.class);
+    }
+
+    private <T> void checkContextsRunWithoutError(final Class<T> contextClass) {
+        final SpecificationContext[] contexts = findSpecContexts(contextClass);
         for (final SpecificationContext context : contexts) {
             runner.run(context);
         }
     }
 
-    public void testInvalidMethodsBarf() {
-        checkInvalidMethodsBarf(ContextWithInvalidlyMarkedSpecification1.class);
-        checkInvalidMethodsBarf(ContextWithSpecificationMethodContainingParameter.class);
-        checkInvalidMethodsBarf(ContextWithInvalidlyMarkedAfterSpecification1.class);
-        checkInvalidMethodsBarf(ContextWithInvalidlyMarkedAfterSpecification2.class);
-        checkInvalidMethodsBarf(ContextWithInvalidlyMarkedBeforeSpecification1.class);
-        checkInvalidMethodsBarf(ContextWithInvalidlyMarkedBeforeSpecification2.class);
-    }
-
     private <T> void checkInvalidMethodsBarf(final Class<T> cls) {
-        final SpecificationContext[] contexts = findContexts(cls);
+        final SpecificationContext[] contexts = findSpecContexts(cls);
         for (final SpecificationContext context : contexts) {
             final SpecificationResult specificationResult = runner.run(context);
-            assertFalse(specificationResult.completedSuccessfully());
+            assertFalse("Context " + context.getBehaviourContextClass().getSimpleName() + " should have failed",
+                    specificationResult.completedSuccessfully());
         }
     }
 
-    private <T> SpecificationContext[] findContexts(final Class<T> cls) {
-        final Method[] before = getMethods(cls, BeforeSpecification.class, new BeforeSpecificationNamingConvention());
-        final Method[] after = getMethods(cls, AfterSpecification.class, new AfterSpecificationNamingConvention());
-        final Method[] specs = getMethods(cls, Specification.class, new SpecificationNamingConvention());
+    private <T> SpecificationContext[] findSpecContexts(final Class<T> contextClass) {
+        final Method[] before = getMethods(contextClass, BeforeSpecification.class, new BeforeSpecificationNamingConvention());
+        final Method[] after = getMethods(contextClass, AfterSpecification.class, new AfterSpecificationNamingConvention());
+        final Method[] specs = getMethods(contextClass, Specification.class, new SpecificationNamingConvention());
         final SpecificationContext[] contexts = new SpecificationContext[specs.length];
         for (int i = 0; i < contexts.length; i++) {
-            contexts[i] = new SpecificationContextImpl(cls, before, after, specs[i]);
+            contexts[i] = new SpecificationContextImpl(contextClass, before, after, specs[i]);
         }
         return contexts;
     }
@@ -72,10 +81,5 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
     private <T, A extends Annotation> Method[] getMethods(final Class<T> cls, final Class<A> annotationType,
             final NamingConvention namingConvention) {
         return methodLocator.locateAll(cls, annotationType, namingConvention);
-    }
-
-    @Override
-    public void setUpSubject() {
-        runner = new SpecificationRunnerImpl();
     }
 }

@@ -49,7 +49,7 @@ public final class Specifications {
         }
     }
 
-    @Suggest({"This should return BehaviourContextClass's, that way we don't need to instantiate them.",
+    @Suggest({"This should return ContextClass's, that way we don't need to instantiate them.",
             "Don't return an array, use an ordered set."})
     public JavaClassName[] getContextClasses() {
         checkPreconditions();

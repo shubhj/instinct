@@ -3,38 +3,18 @@
     <name>InstinctIDEA</name>
     <description>Instinct IntelliJ IDEA Integration</description>
     <version>0.1.0</version>
-    <vendor logo="/resources/testng.gif">adams.id.au</vendor>
+    <vendor logo="/resources/instinct.png" email="http://groups.google.com/group/instinct-general" url="http://code.google.com/p/instinct/">
+        Instinct
+    </vendor>
     <idea-version since-build="6148"/>
-    <!--<application-components>-->
-        <!--<component>-->
-            <!--<implementation-class>com.googlecode.instinct.integrate.idea.TestNGConfigurationType</implementation-class>-->
-            <!--<option name="workspace" value="true"/>-->
-        <!--</component>-->
-    <!--</application-components>-->
-    <!--<project-components>-->
-        <!--<component>-->
-            <!--<implementation-class>com.googlecode.instinct.integrate.idea.intention.ConvertJUnitIntention</implementation-class>-->
-        <!--</component>-->
-        <!--<component>-->
-            <!--<implementation-class>com.googlecode.instinct.integrate.idea.intention.ConvertJavadocIntention</implementation-class>-->
-        <!--</component>-->
-        <!--<component>-->
-            <!--<implementation-class>-->
-                <!--com.googlecode.instinct.integrate.idea.intention.ConvertAnnotationIntention-->
-            <!--</implementation-class>-->
-        <!--</component>-->
-        <!--<component>-->
-            <!--<implementation-class>-->
-                <!--com.googlecode.instinct.integrate.idea.intention.ConvertOldAnnotationIntention-->
-            <!--</implementation-class>-->
-        <!--</component>-->
-        <!--<component>-->
-            <!--<implementation-class>com.googlecode.instinct.integrate.idea.TestNGDefaultConfigurationComponent</implementation-class>-->
-            <!--<option name="workspace" value="true"/>-->
-        <!--</component>-->
-    <!--</project-components>-->
     <change-notes>
-        <![CDATA[<li>Initial release.</li>
+        <![CDATA[
+        <li>Initial release.</li>
         ]]>
     </change-notes>
+    <application-components>
+        <component>
+            <implementation-class>com.googlecode.instinct.integrate.idea.JBehaveConfigurationType</implementation-class>
+        </component>
+    </application-components>
 </idea-plugin>

@@ -30,6 +30,12 @@ public final class ClassLocatorSlowTest extends InstinctTestCase {
     private PackageRootFinder packageRootFinder;
     private ClassLocator locator;
 
+    @Override
+    public void setUpSubject() {
+        packageRootFinder = new PackageRootFinderImpl();
+        locator = new ClassLocatorImpl();
+    }
+
     public void testFindsCorrectNumberOfContexts() {
         final FileFilter filter = new AnnotationFileFilter(getSpecPackageRoot(), BehaviourContext.class);
         final JavaClassName[] names = locator.locate(getSpecPackageRoot(), filter);
@@ -38,11 +44,5 @@ public final class ClassLocatorSlowTest extends InstinctTestCase {
 
     private File getSpecPackageRoot() {
         return new File(packageRootFinder.getPackageRoot(ClassLocatorSlowTest.class));
-    }
-
-    @Override
-    public void setUpSubject() {
-        packageRootFinder = new PackageRootFinderImpl();
-        locator = new ClassLocatorImpl();
     }
 }

@@ -16,19 +16,18 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.BehaviourContext;
 import com.googlecode.instinct.marker.annotate.Specification;
 
-@Suggest("Rename.")
 @BehaviourContext
-public class ContextWithInvalidlyMarkedBeforeSpecification2 {
-    @BeforeSpecification
-    public void setUpReturnsAValue(final String param) {
-    }
-
+public class ContextWithBeforeSpecificationWithReturnType {
     @Specification
     public void specification() {
+    }
+
+    @BeforeSpecification
+    public String setUpReturnsAValue() {
+        return "";
     }
 }

@@ -47,7 +47,7 @@ public final class JUnitTestSuiteBuilderImpl implements JUnitTestSuiteBuilder {
         final TestSuite suite = new TestSuite(suiteName);
         for (final JavaClassName contextClass : contextClasses) {
             final Class<BehaviourContext> cls = getClass(contextClass);
-            suite.addTest(new BehaviourContextTestSuite(cls));
+            suite.addTest(new ContextTestSuite(cls));
         }
         return suite;
     }

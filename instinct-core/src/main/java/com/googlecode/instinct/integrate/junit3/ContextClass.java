@@ -4,8 +4,8 @@ import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.util.Suggest;
 
 @Suggest("This belongs in the main core")
-public interface BehaviourContextClass {
-    ContextResult run(BehaviourContextRunStrategy behaviourContextRunStrategy, SpecificationRunStrategy specificationRunStrategy);
+public interface ContextClass {
+    ContextResult run(ContextRunStrategy contextRunStrategy, SpecificationRunStrategy specificationRunStrategy);
 
     <T> Class<T> getType();
 

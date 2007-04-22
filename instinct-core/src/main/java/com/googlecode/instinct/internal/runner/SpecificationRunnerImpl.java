@@ -64,11 +64,12 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     }
     // } SUPPRESS IllegalCatch
 
+    @Suggest("May need to stick verification of mocks in finally, if we report them as well as other errors.")
     private void runSpecificationLifecycle(final Object behaviourContext, final SpecificationContext specificationContext) {
         try {
             testDoubleAutoWirer.wire(behaviourContext);
             runMethods(behaviourContext, specificationContext.getBeforeSpecificationMethods());
-            attemptToInvoke(behaviourContext, specificationContext.getSpecificationMethod());
+            runMethod(behaviourContext, specificationContext.getSpecificationMethod());
             mockVerifier.verify(behaviourContext);
         } finally {
             runMethods(behaviourContext, specificationContext.getAfterSpecificationMethods());
@@ -77,17 +78,18 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
 
     private void runMethods(final Object instance, final Method[] methods) {
         for (final Method method : methods) {
-            attemptToInvoke(instance, method);
+            runMethod(instance, method);
         }
     }
 
-    private void attemptToInvoke(final Object instance, final Method specificationMethod) {
+    private void runMethod(final Object instance, final Method specificationMethod) {
         checkMethod(specificationMethod);
         methodInvoker.invokeMethod(instance, specificationMethod);
     }
 
+    // Note. Removed need to have a return type for Groovy integration.
     private void checkMethod(final Method method) {
-        methodValidator.checkMethodHasNoReturnType(method);
+//        methodValidator.checkMethodHasNoReturnType(method);
         methodValidator.checkMethodHasNoParameters(method);
     }
 

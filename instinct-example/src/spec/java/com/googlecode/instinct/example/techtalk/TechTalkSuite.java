@@ -1,6 +1,6 @@
 package com.googlecode.instinct.example.techtalk;
 
-import com.googlecode.instinct.integrate.junit3.BehaviourContextTestSuite;
+import com.googlecode.instinct.integrate.junit3.ContextTestSuite;
 import junit.framework.TestSuite;
 
 public final class TechTalkSuite {
@@ -22,7 +22,7 @@ public final class TechTalkSuite {
         suite.addTest(newSuite(contextClass).testAt(0));
     }
 
-    private static <T> BehaviourContextTestSuite newSuite(final Class<T> contextClass) {
-        return new BehaviourContextTestSuite(contextClass);
+    private static <T> ContextTestSuite newSuite(final Class<T> contextClass) {
+        return new ContextTestSuite(contextClass);
     }
 }

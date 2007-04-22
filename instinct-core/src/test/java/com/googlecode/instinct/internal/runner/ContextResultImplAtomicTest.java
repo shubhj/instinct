@@ -26,7 +26,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
 @Suggest("Test new getters")
-public final class BehaviourContextResultImplAtomicTest extends InstinctTestCase {
+public final class ContextResultImplAtomicTest extends InstinctTestCase {
     private ContextResult contextResult;
     private SpecificationResult specificationResult;
 

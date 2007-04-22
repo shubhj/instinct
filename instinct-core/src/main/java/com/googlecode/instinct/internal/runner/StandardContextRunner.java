@@ -31,7 +31,8 @@ import com.googlecode.instinct.marker.naming.BehaviourContextNamingConvention;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 
 @Suggest({"Pass the specification runner to this class, rather than newing it, that way we can pass in logging versions",
-        "Figure out a way to break this class up, it's too procedural."})
+        "Figure out a way to break this class up, it's too procedural.",
+        "Make a runner that runs all contexts in a clas"})
 public final class StandardContextRunner implements ContextRunner {
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
     private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
@@ -46,6 +47,7 @@ public final class StandardContextRunner implements ContextRunner {
         return runSpecifications(contextClass, specificationMethods, beforeSpecificationMethods, afterSpecificationMethods);
     }
 
+    @Suggest("Need a better way to find specification context, share with SpecificationRunnerSlowTest.")
     private <T> ContextResult runSpecifications(final Class<T> behaviourContextClass, final Method[] specificationMethods,
             final Method[] beforeSpecificationMethods, final Method[] afterSpecificationMethods) {
         final ContextResult contextResult = new ContextResultImpl(behaviourContextClass.getSimpleName());

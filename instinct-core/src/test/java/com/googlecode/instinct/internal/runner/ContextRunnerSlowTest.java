@@ -18,13 +18,23 @@ package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.test.InstinctTestCase;
 
-public final class BehaviourContextRunnerSlowTest extends InstinctTestCase {
+public final class ContextRunnerSlowTest extends InstinctTestCase {
     private ContextRunner runner;
 
-    public void testRunWithSuccess() {
-        runner.run(ContextContainerWithSetUpAndTearDown.class);
-        runner.run(ContextContainerWithSetUpAndTearDown.AnEmbeddedPublicContext.class);
-        runner.run(ContextContainerWithConstructors.APublicConstructor.class);
+    @Override
+    public void setUpSubject() {
+        runner = new StandardContextRunner();
+    }
+
+//    public void testRunsContextsWrittenAsInnerClasses() {
+//        runContext(ContextContainerWithSetUpAndTearDown.class, 1);
+//        runContext(ContextContainerWithConstructors.class, 1);
+//    }
+
+    public void testRunsContexts() {
+        runContext(ContextContainerWithSetUpAndTearDown.AnEmbeddedPublicContext.class);
+        runContext(ContextContainerWithConstructors.APublicConstructor.class);
+        runContext(ContextWithSpecificationWithReturnType.class);
     }
 
     public void testInvalidConstructorsThrowConfigException() {
@@ -34,16 +44,15 @@ public final class BehaviourContextRunnerSlowTest extends InstinctTestCase {
         checkInvalidConstructorsGivesFailedStatus(ContextContainerWithConstructors.AProtectedConstructor.class);
     }
 
+    private <T> void runContext(final Class<T> contextClass) {
+        runner.run(contextClass);
+    }
+
     private <T> void checkInvalidConstructorsGivesFailedStatus(final Class<T> cls) {
         final ContextResult result = runner.run(cls);
         assertFalse(result.completedSuccessfully());
         for (final SpecificationResult specificationResult : result.getSpecificationResults()) {
             assertFalse(specificationResult.completedSuccessfully());
         }
-    }
-
-    @Override
-    public void setUpSubject() {
-        runner = new StandardContextRunner();
     }
 }

@@ -16,18 +16,18 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.BehaviourContext;
 import com.googlecode.instinct.marker.annotate.Specification;
 
 @BehaviourContext
-public class ContextWithInvalidlyMarkedAfterSpecification1 {
-    @BeforeSpecification
-    public String setUpReturnsAValue() {
+public class ContextWithSpecificationWithReturnType {
+    @Specification
+    public String specificationReturnsAString() {
         return "";
     }
 
     @Specification
-    public void specification() {
+    public Object specificationReturnsAnObject() {
+        return new Object();
     }
 }
