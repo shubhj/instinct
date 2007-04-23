@@ -50,7 +50,7 @@ public final class VerboseContextResultMessageBuilder implements ContextResultMe
     }
 
     private void appendSummary(final StringBuilder builder, final ContextResult contextResult) {
-        builder.append("Context: ").append(contextResult.getBehaviourContextName()).append(SPACER);
+        builder.append(contextResult.getBehaviourContextName()).append(SPACER);
         builder.append("Specifications run: ").append(getNumberOfSpecsRun(contextResult)).append(SPACER);
         builder.append("Successes: ").append(contextResult.getNumberOfSuccesses()).append(SPACER);
         builder.append("Failures: ").append(contextResult.getNumberOfFailures()).append(SPACER);
@@ -59,9 +59,9 @@ public final class VerboseContextResultMessageBuilder implements ContextResultMe
     }
 
     private void appendSpecification(final StringBuilder builder, final SpecificationResult specificationResult) {
-        builder.append(TAB).append("Specification ").append(specificationResult.getSpecificationName()).append(SPACER);
-        builder.append("time elapsed: ").append(millisToSeconds(specificationResult.getExecutionTime())).append(" seconds").append(SPACER);
-        builder.append("status: ").append(specificationResult.completedSuccessfully() ? "succeeded" : "FAILED");
+        builder.append(TAB).append(specificationResult.getSpecificationName()).append(SPACER);
+        builder.append("Time elapsed: ").append(millisToSeconds(specificationResult.getExecutionTime())).append(" seconds").append(SPACER);
+        builder.append("Status: ").append(specificationResult.completedSuccessfully() ? "succeeded" : "FAILED");
         if (!specificationResult.completedSuccessfully()) {
             builder.append(NEW_LINE).append(TAB).append("Cause: ");
             appendFailureCause(specificationResult.getStatus(), builder);

@@ -48,7 +48,7 @@ public final class BriefContextResultMessageBuilder implements ContextResultMess
 
     private String buildContextSummary(final ContextResult contextResult) {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Context: ").append(contextResult.getBehaviourContextName()).append(SPACER);
+        builder.append(contextResult.getBehaviourContextName()).append(SPACER);
         builder.append("Specifications run: ").append(getNumberOfSpecsRun(contextResult)).append(SPACER);
         builder.append("Successes: ").append(contextResult.getNumberOfSuccesses()).append(SPACER);
         builder.append("Failures: ").append(contextResult.getNumberOfFailures()).append(SPACER);

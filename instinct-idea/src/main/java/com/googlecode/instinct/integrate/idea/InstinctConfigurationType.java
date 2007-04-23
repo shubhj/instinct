@@ -21,6 +21,7 @@ import com.googlecode.instinct.internal.util.Suggest;
 import com.intellij.execution.LocatableConfigurationType;
 import com.intellij.execution.Location;
 import com.intellij.execution.RunnerAndConfigurationSettings;
+import com.intellij.execution.junit.RuntimeConfigurationProducer;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.application.ApplicationManager;
@@ -45,12 +46,9 @@ import org.jetbrains.annotations.NotNull;
 public final class InstinctConfigurationType implements LocatableConfigurationType {
     private final ConfigurationFactory factory;
 
+    @Suggest("Can we do better than pass this?")
     public InstinctConfigurationType() {
-        this.factory = new ConfigurationFactory(this) {
-            public RunConfiguration createTemplateConfiguration(final Project project) {
-                return new InstinctRunConfiguration(project, this, "");
-            }
-        };
+        factory = new InstinctConfigurationFactory(this);
     }
 
     public String getDisplayName() {
@@ -81,8 +79,17 @@ public final class InstinctConfigurationType implements LocatableConfigurationTy
     public void disposeComponent() {
     }
 
+    public RunnerAndConfigurationSettings createConfigurationByLocation(final Location location) {
+        final PsiClass contextClass = getContextClass(location.getPsiElement());
+        if (contextClass == null) {
+            return null;
+        }
+        final RuntimeConfigurationProducer configurationProducer = new InstinctConfigurationProducer(contextClass, this);
+        return configurationProducer.createProducer(location, null).getConfiguration();
+    }
+
     public boolean isConfigurationByElement(final RunConfiguration configuration, final Project project, final PsiElement element) {
-        final PsiClass behaviorClass = getBehaviorClass(element);
+        final PsiClass behaviorClass = getContextClass(element);
         if (behaviorClass == null) {
             return false;
         }
@@ -91,7 +98,7 @@ public final class InstinctConfigurationType implements LocatableConfigurationTy
                 && Comparing.equal(getBehaviourMethodName(element), runConfiguration.getSpecificationMethodName());
     }
 
-    public PsiClass getBehaviorClass(final PsiElement element) {
+    public PsiClass getContextClass(final PsiElement element) {
         for (PsiElement current = element; current != null; current = current.getParent()) {
             if (current instanceof PsiClass) {
                 final PsiClass currentClass = (PsiClass) current;
@@ -108,30 +115,20 @@ public final class InstinctConfigurationType implements LocatableConfigurationTy
         assert element != null;
         final PsiFile file = element.getContainingFile();
         if (file instanceof PsiJavaFile) {
-            PsiClass[] definedClasses = ((PsiJavaFile) file).getClasses();
-            for (int i = 0; i < definedClasses.length; i++) {
-                PsiClass definedClass = definedClasses[i];
+            final PsiClass[] definedClasses = ((PsiJavaFile) file).getClasses();
+            for (final PsiClass definedClass : definedClasses) {
                 if (isContextClass(definedClass)) {
                     return definedClass;
                 }
             }
-            for (int i = 0; i < definedClasses.length; i++) {
-                PsiClass definedClass = definedClasses[i];
-                PsiClass behaviorCandidate = checkIfThereIsOneWithBehaviorAtEnd(definedClass);
-                if (behaviorCandidate != null && isContextClass(behaviorCandidate)) {
-                    return behaviorCandidate;
+            for (final PsiClass definedClass : definedClasses) {
+                final PsiClass contextClassCandidate = checkIfThereIsOneWithBehaviorAtEnd(definedClass);
+                if (contextClassCandidate != null && isContextClass(contextClassCandidate)) {
+                    return contextClassCandidate;
                 }
             }
         }
         return null;
-    }
-
-    public RunnerAndConfigurationSettings createConfigurationByLocation(Location location) {
-        PsiClass behaviorClass = getBehaviorClass(location.getPsiElement());
-        if (behaviorClass == null) {
-            return null;
-        }
-        return new InstinctConfigurationProducer(behaviorClass, this).createProducer(location, null).getConfiguration();
     }
 
     public PsiMethod getBehaviourMethodElement(PsiElement psiElement) {

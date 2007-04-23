@@ -25,11 +25,11 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 
-public class InstinctConfigurationProducer extends RuntimeConfigurationProducer implements Cloneable {
+public final class InstinctConfigurationProducer extends RuntimeConfigurationProducer implements Cloneable {
     private PsiClass contextClass;
     private InstinctConfigurationType configurationType;
 
-    public InstinctConfigurationProducer(PsiClass contextClass, InstinctConfigurationType configurationType) {
+    public InstinctConfigurationProducer(final PsiClass contextClass, final InstinctConfigurationType configurationType) {
         super(configurationType);
         this.contextClass = contextClass;
         this.configurationType = configurationType;
@@ -37,11 +37,11 @@ public class InstinctConfigurationProducer extends RuntimeConfigurationProducer 
 
     protected RunnerAndConfigurationSettingsImpl createConfigurationByElement(Location location, final ConfigurationContext configurationContext) {
         location = ExecutionUtil.stepIntoSingleClass(location);
-        final PsiClass aClass = configurationType.getBehaviorClass(location.getPsiElement());
+        final PsiClass aClass = configurationType.getContextClass(location.getPsiElement());
         if (aClass == null) return null;
         final PsiMethod currentMethod = configurationType.getBehaviourMethodElement(location.getPsiElement());
         final RunnerAndConfigurationSettingsImpl settings = cloneTemplateConfiguration(location.getProject(), configurationContext);
-        InstinctRunConfiguration configuration = (InstinctRunConfiguration) settings.getConfiguration();
+        final InstinctRunConfiguration configuration = (InstinctRunConfiguration) settings.getConfiguration();
         configuration.setContextClass(ClassUtil.fullName(aClass));
         if (currentMethod != null) {
             configuration.setBehaviorMethod(currentMethod.getName());
@@ -51,15 +51,16 @@ public class InstinctConfigurationProducer extends RuntimeConfigurationProducer 
         return settings;
     }
 
+    @Override
     public PsiElement getSourceElement() {
         return contextClass;
     }
 
-    public int compareTo(Object o) {
+    public int compareTo(final Object o) {
         return -1;
     }
 
-    private String createName(PsiClass aClass, PsiMethod currentMethod) {
+    private String createName(final PsiClass aClass, final PsiMethod currentMethod) {
         return currentMethod == null ? ClassUtil.shortName(aClass) : currentMethod.getName();
     }
 }

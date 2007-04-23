@@ -7,12 +7,14 @@ import com.googlecode.instinct.internal.util.Suggest;
 @Suggest("Figure out how to test this sucker.")
 public enum ResultFormat {
     BRIEF {
+        @Override
         public ContextResultMessageBuilder getMessageBuilder() {
             return new BriefContextResultMessageBuilder();
         }
     },
 
     VERBOSE {
+        @Override
         public ContextResultMessageBuilder getMessageBuilder() {
             return new VerboseContextResultMessageBuilder();
         }

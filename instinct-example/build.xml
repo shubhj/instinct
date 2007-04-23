@@ -11,7 +11,7 @@
     <property name="main.classes.dir" value="${build.dir}/main-classes"/>
     <property name="spec.classes.dir" value="${build.dir}/spec-classes"/>
 
-    <property name="instinct.jar" value="${lib.dir}/instinct-0.1.3.jar"/>
+    <property name="instinct.jar" value="${lib.dir}/instinct-0.1.4.jar"/>
 
     <path id="main.class.path"/>
     <path id="main.class.path">

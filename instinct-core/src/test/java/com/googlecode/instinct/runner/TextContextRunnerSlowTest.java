@@ -29,6 +29,7 @@ public final class TextContextRunnerSlowTest extends InstinctTestCase {
         checkSendsSpeciciationResultsToOutput(ContextContainerWithSetUpAndTearDown.class);
     }
 
+    @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed", "UseOfSystemOutOrSystemErr"})
     public void testCanBeCalledStaticallySendingResultsToStandardOut() {
         final PrintStream defaultStdOut = System.out;
         try {
