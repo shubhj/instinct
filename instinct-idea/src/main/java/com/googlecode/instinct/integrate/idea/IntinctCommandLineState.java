@@ -24,6 +24,7 @@ import com.intellij.execution.configurations.JavaParameters;
 import com.intellij.execution.configurations.RunnerSettings;
 
 public final class IntinctCommandLineState extends JavaCommandLineState {
+    private static final String TEXT_RUNNER = "com.googlecode.instinct.runner.TextContextRunner";
     private InstinctRunConfiguration runConfiguration;
 
     public IntinctCommandLineState(final InstinctRunConfiguration runConfiguration, final RunnerSettings runner,
@@ -44,7 +45,7 @@ public final class IntinctCommandLineState extends JavaCommandLineState {
 
     private JavaParameters createParameters(final String behaviourLocator) throws CantRunException {
         final JavaParameters parameters = new JavaParameters();
-        parameters.setMainClass(Constants.JBEHAVE_RUNNER_CLASS);
+        parameters.setMainClass(TEXT_RUNNER);
         parameters.getProgramParametersList().addParametersString(behaviourLocator);
         parameters.configureByModule(runConfiguration.getModule(), JavaParameters.JDK_AND_CLASSES_AND_TESTS);
         parameters.setWorkingDirectory(runConfiguration.getWorkingDirectoryPath());

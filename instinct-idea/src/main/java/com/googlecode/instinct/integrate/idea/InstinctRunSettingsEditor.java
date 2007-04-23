@@ -58,7 +58,7 @@ public final class InstinctRunSettingsEditor extends SettingsEditor<InstinctRunC
     }
 
     protected void applyEditorTo(final InstinctRunConfiguration configuration) throws ConfigurationException {
-        configuration.setContextClass(behaviorClassInput.getText());
+        configuration.setContextClassName(behaviorClassInput.getText());
         configuration.setModule((Module) moduleComponent.getSelectedItem());
     }
 

@@ -38,18 +38,20 @@ import com.intellij.openapi.util.InvalidDataException;
 import com.intellij.openapi.util.JDOMExternalizable;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.util.PathUtil;
+import com.googlecode.instinct.internal.util.Suggest;
 import org.jdom.Element;
 
 public final class InstinctRunConfiguration extends RuntimeConfiguration {
-    public String contextClass;
+    public String contextClassName;
     public String behaviorMethod;
     public String moduleName;
 
-    protected InstinctRunConfiguration(Project project, ConfigurationFactory factory, String name) {
+    public InstinctRunConfiguration(Project project, ConfigurationFactory factory, String name) {
         super(name, project, factory);
     }
 
-    protected InstinctRunConfiguration createInstance() {
+    @Suggest("Can we use the factory to create this?")
+    public InstinctRunConfiguration createInstance() {
         return new InstinctRunConfiguration(getProject(), getFactory(), getName());
     }
 
@@ -57,32 +59,37 @@ public final class InstinctRunConfiguration extends RuntimeConfiguration {
         return new InstinctRunSettingsEditor(getProject());
     }
 
-    public SettingsEditor<JDOMExternalizable> getRunnerSettingsEditor(JavaProgramRunner runner) {
+    @Override
+    public SettingsEditor<JDOMExternalizable> getRunnerSettingsEditor(final JavaProgramRunner runner) {
         return null;
     }
 
-    public void readExternal(Element element) throws InvalidDataException {
+    @Override
+    public void readExternal(final Element element) throws InvalidDataException {
         super.readExternal(element);
         DefaultJDOMExternalizer.readExternal(this, element);
     }
 
-    public void writeExternal(Element element) throws WriteExternalException {
+    @Override
+    public void writeExternal(final Element element) throws WriteExternalException {
         super.writeExternal(element);
         DefaultJDOMExternalizer.writeExternal(this, element);
     }
 
-    public RunProfileState getState(DataContext context, RunnerInfo runnerInfo, RunnerSettings runner,
-            ConfigurationPerRunnerSettings configuration) throws ExecutionException {
-        IntinctCommandLineState commandLineState = new IntinctCommandLineState(this, runner, configuration);
+    public RunProfileState getState(final DataContext context, final RunnerInfo runnerInfo, final RunnerSettings runner,
+            final ConfigurationPerRunnerSettings configuration) throws ExecutionException {
+        final IntinctCommandLineState commandLineState = new IntinctCommandLineState(this, runner, configuration);
         commandLineState.setConsoleBuilder(TextConsoleBuilderFactory.getInstance().createBuilder(getProject()));
         commandLineState.setModulesToCompile(getModules());
         return commandLineState;
     }
 
+    @Override
     public void checkConfiguration() throws RuntimeConfigurationException {
         super.checkConfiguration();
     }
 
+    @Override
     public Module[] getModules() {
         return ModuleManager.getInstance(getProject()).getModules();
     }
@@ -91,7 +98,7 @@ public final class InstinctRunConfiguration extends RuntimeConfiguration {
         return lookUp(getModules(), moduleName);
     }
 
-    public void setModule(Module module) {
+    public void setModule(final Module module) {
         moduleName = module == null ? null : module.getName();
     }
 
@@ -100,11 +107,11 @@ public final class InstinctRunConfiguration extends RuntimeConfiguration {
     }
 
     public String getContextClassName() {
-        return contextClass == null ? "" : contextClass;
+        return contextClassName == null ? "" : contextClassName;
     }
 
-    public void setContextClass(String contextClass) {
-        this.contextClass = contextClass;
+    public void setContextClassName(final String contextClassName) {
+        this.contextClassName = contextClassName;
     }
 
     public Collection<Module> getValidModules() {
@@ -115,12 +122,12 @@ public final class InstinctRunConfiguration extends RuntimeConfiguration {
         return behaviorMethod == null ? "" : behaviorMethod;
     }
 
-    public void setBehaviorMethod(final String methodName) {
+    public void setSpecificationMethodName(final String methodName) {
         behaviorMethod = methodName;
     }
 
-    private Module lookUp(Module[] modules, String moduleName) {
-        for (Module module : modules) {
+    private Module lookUp(final Module[] modules, final String moduleName) {
+        for (final Module module : modules) {
             if (module.getName().equals(moduleName)) {
                 return module;
             }

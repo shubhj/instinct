@@ -42,9 +42,9 @@ public final class InstinctConfigurationProducer extends RuntimeConfigurationPro
         final PsiMethod currentMethod = configurationType.getBehaviourMethodElement(location.getPsiElement());
         final RunnerAndConfigurationSettingsImpl settings = cloneTemplateConfiguration(location.getProject(), configurationContext);
         final InstinctRunConfiguration configuration = (InstinctRunConfiguration) settings.getConfiguration();
-        configuration.setContextClass(ClassUtil.fullName(aClass));
+        configuration.setContextClassName(ClassUtil.fullName(aClass));
         if (currentMethod != null) {
-            configuration.setBehaviorMethod(currentMethod.getName());
+            configuration.setSpecificationMethodName(currentMethod.getName());
         }
         configuration.setModule(ExecutionUtil.findModule(aClass));
         configuration.setName(createName(aClass, currentMethod));

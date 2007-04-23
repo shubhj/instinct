@@ -21,7 +21,6 @@ import com.googlecode.instinct.internal.util.Suggest;
 @Suggest("Move these constants somewhere more appropriate.")
 public final class Constants {
     static final String BEHAVIOURS_INTERFACE = "org.jbehave.core.behaviour.Behaviours";
-    static final String JBEHAVE_RUNNER_CLASS = "com.googlecode.instinct.runner.TextContextRunner";
 
     private Constants() {
         throw new UnsupportedOperationException();

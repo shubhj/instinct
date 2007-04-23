@@ -30,6 +30,16 @@ public final class ContextResultImplAtomicTest extends InstinctTestCase {
     private ContextResult contextResult;
     private SpecificationResult specificationResult;
 
+    @Override
+    public void setUpTestDoubles() {
+        specificationResult = mock(SpecificationResult.class);
+    }
+
+    @Override
+    public void setUpSubject() {
+        contextResult = new ContextResultImpl("AnEmptyStack");
+    }
+
     public void testConformsToClassTraits() {
         checkClass(ContextResultImpl.class, ContextResult.class);
     }
@@ -66,15 +76,5 @@ public final class ContextResultImplAtomicTest extends InstinctTestCase {
     private void checkGetBahaviourContextName(final String behaviourContextName) {
         final ContextResult result = new ContextResultImpl(behaviourContextName);
         assertEquals(behaviourContextName, result.getBehaviourContextName());
-    }
-
-    @Override
-    public void setUpTestDoubles() {
-        specificationResult = mock(SpecificationResult.class);
-    }
-
-    @Override
-    public void setUpSubject() {
-        contextResult = new ContextResultImpl("AnEmptyStack");
     }
 }
