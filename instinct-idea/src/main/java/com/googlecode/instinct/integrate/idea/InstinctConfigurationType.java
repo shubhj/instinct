@@ -44,6 +44,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 public final class InstinctConfigurationType implements LocatableConfigurationType {
+    private static final String BEHAVIOURS_INTERFACE = "org.jbehave.core.behaviour.Behaviours";
     private final ConfigurationFactory factory;
 
     @Suggest("Can we do better than pass this?")
@@ -175,7 +176,7 @@ public final class InstinctConfigurationType implements LocatableConfigurationTy
     private boolean implementsBehaviorsInterface(final PsiClass psiClass) {
         final PsiClassType[] interfaces = psiClass.getImplementsListTypes();
         for (final PsiClassType iface : interfaces) {
-            if (Constants.BEHAVIOURS_INTERFACE.equals(iface.resolve().getQualifiedName())) {
+            if (BEHAVIOURS_INTERFACE.equals(iface.resolve().getQualifiedName())) {
                 return true;
             }
         }
