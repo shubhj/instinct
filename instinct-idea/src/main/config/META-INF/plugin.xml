@@ -14,7 +14,7 @@
     </change-notes>
     <application-components>
         <component>
-            <implementation-class>com.googlecode.instinct.integrate.idea.JBehaveConfigurationType</implementation-class>
+            <implementation-class>com.googlecode.instinct.integrate.idea.InstinctConfigurationType</implementation-class>
         </component>
     </application-components>
 </idea-plugin>

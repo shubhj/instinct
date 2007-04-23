@@ -1,6 +1,22 @@
+/*
+ * Copyright 2006-2007 Tom Adams
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.googlecode.instinct.integrate.idea;
 
-import java.util.Arrays;
+import static java.util.Arrays.asList;
 import java.util.Collection;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.ConfigurationFactory;
@@ -24,17 +40,21 @@ import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.util.PathUtil;
 import org.jdom.Element;
 
-public class JBehaveRunConfiguration extends RuntimeConfiguration {
-    public String behaviorClass;
+public final class InstinctRunConfiguration extends RuntimeConfiguration {
+    public String contextClass;
     public String behaviorMethod;
     public String moduleName;
 
-    protected JBehaveRunConfiguration(Project project, ConfigurationFactory factory, String name) {
+    protected InstinctRunConfiguration(Project project, ConfigurationFactory factory, String name) {
         super(name, project, factory);
     }
 
-    public SettingsEditor<JBehaveRunConfiguration> getConfigurationEditor() {
-        return new JBehaveRunSettingsEditor(getProject());
+    protected InstinctRunConfiguration createInstance() {
+        return new InstinctRunConfiguration(getProject(), getFactory(), getName());
+    }
+
+    public SettingsEditor<InstinctRunConfiguration> getConfigurationEditor() {
+        return new InstinctRunSettingsEditor(getProject());
     }
 
     public SettingsEditor<JDOMExternalizable> getRunnerSettingsEditor(JavaProgramRunner runner) {
@@ -53,7 +73,7 @@ public class JBehaveRunConfiguration extends RuntimeConfiguration {
 
     public RunProfileState getState(DataContext context, RunnerInfo runnerInfo, RunnerSettings runner,
             ConfigurationPerRunnerSettings configuration) throws ExecutionException {
-        JBehaveCommandLineState commandLineState = new JBehaveCommandLineState(this, runner, configuration);
+        IntinctCommandLineState commandLineState = new IntinctCommandLineState(this, runner, configuration);
         commandLineState.setConsoleBuilder(TextConsoleBuilderFactory.getInstance().createBuilder(getProject()));
         commandLineState.setModulesToCompile(getModules());
         return commandLineState;
@@ -71,15 +91,6 @@ public class JBehaveRunConfiguration extends RuntimeConfiguration {
         return lookUp(getModules(), moduleName);
     }
 
-    private Module lookUp(Module[] modules, String moduleName) {
-        for (Module module : modules) {
-            if (module.getName().equals(moduleName)) {
-                return module;
-            }
-        }
-        return modules.length > 0 ? modules[0] : null;
-    }
-
     public void setModule(Module module) {
         moduleName = module == null ? null : module.getName();
     }
@@ -88,27 +99,32 @@ public class JBehaveRunConfiguration extends RuntimeConfiguration {
         return PathUtil.getCanonicalPath(getProject().getProjectFile().getParent().getPath());
     }
 
-    public String getBehaviorClass() {
-        return behaviorClass == null ? "" : behaviorClass;
+    public String getContextClassName() {
+        return contextClass == null ? "" : contextClass;
     }
 
-    public void setBehaviorClass(String behaviorClass) {
-        this.behaviorClass = behaviorClass;
+    public void setContextClass(String contextClass) {
+        this.contextClass = contextClass;
     }
 
     public Collection<Module> getValidModules() {
-        return Arrays.asList(ModuleManager.getInstance(getProject()).getModules());
+        return asList(ModuleManager.getInstance(getProject()).getModules());
     }
 
-    protected JBehaveRunConfiguration createInstance() {
-        return new JBehaveRunConfiguration(getProject(), getFactory(), getName());
-    }
-
-    public String getBehaviourMethod() {
+    public String getSpecificationMethodName() {
         return behaviorMethod == null ? "" : behaviorMethod;
     }
 
-    public void setBehaviorMethod(String methodName) {
+    public void setBehaviorMethod(final String methodName) {
         behaviorMethod = methodName;
+    }
+
+    private Module lookUp(Module[] modules, String moduleName) {
+        for (Module module : modules) {
+            if (module.getName().equals(moduleName)) {
+                return module;
+            }
+        }
+        return modules.length > 0 ? modules[0] : null;
     }
 }

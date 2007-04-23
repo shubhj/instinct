@@ -1,3 +1,19 @@
+/*
+ * Copyright 2006-2007 Tom Adams
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.googlecode.instinct.integrate.idea;
 
 import java.awt.Component;
@@ -25,16 +41,32 @@ import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.search.GlobalSearchScope;
 
-class JBehaveRunSettingsEditor extends SettingsEditor<JBehaveRunConfiguration> {
+public final class InstinctRunSettingsEditor extends SettingsEditor<InstinctRunConfiguration> {
     private Project project;
-
     private TextFieldWithBrowseButton behaviorClassInput;
     private JComboBox moduleComponent;
     private JComponent editorUi;
 
-    public JBehaveRunSettingsEditor(Project project) {
+    public InstinctRunSettingsEditor(final Project project) {
         this.project = project;
         initComponents();
+    }
+
+    protected void resetEditorFrom(final InstinctRunConfiguration configuration) {
+        behaviorClassInput.setText(configuration.getContextClassName());
+        moduleComponent.setSelectedItem(configuration.getModule());
+    }
+
+    protected void applyEditorTo(final InstinctRunConfiguration configuration) throws ConfigurationException {
+        configuration.setContextClass(behaviorClassInput.getText());
+        configuration.setModule((Module) moduleComponent.getSelectedItem());
+    }
+
+    protected JComponent createEditor() {
+        return editorUi;
+    }
+
+    protected void disposeEditor() {
     }
 
     private void initComponents() {
@@ -46,8 +78,8 @@ class JBehaveRunSettingsEditor extends SettingsEditor<JBehaveRunConfiguration> {
     private void initClassChooser() {
         behaviorClassInput = new TextFieldWithBrowseButton();
         behaviorClassInput.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                BehaviorClassBrowser browser = new BehaviorClassBrowser(project, "Choose Behavior");
+            public void actionPerformed(final ActionEvent e) {
+                final BehaviorClassBrowser browser = new BehaviorClassBrowser(project, "Choose Behavior");
                 browser.setField(behaviorClassInput);
                 behaviorClassInput.setText(browser.show());
             }
@@ -57,10 +89,11 @@ class JBehaveRunSettingsEditor extends SettingsEditor<JBehaveRunConfiguration> {
     private void initModuleComboBox() {
         moduleComponent = new JComboBox(ModuleManager.getInstance(project).getSortedModules());
         moduleComponent.setRenderer(new DefaultListCellRenderer() {
-            public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected,
+                    final boolean cellHasFocus) {
+                final JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                 if (value != null) {
-                    Module module = (Module) value;
+                    final Module module = (Module) value;
                     label.setText(module.getName());
                     label.setIcon(module.getModuleType().getNodeIcon(false));
                 }
@@ -71,7 +104,7 @@ class JBehaveRunSettingsEditor extends SettingsEditor<JBehaveRunConfiguration> {
     }
 
     private JComponent createEditorUi() {
-        JPanel panel = new JPanel();
+        final JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
         panel.add(behaviorClassInput, new GridBagConstraints(
                 0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
@@ -92,25 +125,8 @@ class JBehaveRunSettingsEditor extends SettingsEditor<JBehaveRunConfiguration> {
         return panel;
     }
 
-    protected void resetEditorFrom(JBehaveRunConfiguration configuration) {
-        behaviorClassInput.setText(configuration.getBehaviorClass());
-        moduleComponent.setSelectedItem(configuration.getModule());
-    }
-
-    protected void applyEditorTo(JBehaveRunConfiguration configuration) throws ConfigurationException {
-        configuration.setBehaviorClass(behaviorClassInput.getText());
-        configuration.setModule((Module) moduleComponent.getSelectedItem());
-    }
-
-    protected JComponent createEditor() {
-        return editorUi;
-    }
-
-    protected void disposeEditor() {
-    }
-
     private static class BehaviorClassBrowser extends ClassBrowser {
-        public BehaviorClassBrowser(Project project, String name) {
+        public BehaviorClassBrowser(final Project project, final String name) {
             super(project, name);
         }
 
@@ -120,13 +136,13 @@ class JBehaveRunSettingsEditor extends SettingsEditor<JBehaveRunConfiguration> {
                     return SourceScope.wholeProject(getProject()).getGlobalSearchScope();
                 }
 
-                public boolean isAccepted(PsiClass aClass) {
+                public boolean isAccepted(final PsiClass aClass) {
                     return true;
                 }
             };
         }
 
-        protected PsiClass findClass(String name) {
+        protected PsiClass findClass(final String name) {
             return null;
         }
 
