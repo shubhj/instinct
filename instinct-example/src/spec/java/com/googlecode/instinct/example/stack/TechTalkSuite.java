@@ -1,4 +1,4 @@
-package com.googlecode.instinct.example.techtalk;
+package com.googlecode.instinct.example.stack;
 
 import com.googlecode.instinct.integrate.junit3.ContextTestSuite;
 import junit.framework.TestSuite;

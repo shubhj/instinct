@@ -1,9 +1,8 @@
-package com.googlecode.instinct.example.techtalk;
+package com.googlecode.instinct.example.stack;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.marker.annotate.BehaviourContext;
 import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.expect.Expect;
 
 @BehaviourContext
 public final class AGlossyMagazine {

@@ -1,4 +1,4 @@
-package com.googlecode.instinct.example.techtalk;
+package com.googlecode.instinct.example.stack;
 
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.BehaviourContext;

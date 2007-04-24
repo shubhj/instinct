@@ -1,4 +1,4 @@
-package com.googlecode.instinct.example.techtalk;
+package com.googlecode.instinct.example.stack;
 
 import static com.googlecode.instinct.expect.Mocker.expects;
 import static com.googlecode.instinct.expect.Mocker.mock;
