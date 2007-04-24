@@ -32,7 +32,8 @@ import com.googlecode.instinct.marker.naming.NamingConvention;
 
 @Suggest({"Pass the specification runner to this class, rather than newing it, that way we can pass in logging versions",
         "Figure out a way to break this class up, it's too procedural.",
-        "Make a runner that runs all contexts in a clas"})
+        "Make a runner that runs all contexts in a clas",
+        "Pass a context class into the context runner"})
 public final class StandardContextRunner implements ContextRunner {
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
     private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();

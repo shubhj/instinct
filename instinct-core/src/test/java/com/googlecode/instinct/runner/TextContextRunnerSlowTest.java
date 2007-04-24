@@ -49,7 +49,7 @@ public final class TextContextRunnerSlowTest extends InstinctTestCase {
 
     private <T> void checkRunnerSendsSpeciciationResultsToOutput(final Class<T> contextClass) {
         final String runnerOutput = new String(outputBuffer.toByteArray());
-        assertTrue(runnerOutput.contains("Context: " + contextClass.getSimpleName()));
-        assertTrue(runnerOutput.contains("Specifications run:"));
+        assertTrue("Expected to find context name", runnerOutput.contains(contextClass.getSimpleName()));
+        assertTrue("Expected to find the number of specs run", runnerOutput.contains("Specifications run:"));
     }
 }

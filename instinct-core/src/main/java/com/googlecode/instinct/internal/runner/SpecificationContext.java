@@ -19,7 +19,7 @@ package com.googlecode.instinct.internal.runner;
 import java.lang.reflect.Method;
 import com.googlecode.instinct.internal.util.Suggest;
 
-@Suggest("This stuff belongs on a SpecificationMethod")
+@Suggest("Remove these and place in SpecificationMethod")
 public interface SpecificationContext {
     Class<?> getBehaviourContextClass();
 

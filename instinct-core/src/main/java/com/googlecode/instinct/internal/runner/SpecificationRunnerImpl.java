@@ -31,6 +31,7 @@ import com.googlecode.instinct.internal.util.MethodInvokerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 
+@Suggest({"Pass a spec method into a spec runner"})
 public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
     private final TestDoubleAutoWirer testDoubleAutoWirer = new TestDoubleAutoWirerImpl();
