@@ -18,7 +18,7 @@ package com.googlecode.instinct.integrate.idea;
 
 import static java.util.Arrays.asList;
 import java.util.Collection;
-import com.intellij.execution.ExecutionException;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationPerRunnerSettings;
 import com.intellij.execution.configurations.RunProfileState;
@@ -26,7 +26,6 @@ import com.intellij.execution.configurations.RunnerSettings;
 import com.intellij.execution.configurations.RuntimeConfiguration;
 import com.intellij.execution.configurations.RuntimeConfigurationException;
 import com.intellij.execution.filters.TextConsoleBuilderFactory;
-import com.intellij.execution.runners.JavaProgramRunner;
 import com.intellij.execution.runners.RunnerInfo;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.module.Module;
@@ -35,22 +34,20 @@ import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.DefaultJDOMExternalizer;
 import com.intellij.openapi.util.InvalidDataException;
-import com.intellij.openapi.util.JDOMExternalizable;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.util.PathUtil;
-import com.googlecode.instinct.internal.util.Suggest;
 import org.jdom.Element;
 
 public final class InstinctRunConfiguration extends RuntimeConfiguration {
     public String contextClassName;
-    public String behaviorMethod;
+    public String specificationMethodName;
     public String moduleName;
 
-    public InstinctRunConfiguration(Project project, ConfigurationFactory factory, String name) {
+    public InstinctRunConfiguration(final Project project, final ConfigurationFactory factory, final String name) {
         super(name, project, factory);
     }
 
-    @Suggest("Can we use the factory to create this?")
+    @Suggest({"Can we use the factory to create this?", "What calls this?"})
     public InstinctRunConfiguration createInstance() {
         return new InstinctRunConfiguration(getProject(), getFactory(), getName());
     }
@@ -59,10 +56,10 @@ public final class InstinctRunConfiguration extends RuntimeConfiguration {
         return new InstinctRunSettingsEditor(getProject());
     }
 
-    @Override
-    public SettingsEditor<JDOMExternalizable> getRunnerSettingsEditor(final JavaProgramRunner runner) {
-        return null;
-    }
+//    @Override
+//    public SettingsEditor<JDOMExternalizable> getRunnerSettingsEditor(final JavaProgramRunner runner) {
+//        return null;
+//    }
 
     @Override
     public void readExternal(final Element element) throws InvalidDataException {
@@ -77,14 +74,15 @@ public final class InstinctRunConfiguration extends RuntimeConfiguration {
     }
 
     public RunProfileState getState(final DataContext context, final RunnerInfo runnerInfo, final RunnerSettings runner,
-            final ConfigurationPerRunnerSettings configuration) throws ExecutionException {
-        final IntinctCommandLineState commandLineState = new IntinctCommandLineState(this, runner, configuration);
+            final ConfigurationPerRunnerSettings configuration) {
+        final InstinctCommandLineState commandLineState = new InstinctCommandLineState(this, runner, configuration);
         commandLineState.setConsoleBuilder(TextConsoleBuilderFactory.getInstance().createBuilder(getProject()));
         commandLineState.setModulesToCompile(getModules());
         return commandLineState;
     }
 
     @Override
+    @Suggest("Can we reomve this method? Only delegates to super.")
     public void checkConfiguration() throws RuntimeConfigurationException {
         super.checkConfiguration();
     }
@@ -98,6 +96,7 @@ public final class InstinctRunConfiguration extends RuntimeConfiguration {
         return lookUp(getModules(), moduleName);
     }
 
+    @Suggest("Can we remove this setter?")
     public void setModule(final Module module) {
         moduleName = module == null ? null : module.getName();
     }
@@ -119,11 +118,12 @@ public final class InstinctRunConfiguration extends RuntimeConfiguration {
     }
 
     public String getSpecificationMethodName() {
-        return behaviorMethod == null ? "" : behaviorMethod;
+        return specificationMethodName == null ? "" : specificationMethodName;
     }
 
-    public void setSpecificationMethodName(final String methodName) {
-        behaviorMethod = methodName;
+    @Suggest("Can we remove this setter?")
+    public void setSpecificationMethodName(final String specificationMethodName) {
+        this.specificationMethodName = specificationMethodName;
     }
 
     private Module lookUp(final Module[] modules, final String moduleName) {

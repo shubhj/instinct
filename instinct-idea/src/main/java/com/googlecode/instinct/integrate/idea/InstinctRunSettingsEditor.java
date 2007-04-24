@@ -40,10 +40,11 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.psi.PsiClass;
 import com.intellij.psi.search.GlobalSearchScope;
+import org.jetbrains.annotations.NotNull;
 
 public final class InstinctRunSettingsEditor extends SettingsEditor<InstinctRunConfiguration> {
     private Project project;
-    private TextFieldWithBrowseButton behaviorClassInput;
+    private TextFieldWithBrowseButton contextClassInput;
     private JComboBox moduleComponent;
     private JComponent editorUi;
 
@@ -52,21 +53,26 @@ public final class InstinctRunSettingsEditor extends SettingsEditor<InstinctRunC
         initComponents();
     }
 
-    protected void resetEditorFrom(final InstinctRunConfiguration configuration) {
-        behaviorClassInput.setText(configuration.getContextClassName());
+    @Override
+    public void resetEditorFrom(final InstinctRunConfiguration configuration) {
+        contextClassInput.setText(configuration.getContextClassName());
         moduleComponent.setSelectedItem(configuration.getModule());
     }
 
-    protected void applyEditorTo(final InstinctRunConfiguration configuration) throws ConfigurationException {
-        configuration.setContextClassName(behaviorClassInput.getText());
+    @Override
+    public void applyEditorTo(final InstinctRunConfiguration configuration) throws ConfigurationException {
+        configuration.setContextClassName(contextClassInput.getText());
         configuration.setModule((Module) moduleComponent.getSelectedItem());
     }
 
-    protected JComponent createEditor() {
+    @NotNull
+    @Override
+    public JComponent createEditor() {
         return editorUi;
     }
 
-    protected void disposeEditor() {
+    @Override
+    public void disposeEditor() {
     }
 
     private void initComponents() {
@@ -76,12 +82,12 @@ public final class InstinctRunSettingsEditor extends SettingsEditor<InstinctRunC
     }
 
     private void initClassChooser() {
-        behaviorClassInput = new TextFieldWithBrowseButton();
-        behaviorClassInput.addActionListener(new ActionListener() {
+        contextClassInput = new TextFieldWithBrowseButton();
+        contextClassInput.addActionListener(new ActionListener() {
             public void actionPerformed(final ActionEvent e) {
-                final BehaviorClassBrowser browser = new BehaviorClassBrowser(project, "Choose Behavior");
-                browser.setField(behaviorClassInput);
-                behaviorClassInput.setText(browser.show());
+                final ContextClassBrowser browser = new ContextClassBrowser(project, "Choose Context");
+                browser.setField(contextClassInput);
+                contextClassInput.setText(browser.show());
             }
         });
     }
@@ -89,6 +95,7 @@ public final class InstinctRunSettingsEditor extends SettingsEditor<InstinctRunC
     private void initModuleComboBox() {
         moduleComponent = new JComboBox(ModuleManager.getInstance(project).getSortedModules());
         moduleComponent.setRenderer(new DefaultListCellRenderer() {
+            @Override
             public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected,
                     final boolean cellHasFocus) {
                 final JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
@@ -106,7 +113,7 @@ public final class InstinctRunSettingsEditor extends SettingsEditor<InstinctRunC
     private JComponent createEditorUi() {
         final JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
-        panel.add(behaviorClassInput, new GridBagConstraints(
+        panel.add(contextClassInput, new GridBagConstraints(
                 0, 0, 1, 1, 1.0, 0.0, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
                 new Insets(4, 4, 0, 4), 0, 0
         ));
@@ -125,11 +132,12 @@ public final class InstinctRunSettingsEditor extends SettingsEditor<InstinctRunC
         return panel;
     }
 
-    private static class BehaviorClassBrowser extends ClassBrowser {
-        public BehaviorClassBrowser(final Project project, final String name) {
+    private static class ContextClassBrowser extends ClassBrowser {
+        private ContextClassBrowser(final Project project, final String name) {
             super(project, name);
         }
 
+        @Override
         protected TreeClassChooser.ClassFilterWithScope getFilter() throws NoFilterException {
             return new TreeClassChooser.ClassFilterWithScope() {
                 public GlobalSearchScope getScope() {
@@ -142,6 +150,7 @@ public final class InstinctRunSettingsEditor extends SettingsEditor<InstinctRunC
             };
         }
 
+        @Override
         protected PsiClass findClass(final String name) {
             return null;
         }

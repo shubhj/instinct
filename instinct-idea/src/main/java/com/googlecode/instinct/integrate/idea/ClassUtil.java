@@ -1,7 +1,7 @@
 package com.googlecode.instinct.integrate.idea;
 
-import com.intellij.psi.PsiClass;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.intellij.psi.PsiClass;
 
 @Suggest("Does this have to be a static class?")
 public final class ClassUtil {

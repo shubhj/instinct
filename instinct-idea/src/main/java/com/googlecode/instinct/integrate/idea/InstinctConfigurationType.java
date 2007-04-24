@@ -21,15 +21,14 @@ import com.googlecode.instinct.internal.util.Suggest;
 import com.intellij.execution.LocatableConfigurationType;
 import com.intellij.execution.Location;
 import com.intellij.execution.RunnerAndConfigurationSettings;
-import com.intellij.execution.junit.RuntimeConfigurationProducer;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
+import com.intellij.execution.junit.RuntimeConfigurationProducer;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.psi.PsiClass;
-import com.intellij.psi.PsiClassType;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiIdentifier;
@@ -40,18 +39,9 @@ import com.intellij.psi.PsiModifierList;
 import com.intellij.psi.PsiModifierListOwner;
 import com.intellij.psi.PsiType;
 import com.intellij.psi.search.GlobalSearchScope;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 public final class InstinctConfigurationType implements LocatableConfigurationType {
-    private static final String BEHAVIOURS_INTERFACE = "org.jbehave.core.behaviour.Behaviours";
-    private final ConfigurationFactory factory;
-
-    @Suggest("Can we do better than pass this?")
-    public InstinctConfigurationType() {
-        factory = new InstinctConfigurationFactory(this);
-    }
-
     public String getDisplayName() {
         return "Instinct";
     }
@@ -65,13 +55,12 @@ public final class InstinctConfigurationType implements LocatableConfigurationTy
     }
 
     public ConfigurationFactory[] getConfigurationFactories() {
-        return new ConfigurationFactory[]{factory};
+        return new ConfigurationFactory[]{new InstinctConfigurationFactory(this)};
     }
 
     @NotNull
-    @NonNls
     public String getComponentName() {
-        return "#com.googlecode.instinct.integrate.idea.InstinctConfigurationType";
+        return '#' + com.googlecode.instinct.integrate.idea.InstinctConfigurationType.class.getName();
     }
 
     public void initComponent() {
@@ -80,6 +69,7 @@ public final class InstinctConfigurationType implements LocatableConfigurationTy
     public void disposeComponent() {
     }
 
+    @SuppressWarnings({"RawUseOfParameterizedType"})
     public RunnerAndConfigurationSettings createConfigurationByLocation(final Location location) {
         final PsiClass contextClass = getContextClass(location.getPsiElement());
         if (contextClass == null) {
@@ -90,13 +80,7 @@ public final class InstinctConfigurationType implements LocatableConfigurationTy
     }
 
     public boolean isConfigurationByElement(final RunConfiguration configuration, final Project project, final PsiElement element) {
-        final PsiClass behaviorClass = getContextClass(element);
-        if (behaviorClass == null) {
-            return false;
-        }
-        final InstinctRunConfiguration runConfiguration = ((InstinctRunConfiguration) configuration);
-        return Comparing.equal(ClassUtil.fullName(behaviorClass), runConfiguration.getContextClassName())
-                && Comparing.equal(getBehaviourMethodName(element), runConfiguration.getSpecificationMethodName());
+        return elementIsAContextOrSpecification(element, configuration);
     }
 
     public PsiClass getContextClass(final PsiElement element) {
@@ -123,7 +107,7 @@ public final class InstinctConfigurationType implements LocatableConfigurationTy
                 }
             }
             for (final PsiClass definedClass : definedClasses) {
-                final PsiClass contextClassCandidate = checkIfThereIsOneWithBehaviorAtEnd(definedClass);
+                final PsiClass contextClassCandidate = checkIfThereIsOneWithContextAtEnd(definedClass);
                 if (contextClassCandidate != null && isContextClass(contextClassCandidate)) {
                     return contextClassCandidate;
                 }
@@ -132,9 +116,9 @@ public final class InstinctConfigurationType implements LocatableConfigurationTy
         return null;
     }
 
-    public PsiMethod getBehaviourMethodElement(PsiElement psiElement) {
+    public PsiMethod getBehaviourMethodElement(final PsiElement psiElement) {
         if (psiElement instanceof PsiIdentifier && psiElement.getParent() instanceof PsiMethod) {
-            PsiMethod method = (PsiMethod) psiElement.getParent();
+            final PsiMethod method = (PsiMethod) psiElement.getParent();
             if (method.getName().startsWith("should")) {
                 return method;
             }
@@ -142,23 +126,33 @@ public final class InstinctConfigurationType implements LocatableConfigurationTy
         return null;
     }
 
-    private String getBehaviourMethodName(PsiElement element) {
-        PsiMethod method = getBehaviourMethodElement(element);
+    private boolean elementIsAContextOrSpecification(final PsiElement element, final RunConfiguration configuration) {
+        final PsiClass behaviorClass = getContextClass(element);
+        if (behaviorClass == null) {
+            return false;
+        }
+        final InstinctRunConfiguration runConfiguration = ((InstinctRunConfiguration) configuration);
+        return Comparing.equal(ClassUtil.fullName(behaviorClass), runConfiguration.getContextClassName())
+                && Comparing.equal(getSpecificationMethodName(element), runConfiguration.getSpecificationMethodName());
+    }
+
+    private String getSpecificationMethodName(final PsiElement element) {
+        final PsiMethod method = getBehaviourMethodElement(element);
         return method == null ? null : method.getName();
     }
 
-    private PsiClass checkIfThereIsOneWithBehaviorAtEnd(PsiClass psiClass) {
-        String nameToCheck = psiClass.getQualifiedName() + "Behavior";
-        Project project = psiClass.getProject();
+    // This appears to check if there is a class with the same name as psiClass, but ending with "Context"
+    private PsiClass checkIfThereIsOneWithContextAtEnd(final PsiClass psiClass) {
+        final String nameToCheck = psiClass.getQualifiedName() + "Context";
+        final Project project = psiClass.getProject();
         return PsiManager.getInstance(project).findClass(nameToCheck, GlobalSearchScope.allScope(project));
     }
 
-    private PsiClass getMainClass(PsiFile psiFile) {
+    private PsiClass getMainClass(final PsiFile psiFile) {
         if (psiFile instanceof PsiJavaFile) {
-            PsiJavaFile javaFile = (PsiJavaFile) psiFile;
-            PsiClass[] definedClasses = javaFile.getClasses();
-            for (int i = 0; i < definedClasses.length; i++) {
-                PsiClass definedClass = definedClasses[i];
+            final PsiJavaFile javaFile = (PsiJavaFile) psiFile;
+            final PsiClass[] definedClasses = javaFile.getClasses();
+            for (final PsiClass definedClass : definedClasses) {
                 if (isPublic(definedClass)) {
                     return definedClass;
                 }
@@ -167,23 +161,11 @@ public final class InstinctConfigurationType implements LocatableConfigurationTy
         return null;
     }
 
-    @Suggest("Dupe.")
     private boolean isContextClass(final PsiClass psiClass) {
-        return isRunnableClass(psiClass) && (implementsBehaviorsInterface(psiClass) || containsShouldMethod(psiClass));
+        return canBeRun(psiClass) && containsSpecificationMethod(psiClass);
     }
 
-    @Suggest({"Replace with annotation lookup.", "Fix the dupe with "})
-    private boolean implementsBehaviorsInterface(final PsiClass psiClass) {
-        final PsiClassType[] interfaces = psiClass.getImplementsListTypes();
-        for (final PsiClassType iface : interfaces) {
-            if (BEHAVIOURS_INTERFACE.equals(iface.resolve().getQualifiedName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean containsShouldMethod(final PsiClass psiClass) {
+    private boolean containsSpecificationMethod(final PsiClass psiClass) {
         final PsiMethod[] methods = psiClass.getAllMethods();
         for (final PsiMethod method : methods) {
             if (isSpecificationMethod(method)) {
@@ -193,7 +175,7 @@ public final class InstinctConfigurationType implements LocatableConfigurationTy
         return false;
     }
 
-    private boolean isRunnableClass(PsiClass psiClass) {
+    private boolean canBeRun(final PsiClass psiClass) {
         return isPublic(psiClass) && !psiClass.isInterface() && !isAbstract(psiClass);
     }
 
@@ -207,16 +189,19 @@ public final class InstinctConfigurationType implements LocatableConfigurationTy
         return method.getName().startsWith("should") && isPublic(method) && isVoid(method);
     }
 
+    @Suggest("Move into class util.")
     private boolean isPublic(final PsiModifierListOwner definition) {
         final PsiModifierList modifierList = definition.getModifierList();
         return modifierList != null && modifierList.hasModifierProperty("public");
     }
 
+    @Suggest("Move into class util.")
     private boolean isVoid(final PsiMethod method) {
         return PsiType.VOID.equals(method.getReturnType());
     }
 
-    public static InstinctConfigurationType getInstance() {
+    @Suggest("Why is this needed?")
+    public static LocatableConfigurationType getInstance() {
         return ApplicationManager.getApplication().getComponent(InstinctConfigurationType.class);
     }
 }
