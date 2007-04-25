@@ -1,4 +1,4 @@
-package com.googlecode.instinct.integrate.junit3;
+package com.googlecode.instinct.internal.core;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -17,26 +17,24 @@ import com.googlecode.instinct.marker.naming.BeforeSpecificationNamingConvention
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 
-@Suggest("Pull into main packages.")
 public final class ContextRunnerImpl implements ContextRunner {
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
 
-    public ContextResult run(final ContextClass contextClass,
-            final ContextRunStrategy contextRunStrategy, final SpecificationRunStrategy specificationRunStrategy) {
-        checkNotNull(contextClass, contextRunStrategy);
-        contextRunStrategy.onContext(contextClass);
-        runSpecifications(contextClass, specificationRunStrategy);
+    @Suggest("Don't return null - Tom -> up to here.")
+    public ContextResult run(final ContextClass contextClass, final SpecificationListener specificationListener) {
+        checkNotNull(contextClass, specificationListener);
+        runSpecifications(contextClass, specificationListener);
         // fix this.
         return null;
     }
 
     @Suggest("Return the spec results")
-    private void runSpecifications(final ContextClass contextClass, final SpecificationRunStrategy specificationRunStrategy) {
+    private void runSpecifications(final ContextClass contextClass, final SpecificationListener specificationListener) {
         final Method[] specificationMethods = getSpecificationMethods(contextClass);
         for (final Method specificationMethod : specificationMethods) {
             final SpecificationContext specificationContext = createSpecificationContext(contextClass, specificationMethod);
             // save the results
-            new SpecificationMethodImpl(specificationContext).run(specificationRunStrategy);
+            new SpecificationMethodImpl(specificationContext).run(specificationListener);
         }
     }
 

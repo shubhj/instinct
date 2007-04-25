@@ -1,4 +1,4 @@
-package com.googlecode.instinct.integrate.junit3;
+package com.googlecode.instinct.internal.core;
 
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.util.Suggest;
@@ -9,7 +9,7 @@ import com.googlecode.instinct.internal.util.Suggest;
         "Need some way to indicate whether we want to run a single spec or all of them",
         "Maybe pass a single spec method into the constructor?"})
 public interface ContextClass {
-    ContextResult run(ContextRunStrategy contextRunStrategy, SpecificationRunStrategy specificationRunStrategy);
+    ContextResult run(ContextListener contextListener, SpecificationListener specificationListener);
 
     <T> Class<T> getType();
 

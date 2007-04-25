@@ -48,8 +48,8 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         return doRun(context);
     }
 
-    @SuppressWarnings({"CatchGenericClass"})
     // SUPPRESS IllegalCatch {
+    @SuppressWarnings({"CatchGenericClass"})
     @Suggest("Make a clock wrapper that looks like org.jbehave.core.util.Timer.")
     private SpecificationResult doRun(final SpecificationContext specificationContext) {
         final long startTime = clock.getCurrentTime();

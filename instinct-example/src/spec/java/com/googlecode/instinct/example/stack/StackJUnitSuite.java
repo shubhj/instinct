@@ -3,13 +3,13 @@ package com.googlecode.instinct.example.stack;
 import com.googlecode.instinct.integrate.junit3.ContextTestSuite;
 import junit.framework.TestSuite;
 
-public final class TechTalkSuite {
-    private TechTalkSuite() {
+public final class StackJUnitSuite {
+    private StackJUnitSuite() {
         throw new UnsupportedOperationException();
     }
 
     public static TestSuite suite() {
-        final TestSuite suite = new TestSuite("Instinct Tech Talk");
+        final TestSuite suite = new TestSuite("Instinct JUnit Integration - Stack Example");
         addContextToSuite(suite, AnEmptyStack.class);
         addContextToSuite(suite, AFullStack.class);
         addContextToSuite(suite, AnEmptyMagazineRack.class);
@@ -22,7 +22,7 @@ public final class TechTalkSuite {
         suite.addTest(newSuite(contextClass).testAt(0));
     }
 
-    private static <T> ContextTestSuite newSuite(final Class<T> contextClass) {
+    private static <T> TestSuite newSuite(final Class<T> contextClass) {
         return new ContextTestSuite(contextClass);
     }
 }

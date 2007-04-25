@@ -35,6 +35,41 @@ import com.googlecode.instinct.report.ContextResultMessageBuilder;
 [junit]     at com.googlecode.instinct.internal.runner.SpecificationRunnerSlowTest.testInvalidMethodsBarf(SpecificationRunnerSlowTest.java:45)
 [junit]     at com.googlecode.instinct.test.InstinctTestCase.runBare(InstinctTestCase.java:29)
 [junit]
+
+
+
+RSpec success (doesn't show names by default):
+
+A new stack
+- should be empty
+
+Finished in 0.000386 seconds
+
+1 specification, 0 failures
+
+
+RSpec failure:
+
+$ spec stack_spec.rb -fs
+
+A new stack
+- should be empty
+
+An empty stack
+- should not be empty after 'push'
+
+A stack with one item
+- should return top when you send it 'top' (FAILED - 1)
+
+1)
+'A stack with one item should return top when you send it 'top'' FAILED
+expected "one item", got nil (using ==)
+./stack_spec.rb:31:
+
+Finished in 0.002969 seconds
+
+3 specifications, 1 failure
+
  */
 
 public final class BriefContextResultMessageBuilder implements ContextResultMessageBuilder {
