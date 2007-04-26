@@ -16,14 +16,6 @@
 
 package com.googlecode.instinct.internal.core;
 
-import com.googlecode.instinct.internal.runner.ContextResult;
-
-public interface ContextClass {
-    <T> Class<T> getType();
-
-    String getName();
-
-    void addRunListener(ContextRunListener contextRunListener);
-
-    ContextResult run();
+public interface ContextRunListener {
+    void onContext(ContextClass contextClass);
 }

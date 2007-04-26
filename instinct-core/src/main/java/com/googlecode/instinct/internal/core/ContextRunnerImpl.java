@@ -21,7 +21,7 @@ public final class ContextRunnerImpl implements ContextRunner {
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
 
     @Suggest("Don't return null - Tom -> up to here.")
-    public ContextResult run(final ContextClass contextClass, final SpecificationListener specificationListener) {
+    public ContextResult run(final XxxContextClass contextClass, final SpecificationListener specificationListener) {
         checkNotNull(contextClass, specificationListener);
         runSpecifications(contextClass, specificationListener);
         // fix this.
@@ -29,7 +29,7 @@ public final class ContextRunnerImpl implements ContextRunner {
     }
 
     @Suggest("Return the spec results")
-    private void runSpecifications(final ContextClass contextClass, final SpecificationListener specificationListener) {
+    private void runSpecifications(final XxxContextClass contextClass, final SpecificationListener specificationListener) {
         final Method[] specificationMethods = getSpecificationMethods(contextClass);
         for (final Method specificationMethod : specificationMethods) {
             final SpecificationContext specificationContext = createSpecificationContext(contextClass, specificationMethod);
@@ -39,7 +39,7 @@ public final class ContextRunnerImpl implements ContextRunner {
     }
 
     @Suggest("Pull out into specification context creator.")
-    private SpecificationContext createSpecificationContext(final ContextClass contextClass,
+    private SpecificationContext createSpecificationContext(final XxxContextClass contextClass,
             final Method specificationMethod) {
         final Method[] beforeSpecificationMethods = getBeforeSpecificationMethods(contextClass);
         final Method[] afterSpecificationMethods = getAfterSpecificationMethods(contextClass);
@@ -47,22 +47,22 @@ public final class ContextRunnerImpl implements ContextRunner {
                 afterSpecificationMethods, specificationMethod);
     }
 
-    private Method[] getBeforeSpecificationMethods(final ContextClass contextClass) {
+    private Method[] getBeforeSpecificationMethods(final XxxContextClass contextClass) {
         return getMethods(contextClass, BeforeSpecification.class,
                 new BeforeSpecificationNamingConvention());
     }
 
-    private Method[] getAfterSpecificationMethods(final ContextClass contextClass) {
+    private Method[] getAfterSpecificationMethods(final XxxContextClass contextClass) {
         return getMethods(contextClass, AfterSpecification.class,
                 new AfterSpecificationNamingConvention());
     }
 
-    private Method[] getSpecificationMethods(final ContextClass contextClass) {
+    private Method[] getSpecificationMethods(final XxxContextClass contextClass) {
         return getMethods(contextClass, Specification.class, new SpecificationNamingConvention());
     }
 
     @Suggest("This contains heavy duplication with StandardContextRunner, figure out how to remove it")
-    private Method[] getMethods(final ContextClass contextClass, final Class<? extends Annotation> annotationType,
+    private Method[] getMethods(final XxxContextClass contextClass, final Class<? extends Annotation> annotationType,
             final NamingConvention namingConvention) {
         return methodLocator.locateAll(contextClass.getType(), annotationType, namingConvention);
     }

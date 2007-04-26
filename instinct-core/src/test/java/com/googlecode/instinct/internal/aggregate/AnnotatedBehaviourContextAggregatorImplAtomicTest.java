@@ -42,16 +42,6 @@ public final class AnnotatedBehaviourContextAggregatorImplAtomicTest extends Ins
     private File packageRoot;
     private FileFilter fileFilter;
 
-    public void testGetContextNames() {
-        expects(packageRootFinder).method("getPackageRoot").with(same(CLASS_IN_SPEC_TREE)).will(returnValue(PACKAGE_ROOT));
-        expects(objectFactory).method("create").with(same(File.class), eq(new Object[]{PACKAGE_ROOT})).will(returnValue(packageRoot));
-        expects(objectFactory).method("create").with(same(AnnotationFileFilter.class), eq(new Object[]{packageRoot, BehaviourContext.class})).will(
-                returnValue(fileFilter));
-        expects(classLocator).method("locate").with(same(packageRoot), same(fileFilter)).will(returnValue(CLASS_NAMES));
-        final JavaClassName[] names = aggregator.getContextNames();
-        assertSame(CLASS_NAMES, names);
-    }
-
     @Override
     public void setUpTestDoubles() {
         classLocator = mock(ClassLocator.class);
@@ -67,5 +57,15 @@ public final class AnnotatedBehaviourContextAggregatorImplAtomicTest extends Ins
         insertFieldValue(aggregator, "packageRootFinder", packageRootFinder);
         insertFieldValue(aggregator, "classLocator", classLocator);
         insertFieldValue(aggregator, "objectFactory", objectFactory);
+    }
+
+    public void testGetContextNames() {
+        expects(packageRootFinder).method("getPackageRoot").with(same(CLASS_IN_SPEC_TREE)).will(returnValue(PACKAGE_ROOT));
+        expects(objectFactory).method("create").with(same(File.class), eq(new Object[]{PACKAGE_ROOT})).will(returnValue(packageRoot));
+        expects(objectFactory).method("create").with(same(AnnotationFileFilter.class), eq(new Object[]{packageRoot, BehaviourContext.class})).will(
+                returnValue(fileFilter));
+        expects(classLocator).method("locate").with(same(packageRoot), same(fileFilter)).will(returnValue(CLASS_NAMES));
+        final JavaClassName[] names = aggregator.getContextNames();
+        assertSame(CLASS_NAMES, names);
     }
 }

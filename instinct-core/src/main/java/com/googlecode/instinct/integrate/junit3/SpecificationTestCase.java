@@ -49,6 +49,7 @@ public final class SpecificationTestCase extends TestCase {
     private void runSpecification() {
         try {
             final SpecificationContext specificationContext = specificationMethod.getSpecificationContext();
+            //note. this uses the real (internal) runner.
             final SpecificationResult specificationResult = specificationRunner.run(specificationContext);
             processSpecificationResult(specificationResult);
         } catch (Throwable e) {

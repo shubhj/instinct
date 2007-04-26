@@ -84,14 +84,8 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     }
 
     private void runMethod(final Object instance, final Method specificationMethod) {
-        checkMethod(specificationMethod);
+        methodValidator.checkMethodHasNoParameters(specificationMethod);
         methodInvoker.invokeMethod(instance, specificationMethod);
-    }
-
-    // Note. Removed need to have a return type for Groovy integration.
-    private void checkMethod(final Method method) {
-//        methodValidator.checkMethodHasNoReturnType(method);
-        methodValidator.checkMethodHasNoParameters(method);
     }
 
     private <T> Object invokeConstructor(final Class<T> cls) {
