@@ -20,7 +20,6 @@ import java.io.BufferedWriter;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
@@ -33,9 +32,9 @@ import com.googlecode.instinct.report.ResultFormat;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import com.googlecode.instinct.report.StatusLogger;
 
-@Fix({"Write atomic test for this.", "Don't make this implement ContextRunner?"})
+@Fix({"Write atomic test for this.",
+        "Don't make this implement ContextRunner, would then have to create ContextClasses internally.?"})
 public final class TextContextRunner implements ContextRunner {
-    public static final String METHOD_SEPARATOR = "#";
     private static final boolean AUTO_FLUSH_OUTPUT = true;
     private final ContextRunner contextRunner;
 
@@ -95,40 +94,6 @@ public final class TextContextRunner implements ContextRunner {
         final ContextRunner runner = new TextContextRunner();
         for (final Class<?> contextClass : contextClasses) {
             runner.run(contextClass);
-        }
-    }
-
-    /**
-     * Runs a single context or specification method sending the results to standard out.
-     * The format of the argument is as follows:
-     * <pre>
-     * $ TextContextRunner com.googlecode.instinct.example.stack.AnEmptyStack
-     * $ TextContextRunner com.googlecode.instinct.example.stackAnEmptyStack#mustBeEmpty
-     * </pre>
-     *
-     * @param args The fully qualified class name of the context to run, with an optional
-     */
-    @Suggest("Move this implementation elewhere")
-    public static void main(final String... args) {
-        if (args.length == 1) {
-            final ContextRunner contextRunner = new TextContextRunner();
-            final Class<?> contextClass = getContextClass(args[0]);
-            contextRunner.run(contextClass);
-        }
-    }
-
-    private static Class<?> getContextClass(final String specificationToRun) {
-        final String className = getClassName(specificationToRun);
-        return new DefaultEdgeClass().forName(className);
-    }
-
-    private static String getClassName(final String specificationToRun) {
-        final int index = specificationToRun.indexOf(METHOD_SEPARATOR);
-        if (index >= 0) {
-            return specificationToRun.substring(0, index);
-//            methodName = specificationToRun.substring(index + 1);
-        } else {
-            return specificationToRun;
         }
     }
 }

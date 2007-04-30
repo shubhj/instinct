@@ -20,6 +20,6 @@ import com.googlecode.instinct.internal.util.Suggest;
 
 public interface ContextRunner {
     @Suggest("Another method that takes a ContextClass.")
-            <T> ContextResult run(final Class<T> contextClass);
+    <T> ContextResult run(final Class<T> contextClass);
 }
 

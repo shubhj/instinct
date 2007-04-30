@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.runner;
 
-import static java.lang.System.out;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.Suggest;
@@ -25,8 +24,8 @@ import com.googlecode.instinct.internal.util.Suggest;
 public final class CommandLineRunner {
     public static final String METHOD_SEPARATOR = "#";
 
-    private void run() {
-        // run the contexts.
+    private void run(final Class<?> contextClass) {
+        TextContextRunner.runContexts(contextClass);
     }
 
     /**
@@ -34,29 +33,33 @@ public final class CommandLineRunner {
      * The format of the argument is as follows:
      * <pre>
      * $ CommandLineRunner com.googlecode.instinct.example.stack.AnEmptyStack
+     * $ CommandLineRunner com.googlecode.instinct.example.stack.AnEmptyStack
      * $ CommandLineRunner com.googlecode.instinct.example.stackAnEmptyStack#mustBeEmpty
      * </pre>
      *
-     * @param args The fully qualified class name of the context to run, with an optional
+     * @param args Command line arguments (see above).
      */
-    @Suggest("Move this implementation elewhere")
     public static void main(final String... args) {
         if (args.length == 0) {
-            // print usage
             printUsage();
         } else {
             // create the runner, using a map to parse arguments.
             final Class<?> contextClass = getContextClass(args[0]);
-            new CommandLineRunner().run();
+            new CommandLineRunner().run(contextClass);
         }
     }
 
+    // SUPPRESS GenericIllegalRegexp {
+    @SuppressWarnings({"UseOfSystemOutOrSystemErr"})
+    @Suggest("Support formatting. Support more than one context.")
     private static void printUsage() {
         final String className = CommandLineRunner.class.getSimpleName();
-        out.println("Usage: " + className + " -format <brief|verbose> <context#spec>...");
+        System.out.println("Usage: " + className + /*" -format <brief|verbose>" +*/ " <context#spec>");
     }
+    // } SUPPRESS GenericIllegalRegexp
 
-    private static Class<?> getContextClass(final String specificationToRun) {
+    @SuppressWarnings({"unchecked"})
+    private static <T> Class<T> getContextClass(final String specificationToRun) {
         final String className = getClassName(specificationToRun);
         return new DefaultEdgeClass().forName(className);
     }
