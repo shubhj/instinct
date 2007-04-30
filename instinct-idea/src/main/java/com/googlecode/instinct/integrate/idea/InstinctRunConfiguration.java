@@ -75,7 +75,7 @@ public final class InstinctRunConfiguration extends RuntimeConfiguration {
 
     public RunProfileState getState(final DataContext context, final RunnerInfo runnerInfo, final RunnerSettings runner,
             final ConfigurationPerRunnerSettings configuration) {
-        final InstinctCommandLineState commandLineState = new InstinctCommandLineState(this, runner, configuration);
+        final ContextRunCommandLineState commandLineState = new ContextRunCommandLineState(this, runner, configuration);
         commandLineState.setConsoleBuilder(TextConsoleBuilderFactory.getInstance().createBuilder(getProject()));
         commandLineState.setModulesToCompile(getModules());
         return commandLineState;

@@ -16,8 +16,9 @@
 
 package com.googlecode.instinct.integrate.idea;
 
-import com.googlecode.instinct.runner.TextContextRunner;
-import static com.googlecode.instinct.runner.TextContextRunner.METHOD_SEPARATOR;
+import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.runner.CommandLineRunner;
+import static com.googlecode.instinct.runner.CommandLineRunner.METHOD_SEPARATOR;
 import com.intellij.execution.CantRunException;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.ConfigurationPerRunnerSettings;
@@ -25,12 +26,12 @@ import com.intellij.execution.configurations.JavaCommandLineState;
 import com.intellij.execution.configurations.JavaParameters;
 import com.intellij.execution.configurations.RunnerSettings;
 
-public final class InstinctCommandLineState extends JavaCommandLineState {
-    private static final String TEXT_RUNNER_CLASS_NAME = TextContextRunner.class.getName();
+public final class ContextRunCommandLineState extends JavaCommandLineState {
+    private static final String COMMAND_LINE_RUNNER_CLASS_NAME = CommandLineRunner.class.getName();
     private InstinctRunConfiguration runConfiguration;
 
     @SuppressWarnings({"RawUseOfParameterizedType"})
-    public InstinctCommandLineState(final InstinctRunConfiguration runConfiguration, final RunnerSettings runner,
+    public ContextRunCommandLineState(final InstinctRunConfiguration runConfiguration, final RunnerSettings runner,
             final ConfigurationPerRunnerSettings configuration) {
         super(runner, configuration);
         this.runConfiguration = runConfiguration;
@@ -44,17 +45,18 @@ public final class InstinctCommandLineState extends JavaCommandLineState {
         return createParameters(specificationToRun);
     }
 
-    private String createSpecificationsToRunArgument(final String contextClassName, final String specificationMethod) {
-        if (specificationMethod.length() == 0) {
+    @Suggest("Move this into a shared class, parsing & creating belong in the same class.")
+    private String createSpecificationsToRunArgument(final String contextClassName, final String specificationMethodName) {
+        if (specificationMethodName.length() == 0) {
             return contextClassName;
         } else {
-            return contextClassName + METHOD_SEPARATOR + specificationMethod;
+            return contextClassName + METHOD_SEPARATOR + specificationMethodName;
         }
     }
 
     private JavaParameters createParameters(final String specificationsToRun) throws CantRunException {
         final JavaParameters parameters = new JavaParameters();
-        parameters.setMainClass(TEXT_RUNNER_CLASS_NAME);
+        parameters.setMainClass(COMMAND_LINE_RUNNER_CLASS_NAME);
         parameters.getProgramParametersList().addParametersString(specificationsToRun);
         parameters.configureByModule(runConfiguration.getModule(), JavaParameters.JDK_AND_CLASSES_AND_TESTS);
         parameters.setWorkingDirectory(runConfiguration.getWorkingDirectoryPath());
