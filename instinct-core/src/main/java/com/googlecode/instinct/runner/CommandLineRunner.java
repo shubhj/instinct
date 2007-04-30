@@ -20,7 +20,16 @@ import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.Suggest;
 
-@Fix({"Write atomic test for this.", "Delegate to TextContextRunner"})
+/**
+ * Command line specification runner. Runs a context or specification method sending the results to standard out.
+ * The format of the arguments are as follows:
+ * <pre>
+ * $ java CommandLineRunner com.googlecode.instinct.example.stack.AnEmptyStack
+ * $ java CommandLineRunner com.googlecode.instinct.example.stackAnEmptyStack#mustBeEmpty
+ * $ java CommandLineRunner com.googlecode.instinct.example.stack.AnEmptyStack#mustBeEmpty com.googlecode.instinct.example.stack.AnEmptyMagazineRack
+ * </pre>
+ */
+@Fix({"Write atomic test for this."})
 public final class CommandLineRunner {
     public static final String METHOD_SEPARATOR = "#";
 
@@ -29,13 +38,7 @@ public final class CommandLineRunner {
     }
 
     /**
-     * Runs a single context or specification method sending the results to standard out.
-     * The format of the argument is as follows:
-     * <pre>
-     * $ CommandLineRunner com.googlecode.instinct.example.stack.AnEmptyStack
-     * $ CommandLineRunner com.googlecode.instinct.example.stack.AnEmptyStack
-     * $ CommandLineRunner com.googlecode.instinct.example.stackAnEmptyStack#mustBeEmpty
-     * </pre>
+     * Runs a context or specification method sending the results to standard out.
      *
      * @param args Command line arguments (see above).
      */
@@ -43,7 +46,6 @@ public final class CommandLineRunner {
         if (args.length == 0) {
             printUsage();
         } else {
-            // create the runner, using a map to parse arguments.
             final Class<?> contextClass = getContextClass(args[0]);
             new CommandLineRunner().run(contextClass);
         }

@@ -25,7 +25,6 @@ import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ContextResultMessageBuilder;
 import com.googlecode.instinct.report.PrintWriterStatusLogger;
 import com.googlecode.instinct.report.ResultFormat;
@@ -33,7 +32,7 @@ import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import com.googlecode.instinct.report.StatusLogger;
 
 @Fix({"Write atomic test for this.",
-        "Don't make this implement ContextRunner, would then have to create ContextClasses internally.?"})
+        "Don't make this implement ContextRunner, but create ContextClasses internally.?"})
 public final class TextContextRunner implements ContextRunner {
     private static final boolean AUTO_FLUSH_OUTPUT = true;
     private final ContextRunner contextRunner;
@@ -74,7 +73,6 @@ public final class TextContextRunner implements ContextRunner {
      * @param contextClass A class containing specifications (a behaviour/specification context).
      * @return The results of running the given context class.
      */
-    @Suggest("Add method name? Overloaded? Then invoke the SpecRunner.")
     public <T> ContextResult run(final Class<T> contextClass) {
         checkNotNull(contextClass);
         return contextRunner.run(contextClass);
@@ -88,7 +86,7 @@ public final class TextContextRunner implements ContextRunner {
     /**
      * Runs the given contexts sending the results to standard out.
      *
-     * @param contextClasses An array of classes containing specifications (a behaviour/specification context) to run.
+     * @param contextClasses An array of classes containing specifications to run.
      */
     public static void runContexts(final Class<?>... contextClasses) {
         final ContextRunner runner = new TextContextRunner();

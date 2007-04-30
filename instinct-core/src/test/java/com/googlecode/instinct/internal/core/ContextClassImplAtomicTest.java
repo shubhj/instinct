@@ -87,19 +87,18 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
     @Fix("Check more than number, check name.")
     public void testReturnsSpecificationsToRun() {
 //        expectSpecificationMethodsFound();
-//        expects(methodLocator, anyTimes()).method("locateAll").with(same(contextType), anything()).will(returnValue(methods));
-//        expects(methods).method("iterator").will(returnValue(methods));
         final ContextClass context = createContextClass(ASimpleContext.class);
         final Collection<SpecificationMethod> methods = context.getSpecificationMethods();
         assertEquals(1, methods.size());
         assertEquals("toCheckVerification", methods.iterator().next().getName());
     }
 
-    /*
+/*
+To drive out:
 Method[] getBeforeSpecificationMethods();
 Method[] getAfterSpecificationMethods();
 Method getSpecificationMethod();
-     */
+*/
 
     private void expectContextRunListenersStored() {
         for (int i = 0; i < 3; i++) {

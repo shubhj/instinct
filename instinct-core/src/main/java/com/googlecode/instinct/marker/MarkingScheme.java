@@ -17,10 +17,8 @@
 package com.googlecode.instinct.marker;
 
 import java.lang.annotation.Annotation;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 
-@Suggest("Add other schemes of marking.")
 public interface MarkingScheme {
     <A extends Annotation> Class<A> getAnnotationType();
 
