@@ -17,9 +17,11 @@
 package com.googlecode.instinct.internal.core;
 
 import java.lang.reflect.Method;
+import static java.util.Arrays.asList;
 import java.util.Collection;
-import static com.googlecode.instinct.expect.Mocker.eq;
+import static com.googlecode.instinct.expect.Expect.expect;
 import static com.googlecode.instinct.expect.Mocker.expects;
+import static com.googlecode.instinct.expect.Mocker.isA;
 import static com.googlecode.instinct.expect.Mocker.mock;
 import static com.googlecode.instinct.expect.Mocker.returnValue;
 import static com.googlecode.instinct.expect.Mocker.same;
@@ -28,13 +30,10 @@ import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.util.Fix;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.MarkingScheme;
-import com.googlecode.instinct.marker.MarkingSchemeImpl;
-import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import static com.googlecode.instinct.test.reflect.Reflector.getMethod;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
 
 @SuppressWarnings({"unchecked"})
@@ -43,7 +42,8 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
     private Class<?> contextType;
     private ContextRunner contextRunner;
     private ContextResult contextResult;
-    private Collection<Method> methods;
+    private Collection<Method> specMethods;
+    private Collection<Method> beforeSpecMethods;
     private MarkedMethodLocator methodLocator;
 
     @Override
@@ -52,7 +52,8 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
         contextRunner = mock(ContextRunner.class);
         methodLocator = mock(MarkedMethodLocator.class);
         contextResult = mock(ContextResult.class);
-        methods = mock(Collection.class);
+        specMethods = asList(getMethod(contextType, "toCheckVerification"));
+        beforeSpecMethods = asList(getMethod(contextType, "setUp"), getMethod(contextType, "setUpAgain"));
     }
 
     @Override
@@ -60,22 +61,21 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
         contextClass = createContextClass(contextType);
     }
 
-    @Fix("Test extension of primordial.")
     public void testConformsToClassTraits() {
         checkClass(ContextClassImpl.class, ContextClass.class);
     }
 
     public void testReturnsTypePassedInConstructorFromGetType() {
-        assertSame(contextType, contextClass.getType());
+        expect.that((Object) contextType).sameInstanceAs(contextClass.getType());
     }
 
     public void testReturnsContextTypeNameSimpleName() {
-        assertEquals(contextType.getSimpleName(), contextClass.getName());
+        expect.that(contextType.getSimpleName()).equalTo(contextClass.getName());
     }
 
     public void testRunsContextUsingContextRunner() {
         expects(contextRunner).method("run").with(same(contextType)).will(returnValue(contextResult));
-        assertSame(contextResult, contextClass.run());
+        expect.that(contextResult).sameInstanceAs(contextClass.run());
     }
 
     public void testNotifiesContextRunListenersWhenRun() {
@@ -84,22 +84,30 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
         contextClass.run();
     }
 
-    @Fix("Check more than number, check name.")
     public void testReturnsSpecificationsToRun() {
-//        expectSpecificationMethodsFound();
-        final ContextClass context = createContextClass(ASimpleContext.class);
-        final Collection<SpecificationMethod> methods = context.getSpecificationMethods();
-        assertEquals(1, methods.size());
-        assertEquals("toCheckVerification", methods.iterator().next().getName());
+        expects(methodLocator).method("locateAll").with(same(contextType), isA(MarkingScheme.class)).will(returnValue(specMethods));
+        final Collection<SpecificationMethod> methods = contextClass.getSpecificationMethods();
+        expect.that(methods).containsItem(specMethod("toCheckVerification"));
+    }
+
+    public void testReturnsBeforeSpecificationMethodsToRun() {
+        expects(methodLocator).method("locateAll").with(same(contextType), isA(MarkingScheme.class)).will(returnValue(beforeSpecMethods));
+        final Collection<SpecificationMethod> methods = contextClass.getSpecificationMethods();
+        expect.that(methods).containsItem(specMethod("setUp"));
+        expect.that(methods).containsItem(specMethod("setUpAgain"));
+    }
+
+    private SpecificationMethod specMethod(final String methodName) {
+        return new SpecificationMethodImpl(getMethod(contextType, methodName));
     }
 
 /*
 To drive out:
 Method[] getBeforeSpecificationMethods();
 Method[] getAfterSpecificationMethods();
-Method getSpecificationMethod();
 */
 
+    @Fix("Replace with Instinct dummy generation.")
     private void expectContextRunListenersStored() {
         for (int i = 0; i < 3; i++) {
             final ContextRunListener contextRunListener = mock(ContextRunListener.class);
@@ -108,16 +116,9 @@ Method getSpecificationMethod();
         }
     }
 
-    @Suggest("Boost's equals is broken for classes without fields.")
-    private void expectSpecificationMethodsFound() {
-        final MarkingScheme markingScheme = new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention());
-        expects(methodLocator).method("locateAll").with(same(contextType), eq(markingScheme)).will(returnValue(methods));
-    }
-
     private <T> ContextClass createContextClass(final Class<T> contextType) {
         final Object[] constructorArgs = {contextType};
-//        final Object[] dependencies = {contextRunner, methodLocator};
-        final Object[] dependencies = {contextRunner};
+        final Object[] dependencies = {contextRunner, methodLocator};
         return createSubjectWithConstructorArgs(ContextClassImpl.class, constructorArgs, dependencies);
     }
 }

@@ -19,9 +19,10 @@ package com.googlecode.instinct.internal.core;
 import java.lang.reflect.Method;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import au.net.netstorm.boost.primordial.Primordial;
 
-@Suggest("Use the edge when it needs to be used.")
-public final class SpecificationMethodImpl implements SpecificationMethod {
+@Suggest("Use the edge only when it needs to be used.")
+public final class SpecificationMethodImpl extends Primordial implements SpecificationMethod {
     private final Method method;
 
     public SpecificationMethodImpl(final Method method) {

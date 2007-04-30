@@ -17,6 +17,7 @@
 package com.googlecode.instinct.internal.mock;
 
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.mock.constraint.ArrayElementsSame;
 import org.jmock.builder.NameMatchBuilder;
 import org.jmock.core.Constraint;
@@ -25,6 +26,7 @@ import org.jmock.core.Stub;
 import org.jmock.core.constraint.IsAnything;
 import org.jmock.core.constraint.IsEqual;
 import org.jmock.core.constraint.IsSame;
+import org.jmock.core.constraint.IsInstanceOf;
 import org.jmock.core.matcher.InvokeCountMatcher;
 import org.jmock.core.matcher.InvokeOnceMatcher;
 import org.jmock.core.matcher.InvokeAtLeastOnceMatcher;
@@ -85,6 +87,7 @@ public final class MockeryImpl implements Mockery {
         return new InvokeAnyTimesMatcher();
     }
 
+    @Fix("Don't allow objects passed by value to use same - see EasyDoc PrimordialMockingTestCase.")
     public Constraint same(final Object argument) {
         return new IsSame(argument);
     }
@@ -93,11 +96,15 @@ public final class MockeryImpl implements Mockery {
         return new IsAnything();
     }
 
+    public <T> IsInstanceOf isA(final Class<T> operandClass) {
+        return new IsInstanceOf(operandClass);
+    }
+
     public Constraint eq(final Object argument) {
         return new IsEqual(argument);
     }
 
-    public Constraint sameElements(Object[] argument) {
+    public Constraint sameElements(final Object[] argument) {
         return new ArrayElementsSame(argument);
     }
 

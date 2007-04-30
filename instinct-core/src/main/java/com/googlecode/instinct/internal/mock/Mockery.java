@@ -21,6 +21,7 @@ import org.jmock.builder.NameMatchBuilder;
 import org.jmock.core.Constraint;
 import org.jmock.core.InvocationMatcher;
 import org.jmock.core.Stub;
+import org.jmock.core.constraint.IsInstanceOf;
 
 public interface Mockery {
     <T> T mock(Class<T> toMock);
@@ -42,11 +43,13 @@ public interface Mockery {
 
     InvocationMatcher anyTimes();
 
-    Constraint same(Object argument);
-
     Constraint anything();
 
+    <T> IsInstanceOf isA(Class<T> operandClass);
+
     Constraint eq(Object argument);
+
+    Constraint same(Object argument);
 
     Constraint sameElements(Object[] argument);
 

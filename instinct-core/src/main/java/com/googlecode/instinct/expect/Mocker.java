@@ -23,6 +23,7 @@ import org.jmock.builder.NameMatchBuilder;
 import org.jmock.core.Constraint;
 import org.jmock.core.InvocationMatcher;
 import org.jmock.core.Stub;
+import org.jmock.core.constraint.IsInstanceOf;
 
 @Suggest("This becomes the jMock 1.1 implementation of BehaviourExpectations.")
 public final class Mocker {
@@ -68,16 +69,20 @@ public final class Mocker {
         return MOCKERY.anyTimes();
     }
 
-    public static Constraint same(final Object argument) {
-        return MOCKERY.same(argument);
-    }
-
     public static Constraint anything() {
         return MOCKERY.anything();
     }
 
+    public static <T> IsInstanceOf isA(final Class<T> operandClass) {
+        return MOCKERY.isA(operandClass);
+    }
+
     public static Constraint eq(final Object argument) {
         return MOCKERY.eq(argument);
+    }
+
+    public static Constraint same(final Object argument) {
+        return MOCKERY.same(argument);
     }
 
     public static Constraint sameElements(final Object[] argument) {
