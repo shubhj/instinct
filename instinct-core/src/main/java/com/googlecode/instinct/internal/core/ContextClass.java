@@ -29,4 +29,8 @@ public interface ContextClass {
     ContextResult run();
 
     Collection<SpecificationMethod> getSpecificationMethods();
+
+    Collection<SpecificationMethod> getBeforeSpecificationMethods();
+
+    Collection<SpecificationMethod> getAfterSpecificationMethods();
 }

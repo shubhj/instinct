@@ -44,6 +44,7 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
     private ContextResult contextResult;
     private Collection<Method> specMethods;
     private Collection<Method> beforeSpecMethods;
+    private Collection<Method> afterSpecMethods;
     private MarkedMethodLocator methodLocator;
 
     @Override
@@ -54,6 +55,7 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
         contextResult = mock(ContextResult.class);
         specMethods = asList(getMethod(contextType, "toCheckVerification"));
         beforeSpecMethods = asList(getMethod(contextType, "setUp"), getMethod(contextType, "setUpAgain"));
+        afterSpecMethods = asList(getMethod(contextType, "tearDown"), getMethod(contextType, "tearDownAgain"));
     }
 
     @Override
@@ -90,11 +92,18 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
         expect.that(methods).containsItem(specMethod("toCheckVerification"));
     }
 
-    public void testReturnsBeforeSpecificationMethodsToRun() {
+    public void testReturnsBeforeSpecificationMethods() {
         expects(methodLocator).method("locateAll").with(same(contextType), isA(MarkingScheme.class)).will(returnValue(beforeSpecMethods));
-        final Collection<SpecificationMethod> methods = contextClass.getSpecificationMethods();
+        final Collection<SpecificationMethod> methods = contextClass.getBeforeSpecificationMethods();
         expect.that(methods).containsItem(specMethod("setUp"));
         expect.that(methods).containsItem(specMethod("setUpAgain"));
+    }
+
+    public void testReturnsAfterSpecificationMethods() {
+        expects(methodLocator).method("locateAll").with(same(contextType), isA(MarkingScheme.class)).will(returnValue(afterSpecMethods));
+        final Collection<SpecificationMethod> methods = contextClass.getAfterSpecificationMethods();
+        expect.that(methods).containsItem(specMethod("tearDown"));
+        expect.that(methods).containsItem(specMethod("tearDownAgain"));
     }
 
     private SpecificationMethod specMethod(final String methodName) {

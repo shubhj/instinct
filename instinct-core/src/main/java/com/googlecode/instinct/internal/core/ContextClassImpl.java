@@ -30,12 +30,14 @@ import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
+import com.googlecode.instinct.marker.annotate.AfterSpecification;
+import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.naming.AfterSpecificationNamingConvention;
+import com.googlecode.instinct.marker.naming.BeforeSpecificationNamingConvention;
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 
 public final class ContextClassImpl extends Primordial implements ContextClass {
-    private static final MarkingScheme SPECIFICATION_MARKING_SCHEME =
-            new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention());
     private ContextRunner contextRunner = new StandardContextRunner();
     private MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
     private Set<ContextRunListener> contextRunListeners = new HashSet<ContextRunListener>();
@@ -68,7 +70,15 @@ public final class ContextClassImpl extends Primordial implements ContextClass {
     }
 
     public Collection<SpecificationMethod> getSpecificationMethods() {
-        return findMethods(SPECIFICATION_MARKING_SCHEME);
+        return findMethods(new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention()));
+    }
+
+    public Collection<SpecificationMethod> getBeforeSpecificationMethods() {
+        return findMethods(new MarkingSchemeImpl(BeforeSpecification.class, new BeforeSpecificationNamingConvention()));
+    }
+
+    public Collection<SpecificationMethod> getAfterSpecificationMethods() {
+        return findMethods(new MarkingSchemeImpl(AfterSpecification.class, new AfterSpecificationNamingConvention()));
     }
 
     private Collection<SpecificationMethod> findMethods(final MarkingScheme markingScheme) {
