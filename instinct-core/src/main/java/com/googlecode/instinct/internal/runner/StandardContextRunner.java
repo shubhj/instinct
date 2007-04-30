@@ -18,10 +18,12 @@ package com.googlecode.instinct.internal.runner;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
@@ -63,6 +65,7 @@ public final class StandardContextRunner implements ContextRunner {
 
     private <T> Method[] getMethods(final Class<T> behaviourContextClass, final Class<? extends Annotation> annotationType,
             final NamingConvention namingConvention) {
-        return methodLocator.locateAll(behaviourContextClass, annotationType, namingConvention);
+        final Collection<Method> methods = methodLocator.locateAll(behaviourContextClass, new MarkingSchemeImpl(annotationType, namingConvention));
+        return methods.toArray(new Method[methods.size()]);
     }
 }

@@ -21,10 +21,12 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 
 public final class AnnotatedMethodLocatorImpl implements AnnotatedMethodLocator {
     private final AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
 
+    @Suggest("Return a collection.")
     public <A extends Annotation, T> Method[] locate(final Class<T> cls, final Class<A> runtimeAnnotationType) {
         checkNotNull(cls, runtimeAnnotationType);
         final List<Method> annotatedMethods = new ArrayList<Method>();

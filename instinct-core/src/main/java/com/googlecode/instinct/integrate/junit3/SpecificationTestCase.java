@@ -1,7 +1,7 @@
 package com.googlecode.instinct.integrate.junit3;
 
 import au.net.netstorm.boost.edge.EdgeException;
-import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.core.SpikedSpecificationMethod;
 import com.googlecode.instinct.internal.runner.SpecificationContext;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
@@ -20,9 +20,9 @@ public final class SpecificationTestCase extends TestCase {
     private final ExceptionFinder exceptionFinder = new ExceptionFinderImpl();
     private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
     private TestResult result;
-    private final SpecificationMethod specificationMethod;
+    private final SpikedSpecificationMethod specificationMethod;
 
-    public SpecificationTestCase(final SpecificationMethod specificationMethod) {
+    public SpecificationTestCase(final SpikedSpecificationMethod specificationMethod) {
         super(specificationMethod == null ? "" : specificationMethod.getName());
         checkNotNull(specificationMethod);
         this.specificationMethod = specificationMethod;

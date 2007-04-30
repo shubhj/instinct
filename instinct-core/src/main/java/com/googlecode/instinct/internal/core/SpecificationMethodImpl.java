@@ -1,34 +1,35 @@
+/*
+ * Copyright 2006-2007 Tom Adams
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.googlecode.instinct.internal.core;
 
-import com.googlecode.instinct.internal.runner.SpecificationContext;
-import com.googlecode.instinct.internal.runner.SpecificationResult;
-import com.googlecode.instinct.internal.runner.SpecificationRunner;
-import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
+import java.lang.reflect.Method;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 
+@Suggest("Use the edge when it needs to be used.")
 public final class SpecificationMethodImpl implements SpecificationMethod {
-    private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
-    private final SpecificationContext specificationContext;
+    private final Method method;
 
-    public SpecificationMethodImpl(final SpecificationContext specificationContext) {
-        checkNotNull(specificationContext);
-        this.specificationContext = specificationContext;
-    }
-
-    @Suggest({"Add overloaded method that doesn't take a speclistener.", "Add spec listener using addSpecListener()?"})
-    public SpecificationResult run(final SpecificationListener specificationListener) {
-        checkNotNull(specificationListener);
-        specificationListener.onSpecification(this);
-        return specificationRunner.run(specificationContext);
-    }
-
-    @Suggest("Determine this lazily, rather than passing into constructor.")
-    public SpecificationContext getSpecificationContext() {
-        return specificationContext;
+    public SpecificationMethodImpl(final Method method) {
+        checkNotNull(method);
+        this.method = method;
     }
 
     public String getName() {
-        return specificationContext.getSpecificationMethod().getName();
+        return method.getName();
     }
 }

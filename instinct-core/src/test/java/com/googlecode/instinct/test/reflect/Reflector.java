@@ -45,7 +45,7 @@ public final class Reflector {
     public static void insertFieldValueUsingInferredType(final Object instance, final Object value) {
         checkNotNull(instance, value);
         final Class<?> valueType = value.getClass();
-        final Class implementedInterfaceType = valueType.getInterfaces()[0];
+        final Class<?> implementedInterfaceType = valueType.getInterfaces()[0];
         if (containsFieldOfType(instance.getClass(), valueType)) {
             setFieldValue(instance, valueType, value);
         } else if (containsFieldOfType(instance.getClass(), implementedInterfaceType)) {

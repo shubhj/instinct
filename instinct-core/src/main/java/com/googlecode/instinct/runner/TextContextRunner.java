@@ -33,7 +33,7 @@ import com.googlecode.instinct.report.ResultFormat;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import com.googlecode.instinct.report.StatusLogger;
 
-@Fix("Write atomic test for this.")
+@Fix({"Write atomic test for this.", "Don't make this implement ContextRunner?"})
 public final class TextContextRunner implements ContextRunner {
     public static final String METHOD_SEPARATOR = "#";
     private static final boolean AUTO_FLUSH_OUTPUT = true;

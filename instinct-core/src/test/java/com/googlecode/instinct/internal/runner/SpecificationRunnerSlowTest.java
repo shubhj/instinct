@@ -18,8 +18,10 @@ package com.googlecode.instinct.internal.runner;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Collection;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
+import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
@@ -80,6 +82,7 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
 
     private <T, A extends Annotation> Method[] getMethods(final Class<T> cls, final Class<A> annotationType,
             final NamingConvention namingConvention) {
-        return methodLocator.locateAll(cls, annotationType, namingConvention);
+        final Collection<Method> methods = methodLocator.locateAll(cls, new MarkingSchemeImpl(annotationType, namingConvention));
+        return methods.toArray(new Method[methods.size()]);
     }
 }

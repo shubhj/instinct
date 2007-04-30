@@ -16,7 +16,10 @@
 
 package com.googlecode.instinct.internal.runner;
 
+import com.googlecode.instinct.internal.util.Suggest;
+
 public interface ContextRunner {
-    <T> ContextResult run(final Class<T> contextClass);
+    @Suggest("Another method that takes a ContextClass.")
+            <T> ContextResult run(final Class<T> contextClass);
 }
 

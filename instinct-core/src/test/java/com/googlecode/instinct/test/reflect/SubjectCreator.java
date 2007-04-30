@@ -13,10 +13,14 @@ public final class SubjectCreator {
         throw new UnsupportedOperationException();
     }
 
-    @SuppressWarnings({"unchecked"})
     public static <T> T createSubject(final Class<T> subjectClass, final Object... dependencies) {
         checkNotNull(subjectClass, dependencies);
-        final T subject = OBJECT_FACTORY.create(subjectClass);
+        return createSubjectWithConstructorArgs(subjectClass, new Object[]{}, dependencies);
+    }
+
+    public static <T> T createSubjectWithConstructorArgs(final Class<T> subjectClass, final Object[] constructorArgs, final Object... dependencies) {
+        checkNotNull(subjectClass, dependencies);
+        final T subject = OBJECT_FACTORY.create(subjectClass, constructorArgs);
         for (final Object dependency : dependencies) {
             Reflector.insertFieldValueUsingInferredType(subject, dependency);
         }

@@ -16,15 +16,28 @@
 
 package com.googlecode.instinct.internal.core;
 
-import java.util.Set;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
+import au.net.netstorm.boost.primordial.Primordial;
+import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
+import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.marker.MarkingScheme;
+import com.googlecode.instinct.marker.MarkingSchemeImpl;
+import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 
-public final class ContextClassImpl implements ContextClass {
+public final class ContextClassImpl extends Primordial implements ContextClass {
+    private static final MarkingScheme SPECIFICATION_MARKING_SCHEME =
+            new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention());
     private ContextRunner contextRunner = new StandardContextRunner();
+    private MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
     private Set<ContextRunListener> contextRunListeners = new HashSet<ContextRunListener>();
     private final Class<?> contextType;
 
@@ -52,5 +65,18 @@ public final class ContextClassImpl implements ContextClass {
             contextRunListener.onContext(this);
         }
         return contextRunner.run(contextType);
+    }
+
+    public Collection<SpecificationMethod> getSpecificationMethods() {
+        return findMethods(SPECIFICATION_MARKING_SCHEME);
+    }
+
+    private Collection<SpecificationMethod> findMethods(final MarkingScheme markingScheme) {
+        final Collection<SpecificationMethod> list = new ArrayList<SpecificationMethod>();
+        final Collection<Method> methods = methodLocator.locateAll(contextType, markingScheme);
+        for (final Method method : methods) {
+            list.add(new SpecificationMethodImpl(method));
+        }
+        return list;
     }
 }

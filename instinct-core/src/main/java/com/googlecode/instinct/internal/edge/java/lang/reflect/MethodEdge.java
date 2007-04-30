@@ -14,19 +14,8 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.core;
+package com.googlecode.instinct.internal.edge.java.lang.reflect;
 
-import java.util.Collection;
-import com.googlecode.instinct.internal.runner.ContextResult;
-
-public interface ContextClass {
-    <T> Class<T> getType();
-
+public interface MethodEdge {
     String getName();
-
-    void addRunListener(ContextRunListener contextRunListener);
-
-    ContextResult run();
-
-    Collection<SpecificationMethod> getSpecificationMethods();
 }

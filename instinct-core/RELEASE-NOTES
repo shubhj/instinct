@@ -3,8 +3,11 @@
 o Behavioural expectation API (ie. mocking) - com.googlecode.instinct.expect.Expect.
 o Removed the need for specification methods to have a void return type (helps
   Groovy integration).
+o Added command line context runner.
 o Added Clover code coverage.
 o Removed EasyMock dependency, added Objenisis for mocking concrete classes.
+o Internal re-write to remove arrays and return typed Collections instead.
+o Misc. support for IntelliJ IDEA plugin.
 
 
 * Instinct Release 0.1.3 *

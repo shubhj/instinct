@@ -16,10 +16,12 @@
 
 package com.googlecode.instinct.internal.aggregate.locate;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import com.googlecode.instinct.marker.naming.NamingConvention;
+import java.util.Collection;
+import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.MarkingScheme;
 
 public interface MarkedMethodLocator {
-    <A extends Annotation, T> Method[] locateAll(Class<T> cls, Class<A> annotationType, NamingConvention namingConvention);
+    @Suggest("Use methodedge")
+            <T> Collection<Method> locateAll(Class<T> cls, MarkingScheme markingScheme);
 }

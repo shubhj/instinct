@@ -8,8 +8,8 @@ import com.googlecode.instinct.internal.util.Suggest;
         "The context runner can then use these.",
         "Need some way to indicate whether we want to run a single spec or all of them",
         "Maybe pass a single spec method into the constructor?"})
-public interface XxxContextClass {
-    ContextResult run(XxxContextRunListener contextRunListener, SpecificationListener specificationListener);
+public interface SpikedContextClass {
+    ContextResult run(SpikedContextRunListener contextRunListener, SpikedSpecificationListener specificationListener);
 
     <T> Class<T> getType();
 

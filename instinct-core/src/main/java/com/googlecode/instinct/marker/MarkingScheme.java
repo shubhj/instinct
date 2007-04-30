@@ -14,19 +14,15 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.core;
+package com.googlecode.instinct.marker;
 
-import java.util.Collection;
-import com.googlecode.instinct.internal.runner.ContextResult;
+import java.lang.annotation.Annotation;
+import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.naming.NamingConvention;
 
-public interface ContextClass {
-    <T> Class<T> getType();
+@Suggest("Add other schemes of marking.")
+public interface MarkingScheme {
+    <A extends Annotation> Class<A> getAnnotationType();
 
-    String getName();
-
-    void addRunListener(ContextRunListener contextRunListener);
-
-    ContextResult run();
-
-    Collection<SpecificationMethod> getSpecificationMethods();
+    NamingConvention getNamingConvention();
 }
