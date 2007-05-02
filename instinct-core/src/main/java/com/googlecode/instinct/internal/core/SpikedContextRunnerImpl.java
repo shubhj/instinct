@@ -19,7 +19,7 @@ import com.googlecode.instinct.marker.naming.BeforeSpecificationNamingConvention
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 
-public final class ContextRunnerImpl implements ContextRunner {
+public final class SpikedContextRunnerImpl implements SpikedContextRunner {
     private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
 
     @Suggest("Don't return null - Tom -> up to here.")

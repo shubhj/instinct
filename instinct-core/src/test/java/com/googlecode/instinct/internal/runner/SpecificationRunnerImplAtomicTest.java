@@ -16,15 +16,19 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.internal.core.LifecycleMethod;
-import com.googlecode.instinct.runner.SpecificationListener;
-import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
-public interface SpecificationRunner {
-    void addSpecificationListener(SpecificationListener specificationListener);
+public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
+    @Override
+    public void setUpTestDoubles() {
+    }
 
-    @Suggest("Remove this method.")
-    SpecificationResult run(SpecificationContext context);
+    @Override
+    public void setUpSubject() {
+    }
 
-    SpecificationResult run(LifecycleMethod lifecycleMethod);
+    public void testConformsToClassTraits() {
+        checkClass(SpecificationRunnerImpl.class, SpecificationRunner.class);
+    }
 }

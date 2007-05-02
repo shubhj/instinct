@@ -14,31 +14,37 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.core;
+package com.googlecode.instinct.internal.runner;
 
-import java.lang.reflect.Method;
+import static com.googlecode.instinct.expect.Mocker.mock;
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubject;
 
-public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
-    private SpecificationMethod specificationMethod;
-    private Method method;
+@Suggest("Finish this.")
+public final class StandardContextRunnerAtomicTest extends InstinctTestCase {
+    private ContextRunner contextRunner;
+    private SpecificationRunner specificationRunner;
+    private ContextClass contextClass;
 
     @Override
     public void setUpTestDoubles() {
-        method = getClass().getMethods()[0];
+        specificationRunner = mock(SpecificationRunner.class);
+        contextClass = mock(ContextClass.class);
     }
 
     @Override
     public void setUpSubject() {
-        specificationMethod = new SpecificationMethodImpl(method);
+        contextRunner = createSubject(StandardContextRunner.class, specificationRunner);
     }
 
     public void testConformsToClassTraits() {
-        checkClass(SpecificationMethodImpl.class, SpecificationMethod.class);
+        checkClass(StandardContextRunner.class, ContextRunner.class);
     }
 
-    public void testReturnNameOfMethodPassedInConstructor() {
-        assertEquals(method.getName(), specificationMethod.getName());
+    public void testRunsContextClasses() {
+//        contextRunner.run(contextClass);
     }
 }

@@ -25,8 +25,10 @@ import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
+import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.report.StatusLogger;
 import com.googlecode.instinct.runner.StatusLoggingContextRunner;
 import org.apache.tools.ant.BuildException;
@@ -77,6 +79,7 @@ public final class InstinctAntTask extends Task implements StatusLogger {
     }
     // } SUPPRESS IllegalCatch
 
+    @Fix("Register as a runner, so that we recieve results as it happens.")
     private void runContexts() {
         final List<JavaClassName> contextClasses = findBehaviourContextsFromAllAggregators();
         final ContextRunner runner = new StatusLoggingContextRunner(new StandardContextRunner(),
@@ -100,7 +103,7 @@ public final class InstinctAntTask extends Task implements StatusLogger {
 
     private void runContext(final ContextRunner runner, final JavaClassName contextClass) {
         final Class<?> cls = edgeClass.forName(contextClass.getFullyQualifiedName());
-        final ContextResult result = runner.run(cls);
+        final ContextResult result = runner.run(new ContextClassImpl(cls));
         if (!result.completedSuccessfully()) {
             getProject().setProperty(failureProperty, "true");
         }

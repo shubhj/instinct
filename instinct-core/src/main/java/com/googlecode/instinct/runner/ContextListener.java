@@ -14,8 +14,13 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.core;
+package com.googlecode.instinct.runner;
 
-public interface ContextRunListener {
-    void onContext(ContextClass contextClass);
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.runner.ContextResult;
+
+public interface ContextListener {
+    void preContextRun(ContextClass contextClass);
+
+    void postContextRun(ContextClass contextClass, ContextResult contextResult);
 }

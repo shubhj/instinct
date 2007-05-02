@@ -5,7 +5,7 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 
 public final class SpikedContextClassImpl implements SpikedContextClass {
-    private final ContextRunner contextRunner = new ContextRunnerImpl();
+    private final SpikedContextRunner contextRunner = new SpikedContextRunnerImpl();
     private final Class<?> contextType;
 
     public <T> SpikedContextClassImpl(final Class<T> contextType) {

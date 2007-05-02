@@ -16,56 +16,60 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collection;
-import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
-import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.LifecycleMethod;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.marker.MarkingSchemeImpl;
-import com.googlecode.instinct.marker.annotate.AfterSpecification;
-import com.googlecode.instinct.marker.annotate.BeforeSpecification;
-import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.marker.naming.AfterSpecificationNamingConvention;
-import com.googlecode.instinct.marker.naming.BeforeSpecificationNamingConvention;
-import com.googlecode.instinct.marker.naming.BehaviourContextNamingConvention;
-import com.googlecode.instinct.marker.naming.NamingConvention;
+import com.googlecode.instinct.runner.ContextListener;
+import com.googlecode.instinct.runner.SpecificationListener;
 
-@Suggest({"Pass the specification runner to this class, rather than newing it, that way we can pass in logging versions",
-        "Figure out a way to break this class up, it's too procedural.",
-        "Make a runner that runs all contexts in a clas",
-        "Pass a context class into the context runner"})
+@Suggest({"Make a runner that runs all contexts in a class (embedded anon inner)"})
 public final class StandardContextRunner implements ContextRunner {
-    private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
+    private final Collection<ContextListener> contextListeners = new ArrayList<ContextListener>();
     private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
 
-    public <T> ContextResult run(final Class<T> contextClass) {
-        checkNotNull(contextClass);
-        final Method[] specificationMethods = getMethods(contextClass, Specification.class, new BehaviourContextNamingConvention());
-        final Method[] beforeSpecificationMethods = getMethods(contextClass, BeforeSpecification.class,
-                new BeforeSpecificationNamingConvention());
-        final Method[] afterSpecificationMethods = getMethods(contextClass, AfterSpecification.class,
-                new AfterSpecificationNamingConvention());
-        return runSpecifications(contextClass, specificationMethods, beforeSpecificationMethods, afterSpecificationMethods);
+    public void addContextListener(final ContextListener contextListener) {
+        checkNotNull(contextListener);
+        contextListeners.add(contextListener);
     }
 
-    @Suggest("Need a better way to find specification context, share with SpecificationRunnerSlowTest.")
-    private <T> ContextResult runSpecifications(final Class<T> behaviourContextClass, final Method[] specificationMethods,
-            final Method[] beforeSpecificationMethods, final Method[] afterSpecificationMethods) {
-        final ContextResult contextResult = new ContextResultImpl(behaviourContextClass.getSimpleName());
+    public void addSpecificationListener(final SpecificationListener specificationListener) {
+        checkNotNull(specificationListener);
+        specificationRunner.addSpecificationListener(specificationListener);
+    }
+
+    public ContextResult run(final ContextClass contextClass) {
+        checkNotNull(contextClass);
+        // notify listeners
+        final ContextResult contextResult = doRun(contextClass);
+        // notify listeners
+        return contextResult;
+    }
+
+    private ContextResult doRun(final ContextClass contextClass) {
+        final ContextResult contextResult = new ContextResultImpl(contextClass.getName());
+        final Method[] specificationMethods = toMethodArray(contextClass.getSpecificationMethods());
+        final Method[] beforeSpecificationMethods = toMethodArray(contextClass.getBeforeSpecificationMethods());
+        final Method[] afterSpecificationMethods = toMethodArray(contextClass.getAfterSpecificationMethods());
         for (final Method specificationMethod : specificationMethods) {
-            final SpecificationContext specificationContext = new SpecificationContextImpl(behaviourContextClass, beforeSpecificationMethods,
-                    afterSpecificationMethods, specificationMethod);
+            final SpecificationContext specificationContext = new SpecificationContextImpl(
+                    contextClass.getType(), beforeSpecificationMethods, afterSpecificationMethods, specificationMethod);
             final SpecificationResult specificationResult = specificationRunner.run(specificationContext);
             contextResult.addSpecificationResult(specificationResult);
         }
         return contextResult;
     }
 
-    private <T> Method[] getMethods(final Class<T> behaviourContextClass, final Class<? extends Annotation> annotationType,
-            final NamingConvention namingConvention) {
-        final Collection<Method> methods = methodLocator.locateAll(behaviourContextClass, new MarkingSchemeImpl(annotationType, namingConvention));
-        return methods.toArray(new Method[methods.size()]);
+    private Method[] toMethodArray(final Collection<LifecycleMethod> lifecycleMethods) {
+        final Method[] methods = new Method[lifecycleMethods.size()];
+        int i = 0;
+        for (final LifecycleMethod lifecycleMethod : lifecycleMethods) {
+            methods[i] = lifecycleMethod.getMethod();
+            i++;
+        }
+        return methods;
     }
 }

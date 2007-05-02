@@ -25,6 +25,7 @@ import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.marker.BehaviourContextConfigurationException;
 import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
 import com.googlecode.instinct.test.InstinctTestCase;
@@ -49,7 +50,7 @@ public final class AllBehaviourContextsSlowTest extends InstinctTestCase {
 
     private <T> void invokeContextIgnoringConfigurationExceptions(final Class<T> cls) {
         try {
-            contextRunner.run(cls);
+            contextRunner.run(new ContextClassImpl(cls));
         } catch (BehaviourContextConfigurationException ignored) {
         } catch (LifeCycleMethodConfigurationException ignored) {
         } catch (EdgeException e) {

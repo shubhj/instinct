@@ -64,7 +64,7 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
         final SpecificationContext[] contexts = findSpecContexts(cls);
         for (final SpecificationContext context : contexts) {
             final SpecificationResult specificationResult = runner.run(context);
-            assertFalse("Context " + context.getBehaviourContextClass().getSimpleName() + " should have failed",
+            assertFalse("Context " + context.getContextClass().getSimpleName() + " should have failed",
                     specificationResult.completedSuccessfully());
         }
     }

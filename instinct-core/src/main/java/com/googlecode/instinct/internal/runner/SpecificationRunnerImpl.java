@@ -17,6 +17,9 @@
 package com.googlecode.instinct.internal.runner;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collection;
+import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.mock.MockVerifier;
 import com.googlecode.instinct.internal.mock.MockVerifierImpl;
 import com.googlecode.instinct.internal.mock.TestDoubleAutoWirer;
@@ -30,15 +33,23 @@ import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.runner.SpecificationListener;
 
 @Suggest({"Pass a spec method into a spec runner"})
 public final class SpecificationRunnerImpl implements SpecificationRunner {
+    private final Collection<SpecificationListener> specificationListeners = new ArrayList<SpecificationListener>();
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
     private final TestDoubleAutoWirer testDoubleAutoWirer = new TestDoubleAutoWirerImpl();
     private final Clock clock = new ClockImpl();
     private MethodInvoker methodInvoker = new MethodInvokerImpl();
     private LifeCycleMethodValidator methodValidator = new LifeCycleMethodValidatorImpl();
     private final MockVerifier mockVerifier = new MockVerifierImpl();
+
+    public void addSpecificationListener(final SpecificationListener specificationListener) {
+        checkNotNull(specificationListener);
+        specificationListeners.add(specificationListener);
+
+    }
 
     @Suggest({"Does each specification get it's own Mockery?", " How will this work if we want to allow manual mocking?",
             "Need access to the same statics",
@@ -48,13 +59,18 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         return doRun(context);
     }
 
+    public SpecificationResult run(final LifecycleMethod lifecycleMethod) {
+        checkNotNull(lifecycleMethod);
+        throw new UnsupportedOperationException();
+    }
+
     // SUPPRESS IllegalCatch {
     @SuppressWarnings({"CatchGenericClass"})
     @Suggest("Make a clock wrapper that looks like org.jbehave.core.util.Timer.")
     private SpecificationResult doRun(final SpecificationContext specificationContext) {
         final long startTime = clock.getCurrentTime();
         try {
-            final Object instance = invokeConstructor(specificationContext.getBehaviourContextClass());
+            final Object instance = invokeConstructor(specificationContext.getContextClass());
             runSpecificationLifecycle(instance, specificationContext);
             return new SpecificationResultImpl(specificationContext.getSpecificationMethod().getName(), VERIFICATION_SUCCESS,
                     clock.getElapsedTime(startTime));

@@ -20,6 +20,8 @@ import java.io.BufferedWriter;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
@@ -68,12 +70,30 @@ public final class TextContextRunner implements ContextRunner {
     }
 
     /**
+     * Registers a listener for context lifecycle events.
+     *
+     * @param contextListener A listener for context events.
+     */
+    public void addContextListener(final ContextListener contextListener) {
+        checkNotNull(contextListener);
+    }
+
+    /**
+     * Registers a listener for specification lifecycle events.
+     *
+     * @param specificationListener A listener for specification lifecycle events.
+     */
+    public void addSpecificationListener(final SpecificationListener specificationListener) {
+        checkNotNull(specificationListener);
+    }
+
+    /**
      * Runs the given context.
      *
-     * @param contextClass A class containing specifications (a behaviour/specification context).
+     * @param contextClass A class containing specifications (a behaviour/specification context) to run.
      * @return The results of running the given context class.
      */
-    public <T> ContextResult run(final Class<T> contextClass) {
+    public ContextResult run(final ContextClass contextClass) {
         checkNotNull(contextClass);
         return contextRunner.run(contextClass);
     }
@@ -91,7 +111,7 @@ public final class TextContextRunner implements ContextRunner {
     public static void runContexts(final Class<?>... contextClasses) {
         final ContextRunner runner = new TextContextRunner();
         for (final Class<?> contextClass : contextClasses) {
-            runner.run(contextClass);
+            runner.run(new ContextClassImpl(contextClass));
         }
     }
 }

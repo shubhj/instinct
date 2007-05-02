@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.runner;
 
+import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
@@ -37,8 +38,16 @@ public final class StatusLoggingContextRunner implements ContextRunner {
         this.statusLogger = statusLogger;
     }
 
+    public void addContextListener(final ContextListener contextListener) {
+        checkNotNull(contextListener);
+    }
+
+    public void addSpecificationListener(final SpecificationListener specificationListener) {
+        checkNotNull(specificationListener);
+    }
+
     @Suggest("This logging should be done on the fly by the runner, potentially removing the need for this class.")
-    public <T> ContextResult run(final Class<T> contextClass) {
+    public ContextResult run(final ContextClass contextClass) {
         checkNotNull(contextClass);
         final ContextResult contextResult = delegate.run(contextClass);
         logResults(contextResult);

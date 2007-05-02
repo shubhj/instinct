@@ -17,20 +17,26 @@
 package com.googlecode.instinct.internal.core;
 
 import java.lang.reflect.Method;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 import au.net.netstorm.boost.primordial.Primordial;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
-@Suggest("Use the edge only when it needs to be used.")
-public final class SpecificationMethodImpl extends Primordial implements SpecificationMethod {
+public final class LifecycleMethodImpl extends Primordial implements LifecycleMethod {
     private final Method method;
 
-    public SpecificationMethodImpl(final Method method) {
+    public LifecycleMethodImpl(final Method method) {
         checkNotNull(method);
         this.method = method;
     }
 
     public String getName() {
         return method.getName();
+    }
+
+    public Method getMethod() {
+        return method;
+    }
+
+    public Class<?> getDeclaringClass() {
+        return method.getDeclaringClass();
     }
 }

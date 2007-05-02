@@ -14,8 +14,13 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.core;
+package com.googlecode.instinct.runner;
 
-public interface SpecificationMethod {
-    String getName();
+import com.googlecode.instinct.internal.runner.SpecificationResult;
+import com.googlecode.instinct.internal.core.LifecycleMethod;
+
+public interface SpecificationListener {
+    void preSpecificationMethod(LifecycleMethod method);
+
+    void postSpecificationMethod(LifecycleMethod method, SpecificationResult specificationResult);
 }

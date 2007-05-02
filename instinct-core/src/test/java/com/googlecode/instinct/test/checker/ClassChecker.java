@@ -53,6 +53,10 @@ public final class ClassChecker {
         checkClassProperties(subClass, superClass);
     }
 
+    public static <T> void checkInterface(final Class<T> iface) {
+        MODIFIER_CHECKER.checkPublic(iface);
+    }
+
     private static <U, T extends U> void checkClassProperties(final Class<T> implementationClass, final Class<U> parentType) {
         MODIFIER_CHECKER.checkPublic(parentType);
         MODIFIER_CHECKER.checkPublic(implementationClass);
@@ -63,6 +67,7 @@ public final class ClassChecker {
             CLASS_CHECKER.checkSubclassOf(implementationClass, parentType);
         }
         // check serialisability of classes that claim it.
+        // check methods that return collections are unmodifiable
     }
 
     private static <U, T extends U> void nullCheckParameters(final Class<T> implementationClass) {

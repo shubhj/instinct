@@ -19,9 +19,9 @@ package com.googlecode.instinct.internal.runner;
 import java.lang.reflect.Method;
 import com.googlecode.instinct.internal.util.Suggest;
 
-@Suggest("Remove these and place in SpecificationMethod")
+@Suggest("Remove these and place in LifecycleMethod")
 public interface SpecificationContext {
-    Class<?> getBehaviourContextClass();
+    Class<?> getContextClass();
 
     Method[] getBeforeSpecificationMethods();
 

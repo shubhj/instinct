@@ -16,25 +16,12 @@
 
 package com.googlecode.instinct.internal.core;
 
-import java.util.Collection;
-import com.googlecode.instinct.internal.runner.ContextResult;
-import com.googlecode.instinct.runner.SpecificationListener;
-import com.googlecode.instinct.runner.ContextListener;
+import java.lang.reflect.Method;
 
-public interface ContextClass {
-    <T> Class<T> getType();
-
+public interface LifecycleMethod {
     String getName();
 
-    void addContextListener(ContextListener contextListener);
+    Method getMethod();
 
-    void addSpecificationListener(SpecificationListener specificationListener);
-
-    ContextResult run();
-
-    Collection<LifecycleMethod> getSpecificationMethods();
-
-    Collection<LifecycleMethod> getBeforeSpecificationMethods();
-
-    Collection<LifecycleMethod> getAfterSpecificationMethods();
+    Class<?> getDeclaringClass();
 }

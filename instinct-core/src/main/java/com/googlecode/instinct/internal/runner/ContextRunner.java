@@ -16,10 +16,15 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.runner.ContextListener;
+import com.googlecode.instinct.runner.SpecificationListener;
 
 public interface ContextRunner {
-    @Suggest("Another method that takes a ContextClass.")
-    <T> ContextResult run(final Class<T> contextClass);
+    void addContextListener(ContextListener contextListener);
+
+    void addSpecificationListener(SpecificationListener specificationListener);
+
+    ContextResult run(ContextClass contextClass);
 }
 

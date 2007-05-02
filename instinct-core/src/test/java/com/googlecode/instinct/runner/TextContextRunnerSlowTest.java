@@ -6,6 +6,7 @@ import static java.lang.System.setOut;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ContextContainerWithSetUpAndTearDown;
 import com.googlecode.instinct.internal.runner.ContextRunner;
+import com.googlecode.instinct.internal.core.ContextClassImpl;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import static com.googlecode.instinct.runner.TextContextRunner.runContexts;
 import com.googlecode.instinct.test.InstinctTestCase;
@@ -43,7 +44,7 @@ public final class TextContextRunnerSlowTest extends InstinctTestCase {
     }
 
     private <T> void checkSendsSpeciciationResultsToOutput(final Class<T> contextClass) {
-        contextRunner.run(contextClass);
+        contextRunner.run(new ContextClassImpl(contextClass));
         checkRunnerSendsSpeciciationResultsToOutput(contextClass);
     }
 

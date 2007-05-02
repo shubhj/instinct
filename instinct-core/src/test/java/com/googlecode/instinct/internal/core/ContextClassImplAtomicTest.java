@@ -29,12 +29,13 @@ import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
-import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.Reflector.getMethod;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
+import com.googlecode.instinct.runner.SpecificationListener;
+import com.googlecode.instinct.runner.ContextListener;
 
 @SuppressWarnings({"unchecked"})
 public final class ContextClassImplAtomicTest extends InstinctTestCase {
@@ -75,54 +76,49 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
         expect.that(contextType.getSimpleName()).equalTo(contextClass.getName());
     }
 
-    public void testRunsContextUsingContextRunner() {
-        expects(contextRunner).method("run").with(same(contextType)).will(returnValue(contextResult));
+    public void testRunsUsingContextRunner() {
+        expects(contextRunner).method("run").with(same(contextClass)).will(returnValue(contextResult));
         expect.that(contextResult).sameInstanceAs(contextClass.run());
     }
 
-    public void testNotifiesContextRunListenersWhenRun() {
-        expectContextRunListenersStored();
-        expects(contextRunner).method("run").with(same(contextType)).will(returnValue(contextResult));
-        contextClass.run();
+    public void testPassesContextListenersToContextRunner() {
+        for (int i = 0; i < 3; i++) {
+            final ContextListener contextListener = mock(ContextListener.class);
+            expects(contextRunner).method("addContextListener").with(same(contextListener));
+            contextClass.addContextListener(contextListener);
+        }
+    }
+
+    public void testPassesSpecificationListenersToContextRunner() {
+        for (int i = 0; i < 3; i++) {
+            final SpecificationListener specificationListener = mock(SpecificationListener.class);
+            expects(contextRunner).method("addSpecificationListener").with(same(specificationListener));
+            contextClass.addSpecificationListener(specificationListener);
+        }
     }
 
     public void testReturnsSpecificationsToRun() {
         expects(methodLocator).method("locateAll").with(same(contextType), isA(MarkingScheme.class)).will(returnValue(specMethods));
-        final Collection<SpecificationMethod> methods = contextClass.getSpecificationMethods();
-        expect.that(methods).containsItem(specMethod("toCheckVerification"));
+        final Collection<LifecycleMethod> methods = contextClass.getSpecificationMethods();
+        expect.that(methods).containsItem(lifecycleMethod("toCheckVerification"));
     }
 
     public void testReturnsBeforeSpecificationMethods() {
         expects(methodLocator).method("locateAll").with(same(contextType), isA(MarkingScheme.class)).will(returnValue(beforeSpecMethods));
-        final Collection<SpecificationMethod> methods = contextClass.getBeforeSpecificationMethods();
-        expect.that(methods).containsItem(specMethod("setUp"));
-        expect.that(methods).containsItem(specMethod("setUpAgain"));
+        final Collection<LifecycleMethod> methods = contextClass.getBeforeSpecificationMethods();
+        expect.that(methods).containsItem(lifecycleMethod("setUp"));
+        expect.that(methods).containsItem(lifecycleMethod("setUpAgain"));
     }
 
     public void testReturnsAfterSpecificationMethods() {
         expects(methodLocator).method("locateAll").with(same(contextType), isA(MarkingScheme.class)).will(returnValue(afterSpecMethods));
-        final Collection<SpecificationMethod> methods = contextClass.getAfterSpecificationMethods();
-        expect.that(methods).containsItem(specMethod("tearDown"));
-        expect.that(methods).containsItem(specMethod("tearDownAgain"));
+        final Collection<LifecycleMethod> methods = contextClass.getAfterSpecificationMethods();
+        expect.that(methods).containsItem(lifecycleMethod("tearDown"));
+        expect.that(methods).containsItem(lifecycleMethod("tearDownAgain"));
     }
 
-    private SpecificationMethod specMethod(final String methodName) {
-        return new SpecificationMethodImpl(getMethod(contextType, methodName));
-    }
-
-/*
-To drive out:
-Method[] getBeforeSpecificationMethods();
-Method[] getAfterSpecificationMethods();
-*/
-
-    @Fix("Replace with Instinct dummy generation.")
-    private void expectContextRunListenersStored() {
-        for (int i = 0; i < 3; i++) {
-            final ContextRunListener contextRunListener = mock(ContextRunListener.class);
-            expects(contextRunListener).method("onContext").with(same(contextClass));
-            contextClass.addRunListener(contextRunListener);
-        }
+    private LifecycleMethod lifecycleMethod(final String methodName) {
+        return new LifecycleMethodImpl(getMethod(contextType, methodName));
     }
 
     private <T> ContextClass createContextClass(final Class<T> contextType) {
