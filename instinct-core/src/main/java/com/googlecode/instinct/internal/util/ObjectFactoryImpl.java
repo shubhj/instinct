@@ -77,11 +77,22 @@ public final class ObjectFactoryImpl implements ObjectFactory {
     private <T> String createFailureMessage(final Class<T> cls, final Object... argumentValues) {
         final StringBuilder builder = new StringBuilder();
         for (final Iterator<Object> iterator = asList(argumentValues).iterator(); iterator.hasNext();) {
-            builder.append(iterator.next().getClass());
+            final Object o = iterator.next();
+            builder.append(getClassName(o));
             if (iterator.hasNext()) {
                 builder.append(',');
             }
         }
         return cls.getSimpleName() + " does not contain a constructor with types: [" + builder + ']';
+    }
+
+    @Suggest("Make this proxy code less dependent on jMock, what about java.lang.reflect.proxy? What about multiple interfaces.")
+    private String getClassName(final Object object) {
+        final Class<?> cls = object.getClass();
+        final String simpleName = cls.getSimpleName();
+        if (simpleName.startsWith("$Proxy")) {
+            return cls.getInterfaces()[0] == null ? simpleName : cls.getInterfaces()[0].getSimpleName();
+        }
+        return simpleName;
     }
 }

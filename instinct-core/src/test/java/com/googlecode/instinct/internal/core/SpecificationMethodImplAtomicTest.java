@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.internal.core;
 
+import java.util.Collection;
 import static com.googlecode.instinct.expect.Expect.expect;
 import static com.googlecode.instinct.expect.Mocker.expects;
 import static com.googlecode.instinct.expect.Mocker.mock;
@@ -29,23 +30,28 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
 
+@SuppressWarnings({"unchecked"})
 @Suggest({"Todo:", "Add a run method, pass a spec runner as a dependency, pass in other methods required for runners."})
 public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
     private SpecificationMethod specificationMethod;
     private SpecificationRunner specificationRunner;
     private LifecycleMethod specMethod;
     private SpecificationResult specificationResult;
+    private Collection<LifecycleMethod> beforeSpecMethods;
+    private Collection<LifecycleMethod> afterSpecMethods;
 
     @Override
     public void setUpTestDoubles() {
         specMethod = mock(LifecycleMethod.class);
         specificationRunner = mock(SpecificationRunner.class);
         specificationResult = mock(SpecificationResult.class);
+        beforeSpecMethods = mock(Collection.class);
+        afterSpecMethods = mock(Collection.class);
     }
 
     @Override
     public void setUpSubject() {
-        final Object[] constructorArgs = {specMethod};
+        final Object[] constructorArgs = {specMethod, beforeSpecMethods, afterSpecMethods};
         final Object[] dependencies = {specificationRunner};
         specificationMethod = createSubjectWithConstructorArgs(SpecificationMethodImpl.class, constructorArgs, dependencies);
     }
@@ -66,5 +72,20 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
         expects(specificationRunner).method("run").with(same(specificationMethod)).will(returnValue(specificationResult));
         final SpecificationResult result = specificationMethod.run();
         expect.that(result).sameInstanceAs(specificationResult);
+    }
+
+    public void testReturnsUnderlyingSpecificationMethod() {
+        final LifecycleMethod returnedSpecMethod = specificationMethod.getSpecificationMethod();
+        expect.that(returnedSpecMethod).sameInstanceAs(specMethod);
+    }
+
+    public void testReturnsUnderlyingBeforeSpecMethods() {
+        final Collection<LifecycleMethod> returnedBeforeSpecMethods = specificationMethod.getBeforeSpecificationMethods();
+        expect.that(returnedBeforeSpecMethods).sameInstanceAs(beforeSpecMethods);
+    }
+
+    public void testReturnsUnderlyingAfterSpecMethods() {
+        final Collection<LifecycleMethod> returnedAfterSpecMethods = specificationMethod.getAfterSpecificationMethods();
+        expect.that(returnedAfterSpecMethods).sameInstanceAs(afterSpecMethods);
     }
 }

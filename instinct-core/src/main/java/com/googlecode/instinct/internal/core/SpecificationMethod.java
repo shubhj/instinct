@@ -16,11 +16,18 @@
 
 package com.googlecode.instinct.internal.core;
 
-import com.googlecode.instinct.runner.SpecificationListener;
+import java.util.Collection;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
+import com.googlecode.instinct.runner.SpecificationListener;
 
 public interface SpecificationMethod {
     void addSpecificationListener(SpecificationListener specificationListener);
 
     SpecificationResult run();
+
+    LifecycleMethod getSpecificationMethod();
+
+    Collection<LifecycleMethod> getBeforeSpecificationMethods();
+
+    Collection<LifecycleMethod> getAfterSpecificationMethods();
 }
