@@ -19,12 +19,12 @@ package com.googlecode.instinct.internal.runner;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
-import com.googlecode.instinct.internal.core.LifecycleMethod;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.mock.MockVerifier;
 import com.googlecode.instinct.internal.mock.MockVerifierImpl;
 import com.googlecode.instinct.internal.mock.TestDoubleAutoWirer;
 import com.googlecode.instinct.internal.mock.TestDoubleAutoWirerImpl;
-import static com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus.VERIFICATION_SUCCESS;
+import static com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus.SPECIFICATION_SUCCESS;
 import com.googlecode.instinct.internal.util.Clock;
 import com.googlecode.instinct.internal.util.ClockImpl;
 import com.googlecode.instinct.internal.util.ConstructorInvoker;
@@ -53,14 +53,15 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
 
     @Suggest({"Does each specification get it's own Mockery?", " How will this work if we want to allow manual mocking?",
             "Need access to the same statics",
-            "Maybe pass in a BC class instantiation strategy, so that we can enable creating of only one instance of a BC, rather than one per spec"})
+            "Maybe pass in a BC class instantiation strategy, so that we can enable creating of only one instance of a BC, rather than one per spec",
+            "Remove this method, take a SpecificationMethod."})
     public SpecificationResult run(final SpecificationContext context) {
         checkNotNull(context);
         return doRun(context);
     }
 
-    public SpecificationResult run(final LifecycleMethod lifecycleMethod) {
-        checkNotNull(lifecycleMethod);
+    public SpecificationResult run(final SpecificationMethod specificationMethod) {
+        checkNotNull(specificationMethod);
         throw new UnsupportedOperationException();
     }
 
@@ -72,7 +73,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         try {
             final Object instance = invokeConstructor(specificationContext.getContextClass());
             runSpecificationLifecycle(instance, specificationContext);
-            return new SpecificationResultImpl(specificationContext.getSpecificationMethod().getName(), VERIFICATION_SUCCESS,
+            return new SpecificationResultImpl(specificationContext.getSpecificationMethod().getName(), SPECIFICATION_SUCCESS,
                     clock.getElapsedTime(startTime));
         } catch (Throwable e) {
             final SpecificationRunStatus status = new SpecificationRunFailureStatus(e);

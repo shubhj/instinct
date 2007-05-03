@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.internal.core.LifecycleMethod;
-import com.googlecode.instinct.runner.SpecificationListener;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.runner.SpecificationListener;
 
 public interface SpecificationRunner {
     void addSpecificationListener(SpecificationListener specificationListener);
@@ -26,5 +26,5 @@ public interface SpecificationRunner {
     @Suggest("Remove this method.")
     SpecificationResult run(SpecificationContext context);
 
-    SpecificationResult run(LifecycleMethod lifecycleMethod);
+    SpecificationResult run(SpecificationMethod specificationMethod);
 }

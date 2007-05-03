@@ -21,15 +21,13 @@ import au.net.netstorm.boost.primordial.Primordial;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 
-@SuppressWarnings({"AssignmentToCollectionOrArrayFieldFromParameter"})
+@Suggest("Breadcrumb - Remove this class")
 public final class SpecificationContextImpl extends Primordial implements SpecificationContext {
     private final Class<?> contextClass;
     private final Method[] beforeSpecificationMethods;
     private final Method[] afterSpecificationMethods;
     private final Method specificationMethod;
 
-    @Suggest({"All methods bar spec need to go into another object so that they can be resued.",
-            "This class then takes that object."})
     public SpecificationContextImpl(final Class<?> contextClass, final Method[] beforeSpecificationMethods,
             final Method[] afterSpecificationMethods, final Method specificationMethod) {
         checkNotNull(contextClass, beforeSpecificationMethods, afterSpecificationMethods, specificationMethod);

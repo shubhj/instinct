@@ -49,6 +49,7 @@ public final class StandardContextRunner implements ContextRunner {
         return contextResult;
     }
 
+    @Suggest("Breadcrumb - Use specification method to run each spec. Them remove the spec runner.")
     private ContextResult doRun(final ContextClass contextClass) {
         final ContextResult contextResult = new ContextResultImpl(contextClass.getName());
         final Method[] specificationMethods = toMethodArray(contextClass.getSpecificationMethods());

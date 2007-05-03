@@ -45,6 +45,7 @@ public final class ExpectThatImpl implements ExpectThat {
     private StateExpectations stateExpectations = new StateExpectationsImpl();
     private BehaviourExpectations behaviourExpectations = new BehaviourExpectationsImpl();
 
+    @Fix("Should not use the param checker in this class for actual values. Need to return a better error message.")
     public <T> ObjectChecker<T> that(final T object) {
         checkNotNull(object);
         return stateExpectations.that(object);

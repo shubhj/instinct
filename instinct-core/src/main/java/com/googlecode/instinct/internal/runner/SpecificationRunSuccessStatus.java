@@ -18,9 +18,10 @@ package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.util.Suggest;
 
-@Suggest("Implement readObject() & writeObject() to ensure only ever one VERIFICATION_SUCCESS")
+@Suggest({"Implement readObject() & writeObject() to ensure only ever one VERIFICATION_SUCCESS",
+        "Can this be implemented as an enum? Perhaps this becomes an enum & the methods go into the SpecificationResult."})
 public final class SpecificationRunSuccessStatus implements SpecificationRunStatus {
-    public static final SpecificationRunStatus VERIFICATION_SUCCESS = new SpecificationRunSuccessStatus();
+    public static final SpecificationRunStatus SPECIFICATION_SUCCESS = new SpecificationRunSuccessStatus();
 
     public Object getDetailedStatus() {
         return "Specification of behaviour verified correctly";

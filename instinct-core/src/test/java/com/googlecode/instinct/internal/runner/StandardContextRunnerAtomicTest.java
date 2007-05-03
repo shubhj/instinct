@@ -23,7 +23,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubject;
 
-@Suggest("Finish this.")
+@Suggest("Breadcrumb - Finish this.")
 public final class StandardContextRunnerAtomicTest extends InstinctTestCase {
     private ContextRunner contextRunner;
     private SpecificationRunner specificationRunner;

@@ -14,18 +14,13 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.runner;
+package com.googlecode.instinct.internal.core;
 
-import java.lang.reflect.Method;
-import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.runner.SpecificationListener;
+import com.googlecode.instinct.internal.runner.SpecificationResult;
 
-@Suggest("Breadcrumb - Remove this class.")
-public interface SpecificationContext {
-    Class<?> getContextClass();
+public interface SpecificationMethod {
+    void addSpecificationListener(SpecificationListener specificationListener);
 
-    Method[] getBeforeSpecificationMethods();
-
-    Method[] getAfterSpecificationMethods();
-
-    Method getSpecificationMethod();
+    SpecificationResult run();
 }

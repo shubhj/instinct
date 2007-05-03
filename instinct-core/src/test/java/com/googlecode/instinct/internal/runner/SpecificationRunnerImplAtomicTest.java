@@ -18,14 +18,18 @@ package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import com.googlecode.instinct.test.reflect.SubjectCreator;
 
 public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
+    private SpecificationRunner specificationRunner;
+
     @Override
     public void setUpTestDoubles() {
     }
 
     @Override
     public void setUpSubject() {
+        specificationRunner = SubjectCreator.createSubject(SpecificationRunnerImpl.class);
     }
 
     public void testConformsToClassTraits() {

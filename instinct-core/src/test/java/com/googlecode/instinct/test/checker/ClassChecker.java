@@ -42,6 +42,12 @@ public final class ClassChecker {
         throw new UnsupportedOperationException();
     }
 
+    public static <T> void checkClass(final Class<T> implementationClass) {
+        MODIFIER_CHECKER.checkPublic(implementationClass);
+        MODIFIER_CHECKER.checkFinal(implementationClass);
+        nullCheckParameters(implementationClass);
+    }
+
     @Suggest("Infer the interface from the concrete class.")
     public static <U, T extends U> void checkClass(final Class<T> implementationClass, final Class<U> targetInterface) {
         checkClassProperties(implementationClass, targetInterface);
