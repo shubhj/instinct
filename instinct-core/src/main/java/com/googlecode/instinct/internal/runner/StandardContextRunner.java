@@ -16,11 +16,12 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.core.SpecificationMethodImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.ContextListener;
@@ -29,6 +30,7 @@ import com.googlecode.instinct.runner.SpecificationListener;
 @Suggest({"Make a runner that runs all contexts in a class (embedded anon inner)"})
 public final class StandardContextRunner implements ContextRunner {
     private final Collection<ContextListener> contextListeners = new ArrayList<ContextListener>();
+    private final Collection<SpecificationListener> specificationListeners = new ArrayList<SpecificationListener>();
     private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
 
     public void addContextListener(final ContextListener contextListener) {
@@ -38,39 +40,57 @@ public final class StandardContextRunner implements ContextRunner {
 
     public void addSpecificationListener(final SpecificationListener specificationListener) {
         checkNotNull(specificationListener);
-        specificationRunner.addSpecificationListener(specificationListener);
+        specificationListeners.add(specificationListener);
     }
 
     public ContextResult run(final ContextClass contextClass) {
         checkNotNull(contextClass);
-        // notify listeners
-        final ContextResult contextResult = doRun(contextClass);
-        // notify listeners
+        notifyListenersOfPreContextRun(contextClass);
+        final ContextResult contextResult = runContextClass(contextClass);
+        notifyListenersOfPostContextRun(contextClass, contextResult);
         return contextResult;
     }
 
-    @Suggest("Breadcrumb - Use specification method to run each spec. Them remove the spec runner.")
-    private ContextResult doRun(final ContextClass contextClass) {
+    private ContextResult runContextClass(final ContextClass contextClass) {
         final ContextResult contextResult = new ContextResultImpl(contextClass.getName());
-        final Method[] specificationMethods = toMethodArray(contextClass.getSpecificationMethods());
-        final Method[] beforeSpecificationMethods = toMethodArray(contextClass.getBeforeSpecificationMethods());
-        final Method[] afterSpecificationMethods = toMethodArray(contextClass.getAfterSpecificationMethods());
-        for (final Method specificationMethod : specificationMethods) {
-            final SpecificationContext specificationContext = new SpecificationContextImpl(
-                    contextClass.getType(), beforeSpecificationMethods, afterSpecificationMethods, specificationMethod);
-            final SpecificationResult specificationResult = specificationRunner.run(specificationContext);
+        runSpecifications(contextClass, contextResult);
+        return contextResult;
+    }
+
+    private void runSpecifications(final ContextClass contextClass, final ContextResult contextResult) {
+        for (final LifecycleMethod specificationMethod : contextClass.getSpecificationMethods()) {
+            final SpecificationMethod spec = createSpecificationMethod(contextClass, specificationMethod);
+            final SpecificationResult specificationResult = runSpecification(spec);
             contextResult.addSpecificationResult(specificationResult);
         }
-        return contextResult;
     }
 
-    private Method[] toMethodArray(final Collection<LifecycleMethod> lifecycleMethods) {
-        final Method[] methods = new Method[lifecycleMethods.size()];
-        int i = 0;
-        for (final LifecycleMethod lifecycleMethod : lifecycleMethods) {
-            methods[i] = lifecycleMethod.getMethod();
-            i++;
+    private SpecificationResult runSpecification(final SpecificationMethod specificationMethod) {
+        addSpecificationListeners(specificationMethod);
+        return specificationMethod.run();
+    }
+
+    private SpecificationMethod createSpecificationMethod(final ContextClass contextClass, final LifecycleMethod specificationMethod) {
+        final Collection<LifecycleMethod> beforeSpecificationMethods = contextClass.getBeforeSpecificationMethods();
+        final Collection<LifecycleMethod> afterSpecificationMethods = contextClass.getAfterSpecificationMethods();
+        return new SpecificationMethodImpl(specificationMethod, beforeSpecificationMethods, afterSpecificationMethods);
+    }
+
+    private void addSpecificationListeners(final SpecificationMethod specificationMethod) {
+        for (final SpecificationListener specificationListener : specificationListeners) {
+            specificationMethod.addSpecificationListener(specificationListener);
         }
-        return methods;
+    }
+
+    private void notifyListenersOfPreContextRun(final ContextClass contextClass) {
+        for (final ContextListener contextListener : contextListeners) {
+            contextListener.preContextRun(contextClass);
+        }
+    }
+
+    private void notifyListenersOfPostContextRun(final ContextClass contextClass, final ContextResult contextResult) {
+        for (final ContextListener contextListener : contextListeners) {
+            contextListener.postContextRun(contextClass, contextResult);
+        }
     }
 }

@@ -57,4 +57,8 @@ public final class SpecificationMethodImpl implements SpecificationMethod {
     public Collection<LifecycleMethod> getAfterSpecificationMethods() {
         return afterSpecificationMethods;
     }
+
+    public String getName() {
+        return specificationMethod.getName();
+    }
 }

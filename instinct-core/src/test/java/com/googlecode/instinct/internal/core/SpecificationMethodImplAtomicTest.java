@@ -29,6 +29,7 @@ import com.googlecode.instinct.runner.SpecificationListener;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
+import static com.googlecode.instinct.test.triangulate.Triangulation.getInstance;
 
 @SuppressWarnings({"unchecked"})
 @Suggest({"Todo:", "Add a run method, pass a spec runner as a dependency, pass in other methods required for runners."})
@@ -39,6 +40,7 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
     private SpecificationResult specificationResult;
     private Collection<LifecycleMethod> beforeSpecMethods;
     private Collection<LifecycleMethod> afterSpecMethods;
+    private String methodName;
 
     @Override
     public void setUpTestDoubles() {
@@ -47,6 +49,7 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
         specificationResult = mock(SpecificationResult.class);
         beforeSpecMethods = mock(Collection.class);
         afterSpecMethods = mock(Collection.class);
+        methodName = getInstance(String.class);
     }
 
     @Override
@@ -87,5 +90,10 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
     public void testReturnsUnderlyingAfterSpecMethods() {
         final Collection<LifecycleMethod> returnedAfterSpecMethods = specificationMethod.getAfterSpecificationMethods();
         expect.that(returnedAfterSpecMethods).sameInstanceAs(afterSpecMethods);
+    }
+
+    public void testReturnsNameFromUnderlyingLifecycleMethod() {
+        expects(specMethod).method("getName").will(returnValue(methodName));
+        expect.that(specificationMethod.getName()).equalTo(methodName);
     }
 }

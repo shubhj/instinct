@@ -20,6 +20,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.mock.MockVerifier;
 import com.googlecode.instinct.internal.mock.MockVerifierImpl;
 import com.googlecode.instinct.internal.mock.TestDoubleAutoWirer;
@@ -33,6 +34,7 @@ import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.runner.SpecificationListener;
 
 @Suggest({"Pass a spec method into a spec runner"})
@@ -48,7 +50,6 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     public void addSpecificationListener(final SpecificationListener specificationListener) {
         checkNotNull(specificationListener);
         specificationListeners.add(specificationListener);
-
     }
 
     @Suggest({"Does each specification get it's own Mockery?", " How will this work if we want to allow manual mocking?",
@@ -60,12 +61,34 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         return doRun(context);
     }
 
+    // SUPPRESS IllegalCatch {
+    @SuppressWarnings({"CatchGenericClass"})
+    @Suggest("Make a clock wrapper that looks like org.jbehave.core.util.Timer.")
     public SpecificationResult run(final SpecificationMethod specificationMethod) {
         checkNotNull(specificationMethod);
-        throw new UnsupportedOperationException();
+        final long startTime = clock.getCurrentTime();
+        try {
+            // expose the context class, rather than getting the method
+            final Class<?> contextClass = specificationMethod.getSpecificationMethod().getDeclaringClass();
+            final Object instance = invokeConstructor(contextClass);
+            runSpecificationLifecycle(instance, specificationMethod);
+            final SpecificationRunStatus runStatus = SPECIFICATION_SUCCESS;
+            return createSpecResult(specificationMethod, runStatus, startTime);
+        } catch (Throwable e) {
+            final SpecificationRunStatus status = new SpecificationRunFailureStatus(e);
+            return createSpecResult(specificationMethod, status, startTime);
+        }
     }
 
+    private SpecificationResult createSpecResult(final SpecificationMethod specificationMethod, final SpecificationRunStatus runStatus,
+            final long startTime) {
+        final long executionTime = clock.getElapsedTime(startTime);
+        return new SpecificationResultImpl(specificationMethod.getName(), runStatus, executionTime);
+    }
+    // } SUPPRESS IllegalCatch
+
     // SUPPRESS IllegalCatch {
+
     @SuppressWarnings({"CatchGenericClass"})
     @Suggest("Make a clock wrapper that looks like org.jbehave.core.util.Timer.")
     private SpecificationResult doRun(final SpecificationContext specificationContext) {
@@ -82,7 +105,8 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     }
     // } SUPPRESS IllegalCatch
 
-    @Suggest("May need to stick verification of mocks in finally, if we report them as well as other errors.")
+    @Suggest({"Delete",
+            "May need to stick verification of mocks in finally, if we report them as well as other errors."})
     private void runSpecificationLifecycle(final Object behaviourContext, final SpecificationContext specificationContext) {
         try {
             testDoubleAutoWirer.wire(behaviourContext);
@@ -94,12 +118,38 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         }
     }
 
+    @Suggest({"Expose this lifecycle?",
+            "May need to stick verification of mocks in finally, if we report them as well as other errors."})
+    private void runSpecificationLifecycle(final Object contextInstance, final SpecificationMethod specificationMethod) {
+        try {
+            testDoubleAutoWirer.wire(contextInstance);
+            runMethods(contextInstance, specificationMethod.getBeforeSpecificationMethods());
+            runMethod(contextInstance, specificationMethod.getSpecificationMethod());
+            mockVerifier.verify(contextInstance);
+        } finally {
+            runMethods(contextInstance, specificationMethod.getAfterSpecificationMethods());
+        }
+    }
+
+    private void runMethods(final Object instance, final Collection<LifecycleMethod> methods) {
+        for (final LifecycleMethod method : methods) {
+            runMethod(instance, method);
+        }
+    }
+
+    private void runMethod(final Object instance, final LifecycleMethod method) {
+        methodValidator.checkMethodHasNoParameters(method.getMethod());
+        methodInvoker.invokeMethod(instance, method.getMethod());
+    }
+
+    @Fix("Remove")
     private void runMethods(final Object instance, final Method[] methods) {
         for (final Method method : methods) {
             runMethod(instance, method);
         }
     }
 
+    @Fix("Remove")
     private void runMethod(final Object instance, final Method specificationMethod) {
         methodValidator.checkMethodHasNoParameters(specificationMethod);
         methodInvoker.invokeMethod(instance, specificationMethod);

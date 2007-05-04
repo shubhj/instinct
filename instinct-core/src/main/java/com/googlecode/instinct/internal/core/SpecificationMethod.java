@@ -18,8 +18,11 @@ package com.googlecode.instinct.internal.core;
 
 import java.util.Collection;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.SpecificationListener;
 
+@Suggest({"Add a getDeclaringClass() that returns ContextClass or raw class?",
+        "Add a getName method"})
 public interface SpecificationMethod {
     void addSpecificationListener(SpecificationListener specificationListener);
 
@@ -30,4 +33,6 @@ public interface SpecificationMethod {
     Collection<LifecycleMethod> getBeforeSpecificationMethods();
 
     Collection<LifecycleMethod> getAfterSpecificationMethods();
+
+    String getName();
 }
