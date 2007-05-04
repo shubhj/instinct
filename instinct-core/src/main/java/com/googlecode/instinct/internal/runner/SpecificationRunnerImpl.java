@@ -19,8 +19,8 @@ package com.googlecode.instinct.internal.runner;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
-import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.mock.MockVerifier;
 import com.googlecode.instinct.internal.mock.MockVerifierImpl;
 import com.googlecode.instinct.internal.mock.TestDoubleAutoWirer;
@@ -30,11 +30,11 @@ import com.googlecode.instinct.internal.util.Clock;
 import com.googlecode.instinct.internal.util.ClockImpl;
 import com.googlecode.instinct.internal.util.ConstructorInvoker;
 import com.googlecode.instinct.internal.util.ConstructorInvokerImpl;
+import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.runner.SpecificationListener;
 
 @Suggest({"Pass a spec method into a spec runner"})
@@ -52,20 +52,27 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         specificationListeners.add(specificationListener);
     }
 
-    @Suggest({"Does each specification get it's own Mockery?", " How will this work if we want to allow manual mocking?",
-            "Need access to the same statics",
-            "Maybe pass in a BC class instantiation strategy, so that we can enable creating of only one instance of a BC, rather than one per spec",
-            "Remove this method, take a SpecificationMethod."})
+    @Fix("Breadcrumb - Delete. Followback up call chain.")
     public SpecificationResult run(final SpecificationContext context) {
         checkNotNull(context);
-        return doRun(context);
+        return doRunDelete(context);
+    }
+
+    @Suggest({"Does each specification get it's own Mockery?", " How will this work if we want to allow manual mocking?",
+            "Need access to the same statics",
+            "Maybe pass in a BC class instantiation strategy, so that we can enable creating of only one instance of a BC, rather than one per spec"})
+    public SpecificationResult run(final SpecificationMethod specificationMethod) {
+        checkNotNull(specificationMethod);
+        notifyListenersOfPreSpecification(specificationMethod);
+        final SpecificationResult specificationResult = doRun(specificationMethod);
+        notifyListenersOfPostSpecification(specificationMethod, specificationResult);
+        return specificationResult;
     }
 
     // SUPPRESS IllegalCatch {
     @SuppressWarnings({"CatchGenericClass"})
     @Suggest("Make a clock wrapper that looks like org.jbehave.core.util.Timer.")
-    public SpecificationResult run(final SpecificationMethod specificationMethod) {
-        checkNotNull(specificationMethod);
+    private SpecificationResult doRun(final SpecificationMethod specificationMethod) {
         final long startTime = clock.getCurrentTime();
         try {
             // expose the context class, rather than getting the method
@@ -79,19 +86,18 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
             return createSpecResult(specificationMethod, status, startTime);
         }
     }
+    // } SUPPRESS IllegalCatch
 
     private SpecificationResult createSpecResult(final SpecificationMethod specificationMethod, final SpecificationRunStatus runStatus,
             final long startTime) {
         final long executionTime = clock.getElapsedTime(startTime);
         return new SpecificationResultImpl(specificationMethod.getName(), runStatus, executionTime);
     }
-    // } SUPPRESS IllegalCatch
 
     // SUPPRESS IllegalCatch {
-
     @SuppressWarnings({"CatchGenericClass"})
     @Suggest("Make a clock wrapper that looks like org.jbehave.core.util.Timer.")
-    private SpecificationResult doRun(final SpecificationContext specificationContext) {
+    private SpecificationResult doRunDelete(final SpecificationContext specificationContext) {
         final long startTime = clock.getCurrentTime();
         try {
             final Object instance = invokeConstructor(specificationContext.getContextClass());
@@ -128,6 +134,18 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
             mockVerifier.verify(contextInstance);
         } finally {
             runMethods(contextInstance, specificationMethod.getAfterSpecificationMethods());
+        }
+    }
+
+    private void notifyListenersOfPreSpecification(final SpecificationMethod specificationMethod) {
+        for (final SpecificationListener specificationListener : specificationListeners) {
+            specificationListener.preSpecificationMethod(specificationMethod);
+        }
+    }
+
+    private void notifyListenersOfPostSpecification(final SpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
+        for (final SpecificationListener specificationListener : specificationListeners) {
+            specificationListener.postSpecificationMethod(specificationMethod, specificationResult);
         }
     }
 

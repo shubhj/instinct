@@ -18,19 +18,19 @@ package com.googlecode.instinct.runner;
 
 import static com.googlecode.instinct.expect.Mocker.expects;
 import static com.googlecode.instinct.expect.Mocker.mock;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkInterface;
-import com.googlecode.instinct.internal.runner.SpecificationResult;
-import com.googlecode.instinct.internal.core.LifecycleMethod;
 
 public final class SpecificationListenerAtomicTest extends InstinctTestCase {
-    private LifecycleMethod method;
+    private SpecificationMethod specificationMethod;
     private SpecificationListener specificationListener;
     private SpecificationResult specificationResult;
 
     @Override
     public void setUpTestDoubles() {
-        method = mock(LifecycleMethod.class);
+        specificationMethod = mock(SpecificationMethod.class);
         specificationResult = mock(SpecificationResult.class);
     }
 
@@ -45,11 +45,11 @@ public final class SpecificationListenerAtomicTest extends InstinctTestCase {
 
     public void testContainsPreSpecificationRunCallback() {
         expects(specificationListener).method("preSpecificationMethod");
-        specificationListener.preSpecificationMethod(method);
+        specificationListener.preSpecificationMethod(specificationMethod);
     }
 
     public void testContainsPostSpecificationRunCallback() {
         expects(specificationListener).method("postSpecificationMethod");
-        specificationListener.postSpecificationMethod(method, specificationResult);
+        specificationListener.postSpecificationMethod(specificationMethod, specificationResult);
     }
 }

@@ -21,8 +21,7 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.SpecificationListener;
 
-@Suggest({"Add a getDeclaringClass() that returns ContextClass or raw class?",
-        "Add a getName method"})
+@Suggest({"Breadcrumb - Add a getDeclaringClass() that returns ContextClass or raw class?"})
 public interface SpecificationMethod {
     void addSpecificationListener(SpecificationListener specificationListener);
 
