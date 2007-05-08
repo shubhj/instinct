@@ -16,10 +16,9 @@
 
 package com.googlecode.instinct.internal.runner;
 
-public interface SpecificationResult extends ItemResult {
-    String getSpecificationName();
+import com.googlecode.instinct.internal.util.Suggest;
 
-    long getExecutionTime();
-
-    SpecificationRunStatus getStatus();
+@Suggest("Rename")
+public interface ItemResult {
+    boolean completedSuccessfully();
 }

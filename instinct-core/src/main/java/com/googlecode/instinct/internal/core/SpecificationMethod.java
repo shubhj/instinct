@@ -22,7 +22,7 @@ import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.SpecificationListener;
 
 @Suggest({"Breadcrumb - Add a getDeclaringClass() that returns ContextClass or raw class?"})
-public interface SpecificationMethod {
+public interface SpecificationMethod extends RunnableItem {
     void addSpecificationListener(SpecificationListener specificationListener);
 
     SpecificationResult run();

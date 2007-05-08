@@ -21,7 +21,7 @@ import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.runner.SpecificationListener;
 import com.googlecode.instinct.runner.ContextListener;
 
-public interface ContextClass {
+public interface ContextClass extends RunnableItem {
     <T> Class<T> getType();
 
     String getName();

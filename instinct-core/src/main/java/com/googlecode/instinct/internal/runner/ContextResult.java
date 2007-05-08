@@ -18,12 +18,10 @@ package com.googlecode.instinct.internal.runner;
 
 import java.util.List;
 
-public interface ContextResult {
+public interface ContextResult extends ItemResult {
     void addSpecificationResult(SpecificationResult specificationResult);
 
     List<SpecificationResult> getSpecificationResults();
-
-    boolean completedSuccessfully();
 
     String getBehaviourContextName();
 

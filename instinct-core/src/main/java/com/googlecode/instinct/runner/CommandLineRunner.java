@@ -61,6 +61,7 @@ public final class CommandLineRunner {
     // } SUPPRESS GenericIllegalRegexp
 
     @SuppressWarnings({"unchecked"})
+    @Suggest("Make this build a Collection<RunnableItem>. Then  run each one.")
     private static <T> Class<T> getContextClass(final String specificationToRun) {
         final String className = getClassName(specificationToRun);
         return new DefaultEdgeClass().forName(className);

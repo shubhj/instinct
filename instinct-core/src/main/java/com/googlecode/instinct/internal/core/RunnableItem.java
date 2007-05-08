@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.runner;
+package com.googlecode.instinct.internal.core;
 
-public interface SpecificationResult extends ItemResult {
-    String getSpecificationName();
+import com.googlecode.instinct.internal.runner.ItemResult;
 
-    long getExecutionTime();
-
-    SpecificationRunStatus getStatus();
+public interface RunnableItem {
+    ItemResult run();
 }
