@@ -4,7 +4,9 @@ import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.runner.ContextResult;
+import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
+import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.ContextListener;
@@ -14,10 +16,9 @@ import junit.framework.TestSuite;
 @Suggest({"Try and just use the interface Test rather than concrete extension.",
         "Why do we need to do suite.testAt(0) on an instance of one of these to get a nice heirarchy?"})
 public final class ContextTestSuite extends TestSuite implements ContextListener, SpecificationListener {
-    @Suggest("Do we need to make this a field? Does it need to be shared to make JUnit integration work?")
+    private final ContextRunner contextRunner = new StandardContextRunner();
     private TestSuite currentContextSuite;
 
-    @Suggest({"Do we need to do runContext() in the constructor?", "Do we need to set the name?"})
     public <T> ContextTestSuite(final Class<T> contextType) {
         checkNotNull(contextType);
         runContext(contextType);
@@ -43,8 +44,10 @@ public final class ContextTestSuite extends TestSuite implements ContextListener
     }
 
     private <T> void runContext(final Class<T> contextType) {
-        final ContextClass context = new ContextClassImpl(contextType);
-        setName(context.getName());
-        context.run();
+        final ContextClass contextClass = new ContextClassImpl(contextType);
+        setName(contextClass.getName());
+        contextRunner.addContextListener(this);
+        contextRunner.addSpecificationListener(this);
+        contextRunner.run(contextClass);
     }
 }

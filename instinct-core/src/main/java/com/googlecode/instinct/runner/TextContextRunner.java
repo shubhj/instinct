@@ -24,7 +24,6 @@ import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
-import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.report.ContextResultMessageBuilder;
@@ -35,7 +34,6 @@ import static com.googlecode.instinct.report.ResultFormat.BRIEF;
         "Don't make this implement ContextRunner, but create ContextClasses internally.?"})
 public final class TextContextRunner implements ContextRunner, ContextListener {
     private static final boolean AUTO_FLUSH_OUTPUT = true;
-    private final ContextRunner contextRunner = new StandardContextRunner();
     private final PrintWriter writer;
     private final ContextResultMessageBuilder messageBuilder;
 
@@ -67,7 +65,6 @@ public final class TextContextRunner implements ContextRunner, ContextListener {
         checkNotNull(output, resultFormat);
         writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(output)), AUTO_FLUSH_OUTPUT);
         messageBuilder = resultFormat.getMessageBuilder();
-        contextRunner.addContextListener(this);
     }
 
     public void addContextListener(final ContextListener contextListener) {
@@ -80,13 +77,15 @@ public final class TextContextRunner implements ContextRunner, ContextListener {
 
     public ContextResult run(final ContextClass contextClass) {
         checkNotNull(contextClass);
-        return contextRunner.run(contextClass);
+        contextClass.addContextListener(this);
+        return contextClass.run();
     }
 
     public void preContextRun(final ContextClass contextClass) {
         checkNotNull(contextClass);
     }
 
+    @Fix("Use a specification listener to report these as they come out.")
     public void postContextRun(final ContextClass contextClass, final ContextResult contextResult) {
         checkNotNull(contextClass, contextResult);
         writer.println(messageBuilder.buildMessage(contextResult));

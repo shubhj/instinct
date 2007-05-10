@@ -18,7 +18,6 @@ public final class SpecificationTestCase extends TestCase {
     private SpecificationMethod specificationMethod;
 
     public SpecificationTestCase(final SpecificationMethod specificationMethod) {
-        super(specificationMethod == null ? "" : specificationMethod.getName());
         checkNotNull(specificationMethod);
         this.specificationMethod = specificationMethod;
     }
@@ -36,6 +35,11 @@ public final class SpecificationTestCase extends TestCase {
         } catch (EdgeException e) {
             exceptionFinder.rethrowRealError(e);
         }
+    }
+
+    @Override
+    public String getName() {
+        return specificationMethod.getName();
     }
 
     @SuppressWarnings({"CatchGenericClass"})
