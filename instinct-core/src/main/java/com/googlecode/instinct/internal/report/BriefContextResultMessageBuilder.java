@@ -21,8 +21,6 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ContextResultMessageBuilder;
 
-@Suggest({"Should print failing messages by default.",
-        "Print a newline between each spec, see below."})
 
 /*
 [junit] Testsuite: com.googlecode.instinct.internal.runner.SpecificationRunnerSlowTest
@@ -71,7 +69,9 @@ Finished in 0.002969 seconds
 3 specifications, 1 failure
 
  */
-
+@Suggest({"Should print failing messages by default.",
+        "Print a newline between each spec, see below.",
+        "Make a specification message builder, delegate to it from here."})
 public final class BriefContextResultMessageBuilder implements ContextResultMessageBuilder {
     private static final double MILLISECONDS_IN_SECONDS = 1000.0;
     private static final String SPACER = ", ";

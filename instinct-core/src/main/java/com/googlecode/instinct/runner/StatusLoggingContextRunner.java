@@ -24,7 +24,7 @@ import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ContextResultMessageBuilder;
 import com.googlecode.instinct.report.StatusLogger;
 
-@Suggest("Pull out a text logger that logs to std out.")
+@Suggest({"Remove this class, refactor Ant runner to not use it, make Ant runner receive the callback."})
 public final class StatusLoggingContextRunner implements ContextRunner {
     private final ContextRunner delegate;
     private final ContextResultMessageBuilder messageBuilder;

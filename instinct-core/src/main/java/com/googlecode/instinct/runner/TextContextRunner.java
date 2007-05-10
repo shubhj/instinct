@@ -28,16 +28,16 @@ import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.report.ContextResultMessageBuilder;
-import com.googlecode.instinct.report.PrintWriterStatusLogger;
 import com.googlecode.instinct.report.ResultFormat;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
-import com.googlecode.instinct.report.StatusLogger;
 
 @Fix({"Write atomic test for this.",
         "Don't make this implement ContextRunner, but create ContextClasses internally.?"})
-public final class TextContextRunner implements ContextRunner {
+public final class TextContextRunner implements ContextRunner, ContextListener {
     private static final boolean AUTO_FLUSH_OUTPUT = true;
-    private final ContextRunner contextRunner;
+    private final ContextRunner contextRunner = new StandardContextRunner();
+    private final PrintWriter writer;
+    private final ContextResultMessageBuilder messageBuilder;
 
     /**
      * Create a new context runner that sends output to standard out using brief formatting.
@@ -62,45 +62,34 @@ public final class TextContextRunner implements ContextRunner {
      * @param output The output stream to send results to.
      * @param resultFormat The format the specification results should be printed using.
      */
+    @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
     public TextContextRunner(final OutputStream output, final ResultFormat resultFormat) {
         checkNotNull(output, resultFormat);
-        final ContextRunner runner = new StandardContextRunner();
-        final ContextResultMessageBuilder messageBuilder = resultFormat.getMessageBuilder();
-        contextRunner = new StatusLoggingContextRunner(runner, messageBuilder, createLogger(output));
+        writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(output)), AUTO_FLUSH_OUTPUT);
+        messageBuilder = resultFormat.getMessageBuilder();
+        contextRunner.addContextListener(this);
     }
 
-    /**
-     * Registers a listener for context lifecycle events.
-     *
-     * @param contextListener A listener for context events.
-     */
     public void addContextListener(final ContextListener contextListener) {
         checkNotNull(contextListener);
     }
 
-    /**
-     * Registers a listener for specification lifecycle events.
-     *
-     * @param specificationListener A listener for specification lifecycle events.
-     */
     public void addSpecificationListener(final SpecificationListener specificationListener) {
         checkNotNull(specificationListener);
     }
 
-    /**
-     * Runs the given context.
-     *
-     * @param contextClass A class containing specifications (a behaviour/specification context) to run.
-     * @return The results of running the given context class.
-     */
     public ContextResult run(final ContextClass contextClass) {
         checkNotNull(contextClass);
         return contextRunner.run(contextClass);
     }
 
-    @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
-    private StatusLogger createLogger(final OutputStream output) {
-        return new PrintWriterStatusLogger(new PrintWriter(new BufferedWriter(new OutputStreamWriter(output)), AUTO_FLUSH_OUTPUT));
+    public void preContextRun(final ContextClass contextClass) {
+        checkNotNull(contextClass);
+    }
+
+    public void postContextRun(final ContextClass contextClass, final ContextResult contextResult) {
+        checkNotNull(contextClass, contextResult);
+        writer.println(messageBuilder.buildMessage(contextResult));
     }
 
     /**
@@ -109,6 +98,7 @@ public final class TextContextRunner implements ContextRunner {
      * @param contextClasses An array of classes containing specifications to run.
      */
     public static void runContexts(final Class<?>... contextClasses) {
+        checkNotNull((Object[]) contextClasses);
         final ContextRunner runner = new TextContextRunner();
         for (final Class<?> contextClass : contextClasses) {
             runner.run(new ContextClassImpl(contextClass));

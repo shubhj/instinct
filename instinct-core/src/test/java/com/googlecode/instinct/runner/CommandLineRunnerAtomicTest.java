@@ -16,13 +16,11 @@
 
 package com.googlecode.instinct.runner;
 
-import com.googlecode.instinct.internal.core.ContextClass;
-import com.googlecode.instinct.internal.runner.ContextResult;
-import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
-@Suggest("Add javadoc.")
-public interface ContextListener {
-    void preContextRun(ContextClass contextClass);
-
-    void postContextRun(ContextClass contextClass, ContextResult contextResult);
+public final class CommandLineRunnerAtomicTest extends InstinctTestCase {
+    public void testConformsToClassTraits() {
+        checkClass(CommandLineRunner.class);
+    }
 }

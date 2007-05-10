@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.runner;
+package com.googlecode.instinct.integrate.junit3;
 
-import com.googlecode.instinct.internal.core.ContextClass;
-import com.googlecode.instinct.internal.runner.ContextResult;
-import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import junit.framework.TestSuite;
 
-@Suggest("Add javadoc.")
-public interface ContextListener {
-    void preContextRun(ContextClass contextClass);
-
-    void postContextRun(ContextClass contextClass, ContextResult contextResult);
+public final class ContextTestSuiteImplAtomicTest extends InstinctTestCase {
+    public void testConformsToClassTraits() {
+        checkClass(ContextTestSuite.class, TestSuite.class);
+    }
 }

@@ -1,16 +1,12 @@
 package com.googlecode.instinct.integrate.junit3;
 
 import au.net.netstorm.boost.edge.EdgeException;
-import com.googlecode.instinct.internal.core.SpikedSpecificationMethod;
-import com.googlecode.instinct.internal.runner.SpecificationContext;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
-import com.googlecode.instinct.internal.runner.SpecificationRunner;
-import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 import com.googlecode.instinct.internal.util.ExceptionFinder;
 import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 
@@ -18,11 +14,10 @@ import junit.framework.TestResult;
         "JUnitTestCaseWithNonTrivialConstructors"})
 public final class SpecificationTestCase extends TestCase {
     private final ExceptionFinder exceptionFinder = new ExceptionFinderImpl();
-    private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
     private TestResult result;
-    private final SpikedSpecificationMethod specificationMethod;
+    private SpecificationMethod specificationMethod;
 
-    public SpecificationTestCase(final SpikedSpecificationMethod specificationMethod) {
+    public SpecificationTestCase(final SpecificationMethod specificationMethod) {
         super(specificationMethod == null ? "" : specificationMethod.getName());
         checkNotNull(specificationMethod);
         this.specificationMethod = specificationMethod;
@@ -44,13 +39,10 @@ public final class SpecificationTestCase extends TestCase {
     }
 
     @SuppressWarnings({"CatchGenericClass"})
-    @Suggest("Run the specification method directly.")
     // SUPPRESS IllegalCatch {
     private void runSpecification() {
         try {
-            final SpecificationContext specificationContext = specificationMethod.getSpecificationContext();
-            //note. this uses the real (internal) runner.            
-            final SpecificationResult specificationResult = specificationRunner.run(specificationContext);
+            final SpecificationResult specificationResult = specificationMethod.run();
             processSpecificationResult(specificationResult);
         } catch (Throwable e) {
             result.addError(this, e);

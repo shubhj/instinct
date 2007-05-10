@@ -18,6 +18,7 @@ package com.googlecode.instinct.runner;
 
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import com.googlecode.instinct.internal.util.Fix;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 
 /**
@@ -43,10 +44,13 @@ public final class CommandLineRunner {
      * @param args Command line arguments (see above).
      */
     public static void main(final String... args) {
+        checkNotNull((Object[]) args);
         if (args.length == 0) {
             printUsage();
         } else {
+            // SUGGEST Make this a RunnableItemBuilder?
             final Class<?> contextClass = getContextClass(args[0]);
+            // SUGGEST Register this class as a listener for lifecycle events? How does it relate to the text runner?
             new CommandLineRunner().run(contextClass);
         }
     }

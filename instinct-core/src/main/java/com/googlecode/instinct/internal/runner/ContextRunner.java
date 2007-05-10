@@ -21,10 +21,26 @@ import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
 
 public interface ContextRunner {
+    /**
+     * Registers a listener for context lifecycle events.
+     *
+     * @param contextListener A listener for context events.
+     */
     void addContextListener(ContextListener contextListener);
 
+    /**
+     * Registers a listener for specification lifecycle events.
+     *
+     * @param specificationListener A listener for specification lifecycle events.
+     */
     void addSpecificationListener(SpecificationListener specificationListener);
 
+    /**
+     * Runs the given context.
+     *
+     * @param contextClass A class containing specifications (a behaviour/specification context) to run.
+     * @return The results of running the given context class.
+     */
     ContextResult run(ContextClass contextClass);
 }
 
