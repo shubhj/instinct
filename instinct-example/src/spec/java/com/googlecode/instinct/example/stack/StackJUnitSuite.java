@@ -19,7 +19,7 @@ public final class StackJUnitSuite {
     }
 
     private static <T> void addContextToSuite(final TestSuite suite, final Class<T> contextClass) {
-        suite.addTest(newSuite(contextClass).testAt(0));
+        suite.addTest(newSuite(contextClass));
     }
 
     private static <T> TestSuite newSuite(final Class<T> contextClass) {
