@@ -6,6 +6,7 @@ import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Fix;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.SpecificationListener;
 import junit.framework.TestSuite;
 
@@ -25,6 +26,7 @@ public final class ContextTestSuite extends TestSuite implements SpecificationLi
         return contextClass.getName();
     }
 
+    @Suggest("Is this addTest() causing the concurrent mod exceptions?")
     public void preSpecificationMethod(final SpecificationMethod specificationMethod) {
         checkNotNull(specificationMethod);
         addTest(new SpecificationTestCase(specificationMethod));

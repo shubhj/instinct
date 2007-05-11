@@ -44,7 +44,6 @@
             <mkdir dir="${@{type}.test.results.dir}"/>
             <junit failureproperty="@{type}.test.failed" fork="true" forkmode="perBatch">
                 <classpath refid="@{type}.test.class.path"/>
-                <classpath refid="@{type}.test.class.path"/>
                 <sysproperty key="net.sourceforge.cobertura.datafile" file="${coverage.dir}/coverage.ser"/>
                 <batchtest todir="${@{type}.test.results.dir}">
                     <fileset refid="@{type}.test.code.fileset"/>

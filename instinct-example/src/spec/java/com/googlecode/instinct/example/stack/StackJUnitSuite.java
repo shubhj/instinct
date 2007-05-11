@@ -10,16 +10,14 @@ public final class StackJUnitSuite {
 
     public static TestSuite suite() {
         final TestSuite suite = new TestSuite("Instinct JUnit Integration - Stack Example");
-        addContextToSuite(suite, AnEmptyStack.class);
-        addContextToSuite(suite, AFullStack.class);
-        addContextToSuite(suite, AnEmptyMagazineRack.class);
-        addContextToSuite(suite, AGlossyMagazine.class);
-        addContextToSuite(suite, MagazinePileContext.class);
+        addContextsToSuite(suite, AnEmptyStack.class, AFullStack.class, AnEmptyMagazineRack.class, AGlossyMagazine.class, MagazinePileContext.class);
         return suite;
     }
 
-    private static <T> void addContextToSuite(final TestSuite suite, final Class<T> contextClass) {
-        suite.addTest(newSuite(contextClass));
+    private static void addContextsToSuite(final TestSuite suite, final Class<?>... contextClasses) {
+        for (final Class<?> contextClass : contextClasses) {
+            suite.addTest(newSuite(contextClass));
+        }
     }
 
     private static <T> TestSuite newSuite(final Class<T> contextClass) {

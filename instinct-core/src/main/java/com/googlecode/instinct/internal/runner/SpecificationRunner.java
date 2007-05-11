@@ -17,14 +17,21 @@
 package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.core.SpecificationMethod;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.SpecificationListener;
 
 public interface SpecificationRunner {
+    /**
+     * Registers a listener for specification lifecycle events.
+     *
+     * @param specificationListener A listener for specification lifecycle events.
+     */
     void addSpecificationListener(SpecificationListener specificationListener);
 
-    @Suggest("Remove this method.")
-    SpecificationResult run(SpecificationContext context);
-
+    /**
+     * Runs the given specification.
+     *
+     * @param specificationMethod A specification to run.
+     * @return The results of running the given specification.
+     */
     SpecificationResult run(SpecificationMethod specificationMethod);
 }

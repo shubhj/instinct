@@ -16,23 +16,17 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collection;
-import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
-import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
-import com.googlecode.instinct.marker.MarkingSchemeImpl;
-import com.googlecode.instinct.marker.annotate.AfterSpecification;
-import com.googlecode.instinct.marker.annotate.BeforeSpecification;
-import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.marker.naming.AfterSpecificationNamingConvention;
-import com.googlecode.instinct.marker.naming.BeforeSpecificationNamingConvention;
-import com.googlecode.instinct.marker.naming.NamingConvention;
-import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.ContextClassImpl;
+import com.googlecode.instinct.internal.core.LifecycleMethod;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.core.SpecificationMethodImpl;
 import com.googlecode.instinct.test.InstinctTestCase;
 
+@SuppressWarnings({"StringContatenationInLoop"})
 public final class SpecificationRunnerSlowTest extends InstinctTestCase {
-    private final MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
     private SpecificationRunner runner;
 
     @Override
@@ -54,35 +48,29 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
     }
 
     private <T> void checkContextsRunWithoutError(final Class<T> contextClass) {
-        final SpecificationContext[] contexts = findSpecContexts(contextClass);
-        for (final SpecificationContext context : contexts) {
-            runner.run(context);
+        final Collection<SpecificationMethod> specificationMethods = findSpecificationMethods(contextClass);
+        for (final SpecificationMethod specificationMethod : specificationMethods) {
+            runner.run(specificationMethod);
         }
     }
 
-    private <T> void checkInvalidMethodsBarf(final Class<T> cls) {
-        final SpecificationContext[] contexts = findSpecContexts(cls);
-        for (final SpecificationContext context : contexts) {
-            final SpecificationResult specificationResult = runner.run(context);
-            assertFalse("Context " + context.getContextClass().getSimpleName() + " should have failed",
-                    specificationResult.completedSuccessfully());
+    private <T> void checkInvalidMethodsBarf(final Class<T> contextClass) {
+        final Collection<SpecificationMethod> specificationMethods = findSpecificationMethods(contextClass);
+        for (final SpecificationMethod specificationMethod : specificationMethods) {
+            final SpecificationResult specificationResult = runner.run(specificationMethod);
+            assertFalse("Spec " + specificationMethod.getName() + " should have failed", specificationResult.completedSuccessfully());
         }
     }
 
-    private <T> SpecificationContext[] findSpecContexts(final Class<T> contextClass) {
-        final Method[] before = getMethods(contextClass, BeforeSpecification.class, new BeforeSpecificationNamingConvention());
-        final Method[] after = getMethods(contextClass, AfterSpecification.class, new AfterSpecificationNamingConvention());
-        final Method[] specs = getMethods(contextClass, Specification.class, new SpecificationNamingConvention());
-        final SpecificationContext[] contexts = new SpecificationContext[specs.length];
-        for (int i = 0; i < contexts.length; i++) {
-            contexts[i] = new SpecificationContextImpl(contextClass, before, after, specs[i]);
+    private <T> Collection<SpecificationMethod> findSpecificationMethods(final Class<T> cls) {
+        final Collection<SpecificationMethod> specs = new ArrayList<SpecificationMethod>();
+        final ContextClass contextClass = new ContextClassImpl(cls);
+        final Collection<LifecycleMethod> specificationMethods = contextClass.getSpecificationMethods();
+        for (final LifecycleMethod specificationMethod : specificationMethods) {
+            final SpecificationMethod spec = new SpecificationMethodImpl(specificationMethod, contextClass.getBeforeSpecificationMethods(),
+                    contextClass.getAfterSpecificationMethods());
+            specs.add(spec);
         }
-        return contexts;
-    }
-
-    private <T, A extends Annotation> Method[] getMethods(final Class<T> cls, final Class<A> annotationType,
-            final NamingConvention namingConvention) {
-        final Collection<Method> methods = methodLocator.locateAll(cls, new MarkingSchemeImpl(annotationType, namingConvention));
-        return methods.toArray(new Method[methods.size()]);
+        return specs;
     }
 }

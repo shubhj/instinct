@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
@@ -30,14 +29,12 @@ import com.googlecode.instinct.internal.util.Clock;
 import com.googlecode.instinct.internal.util.ClockImpl;
 import com.googlecode.instinct.internal.util.ConstructorInvoker;
 import com.googlecode.instinct.internal.util.ConstructorInvokerImpl;
-import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.SpecificationListener;
 
-@Suggest({"Pass a spec method into a spec runner"})
 public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final Collection<SpecificationListener> specificationListeners = new ArrayList<SpecificationListener>();
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
@@ -50,12 +47,6 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     public void addSpecificationListener(final SpecificationListener specificationListener) {
         checkNotNull(specificationListener);
         specificationListeners.add(specificationListener);
-    }
-
-    @Fix("Breadcrumb - Delete. Followback up call chain.")
-    public SpecificationResult run(final SpecificationContext context) {
-        checkNotNull(context);
-        return doRunDelete(context);
     }
 
     @Suggest({"Does each specification get it's own Mockery?", " How will this work if we want to allow manual mocking?",
@@ -94,36 +85,6 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         return new SpecificationResultImpl(specificationMethod.getName(), runStatus, executionTime);
     }
 
-    // SUPPRESS IllegalCatch {
-    @SuppressWarnings({"CatchGenericClass"})
-    @Suggest("Make a clock wrapper that looks like org.jbehave.core.util.Timer.")
-    private SpecificationResult doRunDelete(final SpecificationContext specificationContext) {
-        final long startTime = clock.getCurrentTime();
-        try {
-            final Object instance = invokeConstructor(specificationContext.getContextClass());
-            runSpecificationLifecycle(instance, specificationContext);
-            return new SpecificationResultImpl(specificationContext.getSpecificationMethod().getName(), SPECIFICATION_SUCCESS,
-                    clock.getElapsedTime(startTime));
-        } catch (Throwable e) {
-            final SpecificationRunStatus status = new SpecificationRunFailureStatus(e);
-            return new SpecificationResultImpl(specificationContext.getSpecificationMethod().getName(), status, clock.getElapsedTime(startTime));
-        }
-    }
-    // } SUPPRESS IllegalCatch
-
-    @Suggest({"Delete",
-            "May need to stick verification of mocks in finally, if we report them as well as other errors."})
-    private void runSpecificationLifecycle(final Object behaviourContext, final SpecificationContext specificationContext) {
-        try {
-            testDoubleAutoWirer.wire(behaviourContext);
-            runMethods(behaviourContext, specificationContext.getBeforeSpecificationMethods());
-            runMethod(behaviourContext, specificationContext.getSpecificationMethod());
-            mockVerifier.verify(behaviourContext);
-        } finally {
-            runMethods(behaviourContext, specificationContext.getAfterSpecificationMethods());
-        }
-    }
-
     @Suggest({"Expose this lifecycle?",
             "May need to stick verification of mocks in finally, if we report them as well as other errors."})
     private void runSpecificationLifecycle(final Object contextInstance, final SpecificationMethod specificationMethod) {
@@ -158,19 +119,6 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     private void runMethod(final Object instance, final LifecycleMethod method) {
         methodValidator.checkMethodHasNoParameters(method.getMethod());
         methodInvoker.invokeMethod(instance, method.getMethod());
-    }
-
-    @Fix("Remove")
-    private void runMethods(final Object instance, final Method[] methods) {
-        for (final Method method : methods) {
-            runMethod(instance, method);
-        }
-    }
-
-    @Fix("Remove")
-    private void runMethod(final Object instance, final Method specificationMethod) {
-        methodValidator.checkMethodHasNoParameters(specificationMethod);
-        methodInvoker.invokeMethod(instance, specificationMethod);
     }
 
     private <T> Object invokeConstructor(final Class<T> cls) {

@@ -18,7 +18,7 @@ package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.util.Suggest;
 
-@Suggest("Rename")
+@Suggest("Rename?")
 public interface ItemResult {
     boolean completedSuccessfully();
 }

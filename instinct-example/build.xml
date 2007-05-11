@@ -13,9 +13,7 @@
 
     <property name="instinct.jar" value="${lib.dir}/instinct-0.1.4.jar"/>
 
-    <path id="main.class.path"/>
     <path id="main.class.path">
-        <!-- Put this here to allow suggestions in the spec code -->
         <fileset dir="${basedir}">
             <include name="${instinct.jar}"/>
         </fileset>
@@ -24,7 +22,6 @@
     <path id="spec.class.path">
         <path refid="main.class.path"/>
         <fileset dir="${basedir}">
-            <include name="${instinct.jar}"/>
             <include name="${lib.dir}/boost-982.jar"/>
             <include name="${lib.dir}/cglib-nodep-2.2_beta1.jar"/>
             <include name="${lib.dir}/jmock-core-1.2.0.jar"/>
@@ -40,7 +37,7 @@
     </path>
 
     <target name="clean" depends="-clean"/>
-    <target name="run-specs" depends="clean,-run-specs"/>
+    <target name="run-specs" depends="clean,-run-specs,-run-junit-integration"/>
 
     <target name="-clean">
         <delete dir="${build.dir}"/>
@@ -77,7 +74,16 @@
             <specifications dir="${spec.classes.dir}"/>
             <formatter type="verbose"/>
         </instinct>
-        <fail if="specs-failed" message="Specifications failed"/>
+        <fail if="specs-failed" message="Specifications failed."/>
+    </target>
+
+    <target name="-run-junit-integration" depends="-compile">
+        <junit failureproperty="tests-failed" fork="true" forkmode="perBatch">
+            <classpath refid="spec.class.path"/>
+            <test name="com.googlecode.instinct.example.stack.StackJUnitSuite"/>
+            <formatter type="brief" usefile="false"/>
+        </junit>
+        <fail if="tests-failed" message="JUnit integration suite failed."/>
     </target>
 
 </project>
