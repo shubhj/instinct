@@ -40,6 +40,8 @@ public @interface Fix {
 
     String card() default "None";
 
+    String removeBeforeRelease() default "1.0.0";
+
     String[] owners() default "Everyone";
 
     Priority priority() default Priority.LOW;

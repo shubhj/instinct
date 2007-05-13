@@ -34,6 +34,7 @@ import com.googlecode.instinct.expect.state.ObjectChecker;
 import com.googlecode.instinct.expect.state.StateExpectations;
 import com.googlecode.instinct.expect.state.StateExpectationsImpl;
 import com.googlecode.instinct.expect.state.StringChecker;
+import com.googlecode.instinct.expect.state.BooleanChecker;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
@@ -84,6 +85,11 @@ public final class ExpectThatImpl implements ExpectThat {
     public DoubleChecker that(final Double d) {
         checkNotNull(d);
         return stateExpectations.that(d);
+    }
+
+    public BooleanChecker that(final Boolean b) {
+        checkNotNull(b);
+        return stateExpectations.that(b);
     }
 
     public <T> ClassChecker<T> that(final Class<T> aClass) {

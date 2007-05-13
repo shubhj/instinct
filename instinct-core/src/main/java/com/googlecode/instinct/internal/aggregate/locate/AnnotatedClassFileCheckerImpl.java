@@ -28,11 +28,11 @@ import com.googlecode.instinct.internal.util.Suggest;
 public final class AnnotatedClassFileCheckerImpl implements AnnotatedClassFileChecker {
     private AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
     private ClassInstantiatorFactory instantiatorFactory = new ClassInstantiatorFactoryImpl();
-    private ClassInstantiator instantiator;
+    private final File packageRoot;
 
     public AnnotatedClassFileCheckerImpl(final File packageRoot) {
         checkNotNull(packageRoot);
-        instantiator = instantiatorFactory.create(packageRoot);
+        this.packageRoot = packageRoot;
     }
 
     @Suggest("Write test that ensures that we reject non-classes & return false for EdgeExceptions")
@@ -43,7 +43,8 @@ public final class AnnotatedClassFileCheckerImpl implements AnnotatedClassFileCh
 
     private <A extends Annotation> boolean checkClass(final File classFile, final Class<A> annotationType) {
         try {
-            final Class<?> candidateClass = instantiator.instantiateClass(classFile);
+            final ClassInstantiator instantiator = instantiatorFactory.create();
+            final Class<?> candidateClass = instantiator.instantiateClass(classFile, packageRoot);
             return annotationChecker.isAnnotated(candidateClass, annotationType);
         } catch (EdgeException e) {
             return false;

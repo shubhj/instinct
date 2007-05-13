@@ -17,6 +17,7 @@
 package com.googlecode.instinct.runner;
 
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
+import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
@@ -32,8 +33,6 @@ import com.googlecode.instinct.internal.util.Suggest;
  */
 @Fix({"Write atomic test for this."})
 public final class CommandLineRunner {
-    public static final String METHOD_SEPARATOR = "#";
-
     private void run(final Class<?> contextClass) {
         TextContextRunner.runContexts(contextClass);
     }
@@ -72,7 +71,7 @@ public final class CommandLineRunner {
     }
 
     private static String getClassName(final String specificationToRun) {
-        final int index = specificationToRun.indexOf(METHOD_SEPARATOR);
+        final int index = specificationToRun.indexOf(RunnableItemBuilder.METHOD_SEPARATOR);
         if (index >= 0) {
             return specificationToRun.substring(0, index);
 //            methodName = specificationToRun.substring(index + 1);

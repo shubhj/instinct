@@ -14,12 +14,22 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util;
+package com.googlecode.instinct.expect.state;
 
-import java.io.File;
+import com.googlecode.instinct.internal.util.Fix;
+import org.hamcrest.Matchers;
 
-public interface ClassInstantiator {
-    Class<?> instantiateClass(File classFile, File packageRoot);
+@Fix("Test this.")
+public class BooleanCheckerImpl extends ComparableCheckerImpl<Boolean> implements BooleanChecker {
+    public BooleanCheckerImpl(final Boolean subject) {
+        super(subject);
+    }
 
-    Class<?> instantiateClass(String className);
+    public final void isTrue() {
+        getAsserter().expectThat(subject, Matchers.equalTo(true));
+    }
+
+    public final void isFalse() {
+        getAsserter().expectThat(subject, Matchers.equalTo(false));
+    }
 }

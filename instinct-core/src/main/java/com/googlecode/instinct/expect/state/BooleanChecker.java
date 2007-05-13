@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util;
+package com.googlecode.instinct.expect.state;
 
-import java.io.File;
-
-public interface ClassInstantiator {
-    Class<?> instantiateClass(File classFile, File packageRoot);
-
-    Class<?> instantiateClass(String className);
+public interface BooleanChecker extends ComparableChecker<Boolean> {
+    void isTrue();
+    void isFalse();
 }

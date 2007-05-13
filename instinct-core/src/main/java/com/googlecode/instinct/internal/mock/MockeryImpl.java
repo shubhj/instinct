@@ -16,22 +16,23 @@
 
 package com.googlecode.instinct.internal.mock;
 
-import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.mock.constraint.ArrayElementsSame;
+import com.googlecode.instinct.internal.util.Fix;
+import com.googlecode.instinct.internal.util.Suggest;
 import org.jmock.builder.NameMatchBuilder;
 import org.jmock.core.Constraint;
 import org.jmock.core.InvocationMatcher;
 import org.jmock.core.Stub;
 import org.jmock.core.constraint.IsAnything;
 import org.jmock.core.constraint.IsEqual;
-import org.jmock.core.constraint.IsSame;
 import org.jmock.core.constraint.IsInstanceOf;
+import org.jmock.core.constraint.IsSame;
+import org.jmock.core.matcher.InvokeAtLeastOnceMatcher;
 import org.jmock.core.matcher.InvokeCountMatcher;
 import org.jmock.core.matcher.InvokeOnceMatcher;
-import org.jmock.core.matcher.InvokeAtLeastOnceMatcher;
 import org.jmock.core.stub.ReturnStub;
 
+@Suggest("Do we want to reject nulls in these public methods?")
 public final class MockeryImpl implements Mockery {
     private final Verifier verifier = new VerifierImpl();
     private final TestDoubleHolder holder = new TestDoubleHolderImpl();
@@ -87,8 +88,12 @@ public final class MockeryImpl implements Mockery {
         return new InvokeAnyTimesMatcher();
     }
 
-    @Fix("Don't allow objects passed by value to use same - see EasyDoc PrimordialMockingTestCase.")
+    @Fix("Don't allow objects passed by value to use same - primitives & Class - see EasyDoc PrimordialMockingTestCase.")
     public Constraint same(final Object argument) {
+        if (cannotConstrainWithSame(argument)) {
+            throw new IllegalArgumentException("Cannot constrain argument of type " + argument.getClass().getSimpleName()
+                    + " with same(), use eq() instead");
+        }
         return new IsSame(argument);
     }
 
@@ -114,6 +119,10 @@ public final class MockeryImpl implements Mockery {
 
     public void verify() {
         verifier.verify();
+    }
+
+    private boolean cannotConstrainWithSame(final Object argument) {
+        return argument != null && (argument.getClass().equals(String.class) || argument.getClass().isPrimitive());
     }
 
     @SuppressWarnings({"unchecked"})

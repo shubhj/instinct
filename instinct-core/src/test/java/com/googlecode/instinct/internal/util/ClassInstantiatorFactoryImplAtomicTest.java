@@ -16,8 +16,6 @@
 
 package com.googlecode.instinct.internal.util;
 
-import java.io.File;
-import static com.googlecode.instinct.expect.Mocker.mock;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
@@ -27,7 +25,7 @@ public final class ClassInstantiatorFactoryImplAtomicTest extends InstinctTestCa
     }
 
     public void testCreate() {
-        final ClassInstantiator instantiator = new ClassInstantiatorFactoryImpl().create(mock(File.class));
+        final ClassInstantiator instantiator = new ClassInstantiatorFactoryImpl().create();
         assertNotNull(instantiator);
         assertEquals(ClassInstantiatorImpl.class, instantiator.getClass());
     }

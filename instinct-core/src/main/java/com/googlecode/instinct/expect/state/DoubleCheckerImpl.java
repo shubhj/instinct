@@ -20,7 +20,6 @@ import org.hamcrest.Matchers;
 
 // TODO Test this
 public class DoubleCheckerImpl extends ComparableCheckerImpl<Double> implements DoubleChecker {
-
     public DoubleCheckerImpl(Double subject) {
         super(subject);
     }

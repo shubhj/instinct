@@ -1,15 +1,14 @@
 package com.googlecode.instinct.runner;
 
 import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import static java.lang.System.setOut;
+import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ContextContainerWithSetUpAndTearDown;
 import com.googlecode.instinct.internal.runner.ContextRunner;
-import com.googlecode.instinct.internal.core.ContextClassImpl;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import static com.googlecode.instinct.runner.TextContextRunner.runContexts;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.io.StreamRedirector.doWithRedirectedStandardOut;
 
 public final class TextContextRunnerSlowTest extends InstinctTestCase {
     private ContextRunner contextRunner;
@@ -30,17 +29,14 @@ public final class TextContextRunnerSlowTest extends InstinctTestCase {
         checkSendsSpeciciationResultsToOutput(ContextContainerWithSetUpAndTearDown.class);
     }
 
-    @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed", "UseOfSystemOutOrSystemErr"})
     public void testCanBeCalledStaticallySendingResultsToStandardOut() {
-        final PrintStream defaultStdOut = System.out;
-        try {
-            setOut(new PrintStream(outputBuffer));
-            runContexts(ASimpleContext.class, ContextContainerWithSetUpAndTearDown.class);
-            checkRunnerSendsSpeciciationResultsToOutput(ASimpleContext.class);
-            checkRunnerSendsSpeciciationResultsToOutput(ContextContainerWithSetUpAndTearDown.class);
-        } finally {
-            setOut(defaultStdOut);
-        }
+        doWithRedirectedStandardOut(outputBuffer, new Runnable() {
+            public void run() {
+                runContexts(ASimpleContext.class, ContextContainerWithSetUpAndTearDown.class);
+            }
+        });
+        checkRunnerSendsSpeciciationResultsToOutput(ASimpleContext.class);
+        checkRunnerSendsSpeciciationResultsToOutput(ContextContainerWithSetUpAndTearDown.class);
     }
 
     private <T> void checkSendsSpeciciationResultsToOutput(final Class<T> contextClass) {

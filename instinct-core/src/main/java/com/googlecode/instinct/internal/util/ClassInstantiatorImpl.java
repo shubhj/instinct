@@ -17,23 +17,22 @@
 package com.googlecode.instinct.internal.util;
 
 import java.io.File;
-import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
-import au.net.netstorm.boost.edge.java.lang.EdgeClass;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class ClassInstantiatorImpl implements ClassInstantiator {
     private JavaClassNameFactory classNameFactory = new JavaClassNameFactoryImpl();
-    private EdgeClass edgeClass = new DefaultEdgeClass();
-    private final File packageRoot;
+    private ClassEdge classEdge = new ClassEdgeImpl();
 
-    public ClassInstantiatorImpl(final File packageRoot) {
-        checkNotNull(packageRoot);
-        this.packageRoot = packageRoot;
+    public Class<?> instantiateClass(final File classFile, final File packageRoot) {
+        checkNotNull(classFile, packageRoot);
+        final JavaClassName className = classNameFactory.create(packageRoot, classFile);
+        return classEdge.forName(className.getFullyQualifiedName());
     }
 
-    public Class<?> instantiateClass(final File classFile) {
-        checkNotNull(classFile);
-        final JavaClassName className = classNameFactory.create(packageRoot, classFile);
-        return edgeClass.forName(className.getFullyQualifiedName());
+    public Class<?> instantiateClass(final String className) {
+        checkNotNull(className);
+        return classEdge.forName(className);
     }
 }

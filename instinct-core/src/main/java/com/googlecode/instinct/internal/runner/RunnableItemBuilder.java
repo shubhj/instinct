@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util;
+package com.googlecode.instinct.internal.runner;
 
-import java.io.File;
+import java.util.Collection;
+import com.googlecode.instinct.internal.core.RunnableItem;
 
-public interface ClassInstantiator {
-    Class<?> instantiateClass(File classFile, File packageRoot);
+public interface RunnableItemBuilder {
+    String METHOD_SEPARATOR = "#";
 
-    Class<?> instantiateClass(String className);
+    Collection<RunnableItem> build(String itemsToRun);
 }

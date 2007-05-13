@@ -17,11 +17,9 @@
 package com.googlecode.instinct.runner;
 
 import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import static java.lang.System.setOut;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.io.StreamRedirector.doWithRedirectedStandardOut;
 
 public final class CommandLineRunnerSlowTest extends InstinctTestCase {
     private static final Class<ASimpleContext> CONTEXT_CLASS_TO_RUN = ASimpleContext.class;
@@ -32,17 +30,13 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
         outputBuffer = new ByteArrayOutputStream();
     }
 
-    @Suggest("Try-finally belongs in another class, pass closure, remove dupe in TextContextRunnerSlowTest.")
-    @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed", "UseOfSystemOutOrSystemErr"})
     public void testRunsASingleContextFromTheCommandLine() {
-        final PrintStream defaultStdOut = System.out;
-        try {
-            setOut(new PrintStream(outputBuffer));
-            CommandLineRunner.main(CONTEXT_CLASS_TO_RUN.getName());
-            checkRunnerSendsSpeciciationResultsToOutput(CONTEXT_CLASS_TO_RUN);
-        } finally {
-            setOut(defaultStdOut);
-        }
+        doWithRedirectedStandardOut(outputBuffer, new Runnable() {
+            public void run() {
+                CommandLineRunner.main(CONTEXT_CLASS_TO_RUN.getName());
+            }
+        });
+        checkRunnerSendsSpeciciationResultsToOutput(CONTEXT_CLASS_TO_RUN);
     }
 
     private <T> void checkRunnerSendsSpeciciationResultsToOutput(final Class<T> contextClass) {

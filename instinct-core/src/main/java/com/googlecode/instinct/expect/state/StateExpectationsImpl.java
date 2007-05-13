@@ -64,6 +64,10 @@ public final class StateExpectationsImpl implements StateExpectations {
         return createChecker(DoubleCheckerImpl.class, d);
     }
 
+    public BooleanChecker that(final Boolean b) {
+        return createChecker(BooleanCheckerImpl.class, b);
+    }
+
     public <T> ClassChecker<T> that(Class<T> aClass) {
         return (ClassChecker<T>) createChecker(ClassCheckerImpl.class, aClass);
     }

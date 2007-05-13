@@ -33,6 +33,8 @@ public interface StateExpectations {
 
     DoubleChecker that(Double d);
 
+    BooleanChecker that(Boolean b);
+
     <T> ClassChecker<T> that(Class<T> aClass);
 
     <T extends EventObject> EventObjectChecker<T> that(T eventObject);
