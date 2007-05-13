@@ -56,4 +56,6 @@ public interface Mockery {
     Stub returnValue(Object returnValue);
 
     void verify();
+
+    void reset();
 }

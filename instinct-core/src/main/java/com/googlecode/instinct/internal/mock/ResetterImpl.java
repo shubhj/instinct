@@ -14,27 +14,23 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.aggregate;
+package com.googlecode.instinct.internal.mock;
 
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
-import com.googlecode.instinct.marker.annotate.Specification;
+import java.util.ArrayList;
+import java.util.List;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
-@SuppressWarnings({"ProtectedMemberInFinalClass", "UnusedDeclaration"})
-@BehaviourContext
-public final class TestContext1 {
-    @Specification
-    protected void notMe() {
+public final class ResetterImpl implements Resetter {
+    private final List<Resetable> resetables = new ArrayList<Resetable>();
+
+    public void addResetable(final Resetable resetable) {
+        checkNotNull(resetable);
+        resetables.add(resetable);
     }
 
-    @Specification
-    public void whoCares() {
-    }
-
-    @Specification
-    void iDo() {
-    }
-
-    @Specification
-    private void norMe() {
+    public void reset() {
+        for (final Resetable resetable : resetables) {
+            resetable.reset();
+        }
     }
 }

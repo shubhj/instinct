@@ -35,6 +35,7 @@ import org.jmock.core.stub.ReturnStub;
 @Suggest("Do we want to reject nulls in these public methods?")
 public final class MockeryImpl implements Mockery {
     private final Verifier verifier = new VerifierImpl();
+    private Resetter resetter = new ResetterImpl();
     private final TestDoubleHolder holder = new TestDoubleHolderImpl();
     private final MockCreator mockCreator = new JMockMockCreator();
 
@@ -121,6 +122,10 @@ public final class MockeryImpl implements Mockery {
         verifier.verify();
     }
 
+    public void reset() {
+        resetter.reset();
+    }
+
     private boolean cannotConstrainWithSame(final Object argument) {
         return argument != null && (argument.getClass().equals(String.class) || argument.getClass().isPrimitive());
     }
@@ -133,5 +138,6 @@ public final class MockeryImpl implements Mockery {
     private void register(final TestDoubleControl mockControl, final Object mockedObject) {
         holder.addControl(mockControl, mockedObject);
         verifier.addVerifiable(mockControl);
+        resetter.addResetable(mockControl);
     }
 }

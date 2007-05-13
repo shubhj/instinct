@@ -96,4 +96,8 @@ public final class Mocker {
     public static void verify() {
         MOCKERY.verify();
     }
+
+    public static void reset() {
+        MOCKERY.reset();
+    }
 }

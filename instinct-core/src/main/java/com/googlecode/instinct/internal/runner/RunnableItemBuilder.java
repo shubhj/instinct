@@ -21,6 +21,7 @@ import com.googlecode.instinct.internal.core.RunnableItem;
 
 public interface RunnableItemBuilder {
     String METHOD_SEPARATOR = "#";
+    String ITEM_SEPARATOR = " ";
 
     Collection<RunnableItem> build(String itemsToRun);
 }

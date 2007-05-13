@@ -39,6 +39,10 @@ public final class JMockMockControl implements MockControl {
         mockController.verify();
     }
 
+    public void reset() {
+        mockController.reset();
+    }
+
     @Override
     public String toString() {
         return mockController.toString();

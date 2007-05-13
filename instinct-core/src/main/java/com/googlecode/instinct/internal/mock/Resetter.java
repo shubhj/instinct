@@ -14,27 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.aggregate;
+package com.googlecode.instinct.internal.mock;
 
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
-import com.googlecode.instinct.marker.annotate.Specification;
+public interface Resetter {
+    void addResetable(Resetable resetable);
 
-@SuppressWarnings({"ProtectedMemberInFinalClass", "UnusedDeclaration"})
-@BehaviourContext
-public final class TestContext1 {
-    @Specification
-    protected void notMe() {
-    }
-
-    @Specification
-    public void whoCares() {
-    }
-
-    @Specification
-    void iDo() {
-    }
-
-    @Specification
-    private void norMe() {
-    }
+    void reset();
 }

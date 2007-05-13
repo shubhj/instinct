@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.test;
 
+import static com.googlecode.instinct.expect.Mocker.reset;
 import static com.googlecode.instinct.expect.Mocker.verify;
 import junit.framework.TestCase;
 
@@ -29,6 +30,7 @@ public abstract class InstinctTestCase extends TestCase {
             runTest();
             verify();
         } finally {
+            reset();
             tearDown();
         }
     }

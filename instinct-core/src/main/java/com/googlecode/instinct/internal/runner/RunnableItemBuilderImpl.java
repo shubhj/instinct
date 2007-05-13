@@ -20,6 +20,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import au.net.netstorm.boost.edge.EdgeException;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.LifecycleMethodImpl;
@@ -39,15 +40,22 @@ public final class RunnableItemBuilderImpl implements RunnableItemBuilder {
     public Collection<RunnableItem> build(final String itemsToRun) {
         checkNotNull(itemsToRun);
         final List<RunnableItem> builtItems = new ArrayList<RunnableItem>();
-        buildItem(builtItems, itemsToRun);
+        buildItems(itemsToRun, builtItems);
         return builtItems;
     }
 
-    private void buildItem(final List<RunnableItem> builtItems, final String itemsToRun) {
-        if (itemsToRun.contains(METHOD_SEPARATOR)) {
-            builtItems.add(buildSpecificationMethod(itemsToRun));
+    private void buildItems(final String itemsToRun, final List<RunnableItem> builtItems) {
+        final String[] items = itemsToRun.split(ITEM_SEPARATOR);
+        for (final String item : items) {
+            builtItems.add(buildItem(item));
+        }
+    }
+
+    private RunnableItem buildItem(final String itemToRun) {
+        if (itemToRun.contains(METHOD_SEPARATOR)) {
+            return buildSpecificationMethod(itemToRun);
         } else {
-            builtItems.add(buildContextClass(itemsToRun));
+            return buildContextClass(itemToRun);
         }
     }
 
@@ -60,8 +68,17 @@ public final class RunnableItemBuilderImpl implements RunnableItemBuilder {
         final String[] items = specToRun.split(METHOD_SEPARATOR);
         checkOnlyOneSpecMethod(items);
         final ContextClass contextClass = (ContextClass) buildContextClass(items[0]);
-        final Method specificationMethod = classEdge.getMethod(contextClass.getType(), items[1]);
+        final Method specificationMethod = findSpecMethod(contextClass, items[1]);
         return createSpecificationMethod(contextClass, specificationMethod);
+    }
+
+    private Method findSpecMethod(final ContextClass contextClass, final String methodName) {
+        try {
+            return classEdge.getMethod(contextClass.getType(), methodName);
+        } catch (EdgeException e) {
+            throw new IllegalArgumentException(
+                    "Specification method '" + contextClass.getType().getName() + METHOD_SEPARATOR + methodName + "' does not exist", e);
+        }
     }
 
     private SpecificationMethod createSpecificationMethod(final ContextClass contextClass, final Method specMethod) {
