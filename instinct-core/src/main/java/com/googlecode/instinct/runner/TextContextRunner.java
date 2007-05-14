@@ -75,12 +75,6 @@ public final class TextContextRunner implements ContextRunner, ContextListener {
         checkNotNull(specificationListener);
     }
 
-    public ContextResult run(final ContextClass contextClass) {
-        checkNotNull(contextClass);
-        contextClass.addContextListener(this);
-        return contextClass.run();
-    }
-
     public void preContextRun(final ContextClass contextClass) {
         checkNotNull(contextClass);
     }
@@ -89,6 +83,12 @@ public final class TextContextRunner implements ContextRunner, ContextListener {
     public void postContextRun(final ContextClass contextClass, final ContextResult contextResult) {
         checkNotNull(contextClass, contextResult);
         writer.println(messageBuilder.buildMessage(contextResult));
+    }
+
+    public ContextResult run(final ContextClass contextClass) {
+        checkNotNull(contextClass);
+        contextClass.addContextListener(this);
+        return contextClass.run();
     }
 
     /**

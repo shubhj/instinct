@@ -20,8 +20,9 @@ import java.net.URL;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 
+@SuppressWarnings({"HardcodedFileSeparator"})
 public final class PackageRootFinderImpl implements PackageRootFinder {
-    @Suggest({"Move Class to a boundary (use Boost's)", "Move resource loading into a ResourceLoader class"})
+    @Suggest({"Move Class to a boundary", "Move resource loading into a ResourceLoader class"})
     public <T> String getPackageRoot(final Class<T> classToFindRootOf) {
         checkNotNull(classToFindRootOf);
         final String fqn = classToFindRootOf.getName();

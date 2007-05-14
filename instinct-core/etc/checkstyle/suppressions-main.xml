@@ -5,4 +5,5 @@
 <suppressions>
     <suppress checks="ConstantName" files="Expect.java"/>
     <suppress checks="GenericIllegalRegexp" files="TextContextRunner.java"/>
+    <suppress checks="GenericIllegalRegexp" files="CommandLineRunner.java"/>
 </suppressions>

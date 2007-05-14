@@ -21,6 +21,7 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
 
 public final class SpecificationMethodImpl implements SpecificationMethod {
@@ -35,6 +36,11 @@ public final class SpecificationMethodImpl implements SpecificationMethod {
         this.specificationMethod = specificationMethod;
         this.beforeSpecificationMethods = beforeSpecificationMethods;
         this.afterSpecificationMethods = afterSpecificationMethods;
+    }
+
+    public void addContextListener(final ContextListener contextListener) {
+        checkNotNull(contextListener);
+        throw new UnsupportedOperationException();
     }
 
     public void addSpecificationListener(final SpecificationListener specificationListener) {

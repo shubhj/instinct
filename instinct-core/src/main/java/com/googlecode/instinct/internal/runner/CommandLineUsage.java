@@ -14,16 +14,8 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.core;
+package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.internal.runner.ItemResult;
-import com.googlecode.instinct.runner.ContextListener;
-import com.googlecode.instinct.runner.SpecificationListener;
-
-public interface RunnableItem {
-    void addContextListener(ContextListener contextListener);
-
-    void addSpecificationListener(SpecificationListener specificationListener);
-
-    ItemResult run();
+public interface CommandLineUsage {
+    CharSequence getUsage();
 }

@@ -16,32 +16,78 @@
 
 package com.googlecode.instinct.runner;
 
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import static java.io.File.pathSeparatorChar;
+import java.io.IOException;
+import java.io.InputStream;
+import au.net.netstorm.boost.edge.java.io.DefaultEdgeInputStream;
+import au.net.netstorm.boost.util.io.DefaultStreamConverter;
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.internal.aggregate.PackageRootFinder;
+import com.googlecode.instinct.internal.aggregate.PackageRootFinderImpl;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
+import com.googlecode.instinct.internal.util.Fix;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.io.StreamRedirector.doWithRedirectedStandardOut;
 
+@SuppressWarnings({"HardcodedFileSeparator", "IOResourceOpenedButNotSafelyClosed"})
 public final class CommandLineRunnerSlowTest extends InstinctTestCase {
     private static final Class<ASimpleContext> CONTEXT_CLASS_TO_RUN = ASimpleContext.class;
-    private ByteArrayOutputStream outputBuffer;
+    private final PackageRootFinder packageRootFinder = new PackageRootFinderImpl();
+    private final DefaultStreamConverter streamConverter = new DefaultStreamConverter();
 
-    @Override
-    public void setUpTestDoubles() {
-        outputBuffer = new ByteArrayOutputStream();
+    @Suggest("Use the WM written stream convertor, not boost's.")
+    @Fix({"Make this work with clover & cobertura", "Add multiple contexts, to test command line arg merging code."})
+    public void nsoTestRunsASingleContextFromTheCommandLine() throws IOException {
+        final Process process = runContext();
+        expectThatRunnerReportsNoErrors(read(process.getErrorStream()));
+        expectThatRunnerSendsSpeciciationResultsToOutput(read(process.getInputStream()));
     }
 
-    public void testRunsASingleContextFromTheCommandLine() {
-        doWithRedirectedStandardOut(outputBuffer, new Runnable() {
-            public void run() {
-                CommandLineRunner.main(CONTEXT_CLASS_TO_RUN.getName());
-            }
-        });
-        checkRunnerSendsSpeciciationResultsToOutput(CONTEXT_CLASS_TO_RUN);
+    public void testExistsOnlyForJunit() {
     }
 
-    private <T> void checkRunnerSendsSpeciciationResultsToOutput(final Class<T> contextClass) {
-        final String runnerOutput = new String(outputBuffer.toByteArray());
-        assertTrue("Expected to find context name", runnerOutput.contains(contextClass.getSimpleName()));
-        assertTrue("Expected to find the number of specs run", runnerOutput.contains("Specifications run:"));
+    private ProcessBuilder createProcessBuilder() {
+        final ProcessBuilder processBuilder = new ProcessBuilder(createCommand());
+        final File workingDirectory = new File(getSourceRoot());
+        processBuilder.directory(workingDirectory);
+        return processBuilder;
+    }
+
+    private Process runContext() throws IOException {
+        final ProcessBuilder processBuilder = createProcessBuilder();
+        return processBuilder.start();
+    }
+
+    @Fix("Fix path to boost.jar to make portable. Can we use getPackageRoot(NullMaster.class) or such?")
+    private String[] createCommand() {
+        final String classPath = getSourceRoot() + pathSeparatorChar + getTestRoot() + pathSeparatorChar + "../../lib/boost/boost-982.jar";
+        return new String[]{"java", "-cp", classPath, CommandLineRunner.class.getName(), CONTEXT_CLASS_TO_RUN.getName()};
+    }
+
+    private String getSourceRoot() {
+        return getPackageRoot(CommandLineRunner.class);
+    }
+
+    private String getTestRoot() {
+        return getPackageRoot(CONTEXT_CLASS_TO_RUN);
+    }
+
+    private void expectThatRunnerReportsNoErrors(final byte[] processError) {
+        expect.that(new String(processError).trim()).equalTo("");
+    }
+
+    private void expectThatRunnerSendsSpeciciationResultsToOutput(final byte[] processOutput) {
+        final String runnerOutput = new String(processOutput);
+        assertTrue("Expected to find context name in: '" + runnerOutput + '\'', runnerOutput.contains(CONTEXT_CLASS_TO_RUN.getSimpleName()));
+        assertTrue("Expected to find the number of specs run in: '" + runnerOutput + '\'', runnerOutput.contains("Specifications run:"));
+    }
+
+    private <T> String getPackageRoot(final Class<T> classToFindRootOf) {
+        return packageRootFinder.getPackageRoot(classToFindRootOf);
+    }
+
+    private byte[] read(final InputStream inputStream) {
+        return streamConverter.read(new DefaultEdgeInputStream(inputStream));
     }
 }

@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.integrate.idea;
 
+import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.CommandLineRunner;
-import static com.googlecode.instinct.runner.CommandLineRunner.METHOD_SEPARATOR;
 import com.intellij.execution.CantRunException;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.ConfigurationPerRunnerSettings;
@@ -50,7 +50,7 @@ public final class ContextRunCommandLineState extends JavaCommandLineState {
         if (specificationMethodName.length() == 0) {
             return contextClassName;
         } else {
-            return contextClassName + METHOD_SEPARATOR + specificationMethodName;
+            return contextClassName + RunnableItemBuilder.METHOD_SEPARATOR + specificationMethodName;
         }
     }
 

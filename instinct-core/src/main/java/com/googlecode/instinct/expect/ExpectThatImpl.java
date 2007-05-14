@@ -22,6 +22,7 @@ import java.util.Map;
 import com.googlecode.instinct.expect.behaviour.BehaviourExpectations;
 import com.googlecode.instinct.expect.behaviour.BehaviourExpectationsImpl;
 import com.googlecode.instinct.expect.state.ArrayChecker;
+import com.googlecode.instinct.expect.state.BooleanChecker;
 import com.googlecode.instinct.expect.state.ClassChecker;
 import com.googlecode.instinct.expect.state.CollectionChecker;
 import com.googlecode.instinct.expect.state.ComparableChecker;
@@ -34,10 +35,8 @@ import com.googlecode.instinct.expect.state.ObjectChecker;
 import com.googlecode.instinct.expect.state.StateExpectations;
 import com.googlecode.instinct.expect.state.StateExpectationsImpl;
 import com.googlecode.instinct.expect.state.StringChecker;
-import com.googlecode.instinct.expect.state.BooleanChecker;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 
@@ -46,74 +45,61 @@ public final class ExpectThatImpl implements ExpectThat {
     private StateExpectations stateExpectations = new StateExpectationsImpl();
     private BehaviourExpectations behaviourExpectations = new BehaviourExpectationsImpl();
 
-    @Fix("Should not use the param checker in this class for actual values. Need to return a better error message.")
     public <T> ObjectChecker<T> that(final T object) {
-        checkNotNull(object);
         return stateExpectations.that(object);
     }
 
     public StringChecker that(final String string) {
-        checkNotWhitespace(string);
         return stateExpectations.that(string);
     }
 
     public <T extends Comparable<T>> ComparableChecker<T> that(final T comparable) {
-        checkNotNull(comparable);
         return stateExpectations.that(comparable);
     }
 
     public <E, T extends Iterable<E>> IterableChecker<E, T> that(final T iterable) {
-        checkNotNull(iterable);
         return stateExpectations.that(iterable);
     }
 
     public <E, T extends Collection<E>> CollectionChecker<E, T> that(final T collection) {
-        checkNotNull(collection);
         return stateExpectations.that(collection);
     }
 
     public <T> ArrayChecker<T> that(final T[] array) {
-        checkNotNull(array);
         return stateExpectations.that(array);
     }
 
     public <K, V> MapChecker<K, V> that(final Map<K, V> map) {
-        checkNotNull(map);
         return stateExpectations.that(map);
     }
 
     public DoubleChecker that(final Double d) {
-        checkNotNull(d);
         return stateExpectations.that(d);
     }
 
     public BooleanChecker that(final Boolean b) {
-        checkNotNull(b);
         return stateExpectations.that(b);
     }
 
     public <T> ClassChecker<T> that(final Class<T> aClass) {
-        checkNotNull(aClass);
         return stateExpectations.that(aClass);
     }
 
     public <T extends EventObject> EventObjectChecker<T> that(final T eventObject) {
-        checkNotNull(eventObject);
         return stateExpectations.that(eventObject);
     }
 
     public <T extends Node> NodeChecker<T> that(final T node) {
-        checkNotNull(node);
         return stateExpectations.that(node);
     }
 
     public <T> void that(final T t, final Matcher<T> hamcrestMatcher) {
-        checkNotNull(t, hamcrestMatcher);
+        checkNotNull(hamcrestMatcher);
         stateExpectations.that(hamcrestMatcher);
     }
 
     public <T> void notThat(final T t, final Matcher<T> hamcrestMatcher) {
-        checkNotNull(t, hamcrestMatcher);
+        checkNotNull(hamcrestMatcher);
         stateExpectations.that(hamcrestMatcher);
     }
 }

@@ -16,11 +16,24 @@
 
 package com.googlecode.instinct.runner;
 
-import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.util.Collection;
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.RunnableItem;
+import com.googlecode.instinct.internal.runner.CommandLineUsage;
+import com.googlecode.instinct.internal.runner.CommandLineUsageImpl;
+import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
+import static com.googlecode.instinct.internal.runner.RunnableItemBuilder.ITEM_SEPARATOR;
+import com.googlecode.instinct.internal.runner.RunnableItemBuilderImpl;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.report.ContextResultMessageBuilder;
+import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 
 /**
  * Command line specification runner. Runs a context or specification method sending the results to standard out.
@@ -30,11 +43,40 @@ import com.googlecode.instinct.internal.util.Suggest;
  * $ java CommandLineRunner com.googlecode.instinct.example.stackAnEmptyStack#mustBeEmpty
  * $ java CommandLineRunner com.googlecode.instinct.example.stack.AnEmptyStack#mustBeEmpty com.googlecode.instinct.example.stack.AnEmptyMagazineRack
  * </pre>
+ *
+ * @see CommandLineUsage
  */
 @Fix({"Write atomic test for this."})
-public final class CommandLineRunner {
-    private void run(final Class<?> contextClass) {
-        TextContextRunner.runContexts(contextClass);
+@Suggest("Add formatting options as command line argument.")
+@SuppressWarnings({"IOResourceOpenedButNotSafelyClosed", "UseOfSystemOutOrSystemErr"})
+public final class CommandLineRunner implements ContextListener {
+    private static final CommandLineUsage USAGE = new CommandLineUsageImpl();
+    private static final RunnableItemBuilder RUNNABLE_ITEM_BUILDER = new RunnableItemBuilderImpl();
+    private static final boolean AUTO_FLUSH_OUTPUT = true;
+    private final ContextResultMessageBuilder messageBuilder = BRIEF.getMessageBuilder();
+    private final PrintWriter writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(out)), AUTO_FLUSH_OUTPUT);
+
+    public void preContextRun(final ContextClass contextClass) {
+        checkNotNull(contextClass);
+    }
+
+    @Fix("Use a specification listener to report these as they come out.")
+    public void postContextRun(final ContextClass contextClass, final ContextResult contextResult) {
+        checkNotNull(contextClass, contextResult);
+        writer.println(messageBuilder.buildMessage(contextResult));
+    }
+
+    private void run(final String itemsToRun) {
+        final Collection<RunnableItem> runnableItems = RUNNABLE_ITEM_BUILDER.build(itemsToRun);
+        for (final RunnableItem runnableItem : runnableItems) {
+            runnableItem.addContextListener(this);
+            runnableItem.run();
+        }
+    }
+
+    @SuppressWarnings({"UseOfSystemOutOrSystemErr"})
+    private void printUsage() {
+        out.println(USAGE.getUsage());
     }
 
     /**
@@ -42,41 +84,23 @@ public final class CommandLineRunner {
      *
      * @param args Command line arguments (see above).
      */
+    @SuppressWarnings({"LocalVariableOfConcreteClass"})
     public static void main(final String... args) {
         checkNotNull((Object[]) args);
+        final CommandLineRunner runner = new CommandLineRunner();
         if (args.length == 0) {
-            printUsage();
+            runner.printUsage();
         } else {
-            // SUGGEST Make this a RunnableItemBuilder?
-            final Class<?> contextClass = getContextClass(args[0]);
-            // SUGGEST Register this class as a listener for lifecycle events? How does it relate to the text runner?
-            new CommandLineRunner().run(contextClass);
+            final String itemsToRun = mergeCommandLineArguments(args);
+            runner.run(itemsToRun);
         }
     }
 
-    // SUPPRESS GenericIllegalRegexp {
-    @SuppressWarnings({"UseOfSystemOutOrSystemErr"})
-    @Suggest("Support formatting. Support more than one context.")
-    private static void printUsage() {
-        final String className = CommandLineRunner.class.getSimpleName();
-        System.out.println("Usage: " + className + /*" -format <brief|verbose>" +*/ " <context#spec>");
-    }
-    // } SUPPRESS GenericIllegalRegexp
-
-    @SuppressWarnings({"unchecked"})
-    @Suggest("Make this build a Collection<RunnableItem>. Then  run each one.")
-    private static <T> Class<T> getContextClass(final String specificationToRun) {
-        final String className = getClassName(specificationToRun);
-        return new DefaultEdgeClass().forName(className);
-    }
-
-    private static String getClassName(final String specificationToRun) {
-        final int index = specificationToRun.indexOf(RunnableItemBuilder.METHOD_SEPARATOR);
-        if (index >= 0) {
-            return specificationToRun.substring(0, index);
-//            methodName = specificationToRun.substring(index + 1);
-        } else {
-            return specificationToRun;
+    private static String mergeCommandLineArguments(final String... args) {
+        final StringBuilder items = new StringBuilder();
+        for (final String arg : args) {
+            items.append(arg).append(ITEM_SEPARATOR);
         }
+        return items.toString();
     }
 }
