@@ -66,6 +66,7 @@
 
     <patternset id="test.classpath.pattern">
         <patternset refid="main.classpath.pattern"/>
+        <include name="${lib.dir}/clover/clover-1.3.13.jar"/>
         <include name="${lib.dir}/cobertura/asm-2.2.1.jar"/>
         <include name="${lib.dir}/cobertura/cobertura-1.8.jar"/>
         <include name="${lib.dir}/cobertura/jakarta-oro-2.0.8.jar"/>

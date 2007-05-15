@@ -20,8 +20,11 @@ import java.io.File;
 import static java.io.File.pathSeparatorChar;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import au.net.netstorm.boost.edge.java.io.DefaultEdgeInputStream;
 import au.net.netstorm.boost.util.io.DefaultStreamConverter;
+import au.net.netstorm.boost.util.nullo.NullMaster;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.aggregate.PackageRootFinder;
 import com.googlecode.instinct.internal.aggregate.PackageRootFinderImpl;
@@ -29,6 +32,9 @@ import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
+import com.googlecode.instinct.test.TestingException;
+import com_cenqua_clover.Clover;
+import net.sourceforge.cobertura.coveragedata.CoverageData;
 
 @SuppressWarnings({"HardcodedFileSeparator", "IOResourceOpenedButNotSafelyClosed"})
 public final class CommandLineRunnerSlowTest extends InstinctTestCase {
@@ -37,14 +43,16 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
     private final DefaultStreamConverter streamConverter = new DefaultStreamConverter();
 
     @Suggest("Use the WM written stream convertor, not boost's.")
-    @Fix({"Make this work with clover & cobertura", "Add multiple contexts, to test command line arg merging code."})
-    public void nsoTestRunsASingleContextFromTheCommandLine() throws IOException {
+    @Fix({"Add multiple contexts, to test command line arg merging code."})
+    public void testRunsASingleContextFromTheCommandLine() throws IOException {
         final Process process = runContext();
         expectThatRunnerReportsNoErrors(read(process.getErrorStream()));
         expectThatRunnerSendsSpeciciationResultsToOutput(read(process.getInputStream()));
     }
 
-    public void testExistsOnlyForJunit() {
+    private Process runContext() throws IOException {
+        final ProcessBuilder processBuilder = createProcessBuilder();
+        return processBuilder.start();
     }
 
     private ProcessBuilder createProcessBuilder() {
@@ -54,14 +62,13 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
         return processBuilder;
     }
 
-    private Process runContext() throws IOException {
-        final ProcessBuilder processBuilder = createProcessBuilder();
-        return processBuilder.start();
-    }
-
-    @Fix("Fix path to boost.jar to make portable. Can we use getPackageRoot(NullMaster.class) or such?")
+    @Fix("Remove cobertura, after switching to clover.")
     private String[] createCommand() {
-        final String classPath = getSourceRoot() + pathSeparatorChar + getTestRoot() + pathSeparatorChar + "../../lib/boost/boost-982.jar";
+        final String boost = getJarFilePath(NullMaster.class);
+        final String clover = getJarFilePath(Clover.class);
+        final String cobertura = getJarFilePath(CoverageData.class);
+        final String classPath = getSourceRoot() + pathSeparatorChar + getTestRoot() + pathSeparatorChar + boost
+                + pathSeparatorChar + clover + pathSeparatorChar + cobertura;
         return new String[]{"java", "-cp", classPath, CommandLineRunner.class.getName(), CONTEXT_CLASS_TO_RUN.getName()};
     }
 
@@ -74,13 +81,22 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
     }
 
     private void expectThatRunnerReportsNoErrors(final byte[] processError) {
-        expect.that(new String(processError).trim()).equalTo("");
+        expect.that(new String(processError).trim()).isEmpty();
     }
 
     private void expectThatRunnerSendsSpeciciationResultsToOutput(final byte[] processOutput) {
         final String runnerOutput = new String(processOutput);
         assertTrue("Expected to find context name in: '" + runnerOutput + '\'', runnerOutput.contains(CONTEXT_CLASS_TO_RUN.getSimpleName()));
         assertTrue("Expected to find the number of specs run in: '" + runnerOutput + '\'', runnerOutput.contains("Specifications run:"));
+    }
+
+    private <T> String getJarFilePath(final Class<T> classInJarFile) {
+        try {
+            final String jarFile = new URL(getPackageRoot(classInJarFile)).getFile();
+            return jarFile.substring(0, jarFile.length() - 2);
+        } catch (MalformedURLException e) {
+            throw new TestingException(e);
+        }
     }
 
     private <T> String getPackageRoot(final Class<T> classToFindRootOf) {

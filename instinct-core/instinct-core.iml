@@ -34,6 +34,15 @@
     <orderEntry type="library" name="jmock1" level="project" />
     <orderEntry type="library" name="objenisis" level="project" />
     <orderEntry type="library" name="Clover" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/cobertura/cobertura-1.8.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntryProperties />
   </component>
   <component name="copyright">

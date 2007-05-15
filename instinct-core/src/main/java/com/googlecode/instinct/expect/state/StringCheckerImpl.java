@@ -16,51 +16,60 @@
 
 package com.googlecode.instinct.expect.state;
 
+import com.googlecode.instinct.internal.util.Suggest;
 import org.hamcrest.Matchers;
 
-// TODO Test this
+@Suggest("Test this.")
 public class StringCheckerImpl extends ComparableCheckerImpl<String> implements StringChecker {
-    public StringCheckerImpl(String subject) {
+    public StringCheckerImpl(final String subject) {
         super(subject);
     }
 
-    public final void equalsIgnoringCase(String string) {
+    public final void equalsIgnoringCase(final String string) {
         getAsserter().expectThat(subject, Matchers.equalToIgnoringCase(string));
     }
 
-    public final void equalsIgnoringWhiteSpace(String string) {
+    public final void equalsIgnoringWhiteSpace(final String string) {
         getAsserter().expectThat(subject, Matchers.equalToIgnoringWhiteSpace(string));
     }
 
-    public final void notEqualIgnoringCase(String string) {
+    public final void notEqualIgnoringCase(final String string) {
         getAsserter().expectNotThat(subject, Matchers.equalToIgnoringCase(string));
     }
 
-    public final void notEqualIgnoringWhiteSpace(String string) {
+    public final void notEqualIgnoringWhiteSpace(final String string) {
         getAsserter().expectNotThat(subject, Matchers.equalToIgnoringWhiteSpace(string));
     }
 
-    public final void containsString(String string) {
+    public final void containsString(final String string) {
         getAsserter().expectThat(subject, Matchers.containsString(string));
     }
 
-    public final void notContainString(String string) {
+    public final void notContainString(final String string) {
         getAsserter().expectNotThat(subject, Matchers.containsString(string));
     }
 
-    public final void endsWith(String string) {
+    public final void endsWith(final String string) {
         getAsserter().expectThat(subject, Matchers.endsWith(string));
     }
 
-    public final void notEndingWith(String string) {
+    public final void notEndingWith(final String string) {
         getAsserter().expectNotThat(subject, Matchers.endsWith(string));
     }
 
-    public final void startsWith(String string) {
+    public final void startsWith(final String string) {
         getAsserter().expectThat(subject, Matchers.startsWith(string));
     }
 
-    public final void notStartingWith(String string) {
+    public final void notStartingWith(final String string) {
         getAsserter().expectNotThat(subject, Matchers.startsWith(string));
+    }
+
+    public final void isEmpty() {
+        getAsserter().expectThat(subject, StringLengthMatcher.hasLength(0));
+    }
+
+    public final void hasLength(final int length) {
+        getAsserter().expectThat(subject, StringLengthMatcher.hasLength(length));
     }
 }

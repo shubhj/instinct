@@ -20,4 +20,8 @@ public interface StringChecker extends ComparableChecker<String> {
     void startsWith(String string);
 
     void notStartingWith(String string);
+
+    void isEmpty();
+
+    void hasLength(int length);
 }
