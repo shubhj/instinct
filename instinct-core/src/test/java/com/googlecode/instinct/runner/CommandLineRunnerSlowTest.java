@@ -64,12 +64,18 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
 
     @Fix("Remove cobertura, after switching to clover.")
     private String[] createCommand() {
+        final String classPath = buildClassPath();
+        final String classToRun = CommandLineRunner.class.getName();
+        final String contextToRun = CONTEXT_CLASS_TO_RUN.getName();
+        return new String[]{"java", "-cp", classPath, classToRun, contextToRun};
+    }
+
+    private String buildClassPath() {
         final String boost = getJarFilePath(NullMaster.class);
         final String clover = getJarFilePath(Clover.class);
         final String cobertura = getJarFilePath(CoverageData.class);
-        final String classPath = getSourceRoot() + pathSeparatorChar + getTestRoot() + pathSeparatorChar + boost
-                + pathSeparatorChar + clover + pathSeparatorChar + cobertura;
-        return new String[]{"java", "-cp", classPath, CommandLineRunner.class.getName(), CONTEXT_CLASS_TO_RUN.getName()};
+        return getSourceRoot() + pathSeparatorChar + getTestRoot() + pathSeparatorChar + boost + pathSeparatorChar
+                + clover + pathSeparatorChar + cobertura;
     }
 
     private String getSourceRoot() {

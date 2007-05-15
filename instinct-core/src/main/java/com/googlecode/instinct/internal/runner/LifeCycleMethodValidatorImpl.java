@@ -18,15 +18,15 @@ package com.googlecode.instinct.internal.runner;
 
 import java.lang.reflect.Method;
 import au.net.netstorm.boost.edge.EdgeException;
-import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
-import au.net.netstorm.boost.edge.java.lang.EdgeClass;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.BehaviourContextConfigurationException;
 import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
 
 final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
-    private final EdgeClass edgeClass = new DefaultEdgeClass();
+    private final ClassEdge edgeClass = new ClassEdgeImpl();
 
     @Suggest("Consider adding parameter types to message for overloaded methods")
     public void checkMethodHasNoParameters(final Method method) {
@@ -54,7 +54,7 @@ final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
 
     private <T> void checkForPublicNullaryConstructor(final Class<T> cls) {
         try {
-            edgeClass.getConstructor(cls, new Class<?>[]{});
+            edgeClass.getConstructor(cls);
         } catch (EdgeException e) {
             final String message = "Unable to run context. Context '" + cls.getSimpleName() + "' must have a public no-argument constructor";
             throw new BehaviourContextConfigurationException(message, e);

@@ -29,12 +29,12 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.intellij.execution.junit.SourceScope;
 import com.intellij.execution.junit2.configuration.ClassBrowser;
 import com.intellij.ide.util.TreeClassChooser;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
@@ -42,27 +42,28 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.search.GlobalSearchScope;
 import org.jetbrains.annotations.NotNull;
 
-public final class InstinctRunSettingsEditor extends SettingsEditor<InstinctRunConfiguration> {
+@SuppressWarnings({"MethodParameterOfConcreteClass", "LocalVariableOfConcreteClass"})
+public final class InstinctRunConfigurationSettingsEditor extends SettingsEditor<InstinctRunConfiguration> {
     private Project project;
     private TextFieldWithBrowseButton contextClassInput;
     private JComboBox moduleComponent;
     private JComponent editorUi;
 
-    public InstinctRunSettingsEditor(final Project project) {
+    public InstinctRunConfigurationSettingsEditor(final Project project) {
         this.project = project;
         initComponents();
     }
 
     @Override
-    public void resetEditorFrom(final InstinctRunConfiguration configuration) {
-        contextClassInput.setText(configuration.getContextClassName());
-        moduleComponent.setSelectedItem(configuration.getModule());
+    public void resetEditorFrom(final InstinctRunConfiguration s) {
+        contextClassInput.setText(s.getContextClassName());
+        moduleComponent.setSelectedItem(s.getModule());
     }
 
     @Override
-    public void applyEditorTo(final InstinctRunConfiguration configuration) throws ConfigurationException {
-        configuration.setContextClassName(contextClassInput.getText());
-        configuration.setModule((Module) moduleComponent.getSelectedItem());
+    public void applyEditorTo(final InstinctRunConfiguration s) {
+        s.setContextClassName(contextClassInput.getText());
+        s.setModule((Module) moduleComponent.getSelectedItem());
     }
 
     @NotNull
@@ -144,6 +145,7 @@ public final class InstinctRunSettingsEditor extends SettingsEditor<InstinctRunC
                     return SourceScope.wholeProject(getProject()).getGlobalSearchScope();
                 }
 
+                @Suggest("Check for the existence of spec methods in the class?")
                 public boolean isAccepted(final PsiClass aClass) {
                     return true;
                 }

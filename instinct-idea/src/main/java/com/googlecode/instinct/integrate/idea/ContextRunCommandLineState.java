@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.integrate.idea;
 
-import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
+import static com.googlecode.instinct.internal.runner.RunnableItemBuilder.METHOD_SEPARATOR;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.CommandLineRunner;
 import com.intellij.execution.CantRunException;
@@ -31,6 +31,7 @@ public final class ContextRunCommandLineState extends JavaCommandLineState {
     private InstinctRunConfiguration runConfiguration;
 
     @SuppressWarnings({"RawUseOfParameterizedType"})
+    @Suggest("Consider only pasing the fields we need, rather than runConfiguration.")
     public ContextRunCommandLineState(final InstinctRunConfiguration runConfiguration, final RunnerSettings runner,
             final ConfigurationPerRunnerSettings configuration) {
         super(runner, configuration);
@@ -45,15 +46,6 @@ public final class ContextRunCommandLineState extends JavaCommandLineState {
         return createParameters(specificationToRun);
     }
 
-    @Suggest("Move this into a shared class, parsing & creating belong in the same class.")
-    private String createSpecificationsToRunArgument(final String contextClassName, final String specificationMethodName) {
-        if (specificationMethodName.length() == 0) {
-            return contextClassName;
-        } else {
-            return contextClassName + RunnableItemBuilder.METHOD_SEPARATOR + specificationMethodName;
-        }
-    }
-
     private JavaParameters createParameters(final String specificationsToRun) throws CantRunException {
         final JavaParameters parameters = new JavaParameters();
         parameters.setMainClass(COMMAND_LINE_RUNNER_CLASS_NAME);
@@ -61,5 +53,10 @@ public final class ContextRunCommandLineState extends JavaCommandLineState {
         parameters.configureByModule(runConfiguration.getModule(), JavaParameters.JDK_AND_CLASSES_AND_TESTS);
         parameters.setWorkingDirectory(runConfiguration.getWorkingDirectoryPath());
         return parameters;
+    }
+
+    @Suggest("Move this into a shared class, parsing & creating belong in the same class.")
+    private String createSpecificationsToRunArgument(final String contextClassName, final String specificationMethodName) {
+        return specificationMethodName.length() == 0 ? contextClassName : contextClassName + METHOD_SEPARATOR + specificationMethodName;
     }
 }

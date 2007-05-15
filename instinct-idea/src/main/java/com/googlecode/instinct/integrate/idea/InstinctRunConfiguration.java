@@ -19,6 +19,7 @@ package com.googlecode.instinct.integrate.idea;
 import static java.util.Arrays.asList;
 import java.util.Collection;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.intellij.execution.configurations.CommandLineState;
 import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationPerRunnerSettings;
 import com.intellij.execution.configurations.RunProfileState;
@@ -38,10 +39,11 @@ import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.util.PathUtil;
 import org.jdom.Element;
 
+@SuppressWarnings({"RawUseOfParameterizedType"})
 public final class InstinctRunConfiguration extends RuntimeConfiguration {
-    public String contextClassName;
-    public String specificationMethodName;
-    public String moduleName;
+    private String contextClassName;
+    private String specificationMethodName;
+    private String moduleName;
 
     public InstinctRunConfiguration(final Project project, final ConfigurationFactory factory, final String name) {
         super(name, project, factory);
@@ -53,7 +55,7 @@ public final class InstinctRunConfiguration extends RuntimeConfiguration {
     }
 
     public SettingsEditor<InstinctRunConfiguration> getConfigurationEditor() {
-        return new InstinctRunSettingsEditor(getProject());
+        return new InstinctRunConfigurationSettingsEditor(getProject());
     }
 
 //    @Override
@@ -73,12 +75,10 @@ public final class InstinctRunConfiguration extends RuntimeConfiguration {
         DefaultJDOMExternalizer.writeExternal(this, element);
     }
 
-    public RunProfileState getState(final DataContext context, final RunnerInfo runnerInfo, final RunnerSettings runner,
-            final ConfigurationPerRunnerSettings configuration) {
-        final ContextRunCommandLineState commandLineState = new ContextRunCommandLineState(this, runner, configuration);
-        commandLineState.setConsoleBuilder(TextConsoleBuilderFactory.getInstance().createBuilder(getProject()));
-        commandLineState.setModulesToCompile(getModules());
-        return commandLineState;
+    @SuppressWarnings({"RawUseOfParameterizedType"})
+    public RunProfileState getState(final DataContext context, final RunnerInfo runnerInfo, final RunnerSettings runnerSettings,
+            final ConfigurationPerRunnerSettings configurationSettings) {
+        return createComandLineState(runnerSettings, configurationSettings);
     }
 
     @Override
@@ -124,6 +124,13 @@ public final class InstinctRunConfiguration extends RuntimeConfiguration {
     @Suggest("Can we remove this setter?")
     public void setSpecificationMethodName(final String specificationMethodName) {
         this.specificationMethodName = specificationMethodName;
+    }
+
+    private RunProfileState createComandLineState(final RunnerSettings runner, final ConfigurationPerRunnerSettings configuration) {
+        final CommandLineState commandLineState = new ContextRunCommandLineState(this, runner, configuration);
+        commandLineState.setConsoleBuilder(TextConsoleBuilderFactory.getInstance().createBuilder(getProject()));
+        commandLineState.setModulesToCompile(getModules());
+        return commandLineState;
     }
 
     private Module lookUp(final Module[] modules, final String moduleName) {

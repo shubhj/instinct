@@ -16,7 +16,13 @@
 
 package com.googlecode.instinct.integrate.idea;
 
-import com.intellij.execution.ExecutionUtil;
+import static com.googlecode.instinct.integrate.idea.ClassUtil.fullName;
+import static com.googlecode.instinct.integrate.idea.ClassUtil.getSpecificationMethod;
+import static com.googlecode.instinct.integrate.idea.ClassUtil.shortName;
+import static com.googlecode.instinct.integrate.idea.InstinctConfigurationType.LOCATION_IS_NOT_IN_A_CONTEXT_CLASS;
+import com.googlecode.instinct.internal.util.Suggest;
+import static com.intellij.execution.ExecutionUtil.findModule;
+import static com.intellij.execution.ExecutionUtil.stepIntoSingleClass;
 import com.intellij.execution.Location;
 import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.impl.RunnerAndConfigurationSettingsImpl;
@@ -25,6 +31,8 @@ import com.intellij.psi.PsiClass;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 
+@SuppressWarnings(
+        {"InstanceVariableOfConcreteClass", "MethodParameterOfConcreteClass", "LocalVariableOfConcreteClass", "CastToConcreteClass", "RawUseOfParameterizedType"})
 public final class InstinctConfigurationProducer extends RuntimeConfigurationProducer implements Cloneable {
     private PsiClass contextClass;
     private InstinctConfigurationType configurationType;
@@ -35,20 +43,18 @@ public final class InstinctConfigurationProducer extends RuntimeConfigurationPro
         this.configurationType = configurationType;
     }
 
-    protected RunnerAndConfigurationSettingsImpl createConfigurationByElement(Location location, final ConfigurationContext configurationContext) {
-        location = ExecutionUtil.stepIntoSingleClass(location);
-        final PsiClass aClass = configurationType.getContextClass(location.getPsiElement());
-        if (aClass == null) return null;
-        final PsiMethod currentMethod = configurationType.getBehaviourMethodElement(location.getPsiElement());
-        final RunnerAndConfigurationSettingsImpl settings = cloneTemplateConfiguration(location.getProject(), configurationContext);
-        final InstinctRunConfiguration configuration = (InstinctRunConfiguration) settings.getConfiguration();
-        configuration.setContextClassName(ClassUtil.fullName(aClass));
-        if (currentMethod != null) {
-            configuration.setSpecificationMethodName(currentMethod.getName());
+    @Override
+    @SuppressWarnings({"RawUseOfParameterizedType"})
+    @Suggest("Dupe with InstinctConfigurationType.createConfigurationByLocation().")
+    protected RunnerAndConfigurationSettingsImpl createConfigurationByElement(final Location location,
+            final ConfigurationContext configurationContext) {
+        final Location newlocation = stepIntoSingleClass(location);
+        final PsiClass contextClass = ClassUtil.getContextClass(newlocation.getPsiElement());
+        if (contextClass == null) {
+            return LOCATION_IS_NOT_IN_A_CONTEXT_CLASS;
+        } else {
+            return createConfigurationByElement(newlocation, configurationContext, contextClass);
         }
-        configuration.setModule(ExecutionUtil.findModule(aClass));
-        configuration.setName(createName(aClass, currentMethod));
-        return settings;
     }
 
     @Override
@@ -60,7 +66,21 @@ public final class InstinctConfigurationProducer extends RuntimeConfigurationPro
         return -1;
     }
 
-    private String createName(final PsiClass aClass, final PsiMethod currentMethod) {
-        return currentMethod == null ? ClassUtil.shortName(aClass) : currentMethod.getName();
+    private RunnerAndConfigurationSettingsImpl createConfigurationByElement(final Location location, final ConfigurationContext configurationContext,
+            final PsiClass contextClass) {
+        final RunnerAndConfigurationSettingsImpl settings = cloneTemplateConfiguration(location.getProject(), configurationContext);
+        final InstinctRunConfiguration configuration = (InstinctRunConfiguration) settings.getConfiguration();
+        configuration.setContextClassName(fullName(contextClass));
+        final PsiMethod currentMethod = getSpecificationMethod(location.getPsiElement());
+        if (currentMethod != null) {
+            configuration.setSpecificationMethodName(currentMethod.getName());
+        }
+        configuration.setModule(findModule(contextClass));
+        configuration.setName(createName(contextClass, currentMethod));
+        return settings;
+    }
+
+    private String createName(final PsiClass currentClass, final PsiMethod currentMethod) {
+        return currentMethod == null ? shortName(currentClass) : currentMethod.getName();
     }
 }
