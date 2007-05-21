@@ -26,16 +26,16 @@ import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.report.ContextResultMessageBuilder;
 import com.googlecode.instinct.report.ResultFormat;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
+import com.googlecode.instinct.report.ResultMessageBuilder;
 
 @Fix({"Write atomic test for this.",
         "Don't make this implement ContextRunner, but create ContextClasses internally.?"})
 public final class TextContextRunner implements ContextRunner, ContextListener {
     private static final boolean AUTO_FLUSH_OUTPUT = true;
     private final PrintWriter writer;
-    private final ContextResultMessageBuilder messageBuilder;
+    private final ResultMessageBuilder messageBuilder;
 
     /**
      * Create a new context runner that sends output to standard out using brief formatting.

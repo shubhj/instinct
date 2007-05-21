@@ -36,7 +36,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiMethod;
 import org.jetbrains.annotations.NotNull;
 
+@Suggest("Add a check to make sure that Instinct is on the module's classpath, and that it's a version we can use.")
 public final class InstinctConfigurationType implements LocatableConfigurationType {
+    public static final String PLUGIN_ID = '#' + InstinctConfigurationType.class.getName();
     public static final RunnerAndConfigurationSettingsImpl LOCATION_IS_NOT_IN_A_CONTEXT_CLASS = null;
 
     public String getDisplayName() {
@@ -58,7 +60,7 @@ public final class InstinctConfigurationType implements LocatableConfigurationTy
 
     @NotNull
     public String getComponentName() {
-        return '#' + getClass().getName();
+        return PLUGIN_ID;
     }
 
     public void initComponent() {

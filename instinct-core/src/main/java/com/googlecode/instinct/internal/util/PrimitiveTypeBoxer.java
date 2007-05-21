@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.runner;
+package com.googlecode.instinct.internal.util;
 
-public interface ItemResult {
-    boolean completedSuccessfully();
-
-    long getExecutionTime();
+public interface PrimitiveTypeBoxer {
+    <T> Class<T> boxPrimitiveType(Class<T> type);
 }

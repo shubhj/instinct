@@ -23,13 +23,11 @@ public interface ContextResult extends ItemResult {
 
     List<SpecificationResult> getSpecificationResults();
 
-    String getBehaviourContextName();
+    String getContextName();
 
     int getNumberOfSpecificationsRun();
 
     int getNumberOfSuccesses();
 
     int getNumberOfFailures();
-
-    long getExecutionTime();
 }

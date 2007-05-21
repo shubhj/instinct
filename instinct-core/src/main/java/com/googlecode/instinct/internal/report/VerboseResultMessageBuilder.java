@@ -16,74 +16,71 @@
 
 package com.googlecode.instinct.internal.report;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintWriter;
 import static java.lang.System.getProperty;
 import com.googlecode.instinct.internal.runner.ContextResult;
+import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilder;
+import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilderImpl;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
-import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
-import com.googlecode.instinct.internal.util.ExceptionFinder;
-import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.report.ContextResultMessageBuilder;
+import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.report.ResultMessageBuilder;
 
-public final class VerboseContextResultMessageBuilder implements ContextResultMessageBuilder {
+public final class VerboseResultMessageBuilder implements ResultMessageBuilder {
     private static final double MILLISECONDS_IN_SECONDS = 1000.0;
     private static final String TAB = "\t";
     private static final String SPACER = ", ";
     private static final String NEW_LINE = getProperty("line.separator");
-    private final ExceptionFinder exceptionFinder = new ExceptionFinderImpl();
+    private final SpecificationFailureMessageBuilder failureMessageBuilder = new SpecificationFailureMessageBuilderImpl();
 
     public String buildMessage(final ContextResult contextResult) {
         checkNotNull(contextResult);
+        return buildContextResultMessage(contextResult);
+    }
+
+    public String buildMessage(final SpecificationResult specificationResult) {
+        checkNotNull(specificationResult);
+        return buildSpecificationResultMessage(specificationResult);
+    }
+
+    private String buildContextResultMessage(final ContextResult contextResult) {
         final StringBuilder builder = new StringBuilder();
-        appendSummary(builder, contextResult);
-        appendSpecifications(builder, contextResult);
+        builder.append(getContextSummary(contextResult));
+        builder.append(getSpecificationResults(contextResult));
         builder.append(NEW_LINE);
         return builder.toString();
     }
 
-    private void appendSpecifications(final StringBuilder builder, final ContextResult contextResult) {
+    private String getSpecificationResults(final ContextResult contextResult) {
+        final StringBuilder builder = new StringBuilder();
         for (final SpecificationResult specificationResult : contextResult.getSpecificationResults()) {
-            appendSpecification(builder, specificationResult);
+            builder.append(TAB).append(buildSpecificationResultMessage(specificationResult));
         }
+        return builder.toString();
     }
 
-    private void appendSummary(final StringBuilder builder, final ContextResult contextResult) {
-        builder.append(contextResult.getBehaviourContextName()).append(SPACER);
+    private String getContextSummary(final ContextResult contextResult) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(contextResult.getContextName()).append(SPACER);
         builder.append("Specifications run: ").append(getNumberOfSpecsRun(contextResult)).append(SPACER);
         builder.append("Successes: ").append(contextResult.getNumberOfSuccesses()).append(SPACER);
         builder.append("Failures: ").append(contextResult.getNumberOfFailures()).append(SPACER);
         builder.append("Total time elapsed: ").append(getExecutionTime(contextResult)).append(" seconds");
         builder.append(NEW_LINE);
+        return builder.toString();
     }
 
-    private void appendSpecification(final StringBuilder builder, final SpecificationResult specificationResult) {
-        builder.append(TAB).append(specificationResult.getSpecificationName()).append(SPACER);
+    private String buildSpecificationResultMessage(final SpecificationResult specificationResult) {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(specificationResult.getSpecificationName()).append(SPACER);
         builder.append("Time elapsed: ").append(millisToSeconds(specificationResult.getExecutionTime())).append(" seconds").append(SPACER);
         builder.append("Status: ").append(specificationResult.completedSuccessfully() ? "succeeded" : "FAILED");
         if (!specificationResult.completedSuccessfully()) {
             builder.append(NEW_LINE).append(TAB).append("Cause: ");
-            appendFailureCause(specificationResult.getStatus(), builder);
+            builder.append(failureMessageBuilder.buildMessage(specificationResult.getStatus()));
         }
         builder.append(NEW_LINE);
+        return builder.toString();
     }
-
-    private void appendFailureCause(final SpecificationRunStatus status, final StringBuilder builder) {
-        final Throwable rootCause = exceptionFinder.getRootCause((Throwable) status.getDetailedStatus());
-        final String stackTrace = getFailureStackTrace(rootCause);
-        final String s = stackTrace.replace(TAB, TAB + TAB);
-        builder.append(s);
-    }
-
-    // SUPPRESS GenericIllegalRegexp {
-    @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
-    private String getFailureStackTrace(final Throwable failureCause) {
-        final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        failureCause.printStackTrace(new PrintWriter(out, true));
-        return out.toString();
-    }
-    // } SUPPRESS GenericIllegalRegexp
 
     private int getNumberOfSpecsRun(final ContextResult contextResult) {
         return contextResult.getSpecificationResults().size();
@@ -93,6 +90,7 @@ public final class VerboseContextResultMessageBuilder implements ContextResultMe
         return millisToSeconds(contextResult.getExecutionTime());
     }
 
+    @Suggest("Utility.")
     private double millisToSeconds(final long millis) {
         return (double) millis / MILLISECONDS_IN_SECONDS;
     }

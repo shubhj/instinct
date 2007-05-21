@@ -75,6 +75,6 @@ public final class ContextResultImplAtomicTest extends InstinctTestCase {
 
     private void checkGetBahaviourContextName(final String behaviourContextName) {
         final ContextResult result = new ContextResultImpl(behaviourContextName);
-        assertEquals(behaviourContextName, result.getBehaviourContextName());
+        assertEquals(behaviourContextName, result.getContextName());
     }
 }

@@ -17,7 +17,6 @@
 package com.googlecode.instinct.internal.mock;
 
 import com.googlecode.instinct.internal.mock.constraint.ArrayElementsSame;
-import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.Suggest;
 import org.jmock.builder.NameMatchBuilder;
 import org.jmock.core.Constraint;
@@ -89,9 +88,8 @@ public final class MockeryImpl implements Mockery {
         return new InvokeAnyTimesMatcher();
     }
 
-    @Fix("Don't allow objects passed by value to use same - primitives & Class - see EasyDoc PrimordialMockingTestCase.")
     public Constraint same(final Object argument) {
-        if (cannotConstrainWithSame(argument)) {
+        if (!canConstrainWithSame(argument)) {
             throw new IllegalArgumentException("Cannot constrain argument of type " + argument.getClass().getSimpleName()
                     + " with same(), use eq() instead");
         }
@@ -126,8 +124,12 @@ public final class MockeryImpl implements Mockery {
         resetter.reset();
     }
 
-    private boolean cannotConstrainWithSame(final Object argument) {
-        return argument != null && (argument.getClass().equals(String.class) || argument.getClass().isPrimitive());
+    private boolean canConstrainWithSame(final Object argument) {
+        return argument != null && nullSafeCanConstrainWithSame(argument);
+    }
+
+    private boolean nullSafeCanConstrainWithSame(final Object argument) {
+        return !argument.getClass().equals(String.class) && !argument.getClass().isPrimitive() && !argument.getClass().isArray();
     }
 
     @SuppressWarnings({"unchecked"})

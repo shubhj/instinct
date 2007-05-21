@@ -21,7 +21,7 @@ import com.googlecode.instinct.marker.annotate.Specification;
 
 @SuppressWarnings({"ProtectedMemberInFinalClass", "UnusedDeclaration"})
 @BehaviourContext
-public final class TestContext1 {
+public final class ContextWithSpecsWithDifferentAccessModifiers {
     @Specification
     protected void notMe() {
     }
@@ -35,6 +35,11 @@ public final class TestContext1 {
     }
 
     @Specification
-    private void norMe() {
+    int norMe() {
+        return 1;
+    }
+
+    @Specification
+    private void orMe() {
     }
 }

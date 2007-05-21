@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.report;
+package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.internal.runner.ContextResult;
-
-public interface ContextResultMessageBuilder {
-    String buildMessage(ContextResult contextResult);
+public interface SpecificationFailureMessageBuilder {
+    String buildMessage(SpecificationRunStatus status);
 }

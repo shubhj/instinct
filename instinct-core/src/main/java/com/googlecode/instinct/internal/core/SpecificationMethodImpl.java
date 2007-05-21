@@ -40,7 +40,6 @@ public final class SpecificationMethodImpl implements SpecificationMethod {
 
     public void addContextListener(final ContextListener contextListener) {
         checkNotNull(contextListener);
-        throw new UnsupportedOperationException();
     }
 
     public void addSpecificationListener(final SpecificationListener specificationListener) {

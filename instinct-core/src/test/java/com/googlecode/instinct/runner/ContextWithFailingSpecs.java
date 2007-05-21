@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.runner;
+package com.googlecode.instinct.runner;
 
-public interface ItemResult {
-    boolean completedSuccessfully();
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.marker.annotate.Specification;
 
-    long getExecutionTime();
+public final class ContextWithFailingSpecs {
+    @Specification
+    void thisWillFail() {
+        expect.that("foo").containsString("bar");
+    }
 }

@@ -12,7 +12,7 @@ import com.googlecode.instinct.runner.TextContextRunner;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 @Suggest("Does this test belong in runner?")
-public final class VerboseContextResultMessageBuilderSlowTest extends InstinctTestCase {
+public final class VerboseResultMessageBuilderSlowTest extends InstinctTestCase {
     private static final ContextClass CONTEXT_CLASS_WITH_INVALID_SPEC =
             new ContextClassImpl(ContextWithSpecificationMethodContainingParameter.class);
     private ContextRunner contextRunner;

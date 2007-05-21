@@ -31,6 +31,7 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 public final class ObjectFactoryImpl implements ObjectFactory {
     private final EdgeClass edgeClass = new DefaultEdgeClass();
     private final EdgeConstructor edgeConstructor = new DefaultEdgeConstructor();
+    private final PrimitiveTypeBoxer primitiveTypeBoxer = new PrimitiveTypeBoxerImpl();
 
     public <T> T create(final Class<T> concreteClass, final Object... constructorArgumentValues) {
         checkNotNull(concreteClass, constructorArgumentValues);
@@ -65,13 +66,18 @@ public final class ObjectFactoryImpl implements ObjectFactory {
         }
     }
 
-    private boolean typesMatch(final Class<?>[] types, final Object... values) {
-        for (int i = 0; i < values.length; i++) {
-            if (!types[i].isAssignableFrom(values[i].getClass())) {
+    private boolean typesMatch(final Class<?>[] constructorTypes, final Object... argumentValues) {
+        for (int i = 0; i < constructorTypes.length; i++) {
+            final Class<?> contructorType = boxPrimitive(constructorTypes[i]);
+            if (!contructorType.isAssignableFrom(argumentValues[i].getClass())) {
                 return false;
             }
         }
         return true;
+    }
+
+    private <T> Class<?> boxPrimitive(final Class<T> argumentType) {
+        return argumentType.isPrimitive() ? primitiveTypeBoxer.boxPrimitiveType(argumentType) : argumentType;
     }
 
     private <T> String createFailureMessage(final Class<T> cls, final Object... argumentValues) {
@@ -86,7 +92,7 @@ public final class ObjectFactoryImpl implements ObjectFactory {
         return cls.getSimpleName() + " does not contain a constructor with types: [" + builder + ']';
     }
 
-    @Suggest("Make this proxy code less dependent on jMock, what about java.lang.reflect.proxy? What about multiple interfaces.")
+    @Suggest("Make this proxy code less dependent on jMock proxies, what about java.lang.reflect.proxy? What about multiple interfaces.")
     private String getClassName(final Object object) {
         final Class<?> cls = object.getClass();
         final String simpleName = cls.getSimpleName();

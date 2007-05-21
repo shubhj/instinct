@@ -18,11 +18,11 @@ package com.googlecode.instinct.integrate.ant;
 
 import static java.util.Arrays.asList;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
-import com.googlecode.instinct.report.ContextResultMessageBuilder;
 import com.googlecode.instinct.report.ResultFormat;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import static com.googlecode.instinct.report.ResultFormat.VERBOSE;
 import static com.googlecode.instinct.report.ResultFormat.valueOf;
+import com.googlecode.instinct.report.ResultMessageBuilder;
 
 public final class Formatter {
     private ResultFormat type;
@@ -36,7 +36,7 @@ public final class Formatter {
         this.type = valueOf(type.toUpperCase());
     }
 
-    public ContextResultMessageBuilder createMessageBuilder() {
+    public ResultMessageBuilder createMessageBuilder() {
         return type.getMessageBuilder();
     }
 }

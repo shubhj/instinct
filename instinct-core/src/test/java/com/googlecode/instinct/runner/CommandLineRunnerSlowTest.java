@@ -22,59 +22,127 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import au.net.netstorm.boost.edge.java.io.DefaultEdgeInputStream;
 import au.net.netstorm.boost.util.io.DefaultStreamConverter;
 import au.net.netstorm.boost.util.nullo.NullMaster;
 import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.internal.aggregate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.internal.aggregate.PackageRootFinder;
 import com.googlecode.instinct.internal.aggregate.PackageRootFinderImpl;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
+import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.Suggest;
+import static com.googlecode.instinct.test.AssertTestChecker.assertThrows;
 import com.googlecode.instinct.test.InstinctTestCase;
 import com.googlecode.instinct.test.TestingException;
 import com_cenqua_clover.Clover;
 import net.sourceforge.cobertura.coveragedata.CoverageData;
+import org.hamcrest.Matchers;
 
 @SuppressWarnings({"HardcodedFileSeparator", "IOResourceOpenedButNotSafelyClosed"})
 public final class CommandLineRunnerSlowTest extends InstinctTestCase {
-    private static final Class<ASimpleContext> CONTEXT_CLASS_TO_RUN = ASimpleContext.class;
+    private static final Class<?> CONTEXT_CLASS_1 = ASimpleContext.class;
+    private static final Class<?> CONTEXT_CLASS_2 = ContextWithSpecsWithDifferentAccessModifiers.class;
     private final PackageRootFinder packageRootFinder = new PackageRootFinderImpl();
     private final DefaultStreamConverter streamConverter = new DefaultStreamConverter();
 
     @Suggest("Use the WM written stream convertor, not boost's.")
-    @Fix({"Add multiple contexts, to test command line arg merging code."})
-    public void testRunsASingleContextFromTheCommandLine() throws IOException {
-        final Process process = runContext();
+    public void testRunsContextsFromTheCommandLine() {
+        checkRunContexts(CONTEXT_CLASS_1);
+        checkRunContexts(CONTEXT_CLASS_2);
+        checkRunContexts(CONTEXT_CLASS_1, CONTEXT_CLASS_2);
+    }
+
+    public void testRunsASingleSpecificationFromTheCommandLine() {
+        checkRunSpecification(CONTEXT_CLASS_1, "toCheckVerification");
+        checkRunSpecification(CONTEXT_CLASS_2, "notMe");
+    }
+
+    @Suggest("Re-enable")
+    public void nsotestRunsContextAndReportsErrors() {
+        assertThrows(AssertionError.class, new Runnable() {
+            public void run() {
+                final Process process = runContexts(ContextWithFailingSpecs.class);
+                expectThatRunnerReportsNoErrors(read(process.getErrorStream()));
+                final String runnerOutput = new String(read(process.getInputStream()));
+                expect.that(runnerOutput).containsString("");
+            }
+        });
+    }
+
+    private void checkRunContexts(final Class<?>... contextClasses) {
+        final Process process = runContexts(contextClasses);
         expectThatRunnerReportsNoErrors(read(process.getErrorStream()));
-        expectThatRunnerSendsSpeciciationResultsToOutput(read(process.getInputStream()));
+        expectThatRunnerSendsSpeciciationResultsToOutput(read(process.getInputStream()), "", contextClasses);
     }
 
-    private Process runContext() throws IOException {
-        final ProcessBuilder processBuilder = createProcessBuilder();
-        return processBuilder.start();
+    private void checkRunSpecification(final Class<?> contextClass, final String specificationMethod) {
+        final Process process = runSpecification(contextClass, specificationMethod);
+        expectThatRunnerReportsNoErrors(read(process.getErrorStream()));
+        expectThatRunnerSendsSpeciciationResultsToOutput(read(process.getInputStream()), specificationMethod);
     }
 
-    private ProcessBuilder createProcessBuilder() {
-        final ProcessBuilder processBuilder = new ProcessBuilder(createCommand());
+    private Process runContexts(final Class<?>... contextClass) {
+        final ProcessBuilder processBuilder = createProcessBuilder(contextClass);
+        return startProcess(processBuilder);
+    }
+
+    private <T> Process runSpecification(final Class<T> contextClass, final String specificationMethod) {
+        final ProcessBuilder processBuilder = createProcessBuilder(contextClass, specificationMethod);
+        return startProcess(processBuilder);
+    }
+
+    private Process startProcess(final ProcessBuilder processBuilder) {
+        try {
+            return processBuilder.start();
+        } catch (IOException e) {
+            throw new TestingException(e);
+        }
+    }
+
+    private ProcessBuilder createProcessBuilder(final Class<?>... classesToRun) {
+        return createProcessBuilder(createCommand(classesToRun));
+    }
+
+    private <T> ProcessBuilder createProcessBuilder(final Class<T> contextClassToRun, final String specificationMethod) {
+        return createProcessBuilder(createCommand(contextClassToRun, specificationMethod));
+    }
+
+    private ProcessBuilder createProcessBuilder(final String[] commandLine) {
+        final ProcessBuilder processBuilder = new ProcessBuilder(commandLine);
         final File workingDirectory = new File(getSourceRoot());
         processBuilder.directory(workingDirectory);
         return processBuilder;
     }
 
+    private <T> String[] createCommand(final Class<T> contextClassToRun, final String specificationMethod) {
+        final String[] baseCommand = createCommand(contextClassToRun);
+        baseCommand[baseCommand.length - 1] += RunnableItemBuilder.METHOD_SEPARATOR + specificationMethod;
+        return baseCommand;
+    }
+
     @Fix("Remove cobertura, after switching to clover.")
-    private String[] createCommand() {
-        final String classPath = buildClassPath();
-        final String classToRun = CommandLineRunner.class.getName();
-        final String contextToRun = CONTEXT_CLASS_TO_RUN.getName();
-        return new String[]{"java", "-cp", classPath, classToRun, contextToRun};
+    private String[] createCommand(final Class<?>... classesToRun) {
+        final List<String> command = new ArrayList<String>();
+        command.add("java");
+        command.add("-cp");
+        command.add(buildClassPath());
+        command.add(CommandLineRunner.class.getName());
+        for (final Class<?> cls : classesToRun) {
+            command.add(cls.getName());
+        }
+        return command.toArray(new String[command.size()]);
     }
 
     private String buildClassPath() {
         final String boost = getJarFilePath(NullMaster.class);
+        final String hamcrest = getJarFilePath(Matchers.class);
         final String clover = getJarFilePath(Clover.class);
         final String cobertura = getJarFilePath(CoverageData.class);
-        return getSourceRoot() + pathSeparatorChar + getTestRoot() + pathSeparatorChar + boost + pathSeparatorChar
+        return getSourceRoot() + pathSeparatorChar + getTestRoot() + pathSeparatorChar + hamcrest + pathSeparatorChar + boost + pathSeparatorChar
                 + clover + pathSeparatorChar + cobertura;
     }
 
@@ -83,17 +151,22 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
     }
 
     private String getTestRoot() {
-        return getPackageRoot(CONTEXT_CLASS_TO_RUN);
+        return getPackageRoot(CONTEXT_CLASS_1);
     }
 
     private void expectThatRunnerReportsNoErrors(final byte[] processError) {
+        System.out.println("processError = \n" + new String(processError));
         expect.that(new String(processError).trim()).isEmpty();
     }
 
-    private void expectThatRunnerSendsSpeciciationResultsToOutput(final byte[] processOutput) {
+    private void expectThatRunnerSendsSpeciciationResultsToOutput(final byte[] processOutput, final String specificationName,
+            final Class<?>... contextClasses) {
         final String runnerOutput = new String(processOutput);
-        assertTrue("Expected to find context name in: '" + runnerOutput + '\'', runnerOutput.contains(CONTEXT_CLASS_TO_RUN.getSimpleName()));
-        assertTrue("Expected to find the number of specs run in: '" + runnerOutput + '\'', runnerOutput.contains("Specifications run:"));
+        for (final Class<?> contextClass : contextClasses) {
+            expect.that(runnerOutput).containsString(contextClass.getSimpleName());
+        }
+        System.out.println("processOutput = \n" + new String(processOutput));
+        expect.that(runnerOutput).containsString(specificationName);
     }
 
     private <T> String getJarFilePath(final Class<T> classInJarFile) {

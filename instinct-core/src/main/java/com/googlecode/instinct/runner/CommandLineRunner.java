@@ -23,17 +23,20 @@ import static java.lang.System.out;
 import java.util.Collection;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.RunnableItem;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.runner.CommandLineUsage;
 import com.googlecode.instinct.internal.runner.CommandLineUsageImpl;
 import com.googlecode.instinct.internal.runner.ContextResult;
+import com.googlecode.instinct.internal.runner.ItemResult;
 import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
 import static com.googlecode.instinct.internal.runner.RunnableItemBuilder.ITEM_SEPARATOR;
 import com.googlecode.instinct.internal.runner.RunnableItemBuilderImpl;
+import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.report.ContextResultMessageBuilder;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
+import com.googlecode.instinct.report.ResultMessageBuilder;
 
 /**
  * Command line specification runner. Runs a context or specification method sending the results to standard out.
@@ -47,36 +50,64 @@ import static com.googlecode.instinct.report.ResultFormat.BRIEF;
  * @see CommandLineUsage
  */
 @Fix({"Write atomic test for this."})
-@Suggest("Add formatting options as command line argument.")
+@Suggest({"Add formatting options as command line argument.",
+        "Can the formatting be moved into the brief runner? Make this not implement spec listener"})
 @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed", "UseOfSystemOutOrSystemErr"})
-public final class CommandLineRunner implements ContextListener {
+public final class CommandLineRunner implements ContextListener, SpecificationListener {
     private static final CommandLineUsage USAGE = new CommandLineUsageImpl();
     private static final RunnableItemBuilder RUNNABLE_ITEM_BUILDER = new RunnableItemBuilderImpl();
+    private static final double MILLISECONDS_IN_SECONDS = 1000.0;
     private static final boolean AUTO_FLUSH_OUTPUT = true;
-    private final ContextResultMessageBuilder messageBuilder = BRIEF.getMessageBuilder();
+    private final ResultMessageBuilder messageBuilder = BRIEF.getMessageBuilder();
     private final PrintWriter writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(out)), AUTO_FLUSH_OUTPUT);
 
     public void preContextRun(final ContextClass contextClass) {
         checkNotNull(contextClass);
+        writer.println(contextClass.getName());
     }
 
-    @Fix("Use a specification listener to report these as they come out.")
     public void postContextRun(final ContextClass contextClass, final ContextResult contextResult) {
         checkNotNull(contextClass, contextResult);
-        writer.println(messageBuilder.buildMessage(contextResult));
+    }
+
+    public void preSpecificationMethod(final SpecificationMethod specificationMethod) {
+        checkNotNull(specificationMethod);
+    }
+
+    public void postSpecificationMethod(final SpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
+        checkNotNull(specificationMethod, specificationResult);
+        writer.println("- " + messageBuilder.buildMessage(specificationResult));
     }
 
     private void run(final String itemsToRun) {
+        long totalTime = 0L;
+        int numberSuccess = 0;
+        int numberFailed = 0;
         final Collection<RunnableItem> runnableItems = RUNNABLE_ITEM_BUILDER.build(itemsToRun);
         for (final RunnableItem runnableItem : runnableItems) {
             runnableItem.addContextListener(this);
-            runnableItem.run();
+            runnableItem.addSpecificationListener(this);
+            final ItemResult itemResult = runnableItem.run();
+            totalTime += itemResult.getExecutionTime();
+            if (itemResult.completedSuccessfully()) {
+                numberSuccess++;
+            } else {
+                numberFailed++;
+            }
+            writer.println();
         }
+        writer.println((numberSuccess + numberFailed) + " specifications, " + numberFailed + " failures");
+        writer.println("Finished in " + millisToSeconds(totalTime) + " seconds");
     }
 
     @SuppressWarnings({"UseOfSystemOutOrSystemErr"})
     private void printUsage() {
         out.println(USAGE.getUsage());
+    }
+
+    @Suggest("Utility.")
+    private double millisToSeconds(final long millis) {
+        return (double) millis / MILLISECONDS_IN_SECONDS;
     }
 
     /**

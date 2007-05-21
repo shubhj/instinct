@@ -16,8 +16,19 @@
 
 package com.googlecode.instinct.internal.runner;
 
-public interface ItemResult {
-    boolean completedSuccessfully();
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.test.InstinctTestCase;
 
-    long getExecutionTime();
+public final class SpecificationFailureMessageBuilderImplSlowTest extends InstinctTestCase {
+    private SpecificationFailureMessageBuilder failureMessageBuilder;
+
+    @Override
+    public void setUpSubject() {
+        failureMessageBuilder = new SpecificationFailureMessageBuilderImpl();
+    }
+
+    public void testCreatesStackTracesFromSpecificationFailures() {
+        final String stack = failureMessageBuilder.buildMessage(new SpecificationRunFailureStatus(new RuntimeException()));
+        expect.that(stack).notEmpty();
+    }
 }

@@ -27,9 +27,25 @@ public final class VerifierImpl implements Verifier {
         verifiables.add(verifiable);
     }
 
+    @SuppressWarnings({"HardcodedLineSeparator"})
     public void verify() {
+        final StringBuilder verificationErrors = new StringBuilder();
         for (final Verifiable verifiable : verifiables) {
-            verifiable.verify();
+            verify(verifiable, verificationErrors);
+        }
+        if (verificationErrors.length() != 0) {
+            throw new AssertionError("One or more behaviour expectations failed.\n\n" + verificationErrors.toString());
         }
     }
+
+    // SUPPRESS IllegalCatch {
+    @SuppressWarnings({"CatchGenericClass"})
+    private void verify(final Verifiable verifiable, final StringBuilder verificationErrors) {
+        try {
+            verifiable.verify();
+        } catch (Throwable e) {
+            verificationErrors.append(e.toString());
+        }
+    }
+    // } SUPPRESS IllegalCatch
 }

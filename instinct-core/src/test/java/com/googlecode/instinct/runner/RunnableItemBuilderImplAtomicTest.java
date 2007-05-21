@@ -23,7 +23,7 @@ import static com.googlecode.instinct.expect.Mocker.eq;
 import static com.googlecode.instinct.expect.Mocker.expects;
 import static com.googlecode.instinct.expect.Mocker.mock;
 import static com.googlecode.instinct.expect.Mocker.returnValue;
-import com.googlecode.instinct.internal.aggregate.TestContext1;
+import com.googlecode.instinct.internal.aggregate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.RunnableItem;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
@@ -41,7 +41,7 @@ import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubject;
 public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
     private static final String UNKNOWN_SPEC = "unknownMethod";
     private static final Class<?> CONTEXT_CLASS_1 = ASimpleContext.class;
-    private static final Class<?> CONTEXT_CLASS_2 = TestContext1.class;
+    private static final Class<?> CONTEXT_CLASS_2 = ContextWithSpecsWithDifferentAccessModifiers.class;
     private RunnableItemBuilder runnableItemBuilder;
     private ClassInstantiator classInstantiator;
 

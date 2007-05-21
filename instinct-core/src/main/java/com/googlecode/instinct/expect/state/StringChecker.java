@@ -23,5 +23,7 @@ public interface StringChecker extends ComparableChecker<String> {
 
     void isEmpty();
 
+    void notEmpty();
+
     void hasLength(int length);
 }

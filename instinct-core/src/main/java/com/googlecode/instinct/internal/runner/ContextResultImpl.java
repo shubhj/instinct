@@ -31,7 +31,7 @@ public final class ContextResultImpl extends Primordial implements ContextResult
         this.behaviourContextName = behaviourContextName;
     }
 
-    public String getBehaviourContextName() {
+    public String getContextName() {
         return behaviourContextName;
     }
 
@@ -54,7 +54,7 @@ public final class ContextResultImpl extends Primordial implements ContextResult
     }
 
     public int getNumberOfSpecificationsRun() {
-        return getSpecificationResults().size();
+        return specificationResults.size();
     }
 
     public int getNumberOfSuccesses() {
@@ -67,7 +67,7 @@ public final class ContextResultImpl extends Primordial implements ContextResult
 
     public long getExecutionTime() {
         long executionTime = 0L;
-        for (final SpecificationResult specificationResult : getSpecificationResults()) {
+        for (final SpecificationResult specificationResult : specificationResults) {
             executionTime += specificationResult.getExecutionTime();
         }
         return executionTime;
@@ -75,7 +75,7 @@ public final class ContextResultImpl extends Primordial implements ContextResult
 
     private int countStatus(final boolean succeeded) {
         int number = 0;
-        for (final SpecificationResult specificationResult : getSpecificationResults()) {
+        for (final SpecificationResult specificationResult : specificationResults) {
             if (specificationResult.completedSuccessfully() == succeeded) {
                 number++;
             }

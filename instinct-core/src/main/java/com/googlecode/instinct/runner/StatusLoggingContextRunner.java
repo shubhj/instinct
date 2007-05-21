@@ -21,16 +21,16 @@ import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.report.ContextResultMessageBuilder;
+import com.googlecode.instinct.report.ResultMessageBuilder;
 import com.googlecode.instinct.report.StatusLogger;
 
 @Suggest({"Remove this class, refactor Ant runner to not use it, make Ant runner receive the callback."})
 public final class StatusLoggingContextRunner implements ContextRunner {
     private final ContextRunner delegate;
-    private final ContextResultMessageBuilder messageBuilder;
+    private final ResultMessageBuilder messageBuilder;
     private final StatusLogger statusLogger;
 
-    public StatusLoggingContextRunner(final ContextRunner delegate, final ContextResultMessageBuilder messageBuilder,
+    public StatusLoggingContextRunner(final ContextRunner delegate, final ResultMessageBuilder messageBuilder,
             final StatusLogger statusLogger) {
         checkNotNull(delegate, messageBuilder, statusLogger);
         this.delegate = delegate;

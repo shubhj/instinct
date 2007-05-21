@@ -14,10 +14,13 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.runner;
+package com.googlecode.instinct.report;
 
-public interface ItemResult {
-    boolean completedSuccessfully();
+import com.googlecode.instinct.internal.runner.ContextResult;
+import com.googlecode.instinct.internal.runner.SpecificationResult;
 
-    long getExecutionTime();
+public interface ResultMessageBuilder {
+    String buildMessage(ContextResult contextResult);
+
+    String buildMessage(SpecificationResult specificationResult);
 }

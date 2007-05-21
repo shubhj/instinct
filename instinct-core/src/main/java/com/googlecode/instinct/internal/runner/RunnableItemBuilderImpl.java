@@ -74,7 +74,7 @@ public final class RunnableItemBuilderImpl implements RunnableItemBuilder {
 
     private Method findSpecMethod(final ContextClass contextClass, final String methodName) {
         try {
-            return classEdge.getMethod(contextClass.getType(), methodName);
+            return classEdge.getDeclaredMethod(contextClass.getType(), methodName);
         } catch (EdgeException e) {
             throw new IllegalArgumentException(
                     "Specification method '" + contextClass.getType().getName() + METHOD_SEPARATOR + methodName + "' does not exist", e);

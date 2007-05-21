@@ -29,8 +29,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import com.googlecode.instinct.internal.util.Suggest;
-import com.intellij.execution.junit.SourceScope;
+import com.googlecode.instinct.internal.util.Fix;
 import com.intellij.execution.junit2.configuration.ClassBrowser;
 import com.intellij.ide.util.TreeClassChooser;
 import com.intellij.openapi.module.Module;
@@ -85,10 +84,12 @@ public final class InstinctRunConfigurationSettingsEditor extends SettingsEditor
     private void initClassChooser() {
         contextClassInput = new TextFieldWithBrowseButton();
         contextClassInput.addActionListener(new ActionListener() {
+            @Fix("Make sure the browse box is not already showing.")
             public void actionPerformed(final ActionEvent e) {
                 final ContextClassBrowser browser = new ContextClassBrowser(project, "Choose Context");
                 browser.setField(contextClassInput);
                 contextClassInput.setText(browser.show());
+                // reset the name of the context in the "Name" field.
             }
         });
     }
@@ -142,12 +143,11 @@ public final class InstinctRunConfigurationSettingsEditor extends SettingsEditor
         protected TreeClassChooser.ClassFilterWithScope getFilter() throws NoFilterException {
             return new TreeClassChooser.ClassFilterWithScope() {
                 public GlobalSearchScope getScope() {
-                    return SourceScope.wholeProject(getProject()).getGlobalSearchScope();
+                    return GlobalSearchScope.projectTestScope(getProject(), false);
                 }
 
-                @Suggest("Check for the existence of spec methods in the class?")
                 public boolean isAccepted(final PsiClass aClass) {
-                    return true;
+                    return ClassUtil.isContextClass(aClass);
                 }
             };
         }

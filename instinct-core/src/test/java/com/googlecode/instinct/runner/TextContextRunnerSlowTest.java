@@ -1,6 +1,7 @@
 package com.googlecode.instinct.runner;
 
 import java.io.ByteArrayOutputStream;
+import com.googlecode.instinct.internal.aggregate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ContextContainerWithSetUpAndTearDown;
@@ -32,11 +33,12 @@ public final class TextContextRunnerSlowTest extends InstinctTestCase {
     public void testCanBeCalledStaticallySendingResultsToStandardOut() {
         doWithRedirectedStandardOut(outputBuffer, new Runnable() {
             public void run() {
-                runContexts(ASimpleContext.class, ContextContainerWithSetUpAndTearDown.class);
+                runContexts(ASimpleContext.class, ContextContainerWithSetUpAndTearDown.class, ContextWithSpecsWithDifferentAccessModifiers.class);
             }
         });
         checkRunnerSendsSpeciciationResultsToOutput(ASimpleContext.class);
         checkRunnerSendsSpeciciationResultsToOutput(ContextContainerWithSetUpAndTearDown.class);
+        checkRunnerSendsSpeciciationResultsToOutput(ContextWithSpecsWithDifferentAccessModifiers.class);
     }
 
     private <T> void checkSendsSpeciciationResultsToOutput(final Class<T> contextClass) {
@@ -47,6 +49,5 @@ public final class TextContextRunnerSlowTest extends InstinctTestCase {
     private <T> void checkRunnerSendsSpeciciationResultsToOutput(final Class<T> contextClass) {
         final String runnerOutput = new String(outputBuffer.toByteArray());
         assertTrue("Expected to find context name", runnerOutput.contains(contextClass.getSimpleName()));
-        assertTrue("Expected to find the number of specs run", runnerOutput.contains("Specifications run:"));
     }
 }

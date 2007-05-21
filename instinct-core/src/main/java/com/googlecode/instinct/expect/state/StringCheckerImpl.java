@@ -69,6 +69,10 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
         getAsserter().expectThat(subject, StringLengthMatcher.hasLength(0));
     }
 
+    public final void notEmpty() {
+        getAsserter().expectThat(subject, Matchers.not(StringLengthMatcher.hasLength(0)));
+    }
+
     public final void hasLength(final int length) {
         getAsserter().expectThat(subject, StringLengthMatcher.hasLength(length));
     }

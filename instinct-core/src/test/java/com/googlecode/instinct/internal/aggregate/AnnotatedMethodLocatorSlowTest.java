@@ -25,13 +25,13 @@ import com.googlecode.instinct.test.InstinctTestCase;
 public final class AnnotatedMethodLocatorSlowTest extends InstinctTestCase {
     private AnnotatedMethodLocator locator;
 
-    public void testFindsCorrectNumberOfSpecifications() {
-        final Method[] methods = locator.locate(TestContext1.class, Specification.class);
-        assertEquals(4, methods.length);
-    }
-
     @Override
     public void setUpSubject() {
         locator = new AnnotatedMethodLocatorImpl();
+    }
+
+    public void testFindsCorrectNumberOfSpecificationsWhenGivenSpecsWithDifferentAccessModifiers() {
+        final Method[] methods = locator.locate(ContextWithSpecsWithDifferentAccessModifiers.class, Specification.class);
+        assertEquals(5, methods.length);
     }
 }

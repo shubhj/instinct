@@ -28,6 +28,7 @@ import static com.googlecode.instinct.expect.Mocker.mock;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import com.googlecode.instinct.test.triangulate.Triangulation;
 
 @SuppressWarnings({"ExceptionClassNameDoesntEndWithException", "UnusedDeclaration"})
 public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
@@ -38,23 +39,50 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
     private Writer writer;
     private String string;
 
+    @Override
+    public void setUpTestDoubles() {
+        string = Triangulation.getInstance(String.class);
+        reader = mock(Reader.class);
+        writer = mock(Writer.class);
+    }
+
+    @Override
+    public void setUpSubject() {
+        factory = new ObjectFactoryImpl();
+    }
+
     public void testConformsToClassTraits() {
         checkClass(ObjectFactoryImpl.class, ObjectFactory.class);
     }
 
-    public void testOnlyAcceptConcreteClasses() {
+    public void testRefusesToCreateInterfaces() {
         checkRejectsInterfaces(AN_INTERFACE_1);
         checkRejectsInterfaces(AN_INTERFACE_2);
     }
 
     @Suggest("Check for two constructors with params of the same type, one subtype of the other.")
-    public void testCreatePerformsCorrectTypeInference() {
+    public void testCreatesInstancesOfConcreteClasses() {
         checkSimpleArgumentsSucceed();
         checkMultipleConstructorSucceeds();
         checkSubclassTypeInferenceSucceed();
         checkIncorrectOrderingFails();
         checkBadConstructorParametersFails();
-        checkInstatiationOfInterfaceFails();
+    }
+
+    @SuppressWarnings({"UnnecessaryBoxing"})
+    public void testPerformsUnboxingOfAutoboxedParametersWhenMatchingConstructor() {
+        checkSucceeds(ClassWithConstructors.class, Boolean.valueOf(false));
+        checkSucceeds(ClassWithConstructors.class, true);
+        checkSucceeds(ClassWithConstructors.class, (byte) 1);
+        checkSucceeds(ClassWithConstructors.class, (char) 1);
+        checkSucceeds(ClassWithConstructors.class, (short) 1);
+        checkSucceeds(ClassWithConstructors.class, 1);
+        checkSucceeds(ClassWithConstructors.class, 1L);
+        checkSucceeds(ClassWithConstructors.class, 1F);
+        checkSucceeds(ClassWithConstructors.class, 1D);
+    }
+
+    public void testRejectsConcreteClassesWithRestrictiveAcessModifiers() {
         checkInstantiationConstructorsWithoutAccessFails();
     }
 
@@ -82,11 +110,6 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
     private void checkBadConstructorParametersFails() {
         checkFails(ObjectCreationException.class);
         checkFails(ClassWithConstructors.class, writer, reader);
-    }
-
-    private void checkInstatiationOfInterfaceFails() {
-        checkFailsWithException(IllegalArgumentException.class, ObjectFactory.class);
-        checkFailsWithException(IllegalArgumentException.class, Serializable.class);
     }
 
     private void checkInstantiationConstructorsWithoutAccessFails() {
@@ -118,26 +141,8 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
         });
     }
 
-    @Override
-    public void setUpTestDoubles() {
-        string = "Some string";
-        reader = mock(Reader.class);
-        writer = mock(Writer.class);
-    }
-
-    @Override
-    public void setUpSubject() {
-        factory = new ObjectFactoryImpl();
-    }
-
     @SuppressWarnings({"UtilityClassWithPublicConstructor", "ClassWithTooManyConstructors"})
     public static class ClassWithConstructors {
-        private ClassWithConstructors() {
-        }
-
-        ClassWithConstructors(final Integer i) {
-        }
-
         public ClassWithConstructors(final String s) {
         }
 
@@ -148,6 +153,36 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
         }
 
         public ClassWithConstructors(final Reader r, final Writer w) {
+        }
+
+        public ClassWithConstructors(final boolean b) {
+        }
+
+        public ClassWithConstructors(final byte b) {
+        }
+
+        public ClassWithConstructors(final char c) {
+        }
+
+        public ClassWithConstructors(final short s) {
+        }
+
+        public ClassWithConstructors(final int i) {
+        }
+
+        public ClassWithConstructors(final long l) {
+        }
+
+        public ClassWithConstructors(final double d) {
+        }
+
+        public ClassWithConstructors(final float f) {
+        }
+
+        ClassWithConstructors(final Integer i) {
+        }
+
+        private ClassWithConstructors() {
         }
     }
 }
