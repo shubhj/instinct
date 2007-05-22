@@ -16,33 +16,46 @@
 
 package com.googlecode.instinct.internal.report;
 
+import static java.lang.System.getProperty;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import static java.util.regex.Pattern.MULTILINE;
+import static java.util.regex.Pattern.compile;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextResultImpl;
+import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilder;
+import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilderImpl;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationResultImpl;
 import com.googlecode.instinct.internal.runner.SpecificationRunFailureStatus;
+import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
 import com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 @SuppressWarnings({"HardcodedLineSeparator"})
 public final class BriefResultMessageBuilderSlowTest extends InstinctTestCase {
+    private static final String NEW_LINE = getProperty("line.separator");
+    private static final String TAB = "\t";
     private ResultMessageBuilder briefResultMessageBuilder;
-    private RuntimeException failureCause;
     private ContextResult contextResult;
     private SpecificationResult succeedingSpec;
     private SpecificationResult failingSpec;
+    private SpecificationRunStatus failureStatus;
+    private SpecificationFailureMessageBuilder failureMessageBuilder;
 
     @Override
     public void setUpTestDoubles() {
-        failureCause = new RuntimeException("Failure cause");
         contextResult = new ContextResultImpl("Context");
-        succeedingSpec = new SpecificationResultImpl("runs", new SpecificationRunSuccessStatus(), 1L);
-        failingSpec = new SpecificationResultImpl("fails", new SpecificationRunFailureStatus(failureCause), 1L);
-        contextResult.addSpecificationResult(succeedingSpec);
+        failureMessageBuilder = new SpecificationFailureMessageBuilderImpl();
+        final RuntimeException failureCause = new RuntimeException("Failure cause");
+        failureStatus = new SpecificationRunFailureStatus(failureCause);
+        failingSpec = new SpecificationResultImpl("fails", failureStatus, 1L);
+        final SpecificationRunStatus successStatus = new SpecificationRunSuccessStatus();
+        succeedingSpec = new SpecificationResultImpl("runs", successStatus, 1L);
         contextResult.addSpecificationResult(failingSpec);
+        contextResult.addSpecificationResult(succeedingSpec);
     }
 
     @Override
@@ -50,17 +63,28 @@ public final class BriefResultMessageBuilderSlowTest extends InstinctTestCase {
         briefResultMessageBuilder = new BriefResultMessageBuilder();
     }
 
-    @Suggest("Remove.")
-    public void testFoo() {
+    public void testCreatesBriefContextResultMessages() {
+        final String expectedContextMessage = "Context" + NEW_LINE
+                + "- fails (FAILED)" + NEW_LINE + NEW_LINE
+                + formatFailureCause()
+                + "- runs";
+        expect.that(briefResultMessageBuilder.buildMessage(contextResult)).equalTo(expectedContextMessage);
     }
 
-    public void nsotestCreatesBriefMessages() {
-        final String contextMessage = briefResultMessageBuilder.buildMessage(contextResult);
-        final String expectedContextMessage = "Context\n"
-                + "- runs\n"
-                + "- fails (FAILED)\n"
-                + "";
-        expect.that(contextMessage).equalTo(expectedContextMessage);
-        System.out.println(contextMessage);
+    public void testCreatesBriefSpecificationSuccessResultMessages() {
+        expect.that(briefResultMessageBuilder.buildMessage(succeedingSpec)).equalTo("runs");
+    }
+
+    public void testCreatesBriefSpecificationFailuresResultMessages() {
+        final String expected = "fails (FAILED)" + NEW_LINE + NEW_LINE
+                + formatFailureCause();
+        expect.that(briefResultMessageBuilder.buildMessage(failingSpec)).equalTo(expected);
+    }
+
+    private String formatFailureCause() {
+        final String failureCause = failureMessageBuilder.buildMessage(failureStatus);
+        final Pattern startOfLine = compile("^", MULTILINE);
+        final Matcher matcher = startOfLine.matcher(failureCause);
+        return matcher.replaceAll(TAB);
     }
 }

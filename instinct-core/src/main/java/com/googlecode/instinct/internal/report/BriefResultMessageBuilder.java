@@ -17,14 +17,20 @@
 package com.googlecode.instinct.internal.report;
 
 import static java.lang.System.getProperty;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import static java.util.regex.Pattern.MULTILINE;
+import static java.util.regex.Pattern.compile;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilder;
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilderImpl;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 
 public final class BriefResultMessageBuilder implements ResultMessageBuilder {
+    private static final Pattern START_OF_LINE = compile("^", MULTILINE);
     private static final String NEW_LINE = getProperty("line.separator");
     private static final String TAB = "\t";
     private final SpecificationFailureMessageBuilder failureMessageBuilder = new SpecificationFailureMessageBuilderImpl();
@@ -50,17 +56,22 @@ public final class BriefResultMessageBuilder implements ResultMessageBuilder {
 
     private String buildSpecificationResultMessage(final SpecificationResult specificationResult) {
         final StringBuilder builder = new StringBuilder();
-        final String status = specificationResult.completedSuccessfully() ? "" : "(FAILED)";
+        final String status = specificationResult.completedSuccessfully() ? "" : " (FAILED)";
         builder.append(specificationResult.getSpecificationName()).append(status);
         if (!specificationResult.completedSuccessfully()) {
-            builder.append(NEW_LINE).append(getFailureCause(specificationResult));
+            builder.append(NEW_LINE).append(NEW_LINE).append(getFailureCause(specificationResult));
         }
         return builder.toString();
     }
 
     private String getFailureCause(final SpecificationResult specificationResult) {
         final String failureCause = failureMessageBuilder.buildMessage(specificationResult.getStatus());
-        final String indentedFailureCause = failureCause.replaceAll(NEW_LINE, NEW_LINE + TAB + TAB);
-        return NEW_LINE + TAB + indentedFailureCause;
+        return indentEachLine(failureCause);
+    }
+
+    @Suggest("Utility?")
+    private String indentEachLine(final String failureCause) {
+        final Matcher matcher = START_OF_LINE.matcher(failureCause);
+        return matcher.replaceAll(TAB);
     }
 }

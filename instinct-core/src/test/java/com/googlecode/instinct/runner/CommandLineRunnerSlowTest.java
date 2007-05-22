@@ -35,7 +35,6 @@ import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.Suggest;
-import static com.googlecode.instinct.test.AssertTestChecker.assertThrows;
 import com.googlecode.instinct.test.InstinctTestCase;
 import com.googlecode.instinct.test.TestingException;
 import com_cenqua_clover.Clover;
@@ -61,16 +60,11 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
         checkRunSpecification(CONTEXT_CLASS_2, "notMe");
     }
 
-    @Suggest("Re-enable")
-    public void nsotestRunsContextAndReportsErrors() {
-        assertThrows(AssertionError.class, new Runnable() {
-            public void run() {
-                final Process process = runContexts(ContextWithFailingSpecs.class);
-                expectThatRunnerReportsNoErrors(read(process.getErrorStream()));
-                final String runnerOutput = new String(read(process.getInputStream()));
-                expect.that(runnerOutput).containsString("");
-            }
-        });
+    public void testRunsContextAndReportsErrors() {
+        final Process process = runContexts(ContextWithFailingSpecs.class);
+        expectThatRunnerReportsNoErrors(read(process.getErrorStream()));
+        final String runnerOutput = new String(read(process.getInputStream()));
+        expect.that(runnerOutput).containsString("FAILED");
     }
 
     private void checkRunContexts(final Class<?>... contextClasses) {
@@ -155,7 +149,6 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
     }
 
     private void expectThatRunnerReportsNoErrors(final byte[] processError) {
-        System.out.println("processError = \n" + new String(processError));
         expect.that(new String(processError).trim()).isEmpty();
     }
 
@@ -165,7 +158,6 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
         for (final Class<?> contextClass : contextClasses) {
             expect.that(runnerOutput).containsString(contextClass.getSimpleName());
         }
-        System.out.println("processOutput = \n" + new String(processOutput));
         expect.that(runnerOutput).containsString(specificationName);
     }
 
