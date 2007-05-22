@@ -95,6 +95,7 @@ public final class CommandLineRunner implements ContextListener, SpecificationLi
                 numberFailed++;
             }
         }
+        writer.println();
         writer.println((numberSuccess + numberFailed) + " specifications, " + numberFailed + " failures");
         writer.println("Finished in " + millisToSeconds(totalTime) + " seconds");
     }
