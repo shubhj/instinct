@@ -29,13 +29,13 @@
             <mkdir dir="${checkstyle.results.dir}"/>
             <taskdef resource="checkstyletask.properties" classpathref="${lib.dir}/checkstyle/checkstyle-all-4.2.jar"/>
             <checkstyle config="${etc.dir}/checkstyle/checkstyle-@{code.type}.xml"
-                        failOnViolation="false" failureProperty="checkstyle.@{code.type}.failed">
+                    failOnViolation="false" failureProperty="checkstyle.@{code.type}.failed">
                 <formatter/>
                 <formatter type="xml" tofile="${reports.checkstyle.dir}/checkstyle-@{code.type}.xml"/>
                 <fileset refid="src.@{code.type}.java.fileset"/>
             </checkstyle>
             <style in="${reports.checkstyle.dir}/checkstyle-@{code.type}.xml" out="${reports.checkstyle.dir}/checkstyle-@{code.type}.html"
-                   style="${etc.dir}/checkstyle/checkstyle-noframes-sorted.xsl"/>
+                    style="${etc.dir}/checkstyle/checkstyle-noframes-sorted.xsl"/>
         </sequential>
     </macrodef>
 
@@ -50,7 +50,7 @@
         <sequential>
             <mkdir dir="${coverage.dir}"/>
             <cobertura-report destdir="${coverage.dir}" datafile="${coverage.dir}/coverage.ser">
-                <fileset dir="${main.src.dir}" includes="**/*.java"/>
+                <fileset dir="${main.src.dir}" includes="**/*.java" excludes="**/internal/edge/**/*.java"/>
             </cobertura-report>
         </sequential>
     </macrodef>
