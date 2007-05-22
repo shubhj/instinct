@@ -1092,7 +1092,7 @@
         <root url="jar://$PROJECT_DIR$/instinct-core/etc/lib-src/cglib-src-2.2_beta1.jar!/src/proxy" />
       </SOURCES>
     </library>
-    <library name="hamcrest-all-1.0">
+    <library name="hamcrest">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/instinct-core/lib/hamcrest/hamcrest-all-1.0.jar!/" />
       </CLASSES>
