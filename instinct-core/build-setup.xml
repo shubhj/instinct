@@ -62,15 +62,11 @@
         <include name="${lib.dir}/objenesis/objenesis-1.0.jar"/>
         <include name="${lib.dir}/ant/ant-1.7.0.jar"/>
         <include name="${lib.dir}/hamcrest/hamcrest-all-1.0.jar"/>
+        <include name="${lib.dir}/clover/clover-1.3.13.jar"/>
     </patternset>
 
     <patternset id="test.classpath.pattern">
         <patternset refid="main.classpath.pattern"/>
-        <include name="${lib.dir}/clover/clover-1.3.13.jar"/>
-        <include name="${lib.dir}/cobertura/asm-2.2.1.jar"/>
-        <include name="${lib.dir}/cobertura/cobertura-1.8.jar"/>
-        <include name="${lib.dir}/cobertura/jakarta-oro-2.0.8.jar"/>
-        <include name="${lib.dir}/cobertura/log4j-1.2.9.jar"/>
     </patternset>
 
     <fileset id="main.code.fileset" dir="${main.src.dir}">
@@ -97,7 +93,7 @@
         </fileset>
     </path>
     <path id="test.class.path">
-        <pathelement location="${coverage.instrumented.dir}"/>
+        <!--<pathelement location="${coverage.instrumented.dir}"/>-->
         <path refid="main.class.path"/>
         <pathelement location="${test.classes.dir}"/>
         <fileset dir="${basedir}">

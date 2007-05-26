@@ -3,8 +3,8 @@
         "-//Puppy Crawl//DTD Check Configuration 1.2//EN" "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
 <module name="Checker">
     <module name="SuppressionCommentFilter">
-        <property name="offCommentFormat" value="SUPPRESS ([\w\|]+) {"/>
-        <property name="onCommentFormat" value="} SUPPRESS ([\w\|]+)"/>
+        <property name="offCommentFormat" value="SUPPRESS ([\w\|]+) \{"/>
+        <property name="onCommentFormat" value="\} SUPPRESS `([\w\|]+)"/>
         <property name="checkFormat" value="$1"/>
     </module>
     <module name="TreeWalker">
@@ -28,7 +28,7 @@
         <module name="FinalParameters"/>
         <module name="GenericIllegalRegexp">
             <property name="format"
-                      value="System\w*\.\w*out|System\w*\.\w*err|\.\w*printStackTrace\w*(\w*)|\.\w*clone\w*(\w*)|\.\w*finalize\w*(\w*)"/>
+                    value="System\w*\.\w*out|System\w*\.\w*err|\.\w*printStackTrace\w*(\w*)|\.\w*clone\w*(\w*)|\.\w*finalize\w*(\w*)"/>
         </module>
         <module name="HideUtilityClassConstructor"/>
         <module name="IllegalCatch">
@@ -37,14 +37,14 @@
         <module name="IllegalImport"/>
         <module name="IllegalInstantiation">
             <property name="classes"
-                      value="java.lang.Boolean,java.lang.Byte,java.lang.Short,java.lang.Character,java.lang.Integer,java.lang.Long,java.lang.Float,java.lang.Double"/>
+                    value="java.lang.Boolean,java.lang.Byte,java.lang.Short,java.lang.Character,java.lang.Integer,java.lang.Long,java.lang.Float,java.lang.Double"/>
         </module>
         <module name="IllegalToken">
             <property name="tokens" value="LITERAL_PROTECTED,LITERAL_SWITCH,LITERAL_CASE,LITERAL_ASSERT"/>
         </module>
         <module name="IllegalType">
             <property name="illegalClassNames"
-                      value="java.util.GregorianCalendar, java.util.Hashtable, java.util.HashSet, java.util.HashMap, java.util.ArrayList, java.util.LinkedList, java.util.LinkedHashMap, java.util.LinkedHashSet, java.util.TreeSet, java.util.TreeMap, java.util.Vector"/>
+                    value="java.util.GregorianCalendar, java.util.Hashtable, java.util.HashSet, java.util.HashMap, java.util.ArrayList, java.util.LinkedList, java.util.LinkedHashMap, java.util.LinkedHashSet, java.util.TreeSet, java.util.TreeMap, java.util.Vector"/>
         </module>
         <module name="Indentation"/>
         <module name="InterfaceIsType"/>

@@ -33,12 +33,10 @@ import com.googlecode.instinct.internal.aggregate.PackageRootFinder;
 import com.googlecode.instinct.internal.aggregate.PackageRootFinderImpl;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
-import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
 import com.googlecode.instinct.test.TestingException;
 import com_cenqua_clover.Clover;
-import net.sourceforge.cobertura.coveragedata.CoverageData;
 import org.hamcrest.Matchers;
 
 @SuppressWarnings({"HardcodedFileSeparator", "IOResourceOpenedButNotSafelyClosed"})
@@ -118,7 +116,6 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
         return baseCommand;
     }
 
-    @Fix("Remove cobertura, after switching to clover.")
     private String[] createCommand(final Class<?>... classesToRun) {
         final List<String> command = new ArrayList<String>();
         command.add("java");
@@ -135,9 +132,8 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
         final String boost = getJarFilePath(NullMaster.class);
         final String hamcrest = getJarFilePath(Matchers.class);
         final String clover = getJarFilePath(Clover.class);
-        final String cobertura = getJarFilePath(CoverageData.class);
         return getSourceRoot() + pathSeparatorChar + getTestRoot() + pathSeparatorChar + hamcrest + pathSeparatorChar + boost + pathSeparatorChar
-                + clover + pathSeparatorChar + cobertura;
+                + clover + pathSeparatorChar;
     }
 
     private String getSourceRoot() {

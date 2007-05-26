@@ -28,7 +28,7 @@
         <sequential>
             <mkdir dir="@{output.dir}"/>
             <javac source="${java.src.version}" srcdir="@{src.dir}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="${compile.debug}"
-                   debuglevel="${compile.debuglevel}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
+                    debuglevel="${compile.debuglevel}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
                 <src>
                     <path refid="@{src.path}"/>
                 </src>
@@ -44,7 +44,6 @@
             <mkdir dir="${@{type}.test.results.dir}"/>
             <junit failureproperty="@{type}.test.failed" fork="true" forkmode="perBatch">
                 <classpath refid="@{type}.test.class.path"/>
-                <sysproperty key="net.sourceforge.cobertura.datafile" file="${coverage.dir}/coverage.ser"/>
                 <batchtest todir="${@{type}.test.results.dir}">
                     <fileset refid="@{type}.test.code.fileset"/>
                 </batchtest>
@@ -52,15 +51,15 @@
                 <formatter type="brief" usefile="false"/>
             </junit>
             <fail if="@{type}.test.failed" message="@{type} tests failed."/>
-            <macro_cobertura_report/>
+            <macro_clover_report/>
         </sequential>
     </macrodef>
 
-    <target name="atomic-test" depends="-instrumented_compile">
+    <target name="atomic-test" depends="-instrumented-compile">
         <test.macro type="atomic"/>
     </target>
 
-    <target name="slow-test" depends="-instrumented_compile">
+    <target name="slow-test" depends="-instrumented-compile">
         <test.macro type="slow"/>
     </target>
 
@@ -69,11 +68,11 @@
     <target name="-javadoc" depends="-compile">
         <mkdir dir="${javadoc.dir}"/>
         <javadoc destdir="${javadoc.dir}" author="true" version="true"
-                 packagenames="${main.package.name}.*" sourcepath="${main.src.dir}" classpathref="main.class.path" failonerror="true"
-                 additionalparam="-breakiterator" Use="true" source="${java.src.version}"
-                 excludepackagenames="${main.package.name}.internal.*,${main.package.name}.sandbox.*"
-                 windowtitle="${project.longname} ${project.version.full}" doctitle="${project.longname} ${project.version.full}"
-                 useexternalfile="true">
+                packagenames="${main.package.name}.*" sourcepath="${main.src.dir}" classpathref="main.class.path" failonerror="true"
+                additionalparam="-breakiterator" Use="true" source="${java.src.version}"
+                excludepackagenames="${main.package.name}.internal.*,${main.package.name}.sandbox.*"
+                windowtitle="${project.longname} ${project.version.full}" doctitle="${project.longname} ${project.version.full}"
+                useexternalfile="true">
             <link href="http://java.sun.com/j2se/1.5.0/docs/api"/>
         </javadoc>
         <zip destfile="${build.dir}/${javadoc.zip}">
@@ -83,9 +82,9 @@
 
     <target name="-compile" depends="checkstyle">
         <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}" src.path="main.code.path"
-                       src.pattern="all.code.pattern"/>
+                src.pattern="all.code.pattern"/>
         <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}" src.path="test.code.path"
-                       src.pattern="all.code.pattern"/>
+                src.pattern="all.code.pattern"/>
     </target>
 
     <target name="-jar" depends="-compile">
@@ -96,21 +95,8 @@
         </jar>
     </target>
 
-    <target name="-instrumented_compile" depends="-compile">
-        <mkdir dir="${coverage.dir}"/>
-        <mkdir dir="${coverage.instrumented.dir}"/>
-        <copy todir="${coverage.instrumented.dir}">
-            <fileset dir="${main.classes.dir}"/>
-        </copy>
-        <!-- FIXME: Enable different coverage for atomic vs. slow tests. -->
-        <cobertura-instrument todir="${coverage.instrumented.dir}" datafile="${coverage.dir}/coverage.ser">
-            <fileset dir="${main.classes.dir}">
-                <include name="**/*.class"/>
-                <exclude name="**/integrate/junit/**"/>
-                <exclude name="**/integrate/ant/**"/>
-            </fileset>
-        </cobertura-instrument>
-    </target>
+    <!-- FIXME: Enable different coverage for atomic vs. slow tests. -->
+    <target name="-instrumented-compile" depends="-enable-clover,-compile"/>
 
     <target name="-release-zip" depends="-jar,javadoc">
         <mkdir dir="${release.dir}"/>
@@ -132,6 +118,7 @@
             <zipfileset dir="${lib.dir}/objenesis" prefix="lib"/>
         </zip>
     </target>
+
     <target name="-tag-repository" depends="release">
         <!-- Note. Assumes latest changes are in svn trunk. -->
         <java classname="org.tmatesoft.svn.cli.SVN" fork="true">
