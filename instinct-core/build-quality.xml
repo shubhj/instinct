@@ -17,11 +17,11 @@
 
     <!-- FIX Turn test checks back on. -->
     <target name="checkstyle">
-        <macro_checkstyle code.type="main"/>
-        <!--<macro_checkstyle code.type="test"/>-->
+        <checkstyle.macro code.type="main"/>
+        <!--<checkstyle.macro code.type="test"/>-->
     </target>
 
-    <macrodef name="macro_checkstyle">
+    <macrodef name="checkstyle.macro">
         <attribute name="code.type"/>
         <sequential>
             <taskdef resource="checkstyletask.properties" classpath="${lib.dir}/checkstyle/checkstyle-all-4.2.jar"/>
@@ -39,7 +39,7 @@
         </clover-setup>
     </target>
 
-    <macrodef name="macro_clover_report">
+    <macrodef name="cloverreport.macro">
         <sequential>
             <taskdef resource="clovertasks" classpathref="test.class.path"/>
             <!-- Allow 2 x flush interval for any final coverage flushes -->
