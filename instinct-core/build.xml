@@ -4,8 +4,6 @@
     <import file="build-setup.xml"/>
     <import file="build-quality.xml"/>
 
-    <taskdef resource="tasks.properties" classpathref="test.class.path"/>
-
     <target name="clean">
         <delete dir="${build.dir}"/>
     </target>
