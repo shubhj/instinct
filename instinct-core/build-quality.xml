@@ -37,11 +37,23 @@
         </sequential>
     </macrodef>
 
-    <target name="-coverage">
+    <target name="-check-coverage">
         <clovercheck.macro test.type="atomic"/>
         <fail if="coverage.atomic.failure" message="Atomic test coverage did not meet the target of ${coverage.atomic.target}."/>
         <clovercheck.macro test.type="slow"/>
         <fail if="coverage.slow.failure" message="Slow test coverage did not meet the target of ${coverage.slow.target}."/>
+    </target>
+
+    <target name="-merge-coverage">
+        <clovercommon.macro test.type="atomic"/>
+        <clovercommon.macro test.type="slow"/>
+        <property name="coverage.merged.dir" value="${build.dir}/coverage/merged"/>
+        <mkdir dir="${coverage.merged.dir}"/>
+        <clover-merge initString="${coverage.merged.dir}/coverage.db">
+            <cloverDb initString="${coverage.atomic.dir}/coverage.db"/>
+            <cloverDb initString="${coverage.slow.dir}/coverage.db"/>
+        </clover-merge>
+        <cloverreport.macro test.type="merged"/>
     </target>
 
     <macrodef name="clovercommon.macro">
@@ -56,7 +68,7 @@
         <attribute name="test.type"/>
         <sequential>
             <taskdef resource="clovertasks" classpathref="test.class.path"/>
-            <clover-clean initString="${coverage.@{test.type}.dir}/coverage.db" verbose="true"/>
+            <clover-clean initString="${coverage.@{test.type}.dir}/coverage.db" keepdb="true" verbose="true"/>
         </sequential>
     </macrodef>
 
@@ -78,9 +90,16 @@
             <!-- Allow 2 x flush interval for any final coverage flushes. -->
             <sleep milliseconds="${coverage.flush.interval}"/>
             <sleep milliseconds="${coverage.flush.interval}"/>
+            <cloverreport.macro test.type="@{test.type}"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="cloverreport.macro">
+        <attribute name="test.type"/>
+        <sequential>
             <clovercommon.macro test.type="@{test.type}"/>
             <clover-report initString="${coverage.@{test.type}.dir}/coverage.db">
-                <current outfile="${coverage.@{test.type}.dir}" title="${project.shortname} Code Coverage">
+                <current outfile="${coverage.@{test.type}.dir}" title="${project.shortname} @{test.type} test code coverage">
                     <format type="html"/>
                 </current>
             </clover-report>
