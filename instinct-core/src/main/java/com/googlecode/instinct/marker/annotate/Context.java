@@ -14,10 +14,18 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.aggregate;
+package com.googlecode.instinct.marker.annotate;
 
-import com.googlecode.instinct.internal.util.JavaClassName;
+import java.lang.annotation.Documented;
+import static java.lang.annotation.ElementType.TYPE;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import java.lang.annotation.Target;
 
-public interface BehaviourContextAggregator {
-    JavaClassName[] getContextNames();
+@Documented
+@Inherited
+@Retention(RUNTIME)
+@Target({TYPE})
+public @interface Context {
 }

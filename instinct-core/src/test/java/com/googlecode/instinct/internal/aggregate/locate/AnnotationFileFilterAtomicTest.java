@@ -18,13 +18,13 @@ package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.io.File;
 import java.io.FileFilter;
-import com.googlecode.instinct.internal.util.ObjectFactory;
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
 import static com.googlecode.instinct.expect.Mocker.eq;
 import static com.googlecode.instinct.expect.Mocker.expects;
 import static com.googlecode.instinct.expect.Mocker.mock;
 import static com.googlecode.instinct.expect.Mocker.returnValue;
 import static com.googlecode.instinct.expect.Mocker.same;
+import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;
@@ -35,6 +35,20 @@ public final class AnnotationFileFilterAtomicTest extends InstinctTestCase {
     private File pathname;
     private ObjectFactory objectFactory;
     private AnnotatedClassFileChecker checker;
+
+    @Override
+    public void setUpTestDoubles() {
+        packageRoot = mock(File.class, "mockPackageRoot");
+        pathname = mock(File.class, "mockPathname");
+        objectFactory = mock(ObjectFactory.class);
+        checker = mock(AnnotatedClassFileChecker.class);
+    }
+
+    @Override
+    public void setUpSubject() {
+        filter = new AnnotationFileFilter(packageRoot, Context.class);
+        insertFieldValue(filter, "objectFactory", objectFactory);
+    }
 
     public void testConformsToClassTraits() {
         checkClass(AnnotationFileFilter.class, FileFilter.class);
@@ -50,23 +64,9 @@ public final class AnnotationFileFilterAtomicTest extends InstinctTestCase {
                 returnValue(checker));
         expects(pathname).method("isDirectory").will(returnValue(pathIsADirectory));
         if (!pathIsADirectory) {
-            expects(checker).method("isAnnotated").with(same(pathname), same(BehaviourContext.class)).will(returnValue(classHasAnnotation));
+            expects(checker).method("isAnnotated").with(same(pathname), same(Context.class)).will(returnValue(classHasAnnotation));
         }
         final boolean accept = filter.accept(pathname);
         assertEquals(isAnnotated, accept);
-    }
-
-    @Override
-    public void setUpTestDoubles() {
-        packageRoot = mock(File.class, "mockPackageRoot");
-        pathname = mock(File.class, "mockPathname");
-        objectFactory = mock(ObjectFactory.class);
-        checker = mock(AnnotatedClassFileChecker.class);
-    }
-
-    @Override
-    public void setUpSubject() {
-        filter = new AnnotationFileFilter(packageRoot, BehaviourContext.class);
-        insertFieldValue(filter, "objectFactory", objectFactory);
     }
 }

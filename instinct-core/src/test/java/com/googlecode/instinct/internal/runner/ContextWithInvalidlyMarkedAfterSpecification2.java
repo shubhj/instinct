@@ -18,11 +18,11 @@ package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.annotate.AfterSpecification;
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 
 @Suggest("Rename")
-@BehaviourContext
+@Context
 public class ContextWithInvalidlyMarkedAfterSpecification2 {
     @Specification
     public void specification() {

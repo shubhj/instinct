@@ -1,11 +1,11 @@
 package com.googlecode.instinct.example.stack;
 
-import com.googlecode.instinct.marker.annotate.BeforeSpecification;
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
-import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.marker.annotate.BeforeSpecification;
+import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.annotate.Specification;
 
-@BehaviourContext
+@Context
 public final class AnEmptyStack {
     private Stack<Object> stack;
     private Object object;
@@ -19,7 +19,6 @@ public final class AnEmptyStack {
     @Specification
     void mustBeEmpty() {
         expect.that(stack.isEmpty()).equalTo(true);
-
     }
 
     @Specification

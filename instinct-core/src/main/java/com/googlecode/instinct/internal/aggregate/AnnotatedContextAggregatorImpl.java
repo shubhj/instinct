@@ -25,22 +25,22 @@ import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Context;
 
-public final class AnnotatedBehaviourContextAggregatorImpl implements BehaviourContextAggregator {
+public final class AnnotatedContextAggregatorImpl implements ContextAggregator {
     private PackageRootFinder packageRootFinder = new PackageRootFinderImpl();
     private ClassLocator classLocator = new ClassLocatorImpl();
     private ObjectFactory objectFactory = new ObjectFactoryImpl();
     private final Class<?> classInSpecTree;
 
-    public <T> AnnotatedBehaviourContextAggregatorImpl(final Class<T> classInSpecTree) {
+    public <T> AnnotatedContextAggregatorImpl(final Class<T> classInSpecTree) {
         checkNotNull(classInSpecTree);
         this.classInSpecTree = classInSpecTree;
     }
 
     public JavaClassName[] getContextNames() {
         final File packageRoot = objectFactory.create(File.class, packageRootFinder.getPackageRoot(classInSpecTree));
-        final FileFilter filter = objectFactory.create(AnnotationFileFilter.class, packageRoot, BehaviourContext.class);
+        final FileFilter filter = objectFactory.create(AnnotationFileFilter.class, packageRoot, Context.class);
         return classLocator.locate(packageRoot, filter);
     }
 }

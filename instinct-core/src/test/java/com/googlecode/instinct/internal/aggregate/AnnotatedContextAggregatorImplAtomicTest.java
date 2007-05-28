@@ -18,24 +18,24 @@ package com.googlecode.instinct.internal.aggregate;
 
 import java.io.File;
 import java.io.FileFilter;
-import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
-import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
-import com.googlecode.instinct.internal.util.JavaClassName;
-import com.googlecode.instinct.internal.util.ObjectFactory;
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
 import static com.googlecode.instinct.expect.Mocker.eq;
 import static com.googlecode.instinct.expect.Mocker.expects;
 import static com.googlecode.instinct.expect.Mocker.mock;
 import static com.googlecode.instinct.expect.Mocker.returnValue;
 import static com.googlecode.instinct.expect.Mocker.same;
+import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
+import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
+import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;
 
-public final class AnnotatedBehaviourContextAggregatorImplAtomicTest extends InstinctTestCase {
-    private static final Class<?> CLASS_IN_SPEC_TREE = AnnotatedBehaviourContextAggregatorImplAtomicTest.class;
+public final class AnnotatedContextAggregatorImplAtomicTest extends InstinctTestCase {
+    private static final Class<?> CLASS_IN_SPEC_TREE = AnnotatedContextAggregatorImplAtomicTest.class;
     private static final JavaClassName[] CLASS_NAMES = {};
     private static final String PACKAGE_ROOT = "";
-    private BehaviourContextAggregator aggregator;
+    private ContextAggregator aggregator;
     private PackageRootFinder packageRootFinder;
     private ClassLocator classLocator;
     private ObjectFactory objectFactory;
@@ -53,7 +53,7 @@ public final class AnnotatedBehaviourContextAggregatorImplAtomicTest extends Ins
 
     @Override
     public void setUpSubject() {
-        aggregator = new AnnotatedBehaviourContextAggregatorImpl(CLASS_IN_SPEC_TREE);
+        aggregator = new AnnotatedContextAggregatorImpl(CLASS_IN_SPEC_TREE);
         insertFieldValue(aggregator, "packageRootFinder", packageRootFinder);
         insertFieldValue(aggregator, "classLocator", classLocator);
         insertFieldValue(aggregator, "objectFactory", objectFactory);
@@ -62,7 +62,7 @@ public final class AnnotatedBehaviourContextAggregatorImplAtomicTest extends Ins
     public void testGetContextNames() {
         expects(packageRootFinder).method("getPackageRoot").with(same(CLASS_IN_SPEC_TREE)).will(returnValue(PACKAGE_ROOT));
         expects(objectFactory).method("create").with(same(File.class), eq(new Object[]{PACKAGE_ROOT})).will(returnValue(packageRoot));
-        expects(objectFactory).method("create").with(same(AnnotationFileFilter.class), eq(new Object[]{packageRoot, BehaviourContext.class})).will(
+        expects(objectFactory).method("create").with(same(AnnotationFileFilter.class), eq(new Object[]{packageRoot, Context.class})).will(
                 returnValue(fileFilter));
         expects(classLocator).method("locate").with(same(packageRoot), same(fileFilter)).will(returnValue(CLASS_NAMES));
         final JavaClassName[] names = aggregator.getContextNames();

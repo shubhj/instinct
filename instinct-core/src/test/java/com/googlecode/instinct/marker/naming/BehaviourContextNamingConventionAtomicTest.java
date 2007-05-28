@@ -25,6 +25,6 @@ public final class BehaviourContextNamingConventionAtomicTest extends InstinctTe
     }
 
     public void testGetPattern() {
-        assertEquals(".*BehaviourContext$", new BehaviourContextNamingConvention().getPattern());
+        assertEquals(".*Context$", new BehaviourContextNamingConvention().getPattern());
     }
 }

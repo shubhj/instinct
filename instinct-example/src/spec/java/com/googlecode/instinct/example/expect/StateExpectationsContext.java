@@ -6,16 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import org.hamcrest.Matchers;
 
 /**
  * The examples below illustrate Instinct's state-based expectation API.
+ *
  * @see com.googlecode.instinct.expect.state.StateExpectations
  */
 @SuppressWarnings({"MagicNumber", "unchecked"})
-@BehaviourContext
+@Context
 public final class StateExpectationsContext {
 
     @Specification

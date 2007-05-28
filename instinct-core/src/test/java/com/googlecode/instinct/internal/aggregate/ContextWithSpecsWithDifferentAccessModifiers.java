@@ -16,11 +16,11 @@
 
 package com.googlecode.instinct.internal.aggregate;
 
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 
 @SuppressWarnings({"ProtectedMemberInFinalClass", "UnusedDeclaration"})
-@BehaviourContext
+@Context
 public final class ContextWithSpecsWithDifferentAccessModifiers {
     @Specification
     protected void notMe() {

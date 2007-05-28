@@ -21,7 +21,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 
 public final class BehaviourContextAggregatorSlowTest extends InstinctTestCase {
     public static final int EXPECTED_CONTEXTS = 22;
-    private BehaviourContextAggregator aggregator;
+    private ContextAggregator aggregator;
 
     public void testFindsCorrectNumberOfContexts() {
         final JavaClassName[] contexts = aggregator.getContextNames();
@@ -30,6 +30,6 @@ public final class BehaviourContextAggregatorSlowTest extends InstinctTestCase {
 
     @Override
     public void setUpSubject() {
-        aggregator = new AnnotatedBehaviourContextAggregatorImpl(BehaviourContextAggregatorSlowTest.class);
+        aggregator = new AnnotatedContextAggregatorImpl(BehaviourContextAggregatorSlowTest.class);
     }
 }

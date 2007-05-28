@@ -18,6 +18,6 @@ package com.googlecode.instinct.marker.naming;
 
 public final class BehaviourContextNamingConvention implements NamingConvention {
     public String getPattern() {
-        return ".*BehaviourContext$";
+        return ".*Context$";
     }
 }

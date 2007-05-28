@@ -25,7 +25,7 @@ import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Context;
 import org.apache.tools.ant.Project;
 
 public final class Specifications {
@@ -53,7 +53,7 @@ public final class Specifications {
             "Don't return an array, use an ordered set."})
     public JavaClassName[] getContextClasses() {
         checkPreconditions();
-        final FileFilter filter = new AnnotationFileFilter(specPackageRoot, BehaviourContext.class);
+        final FileFilter filter = new AnnotationFileFilter(specPackageRoot, Context.class);
         return classLocator.locate(specPackageRoot, filter);
     }
 

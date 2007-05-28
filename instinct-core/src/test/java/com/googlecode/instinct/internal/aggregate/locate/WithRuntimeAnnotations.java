@@ -16,22 +16,22 @@
 
 package com.googlecode.instinct.internal.aggregate.locate;
 
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Specification;
 
-@SuppressWarnings({"UnusedDeclaration", "PackageVisibleField", "FieldCanBeLocal", "ProtectedField"})
-@BehaviourContext
+@SuppressWarnings({"UnusedDeclaration", "PackageVisibleField", "FieldCanBeLocal", "ProtectedField", "EqualsAndHashcode"})
+@Context
 public class WithRuntimeAnnotations {
-    @Dummy
-    private final String string1;
-    @Dummy
-    final String string2;
     @Dummy
     protected final String string3;
     @Dummy
     public final String string4;
     public final String string5;
+    @Dummy
+    final String string2;
+    @Dummy
+    private final String string1;
 
     public WithRuntimeAnnotations(final String string1, final String string2, final String string3, final String string4, final String string5) {
         this.string1 = string1;

@@ -18,11 +18,11 @@ package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Context;
 
 @SuppressWarnings({"EmptyClass", "UnusedDeclaration"})
 public final class ContextContainerWithSetUpAndTearDown {
-    @BehaviourContext
+    @Context
     public static class AnEmbeddedPublicContext {
         @AfterSpecification
         protected void drop() {

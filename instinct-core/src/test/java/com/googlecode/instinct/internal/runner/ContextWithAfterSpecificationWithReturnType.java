@@ -17,10 +17,10 @@
 package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.marker.annotate.AfterSpecification;
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 
-@BehaviourContext
+@Context
 public class ContextWithAfterSpecificationWithReturnType {
     @Specification
     public void specification() {

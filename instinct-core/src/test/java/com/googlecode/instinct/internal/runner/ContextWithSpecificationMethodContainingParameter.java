@@ -16,10 +16,10 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 
-@BehaviourContext
+@Context
 public class ContextWithSpecificationMethodContainingParameter {
     @Specification
     public void specificationTakesAParam(final String param1) {

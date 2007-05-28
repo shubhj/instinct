@@ -18,7 +18,7 @@ package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.test.InstinctTestCase;
@@ -32,8 +32,8 @@ public final class AnnotationCheckerImplAtomicTest extends InstinctTestCase {
     }
 
     public void testClassIsAnnotated() {
-        checkIsAnnotated(WithRuntimeAnnotations.class, BehaviourContext.class, true);
-        checkIsAnnotated(WithoutRuntimeAnnotations.class, BehaviourContext.class, false);
+        checkIsAnnotated(WithRuntimeAnnotations.class, Context.class, true);
+        checkIsAnnotated(WithoutRuntimeAnnotations.class, Context.class, false);
     }
 
     public void testMethodIsAnnotated() {

@@ -17,23 +17,23 @@
 package com.googlecode.instinct.internal.aggregate;
 
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Context;
 
 @SuppressWarnings({"EmptyClass", "PackageVisibleInnerClass", "UnusedDeclaration"})
 public final class ContextContainer2 {
-    @BehaviourContext
+    @Context
     public static class AnEmbeddedPublicContext {
         public void whoCares() {
         }
     }
 
-    @BehaviourContext
+    @Context
     static class AnEmbeddedPackageLocalContext {
         public void whoCares() {
         }
     }
 
-    @BehaviourContext
+    @Context
     private static class AnEmbeddedPrivateContext {
         @BeforeSpecification
         public void aSetUpMethod() {

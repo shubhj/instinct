@@ -1,14 +1,22 @@
+* Instinct Release 0.1.5 *
+
+o Behavioural expectation API (i.e. mocking) - com.googlecode.instinct.expect.Expect.
+
+
 * Instinct Release 0.1.4 *
 
-o Behavioural expectation API (ie. mocking) - com.googlecode.instinct.expect.Expect.
-o Removed the need for specification methods to have a void return type (helps
-  Groovy integration).
+o Behavioural expectation API (i.e. mocking) - com.googlecode.instinct.expect.Expect.
+o Removed the need for specification methods to have a void return type (provides
+  cleaner Groovy integration).
+o Renamed BehaviourContext to just Context to bring into line with rest of code.
 o Added command line context runner.
+o Improved specification lifecycle listeners.
 o Added BooleanChecker for state-based testing of booleans.
+o Additional StringChecker expectations for length.
 o Removed EasyMock dependency, added Objenisis for mocking concrete classes.
 o Internal re-write to remove arrays and return typed Collections instead.
 o Added Clover code coverage.
-o Misc. support for IntelliJ IDEA plugin.
+o Misc. features required for IntelliJ IDEA plugin.
 
 
 * Instinct Release 0.1.3 *
@@ -33,12 +41,12 @@ There was no public 0.1.1 release.
 
 * Instinct Release 0.1.0 *
 
-o Initial public release.
-  o Support for running specifications (based on annotations), effectively
-    providing simple JUnit 3.8.x feature parity.
-  o Core annotation support - BehaviourContext, Specification, BeforeSpecification,
-    AfterSpecification.
-  o Ant task.
-  o Specifications are located based on annotations.
-  o Simplified mocking API, build on jMock 1.1.
-  o Simple Verification class (will change in future releases).
+Initial public release.
+o Support for running specifications (based on annotations), effectively
+  providing simple JUnit 3.8.x feature parity.
+o Core annotation support - BehaviourContext, Specification, BeforeSpecification,
+  AfterSpecification.
+o Ant task.
+o Specifications are located based on annotations.
+o Simplified mocking API, build on jMock 1.1.
+o Simple Verification class (will change in future releases).

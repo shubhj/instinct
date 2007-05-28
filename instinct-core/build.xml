@@ -8,13 +8,13 @@
         <delete dir="${build.dir}"/>
     </target>
 
-    <target name="all" depends="clean,test,release"/>
+    <target name="all" depends="clean,test,-coverage,release"/>
     <target name="compile" depends="clean,-compile"/>
     <target name="test" depends="clean,-test"/>
     <target name="javadoc" depends="clean,-javadoc"/>
     <target name="jar" depends="clean,-jar"/>
+    <target name="quality" depends="clean,-quality"/>
     <target name="release" depends="clean,-release-zip"/>
-    <target name="tag" depends="clean,-tag-repository"/>
 
     <macrodef name="compile.macro">
         <attribute name="src.dir"/>
@@ -36,6 +36,15 @@
         </sequential>
     </macrodef>
 
+    <macrodef name="compile.all.macro">
+        <sequential>
+            <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}" src.path="main.code.path"
+                    src.pattern="all.code.pattern"/>
+            <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}" src.path="test.code.path"
+                    src.pattern="all.code.pattern"/>
+        </sequential>
+    </macrodef>
+
     <macrodef name="test.macro">
         <attribute name="type"/>
         <sequential>
@@ -49,16 +58,31 @@
                 <formatter type="brief" usefile="false"/>
             </junit>
             <fail if="@{type}.test.failed" message="@{type} tests failed."/>
-            <cloverreport.macro/>
         </sequential>
     </macrodef>
 
-    <target name="atomic-test" depends="-instrumented-compile">
-        <test.macro type="atomic"/>
+    <macrodef name="runtests.macro">
+        <attribute name="test.type"/>
+        <sequential>
+            <delete dir="${main.classes.dir}"/>
+            <delete dir="${test.classes.dir}"/>
+            <cloverenable.macro test.type="@{test.type}"/>
+            <compile.all.macro/>
+            <test.macro type="@{test.type}"/>
+            <cloverreport.macro test.type="@{test.type}"/>
+        </sequential>
+    </macrodef>
+
+    <!--<target name="atomic-test" depends="-clean-classes">-->
+    <target name="atomic-test">
+        <!--<cloverclean.macro test.type="slow"/>-->
+        <runtests.macro test.type="atomic"/>
     </target>
 
-    <target name="slow-test" depends="-instrumented-compile">
-        <test.macro type="slow"/>
+    <!--<target name="slow-test" depends="-clean-classes">-->
+    <target name="slow-test">
+        <!--<cloverclean.macro test.type="atomic"/>-->
+        <runtests.macro test.type="slow"/>
     </target>
 
     <target name="-test" depends="atomic-test,slow-test"/>
@@ -78,23 +102,24 @@
         </zip>
     </target>
 
-    <target name="-compile" depends="checkstyle">
-        <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}" src.path="main.code.path"
-                src.pattern="all.code.pattern"/>
-        <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}" src.path="test.code.path"
-                src.pattern="all.code.pattern"/>
+    <target name="-compile" depends="-checkstyle">
+        <compile.all.macro/>
     </target>
 
-    <target name="-jar" depends="-compile">
+    <target name="-clean-classes">
+        <delete dir="${main.classes.dir}"/>
+        <delete dir="${test.classes.dir}"/>
+    </target>
+
+    <target name="-jar" depends="-clean-classes,-compile">
+        <!--<cloverclean.macro test.type="atomic"/>-->
+        <!--<cloverclean.macro test.type="slow"/>-->
         <jar destfile="${build.dir}/${project.jar}">
             <fileset dir="${main.classes.dir}"/>
             <fileset dir="${main.src.dir}"/>
             <fileset dir="${properties.src.dir}"/>
         </jar>
     </target>
-
-    <!-- FIXME: Enable different coverage for atomic vs. slow tests. -->
-    <target name="-instrumented-compile" depends="-enable-clover,-compile"/>
 
     <target name="-release-zip" depends="-jar,javadoc">
         <mkdir dir="${release.dir}"/>
@@ -116,21 +141,5 @@
             <zipfileset dir="${lib.dir}/objenesis" prefix="lib"/>
         </zip>
     </target>
-
-    <!-- FIX This belongs in a top-level build file. -->
-    <target name="-tag-repository" depends="release">
-        <!-- Note. Assumes latest changes are in svn trunk. -->
-        <java classname="org.tmatesoft.svn.cli.SVN" fork="true">
-            <classpath>
-                <fileset dir="${lib.dir}/svn" includes="javasvn.jar"/>
-                <fileset dir="${lib.dir}/svn" includes="javasvn-cli.jar"/>
-            </classpath>
-            <arg value="copy -m 'Release ${project.version.full}'"/>
-            <arg value="https://instinct.googlecode.com/svn/trunk"/>
-            <arg value="https://instinct.googlecode.com/svn/tags/Release-${project.version.full}"/>
-        </java>
-    </target>
-    <!-- FIXME: Implement this - see etc/googlecode/googlecode-upload.py. -->
-    <target name="-upload-to-googlecode"/>
 
 </project>

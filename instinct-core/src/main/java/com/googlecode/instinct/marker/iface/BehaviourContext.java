@@ -16,7 +16,9 @@
 
 package com.googlecode.instinct.marker.iface;
 
+import com.googlecode.instinct.marker.annotate.Context;
+
 @SuppressWarnings({"MarkerInterface"})
-@com.googlecode.instinct.marker.annotate.BehaviourContext
+@Context
 public interface BehaviourContext {
 }

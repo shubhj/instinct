@@ -19,10 +19,10 @@ package com.googlecode.instinct.internal.runner;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 
-@BehaviourContext
+@Context
 public final class ASimpleContext {
     @BeforeSpecification
     public void setUp() {

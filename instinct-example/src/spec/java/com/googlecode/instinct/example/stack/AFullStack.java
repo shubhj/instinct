@@ -1,12 +1,12 @@
 package com.googlecode.instinct.example.stack;
 
-import com.googlecode.instinct.marker.annotate.BeforeSpecification;
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
-import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.annotate.BeforeSpecification;
+import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.annotate.Specification;
 
-@BehaviourContext
+@Context
 public final class AFullStack {
     private static final int SIZE = 10;
     private Stack<Integer> stack;

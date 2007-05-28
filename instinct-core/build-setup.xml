@@ -19,7 +19,6 @@
     <property name="src.dir" value="src/main"/>
     <property name="test.dir" value="src/test"/>
 
-    <property name="checkstyle.lib.dir" value="${lib.dir}/checkstyle"/>
     <property name="main.src.dir" value="${src.dir}/java"/>
     <property name="test.src.dir" value="${test.dir}/java"/>
     <property name="properties.src.dir" value="${src.dir}/properties"/>
@@ -43,9 +42,6 @@
     <property name="slow.test.classes.dir" value="${test.classes.dir}"/>
     <property name="slow.test.results.dir" value="${build.dir}/slow-test-results"/>
     <property name="slow.test.results" value="${slow.test.results.dir}/Slow-Tests.xml"/>
-    <property name="checkstyle.results.dir" value="${build.dir}/checkstyle"/>
-    <property name="coverage.dir" value="${build.dir}/coverage"/>
-    <property name="coverage.instrumented.dir" value="${coverage.dir}/instrumented"/>
 
     <patternset id="all.code.pattern">
         <include name="**/*.java"/>

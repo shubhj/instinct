@@ -2,7 +2,7 @@ package com.googlecode.instinct.sandbox.behaviourexpect;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.googlecode.instinct.marker.annotate.BehaviourContext;
+import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.sandbox.behaviourexpect.BehaviourExpect.eq;
 import static com.googlecode.instinct.sandbox.behaviourexpect.BehaviourExpect.expect;
@@ -13,7 +13,7 @@ import org.jmock.Expectations;
 
 // SUPPRESS Indentation {
 @SuppressWarnings({"AccessStaticViaInstance", "EmptyClass"})
-@BehaviourContext
+@Context
 public final class BehaviourExpectationsExample {
     private final List<String> strings = new ArrayList<String>();
     private final SomeClass someClass = new SomeClass(strings);
@@ -37,7 +37,6 @@ public final class BehaviourExpectationsExample {
                 one(strings).clear();
             }
         });
-
         someClass.doStuff();
     }
 

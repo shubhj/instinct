@@ -18,8 +18,8 @@ package com.googlecode.instinct.integrate.junit3;
 
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
-import com.googlecode.instinct.internal.aggregate.AnnotatedBehaviourContextAggregatorImpl;
-import com.googlecode.instinct.internal.aggregate.BehaviourContextAggregator;
+import com.googlecode.instinct.internal.aggregate.AnnotatedContextAggregatorImpl;
+import com.googlecode.instinct.internal.aggregate.ContextAggregator;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
@@ -30,11 +30,11 @@ import junit.framework.TestSuite;
 @Suggest("Move this (& all JUnit stuff) into a seperate distribution")
 public final class JUnitTestSuiteBuilderImpl implements JUnitTestSuiteBuilder {
     private final EdgeClass edgeClass = new DefaultEdgeClass();
-    private final BehaviourContextAggregator aggregator;
+    private final ContextAggregator aggregator;
 
     public <T> JUnitTestSuiteBuilderImpl(final Class<T> classInSpecTree) {
         checkNotNull(classInSpecTree);
-        aggregator = new AnnotatedBehaviourContextAggregatorImpl(classInSpecTree);
+        aggregator = new AnnotatedContextAggregatorImpl(classInSpecTree);
     }
 
     public Test buildSuite(final String suiteName) {
