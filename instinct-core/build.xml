@@ -87,7 +87,7 @@
                 <include name="**/*"/>
             </fileset>
             <filterset>
-                <filter token="TITLE" value="Artefacts - ${project.longname} Version ${project.version.full}"/>
+                <filter token="TITLE" value="Artefacts - ${project.shortname} v${project.version.full}"/>
                 <filter token="PROJECT_NAME" value="${project.longname}"/>
                 <filter token="PROJECT_JAR" value="${project.jar}"/>
                 <filter token="RELEASE_ZIP" value="${project.zip}"/>
