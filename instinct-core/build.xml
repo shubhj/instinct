@@ -8,7 +8,7 @@
         <delete dir="${build.dir}"/>
     </target>
 
-    <target name="all" depends="clean,test,-check-coverage,release"/>
+    <target name="all" depends="clean,test,-check-coverage,release,-artifacts"/>
     <target name="compile" depends="clean,-compile"/>
     <target name="test" depends="clean,-test"/>
     <target name="javadoc" depends="clean,-javadoc"/>
@@ -73,15 +73,30 @@
         </sequential>
     </macrodef>
 
-    <target name="atomic-test">
+    <target name="-atomic-test">
         <runtests.macro test.type="atomic"/>
     </target>
 
-    <target name="slow-test">
+    <target name="-slow-test">
         <runtests.macro test.type="slow"/>
     </target>
 
-    <target name="-test" depends="atomic-test,slow-test,-merge-coverage"/>
+    <target name="-artifacts" depends="-release-zip">
+        <copy todir="${build.dir}">
+            <fileset dir="${etc.dir}/artefacts">
+                <include name="**/*"/>
+            </fileset>
+            <filterset>
+                <filter token="TITLE" value="Artefacts - ${project.longname} Version ${project.version.full}"/>
+                <filter token="PROJECT_NAME" value="${project.longname}"/>
+                <filter token="PROJECT_JAR" value="${project.jar}"/>
+                <filter token="RELEASE_ZIP" value="${project.zip}"/>
+                <filter token="JAVADOC_ZIP" value="${javadoc.zip}"/>
+            </filterset>
+        </copy>
+    </target>
+
+    <target name="-test" depends="-atomic-test,-slow-test,-merge-coverage"/>
 
     <target name="-javadoc" depends="-compile">
         <mkdir dir="${javadoc.dir}"/>
@@ -107,7 +122,7 @@
         <delete dir="${test.classes.dir}"/>
     </target>
 
-    <target name="-jar" depends="-clean-classes,-compile">
+    <target name="-jar" depends="-disable-coverage,-clean-classes,-compile">
         <cloverclean.macro test.type="atomic"/>
         <cloverclean.macro test.type="slow"/>
         <jar destfile="${build.dir}/${project.jar}">

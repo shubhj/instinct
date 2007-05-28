@@ -56,19 +56,16 @@
         <cloverreport.macro test.type="merged"/>
     </target>
 
+    <target name="-disable-coverage">
+        <cloverdisable.macro test.type="atomic"/>
+        <cloverdisable.macro test.type="slow"/>
+    </target>
+
     <macrodef name="clovercommon.macro">
         <attribute name="test.type"/>
         <sequential>
             <taskdef resource="clovertasks" classpathref="test.class.path"/>
             <property name="coverage.@{test.type}.dir" value="${build.dir}/coverage/@{test.type}"/>
-        </sequential>
-    </macrodef>
-
-    <macrodef name="cloverclean.macro">
-        <attribute name="test.type"/>
-        <sequential>
-            <taskdef resource="clovertasks" classpathref="test.class.path"/>
-            <clover-clean initString="${coverage.@{test.type}.dir}/coverage.db" keepdb="true" verbose="true"/>
         </sequential>
     </macrodef>
 
@@ -81,6 +78,22 @@
                     flushinterval="${coverage.flush.interval}">
                 <fileset refid="covered.code.fileset"/>
             </clover-setup>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="cloverdisable.macro">
+        <attribute name="test.type"/>
+        <sequential>
+            <clovercommon.macro test.type="@{test.type}"/>
+            <clover-setup initString="${coverage.@{test.type}.dir}/coverage.db" enabled="false"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="cloverclean.macro">
+        <attribute name="test.type"/>
+        <sequential>
+            <taskdef resource="clovertasks" classpathref="test.class.path"/>
+            <clover-clean initString="${coverage.@{test.type}.dir}/coverage.db" keepdb="true" verbose="true"/>
         </sequential>
     </macrodef>
 
