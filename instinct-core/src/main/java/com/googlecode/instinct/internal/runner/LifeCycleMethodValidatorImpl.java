@@ -22,7 +22,7 @@ import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.marker.BehaviourContextConfigurationException;
+import com.googlecode.instinct.marker.ContextConfigurationException;
 import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
 
 final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
@@ -57,7 +57,7 @@ final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
             edgeClass.getConstructor(cls);
         } catch (EdgeException e) {
             final String message = "Unable to run context. Context '" + cls.getSimpleName() + "' must have a public no-argument constructor";
-            throw new BehaviourContextConfigurationException(message, e);
+            throw new ContextConfigurationException(message, e);
         }
     }
 }

@@ -18,7 +18,7 @@ package com.googlecode.instinct.internal.aggregate;
 
 import java.io.File;
 import java.io.FileFilter;
-import static com.googlecode.instinct.internal.aggregate.BehaviourContextAggregatorSlowTest.EXPECTED_CONTEXTS;
+import static com.googlecode.instinct.internal.aggregate.ContextAggregatorSlowTest.EXPECTED_CONTEXTS;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;

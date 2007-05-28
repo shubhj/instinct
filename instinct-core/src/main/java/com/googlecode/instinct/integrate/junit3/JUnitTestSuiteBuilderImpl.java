@@ -23,7 +23,7 @@ import com.googlecode.instinct.internal.aggregate.ContextAggregator;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.marker.iface.BehaviourContext;
+import com.googlecode.instinct.marker.iface.Context;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -46,14 +46,14 @@ public final class JUnitTestSuiteBuilderImpl implements JUnitTestSuiteBuilder {
     private TestSuite buildSuite(final String suiteName, final JavaClassName[] contextClasses) {
         final TestSuite suite = new TestSuite(suiteName);
         for (final JavaClassName contextClass : contextClasses) {
-            final Class<BehaviourContext> cls = getClass(contextClass);
+            final Class<Context> cls = getClass(contextClass);
             suite.addTest(new ContextTestSuite(cls));
         }
         return suite;
     }
 
     @SuppressWarnings({"unchecked", "JUnitTestCaseInProductSource"})
-    private <T extends BehaviourContext> Class<T> getClass(final JavaClassName className) {
+    private <T extends Context> Class<T> getClass(final JavaClassName className) {
         final String qualified = className.getFullyQualifiedName();
         return edgeClass.forName(qualified);
     }

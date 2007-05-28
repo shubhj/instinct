@@ -17,12 +17,12 @@
 package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.lang.reflect.Field;
-import com.googlecode.instinct.marker.annotate.Dummy;
 import static com.googlecode.instinct.expect.Mocker.eq;
 import static com.googlecode.instinct.expect.Mocker.expects;
 import static com.googlecode.instinct.expect.Mocker.mock;
 import static com.googlecode.instinct.expect.Mocker.returnValue;
 import static com.googlecode.instinct.expect.Mocker.same;
+import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import com.googlecode.instinct.test.reflect.Reflector;
@@ -32,6 +32,17 @@ import org.junit.Assert;
 public final class AnnotatedFieldLocatorImplAtomicTest extends InstinctTestCase {
     private AnnotatedFieldLocator locator;
     private AnnotationChecker checker;
+
+    @Override
+    public void setUpTestDoubles() {
+        checker = mock(AnnotationChecker.class);
+    }
+
+    @Override
+    public void setUpSubject() {
+        locator = new AnnotatedFieldLocatorImpl();
+        insertFieldValue(locator, "annotationChecker", checker);
+    }
 
     public void testConformsToClassTraits() {
         checkClass(AnnotatedFieldLocatorImpl.class, AnnotatedFieldLocator.class);
@@ -66,16 +77,5 @@ public final class AnnotatedFieldLocatorImplAtomicTest extends InstinctTestCase 
 
     private Field getField(final String fieldName) {
         return Reflector.getFieldByName(WithRuntimeAnnotations.class, fieldName);
-    }
-
-    @Override
-    public void setUpTestDoubles() {
-        checker = mock(AnnotationChecker.class);
-    }
-
-    @Override
-    public void setUpSubject() {
-        locator = new AnnotatedFieldLocatorImpl();
-        insertFieldValue(locator, "annotationChecker", checker);
     }
 }

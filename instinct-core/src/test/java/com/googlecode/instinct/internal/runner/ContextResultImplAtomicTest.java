@@ -44,9 +44,9 @@ public final class ContextResultImplAtomicTest extends InstinctTestCase {
         checkClass(ContextResultImpl.class, ContextResult.class);
     }
 
-    public void testGetBehaviourContextName() {
-        checkGetBahaviourContextName("name1");
-        checkGetBahaviourContextName("name2");
+    public void testGetContextName() {
+        checkGetContextName("name1");
+        checkGetContextName("name2");
     }
 
     public void testResultAddedAppearsInListReturnedFromGetResults() {
@@ -73,8 +73,8 @@ public final class ContextResultImplAtomicTest extends InstinctTestCase {
         assertEquals(1, contextResult.getNumberOfSuccesses());
     }
 
-    private void checkGetBahaviourContextName(final String behaviourContextName) {
-        final ContextResult result = new ContextResultImpl(behaviourContextName);
-        assertEquals(behaviourContextName, result.getContextName());
+    private void checkGetContextName(final String contextName) {
+        final ContextResult result = new ContextResultImpl(contextName);
+        assertEquals(contextName, result.getContextName());
     }
 }

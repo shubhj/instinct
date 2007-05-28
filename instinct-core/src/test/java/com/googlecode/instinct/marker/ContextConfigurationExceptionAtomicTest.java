@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.marker.iface;
+package com.googlecode.instinct.marker;
 
-import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ExceptionChecker.checkException;
 
-@SuppressWarnings({"MarkerInterface"})
-@Context
-public interface BehaviourContext {
+public final class ContextConfigurationExceptionAtomicTest extends InstinctTestCase {
+    public void testConformsToClassTraits() {
+        checkException(ContextConfigurationException.class);
+    }
 }

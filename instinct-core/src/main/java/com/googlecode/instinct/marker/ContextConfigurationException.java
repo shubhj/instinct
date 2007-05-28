@@ -16,11 +16,14 @@
 
 package com.googlecode.instinct.marker;
 
-import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.ExceptionChecker.checkException;
+public final class ContextConfigurationException extends RuntimeException {
+    private static final long serialVersionUID = -4941355685885692333L;
 
-public final class BehaviourContextConfigurationExceptionAtomicTest extends InstinctTestCase {
-    public void testConformsToClassTraits() {
-        checkException(BehaviourContextConfigurationException.class);
+    public ContextConfigurationException(final String message) {
+        super(message);
+    }
+
+    public ContextConfigurationException(final String message, final Throwable cause) {
+        super(message, cause);
     }
 }

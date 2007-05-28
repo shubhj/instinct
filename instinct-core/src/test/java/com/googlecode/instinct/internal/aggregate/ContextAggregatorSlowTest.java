@@ -14,17 +14,22 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.marker.naming;
+package com.googlecode.instinct.internal.aggregate;
 
+import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
-public final class BehaviourContextNamingConventionAtomicTest extends InstinctTestCase {
-    public void testConformsToClassTraits() {
-        checkClass(BehaviourContextNamingConvention.class, NamingConvention.class);
+public final class ContextAggregatorSlowTest extends InstinctTestCase {
+    public static final int EXPECTED_CONTEXTS = 22;
+    private ContextAggregator aggregator;
+
+    @Override
+    public void setUpSubject() {
+        aggregator = new AnnotatedContextAggregatorImpl(ContextAggregatorSlowTest.class);
     }
 
-    public void testGetPattern() {
-        assertEquals(".*Context$", new BehaviourContextNamingConvention().getPattern());
+    public void testFindsCorrectNumberOfContexts() {
+        final JavaClassName[] contexts = aggregator.getContextNames();
+        assertEquals(EXPECTED_CONTEXTS, contexts.length);
     }
 }

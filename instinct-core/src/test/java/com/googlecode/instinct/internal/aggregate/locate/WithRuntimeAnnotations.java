@@ -24,14 +24,14 @@ import com.googlecode.instinct.marker.annotate.Specification;
 @Context
 public class WithRuntimeAnnotations {
     @Dummy
-    protected final String string3;
+    protected final String string1;
     @Dummy
-    public final String string4;
-    public final String string5;
+    public final String string2;
+    public final String string3;
     @Dummy
-    final String string2;
+    final String string4;
     @Dummy
-    private final String string1;
+    private final String string5;
 
     public WithRuntimeAnnotations(final String string1, final String string2, final String string3, final String string4, final String string5) {
         this.string1 = string1;

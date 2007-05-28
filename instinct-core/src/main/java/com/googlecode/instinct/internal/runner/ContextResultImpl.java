@@ -24,15 +24,15 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitesp
 
 public final class ContextResultImpl extends Primordial implements ContextResult {
     private final List<SpecificationResult> specificationResults = new ArrayList<SpecificationResult>();
-    private final String behaviourContextName;
+    private final String contextName;
 
-    public ContextResultImpl(final String behaviourContextName) {
-        checkNotWhitespace(behaviourContextName);
-        this.behaviourContextName = behaviourContextName;
+    public ContextResultImpl(final String contextName) {
+        checkNotWhitespace(contextName);
+        this.contextName = contextName;
     }
 
     public String getContextName() {
-        return behaviourContextName;
+        return contextName;
     }
 
     public void addSpecificationResult(final SpecificationResult specificationResult) {

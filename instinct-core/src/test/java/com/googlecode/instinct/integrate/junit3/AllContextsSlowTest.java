@@ -26,12 +26,12 @@ import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import com.googlecode.instinct.internal.util.JavaClassName;
-import com.googlecode.instinct.marker.BehaviourContextConfigurationException;
+import com.googlecode.instinct.marker.ContextConfigurationException;
 import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 @SuppressWarnings({"ProhibitedExceptionThrown"})
-public final class AllBehaviourContextsSlowTest extends InstinctTestCase {
+public final class AllContextsSlowTest extends InstinctTestCase {
     private final EdgeClass edgeClass = new DefaultEdgeClass();
     private final ContextRunner contextRunner = new StandardContextRunner();
 
@@ -40,7 +40,7 @@ public final class AllBehaviourContextsSlowTest extends InstinctTestCase {
     }
 
     private void runAllContexts() {
-        final ContextAggregator contextAggregator = new AnnotatedContextAggregatorImpl(AllBehaviourContextsSlowTest.class);
+        final ContextAggregator contextAggregator = new AnnotatedContextAggregatorImpl(AllContextsSlowTest.class);
         final JavaClassName[] contextClasses = contextAggregator.getContextNames();
         for (final JavaClassName contextClassName : contextClasses) {
             final Class<?> cls = edgeClass.forName(contextClassName.getFullyQualifiedName());
@@ -51,7 +51,7 @@ public final class AllBehaviourContextsSlowTest extends InstinctTestCase {
     private <T> void invokeContextIgnoringConfigurationExceptions(final Class<T> cls) {
         try {
             contextRunner.run(new ContextClassImpl(cls));
-        } catch (BehaviourContextConfigurationException ignored) {
+        } catch (ContextConfigurationException ignored) {
         } catch (LifeCycleMethodConfigurationException ignored) {
         } catch (EdgeException e) {
             if (e.getCause() instanceof InvocationTargetException) {

@@ -21,14 +21,14 @@ import static java.util.Arrays.asList;
 import java.util.List;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
+import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
-import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.Fix;
+import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
-import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.report.StatusLogger;
 import com.googlecode.instinct.runner.StatusLoggingContextRunner;
 import org.apache.tools.ant.BuildException;
@@ -81,13 +81,13 @@ public final class InstinctAntTask extends Task implements StatusLogger {
 
     @Fix("Register as a runner, so that we recieve results as it happens.")
     private void runContexts() {
-        final List<JavaClassName> contextClasses = findBehaviourContextsFromAllAggregators();
+        final List<JavaClassName> contextClasses = findContextsFromAllAggregators();
         final ContextRunner runner = new StatusLoggingContextRunner(new StandardContextRunner(),
                 formatter.createMessageBuilder(), this);
         runContexts(runner, contextClasses);
     }
 
-    private List<JavaClassName> findBehaviourContextsFromAllAggregators() {
+    private List<JavaClassName> findContextsFromAllAggregators() {
         final List<JavaClassName> contextClasses = new ArrayList<JavaClassName>();
         for (final Specifications specificationLocator : specificationLocators) {
             contextClasses.addAll(asList(specificationLocator.getContextClasses()));
