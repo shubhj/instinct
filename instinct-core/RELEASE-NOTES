@@ -5,7 +5,6 @@ o Behavioural expectation API (i.e. mocking) - com.googlecode.instinct.expect.Ex
 
 * Instinct Release 0.1.4 *
 
-o Behavioural expectation API (i.e. mocking) - com.googlecode.instinct.expect.Expect.
 o Removed the need for specification methods to have a void return type (provides
   cleaner Groovy integration).
 o Renamed BehaviourContext to just Context to bring into line with rest of code.
