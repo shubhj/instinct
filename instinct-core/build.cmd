@@ -46,6 +46,7 @@ set LOCALPATH=%LOCALPATH%;%LIBDIR%\ant\ant-1.7.0.jar
 set LOCALPATH=%LOCALPATH%;%LIBDIR%\ant\ant-launcher-1.7.0.jar
 set LOCALPATH=%LOCALPATH%;%LIBDIR%\ant\ant-junit-1.7.0.jar
 set LOCALPATH=%LOCALPATH%;%LIBDIR%\junit-4.3.1.jar
+set LOCALPATH=%LOCALPATH%;%LIBDIR%\clover\clover-1.3.13.jar
 
 :testjavahome
 if "%JAVA_HOME%" == "" goto setjavahome
