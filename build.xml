@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="instinct" default="full-release" basedir=".">
+
+    <!-- FIX Pull this from the core build file. -->
+    <property name="project.version.full"/>
+
+    <property name="core.dir" value="instinct-core"/>
+    <property name="idea.dir" value="instinct-idea"/>
+
+    <target name="full-release">
+        <ant antfile="${core.dir}/build.xml" target="release"/>
+        <antcall target="-tag-repository"/>
+        <antcall target="-upload-to-googlecode"/>
+    </target>
+
+    <target name="-tag-repository">
+        <!-- Note. Assumes latest changes are checked into svn trunk. -->
+        <java classname="org.tmatesoft.svn.cli.SVN" fork="true">
+            <classpath>
+                <fileset dir="${core.dir}/lib/svn" includes="javasvn.jar"/>
+                <fileset dir="${core.dir}/lib/svn" includes="javasvn-cli.jar"/>
+            </classpath>
+            <arg value="copy -m 'Release ${project.version.full}'"/>
+            <arg value="https://instinct.googlecode.com/svn/trunk"/>
+            <arg value="https://instinct.googlecode.com/svn/tags/Release-${project.version.full}"/>
+        </java>
+    </target>
+
+    <!-- FIXME: Implement this - see etc/googlecode/googlecode-upload.py. -->
+    <target name="-upload-to-googlecode"/>
+
+</project>
