@@ -17,6 +17,7 @@
 package com.googlecode.instinct.internal.report;
 
 import static java.lang.System.getProperty;
+import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import static java.util.regex.Pattern.MULTILINE;
@@ -48,8 +49,12 @@ public final class BriefResultMessageBuilder implements ResultMessageBuilder {
     private String buildContextResultMessage(final ContextResult contextResult) {
         final StringBuilder builder = new StringBuilder();
         builder.append(contextResult.getContextName()).append(NEW_LINE);
-        for (final SpecificationResult specificationResult : contextResult.getSpecificationResults()) {
+        for (final Iterator<SpecificationResult> iterator = contextResult.getSpecificationResults().iterator(); iterator.hasNext();) {
+            final SpecificationResult specificationResult = iterator.next();
             builder.append("- ").append(buildSpecificationResultMessage(specificationResult));
+            if (iterator.hasNext()) {
+                builder.append(NEW_LINE);
+            }
         }
         return builder.toString();
     }
@@ -66,7 +71,11 @@ public final class BriefResultMessageBuilder implements ResultMessageBuilder {
 
     private String getFailureCause(final SpecificationResult specificationResult) {
         final String failureCause = failureMessageBuilder.buildMessage(specificationResult.getStatus());
-        return indentEachLine(failureCause);
+        return indentEachLine(removeLastNewline(failureCause));
+    }
+
+    private String removeLastNewline(final String failureCause) {
+        return failureCause.endsWith(NEW_LINE) ? failureCause.substring(0, failureCause.length() - 1) : failureCause;
     }
 
     @Suggest("Utility?")
