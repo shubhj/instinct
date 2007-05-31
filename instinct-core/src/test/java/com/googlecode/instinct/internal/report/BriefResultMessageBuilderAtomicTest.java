@@ -33,14 +33,14 @@ import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
 import com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
-@SuppressWarnings({"HardcodedLineSeparator"})
-public final class BriefResultMessageBuilderSlowTest extends InstinctTestCase {
+public final class BriefResultMessageBuilderAtomicTest extends InstinctTestCase {
     private static final String NEW_LINE = getProperty("line.separator");
     private static final String TAB = "\t";
     private ResultMessageBuilder briefResultMessageBuilder;
     private ContextResult contextResult;
-    private SpecificationResult succeedingSpec;
+    private SpecificationResult succeedingSpec1;
     private SpecificationResult failingSpec;
     private SpecificationRunStatus failureStatus;
     private SpecificationFailureMessageBuilder failureMessageBuilder;
@@ -53,9 +53,10 @@ public final class BriefResultMessageBuilderSlowTest extends InstinctTestCase {
         failureStatus = new SpecificationRunFailureStatus(failureCause);
         failingSpec = new SpecificationResultImpl("fails", failureStatus, 1L);
         final SpecificationRunStatus successStatus = new SpecificationRunSuccessStatus();
-        succeedingSpec = new SpecificationResultImpl("runs", successStatus, 1L);
+        succeedingSpec1 = new SpecificationResultImpl("runs", successStatus, 1L);
         contextResult.addSpecificationResult(failingSpec);
-        contextResult.addSpecificationResult(succeedingSpec);
+        contextResult.addSpecificationResult(succeedingSpec1);
+        contextResult.addSpecificationResult(new SpecificationResultImpl("soDoesThis", successStatus, 2L));
     }
 
     @Override
@@ -63,21 +64,25 @@ public final class BriefResultMessageBuilderSlowTest extends InstinctTestCase {
         briefResultMessageBuilder = new BriefResultMessageBuilder();
     }
 
+    public void testConformsToClassTraits() {
+        checkClass(BriefResultMessageBuilder.class, ResultMessageBuilder.class);
+    }
+
     public void testCreatesBriefContextResultMessages() {
         final String expectedContextMessage = "Context" + NEW_LINE
                 + "- fails (FAILED)" + NEW_LINE + NEW_LINE
-                + formatFailureCause()
-                + "- runs";
+                + formatFailureCause() + NEW_LINE
+                + "- runs" + NEW_LINE
+                + "- soDoesThis";
         expect.that(briefResultMessageBuilder.buildMessage(contextResult)).equalTo(expectedContextMessage);
     }
 
     public void testCreatesBriefSpecificationSuccessResultMessages() {
-        expect.that(briefResultMessageBuilder.buildMessage(succeedingSpec)).equalTo("runs");
+        expect.that(briefResultMessageBuilder.buildMessage(succeedingSpec1)).equalTo("runs");
     }
 
     public void testCreatesBriefSpecificationFailuresResultMessages() {
-        final String expected = "fails (FAILED)" + NEW_LINE + NEW_LINE
-                + formatFailureCause();
+        final String expected = "fails (FAILED)" + NEW_LINE + NEW_LINE + formatFailureCause();
         expect.that(briefResultMessageBuilder.buildMessage(failingSpec)).equalTo(expected);
     }
 
@@ -85,6 +90,10 @@ public final class BriefResultMessageBuilderSlowTest extends InstinctTestCase {
         final String failureCause = failureMessageBuilder.buildMessage(failureStatus);
         final Pattern startOfLine = compile("^", MULTILINE);
         final Matcher matcher = startOfLine.matcher(failureCause);
-        return matcher.replaceAll(TAB);
+        return removeLastNewline(matcher.replaceAll(TAB));
+    }
+
+    private String removeLastNewline(final String failureCause) {
+        return failureCause.endsWith(NEW_LINE) ? failureCause.substring(0, failureCause.length() - 1) : failureCause;
     }
 }
