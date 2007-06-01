@@ -4,8 +4,8 @@
     <!-- FIX Pull this from the core build file. -->
     <property name="project.version.full"/>
 
-    <property name="core.dir" value="instinct-core"/>
-    <property name="idea.dir" value="instinct-idea"/>
+    <property name="core.dir" value="core"/>
+    <property name="idea.dir" value="idea"/>
 
     <target name="full-release">
         <ant antfile="${core.dir}/build.xml" target="release"/>
