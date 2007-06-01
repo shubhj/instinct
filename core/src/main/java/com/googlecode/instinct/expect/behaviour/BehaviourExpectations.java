@@ -1,5 +1,7 @@
 package com.googlecode.instinct.expect.behaviour;
 
+import com.googlecode.instinct.internal.util.Fix;
+
 /**
  * Behaviour expectation API.
  * Behaviour expectations are expectations of a class' behaviour, made using mock collaborators. The Instinct behaviour expectation API is built on
@@ -21,5 +23,6 @@ package com.googlecode.instinct.expect.behaviour;
  * Mock collablorators are created automatically using the {@link com.googlecode.instinct.marker.annotate.Mock} annotation or manually using
  * {@link com.googlecode.instinct.expect.Mocker#mock(Class)}.
  */
+@Fix({"Add javadoc"})
 public interface BehaviourExpectations {
 }

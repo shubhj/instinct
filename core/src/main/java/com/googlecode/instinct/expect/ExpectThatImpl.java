@@ -40,7 +40,7 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 
-@Fix({"Add javadoc", "Come up with a better way to compose these interfaces into one, perhaps a proxy."})
+@Fix({"Use the new interface composer to compose these interfaces."})
 public final class ExpectThatImpl implements ExpectThat {
     private StateExpectations stateExpectations = new StateExpectationsImpl();
     private BehaviourExpectations behaviourExpectations = new BehaviourExpectationsImpl();

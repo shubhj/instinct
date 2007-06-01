@@ -3,6 +3,7 @@ package com.googlecode.instinct.expect.state;
 import java.util.Collection;
 import java.util.EventObject;
 import java.util.Map;
+import com.googlecode.instinct.internal.util.Fix;
 import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 
@@ -16,6 +17,7 @@ import org.w3c.dom.Node;
  * <li>The standard Hamcrest Matchers or custom Matcher implementations to be passed in as well.</li>
  * </ol>
  */
+@Fix({"Add javadoc"})
 public interface StateExpectations {
     <T> ObjectChecker<T> that(T object);
 
