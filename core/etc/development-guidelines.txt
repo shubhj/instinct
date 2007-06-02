@@ -1,0 +1,19 @@
+Prod code
+- User-facing code goes into top level packages, internal code belongs in internal.
+  It's OK if external code returns internal implementations. Prefer to return external
+  interfaces though.
+- There is no IoC container, play around if you want to use constructor injection,
+  or use manual field injection with non-final fields. Avoid setter injection.
+- Prefer interfaces for all classes.
+- Try to write real objects, not procedural code.
+- Reject nulls.
+- Prefer "immutable" classes. Don't use setters that allow an object to be set up in
+  a bad state, only use them for optional fields or where the usage requires
+  mutability.
+- Prefer to use final on 
+
+Test code
+
+- Don't add methods to the super class test case. Prefer static imports.
+- Use the SubjectCreator to create test subjects. This will handle dependencies.
+- Ensure code is policy checked (nulls, finals, etc.).

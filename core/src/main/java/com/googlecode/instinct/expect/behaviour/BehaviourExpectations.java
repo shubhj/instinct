@@ -1,6 +1,6 @@
 package com.googlecode.instinct.expect.behaviour;
 
-import com.googlecode.instinct.internal.util.Fix;
+import org.jmock.Expectations;
 
 /**
  * Behaviour expectation API.
@@ -23,6 +23,12 @@ import com.googlecode.instinct.internal.util.Fix;
  * Mock collablorators are created automatically using the {@link com.googlecode.instinct.marker.annotate.Mock} annotation or manually using
  * {@link com.googlecode.instinct.expect.Mocker#mock(Class)}.
  */
-@Fix({"Add javadoc"})
 public interface BehaviourExpectations {
+
+    /**
+     * Sets behaviour expectations using a jMock 2 syntax.
+     *
+     * @param expectations The jMock2 expectations to set.
+     */
+    void that(Expectations expectations);
 }

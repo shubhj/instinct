@@ -39,6 +39,7 @@ import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
+import org.jmock.Expectations;
 
 @Fix({"Use the new interface composer to compose these interfaces."})
 public final class ExpectThatImpl implements ExpectThat {
@@ -101,5 +102,10 @@ public final class ExpectThatImpl implements ExpectThat {
     public <T> void notThat(final T t, final Matcher<T> hamcrestMatcher) {
         checkNotNull(hamcrestMatcher);
         stateExpectations.that(hamcrestMatcher);
+    }
+
+    public void that(final Expectations expectations) {
+        checkNotNull(expectations);
+        behaviourExpectations.that(expectations);
     }
 }
