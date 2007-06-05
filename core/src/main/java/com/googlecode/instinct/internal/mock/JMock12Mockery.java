@@ -23,7 +23,7 @@ import org.jmock.core.InvocationMatcher;
 import org.jmock.core.Stub;
 import org.jmock.core.constraint.IsInstanceOf;
 
-public interface Mockery {
+public interface JMock12Mockery {
     <T> T mock(Class<T> toMock);
 
     <T> T mock(Class<T> toMock, String roleName);

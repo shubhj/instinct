@@ -18,9 +18,9 @@ package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.io.File;
 import java.io.FileFilter;
-import static com.googlecode.instinct.expect.Mocker.expects;
-import static com.googlecode.instinct.expect.Mocker.mock;
-import static com.googlecode.instinct.expect.Mocker.returnValue;
+import static com.googlecode.instinct.expect.Mocker12.expects;
+import static com.googlecode.instinct.expect.Mocker12.mock;
+import static com.googlecode.instinct.expect.Mocker12.returnValue;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 

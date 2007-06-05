@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.io.File;
-import static com.googlecode.instinct.expect.Mocker.mock;
+import static com.googlecode.instinct.expect.Mocker12.mock;
 import com.googlecode.instinct.internal.util.ClassInstantiator;
 import com.googlecode.instinct.internal.util.ClassInstantiatorFactory;
 import com.googlecode.instinct.test.InstinctTestCase;

@@ -20,22 +20,22 @@ import java.lang.reflect.Method;
 import static java.util.Arrays.asList;
 import java.util.Collection;
 import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.expect.Mocker.expects;
-import static com.googlecode.instinct.expect.Mocker.isA;
-import static com.googlecode.instinct.expect.Mocker.mock;
-import static com.googlecode.instinct.expect.Mocker.returnValue;
-import static com.googlecode.instinct.expect.Mocker.same;
+import static com.googlecode.instinct.expect.Mocker12.expects;
+import static com.googlecode.instinct.expect.Mocker12.isA;
+import static com.googlecode.instinct.expect.Mocker12.mock;
+import static com.googlecode.instinct.expect.Mocker12.returnValue;
+import static com.googlecode.instinct.expect.Mocker12.same;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.marker.MarkingScheme;
+import com.googlecode.instinct.runner.ContextListener;
+import com.googlecode.instinct.runner.SpecificationListener;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.Reflector.getMethod;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
-import com.googlecode.instinct.runner.SpecificationListener;
-import com.googlecode.instinct.runner.ContextListener;
 
 @SuppressWarnings({"unchecked"})
 public final class ContextClassImplAtomicTest extends InstinctTestCase {

@@ -21,7 +21,7 @@ import org.jmock.Expectations;
  * }});
  * </pre>
  * Mock collablorators are created automatically using the {@link com.googlecode.instinct.marker.annotate.Mock} annotation or manually using
- * {@link com.googlecode.instinct.expect.Mocker#mock(Class)}.
+ * {@link com.googlecode.instinct.expect.Mocker12#mock(Class)}.
  */
 public interface BehaviourExpectations {
 

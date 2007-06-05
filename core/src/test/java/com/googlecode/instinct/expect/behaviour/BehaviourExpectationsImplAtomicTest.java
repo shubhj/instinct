@@ -16,7 +16,8 @@
 
 package com.googlecode.instinct.expect.behaviour;
 
-import static com.googlecode.instinct.expect.Mocker.mock;
+import static com.googlecode.instinct.expect.Mocker12.mock;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import org.jmock.Expectations;
@@ -39,6 +40,7 @@ public final class BehaviourExpectationsImplAtomicTest extends InstinctTestCase 
         checkClass(BehaviourExpectationsImpl.class, BehaviourExpectations.class);
     }
 
+    @Suggest("Breadcrumb: Expect side effects on mockery.")
     public void testSetsExpectationsUsingJMock2Syntax() {
         behaviourExpectations.that(expectations);
     }

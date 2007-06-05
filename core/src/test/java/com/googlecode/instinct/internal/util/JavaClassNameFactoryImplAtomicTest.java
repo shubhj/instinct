@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.util;
 
 import java.io.File;
-import static com.googlecode.instinct.expect.Mocker.mock;
+import static com.googlecode.instinct.expect.Mocker12.mock;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 

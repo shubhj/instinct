@@ -1,9 +1,9 @@
 package com.googlecode.instinct.expect;
 
-import static com.googlecode.instinct.expect.Mocker.expects;
-import static com.googlecode.instinct.expect.Mocker.mock;
-import static com.googlecode.instinct.expect.Mocker.returnValue;
-import static com.googlecode.instinct.expect.Mocker.same;
+import static com.googlecode.instinct.expect.Mocker12.expects;
+import static com.googlecode.instinct.expect.Mocker12.mock;
+import static com.googlecode.instinct.expect.Mocker12.returnValue;
+import static com.googlecode.instinct.expect.Mocker12.same;
 import com.googlecode.instinct.expect.behaviour.BehaviourExpectations;
 import com.googlecode.instinct.expect.state.ObjectChecker;
 import com.googlecode.instinct.expect.state.StateExpectations;
@@ -15,7 +15,7 @@ import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubject;
 @Suggest({"Breadcrumb:",
         "Behaviour expectations plan.",
         "1. Drive out that(Expectations) to support jMock 2",
-        "2. Move Mocker & Mockery infrastructure over to jMock2. Fix tests as required.",
+        "2. Move Mocker12 & JMock12Mockery infrastructure over to jMock2. Fix tests as required.",
         "3. Use that() to drive out facade on top of ObjectChecker that delegates to either a state or",
         "mock aware checker depending on object status (i.e. is it a mock?)."})
 public final class ExpectThatImplAtomicTest extends InstinctTestCase {

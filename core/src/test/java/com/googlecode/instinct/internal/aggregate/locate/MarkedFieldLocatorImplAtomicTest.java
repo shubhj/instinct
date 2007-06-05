@@ -17,12 +17,12 @@
 package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.lang.reflect.Field;
+import static com.googlecode.instinct.expect.Mocker12.expects;
+import static com.googlecode.instinct.expect.Mocker12.mock;
+import static com.googlecode.instinct.expect.Mocker12.returnValue;
+import static com.googlecode.instinct.expect.Mocker12.same;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.naming.DummyNamingConvention;
-import static com.googlecode.instinct.expect.Mocker.expects;
-import static com.googlecode.instinct.expect.Mocker.mock;
-import static com.googlecode.instinct.expect.Mocker.returnValue;
-import static com.googlecode.instinct.expect.Mocker.same;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;

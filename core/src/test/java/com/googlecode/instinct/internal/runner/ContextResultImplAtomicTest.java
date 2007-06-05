@@ -17,10 +17,10 @@
 package com.googlecode.instinct.internal.runner;
 
 import java.util.List;
-import static com.googlecode.instinct.expect.Mocker.atLeastOnce;
-import static com.googlecode.instinct.expect.Mocker.expects;
-import static com.googlecode.instinct.expect.Mocker.mock;
-import static com.googlecode.instinct.expect.Mocker.returnValue;
+import static com.googlecode.instinct.expect.Mocker12.atLeastOnce;
+import static com.googlecode.instinct.expect.Mocker12.expects;
+import static com.googlecode.instinct.expect.Mocker12.mock;
+import static com.googlecode.instinct.expect.Mocker12.returnValue;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;

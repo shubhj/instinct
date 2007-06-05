@@ -16,12 +16,12 @@
 
 package com.googlecode.instinct.runner;
 
-import static com.googlecode.instinct.expect.Mocker.expects;
-import static com.googlecode.instinct.expect.Mocker.mock;
-import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkInterface;
+import static com.googlecode.instinct.expect.Mocker12.expects;
+import static com.googlecode.instinct.expect.Mocker12.mock;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.runner.ContextResult;
+import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkInterface;
 
 public final class ContextListenerAtomicTest extends InstinctTestCase {
     private ContextClass contextClass;

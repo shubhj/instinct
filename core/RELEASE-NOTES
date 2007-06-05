@@ -1,6 +1,9 @@
 * Instinct Release 0.1.5 *
 
 o Behavioural expectation API (i.e. mocking) - com.googlecode.instinct.expect.Expect.
+o Moved old mocking code to jMock 2, removed jMock 1.2 dependency.
+o Updated to jMock 2.1.
+o Fixed Issue 4 - Add newlines between context output in brief runner
 
 
 * Instinct Release 0.1.4 *

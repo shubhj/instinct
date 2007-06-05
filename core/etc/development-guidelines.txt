@@ -10,7 +10,7 @@ Prod code
 - Prefer "immutable" classes. Don't use setters that allow an object to be set up in
   a bad state, only use them for optional fields or where the usage requires
   mutability.
-- Prefer to use final on 
+- Prefer to use final on local variables and parameters.
 
 Test code
 

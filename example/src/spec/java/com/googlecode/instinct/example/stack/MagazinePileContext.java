@@ -1,9 +1,9 @@
 package com.googlecode.instinct.example.stack;
 
-import static com.googlecode.instinct.expect.Mocker.expects;
-import static com.googlecode.instinct.expect.Mocker.mock;
-import static com.googlecode.instinct.expect.Mocker.same;
-import static com.googlecode.instinct.expect.Mocker.verify;
+import static com.googlecode.instinct.expect.Mocker12.expects;
+import static com.googlecode.instinct.expect.Mocker12.mock;
+import static com.googlecode.instinct.expect.Mocker12.same;
+import static com.googlecode.instinct.expect.Mocker12.verify;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;

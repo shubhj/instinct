@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.expect;
 
-import com.googlecode.instinct.internal.mock.Mockery;
-import com.googlecode.instinct.internal.mock.MockeryImpl;
+import com.googlecode.instinct.internal.mock.JMock12Mockery;
+import com.googlecode.instinct.internal.mock.JMock12MockeryImpl;
 import com.googlecode.instinct.internal.util.Suggest;
 import org.jmock.builder.NameMatchBuilder;
 import org.jmock.core.Constraint;
@@ -26,78 +26,78 @@ import org.jmock.core.Stub;
 import org.jmock.core.constraint.IsInstanceOf;
 
 @Suggest("This becomes the jMock 1.1 implementation of BehaviourExpectations.")
-public final class Mocker {
-    private static final Mockery MOCKERY = new MockeryImpl();
+public final class Mocker12 {
+    private static final JMock12Mockery JMOCK_12_MOCKERY = new JMock12MockeryImpl();
 
-    private Mocker() {
+    private Mocker12() {
         throw new UnsupportedOperationException();
     }
 
     public static <T> T mock(final Class<T> toMock) {
-        return MOCKERY.mock(toMock);
+        return JMOCK_12_MOCKERY.mock(toMock);
     }
 
     public static <T> T mock(final Class<T> toMock, final String roleName) {
-        return MOCKERY.mock(toMock, roleName);
+        return JMOCK_12_MOCKERY.mock(toMock, roleName);
     }
 
     public static NameMatchBuilder expects(final Object mockedObject) {
-        return MOCKERY.expects(mockedObject);
+        return JMOCK_12_MOCKERY.expects(mockedObject);
     }
 
     public static NameMatchBuilder expects(final Object mockedObject, final InvocationMatcher expectation) {
-        return MOCKERY.expects(mockedObject, expectation);
+        return JMOCK_12_MOCKERY.expects(mockedObject, expectation);
     }
 
     public static InvocationMatcher once() {
-        return MOCKERY.once();
+        return JMOCK_12_MOCKERY.once();
     }
 
     public static InvocationMatcher times(final int expectedNumberOfCalls) {
-        return MOCKERY.times(expectedNumberOfCalls);
+        return JMOCK_12_MOCKERY.times(expectedNumberOfCalls);
     }
 
 //    public static InvocationMatcher times(final int minNumberOfCalls, final int maxNumberOfCalls) {
-//        return MOCKERY.times(minNumberOfCalls, maxNumberOfCalls);
+//        return JMOCK_12_MOCKERY.times(minNumberOfCalls, maxNumberOfCalls);
 //    }
 
     public static InvocationMatcher atLeastOnce() {
-        return MOCKERY.atLeastOnce();
+        return JMOCK_12_MOCKERY.atLeastOnce();
     }
 
     public static InvocationMatcher anyTimes() {
-        return MOCKERY.anyTimes();
+        return JMOCK_12_MOCKERY.anyTimes();
     }
 
     public static Constraint anything() {
-        return MOCKERY.anything();
+        return JMOCK_12_MOCKERY.anything();
     }
 
     public static <T> IsInstanceOf isA(final Class<T> operandClass) {
-        return MOCKERY.isA(operandClass);
+        return JMOCK_12_MOCKERY.isA(operandClass);
     }
 
     public static Constraint eq(final Object argument) {
-        return MOCKERY.eq(argument);
+        return JMOCK_12_MOCKERY.eq(argument);
     }
 
     public static Constraint same(final Object argument) {
-        return MOCKERY.same(argument);
+        return JMOCK_12_MOCKERY.same(argument);
     }
 
     public static Constraint sameElements(final Object[] argument) {
-        return MOCKERY.sameElements(argument);
+        return JMOCK_12_MOCKERY.sameElements(argument);
     }
 
     public static Stub returnValue(final Object returnValue) {
-        return MOCKERY.returnValue(returnValue);
+        return JMOCK_12_MOCKERY.returnValue(returnValue);
     }
 
     public static void verify() {
-        MOCKERY.verify();
+        JMOCK_12_MOCKERY.verify();
     }
 
     public static void reset() {
-        MOCKERY.reset();
+        JMOCK_12_MOCKERY.reset();
     }
 }
