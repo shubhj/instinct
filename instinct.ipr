@@ -1100,15 +1100,19 @@
     </library>
     <library name="jmock2">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-2.1.0-RC1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-objenesis-2.1.0-RC1.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-junit3-2.1.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-2.1.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-junit4-2.1.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-legacy-2.1.0.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$PROJECT_DIR$/core/etc/lib-doc/jmock-2.1.0-RC1-javadoc.zip!/jmock-2.1.0-RC1/doc" />
+        <root url="jar://$PROJECT_DIR$/core/etc/lib-doc/jmock-2.1.0-javadoc.zip!/" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-2.1.0-RC1.jar!/" />
-        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-objenesis-2.1.0-RC1.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-junit3-2.1.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-2.1.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-junit4-2.1.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-legacy-2.1.0.jar!/" />
       </SOURCES>
     </library>
     <library name="jmock1">
