@@ -21,6 +21,7 @@ import java.lang.reflect.Method;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.TestingException;
 
 public final class Reflector {
@@ -44,15 +45,10 @@ public final class Reflector {
     @Fix("Refactor this sucker.")
     public static void insertFieldValueUsingInferredType(final Object instance, final Object value) {
         checkNotNull(instance, value);
-        final Class<?> valueType = value.getClass();
-        final Class<?> implementedInterfaceType = valueType.getInterfaces()[0];
-        if (containsFieldOfType(instance.getClass(), valueType)) {
-            setFieldValue(instance, valueType, value);
-        } else if (containsFieldOfType(instance.getClass(), implementedInterfaceType)) {
-            setFieldValue(instance, implementedInterfaceType, value);
+        if (containsFieldOfType(instance.getClass(), value.getClass())) {
+            setFieldValue(instance, value.getClass(), value);
         } else {
-            throw new TestingException("Unable to find field of type " + valueType.getSimpleName() + " or "
-                    + implementedInterfaceType.getSimpleName() + " on class " + instance.getClass().getSimpleName());
+            setFieldValueUsingSuperType(instance, value);
         }
     }
 
@@ -74,6 +70,28 @@ public final class Reflector {
         } catch (NoSuchFieldException e) {
             throw new TestingException("Unable to find field '" + fieldName + "' on class " + cls.getSimpleName(), e);
         }
+    }
+
+    private static void setFieldValueUsingSuperType(final Object instance, final Object value) {
+        if (containsFieldOfType(instance.getClass(), value.getClass().getSuperclass())) {
+            setFieldValue(instance, value.getClass().getSuperclass(), value);
+        } else {
+            final boolean fieldSetUsingParentInterface = setFieldValueUsingParentInterface(instance, value);
+            if (!fieldSetUsingParentInterface) {
+                throw new TestingException("Unable to find field of type "
+                        + value.getClass().getSimpleName() + " on class " + instance.getClass().getSimpleName());
+            }
+        }
+    }
+
+    private static boolean setFieldValueUsingParentInterface(Object instance, Object value) {
+        for (final Class<?> implementedInterfaceType : value.getClass().getInterfaces()) {
+            if (containsFieldOfType(instance.getClass(), implementedInterfaceType)) {
+                setFieldValue(instance, implementedInterfaceType, value);
+                return true;
+            }
+        }
+        return false;
     }
 
     private static <T> void setFieldValue(final Object instance, final Class<T> targetFieldType, final Object value) {
@@ -105,6 +123,7 @@ public final class Reflector {
         return getFieldByName(instance.getClass(), fieldName);
     }
 
+    @Suggest("Belongs in utility.")
     private static void setValue(final Field field, final Object instance, final Object value) {
         try {
             field.setAccessible(true);
