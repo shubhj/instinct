@@ -16,6 +16,8 @@
 
 package com.googlecode.instinct.expect.behaviour;
 
-public interface JMock2Mockery {
+import org.jmock.internal.ExpectationBuilder;
 
+public interface JMock2Mockery extends Mockery {
+    void checking(ExpectationBuilder expectations);
 }

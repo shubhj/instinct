@@ -16,8 +16,32 @@
 
 package com.googlecode.instinct.expect.behaviour;
 
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import org.jmock.Mockery;
+import org.jmock.internal.ExpectationBuilder;
 
 public final class JMock2MockeryImpl implements JMock2Mockery {
-    private Mockery mockery;
+    private final Mockery mockery = new Mockery();
+
+    public <T> T mock(final Class<T> typeToMock) {
+        checkNotNull(typeToMock);
+        return mockery.mock(typeToMock);
+    }
+
+    public <T> T mock(final Class<T> typeToMock, final String roleName) {
+        checkNotNull(typeToMock, roleName);
+        return mockery.mock(typeToMock, roleName);
+    }
+
+    public void checking(final ExpectationBuilder expectations) {
+        checkNotNull(expectations);
+        mockery.checking(expectations);
+    }
+
+    public void verify() {
+        mockery.assertIsSatisfied();
+    }
+
+    public void reset() {
+    }
 }
