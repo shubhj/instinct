@@ -34,7 +34,7 @@ import org.jmock.core.stub.ReturnStub;
 @Suggest("Do we want to reject nulls in these public methods?")
 public final class JMock12MockeryImpl implements JMock12Mockery {
     private final Verifier verifier = new VerifierImpl();
-    private Resetter resetter = new ResetterImpl();
+    private final Resetter resetter = new ResetterImpl();
     private final TestDoubleHolder holder = new TestDoubleHolderImpl();
     private final MockCreator mockCreator = new JMockMockCreator();
 
