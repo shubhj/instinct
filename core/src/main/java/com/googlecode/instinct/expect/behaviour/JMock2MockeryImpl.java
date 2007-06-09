@@ -19,9 +19,15 @@ package com.googlecode.instinct.expect.behaviour;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import org.jmock.Mockery;
 import org.jmock.internal.ExpectationBuilder;
+import org.jmock.lib.legacy.ClassImposteriser;
 
 public final class JMock2MockeryImpl implements JMock2Mockery {
-    private final Mockery mockery = new Mockery();
+    @SuppressWarnings({"EmptyClass"})
+    private final Mockery mockery = new Mockery() {
+        {
+            setImposteriser(ClassImposteriser.INSTANCE);
+        }
+    };
 
     public <T> T mock(final Class<T> typeToMock) {
         checkNotNull(typeToMock);

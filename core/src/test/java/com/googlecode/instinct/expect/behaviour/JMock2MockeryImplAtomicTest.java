@@ -25,19 +25,17 @@ import org.jmock.Mockery;
 import org.jmock.internal.ExpectationBuilder;
 import org.jmock.lib.legacy.ClassImposteriser;
 
-@SuppressWarnings({"JUnitTestCaseWithNonTrivialConstructors"})
+@SuppressWarnings({"JUnitTestCaseWithNonTrivialConstructors", "EmptyClass"})
 public final class JMock2MockeryImplAtomicTest extends InstinctTestCase {
-    private Mockery context = new Mockery();
+    private Mockery context = new Mockery(){{
+        setImposteriser(ClassImposteriser.INSTANCE);
+    }};
     private JMock2Mockery jMock2Mockery;
     private ExpectationBuilder expectations;
     private Class<CharSequence> typeToMock;
     private String returnedMock;
     private String roleName;
     private Mockery mockery;
-
-    {
-        context.setImposteriser(ClassImposteriser.INSTANCE);
-    }
 
     @Override
     public void setUpTestDoubles() {

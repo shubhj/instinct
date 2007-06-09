@@ -16,9 +16,11 @@
 
 package com.googlecode.instinct.expect.behaviour;
 
+import java.io.BufferedReader;
 import com.googlecode.instinct.test.InstinctTestCase;
 import org.jmock.Expectations;
 
+@SuppressWarnings({"EmptyClass"})
 public final class JMock2MockeryImplSlowTest extends InstinctTestCase {
     private JMock2Mockery mockery;
 
@@ -31,6 +33,13 @@ public final class JMock2MockeryImplSlowTest extends InstinctTestCase {
         final CharSequence sequence = mockery.mock(CharSequence.class);
         mockery.checking(new Expectations() {{
             one(sequence).charAt(0); will(returnValue(0));
+        }});
+    }
+
+    public void testMocksConcreteClasses() {
+        final BufferedReader sequence = mockery.mock(BufferedReader.class);
+        mockery.checking(new Expectations() {{
+            one(sequence).markSupported(); will(returnValue(false));
         }});
     }
 }
