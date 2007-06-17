@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.expect.behaviour;
+package com.googlecode.instinct.internal.expect.behaviour;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import org.jmock.Mockery;
@@ -26,6 +26,7 @@ public final class JMock2MockeryImpl implements JMock2Mockery {
     private final Mockery mockery = new Mockery() {
         {
             setImposteriser(ClassImposteriser.INSTANCE);
+//            setExpectationErrorTranslator(new IdentityExpectationErrorTranslator());
         }
     };
 
@@ -46,8 +47,5 @@ public final class JMock2MockeryImpl implements JMock2Mockery {
 
     public void verify() {
         mockery.assertIsSatisfied();
-    }
-
-    public void reset() {
     }
 }

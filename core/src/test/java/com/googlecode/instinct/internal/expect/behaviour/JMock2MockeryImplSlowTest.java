@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.expect.behaviour;
+package com.googlecode.instinct.internal.expect.behaviour;
 
 import java.io.BufferedReader;
 import static com.googlecode.instinct.expect.Expect.expect;
@@ -37,17 +37,23 @@ public final class JMock2MockeryImplSlowTest extends InstinctTestCase {
 
     public void testMocksInterfaces() {
         final CharSequence sequence = mockery.mock(CharSequence.class);
-        mockery.checking(new Expectations() {{
-            one(sequence).charAt(0); will(returnValue('2'));
-        }});
+        mockery.checking(new Expectations() {
+            {
+                one(sequence).charAt(0);
+                will(returnValue('2'));
+            }
+        });
         expect.that(sequence.charAt(0)).equalTo('2');
     }
 
     public void testMocksConcreteClasses() {
         final BufferedReader reader = mockery.mock(BufferedReader.class);
-        mockery.checking(new Expectations() {{
-            one(reader).markSupported(); will(returnValue(false));
-        }});
+        mockery.checking(new Expectations() {
+            {
+                one(reader).markSupported();
+                will(returnValue(false));
+            }
+        });
         expect.that(reader.markSupported()).equalTo(false);
     }
 }

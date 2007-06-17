@@ -11,7 +11,7 @@
     <property name="main.classes.dir" value="${build.dir}/main-classes"/>
     <property name="spec.classes.dir" value="${build.dir}/spec-classes"/>
 
-    <property name="instinct.jar" value="${lib.dir}/instinct-0.1.4.jar"/>
+    <property name="instinct.jar" value="${lib.dir}/instinct-0.1.5.jar"/>
 
     <path id="main.class.path">
         <fileset dir="${basedir}">
@@ -26,8 +26,8 @@
             <include name="${lib.dir}/cglib-nodep-2.2_beta1.jar"/>
             <include name="${lib.dir}/jmock-core-1.2.0.jar"/>
             <include name="${lib.dir}/jmock-cglib-1.2.0.jar"/>
-            <include name="${lib.dir}/jmock-2.1.0-RC1.jar"/>
-            <include name="${lib.dir}/jmock-objenesis-2.1.0-RC1.jar"/>
+            <include name="${lib.dir}/jmock-2.1.0.jar"/>
+            <include name="${lib.dir}/jmock-legacy-2.1.0.jar"/>
             <include name="${lib.dir}/objenesis-1.0.jar"/>
             <include name="${lib.dir}/ant-1.7.0.jar"/>
             <include name="${lib.dir}/hamcrest-all-1.0.jar"/>

@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.expect.behaviour;
+package com.googlecode.instinct.internal.expect.behaviour;
 
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubject;
-import static com.googlecode.instinct.expect.Expect.*;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.internal.ExpectationBuilder;
@@ -27,9 +27,11 @@ import org.jmock.lib.legacy.ClassImposteriser;
 
 @SuppressWarnings({"JUnitTestCaseWithNonTrivialConstructors", "EmptyClass"})
 public final class JMock2MockeryImplAtomicTest extends InstinctTestCase {
-    private Mockery context = new Mockery(){{
-        setImposteriser(ClassImposteriser.INSTANCE);
-    }};
+    private Mockery context = new Mockery() {
+        {
+            setImposteriser(ClassImposteriser.INSTANCE);
+        }
+    };
     private JMock2Mockery jMock2Mockery;
     private ExpectationBuilder expectations;
     private Class<CharSequence> typeToMock;
@@ -61,23 +63,40 @@ public final class JMock2MockeryImplAtomicTest extends InstinctTestCase {
     }
 
     public void testDelegatesMockCallsToUnderlyingMockery() {
-        context.checking(new Expectations() {{
-            one(mockery).mock(typeToMock); will(returnValue(returnedMock));
-        }});
+        context.checking(new Expectations() {
+            {
+                one(mockery).mock(typeToMock);
+                will(returnValue(returnedMock));
+            }
+        });
         expect.that(jMock2Mockery.mock(typeToMock)).sameInstanceAs(returnedMock);
     }
 
     public void testDelegatesMockWithRoleNameCallsToUnderlyingMockery() {
-        context.checking(new Expectations() {{
-            one(mockery).mock(typeToMock, roleName); will(returnValue(returnedMock));
-        }});
+        context.checking(new Expectations() {
+            {
+                one(mockery).mock(typeToMock, roleName);
+                will(returnValue(returnedMock));
+            }
+        });
         expect.that(jMock2Mockery.mock(typeToMock, roleName)).sameInstanceAs(returnedMock);
     }
 
     public void testDelegatesCheckingToUnderlyingMockery() {
-        context.checking(new Expectations(){{
-            one(mockery).checking(expectations);
-        }});
+        context.checking(new Expectations() {
+            {
+                one(mockery).checking(expectations);
+            }
+        });
         jMock2Mockery.checking(expectations);
+    }
+
+    public void testVerifiesByCallingAssertIsSatisfiedOnUnderlyingMockery() {
+        context.checking(new Expectations() {
+            {
+                one(mockery).assertIsSatisfied();
+            }
+        });
+        jMock2Mockery.verify();
     }
 }

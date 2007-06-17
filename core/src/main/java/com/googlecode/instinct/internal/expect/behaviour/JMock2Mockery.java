@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.expect.behaviour;
+package com.googlecode.instinct.internal.expect.behaviour;
 
+import com.googlecode.instinct.expect.behaviour.Mockery;
 import org.jmock.internal.ExpectationBuilder;
 
 public interface JMock2Mockery extends Mockery {
