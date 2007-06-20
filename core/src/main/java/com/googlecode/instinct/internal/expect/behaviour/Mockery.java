@@ -16,8 +16,10 @@
 
 package com.googlecode.instinct.internal.expect.behaviour;
 
-import org.jmock.internal.ExpectationBuilder;
+public interface Mockery {
+    <T> T mock(Class<T> typeToMock);
 
-public interface JMock2Mockery extends Mockery {
-    void checking(ExpectationBuilder expectations);
+    <T> T mock(Class<T> typeToMock, String roleName);
+
+    void verify();
 }

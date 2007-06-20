@@ -9,10 +9,10 @@ import org.jmock.Expectations;
  * <pre>
  * final List&lt;String&gt; strings = mock(List.class);
  *
- * // Instinct DSL
+ * // Instinct DSL (not implemented yet)
  * expect.that(one(strings).add("abc")).will(returnValue(true));
  *
- * // jMock 1 style
+ * // jMock 1 style (not implemented yet)
  * expect.that(strings, once()).method("add").with(eq("abc")).will(returnValue(true));
  *
  * // jMock 2 style
@@ -24,7 +24,6 @@ import org.jmock.Expectations;
  * {@link com.googlecode.instinct.expect.Mocker12#mock(Class)}.
  */
 public interface BehaviourExpectations {
-
     /**
      * Sets behaviour expectations using a jMock 2 syntax.
      *

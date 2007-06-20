@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.expect.behaviour;
+package com.googlecode.instinct.expect;
 
-public interface Mockery {
-    <T> T mock(Class<T> typeToMock);
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.test.InstinctTestCase;
+import org.jmock.Expectations;
 
-    <T> T mock(Class<T> typeToMock, String roleName);
-
-    void verify();
+public final class ExpectThatImplSlowTest extends InstinctTestCase {
+    public void testSetsExpectationsUsingJMock2Syntax() {
+        expect.that(new Expectations());
+    }
 }
