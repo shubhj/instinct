@@ -21,7 +21,7 @@ import com.googlecode.instinct.internal.expect.behaviour.JMock2MockeryImpl;
 import com.googlecode.instinct.internal.util.Suggest;
 
 public final class Mocker {
-    @Suggest("Use a DI container to get this.")
+    @Suggest("Use a DI container to get this?")
     private static final JMock2Mockery J_MOCK2_MOCKERY = new JMock2MockeryImpl();
 
     private Mocker() {
