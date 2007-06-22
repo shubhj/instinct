@@ -21,7 +21,6 @@ import java.lang.reflect.Method;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.TestingException;
 
 public final class Reflector {
@@ -36,8 +35,15 @@ public final class Reflector {
         setValue(field, instance, value);
     }
 
+    public static <T> void insertFieldValue(final Class<T> cls, final String fieldName, final Object value) {
+        checkNotNull(cls, value);
+        checkNotWhitespace(fieldName);
+        final Field field = getFieldByName(cls, fieldName);
+        setValue(field, cls, value);
+    }
+
     public static <T> void insertFieldValue(final Object instance, final Class<T> valueType, final Object value) {
-        checkNotNull(instance, value);
+        checkNotNull(instance, valueType, value);
         setFieldValue(instance, valueType, value);
     }
 
@@ -123,7 +129,6 @@ public final class Reflector {
         return getFieldByName(instance.getClass(), fieldName);
     }
 
-    @Suggest("Belongs in utility.")
     private static void setValue(final Field field, final Object instance, final Object value) {
         try {
             field.setAccessible(true);

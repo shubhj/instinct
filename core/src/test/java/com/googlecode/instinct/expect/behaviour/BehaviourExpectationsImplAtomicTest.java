@@ -16,32 +16,31 @@
 
 package com.googlecode.instinct.expect.behaviour;
 
-import static com.googlecode.instinct.expect.Mocker12.mock;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import org.jmock.Expectations;
 
+@Suggest("Come back & fix this test up once we can wire in dependencies to statics.")
 public final class BehaviourExpectationsImplAtomicTest extends InstinctTestCase {
-    private BehaviourExpectations behaviourExpectations;
-    private Expectations expectations;
+//    private BehaviourExpectations behaviourExpectations;
+//    private Expectations expectations;
 
-    @Override
-    public void setUpTestDoubles() {
-        expectations = mock(Expectations.class);
-    }
+//    @Override
+//    public void setUpTestDoubles() {
+//        expectations = mock(Expectations.class);
+//    }
 
-    @Override
-    public void setUpSubject() {
-        behaviourExpectations = new BehaviourExpectationsImpl();
-    }
+//    @Override
+//    public void setUpSubject() {
+//        behaviourExpectations = createSubject(BehaviourExpectationsImpl.class);
+//    }
 
     public void testConformsToClassTraits() {
         checkClass(BehaviourExpectationsImpl.class, BehaviourExpectations.class);
     }
 
-    @Suggest("Breadcrumb: Expect side effects on mockery.")
-    public void testSetsExpectationsUsingJMock2Syntax() {
-        behaviourExpectations.that(expectations);
-    }
+//    public void testSetsExpectationsUsingJMock2Syntax() {
+//        expects(mockery).method("checking").with(eq(expectations));
+//        behaviourExpectations.that(expectations);
+//    }
 }

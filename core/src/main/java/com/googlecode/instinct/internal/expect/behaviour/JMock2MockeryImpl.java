@@ -26,7 +26,6 @@ public final class JMock2MockeryImpl implements JMock2Mockery {
     private final Mockery mockery = new Mockery() {
         {
             setImposteriser(ClassImposteriser.INSTANCE);
-//            setExpectationErrorTranslator(new IdentityExpectationErrorTranslator());
         }
     };
 

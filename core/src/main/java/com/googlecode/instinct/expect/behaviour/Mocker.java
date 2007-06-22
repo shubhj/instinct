@@ -14,13 +14,24 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.aggregate;
+package com.googlecode.instinct.expect.behaviour;
 
-import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.internal.expect.behaviour.JMock2Mockery;
+import com.googlecode.instinct.internal.expect.behaviour.JMock2MockeryImpl;
 import com.googlecode.instinct.internal.util.Suggest;
 
-@Suggest("Belongs in public API.")
-public interface ContextAggregator {
-    @Suggest("Return a collection.")
-    JavaClassName[] getContextNames();
+public final class Mocker {
+    @Suggest("Use a DI container to get this.")
+    private static final JMock2Mockery J_MOCK2_MOCKERY = new JMock2MockeryImpl();
+
+    private Mocker() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Suggest("Rename to getJMock2Mockery()?")
+    public static JMock2Mockery getMockery() {
+        return J_MOCK2_MOCKERY;
+    }
+
+    // FIX: Add all the methods from mockery, to allow for manual mocking.
 }

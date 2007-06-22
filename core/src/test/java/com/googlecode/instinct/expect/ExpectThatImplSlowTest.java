@@ -17,11 +17,35 @@
 package com.googlecode.instinct.expect;
 
 import static com.googlecode.instinct.expect.Expect.expect;
+import static com.googlecode.instinct.expect.behaviour.Mocker.getMockery;
+import com.googlecode.instinct.internal.expect.behaviour.JMock2Mockery;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
 import org.jmock.Expectations;
 
+@SuppressWarnings({"EmptyClass"})
 public final class ExpectThatImplSlowTest extends InstinctTestCase {
+    private CharSequence charSequence;
+    private JMock2Mockery mockery;
+
+    @Suggest("Don't use the mocker directly, use the Mocker. Requires methods to be exposed.")
+    @Override
+    public void setUpTestDoubles() {
+        mockery = getMockery();
+        charSequence = mockery.mock(CharSequence.class);
+    }
+
+    @Override
+    public void tearDown() {
+        mockery.verify();
+    }
+
     public void testSetsExpectationsUsingJMock2Syntax() {
-        expect.that(new Expectations());
+        expect.that(new Expectations() {
+            {
+                one(charSequence).charAt(0);
+            }
+        });
+        charSequence.charAt(0);
     }
 }

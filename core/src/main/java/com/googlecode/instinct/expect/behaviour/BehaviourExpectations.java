@@ -1,6 +1,6 @@
 package com.googlecode.instinct.expect.behaviour;
 
-import org.jmock.Expectations;
+import org.jmock.internal.ExpectationBuilder;
 
 /**
  * Behaviour expectation API.
@@ -29,5 +29,5 @@ public interface BehaviourExpectations {
      *
      * @param expectations The jMock2 expectations to set.
      */
-    void that(Expectations expectations);
+    void that(ExpectationBuilder expectations);
 }
