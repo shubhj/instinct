@@ -81,8 +81,7 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
 
     private void nullCheckString(final String string, final String methodName) {
         if (string == null) {
-            throw new IllegalArgumentException("Cannot pass a null string into " +
-                    methodName);
+            throw new IllegalArgumentException("Cannot pass a null string into " + methodName);
         }
     }
 }

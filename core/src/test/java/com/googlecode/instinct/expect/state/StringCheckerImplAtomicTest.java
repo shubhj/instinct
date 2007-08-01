@@ -18,24 +18,28 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
     }
 
     public void testEndsWithShowsHumanReadableStringWhenNullPassed() {
-        try {
-            checker.endsWith(null);
-            fail("Expected illegal argument exception");
-        } catch (IllegalArgumentException e) {
-            final String message = e.getMessage();
-            assertEquals("Cannot pass a null string into endsWith", message);
-        } catch (Throwable t) {
-            fail("Expected IllegalArgumentException but was " + t);
-        }
+        expectNullRejected("endsWith", new Runnable() {
+            public void run() {
+                checker.endsWith(null);
+            }
+        });
     }
 
     public void testContainsStringShowsHumanReadableStringWhenNullPassed() {
+        expectNullRejected("containsString", new Runnable() {
+            public void run() {
+                checker.containsString(null);
+            }
+        });
+    }
+
+    private void expectNullRejected(final String methodName, final Runnable block) {
         try {
-            checker.containsString(null);
+            block.run();
             fail("Expected illegal argument exception");
         } catch (IllegalArgumentException e) {
             final String message = e.getMessage();
-            assertEquals("Cannot pass a null string into containsString", message);
+            assertEquals("Cannot pass a null string into " + methodName, message);
         } catch (Throwable t) {
             fail("Expected IllegalArgumentException but was " + t);
         }
