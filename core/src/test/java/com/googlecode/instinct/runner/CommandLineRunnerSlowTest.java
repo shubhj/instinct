@@ -18,6 +18,7 @@ package com.googlecode.instinct.runner;
 
 import java.io.File;
 import static java.io.File.pathSeparatorChar;
+import static java.io.File.separatorChar;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -99,7 +100,8 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
         return createProcessBuilder(createCommand(classesToRun));
     }
 
-    private <T> ProcessBuilder createProcessBuilder(final Class<T> contextClassToRun, final String specificationMethod) {
+    private <T> ProcessBuilder createProcessBuilder(final Class<T> contextClassToRun,
+            final String specificationMethod) {
         return createProcessBuilder(createCommand(contextClassToRun, specificationMethod));
     }
 
@@ -118,7 +120,7 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
 
     private String[] createCommand(final Class<?>... classesToRun) {
         final List<String> command = new ArrayList<String>();
-        command.add("java");
+        command.add(getJavaCommand());
         command.add("-cp");
         command.add(buildClassPath());
         command.add(CommandLineRunner.class.getName());
@@ -128,11 +130,25 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
         return command.toArray(new String[command.size()]);
     }
 
+    private String getJavaCommand() {
+        return getJavaPath() + "java";
+    }
+
+    private String getJavaPath() {
+        final String javaHome = System.getenv().get("JAVA_HOME");
+        if (javaHome == null) {
+            return "";
+        } else {
+            return javaHome + separatorChar;
+        }
+    }
+
     private String buildClassPath() {
         final String boost = getJarFilePath(NullMaster.class);
         final String hamcrest = getJarFilePath(Matchers.class);
         final String clover = getJarFilePath(Clover.class);
-        return getSourceRoot() + pathSeparatorChar + getTestRoot() + pathSeparatorChar + hamcrest + pathSeparatorChar + boost + pathSeparatorChar
+        return getSourceRoot() + pathSeparatorChar + getTestRoot() + pathSeparatorChar + hamcrest + pathSeparatorChar
+                + boost + pathSeparatorChar
                 + clover + pathSeparatorChar;
     }
 
@@ -148,7 +164,8 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
         expect.that(new String(processError).trim()).isEmpty();
     }
 
-    private void expectThatRunnerSendsSpeciciationResultsToOutput(final byte[] processOutput, final String specificationName,
+    private void expectThatRunnerSendsSpeciciationResultsToOutput(final byte[] processOutput,
+            final String specificationName,
             final Class<?>... contextClasses) {
         final String runnerOutput = new String(processOutput);
         for (final Class<?> contextClass : contextClasses) {
