@@ -16,9 +16,6 @@
 
 package com.googlecode.instinct.expect;
 
-import java.util.Collection;
-import java.util.EventObject;
-import java.util.Map;
 import com.googlecode.instinct.expect.behaviour.BehaviourExpectations;
 import com.googlecode.instinct.expect.behaviour.BehaviourExpectationsImpl;
 import com.googlecode.instinct.expect.state.ArrayChecker;
@@ -37,6 +34,9 @@ import com.googlecode.instinct.expect.state.StateExpectationsImpl;
 import com.googlecode.instinct.expect.state.StringChecker;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import java.util.Collection;
+import java.util.EventObject;
+import java.util.Map;
 import org.hamcrest.Matcher;
 import org.jmock.internal.ExpectationBuilder;
 import org.w3c.dom.Node;

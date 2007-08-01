@@ -16,8 +16,6 @@
 
 package com.googlecode.instinct.internal.aggregate.locate;
 
-import java.io.File;
-import java.io.FileFilter;
 import static com.googlecode.instinct.expect.Mocker12.eq;
 import static com.googlecode.instinct.expect.Mocker12.expects;
 import static com.googlecode.instinct.expect.Mocker12.mock;
@@ -28,6 +26,8 @@ import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;
+import java.io.File;
+import java.io.FileFilter;
 
 public final class AnnotationFileFilterAtomicTest extends InstinctTestCase {
     private FileFilter filter;

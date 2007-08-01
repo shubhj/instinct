@@ -16,14 +16,15 @@
 
 package com.googlecode.instinct.expect.state;
 
-import java.util.Collection;
-import java.util.EventObject;
-import java.util.Map;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdgeImpl;
+import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import java.util.Collection;
+import java.util.EventObject;
+import java.util.Map;
 import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 
@@ -90,6 +91,7 @@ public final class StateExpectationsImpl implements StateExpectations {
         matcher.expectNotThat(t, hamcrestMatcher);
     }
 
+    @Fix("Remove check for null here, need to be careful of NPEs.")
     private <T> T createChecker(Class<T> checkerClass, Object subject) {
         checkNotNull(checkerClass, subject);
         return objectFactory.create(checkerClass, subject);

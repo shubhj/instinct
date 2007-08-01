@@ -16,22 +16,22 @@
 
 package com.googlecode.instinct.internal.aggregate.locate;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.lang.annotation.Annotation;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import java.io.File;
+import java.io.FileFilter;
+import java.lang.annotation.Annotation;
 
 public final class AnnotationFileFilter implements FileFilter {
     private ObjectFactory objectFactory = new ObjectFactoryImpl();
-    private final Class<? extends Annotation> annotationType;
     private final File packageRoot;
+    private final Class<? extends Annotation> annotationType;
 
     public <T extends Annotation> AnnotationFileFilter(final File packageRoot, final Class<T> annotationType) {
         checkNotNull(packageRoot, annotationType);
-        this.annotationType = annotationType;
         this.packageRoot = packageRoot;
+        this.annotationType = annotationType;
     }
 
     public boolean accept(final File pathname) {
