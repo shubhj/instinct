@@ -63,7 +63,6 @@ public final class StateExpectationsContext {
         expect.that(people).isEmpty();
         people.add("fred");
         people.add("wilma");
-        expect.that(people).isEmpty();
         expect.that(people).notEmpty();
         expect.that(people).hasSize(2);
         expect.that(people).containsItems("fred", "wilma");
