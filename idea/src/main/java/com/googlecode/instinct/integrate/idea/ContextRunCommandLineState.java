@@ -46,38 +46,19 @@ public final class ContextRunCommandLineState extends JavaCommandLineState {
         return createParameters(specificationToRun);
     }
 
-    @Suggest({"Append the classpath of the plugin (last?) so that we don't need to add instinct to the classpath of the project,", "or",
-            "can use differerent versions of instinct in the plugin vs the project using we're running"})
     private JavaParameters createParameters(final String specificationsToRun) throws CantRunException {
         final JavaParameters parameters = new JavaParameters();
         parameters.setMainClass(COMMAND_LINE_RUNNER_CLASS_NAME);
         parameters.getProgramParametersList().addParametersString(specificationsToRun);
         parameters.configureByModule(runConfiguration.getModule(), JavaParameters.JDK_AND_CLASSES_AND_TESTS);
         parameters.setWorkingDirectory(runConfiguration.getWorkingDirectoryPath());
-//        final PathsList classPath = parameters.getClassPath();
-//        final IdeaPluginDescriptor ideaPluginDescriptor = PluginManager.getPlugin(PluginId.getId(""));
-//        System.out.println(classPath.getPathList());
         return parameters;
     }
 
     @Suggest("Move this into a shared class, parsing & creating belong in the same class.")
-    private String createSpecificationsToRunArgument(final String contextClassName, final String specificationMethodName) {
-        return specificationMethodName.length() == 0 ? contextClassName : contextClassName + METHOD_SEPARATOR + specificationMethodName;
+    private String createSpecificationsToRunArgument(final String contextClassName,
+            final String specificationMethodName) {
+        return specificationMethodName.length() == 0 ? contextClassName
+                : contextClassName + METHOD_SEPARATOR + specificationMethodName;
     }
-
-/*
-ClassPath (excl. JDK clases):
-[/Users/tom/tmp/instinct-example/i-build/test
- /Users/tom/tmp/instinct-example/i-build/main
- /Users/tom/tmp/instinct-example/lib/junit-4.3.1.jar
- /Users/tom/tmp/instinct-example/lib/cglib-nodep-2.2_beta1.jar
- /Users/tom/tmp/instinct-example/lib/jmock-2.1.0-RC1.jar
- /Users/tom/tmp/instinct-example/lib/objenesis-1.0.jar
- /Users/tom/tmp/instinct-example/lib/jmock-cglib-1.2.0.jar
- /Users/tom/tmp/instinct-example/lib/instinct-0.1.4.jar
- /Users/tom/tmp/instinct-example/lib/jmock-objenesis-2.1.0-RC1.jar
- /Users/tom/tmp/instinct-example/lib/hamcrest-all-1.0.jar
- /Users/tom/tmp/instinct-example/lib/jmock-core-1.2.0.jar
- /Users/tom/tmp/instinct-example/lib/boost-982.jar]
-*/
 }
