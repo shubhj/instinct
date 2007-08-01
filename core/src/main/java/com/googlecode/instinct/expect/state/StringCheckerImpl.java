@@ -42,9 +42,7 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
     }
 
     public final void containsString(final String string) {
-        if (string == null) {
-            throw new IllegalArgumentException("Cannot pass a null string into containsString");            
-        }
+        nullCheckString(string, "containsString");
         getAsserter().expectThat(subject, Matchers.containsString(string));
     }
 
@@ -53,9 +51,7 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
     }
 
     public final void endsWith(final String string) {
-        if (string == null) {
-            throw new IllegalArgumentException("Cannot pass a null string into endsWith");
-        }
+        nullCheckString(string, "endsWith");
         getAsserter().expectThat(subject, Matchers.endsWith(string));
     }
 
@@ -81,5 +77,12 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
 
     public final void hasLength(final int length) {
         getAsserter().expectThat(subject, StringLengthMatcher.hasLength(length));
+    }
+
+    private void nullCheckString(final String string, final String methodName) {
+        if (string == null) {
+            throw new IllegalArgumentException("Cannot pass a null string into " +
+                    methodName);
+        }
     }
 }
