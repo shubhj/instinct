@@ -139,7 +139,7 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
         if (javaHome == null) {
             return "";
         } else {
-            return javaHome + separatorChar;
+            return javaHome + separatorChar + "bin" + separatorChar;
         }
     }
 
