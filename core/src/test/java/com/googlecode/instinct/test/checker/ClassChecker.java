@@ -67,6 +67,14 @@ public final class ClassChecker {
         checkPublicMethodsRejectNull(newInstance(implementationClass));
     }
 
+    public static <T> void checkPublicConstructorsRejectNull(final Class<T> classToCheck) {
+        CONSTRUCTOR_NULL_CHECKER.checkPublicConstructorsRejectNull(classToCheck);
+    }
+
+    public static void checkPublicMethodsRejectNull(final Object instance) {
+        METHOD_NULL_CHECKER.checkPublicMethodsRejectNull(instance);
+    }
+
     private static <U, T extends U> void checkClassProperties(final Class<T> implementationClass, final Class<U> parentType) {
         checkPublic(parentType);
         checkPublic(implementationClass);
@@ -78,14 +86,6 @@ public final class ClassChecker {
         }
         // check serialisability of classes that claim it.
         // check methods that return collections are unmodifiable
-    }
-
-    private static <T> void checkPublicConstructorsRejectNull(final Class<T> classToCheck) {
-        CONSTRUCTOR_NULL_CHECKER.checkPublicConstructorsRejectNull(classToCheck);
-    }
-
-    private static void checkPublicMethodsRejectNull(final Object instance) {
-        METHOD_NULL_CHECKER.checkPublicMethodsRejectNull(instance);
     }
 
     private static <T> Object newInstance(final Class<T> classToCheck) {

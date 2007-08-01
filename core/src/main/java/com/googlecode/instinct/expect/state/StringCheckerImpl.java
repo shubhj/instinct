@@ -50,6 +50,7 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
     }
 
     public final void endsWith(final String string) {
+        if (string == null) throw new IllegalArgumentException("Cannot pass a null string into endsWith");
         getAsserter().expectThat(subject, Matchers.endsWith(string));
     }
 
