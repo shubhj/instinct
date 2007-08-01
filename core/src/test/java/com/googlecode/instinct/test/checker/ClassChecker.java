@@ -23,15 +23,14 @@ import au.net.netstorm.boost.nursery.reflect.checker.DefaultMethodNullParameterT
 import au.net.netstorm.boost.nursery.reflect.checker.MethodNullParameterTestChecker;
 import au.net.netstorm.boost.test.reflect.checker.ClassTestChecker;
 import au.net.netstorm.boost.test.reflect.checker.DefaultClassTestChecker;
-import au.net.netstorm.boost.test.reflect.checker.DefaultModifierTestChecker;
-import au.net.netstorm.boost.test.reflect.checker.ModifierTestChecker;
 import com.googlecode.instinct.internal.mock.instance.UberInstanceProvider;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.Suggest;
+import static com.googlecode.instinct.test.checker.ModifierChecker.checkFinal;
+import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;
 
 public final class ClassChecker {
     private static final ClassTestChecker CLASS_CHECKER = new DefaultClassTestChecker();
-    private static final ModifierTestChecker MODIFIER_CHECKER = new DefaultModifierTestChecker();
     @Fix("This returns mocks - which aint much use when testing a specific implementation see StateExpectationsImplAtomicTest.")
     private static final InstanceProvider INSTANCE_PROVIDER = new UberInstanceProvider();
     private static final ConstructorNullParameterTestChecker CONSTRUCTOR_NULL_CHECKER = new DefaultConstructorNullParameterTestChecker(
@@ -43,8 +42,8 @@ public final class ClassChecker {
     }
 
     public static <T> void checkClass(final Class<T> implementationClass) {
-        MODIFIER_CHECKER.checkPublic(implementationClass);
-        MODIFIER_CHECKER.checkFinal(implementationClass);
+        checkPublic(implementationClass);
+        checkFinal(implementationClass);
         nullCheckParameters(implementationClass);
     }
 
@@ -60,13 +59,18 @@ public final class ClassChecker {
     }
 
     public static <T> void checkInterface(final Class<T> iface) {
-        MODIFIER_CHECKER.checkPublic(iface);
+        checkPublic(iface);
+    }
+
+    public static <U, T extends U> void nullCheckParameters(final Class<T> implementationClass) {
+        checkPublicConstructorsRejectNull(implementationClass);
+        checkPublicMethodsRejectNull(newInstance(implementationClass));
     }
 
     private static <U, T extends U> void checkClassProperties(final Class<T> implementationClass, final Class<U> parentType) {
-        MODIFIER_CHECKER.checkPublic(parentType);
-        MODIFIER_CHECKER.checkPublic(implementationClass);
-        MODIFIER_CHECKER.checkFinal(implementationClass);
+        checkPublic(parentType);
+        checkPublic(implementationClass);
+        checkFinal(implementationClass);
         if (parentType.isInterface()) {
             CLASS_CHECKER.checkImplementsAndFinal(parentType, implementationClass);
         } else {
@@ -74,11 +78,6 @@ public final class ClassChecker {
         }
         // check serialisability of classes that claim it.
         // check methods that return collections are unmodifiable
-    }
-
-    private static <U, T extends U> void nullCheckParameters(final Class<T> implementationClass) {
-        checkPublicConstructorsRejectNull(implementationClass);
-        checkPublicMethodsRejectNull(newInstance(implementationClass));
     }
 
     private static <T> void checkPublicConstructorsRejectNull(final Class<T> classToCheck) {
