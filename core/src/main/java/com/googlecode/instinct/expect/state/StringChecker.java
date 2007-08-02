@@ -26,4 +26,6 @@ public interface StringChecker extends ComparableChecker<String> {
     void notEmpty();
 
     void hasLength(int length);
+
+    void matchesRegex(final String string);
 }

@@ -1,5 +1,6 @@
 package com.googlecode.instinct.expect.state;
 
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;
@@ -16,6 +17,20 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
 
     public void testConformsToClassTraits() {
         checkPublic(StringCheckerImpl.class);
+    }
+
+    @Suggest("Drive out the notMatchesRegex method also.")
+    public void testMatchesRegularExpressions() {
+        final StringChecker checker = new StringCheckerImpl("somepatternorother");
+        checker.matchesRegex("somepattern");
+    }
+
+    public void testShowsHumanReadableStringWhenMatchesRegexIsPassedNull() {
+        expectNullRejected("matchesRegex", new Runnable() {
+            public void run() {
+                checker.matchesRegex(null);
+            }
+        });
     }
 
     public void testShowsHumanReadableStringWhenEqualsIgnoringCaseIsPassedNull() {

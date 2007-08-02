@@ -19,7 +19,7 @@ package com.googlecode.instinct.expect.state;
 import com.googlecode.instinct.internal.util.Suggest;
 import org.hamcrest.Matchers;
 
-@Suggest("Test this.")
+@Suggest("Test the happy paths through this class.")
 public class StringCheckerImpl extends ComparableCheckerImpl<String> implements StringChecker {
     public StringCheckerImpl(final String subject) {
         super(subject);
@@ -85,6 +85,10 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
 
     public final void hasLength(final int length) {
         getAsserter().expectThat(subject, StringLengthMatcher.hasLength(length));
+    }
+
+    public void matchesRegex(final String string) {
+        nullCheckString(string, "matchesRegex");
     }
 
     private void nullCheckString(final String stringToCheck, final String methodName) {
