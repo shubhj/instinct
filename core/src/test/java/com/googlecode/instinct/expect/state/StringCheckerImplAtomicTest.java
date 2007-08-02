@@ -18,7 +18,7 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
         checkPublic(StringCheckerImpl.class);
     }
 
-    public void testEndsWithShowsHumanReadableStringWhenNullPassed() {
+    public void testEndsWithShowsHumanReadableStringWhenPassedNull() {
         expectNullRejected("endsWith", new Runnable() {
             public void run() {
                 checker.endsWith(null);
@@ -26,7 +26,7 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
         });
     }
 
-    public void testContainsStringShowsHumanReadableStringWhenNullPassed() {
+    public void testContainsStringShowsHumanReadableStringWhenPassedNull() {
         expectNullRejected("containsString", new Runnable() {
             public void run() {
                 checker.containsString(null);
