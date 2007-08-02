@@ -47,9 +47,9 @@ public final class ClassChecker {
         nullCheckParameters(implementationClass);
     }
 
-    @Suggest("Infer the interface from the concrete class.")
-    public static <U, T extends U> void checkClass(final Class<T> implementationClass, final Class<U> targetInterface) {
-        checkClassProperties(implementationClass, targetInterface);
+    @Suggest("Infer the interface/parent type from the concrete class.")
+    public static <U, T extends U> void checkClass(final Class<T> implementationClass, final Class<U> parentType) {
+        checkClassProperties(implementationClass, parentType);
         nullCheckParameters(implementationClass);
     }
 

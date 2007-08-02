@@ -91,6 +91,7 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
         nullCheckString(string, "matchesRegex");
     }
 
+    @Suggest("Move this nice form of null check into ParamChecker.")
     private void nullCheckString(final String stringToCheck, final String methodName) {
         if (stringToCheck == null) {
             throw new IllegalArgumentException("Cannot pass a null string into " + methodName);
