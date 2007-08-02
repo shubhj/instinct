@@ -18,6 +18,10 @@ public final class RegularExpressionMatcherAtomicTest extends InstinctTestCase {
         checkDescribesErrorsByAppendingTheExpectedRegularExpression("[a-z]+");
     }
 
+    public void testThrowsExceptionWhenInvalidRegularExpressionPassed() {
+
+    }
+
     private void checkDescribesErrorsByAppendingTheExpectedRegularExpression(final String regularExpression) {
         final Matcher<String> matcher = new RegularExpressionMatcher(regularExpression);
         final Description description = new StringDescription();

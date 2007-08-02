@@ -1,6 +1,7 @@
 package com.googlecode.instinct.expect.state;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
@@ -12,6 +13,7 @@ public final class RegularExpressionMatcher extends TypeSafeMatcher<String> {
         this.regularExpression = regularExpression;
     }
 
+    @Suggest("Come back here after creating the PatternEdge")
     @Override
     public boolean matchesSafely(final String item) {
         checkNotNull(item);
