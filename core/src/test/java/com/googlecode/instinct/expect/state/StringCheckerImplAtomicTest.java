@@ -18,7 +18,7 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
         checkPublic(StringCheckerImpl.class);
     }
 
-    public void testEqualsIgnoringCase() {
+    public void testShowsHumanReadableStringWhenEqualsIgnoringCaseIsPassedNull() {
         expectNullRejected("equalsIgnoringCase", new Runnable() {
             public void run() {
                 checker.equalsIgnoringCase(null);
@@ -26,8 +26,15 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
         });
     }
 
+    public void testShowsHumanReadableStringWhenEqualsIgnoringWhiteSpaceIsPassedNull() {
+        expectNullRejected("equalsIgnoringWhiteSpace", new Runnable() {
+            public void run() {
+                checker.equalsIgnoringWhiteSpace(null);
+            }
+        });
+    }
+
     /*
-    public final void equalsIgnoringCase(final String string) {
     public final void equalsIgnoringWhiteSpace(final String string) {
     public final void notEqualIgnoringCase(final String string) {
     public final void notEqualIgnoringWhiteSpace(final String string) {
@@ -37,7 +44,7 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
     public final void notStartingWith(final String string) {
      */
 
-    public void testEndsWithShowsHumanReadableStringWhenPassedNull() {
+    public void testShowsHumanReadableStringWhenEndsWithIsPassedNull() {
         expectNullRejected("endsWith", new Runnable() {
             public void run() {
                 checker.endsWith(null);
@@ -45,7 +52,7 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
         });
     }
 
-    public void testContainsStringShowsHumanReadableStringWhenPassedNull() {
+    public void testShowsHumanReadableStringWhenContainsStringIsPassedNull() {
         expectNullRejected("containsString", new Runnable() {
             public void run() {
                 checker.containsString(null);

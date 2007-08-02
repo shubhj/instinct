@@ -31,6 +31,7 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
     }
 
     public final void equalsIgnoringWhiteSpace(final String string) {
+        nullCheckString(string, "equalsIgnoringWhiteSpace");
         getAsserter().expectThat(subject, Matchers.equalToIgnoringWhiteSpace(string));
     }
 
