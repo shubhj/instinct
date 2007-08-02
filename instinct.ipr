@@ -83,7 +83,7 @@
   <component name="IdProvider" IDEtalkID="339013A1D290AA21712480AFD5B693D5" />
   <component name="InspectionProjectProfileManager">
     <option name="PROJECT_PROFILE" value="Project Default" />
-    <option name="USE_PROJECT_LEVEL_SETTINGS" value="false" />
+    <option name="USE_PROJECT_LEVEL_SETTINGS" value="true" />
     <scopes />
     <profiles>
       <profile version="1.0" is_locked="false">
@@ -349,9 +349,9 @@
           <option name="m_maxLength" value="32" />
         </inspection_tool>
         <inspection_tool class="InstanceVariableNamingConvention" level="WARNING" enabled="true">
-          <option name="m_regex" value="m_[a-z][A-Za-z\d]*" />
-          <option name="m_minLength" value="5" />
-          <option name="m_maxLength" value="32" />
+          <option name="m_regex" value="[a-z][A-Za-z\d]*" />
+          <option name="m_minLength" value="2" />
+          <option name="m_maxLength" value="99" />
         </inspection_tool>
         <inspection_tool class="InterfaceNamingConvention" level="WARNING" enabled="true">
           <option name="m_regex" value="[A-Z][A-Za-z\d]*" />
@@ -453,7 +453,6 @@
         </inspection_tool>
         <inspection_tool class="StaticFieldReferenceOnSubclass" level="WARNING" enabled="true" />
         <inspection_tool class="StaticCallOnSubclass" level="WARNING" enabled="true" />
-        <inspection_tool class="SuspiciousToArrayCall" level="WARNING" enabled="true" />
         <inspection_tool class="TextLabelInSwitchStatement" level="WARNING" enabled="true" />
         <inspection_tool class="MisspelledToString" level="WARNING" enabled="true" />
         <inspection_tool class="ResultSetIndexZero" level="WARNING" enabled="true" />
@@ -587,7 +586,6 @@
         <inspection_tool class="MagicNumber" level="WARNING" enabled="true">
           <option name="m_ignoreInHashCode" value="true" />
         </inspection_tool>
-        <inspection_tool class="PublicMethodNotExposedInInterface" level="WARNING" enabled="true" />
         <inspection_tool class="AssignmentToCatchBlockParameter" level="WARNING" enabled="true" />
         <inspection_tool class="AnonymousClassMethodCount" level="WARNING" enabled="true">
           <option name="m_limit" value="1" />
