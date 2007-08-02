@@ -26,6 +26,7 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
     }
 
     public final void equalsIgnoringCase(final String string) {
+        nullCheckString(string, "equalsIgnoringCase");
         getAsserter().expectThat(subject, Matchers.equalToIgnoringCase(string));
     }
 
@@ -79,8 +80,8 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
         getAsserter().expectThat(subject, StringLengthMatcher.hasLength(length));
     }
 
-    private void nullCheckString(final String string, final String methodName) {
-        if (string == null) {
+    private void nullCheckString(final String stringToCheck, final String methodName) {
+        if (stringToCheck == null) {
             throw new IllegalArgumentException("Cannot pass a null string into " + methodName);
         }
     }
