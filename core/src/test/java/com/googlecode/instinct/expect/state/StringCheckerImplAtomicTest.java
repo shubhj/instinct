@@ -64,7 +64,6 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
                 checker.doesNotEndWith(null);
             }
         });
-
     }
 
     public void testShowsHumanReadableStringWhenStartsWthIsPassedNull() {
@@ -73,7 +72,6 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
                 checker.startsWith(null);
             }
         });
-
     }
 
     public void testShowsHumanReadableStringWhenDoesNotStartWithIsPassedNull() {
