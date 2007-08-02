@@ -1,6 +1,7 @@
 package com.googlecode.instinct.expect.state;
 
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;
 import static com.googlecode.instinct.test.triangulate.Triangulation.getInstance;
 
@@ -34,14 +35,6 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
     }
 
     private void expectNullRejected(final String methodName, final Runnable block) {
-        try {
-            block.run();
-            fail("Expected illegal argument exception");
-        } catch (IllegalArgumentException e) {
-            final String message = e.getMessage();
-            assertEquals("Cannot pass a null string into " + methodName, message);
-        } catch (Throwable t) {
-            fail("Expected IllegalArgumentException but was " + t);
-        }
+        assertThrows(IllegalArgumentException.class, "Cannot pass a null string into " + methodName, block);
     }
 }

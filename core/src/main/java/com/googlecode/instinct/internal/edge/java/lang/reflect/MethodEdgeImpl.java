@@ -16,6 +16,8 @@
 
 package com.googlecode.instinct.internal.edge.java.lang.reflect;
 
+import au.net.netstorm.boost.edge.EdgeException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public final class MethodEdgeImpl implements MethodEdge {
@@ -23,6 +25,16 @@ public final class MethodEdgeImpl implements MethodEdge {
 
     public MethodEdgeImpl(final Method method) {
         this.method = method;
+    }
+
+    public Object invoke(Object obj, Object... args) {
+        try {
+            return method.invoke(obj, args);
+        } catch (IllegalAccessException e) {
+            throw new EdgeException(e);
+        } catch (InvocationTargetException e) {
+            throw new EdgeException(e);
+        }
     }
 
     public String getName() {

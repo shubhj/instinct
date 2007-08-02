@@ -16,17 +16,19 @@
 
 package com.googlecode.instinct.internal.util;
 
+import com.googlecode.instinct.internal.edge.java.lang.reflect.MethodEdgeImpl;
 import java.lang.reflect.Method;
-import au.net.netstorm.boost.edge.java.lang.reflect.DefaultEdgeMethod;
-import au.net.netstorm.boost.edge.java.lang.reflect.EdgeMethod;
 
-@Fix("Use the instinct MethodEdge.")
+@Suggest("Test this.")
 public final class MethodInvokerImpl implements MethodInvoker {
     private static final Object[] NO_PARAMS = {};
-    private final EdgeMethod edgeMethod = new DefaultEdgeMethod();
 
-    public void invokeMethod(final Object instance, final Method method) {
+    public Object invokeMethod(final Object instance, final Method method) {
+        return invokeMethod(instance, method, NO_PARAMS);
+    }
+
+    public Object invokeMethod(final Object instance, final Method method, final Object... params) {
         method.setAccessible(true);
-        edgeMethod.invoke(method, instance, NO_PARAMS);
+        return new MethodEdgeImpl(method).invoke(instance, params);
     }
 }

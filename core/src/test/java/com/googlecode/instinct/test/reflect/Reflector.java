@@ -16,14 +16,18 @@
 
 package com.googlecode.instinct.test.reflect;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import com.googlecode.instinct.internal.util.Fix;
+import com.googlecode.instinct.internal.util.MethodInvoker;
+import com.googlecode.instinct.internal.util.MethodInvokerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import com.googlecode.instinct.test.TestingException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public final class Reflector {
+    private static final MethodInvoker METHOD_INVOKER = new MethodInvokerImpl();
+
     private Reflector() {
         throw new UnsupportedOperationException();
     }
@@ -66,6 +70,14 @@ public final class Reflector {
         } catch (NoSuchMethodException e) {
             throw new TestingException(e);
         }
+    }
+
+    public static Object invokeMethod(final Object instance, final String methodName, final Class<?>[] paramTypes, final Object... params) {
+        if (paramTypes.length != params.length) {
+            throw new TestingException("Paramter types array and values array must be the same length");            
+        }
+        final Method method = getMethod(instance.getClass(), methodName, paramTypes);
+        return METHOD_INVOKER.invokeMethod(instance, method, params);
     }
 
     public static <T> Field getFieldByName(final Class<T> cls, final String fieldName) {
