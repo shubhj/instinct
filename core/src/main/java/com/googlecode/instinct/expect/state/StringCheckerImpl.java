@@ -87,7 +87,7 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
         getAsserter().expectThat(subject, StringLengthMatcher.hasLength(length));
     }
 
-    public void matchesRegex(final String string) {
+    public final void matchesRegex(final String string) {
         nullCheckString(string, "matchesRegex");
     }
 
