@@ -40,16 +40,44 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
                 checker.notEqualToIgnoringCase(null);
             }
         });
+    }
+
+    public void testShowsHumanReadableStringWhenNotEqualToIgnoringWhiteSpaceIsPassedNull() {
+        expectNullRejected("notEqualToIgnoringWhiteSpace", new Runnable() {
+            public void run() {
+                checker.notEqualToIgnoringWhiteSpace(null);
+            }
+        });
+    }
+
+    public void testShowsHumanReadableStringWhenDoesNotContainStringIsPassedNull() {
+        expectNullRejected("doesNotContainString", new Runnable() {
+            public void run() {
+                checker.doesNotContainString(null);
+            }
+        });
+    }
+
+    public void testShowsHumanReadableStringWhenDoesNotEndWithIsPassedNull() {
+        expectNullRejected("doesNotEndWith", new Runnable() {
+            public void run() {
+                checker.doesNotEndWith(null);
+            }
+        });
 
     }
 
+    public void testShowsHumanReadableStringWhenStartsWthIsPassedNull() {
+        expectNullRejected("startsWith", new Runnable() {
+            public void run() {
+                checker.startsWith(null);
+            }
+        });
+
+    }
     /*
-    public final void notEqualToIgnoringCase(final String string) {
-    public final void notEqualToIgnoringWhiteSpace(final String string) {
-    public final void notContainString(final String string) {
-    public final void notEndingWith(final String string) {
     public final void startsWith(final String string) {
-    public final void notStartingWith(final String string) {
+    public final void doesNotStartWith(final String string) {
      */
 
     public void testShowsHumanReadableStringWhenEndsWithIsPassedNull() {

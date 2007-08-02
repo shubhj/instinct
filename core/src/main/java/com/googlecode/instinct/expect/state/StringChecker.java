@@ -11,15 +11,15 @@ public interface StringChecker extends ComparableChecker<String> {
 
     void containsString(String string);
 
-    void notContainString(String string);
+    void doesNotContainString(String string);
 
     void endsWith(String string);
 
-    void notEndingWith(String string);
+    void doesNotEndWith(String string);
 
     void startsWith(String string);
 
-    void notStartingWith(String string);
+    void doesNotStartWith(String string);
 
     void isEmpty();
 

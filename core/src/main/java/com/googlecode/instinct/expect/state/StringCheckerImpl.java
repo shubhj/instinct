@@ -41,6 +41,7 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
     }
 
     public final void notEqualToIgnoringWhiteSpace(final String string) {
+        nullCheckString(string, "notEqualToIgnoringWhiteSpace");
         getAsserter().expectNotThat(subject, Matchers.equalToIgnoringWhiteSpace(string));
     }
 
@@ -49,7 +50,8 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
         getAsserter().expectThat(subject, Matchers.containsString(string));
     }
 
-    public final void notContainString(final String string) {
+    public final void doesNotContainString(final String string) {
+        nullCheckString(string, "doesNotContainString");
         getAsserter().expectNotThat(subject, Matchers.containsString(string));
     }
 
@@ -58,15 +60,17 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
         getAsserter().expectThat(subject, Matchers.endsWith(string));
     }
 
-    public final void notEndingWith(final String string) {
+    public final void doesNotEndWith(final String string) {
+        nullCheckString(string, "doesNotEndWith");
         getAsserter().expectNotThat(subject, Matchers.endsWith(string));
     }
 
     public final void startsWith(final String string) {
+        nullCheckString(string, "startsWith");
         getAsserter().expectThat(subject, Matchers.startsWith(string));
     }
 
-    public final void notStartingWith(final String string) {
+    public final void doesNotStartWith(final String string) {
         getAsserter().expectNotThat(subject, Matchers.startsWith(string));
     }
 

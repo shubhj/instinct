@@ -45,7 +45,7 @@ public final class StateExpectationsContext {
         expect.that("andersdabeerz").containsString("da");
         expect.that("andersdabeerz").endsWith("beerz");
         expect.that("andersdabeerz").equalToIgnoringWhiteSpace(" andersdabeerz ");
-        expect.that("andersdabeerz").notContainString("water");
+        expect.that("andersdabeerz").doesNotContainString("water");
     }
 
     @Specification
