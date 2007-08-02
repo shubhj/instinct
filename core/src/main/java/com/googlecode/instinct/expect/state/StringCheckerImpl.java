@@ -71,6 +71,7 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
     }
 
     public final void doesNotStartWith(final String string) {
+        nullCheckString(string, "doesNotStartWith");
         getAsserter().expectNotThat(subject, Matchers.startsWith(string));
     }
 

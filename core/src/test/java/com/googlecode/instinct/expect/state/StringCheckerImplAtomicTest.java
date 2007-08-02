@@ -75,8 +75,15 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
         });
 
     }
+
+    public void testShowsHumanReadableStringWhenDoesNotStartWithIsPassedNull() {
+        expectNullRejected("doesNotStartWith", new Runnable() {
+            public void run() {
+                checker.doesNotStartWith(null);
+            }
+        });
+    }
     /*
-    public final void startsWith(final String string) {
     public final void doesNotStartWith(final String string) {
      */
 
