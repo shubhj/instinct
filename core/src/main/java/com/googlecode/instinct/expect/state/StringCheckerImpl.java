@@ -25,21 +25,22 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
         super(subject);
     }
 
-    public final void equalsIgnoringCase(final String string) {
-        nullCheckString(string, "equalsIgnoringCase");
+    public final void equalToIgnoringCase(final String string) {
+        nullCheckString(string, "equalToIgnoringCase");
         getAsserter().expectThat(subject, Matchers.equalToIgnoringCase(string));
     }
 
-    public final void equalsIgnoringWhiteSpace(final String string) {
-        nullCheckString(string, "equalsIgnoringWhiteSpace");
+    public final void equalToIgnoringWhiteSpace(final String string) {
+        nullCheckString(string, "equalToIgnoringWhiteSpace");
         getAsserter().expectThat(subject, Matchers.equalToIgnoringWhiteSpace(string));
     }
 
-    public final void notEqualIgnoringCase(final String string) {
+    public final void notEqualToIgnoringCase(final String string) {
+        nullCheckString(string, "notEqualToIgnoringCase");
         getAsserter().expectNotThat(subject, Matchers.equalToIgnoringCase(string));
     }
 
-    public final void notEqualIgnoringWhiteSpace(final String string) {
+    public final void notEqualToIgnoringWhiteSpace(final String string) {
         getAsserter().expectNotThat(subject, Matchers.equalToIgnoringWhiteSpace(string));
     }
 

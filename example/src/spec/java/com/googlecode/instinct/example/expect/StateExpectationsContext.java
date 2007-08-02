@@ -1,13 +1,13 @@
 package com.googlecode.instinct.example.expect;
 
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.annotate.Specification;
 import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.marker.annotate.Context;
-import com.googlecode.instinct.marker.annotate.Specification;
 import org.hamcrest.Matchers;
 
 /**
@@ -40,11 +40,11 @@ public final class StateExpectationsContext {
 
     @Specification
     public void providesMatchersForMakingAssertionsAboutStrings() {
-        expect.that("andersdabeerz").equalsIgnoringCase("AndersDaBeerz");
+        expect.that("andersdabeerz").equalToIgnoringCase("AndersDaBeerz");
         expect.that("andersdabeerz").startsWith("anders");
         expect.that("andersdabeerz").containsString("da");
         expect.that("andersdabeerz").endsWith("beerz");
-        expect.that("andersdabeerz").equalsIgnoringWhiteSpace(" andersdabeerz ");
+        expect.that("andersdabeerz").equalToIgnoringWhiteSpace(" andersdabeerz ");
         expect.that("andersdabeerz").notContainString("water");
     }
 

@@ -1,13 +1,13 @@
 package com.googlecode.instinct.expect.state;
 
 public interface StringChecker extends ComparableChecker<String> {
-    void equalsIgnoringCase(String string);
+    void equalToIgnoringCase(String string);
 
-    void equalsIgnoringWhiteSpace(String string);
+    void equalToIgnoringWhiteSpace(String string);
 
-    void notEqualIgnoringCase(String string);
+    void notEqualToIgnoringCase(String string);
 
-    void notEqualIgnoringWhiteSpace(String string);
+    void notEqualToIgnoringWhiteSpace(String string);
 
     void containsString(String string);
 
