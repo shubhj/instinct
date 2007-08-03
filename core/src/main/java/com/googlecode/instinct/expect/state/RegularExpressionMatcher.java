@@ -21,18 +21,32 @@ import java.util.regex.Pattern;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
+/**
+ * Performs matches of a string against a regular expression.
+ */
 public final class RegularExpressionMatcher extends TypeSafeMatcher<String> {
     private final Pattern pattern;
 
+    /**
+     * Constructs a matcher for the given <code>regularExpression</code>.
+     * @param regularExpression The regular expression to match against.
+     * @throws java.util.regex.PatternSyntaxException if the given <code>regularExpression</code> is syntactically invalid.
+     */
     public RegularExpressionMatcher(final String regularExpression) {
         checkNotNull(regularExpression);
         pattern = Pattern.compile(regularExpression);
     }
 
+    /**
+     * Returns true if the <code>item</code> matches the regular expression given in the constructor.
+     * This method is invoked by Hamcrest after preliminary null and type checking.
+     * @param item The item to check against the regular expression given in the constructor.
+     * @return <code>true</code> if the <code>item</code> matches the regular expression given in the constructor.
+     */
     @Override
     public boolean matchesSafely(final String item) {
         checkNotNull(item);
-        return true;
+        return pattern.matcher(item).matches();
     }
 
     public void describeTo(final Description description) {

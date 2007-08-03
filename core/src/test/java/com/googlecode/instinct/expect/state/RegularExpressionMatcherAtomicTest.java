@@ -29,15 +29,30 @@ public final class RegularExpressionMatcherAtomicTest extends InstinctTestCase {
         checkClass(RegularExpressionMatcher.class, TypeSafeMatcher.class);
     }
 
-    public void testMatchesStringsThatMatchTheRegularExpression() {
-        final Matcher<String> matcher = new RegularExpressionMatcher(".*");
-        final Boolean matches = matcher.matches("");
-        expect.that(matches).isTrue();
+    public void testPerformsMatchesOnStringAgainstAGivenRegularExpression() {
+        expectMatches(".*", "");
+        expectMatches("[a-z]*", "aaaaaa");
+        expectDoesNotMatch("[a-z]+", "123");
+        expectDoesNotMatch("[0-9]+", "AAAA");
     }
 
     public void testDescribesErrorsByAppendingTheExpectedRegularExpression() {
         checkDescribesErrorsByAppendingTheExpectedRegularExpression(".*");
         checkDescribesErrorsByAppendingTheExpectedRegularExpression("[a-z]+");
+    }
+
+    private void expectMatches(final String regularExpression, final String stringToMatch) {
+        match(regularExpression, stringToMatch, true);
+    }
+
+    private void expectDoesNotMatch(final String regularExpression, final String stringToMatch) {
+        match(regularExpression, stringToMatch, false);
+    }
+
+    private void match(final String regularExpression, final String stringToMatch, final boolean expectMatch) {
+        final Matcher<String> matcher = new RegularExpressionMatcher(regularExpression);
+        final Boolean matches = matcher.matches(stringToMatch);
+        expect.that(matches).equalTo(expectMatch);
     }
 
     private void checkDescribesErrorsByAppendingTheExpectedRegularExpression(final String regularExpression) {
