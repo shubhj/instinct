@@ -16,7 +16,11 @@
 
 package com.googlecode.instinct.expect.state;
 
+import com.googlecode.instinct.internal.util.Suggest;
+
+@Suggest("Appears to be something odd going on with generics if an unboxed primitive boolean is passed to Expect.expect.that(boolean)")
 public interface BooleanChecker extends ComparableChecker<Boolean> {
     void isTrue();
+
     void isFalse();
 }
