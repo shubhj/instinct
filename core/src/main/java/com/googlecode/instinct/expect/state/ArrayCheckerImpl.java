@@ -22,27 +22,27 @@ import org.hamcrest.Matchers;
 // TODO Test this
 public class ArrayCheckerImpl<T> extends ObjectCheckerImpl<T[]> implements ArrayChecker<T> {
 
-    public ArrayCheckerImpl(T[] subject) {
+    public ArrayCheckerImpl(final T[] subject) {
         super(subject);
     }
 
-    public final void containsItem(Matcher<T> matcher) {
+    public final void containsItem(final Matcher<T> matcher) {
         getAsserter().expectThat(subject, Matchers.hasItemInArray(matcher));
     }
 
-    public final void containsItem(T t) {
+    public final void containsItem(final T t) {
         getAsserter().expectThat(subject, Matchers.hasItemInArray(t));
     }
 
-    public final void notContainItem(Matcher<T> matcher) {
+    public final void notContainItem(final Matcher<T> matcher) {
         getAsserter().expectNotThat(subject, Matchers.hasItemInArray(matcher));
     }
 
-    public final void notContainItem(T t) {
+    public final void notContainItem(final T t) {
         getAsserter().expectNotThat(subject, Matchers.hasItemInArray(t));
     }
 
-    public final void hasLength(int length) {
+    public final void hasLength(final int length) {
         getAsserter().expectThat(subject.length, Matchers.equalTo(length));
     }
 }

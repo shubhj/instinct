@@ -22,23 +22,23 @@ import org.hamcrest.Matchers;
 public class ComparableCheckerImpl<T extends Comparable<T>> extends ObjectCheckerImpl<T>
         implements ComparableChecker<T> {
 
-    public ComparableCheckerImpl(T subject) {
+    public ComparableCheckerImpl(final T subject) {
         super(subject);
     }
 
-    public final void greaterThan(T comparable) {
+    public final void greaterThan(final T comparable) {
         getAsserter().expectThat(subject, Matchers.greaterThan(comparable));
     }
 
-    public final void greaterThanOrEqualTo(T comparable) {
+    public final void greaterThanOrEqualTo(final T comparable) {
         getAsserter().expectThat(subject, Matchers.greaterThanOrEqualTo(comparable));
     }
 
-    public final void lessThan(T comparable) {
+    public final void lessThan(final T comparable) {
         getAsserter().expectThat(subject, Matchers.lessThan(comparable));
     }
 
-    public final void lessThanOrEqualTo(T comparable) {
+    public final void lessThanOrEqualTo(final T comparable) {
         getAsserter().expectThat(subject, Matchers.lessThanOrEqualTo(comparable));
     }
 }

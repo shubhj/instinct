@@ -20,15 +20,15 @@ import org.hamcrest.Matchers;
 
 // TODO Test this
 public class DoubleCheckerImpl extends ComparableCheckerImpl<Double> implements DoubleChecker {
-    public DoubleCheckerImpl(Double subject) {
+    public DoubleCheckerImpl(final Double subject) {
         super(subject);
     }
 
-    public final void closeTo(double value, double delta) {
+    public final void closeTo(final double value, final double delta) {
         getAsserter().expectThat(subject, Matchers.closeTo(value, delta));
     }
 
-    public final void notCloseTo(double value, double delta) {
+    public final void notCloseTo(final double value, final double delta) {
         getAsserter().expectNotThat(subject, Matchers.closeTo(value, delta));
     }
 }

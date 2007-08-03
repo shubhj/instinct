@@ -23,22 +23,22 @@ import static com.googlecode.instinct.test.triangulate.Triangulation.getInstance
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 
+@SuppressWarnings({"InstanceVariableOfConcreteClass", "QuestionableName", "ProtectedField", "ProhibitedExceptionDeclared"})
 public class InterfaceComposerAtomicTest extends InstinctTestCase {
-
+    private Mockery context = new Mockery();
+    private One one = new One();
+    private Two two = new Two();
+    private Three three = new Three();
+    private final ComposedInterface mockComposedInterface = context.mock(ComposedInterface.class);
     private ComposedInterface oneAndTwo;
     private ComposedInterface oneTwoAndThree;
-    private InterfaceComposerAtomicTest.One one = new One();
-    private InterfaceComposerAtomicTest.Two two = new Two();
-    private InterfaceComposerAtomicTest.Three three = new Three();
-    private Mockery context = new Mockery();
-    final ComposedInterface mockComposedInterface = context.mock(ComposedInterface.class);
     private ComposedInterface backedByMockImplementation;
 
-    public void testProperties() {
+    public void testConformsToClassTraits() {
         // TODO
     }
 
-    public void testDelgatesToMethodWithMostSpecificReturnType() throws Exception {
+    public void testDelgatesToMethodWithMostSpecificReturnType() {
         assertEquals(one.returnANumber(), oneAndTwo.returnANumber());
         assertEquals(two.returnAnotherNumber(), oneAndTwo.returnAnotherNumber());
         assertEquals(two.getObject(), oneAndTwo.getObject());
@@ -46,7 +46,7 @@ public class InterfaceComposerAtomicTest extends InstinctTestCase {
     }
 
     public void testThrowsNoSuchMethodExceptionWhenMethodNotFound() {
-        Throwable throwable = assertThrows(NoSuchMethodError.class, new Runnable() {
+        final Throwable throwable = assertThrows(NoSuchMethodError.class, new Runnable() {
             public void run() {
                 oneAndTwo.notImplemented();
             }
@@ -66,17 +66,29 @@ public class InterfaceComposerAtomicTest extends InstinctTestCase {
         final Throwable expectedThrowable = new Throwable();
         context.checking(new Expectations() {
             {
-                one(mockComposedInterface).thowSomething();
+                one(mockComposedInterface).throwSomething();
                 will(throwException(expectedThrowable));
             }
         });
         try {
-            backedByMockImplementation.thowSomething();
+            backedByMockImplementation.throwSomething();
         } catch (Throwable actualThrowable) {
             context.assertIsSatisfied();
             assertSame(RuntimeException.class, actualThrowable.getClass());
             assertSame(expectedThrowable, actualThrowable.getCause());
         }
+    }
+
+    @Override
+    public void setUpTestDoubles() {
+    }
+
+    @Override
+    public void setUpSubject() {
+        final InterfaceComposer interfaceComposer = new InterfaceComposerImpl();
+        oneAndTwo = interfaceComposer.compose(ComposedInterface.class, one, two);
+        oneTwoAndThree = interfaceComposer.compose(ComposedInterface.class, one, two, three);
+        backedByMockImplementation = interfaceComposer.compose(ComposedInterface.class, mockComposedInterface);
     }
 
     private void checkRethrowsSameThrowable(final Throwable expectedThrowable) {
@@ -87,7 +99,7 @@ public class InterfaceComposerAtomicTest extends InstinctTestCase {
                 will(throwException(expectedThrowable));
             }
         });
-        Throwable actualThrowable = assertThrows(expectedThrowable.getClass(), new Runnable() {
+        final Throwable actualThrowable = assertThrows(expectedThrowable.getClass(), new Runnable() {
             public void run() {
                 mockComposedInterface.returnANumber();
             }
@@ -96,32 +108,7 @@ public class InterfaceComposerAtomicTest extends InstinctTestCase {
         assertSame(expectedThrowable, actualThrowable);
     }
 
-    @Override
-    public void setUpTestDoubles() {
-    }
-
-    @Override
-    public void setUpSubject() {
-        InterfaceComposer interfaceComposer = new InterfaceComposer();
-        oneAndTwo = interfaceComposer.compose(ComposedInterface.class, one, two);
-        oneTwoAndThree = interfaceComposer.compose(ComposedInterface.class, one, two, three);
-        backedByMockImplementation = interfaceComposer.compose(ComposedInterface.class, mockComposedInterface);
-    }
-
-    public interface ComposedInterface {
-        int returnANumber();
-
-        int returnAnotherNumber();
-
-        Object getObject();
-
-        void notImplemented();
-
-        void thowSomething() throws Throwable;
-    }
-
-    class One {
-
+    private static class One {
         private final int number = getInstance(Integer.class);
         private final Object object = getInstance(String.class);
 
@@ -134,10 +121,9 @@ public class InterfaceComposerAtomicTest extends InstinctTestCase {
         }
     }
 
-    class Two {
-
-        final int number = getInstance(Integer.class);
-        final String object = getInstance(String.class);
+    private static class Two {
+        protected final String object = getInstance(String.class);
+        private final int number = getInstance(Integer.class);
 
         public int returnAnotherNumber() {
             return number;
@@ -148,10 +134,22 @@ public class InterfaceComposerAtomicTest extends InstinctTestCase {
         }
     }
 
-    class Three extends Two {
-
+    private static class Three extends Two {
+        @Override
         public String getObject() {
             return object;
         }
+    }
+
+    private interface ComposedInterface {
+        int returnANumber();
+
+        int returnAnotherNumber();
+
+        Object getObject();
+
+        void notImplemented();
+
+        void throwSomething() throws Throwable;
     }
 }

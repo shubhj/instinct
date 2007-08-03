@@ -23,23 +23,23 @@ import org.hamcrest.Matchers;
 public class EventObjectCheckerImpl<T extends EventObject>
         extends ObjectCheckerImpl<T> implements EventObjectChecker<T> {
 
-    public EventObjectCheckerImpl(T subject) {
+    public EventObjectCheckerImpl(final T subject) {
         super(subject);
     }
 
-    public final void eventFrom(Class<? extends EventObject> cls, Object object) {
+    public final void eventFrom(final Class<? extends EventObject> cls, final Object object) {
         getAsserter().expectThat(subject, Matchers.eventFrom(cls, object));
     }
 
-    public final void eventFrom(Object object) {
+    public final void eventFrom(final Object object) {
         getAsserter().expectThat(subject, Matchers.eventFrom(object));
     }
 
-    public final void notEventFrom(Class<? extends EventObject> aClass, Object object) {
+    public final void notEventFrom(final Class<? extends EventObject> aClass, final Object object) {
         getAsserter().expectNotThat(subject, Matchers.eventFrom(aClass, object));
     }
 
-    public final void notEventFrom(Object object) {
+    public final void notEventFrom(final Object object) {
         getAsserter().expectNotThat(subject, Matchers.eventFrom(object));
     }
 }

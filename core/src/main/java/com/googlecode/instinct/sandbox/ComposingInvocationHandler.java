@@ -16,47 +16,39 @@
 package com.googlecode.instinct.sandbox;
 
 import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class ComposingInvocationHandler<T> implements InvocationHandler {
+public final class ComposingInvocationHandler implements InvocationHandler {
     private Object[] implementers;
 
-    public ComposingInvocationHandler(Object... implementers) {
-        this.implementers = implementers;
+    public ComposingInvocationHandler(final Object... implementers) {
+        this.implementers = implementers.clone();
     }
 
-    public Object invoke(Object object, Method method, Object... params) {
+    public Object invoke(final Object proxy, final Method method, final Object[] args) {
         final MethodImplementer invokee = findImplementer(method);
-        try {
-            return invokee.invoke(params);
-        } catch (InvocationTargetException ite) {
-            throw new RuntimeException(ite.getCause());
-        } catch (IllegalAccessException iae) {
-            // TODO Can we do something better with exceptions declared by the interface
-            throw new RuntimeException(iae);
-        }
+        return invokee.invoke(args);
     }
 
-    private MethodImplementer findImplementer(Method targetMethod) {
-        final List<MethodImplementer> methodImplementers = new ArrayList<MethodImplementer>();
-        for (Object implementer : implementers) {
+    private MethodImplementer findImplementer(final Method targetMethod) {
+        final List<MethodImplementorImpl> methodImplementers = new ArrayList<MethodImplementorImpl>();
+        for (final Object implementer : implementers) {
             addMethodImplementations(implementer, methodImplementers);
         }
         return findImplementer(targetMethod, methodImplementers);
     }
 
-    private void addMethodImplementations(Object implementer, List<MethodImplementer> methodImplementers) {
-        for (Method method : implementer.getClass().getMethods()) {
-            methodImplementers.add(new MethodImplementer(implementer, method));
+    private void addMethodImplementations(final Object implementer, final List<MethodImplementorImpl> methodImplementers) {
+        for (final Method method : implementer.getClass().getMethods()) {
+            methodImplementers.add(new MethodImplementorImpl(implementer, method));
         }
     }
 
-    private MethodImplementer findImplementer(Method targetMethod, List<MethodImplementer> implementations) {
+    private MethodImplementer findImplementer(final Method targetMethod, final List<MethodImplementorImpl> implementations) {
         MethodImplementer bestImplementation = null;
-        for (MethodImplementer implementation : implementations) {
+        for (final MethodImplementer implementation : implementations) {
             bestImplementation = matchesAndHasMostSpecificReturnType(targetMethod, bestImplementation, implementation);
         }
         if (bestImplementation == null) {
@@ -65,8 +57,8 @@ public final class ComposingInvocationHandler<T> implements InvocationHandler {
         return bestImplementation;
     }
 
-    private MethodImplementer matchesAndHasMostSpecificReturnType(Method targetMethod, MethodImplementer champion,
-            MethodImplementer contender) {
+    private MethodImplementer matchesAndHasMostSpecificReturnType(final Method targetMethod, final MethodImplementer champion,
+            final MethodImplementer contender) {
         if (contender.hasMethodWithSameNameAndParametersAs(targetMethod)) {
             return mostSpecificReturnType(champion, contender);
         } else {
@@ -74,7 +66,7 @@ public final class ComposingInvocationHandler<T> implements InvocationHandler {
         }
     }
 
-    private MethodImplementer mostSpecificReturnType(MethodImplementer currentChampion, MethodImplementer contender) {
+    private MethodImplementer mostSpecificReturnType(final MethodImplementer currentChampion, final MethodImplementer contender) {
         if (currentChampion == null || contender.hasMoreSpecificReturnTypeThan(currentChampion)) {
             return contender;
         } else {

@@ -152,7 +152,6 @@
         <inspection_tool class="ClassInTopLevelPackage" level="WARNING" enabled="true" />
         <inspection_tool class="ConstantDeclaredInAbstractClass" level="WARNING" enabled="true" />
         <inspection_tool class="ConstantDeclaredInInterface" level="WARNING" enabled="true" />
-        <inspection_tool class="EmptyClass" level="WARNING" enabled="true" />
         <inspection_tool class="FinalMethodInFinalClass" level="WARNING" enabled="true" />
         <inspection_tool class="InnerClassOnInterface" level="WARNING" enabled="true">
           <option name="m_ignoreInnerInterfaces" value="false" />
@@ -251,10 +250,10 @@
         </inspection_tool>
         <inspection_tool class="BadExceptionDeclared" level="WARNING" enabled="true">
           <option name="exceptionsString" value="java.lang.Throwable,java.lang.Exception,java.lang.Error,java.lang.RuntimeException,java.lang.NullPointerException,java.lang.ClassCastException,java.lang.ArrayIndexOutOfBoundsException" />
-          <option name="ignoreTestCases" value="false" />
+          <option name="ignoreTestCases" value="true" />
         </inspection_tool>
         <inspection_tool class="BadExceptionThrown" level="WARNING" enabled="true">
-          <option name="exceptionsString" value="java.lang.Throwable,java.lang.Exception,java.lang.Error,java.lang.RuntimeException,java.lang.NullPointerException,java.lang.ClassCastException,java.lang.ArrayIndexOutOfBoundsException" />
+          <option name="exceptionsString" value="java.lang.Throwable,java.lang.Exception,java.lang.Error,java.lang.NullPointerException,java.lang.ClassCastException,java.lang.ArrayIndexOutOfBoundsException" />
         </inspection_tool>
         <inspection_tool class="ThrowCaughtLocally" level="WARNING" enabled="true">
           <option name="ignoreRethrownExceptions" value="false" />
@@ -525,7 +524,6 @@
         <inspection_tool class="UseOfAnotherObjectsPrivateField" level="WARNING" enabled="true" />
         <inspection_tool class="PackageVisibleInnerClass" level="WARNING" enabled="true" />
         <inspection_tool class="NonFinalFieldOfException" level="WARNING" enabled="true" />
-        <inspection_tool class="AutoUnboxing" level="WARNING" enabled="true" />
         <inspection_tool class="MisorderedAssertEqualsParameters" level="WARNING" enabled="true" />
         <inspection_tool class="QuestionableName" level="WARNING" enabled="true">
           <option name="nameString" value="aa,abc,bad,bar,bar2,baz,baz1,baz2,baz3,bb,blah,bogus,bool,cc,dd,defau1t,dummy,dummy2,ee,fa1se,ff,foo,foo1,foo2,foo3,foobar,four,fred,fred1,fred2,gg,hh,hello,hello1,hello2,hello3,ii,nu11,one,silly,silly2,two,then,three,whi1e,var" />
@@ -645,6 +643,9 @@
         </inspection_tool>
         <inspection_tool class="MethodOverloadsParentMethod" level="WARNING" enabled="true" />
         <inspection_tool class="RemoveTestConstant" level="WARNING" enabled="false" />
+        <inspection_tool class="ThrowableInstanceNeverThrown" level="WARNING" enabled="false" />
+        <inspection_tool class="CaughtExceptionImmediatelyRethrown" level="WARNING" enabled="true" />
+        <inspection_tool class="CheckedExceptionClass" level="WARNING" enabled="true" />
       </profile>
     </profiles>
   </component>

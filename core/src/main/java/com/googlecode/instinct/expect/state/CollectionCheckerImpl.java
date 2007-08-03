@@ -25,7 +25,7 @@ import org.hamcrest.Matchers;
 public class CollectionCheckerImpl<E, T extends Collection<E>> extends IterableCheckerImpl<E, T>
         implements CollectionChecker<E, T> {
 
-    public CollectionCheckerImpl(T subject) {
+    public CollectionCheckerImpl(final T subject) {
         super(subject);
     }
 
@@ -39,7 +39,7 @@ public class CollectionCheckerImpl<E, T extends Collection<E>> extends IterableC
                 Matchers.describedAs("isEmpty() = <false>", Matchers.equalTo(false)));
     }
 
-    public final void hasSize(int size) {
+    public final void hasSize(final int size) {
         getAsserter().expectThat(subject.size(), Matchers.equalTo(size));
     }
 }

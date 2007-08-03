@@ -25,55 +25,55 @@ import org.hamcrest.Matchers;
 @SuppressWarnings({"unchecked"})
 @Suggest("Consider removing inheritance, this would forsce you to save a typesafe form of subject, and not have to perform casts.")
 public class MapCheckerImpl<K, V> extends ObjectCheckerImpl<Map<K, V>> implements MapChecker<K, V> {
-    public MapCheckerImpl(Map<K, V> subject) {
+    public MapCheckerImpl(final Map<K, V> subject) {
         super(subject);
     }
 
-    public final void containsEntry(Matcher<K> matcher, Matcher<V> matcher1) {
+    public final void containsEntry(final Matcher<K> matcher, final Matcher<V> matcher1) {
         getAsserter().expectThat(subject, Matchers.hasEntry(matcher, matcher1));
     }
 
-    public final void containsEntry(K k, V v) {
+    public final void containsEntry(final K k, final V v) {
         getAsserter().expectThat(subject, Matchers.hasEntry(k, v));
     }
 
-    public final void notContainEntry(Matcher<K> matcher, Matcher<V> matcher1) {
+    public final void notContainEntry(final Matcher<K> matcher, final Matcher<V> matcher1) {
         getAsserter().expectNotThat(subject, Matchers.hasEntry(matcher, matcher1));
     }
 
-    public final void notContainEntry(K k, V v) {
+    public final void notContainEntry(final K k, final V v) {
         getAsserter().expectNotThat(subject, Matchers.hasEntry(k, v));
     }
 
-    public final void containsKey(Matcher<K> matcher) {
+    public final void containsKey(final Matcher<K> matcher) {
         getAsserter().expectThat((Map<K, Object>) subject, Matchers.hasKey(matcher));
     }
 
-    public final void containsKey(K k) {
+    public final void containsKey(final K k) {
         getAsserter().expectThat((Map<K, Object>) subject, Matchers.hasKey(k));
     }
 
-    public final void notContainKey(Matcher<K> matcher) {
+    public final void notContainKey(final Matcher<K> matcher) {
         getAsserter().expectNotThat((Map<K, Object>) subject, Matchers.hasKey(matcher));
     }
 
-    public final void notContainKey(K k) {
+    public final void notContainKey(final K k) {
         getAsserter().expectNotThat((Map<K, Object>) subject, Matchers.hasKey(k));
     }
 
-    public final void containsValue(Matcher<V> matcher) {
+    public final void containsValue(final Matcher<V> matcher) {
         getAsserter().expectThat((Map<Object, V>) subject, Matchers.hasValue(matcher));
     }
 
-    public final void containsValue(V v) {
+    public final void containsValue(final V v) {
         getAsserter().expectThat((Map<Object, V>) subject, Matchers.hasValue(v));
     }
 
-    public final void notContainValue(Matcher<V> matcher) {
+    public final void notContainValue(final Matcher<V> matcher) {
         getAsserter().expectNotThat((Map<Object, V>) subject, Matchers.hasValue(matcher));
     }
 
-    public final void notContainValue(V v) {
+    public final void notContainValue(final V v) {
         getAsserter().expectNotThat((Map<Object, V>) subject, Matchers.hasValue(v));
     }
 
@@ -87,7 +87,7 @@ public class MapCheckerImpl<K, V> extends ObjectCheckerImpl<Map<K, V>> implement
                 Matchers.describedAs("isEmpty() = <false>", Matchers.equalTo(false)));
     }
 
-    public final void hasSize(int size) {
+    public final void hasSize(final int size) {
         getAsserter().expectThat(subject.size(), Matchers.equalTo(size));
     }
 }

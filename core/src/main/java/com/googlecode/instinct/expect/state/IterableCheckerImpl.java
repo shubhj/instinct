@@ -23,39 +23,39 @@ import org.hamcrest.Matchers;
 public class IterableCheckerImpl<E, T extends Iterable<E>>
         extends ObjectCheckerImpl<T> implements IterableChecker<E, T> {
 
-    public IterableCheckerImpl(T subject) {
+    public IterableCheckerImpl(final T subject) {
         super(subject);
     }
 
-    public final void containsItem(E element) {
+    public final void containsItem(final E element) {
         getAsserter().expectThat(subject, Matchers.hasItem(element));
     }
 
-    public final void containsItem(Matcher<E> matcher) {
+    public final void containsItem(final Matcher<E> matcher) {
         getAsserter().expectThat(subject, Matchers.hasItem(matcher));
     }
 
-    public final void notContainItem(E item) {
+    public final void notContainItem(final E item) {
         getAsserter().expectNotThat(subject, Matchers.hasItem(item));
     }
 
-    public final void notContainItem(Matcher<E> matcher) {
+    public final void notContainItem(final Matcher<E> matcher) {
         getAsserter().expectNotThat(subject, Matchers.hasItem(matcher));
     }
 
-    public final void containsItems(Matcher<E>... matchers) {
+    public final void containsItems(final Matcher<E>... matchers) {
         getAsserter().expectThat(subject, Matchers.hasItems(matchers));
     }
 
-    public final void containsItems(E... items) {
+    public final void containsItems(final E... items) {
         getAsserter().expectThat(subject, Matchers.hasItems(items));
     }
 
-    public final void notContainItems(Matcher<E>... matchers) {
+    public final void notContainItems(final Matcher<E>... matchers) {
         getAsserter().expectNotThat(subject, Matchers.hasItems(matchers));
     }
 
-    public final void notContainItems(E... items) {
+    public final void notContainItems(final E... items) {
         getAsserter().expectNotThat(subject, Matchers.hasItems(items));
     }
 }

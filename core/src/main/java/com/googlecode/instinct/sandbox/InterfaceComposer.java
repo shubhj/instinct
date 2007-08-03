@@ -13,15 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.googlecode.instinct.sandbox;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Proxy;
-
-public final class InterfaceComposer {
-
-    public <T> T compose(Class<T> iface, Object... implementers) {
-        final InvocationHandler handler = new ComposingInvocationHandler<T>(implementers);
-        return (T) Proxy.newProxyInstance(iface.getClassLoader(), new Class[]{iface}, handler);
-    }
+public interface InterfaceComposer {
+    <T> T compose(Class<T> iface, Object... implementers);
 }

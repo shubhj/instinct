@@ -13,22 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.googlecode.instinct.sandbox;
 
-package com.googlecode.instinct.expect.state;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Proxy;
 
-import org.hamcrest.Matchers;
-
-// TODO Test this
-public class ClassCheckerImpl<T> extends ObjectCheckerImpl<Class<T>> implements ClassChecker<T> {
-    public ClassCheckerImpl(final Class<T> subject) {
-        super(subject);
-    }
-
-    public final <U> void typeCompatibleWith(final Class<U> cls) {
-        getAsserter().expectThat(subject, Matchers.typeCompatibleWith(cls));
-    }
-
-    public final <U> void notTypeCompatibleWith(final Class<U> cls) {
-        getAsserter().expectNotThat(subject, Matchers.typeCompatibleWith(cls));
+public final class InterfaceComposerImpl implements InterfaceComposer {
+    @SuppressWarnings({"unchecked"})
+    public <T> T compose(final Class<T> iface, final Object... implementers) {
+        final InvocationHandler handler = new ComposingInvocationHandler(implementers);
+        return (T) Proxy.newProxyInstance(iface.getClassLoader(), new Class[]{iface}, handler);
     }
 }
