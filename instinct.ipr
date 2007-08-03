@@ -318,30 +318,30 @@
         </inspection_tool>
         <inspection_tool class="AnnotationNamingConvention" level="WARNING" enabled="true">
           <option name="m_regex" value="[A-Z][A-Za-z\d]*" />
-          <option name="m_minLength" value="8" />
-          <option name="m_maxLength" value="64" />
+          <option name="m_minLength" value="2" />
+          <option name="m_maxLength" value="99" />
         </inspection_tool>
         <inspection_tool class="ConfusingMainMethod" level="WARNING" enabled="true" />
         <inspection_tool class="ConstantNamingConvention" level="WARNING" enabled="true">
           <option name="m_regex" value="[A-Z_\d]*" />
-          <option name="m_minLength" value="5" />
-          <option name="m_maxLength" value="32" />
+          <option name="m_minLength" value="2" />
+          <option name="m_maxLength" value="99" />
         </inspection_tool>
         <inspection_tool class="EnumeratedClassNamingConvention" level="WARNING" enabled="true">
           <option name="m_regex" value="[A-Z][A-Za-z\d]*" />
-          <option name="m_minLength" value="8" />
-          <option name="m_maxLength" value="64" />
+          <option name="m_minLength" value="2" />
+          <option name="m_maxLength" value="99" />
         </inspection_tool>
         <inspection_tool class="EnumeratedConstantNamingConvention" level="WARNING" enabled="true">
           <option name="m_regex" value="[A-Z][A-Za-z\d]*" />
-          <option name="m_minLength" value="5" />
-          <option name="m_maxLength" value="32" />
+          <option name="m_minLength" value="2" />
+          <option name="m_maxLength" value="99" />
         </inspection_tool>
         <inspection_tool class="ExceptionNameDoesntEndWithException" level="WARNING" enabled="true" />
         <inspection_tool class="ClassNamingConvention" level="WARNING" enabled="true">
           <option name="m_regex" value="[A-Z][A-Za-z\d]*" />
-          <option name="m_minLength" value="8" />
-          <option name="m_maxLength" value="64" />
+          <option name="m_minLength" value="2" />
+          <option name="m_maxLength" value="99" />
         </inspection_tool>
         <inspection_tool class="InstanceMethodNamingConvention" level="WARNING" enabled="true">
           <option name="m_regex" value="[a-z][A-Za-z\d]*" />
@@ -349,21 +349,21 @@
           <option name="m_maxLength" value="99" />
         </inspection_tool>
         <inspection_tool class="InstanceVariableNamingConvention" level="WARNING" enabled="true">
-          <option name="m_regex" value="m_[a-z][A-Za-z\d]*" />
-          <option name="m_minLength" value="5" />
-          <option name="m_maxLength" value="32" />
+          <option name="m_regex" value="[a-z][A-Za-z\d]*" />
+          <option name="m_minLength" value="2" />
+          <option name="m_maxLength" value="99" />
         </inspection_tool>
         <inspection_tool class="InterfaceNamingConvention" level="WARNING" enabled="true">
           <option name="m_regex" value="[A-Z][A-Za-z\d]*" />
-          <option name="m_minLength" value="8" />
-          <option name="m_maxLength" value="64" />
+          <option name="m_minLength" value="2" />
+          <option name="m_maxLength" value="99" />
         </inspection_tool>
         <inspection_tool class="LocalVariableNamingConvention" level="WARNING" enabled="true">
           <option name="m_ignoreForLoopParameters" value="false" />
           <option name="m_ignoreCatchParameters" value="false" />
           <option name="m_regex" value="[a-z][A-Za-z\d]*" />
           <option name="m_minLength" value="1" />
-          <option name="m_maxLength" value="20" />
+          <option name="m_maxLength" value="99" />
         </inspection_tool>
         <inspection_tool class="MethodNameSameAsClassName" level="WARNING" enabled="true" />
         <inspection_tool class="MethodNameSameAsParentName" level="WARNING" enabled="true" />
@@ -371,7 +371,7 @@
         <inspection_tool class="ParameterNamingConvention" level="WARNING" enabled="true">
           <option name="m_regex" value="[a-z][A-Za-z\d]*" />
           <option name="m_minLength" value="1" />
-          <option name="m_maxLength" value="20" />
+          <option name="m_maxLength" value="99" />
         </inspection_tool>
         <inspection_tool class="UpperCaseFieldNameNotConstant" level="WARNING" enabled="true" />
         <inspection_tool class="NonExceptionNameEndsWithException" level="WARNING" enabled="true" />
@@ -381,13 +381,13 @@
         </inspection_tool>
         <inspection_tool class="StaticMethodNamingConvention" level="WARNING" enabled="true">
           <option name="m_regex" value="[a-z][A-Za-z\d]*" />
-          <option name="m_minLength" value="4" />
-          <option name="m_maxLength" value="32" />
+          <option name="m_minLength" value="2" />
+          <option name="m_maxLength" value="99" />
         </inspection_tool>
         <inspection_tool class="StaticVariableNamingConvention" level="WARNING" enabled="true">
           <option name="m_regex" value="s_[a-z][A-Za-z\d]*" />
-          <option name="m_minLength" value="5" />
-          <option name="m_maxLength" value="32" />
+          <option name="m_minLength" value="2" />
+          <option name="m_maxLength" value="99" />
         </inspection_tool>
         <inspection_tool class="TypeParameterNamingConvention" level="WARNING" enabled="true">
           <option name="m_regex" value="[A-Z\d]" />
@@ -528,7 +528,7 @@
         <inspection_tool class="AutoUnboxing" level="WARNING" enabled="true" />
         <inspection_tool class="MisorderedAssertEqualsParameters" level="WARNING" enabled="true" />
         <inspection_tool class="QuestionableName" level="WARNING" enabled="true">
-          <option name="nameString" value="aa,abc,bad,bar,bar2,baz,baz1,baz2,baz3,bb,blah,bogus,bool,cc,dd,defau1t,dummy,dummy2,ee,fa1se,ff,foo,foo1,foo2,foo3,foobar,four,fred,fred1,fred2,gg,hh,hello,hello1,hello2,hello3,ii,nu11,one,silly,silly2,string,two,that,then,three,whi1e,var" />
+          <option name="nameString" value="aa,abc,bad,bar,bar2,baz,baz1,baz2,baz3,bb,blah,bogus,bool,cc,dd,defau1t,dummy,dummy2,ee,fa1se,ff,foo,foo1,foo2,foo3,foobar,four,fred,fred1,fred2,gg,hh,hello,hello1,hello2,hello3,ii,nu11,one,silly,silly2,two,that,then,three,whi1e,var" />
         </inspection_tool>
         <inspection_tool class="IntegerDivisionInFloatingPointContext" level="WARNING" enabled="true" />
         <inspection_tool class="ImplicitNumericConversion" level="WARNING" enabled="true">
@@ -586,7 +586,6 @@
         <inspection_tool class="MagicNumber" level="WARNING" enabled="true">
           <option name="m_ignoreInHashCode" value="true" />
         </inspection_tool>
-        <inspection_tool class="PublicMethodNotExposedInInterface" level="WARNING" enabled="true" />
         <inspection_tool class="AssignmentToCatchBlockParameter" level="WARNING" enabled="true" />
         <inspection_tool class="AnonymousClassMethodCount" level="WARNING" enabled="true">
           <option name="m_limit" value="1" />
@@ -881,27 +880,6 @@
       <option name="notice" value="Copyright 2006-2007 Tom Adams&#10;&#10;Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);&#10;you may not use this file except in compliance with the License.&#10;You may obtain a copy of the License at&#10;&#10;    http://www.apache.org/licenses/LICENSE-2.0&#10;&#10;Unless required by applicable law or agreed to in writing, software&#10;distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#10;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#10;See the License for the specific language governing permissions and&#10;limitations under the License." />
       <option name="keyword" value="Copyright" />
       <option name="fileTypeOverride" value="4" />
-      <option name="relativeBefore" value="true" />
-      <option name="addBlankAfter" value="true" />
-      <option name="fileLocation" value="1" />
-      <option name="useAlternate" value="false" />
-    </LanguageOptions>
-    <LanguageOptions name="CSS">
-      <option name="templateOptions">
-        <value>
-          <option name="block" value="true" />
-          <option name="separateBefore" value="false" />
-          <option name="separateAfter" value="false" />
-          <option name="prefixLines" value="true" />
-          <option name="lenBefore" value="80" />
-          <option name="lenAfter" value="80" />
-          <option name="box" value="false" />
-          <option name="filler" value=" " />
-        </value>
-      </option>
-      <option name="notice" value="Copyright (c) &amp;#36;today.year, Your Corporation. All Rights Reserved." />
-      <option name="keyword" value="Copyright" />
-      <option name="fileTypeOverride" value="1" />
       <option name="relativeBefore" value="true" />
       <option name="addBlankAfter" value="true" />
       <option name="fileLocation" value="1" />

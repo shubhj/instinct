@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Ben Warren
+ * Copyright 2006-2007 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.expect.state;
 
-import java.util.Map;
 import com.googlecode.instinct.internal.util.Suggest;
+import java.util.Map;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 

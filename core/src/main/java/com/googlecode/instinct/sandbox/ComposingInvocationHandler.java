@@ -1,18 +1,18 @@
 /*
-* Copyright 2006-2007 Ben Warren
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*     http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright 2006-2007 Tom Adams
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.googlecode.instinct.sandbox;
 
 import java.lang.reflect.InvocationHandler;
@@ -32,7 +32,7 @@ public final class ComposingInvocationHandler<T> implements InvocationHandler {
         final MethodImplementer invokee = findImplementer(method);
         try {
             return invokee.invoke(params);
-        } catch(InvocationTargetException ite) {
+        } catch (InvocationTargetException ite) {
             throw new RuntimeException(ite.getCause());
         } catch (IllegalAccessException iae) {
             // TODO Can we do something better with exceptions declared by the interface
@@ -40,13 +40,11 @@ public final class ComposingInvocationHandler<T> implements InvocationHandler {
         }
     }
 
-    private MethodImplementer findImplementer(Method targetMethod)  {
+    private MethodImplementer findImplementer(Method targetMethod) {
         final List<MethodImplementer> methodImplementers = new ArrayList<MethodImplementer>();
-
         for (Object implementer : implementers) {
             addMethodImplementations(implementer, methodImplementers);
         }
-
         return findImplementer(targetMethod, methodImplementers);
     }
 
@@ -57,22 +55,18 @@ public final class ComposingInvocationHandler<T> implements InvocationHandler {
     }
 
     private MethodImplementer findImplementer(Method targetMethod, List<MethodImplementer> implementations) {
-
         MethodImplementer bestImplementation = null;
-
         for (MethodImplementer implementation : implementations) {
             bestImplementation = matchesAndHasMostSpecificReturnType(targetMethod, bestImplementation, implementation);
         }
-
         if (bestImplementation == null) {
             throw new NoSuchMethodError("No implementation found for: " + targetMethod);
         }
-
         return bestImplementation;
     }
 
     private MethodImplementer matchesAndHasMostSpecificReturnType(Method targetMethod, MethodImplementer champion,
-                                                                  MethodImplementer contender) {
+            MethodImplementer contender) {
         if (contender.hasMethodWithSameNameAndParametersAs(targetMethod)) {
             return mostSpecificReturnType(champion, contender);
         } else {

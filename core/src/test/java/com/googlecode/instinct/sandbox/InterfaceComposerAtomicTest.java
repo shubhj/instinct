@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Ben Warren
+ * Copyright 2006-2007 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,12 @@
 
 package com.googlecode.instinct.sandbox;
 
-import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
-import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertMessageContains;
-import static com.googlecode.instinct.test.triangulate.Triangulation.*;
 import com.googlecode.instinct.test.InstinctTestCase;
-import org.jmock.Mockery;
+import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertMessageContains;
+import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
+import static com.googlecode.instinct.test.triangulate.Triangulation.getInstance;
 import org.jmock.Expectations;
+import org.jmock.Mockery;
 
 public class InterfaceComposerAtomicTest extends InstinctTestCase {
 
@@ -58,23 +58,18 @@ public class InterfaceComposerAtomicTest extends InstinctTestCase {
         checkRethrowsSameThrowable(new Error());
     }
 
-
     public void testReThrowsRuntimeExceptions() {
         checkRethrowsSameThrowable(new RuntimeException());
     }
 
-
     public void testWrapsOtherThrowables() throws Throwable {
-
         final Throwable expectedThrowable = new Throwable();
-
         context.checking(new Expectations() {
             {
                 one(mockComposedInterface).thowSomething();
                 will(throwException(expectedThrowable));
             }
         });
-
         try {
             backedByMockImplementation.thowSomething();
         } catch (Throwable actualThrowable) {
@@ -86,28 +81,23 @@ public class InterfaceComposerAtomicTest extends InstinctTestCase {
 
     private void checkRethrowsSameThrowable(final Throwable expectedThrowable) {
         final ComposedInterface mockComposedInterface = context.mock(ComposedInterface.class);
-
         context.checking(new Expectations() {
             {
                 one(mockComposedInterface).returnANumber();
                 will(throwException(expectedThrowable));
             }
         });
-
         Throwable actualThrowable = assertThrows(expectedThrowable.getClass(), new Runnable() {
             public void run() {
                 mockComposedInterface.returnANumber();
             }
         });
-
         context.assertIsSatisfied();
         assertSame(expectedThrowable, actualThrowable);
     }
 
-
     @Override
     public void setUpTestDoubles() {
-
     }
 
     @Override

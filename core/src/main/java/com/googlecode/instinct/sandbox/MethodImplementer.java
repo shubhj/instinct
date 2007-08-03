@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Ben Warren
+ * Copyright 2006-2007 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,15 +15,14 @@
  */
 package com.googlecode.instinct.sandbox;
 
-import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 final class MethodImplementer {
 
     private Object object;
     private Method method;
-
 
     public MethodImplementer(Object object, Method method) {
         this.object = object;
