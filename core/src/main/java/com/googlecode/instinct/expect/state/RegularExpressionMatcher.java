@@ -19,6 +19,8 @@ package com.googlecode.instinct.expect.state;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.util.regex.Pattern;
 import org.hamcrest.Description;
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 /**
@@ -27,13 +29,7 @@ import org.hamcrest.TypeSafeMatcher;
 public final class RegularExpressionMatcher extends TypeSafeMatcher<String> {
     private final Pattern pattern;
 
-    /**
-     * Constructs a matcher for the given <code>regularExpression</code>.
-     * @param regularExpression The regular expression to match against.
-     * @throws java.util.regex.PatternSyntaxException if the given <code>regularExpression</code> is syntactically invalid.
-     */
-    public RegularExpressionMatcher(final String regularExpression) {
-        checkNotNull(regularExpression);
+    private RegularExpressionMatcher(final String regularExpression) {
         pattern = Pattern.compile(regularExpression);
     }
 
@@ -52,5 +48,16 @@ public final class RegularExpressionMatcher extends TypeSafeMatcher<String> {
     public void describeTo(final Description description) {
         checkNotNull(description);
         description.appendText("a string matching regular expression /").appendText(pattern.toString()).appendText("/");
+    }
+
+    /**
+     * Returns a matcher for the given <code>regularExpression</code>.
+     * @param regularExpression The regular expression to match against.
+     * @throws java.util.regex.PatternSyntaxException if the given <code>regularExpression</code> is syntactically invalid.
+     */
+    @Factory
+    public static Matcher<String> matchesRegex(final String regularExpression) {
+        checkNotNull(regularExpression);
+        return new RegularExpressionMatcher(regularExpression);
     }
 }

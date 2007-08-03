@@ -16,6 +16,11 @@
 
 package com.googlecode.instinct.internal.util;
 
+import static com.googlecode.instinct.expect.Mocker12.mock;
+import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
+import com.googlecode.instinct.test.triangulate.Triangulation;
 import java.io.FileReader;
 import java.io.FilterReader;
 import java.io.FilterWriter;
@@ -24,11 +29,6 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Serializable;
 import java.io.Writer;
-import static com.googlecode.instinct.expect.Mocker12.mock;
-import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import com.googlecode.instinct.test.triangulate.Triangulation;
 
 @SuppressWarnings({"ExceptionClassNameDoesntEndWithException", "UnusedDeclaration"})
 public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
@@ -51,8 +51,9 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
         factory = new ObjectFactoryImpl();
     }
 
+    // Note. Because this is used in code that needs to accept nulls, we can't null check argument values.
     public void testConformsToClassTraits() {
-        checkClass(ObjectFactoryImpl.class, ObjectFactory.class);
+        checkClassWithoutParamChecks(ObjectFactoryImpl.class, ObjectFactory.class);
     }
 
     public void testRefusesToCreateInterfaces() {

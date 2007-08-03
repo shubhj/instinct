@@ -18,7 +18,6 @@ package com.googlecode.instinct.expect.state;
 
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdgeImpl;
-import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
@@ -33,35 +32,35 @@ public final class StateExpectationsImpl implements StateExpectations {
     private MatcherAssertEdge matcher = new MatcherAssertEdgeImpl();
     private ObjectFactory objectFactory = new ObjectFactoryImpl();
 
-    public <T> ObjectChecker<T> that(T object) {
+    public <T> ObjectChecker<T> that(final T object) {
         return (ObjectChecker<T>) createChecker(ObjectCheckerImpl.class, object);
     }
 
-    public StringChecker that(String string) {
+    public StringChecker that(final String string) {
         return createChecker(StringCheckerImpl.class, string);
     }
 
-    public <T extends Comparable<T>> ComparableChecker<T> that(T comparable) {
+    public <T extends Comparable<T>> ComparableChecker<T> that(final T comparable) {
         return (ComparableChecker<T>) createChecker(ComparableCheckerImpl.class, comparable);
     }
 
-    public <E, T extends Iterable<E>> IterableChecker<E, T> that(T iterable) {
+    public <E, T extends Iterable<E>> IterableChecker<E, T> that(final T iterable) {
         return (IterableChecker<E, T>) createChecker(IterableCheckerImpl.class, iterable);
     }
 
-    public <E, T extends Collection<E>> CollectionChecker<E, T> that(T collection) {
+    public <E, T extends Collection<E>> CollectionChecker<E, T> that(final T collection) {
         return (CollectionChecker<E, T>) createChecker(CollectionCheckerImpl.class, collection);
     }
 
-    public <T> ArrayChecker<T> that(T[] array) {
+    public <T> ArrayChecker<T> that(final T[] array) {
         return (ArrayChecker<T>) createChecker(ArrayCheckerImpl.class, array);
     }
 
-    public <K, V> MapChecker<K, V> that(Map<K, V> map) {
+    public <K, V> MapChecker<K, V> that(final Map<K, V> map) {
         return (MapChecker<K, V>) createChecker(MapCheckerImpl.class, map);
     }
 
-    public DoubleChecker that(Double d) {
+    public DoubleChecker that(final Double d) {
         return createChecker(DoubleCheckerImpl.class, d);
     }
 
@@ -69,31 +68,29 @@ public final class StateExpectationsImpl implements StateExpectations {
         return createChecker(BooleanCheckerImpl.class, b);
     }
 
-    public <T> ClassChecker<T> that(Class<T> aClass) {
+    public <T> ClassChecker<T> that(final Class<T> aClass) {
         return (ClassChecker<T>) createChecker(ClassCheckerImpl.class, aClass);
     }
 
-    public <T extends EventObject> EventObjectChecker<T> that(T eventObject) {
+    public <T extends EventObject> EventObjectChecker<T> that(final T eventObject) {
         return (EventObjectChecker<T>) createChecker(EventObjectCheckerImpl.class, eventObject);
     }
 
-    public <T extends Node> NodeChecker<T> that(T node) {
+    public <T extends Node> NodeChecker<T> that(final T node) {
         return (NodeChecker<T>) createChecker(NodeCheckerImpl.class, node);
     }
 
-    public <T> void that(T t, Matcher<T> hamcrestMatcher) {
+    public <T> void that(final T t, final Matcher<T> hamcrestMatcher) {
         checkNotNull(t, hamcrestMatcher);
         matcher.expectThat(t, hamcrestMatcher);
     }
 
-    public <T> void notThat(T t, Matcher<T> hamcrestMatcher) {
+    public <T> void notThat(final T t, final Matcher<T> hamcrestMatcher) {
         checkNotNull(t, hamcrestMatcher);
         matcher.expectNotThat(t, hamcrestMatcher);
     }
 
-    @Fix("Remove check for null here, need to be careful of NPEs.")
-    private <T> T createChecker(Class<T> checkerClass, Object subject) {
-        checkNotNull(checkerClass, subject);
+    private <T> T createChecker(final Class<T> checkerClass, final Object subject) {
         return objectFactory.create(checkerClass, subject);
     }
 }

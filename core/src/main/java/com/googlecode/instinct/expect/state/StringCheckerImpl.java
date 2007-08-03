@@ -89,6 +89,7 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
 
     public final void matchesRegex(final String string) {
         nullCheckString(string, "matchesRegex");
+//        getAsserter().expectThat(string,);
     }
 
     @Suggest("Move this nice form of null check into ParamChecker.")

@@ -16,9 +16,6 @@
 
 package com.googlecode.instinct.internal.util;
 
-import java.lang.reflect.Constructor;
-import static java.util.Arrays.asList;
-import java.util.Iterator;
 import au.net.netstorm.boost.edge.EdgeException;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
@@ -26,6 +23,9 @@ import au.net.netstorm.boost.edge.java.lang.reflect.DefaultEdgeConstructor;
 import au.net.netstorm.boost.edge.java.lang.reflect.EdgeConstructor;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkIsConcreteClass;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import java.lang.reflect.Constructor;
+import static java.util.Arrays.asList;
+import java.util.Iterator;
 
 @SuppressWarnings({"unchecked"})
 public final class ObjectFactoryImpl implements ObjectFactory {
@@ -34,7 +34,7 @@ public final class ObjectFactoryImpl implements ObjectFactory {
     private final PrimitiveTypeBoxer primitiveTypeBoxer = new PrimitiveTypeBoxerImpl();
 
     public <T> T create(final Class<T> concreteClass, final Object... constructorArgumentValues) {
-        checkNotNull(concreteClass, constructorArgumentValues);
+        checkNotNull(concreteClass);
         checkIsConcreteClass(concreteClass);
         final Constructor<T> constructor = findConstructor(concreteClass, constructorArgumentValues);
         return instantiate(constructor, constructorArgumentValues);
@@ -69,7 +69,7 @@ public final class ObjectFactoryImpl implements ObjectFactory {
     private boolean typesMatch(final Class<?>[] constructorTypes, final Object... argumentValues) {
         for (int i = 0; i < constructorTypes.length; i++) {
             final Class<?> contructorType = boxPrimitive(constructorTypes[i]);
-            if (!contructorType.isAssignableFrom(argumentValues[i].getClass())) {
+            if (argumentValues[i] != null && !contructorType.isAssignableFrom(argumentValues[i].getClass())) {
                 return false;
             }
         }

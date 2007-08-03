@@ -24,7 +24,7 @@ import org.hamcrest.TypeSafeMatcher;
 public final class StringLengthMatcher extends TypeSafeMatcher<String> {
     private final int expectedLength;
 
-    public StringLengthMatcher(final int expectedLength) {
+    private StringLengthMatcher(final int expectedLength) {
         this.expectedLength = expectedLength;
     }
 

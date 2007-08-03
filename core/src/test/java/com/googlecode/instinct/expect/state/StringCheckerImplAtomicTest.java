@@ -35,7 +35,7 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
         checkPublic(StringCheckerImpl.class);
     }
 
-    @Suggest("Drive out the notMatchesRegex method also.")
+    @Suggest({"Finish this method", "Drive out the notMatchesRegex method also."})
     public void testMatchesRegularExpressions() {
         final StringChecker checker = new StringCheckerImpl("somepatternorother");
         checker.matchesRegex("somepattern");
