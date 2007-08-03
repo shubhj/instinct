@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.expect.state;
 
-import com.googlecode.instinct.internal.util.Suggest;
+import static com.googlecode.instinct.test.ExceptionTestChecker.expectException;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;
@@ -35,10 +35,31 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
         checkPublic(StringCheckerImpl.class);
     }
 
-    @Suggest({"Finish this method", "Drive out the notMatchesRegex method also."})
     public void testMatchesRegularExpressions() {
-        final StringChecker checker = new StringCheckerImpl("somepatternorother");
-        checker.matchesRegex("somepattern");
+        match("[a-z]+", "astring");
+    }
+
+    public void testThrowsExceptionWhenStringPassedDoesNotMatchRegularExpression() {
+        expectException(AssertionError.class, new Runnable() {
+            public void run() {
+                match("[a-z]+", "a-string-123");
+            }
+        });
+    }
+
+    public void testMatchesFailingRegularExpressions() {
+        final StringChecker checker = new StringCheckerImpl("[a-z]+");
+        checker.doesNotMatchRegex("a-string-123");
+    }
+
+    public void testThrowsExceptionWhenStringPassedMatchesRegularExpressionButIsExpectedToFail() {
+        expectException(AssertionError.class, new Runnable() {
+            public void run() {
+                final String matchingRegex = "[a-z]+[1-9]+";
+                final StringChecker checker = new StringCheckerImpl("astring123");
+                checker.doesNotMatchRegex(matchingRegex);
+            }
+        });
     }
 
     public void testShowsHumanReadableStringWhenMatchesRegexIsPassedNull() {
@@ -127,6 +148,11 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
                 checker.containsString(null);
             }
         });
+    }
+
+    private void match(final String regularExpression, final String stringToMatch) {
+        final StringChecker checker = new StringCheckerImpl(stringToMatch);
+        checker.matchesRegex(regularExpression);
     }
 
     private void expectNullRejected(final String methodName, final Runnable block) {

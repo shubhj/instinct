@@ -19,22 +19,22 @@ package com.googlecode.instinct.test;
 import au.net.netstorm.boost.nursery.reflect.checker.AssertThrows;
 import au.net.netstorm.boost.nursery.reflect.checker.DefaultAssertThrows;
 
-public final class AssertTestChecker {
+public final class ExceptionTestChecker {
     private static final AssertThrows ASSERT_THROWS = new DefaultAssertThrows();
 
-    private AssertTestChecker() {
+    private ExceptionTestChecker() {
         throw new UnsupportedOperationException();
     }
 
-    public static <T extends Throwable> Throwable assertThrows(final Class<T> expectedException, final String message, final Runnable block) {
+    public static <T extends Throwable> Throwable expectException(final Class<T> expectedException, final String message, final Runnable block) {
         return ASSERT_THROWS.assertThrows(expectedException, message, block);
     }
 
-    public static <T extends Throwable> Throwable assertThrows(final Class<T> expectedException, final Runnable block) {
+    public static <T extends Throwable> Throwable expectException(final Class<T> expectedException, final Runnable block) {
         return ASSERT_THROWS.assertThrows(expectedException, block);
     }
 
-    public static void assertMessageContains(final Throwable t, final String fragment) {
+    public static void expectMessageContains(final Throwable t, final String fragment) {
         ASSERT_THROWS.assertMessageContains(t, fragment);
     }
 }

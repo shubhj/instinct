@@ -87,9 +87,14 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
         getAsserter().expectThat(subject, StringLengthMatcher.hasLength(length));
     }
 
-    public final void matchesRegex(final String string) {
-        nullCheckString(string, "matchesRegex");
-//        getAsserter().expectThat(string,);
+    public final void matchesRegex(final String regularExpression) {
+        nullCheckString(regularExpression, "matchesRegex");
+        getAsserter().expectThat(subject, RegularExpressionMatcher.matchesRegex(regularExpression));
+    }
+
+    public final void doesNotMatchRegex(final String regularExpression) {
+        nullCheckString(regularExpression, "doesNotMatchRegex");
+        getAsserter().expectNotThat(subject, RegularExpressionMatcher.matchesRegex(regularExpression));
     }
 
     @Suggest("Move this nice form of null check into ParamChecker.")
