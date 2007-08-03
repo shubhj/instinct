@@ -16,19 +16,13 @@
 
 package com.googlecode.instinct.internal.core;
 
-import java.util.Collection;
 import com.googlecode.instinct.internal.runner.ContextResult;
-import com.googlecode.instinct.runner.SpecificationListener;
-import com.googlecode.instinct.runner.ContextListener;
+import java.util.Collection;
 
 public interface ContextClass extends RunnableItem {
     <T> Class<T> getType();
 
     String getName();
-
-    void addContextListener(ContextListener contextListener);
-
-    void addSpecificationListener(SpecificationListener specificationListener);
 
     ContextResult run();
 

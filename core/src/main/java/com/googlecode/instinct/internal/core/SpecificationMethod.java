@@ -16,15 +16,12 @@
 
 package com.googlecode.instinct.internal.core;
 
-import java.util.Collection;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.runner.SpecificationListener;
+import java.util.Collection;
 
 @Suggest({"Breadcrumb - Add a getDeclaringClass() that returns ContextClass or raw class?"})
 public interface SpecificationMethod extends RunnableItem {
-    void addSpecificationListener(SpecificationListener specificationListener);
-
     SpecificationResult run();
 
     LifecycleMethod getSpecificationMethod();
