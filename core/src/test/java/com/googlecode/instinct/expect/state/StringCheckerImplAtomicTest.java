@@ -39,7 +39,7 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
         match("[a-z]+", "astring");
     }
 
-    public void testThrowsExceptionWhenStringPassedDoesNotMatchRegularExpression() {
+    public void testThrowsExceptionWhenStringPassedToMatchesRegexDoesNotMatchRegularExpression() {
         expectException(AssertionError.class, new Runnable() {
             public void run() {
                 match("[a-z]+", "a-string-123");
