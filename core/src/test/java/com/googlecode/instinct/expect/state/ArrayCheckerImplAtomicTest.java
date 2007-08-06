@@ -43,7 +43,7 @@ public final class ArrayCheckerImplAtomicTest extends InstinctTestCase {
     }
 
     public void testThrowsExceptionWhenItemIsNotContainedInSubjectArray() {
-        expectDoesNotContainItem(checker, "foo");
+        checkExceptionIsThrownWhenContainItemIsCalled(checker, "foo");
     }
 
     public void testDoesNotThrowExceptionWhenNullIsContainedWithSubjectArray() {
@@ -55,7 +55,7 @@ public final class ArrayCheckerImplAtomicTest extends InstinctTestCase {
     public void testThrowsExceptionWhenContainsItemIsCalledOnANullSubjectArray() {
         final String[] nullSubjectArray = null;
         final ArrayChecker<String> nullChecker = new ArrayCheckerImpl<String>(nullSubjectArray);
-        expectDoesNotContainItem(nullChecker, null);
+        checkExceptionIsThrownWhenContainItemIsCalled(nullChecker, null);
     }
 
     public void testWillNotFindItemsThatAreNotInSubjectArray() {
@@ -70,7 +70,7 @@ public final class ArrayCheckerImplAtomicTest extends InstinctTestCase {
         });
     }
 
-    private void expectDoesNotContainItem(final ArrayChecker<String> checker, final String searchString) {
+    private void checkExceptionIsThrownWhenContainItemIsCalled(final ArrayChecker<String> checker, final String searchString) {
         assertThrows(AssertionError.class, new Runnable() {
             public void run() {
                 checker.containsItem(searchString);
