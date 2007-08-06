@@ -1,6 +1,7 @@
 package com.googlecode.instinct.example.expect;
 
 import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public final class StateExpectationsContext {
 
     @Specification
     public void providesMatchersForMakingAssertionsAboutCollectionsAndIterables() {
-        List<String> people = new ArrayList<String>();
+        final List<String> people = new ArrayList<String>();
         expect.that(people).isEmpty();
         people.add("fred");
         people.add("wilma");
@@ -71,7 +72,7 @@ public final class StateExpectationsContext {
 
     @Specification
     public void providesMatchersForMakingAssertionsAboutArrays() {
-        String[] greetings = {"hi", "there"};
+        final String[] greetings = {"hi", "there"};
         expect.that(greetings).hasLength(2);
         expect.that(greetings).containsItem("hi");
         expect.that(greetings).doesNotContainItem("bye");
@@ -80,7 +81,7 @@ public final class StateExpectationsContext {
 
     @Specification
     public void providesMatchersForMakingAssertionsAboutMaps() {
-        Map<String, String> map = new HashMap<String, String>();
+        final Map<String, String> map = new HashMap<String, String>();
         expect.that(map).isEmpty();
         map.put("key", "value");
         expect.that(map).notEmpty();
@@ -91,15 +92,16 @@ public final class StateExpectationsContext {
     }
 
     @Specification
+    @Fix("Adding the new Double() is a hack to get the correct matcher. Problem with autoboxing.")
     public void providesMatchersForMakingAssertionsAboutDoubles() {
-        expect.that(1.1).closeTo(1.0, 0.11);
-        expect.that(1.1).notCloseTo(1.0, 0.1);
+        expect.that(new Double(1.1)).closeTo(1.0, 0.11);
+        expect.that(new Double(1.1)).notCloseTo(1.0, 0.1);
     }
 
     @Specification
     public void providesMatchersForMakingAssertionsAboutEvents() {
-        Object object = new Object();
-        EventObject myEventObject = new MyEventObject(object);
+        final Object object = new Object();
+        final EventObject myEventObject = new MyEventObject(object);
         expect.that(myEventObject).eventFrom(MyEventObject.class, object);
         expect.that(myEventObject).eventFrom(object);
         expect.that(myEventObject).notEventFrom(new Object());
@@ -108,7 +110,7 @@ public final class StateExpectationsContext {
     private static class MyEventObject extends EventObject {
         private static final long serialVersionUID = -2001716596031438536L;
 
-        private MyEventObject(Object o) {
+        private MyEventObject(final Object o) {
             super(o);
         }
     }
