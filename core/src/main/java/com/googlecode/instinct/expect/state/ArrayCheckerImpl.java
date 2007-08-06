@@ -34,11 +34,11 @@ public class ArrayCheckerImpl<T> extends ObjectCheckerImpl<T[]> implements Array
         getAsserter().expectThat(subject, Matchers.hasItemInArray(t));
     }
 
-    public final void notContainItem(final Matcher<T> matcher) {
+    public final void doesNotContainItem(final Matcher<T> matcher) {
         getAsserter().expectNotThat(subject, Matchers.hasItemInArray(matcher));
     }
 
-    public final void notContainItem(final T t) {
+    public final void doesNotContainItem(final T t) {
         getAsserter().expectNotThat(subject, Matchers.hasItemInArray(t));
     }
 

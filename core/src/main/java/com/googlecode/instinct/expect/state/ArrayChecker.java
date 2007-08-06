@@ -23,9 +23,9 @@ public interface ArrayChecker<T> extends ObjectChecker<T[]> {
 
     void containsItem(T t);
 
-    void notContainItem(Matcher<T> matcher);
+    void doesNotContainItem(Matcher<T> matcher);
 
-    void notContainItem(T t);
+    void doesNotContainItem(T t);
 
     void hasLength(int length);
 }
