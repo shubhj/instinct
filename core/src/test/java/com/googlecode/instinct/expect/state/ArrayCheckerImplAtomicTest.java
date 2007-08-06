@@ -21,7 +21,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;
 
-@Suggest("Determine whether or not the ArrayCheckerImpl class is meant to be extended.")
+@Suggest("Determine whether or not the ArrayCheckerImpl class is designed for extension.")
 public final class ArrayCheckerImplAtomicTest extends InstinctTestCase {
     private ArrayChecker<String> checker;
 

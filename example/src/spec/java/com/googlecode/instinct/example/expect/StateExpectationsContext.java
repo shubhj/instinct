@@ -12,7 +12,6 @@ import org.hamcrest.Matchers;
 
 /**
  * The examples below illustrate Instinct's state-based expectation API.
- *
  * @see com.googlecode.instinct.expect.state.StateExpectations
  */
 @SuppressWarnings({"MagicNumber", "unchecked"})
@@ -75,8 +74,8 @@ public final class StateExpectationsContext {
         String[] greetings = {"hi", "there"};
         expect.that(greetings).hasLength(2);
         expect.that(greetings).containsItem("hi");
-        expect.that(greetings).notContainItem("bye");
-        expect.that(greetings).notContainItem(Matchers.greaterThan("zip"));
+        expect.that(greetings).doesNotContainItem("bye");
+        expect.that(greetings).doesNotContainItem(Matchers.greaterThan("zip"));
     }
 
     @Specification
