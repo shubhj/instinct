@@ -16,21 +16,31 @@
 
 package com.googlecode.instinct.internal.aggregate.locate;
 
+import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.MarkingScheme;
+import com.googlecode.instinct.marker.naming.NamingConvention;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
-import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.marker.MarkingScheme;
+import java.util.Set;
 
 public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
     private final AnnotatedMethodLocator annotatedMethodLocator = new AnnotatedMethodLocatorImpl();
+    private final NamingConventionMethodLocator namingConventionMethodLocator = new NamingConventionMethodLocatorImpl();
 
     @Suggest("Return an unmodifiable collection.")
     public <T> Collection<Method> locateAll(final Class<T> cls, final MarkingScheme markingScheme) {
-        final Method[] methods = findMethodsByAnnotation(cls, markingScheme.getAnnotationType());
-        return new HashSet<Method>(Arrays.asList(methods));
+        final Method[] annotatedMethods = findMethodsByAnnotation(cls, markingScheme.getAnnotationType());
+        final Collection<Method> namedMethods = findMethodsByNamingConvention(cls, markingScheme.getNamingConvention());
+        final Set<Method> methods = new HashSet<Method>(Arrays.asList(annotatedMethods));
+        methods.addAll(namedMethods);
+        return methods;
+    }
+
+    private <T> Collection<Method> findMethodsByNamingConvention(final Class<T> cls, final NamingConvention namingConvention) {
+        return namingConventionMethodLocator.locate(cls, namingConvention);
     }
 
     private <A extends Annotation, T> Method[] findMethodsByAnnotation(final Class<T> cls, final Class<A> annotationType) {
