@@ -31,4 +31,6 @@ public interface ContextClass extends RunnableItem {
     Collection<LifecycleMethod> getBeforeSpecificationMethods();
 
     Collection<LifecycleMethod> getAfterSpecificationMethods();
+
+    Collection<SpecificationMethod> buildSpecificationMethods();
 }

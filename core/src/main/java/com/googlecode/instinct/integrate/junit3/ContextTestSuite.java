@@ -17,24 +17,24 @@
 package com.googlecode.instinct.integrate.junit3;
 
 import com.googlecode.instinct.internal.core.ContextClass;
-import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.SpecificationListener;
+import java.util.Collection;
 import junit.framework.TestSuite;
 
 @Fix("Make JUnit integration work again. Add to example ant build")
 public final class ContextTestSuite extends TestSuite implements SpecificationListener {
-    private ContextClass contextClass;
+    private final ContextClass contextClass;
 
-    public <T> ContextTestSuite(final Class<T> contextType) {
-        checkNotNull(contextType);
-        contextClass = new ContextClassImpl(contextType);
+    public ContextTestSuite(final ContextClass contextClass) {
+        checkNotNull(contextClass);
+        this.contextClass = contextClass;
+        // Do we really want to pass an unconstructed "this" to another class?
         contextClass.addSpecificationListener(this);
-        contextClass.run();
+        addToSuite(contextClass.buildSpecificationMethods());
     }
 
     @Override
@@ -42,7 +42,6 @@ public final class ContextTestSuite extends TestSuite implements SpecificationLi
         return contextClass.getName();
     }
 
-    @Suggest("Is this addTest() causing the concurrent mod exceptions?")
     public void preSpecificationMethod(final SpecificationMethod specificationMethod) {
         checkNotNull(specificationMethod);
         addTest(new SpecificationTestCase(specificationMethod));
@@ -51,5 +50,11 @@ public final class ContextTestSuite extends TestSuite implements SpecificationLi
     public void postSpecificationMethod(final SpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
         checkNotNull(specificationMethod, specificationResult);
         // ignored
+    }
+
+    private void addToSuite(final Collection<SpecificationMethod> specificationMethods) {
+        for (final SpecificationMethod specificationMethod : specificationMethods) {
+            addTest(new SpecificationTestCase(specificationMethod));
+        }
     }
 }

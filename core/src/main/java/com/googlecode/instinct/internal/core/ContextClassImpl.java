@@ -16,9 +16,6 @@
 
 package com.googlecode.instinct.internal.core;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collection;
 import au.net.netstorm.boost.primordial.Primordial;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
@@ -26,6 +23,7 @@ import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.AfterSpecification;
@@ -36,6 +34,9 @@ import com.googlecode.instinct.marker.naming.BeforeSpecificationNamingConvention
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public final class ContextClassImpl extends Primordial implements ContextClass {
     private ContextRunner contextRunner = new StandardContextRunner();
@@ -80,6 +81,16 @@ public final class ContextClassImpl extends Primordial implements ContextClass {
 
     public Collection<LifecycleMethod> getAfterSpecificationMethods() {
         return findMethods(new MarkingSchemeImpl(AfterSpecification.class, new AfterSpecificationNamingConvention()));
+    }
+
+    @Suggest({"This logic is duplicated in StandardContextRunner.createSpecificationMethod()"})
+    public Collection<SpecificationMethod> buildSpecificationMethods() {
+        final Collection<SpecificationMethod> specificationMethodResults = new ArrayList<SpecificationMethod>();
+        for (final LifecycleMethod lifecycleSpecificationMethod : getSpecificationMethods()) {
+            specificationMethodResults.add(new SpecificationMethodImpl(lifecycleSpecificationMethod,
+                    getBeforeSpecificationMethods(), getAfterSpecificationMethods()));
+        }
+        return specificationMethodResults;
     }
 
     private Collection<LifecycleMethod> findMethods(final MarkingScheme markingScheme) {

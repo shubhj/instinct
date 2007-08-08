@@ -34,6 +34,7 @@ public interface ObjectChecker<T> {
 
     void isNull();
 
+    @Suggest("Change this to isNotNull(). -CM")
     void notNull();
 
     void hasToString(Matcher<String> matcher);

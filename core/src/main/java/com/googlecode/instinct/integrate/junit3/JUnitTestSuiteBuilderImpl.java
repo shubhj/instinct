@@ -20,6 +20,7 @@ import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
 import com.googlecode.instinct.internal.aggregate.AnnotatedContextAggregatorImpl;
 import com.googlecode.instinct.internal.aggregate.ContextAggregator;
+import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
@@ -47,7 +48,7 @@ public final class JUnitTestSuiteBuilderImpl implements JUnitTestSuiteBuilder {
         final TestSuite suite = new TestSuite(suiteName);
         for (final JavaClassName contextClass : contextClasses) {
             final Class<Context> cls = getClass(contextClass);
-            suite.addTest(new ContextTestSuite(cls));
+            suite.addTest(new ContextTestSuite(new ContextClassImpl(cls)));
         }
         return suite;
     }
