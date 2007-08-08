@@ -23,6 +23,7 @@ import static com.googlecode.instinct.expect.Mocker12.mock;
 import static com.googlecode.instinct.expect.Mocker12.returnValue;
 import static com.googlecode.instinct.expect.Mocker12.same;
 import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
+import com.googlecode.instinct.internal.matcher.SpecificationMatcher;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
@@ -36,8 +37,6 @@ import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectW
 import java.lang.reflect.Method;
 import static java.util.Arrays.asList;
 import java.util.Collection;
-import org.hamcrest.BaseMatcher;
-import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
 @SuppressWarnings({"unchecked"})
@@ -122,22 +121,12 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
 
     public void testReturnsCollectionOfSpecificationMethod() {
         expects(methodLocator).method("locateAll").with(same(contextType), isA(MarkingScheme.class)).will(returnValue(beforeSpecMethods));
-        expects(methodLocator).method("locateAll").with(same(contextType), isA(MarkingScheme.class)).will(returnValue(beforeSpecMethods));
-        expects(methodLocator).method("locateAll").with(same(contextType), isA(MarkingScheme.class)).will(returnValue(afterSpecMethods));
         expects(methodLocator).method("locateAll").with(same(contextType), isA(MarkingScheme.class)).will(returnValue(afterSpecMethods));
         expects(methodLocator).method("locateAll").with(same(contextType), isA(MarkingScheme.class)).will(returnValue(specMethods));
         final Collection<SpecificationMethod> methods = contextClass.buildSpecificationMethods();
         expect.that(methods.size()).equalTo(1);
-        final Matcher<SpecificationMethod> specificationMatcher = new SpecificationMatcher(buildExpectedSpecificationMethod());
+        final Matcher<SpecificationMethod> specificationMatcher = new SpecificationMatcher("toCheckVerification");
         expect.that(methods).containsItem(specificationMatcher);
-    }
-
-    private SpecificationMethod buildExpectedSpecificationMethod() {
-        // this is dodgy and hard to read.
-        final Collection<LifecycleMethod> lifecycleBeforeSpecMethods = contextClass.getBeforeSpecificationMethods();
-        final Collection<LifecycleMethod> lifecycleAfterSpecMethods = contextClass.getAfterSpecificationMethods();
-        return new SpecificationMethodImpl(lifecycleMethod("toCheckVerification"),
-                lifecycleBeforeSpecMethods, lifecycleAfterSpecMethods);
     }
 
     private LifecycleMethod lifecycleMethod(final String methodName) {
@@ -148,22 +137,5 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
         final Object[] constructorArgs = {contextType};
         final Object[] dependencies = {contextRunner, methodLocator};
         return createSubjectWithConstructorArgs(ContextClassImpl.class, constructorArgs, dependencies);
-    }
-
-    private static class SpecificationMatcher extends BaseMatcher<SpecificationMethod> {
-        private final SpecificationMethod method;
-
-        SpecificationMatcher(final SpecificationMethod method) {
-            this.method = method;
-        }
-
-        public boolean matches(final Object item) {
-            final SpecificationMethod specificationMethod = (SpecificationMethod) item;
-            return method.getName().equals(specificationMethod.getName());
-        }
-
-        public void describeTo(final Description description) {
-            description.appendText("matches a specification name via the name field");
-        }
     }
 }
