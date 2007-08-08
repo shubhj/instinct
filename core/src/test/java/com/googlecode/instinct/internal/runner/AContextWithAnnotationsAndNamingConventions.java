@@ -22,6 +22,7 @@ import com.googlecode.instinct.marker.annotate.Specification;
 
 @Context
 public class AContextWithAnnotationsAndNamingConventions {
+    // matches ^must.*
     public void mustDoSomethingRatherVague() {
         expect.that(Boolean.TRUE).isTrue();
     }
@@ -32,6 +33,11 @@ public class AContextWithAnnotationsAndNamingConventions {
     }
 
     public void isNotASpecification() {
+        expect.that(Boolean.FALSE).isFalse();
+    }
+
+    // matches *.Test$
+    public void thisIsASpecificationTest() {
         expect.that(Boolean.FALSE).isFalse();
     }
 }

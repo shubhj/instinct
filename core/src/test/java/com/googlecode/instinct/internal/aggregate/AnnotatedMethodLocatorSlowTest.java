@@ -16,11 +16,12 @@
 
 package com.googlecode.instinct.internal.aggregate;
 
-import java.lang.reflect.Method;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotatedMethodLocator;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotatedMethodLocatorImpl;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.test.InstinctTestCase;
+import java.lang.reflect.Method;
+import java.util.Collection;
 
 public final class AnnotatedMethodLocatorSlowTest extends InstinctTestCase {
     private AnnotatedMethodLocator locator;
@@ -31,7 +32,7 @@ public final class AnnotatedMethodLocatorSlowTest extends InstinctTestCase {
     }
 
     public void testFindsCorrectNumberOfSpecificationsWhenGivenSpecsWithDifferentAccessModifiers() {
-        final Method[] methods = locator.locate(ContextWithSpecsWithDifferentAccessModifiers.class, Specification.class);
-        assertEquals(5, methods.length);
+        final Collection<Method> methods = locator.locate(ContextWithSpecsWithDifferentAccessModifiers.class, Specification.class);
+        assertEquals(5, methods.size());
     }
 }

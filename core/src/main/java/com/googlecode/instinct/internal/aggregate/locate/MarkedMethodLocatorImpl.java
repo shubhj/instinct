@@ -21,7 +21,6 @@ import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,9 +31,10 @@ public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
 
     @Suggest("Return an unmodifiable collection.")
     public <T> Collection<Method> locateAll(final Class<T> cls, final MarkingScheme markingScheme) {
-        final Method[] annotatedMethods = findMethodsByAnnotation(cls, markingScheme.getAnnotationType());
+        final Collection<Method> annotatedMethods = findMethodsByAnnotation(cls, markingScheme.getAnnotationType());
         final Collection<Method> namedMethods = findMethodsByNamingConvention(cls, markingScheme.getNamingConvention());
-        final Set<Method> methods = new HashSet<Method>(Arrays.asList(annotatedMethods));
+        final Set<Method> methods = new HashSet<Method>();
+        methods.addAll(annotatedMethods);
         methods.addAll(namedMethods);
         return methods;
     }
@@ -43,7 +43,7 @@ public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
         return namingConventionMethodLocator.locate(cls, namingConvention);
     }
 
-    private <A extends Annotation, T> Method[] findMethodsByAnnotation(final Class<T> cls, final Class<A> annotationType) {
+    private <A extends Annotation, T> Collection<Method> findMethodsByAnnotation(final Class<T> cls, final Class<A> annotationType) {
         return annotatedMethodLocator.locate(cls, annotationType);
     }
 }

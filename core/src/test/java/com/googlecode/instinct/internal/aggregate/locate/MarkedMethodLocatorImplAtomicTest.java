@@ -65,16 +65,17 @@ public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
         expect.that(specificationMethods).containsItem(mustAlwaysReturnTrueMethod);
     }
 
-    public void testFindsBothAnnotatedAndNamedMethods() {
+    public void testFindsBothAnnotatedAndNamedMethodsInTheSameClass() {
         final Collection<Method> methods = getSpecificationMethodsFromContextClass(AContextWithAnnotationsAndNamingConventions.class);
-        expect.that(methods.size()).equalTo(2);
+        expect.that(methods.size()).equalTo(3);
         final Matcher<Method> aMethodNamedMustDoSomethingRatherVague = new MethodNameMatcher("mustDoSomethingRatherVague");
         final Matcher<Method> aMethodNamedDoSomeCrazyRequirement = new MethodNameMatcher("doSomeCrazyRequirement");
-        expect.that(methods).containsItems(aMethodNamedMustDoSomethingRatherVague, aMethodNamedDoSomeCrazyRequirement);
+        final Matcher<Method> aMethodNamedThisIsATest = new MethodNameMatcher("thisIsASpecificationTest");
+        expect.that(methods).containsItems(aMethodNamedMustDoSomethingRatherVague, aMethodNamedDoSomeCrazyRequirement, aMethodNamedThisIsATest);
     }
 
     private <T> Collection<Method> getSpecificationMethodsFromContextClass(final Class<T> cls) {
-        expects(namingConvention, anyTimes()).method("getPattern").will(returnValue("^must.*"));
+        expects(namingConvention, anyTimes()).method("getPattern").will(returnValue("^must.*|.*Test$"));
         return locator.locateAll(cls, new MarkingSchemeImpl(Specification.class, namingConvention));
     }
 }

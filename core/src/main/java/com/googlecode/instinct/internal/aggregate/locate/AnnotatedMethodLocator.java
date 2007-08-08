@@ -18,7 +18,8 @@ package com.googlecode.instinct.internal.aggregate.locate;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Collection;
 
 public interface AnnotatedMethodLocator {
-    <A extends Annotation, T> Method[] locate(Class<T> cls, Class<A> runtimeAnnotationType);
+    <A extends Annotation, T> Collection<Method> locate(Class<T> cls, Class<A> runtimeAnnotationType);
 }

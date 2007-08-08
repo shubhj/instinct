@@ -16,10 +16,11 @@
 
 package com.googlecode.instinct.internal.aggregate.locate;
 
-import java.lang.reflect.Method;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import java.lang.reflect.Method;
+import java.util.Collection;
 
 public final class AnnotatedMethodLocatorImplAtomicTest extends InstinctTestCase {
     private AnnotatedMethodLocator locator;
@@ -29,13 +30,13 @@ public final class AnnotatedMethodLocatorImplAtomicTest extends InstinctTestCase
     }
 
     public void testLocateOnAClassWithNoAnnotationsGiveNoMethod() {
-        final Method[] methods = locator.locate(WithoutRuntimeAnnotations.class, Specification.class);
-        assertEquals(0, methods.length);
+        final Collection<Method> methods = locator.locate(WithoutRuntimeAnnotations.class, Specification.class);
+        assertEquals(0, methods.size());
     }
 
     public void testLocateOnAClassWithSeveralAnnotationsGiveSeveralMethod() {
-        final Method[] methods = locator.locate(WithRuntimeAnnotations.class, Specification.class);
-        assertEquals(2, methods.length);
+        final Collection<Method> methods = locator.locate(WithRuntimeAnnotations.class, Specification.class);
+        assertEquals(2, methods.size());
     }
 
     @Override
