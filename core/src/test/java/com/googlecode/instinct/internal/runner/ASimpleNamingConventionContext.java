@@ -21,9 +21,22 @@ import com.googlecode.instinct.marker.annotate.Context;
 
 @Context
 public class ASimpleNamingConventionContext {
+
+    public void beforeSpecification() {
+        expect.that(Boolean.TRUE).isTrue();
+    }
+
+    public void beforeWeDoStuff() {
+        expect.that(Boolean.TRUE).isTrue();
+    }
+
     public void mustAlwaysReturnTrue() {
         // autoboxing problem again.
         expect.that(Boolean.TRUE).isTrue();
+    }
+
+    public void shouldAlwaysReturnFalse() {
+        expect.that(Boolean.FALSE).isFalse();
     }
 
     public void notASpecificationMethod() {

@@ -18,6 +18,6 @@ package com.googlecode.instinct.marker.naming;
 
 public final class SpecificationNamingConvention implements NamingConvention {
     public String getPattern() {
-        return "^must";
+        return "^must.*|^should.*";
     }
 }

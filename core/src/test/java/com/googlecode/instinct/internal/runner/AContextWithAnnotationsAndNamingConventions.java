@@ -36,8 +36,8 @@ public class AContextWithAnnotationsAndNamingConventions {
         expect.that(Boolean.FALSE).isFalse();
     }
 
-    // matches *.Test$
-    public void thisIsASpecificationTest() {
+    // matches ^should.*
+    public void shouldDoSomethingReallyImportant() {
         expect.that(Boolean.FALSE).isFalse();
     }
 }
