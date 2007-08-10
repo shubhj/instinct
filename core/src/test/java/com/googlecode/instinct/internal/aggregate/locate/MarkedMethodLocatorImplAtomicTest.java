@@ -21,7 +21,6 @@ import static com.googlecode.instinct.expect.Mocker12.anyTimes;
 import static com.googlecode.instinct.expect.Mocker12.expects;
 import static com.googlecode.instinct.expect.Mocker12.mock;
 import static com.googlecode.instinct.expect.Mocker12.returnValue;
-import com.googlecode.instinct.internal.matcher.MethodMatcher;
 import com.googlecode.instinct.internal.runner.AContextThatHasAMethodWithAnnotationAndNamingConvention;
 import com.googlecode.instinct.internal.runner.AContextWithAnnotationsAndNamingConventions;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
@@ -56,50 +55,86 @@ public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
     }
 
     public void testFindsAnnotatedSpecificationMethodsInASimpleContext() {
-        final Collection<Method> specificationMethodsCollection = getSpecificationMethodsFromContextClass(ASimpleContext.class);
-        final Matcher<Method> toCheckVerificationMethod = new MethodMatcher("toCheckVerification");
-        expect.that(specificationMethodsCollection).containsItem(toCheckVerificationMethod);
+        expect.that(specificationMethodsInASimpleContextClass()).containsItem(toCheckVerificationMethod());
     }
 
     public void testFindsSpecificationMethodsConformingToNamingConventionInASimpleNamingConventionContext() {
         final Collection<Method> specificationMethods = getSpecificationMethodsFromContextClass(ASimpleNamingConventionContext.class);
         expect.that(specificationMethods).hasSize(2);
-        final Matcher<Method> aMethodNamedMustAlwaysReturnTrue = new MethodNameMatcher("mustAlwaysReturnTrue");
-        final Matcher<Method> aMethodNamedShouldAlwaysReturnFalse = new MethodNameMatcher("shouldAlwaysReturnFalse");
-        expect.that(specificationMethods).containsItems(aMethodNamedMustAlwaysReturnTrue, aMethodNamedShouldAlwaysReturnFalse);
+        expect.that(specificationMethods).containsItems(aMethodNamedMustAlwaysReturnTrue(), aMethodNamedShouldAlwaysReturnFalse());
     }
 
     public void testFindsBothAnnotatedAndNamedSpecificationMethodsInTheSameClass() {
         final Collection<Method> methods = getSpecificationMethodsFromContextClass(AContextWithAnnotationsAndNamingConventions.class);
         expect.that(methods).hasSize(3);
-        final Matcher<Method> aMethodNamedMustDoSomethingRatherVague = new MethodNameMatcher("mustDoSomethingRatherVague");
-        final Matcher<Method> aMethodNamedDoSomeCrazyRequirement = new MethodNameMatcher("doSomeCrazyRequirement");
-        final Matcher<Method> aMethodNamedShouldDoSomethingReallyImportant = new MethodNameMatcher("shouldDoSomethingReallyImportant");
-        expect.that(methods).containsItems(aMethodNamedMustDoSomethingRatherVague, aMethodNamedDoSomeCrazyRequirement,
-                aMethodNamedShouldDoSomethingReallyImportant);
+        expect.that(methods).containsItems(aMethodNamedMustDoSomethingRatherVague(), aMethodNamedDoSomeCrazyRequirement(),
+                aMethodNamedShouldDoSomethingReallyImportant());
     }
 
     public void testFindsAnnotatedBeforeSpecificationMethodsInASimpleContext() {
         final Collection<Method> methods = getBeforeSpecificationMethodsFromContextClass("", ASimpleContext.class);
         expect.that(methods).hasSize(2);
-        final Matcher<Method> aMethodNamedSetup = new MethodNameMatcher("setUp");
-        final Matcher<Method> aMethodNamedSetupAgain = new MethodNameMatcher("setUpAgain");
-        expect.that(methods).containsItems(aMethodNamedSetup, aMethodNamedSetupAgain);
+        expect.that(methods).containsItems(aMethodNamedSetup(), aMethodNamedSetupAgain());
     }
 
     public void testFindsNamingConventionBeforeSpecificationMethodsInASimpleNamingConventionContext() {
         final Collection<Method> methods = getBeforeSpecificationMethodsFromContextClass("^before.*", ASimpleNamingConventionContext.class);
         expect.that(methods).hasSize(2);
-        final Matcher<Method> aMethodNamedBeforeSpecification = new MethodNameMatcher("beforeSpecification");
-        final Matcher<Method> aMethodNamedBeforeWeDoStuff = new MethodNameMatcher("beforeWeDoStuff");
-        expect.that(methods).containsItems(aMethodNamedBeforeSpecification, aMethodNamedBeforeWeDoStuff);
+        expect.that(methods).containsItems(aMethodNamedBeforeSpecification(), aMethodNamedBeforeWeDoStuff());
     }
 
     public void testReturnsAUniqueListOfMethodsWhenAMethodHasBothAnnotationAndNamingConvention() {
         final Collection<Method> methods = getSpecificationMethodsFromContextClass(AContextThatHasAMethodWithAnnotationAndNamingConvention.class);
         expect.that(methods).hasSize(1);
-        final Matcher<Method> aMethodNamedMustDoSomething = new MethodNameMatcher("mustDoSomething");
-        expect.that(methods).containsItem(aMethodNamedMustDoSomething);
+        expect.that(methods).containsItem(aMethodNamedMustDoSomething());
+    }
+
+    private Collection<Method> specificationMethodsInASimpleContextClass() {
+        return getSpecificationMethodsFromContextClass(ASimpleContext.class);
+    }
+
+    private Matcher<Method> aMethodNamedBeforeWeDoStuff() {
+        return new MethodNameMatcher("beforeWeDoStuff");
+    }
+
+    private Matcher<Method> aMethodNamedBeforeSpecification() {
+        return new MethodNameMatcher("beforeSpecification");
+    }
+
+    private Matcher<Method> aMethodNamedSetupAgain() {
+        return new MethodNameMatcher("setUpAgain");
+    }
+
+    private Matcher<Method> aMethodNamedSetup() {
+        return new MethodNameMatcher("setUp");
+    }
+
+    private Matcher<Method> toCheckVerificationMethod() {
+        return new MethodNameMatcher("toCheckVerification");
+    }
+
+    private Matcher<Method> aMethodNamedShouldAlwaysReturnFalse() {
+        return new MethodNameMatcher("shouldAlwaysReturnFalse");
+    }
+
+    private Matcher<Method> aMethodNamedMustAlwaysReturnTrue() {
+        return new MethodNameMatcher("mustAlwaysReturnTrue");
+    }
+
+    private Matcher<Method> aMethodNamedMustDoSomethingRatherVague() {
+        return new MethodNameMatcher("mustDoSomethingRatherVague");
+    }
+
+    private Matcher<Method> aMethodNamedDoSomeCrazyRequirement() {
+        return new MethodNameMatcher("doSomeCrazyRequirement");
+    }
+
+    private Matcher<Method> aMethodNamedShouldDoSomethingReallyImportant() {
+        return new MethodNameMatcher("shouldDoSomethingReallyImportant");
+    }
+
+    private Matcher<Method> aMethodNamedMustDoSomething() {
+        return new MethodNameMatcher("mustDoSomething");
     }
 
     private <T> Collection<Method> getBeforeSpecificationMethodsFromContextClass(final String namingPattern, final Class<T> cls) {
