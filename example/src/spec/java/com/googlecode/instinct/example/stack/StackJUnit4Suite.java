@@ -23,7 +23,4 @@ import org.junit.runner.RunWith;
 @RunWith(InstinctRunner.class)
 @SpecificationClasses(value = {AnEmptyStack.class, ANonEmptyStack.class, AnEmptyMagazineRack.class, AGlossyMagazine.class, MagazinePileContext.class})
 public final class StackJUnit4Suite {
-    private StackJUnit4Suite() {
-        throw new UnsupportedOperationException();
-    }
 }
