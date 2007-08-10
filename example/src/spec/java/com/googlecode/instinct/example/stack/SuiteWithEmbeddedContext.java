@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Chris Myers, Workingmouse
+ * Copyright 2006-2007 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,13 @@
 
 package com.googlecode.instinct.example.stack;
 
-import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.marker.annotate.ContextClasses;
 import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
-@RunWith(InstinctRunner.class)
-@ContextClasses(value = {AnEmptyStack.class, ANonEmptyStack.class, AnEmptyMagazineRack.class, AGlossyMagazine.class, MagazinePileContext.class})
-public final class StackJUnit4Suite {
-    private StackJUnit4Suite() {
+@RunWith(Suite.class)
+@Suite.SuiteClasses(value = {StackJUnit4Suite.class, StackJUnitSuite.class})
+public final class SuiteWithEmbeddedContext {
+    private SuiteWithEmbeddedContext() {
         throw new UnsupportedOperationException();
     }
 }

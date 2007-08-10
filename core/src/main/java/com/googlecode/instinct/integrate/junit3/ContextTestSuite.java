@@ -34,7 +34,7 @@ public final class ContextTestSuite extends TestSuite implements SpecificationLi
         this.contextClass = contextClass;
         // Do we really want to pass an unconstructed "this" to another class?
         contextClass.addSpecificationListener(this);
-        addToSuite(contextClass.buildSpecificationMethods());
+        addSpecificationsToSuite(contextClass.buildSpecificationMethods());
     }
 
     @Override
@@ -52,7 +52,7 @@ public final class ContextTestSuite extends TestSuite implements SpecificationLi
         // ignored
     }
 
-    private void addToSuite(final Collection<SpecificationMethod> specificationMethods) {
+    private void addSpecificationsToSuite(final Collection<SpecificationMethod> specificationMethods) {
         for (final SpecificationMethod specificationMethod : specificationMethods) {
             addTest(new SpecificationTestCase(specificationMethod));
         }

@@ -20,7 +20,7 @@ import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
-import com.googlecode.instinct.marker.annotate.SpecificationClasses;
+import com.googlecode.instinct.marker.annotate.ContextClasses;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,10 +32,11 @@ import org.junit.runner.notification.RunNotifier;
 
 public class InstinctRunner extends Runner {
     private Set<SpecificationMethod> methods = new HashSet<SpecificationMethod>();
-    private final Description suiteDescription = Description.createSuiteDescription("Instinct Specification Suite");
+    private final Description suiteDescription;
 
     public InstinctRunner(final Class<?> cls) throws InitializationError {
         createSpecifications(getAnnotatedClasses(cls));
+        suiteDescription = Description.createSuiteDescription("Instinct Specification Suite for " + cls.getName());
     }
 
     @Override
@@ -47,15 +48,19 @@ public class InstinctRunner extends Runner {
     public final void run(final RunNotifier notifier) {
         notifier.fireTestRunStarted(suiteDescription);
         for (final SpecificationMethod specificationMethod : methods) {
-            final Description description = Description.createTestDescription(specificationMethod.getSpecificationMethod().getDeclaringClass(),
-                    specificationMethod.getName());
-            notifier.fireTestStarted(description);
-            final SpecificationResult specificationResult = specificationMethod.run();
-            if (specificationResult.completedSuccessfully()) {
-                notifier.fireTestFinished(description);
-            } else {
-                notifier.fireTestFailure(new Failure(description, (Throwable) specificationResult.getStatus().getDetailedStatus()));
-            }
+            setUpAndRunSpecification(notifier, specificationMethod);
+        }
+    }
+
+    private void setUpAndRunSpecification(final RunNotifier notifier, final SpecificationMethod specificationMethod) {
+        final Description description = Description.createTestDescription(specificationMethod.getSpecificationMethod().getDeclaringClass(),
+                specificationMethod.getName());
+        notifier.fireTestStarted(description);
+        final SpecificationResult specificationResult = specificationMethod.run();
+        if (specificationResult.completedSuccessfully()) {
+            notifier.fireTestFinished(description);
+        } else {
+            notifier.fireTestFailure(new Failure(description, (Throwable) specificationResult.getStatus().getDetailedStatus()));
         }
     }
 
@@ -68,7 +73,7 @@ public class InstinctRunner extends Runner {
     }
 
     private static Class<?>[] getAnnotatedClasses(final Class<?> cls) {
-        final SpecificationClasses specificationClass = cls.getAnnotation(SpecificationClasses.class);
+        final ContextClasses specificationClass = cls.getAnnotation(ContextClasses.class);
         return specificationClass.value();
     }
 }

@@ -23,6 +23,6 @@ import java.lang.annotation.Target;
 
 @Retention(RUNTIME)
 @Target({ElementType.TYPE})
-public @interface SpecificationClasses {
+public @interface ContextClasses {
     Class<?>[] value();
 }
