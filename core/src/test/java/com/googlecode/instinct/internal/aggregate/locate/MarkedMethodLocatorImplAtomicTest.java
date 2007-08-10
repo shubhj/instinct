@@ -22,6 +22,7 @@ import static com.googlecode.instinct.expect.Mocker12.expects;
 import static com.googlecode.instinct.expect.Mocker12.mock;
 import static com.googlecode.instinct.expect.Mocker12.returnValue;
 import com.googlecode.instinct.internal.matcher.MethodMatcher;
+import com.googlecode.instinct.internal.runner.AContextThatHasAMethodWithAnnotationAndNamingConvention;
 import com.googlecode.instinct.internal.runner.AContextWithAnnotationsAndNamingConventions;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ASimpleNamingConventionContext;
@@ -92,6 +93,13 @@ public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
         final Matcher<Method> aMethodNamedBeforeSpecification = new MethodNameMatcher("beforeSpecification");
         final Matcher<Method> aMethodNamedBeforeWeDoStuff = new MethodNameMatcher("beforeWeDoStuff");
         expect.that(methods).containsItems(aMethodNamedBeforeSpecification, aMethodNamedBeforeWeDoStuff);
+    }
+
+    public void testReturnsAUniqueListOfMethodsWhenAMethodHasBothAnnotationAndNamingConvention() {
+        final Collection<Method> methods = getSpecificationMethodsFromContextClass(AContextThatHasAMethodWithAnnotationAndNamingConvention.class);
+        expect.that(methods).hasSize(1);
+        final Matcher<Method> aMethodNamedMustDoSomething = new MethodNameMatcher("mustDoSomething");
+        expect.that(methods).containsItem(aMethodNamedMustDoSomething);
     }
 
     private <T> Collection<Method> getBeforeSpecificationMethodsFromContextClass(final String namingPattern, final Class<T> cls) {
