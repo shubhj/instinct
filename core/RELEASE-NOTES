@@ -6,6 +6,7 @@ o Updated to jMock 2.1.
 o Fixed Issue 4 - Add newlines between context output in brief runner
 o Fixed concurrent modification issue with the JUnit runner.
 o Added JUnit 4 runner, with @ContextClasses annotation.
+o Added naming convention implementation.  Will now find methods starting with 'should' and 'must'. 
 
 * Instinct Release 0.1.4 *
 
