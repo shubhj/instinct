@@ -46,7 +46,6 @@ public class InstinctRunner extends Runner {
 
     @Override
     public final void run(final RunNotifier notifier) {
-        notifier.fireTestRunStarted(suiteDescription);
         for (final SpecificationMethod specificationMethod : methods) {
             setUpAndRunSpecification(notifier, specificationMethod);
         }
