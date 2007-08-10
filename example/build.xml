@@ -37,7 +37,7 @@
     </path>
 
     <target name="clean" depends="-clean"/>
-    <target name="run-specs" depends="clean,-run-specs,-run-junit-integration"/>
+    <target name="run-specs" depends="clean,-run-specs,-run-junit3-integration,-run-junit4-integration"/>
 
     <target name="-clean">
         <delete dir="${build.dir}"/>
@@ -77,14 +77,22 @@
         <fail if="specs-failed" message="Specifications failed."/>
     </target>
 
-    <target name="-run-junit-integration" depends="-compile">
+    <target name="-run-junit3-integration" depends="-compile">
         <junit failureproperty="tests-failed" fork="true" forkmode="perBatch">
             <classpath refid="spec.class.path"/>
             <test name="com.googlecode.instinct.example.stack.StackJUnitSuite"/>
             <formatter type="brief" usefile="false"/>
         </junit>
-        <!-- FIX Re-enable this. -->
-        <!--<fail if="tests-failed" message="JUnit integration suite failed."/>-->
+        <fail if="tests-failed" message="JUnit 3 integration suite failed."/>
+    </target>
+
+    <target name="-run-junit4-integration" depends="-compile">
+        <junit failureproperty="tests-failed" fork="true" forkmode="perBatch">
+            <classpath refid="spec.class.path"/>
+            <test name="com.googlecode.instinct.example.stack.StackJUnit4Suite"/>
+            <formatter type="brief" usefile="false"/>
+        </junit>
+        <fail if="tests-failed" message="JUnit 4 integration suite failed."/>
     </target>
 
 </project>

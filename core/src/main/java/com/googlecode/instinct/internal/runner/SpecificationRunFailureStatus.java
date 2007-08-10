@@ -17,6 +17,7 @@
 package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 
 public final class SpecificationRunFailureStatus implements SpecificationRunStatus {
     private final Throwable error;
@@ -26,6 +27,7 @@ public final class SpecificationRunFailureStatus implements SpecificationRunStat
         this.error = error;
     }
 
+    @Suggest("Should this return Throwable?")
     public Object getDetailedStatus() {
         return error;
     }
