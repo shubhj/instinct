@@ -16,12 +16,11 @@
 
 package com.googlecode.instinct.expect.state;
 
+import com.googlecode.instinct.internal.util.Fix;
 import java.util.Collection;
 import org.hamcrest.Matchers;
 
-// TODO Test this - especially desc strings
-
-// or make custom matchers?
+@Fix("Test this especially desc strings or make custom matchers?")
 public class CollectionCheckerImpl<E, T extends Collection<E>> extends IterableCheckerImpl<E, T>
         implements CollectionChecker<E, T> {
 

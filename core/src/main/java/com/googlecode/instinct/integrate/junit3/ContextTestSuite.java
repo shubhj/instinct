@@ -19,20 +19,20 @@ package com.googlecode.instinct.integrate.junit3;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
-import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.SpecificationListener;
 import java.util.Collection;
 import junit.framework.TestSuite;
 
-@Fix("Make JUnit integration work again. Add to example ant build")
+@SuppressWarnings({"ThisEscapedInObjectConstruction"})
 public final class ContextTestSuite extends TestSuite implements SpecificationListener {
     private final ContextClass contextClass;
 
+    @Suggest("Just take the Class<?>, use object factory to new up a ContextClass")
     public ContextTestSuite(final ContextClass contextClass) {
         checkNotNull(contextClass);
         this.contextClass = contextClass;
-        // Do we really want to pass an unconstructed "this" to another class?
         contextClass.addSpecificationListener(this);
         addSpecificationsToSuite(contextClass.buildSpecificationMethods());
     }

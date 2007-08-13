@@ -16,10 +16,11 @@
 
 package com.googlecode.instinct.expect.state;
 
+import com.googlecode.instinct.internal.util.Fix;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-// TODO Test this
+@Fix("Test this")
 public class IterableCheckerImpl<E, T extends Iterable<E>>
         extends ObjectCheckerImpl<T> implements IterableChecker<E, T> {
 

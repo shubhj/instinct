@@ -20,21 +20,26 @@ import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
+import com.googlecode.instinct.internal.util.ExceptionFinder;
+import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.annotate.ContextClasses;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import org.junit.internal.runners.InitializationError;
 import org.junit.runner.Description;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 
+@Suggest("Test this.")
 public class InstinctRunner extends Runner {
-    private Set<SpecificationMethod> methods = new HashSet<SpecificationMethod>();
+    @Suggest("Does this have to be global?")
+    private final Set<SpecificationMethod> methods = new HashSet<SpecificationMethod>();
+    private final ExceptionFinder exceptionFinder = new ExceptionFinderImpl();
     private final Description suiteDescription;
 
-    public InstinctRunner(final Class<?> cls) throws InitializationError {
+    public InstinctRunner(final Class<?> cls) {
         createSpecifications(getAnnotatedClasses(cls));
         suiteDescription = Description.createSuiteDescription("Instinct Specification Suite for " + cls.getName());
     }
@@ -59,8 +64,13 @@ public class InstinctRunner extends Runner {
         if (specificationResult.completedSuccessfully()) {
             notifier.fireTestFinished(description);
         } else {
-            notifier.fireTestFailure(new Failure(description, (Throwable) specificationResult.getStatus().getDetailedStatus()));
+            notifier.fireTestFailure(createFailure(description, specificationResult));
         }
+    }
+
+    private Failure createFailure(final Description description, final SpecificationResult specificationResult) {
+        final Throwable rootCause = exceptionFinder.getRootCause((Throwable) specificationResult.getStatus().getDetailedStatus());
+        return new Failure(description, rootCause);
     }
 
     private void createSpecifications(final Class<?>[] annotatedClasses) {

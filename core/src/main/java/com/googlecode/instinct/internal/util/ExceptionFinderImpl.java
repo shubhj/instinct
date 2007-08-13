@@ -20,7 +20,7 @@ import au.net.netstorm.boost.edge.EdgeException;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.lang.reflect.InvocationTargetException;
 
-@Suggest("May need to put smarts in to detect InvocationTargetException & EdgeExceptionsT")
+@Suggest("May need to put smarts in to detect InvocationTargetException & EdgeExceptions")
 public final class ExceptionFinderImpl implements ExceptionFinder {
     @Suggest("Use recursion to go arbitrarily deep.")
     public Throwable getRootCause(final Throwable topLevelCause) {

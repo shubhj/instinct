@@ -16,12 +16,13 @@
 
 package com.googlecode.instinct.expect.state;
 
+import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.Suggest;
 import java.util.Map;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-// TODO Test this
+@Fix("Test this")
 @SuppressWarnings({"unchecked"})
 @Suggest("Consider removing inheritance, this would forsce you to save a typesafe form of subject, and not have to perform casts.")
 public class MapCheckerImpl<K, V> extends ObjectCheckerImpl<Map<K, V>> implements MapChecker<K, V> {

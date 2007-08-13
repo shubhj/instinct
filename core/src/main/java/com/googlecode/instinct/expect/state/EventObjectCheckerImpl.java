@@ -16,10 +16,11 @@
 
 package com.googlecode.instinct.expect.state;
 
+import com.googlecode.instinct.internal.util.Fix;
 import java.util.EventObject;
 import org.hamcrest.Matchers;
 
-// TODO Test this
+@Fix("Test this")
 public class EventObjectCheckerImpl<T extends EventObject>
         extends ObjectCheckerImpl<T> implements EventObjectChecker<T> {
 

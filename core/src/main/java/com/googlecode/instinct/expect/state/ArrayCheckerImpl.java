@@ -16,10 +16,11 @@
 
 package com.googlecode.instinct.expect.state;
 
+import com.googlecode.instinct.internal.util.Fix;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-// TODO Test this
+@Fix("Test this")
 public class ArrayCheckerImpl<T> extends ObjectCheckerImpl<T[]> implements ArrayChecker<T> {
 
     public ArrayCheckerImpl(final T[] subject) {

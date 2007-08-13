@@ -16,9 +16,10 @@
 
 package com.googlecode.instinct.expect.state;
 
+import com.googlecode.instinct.internal.util.Fix;
 import org.hamcrest.Matchers;
 
-// TODO Test this
+@Fix("Test this")
 public class ComparableCheckerImpl<T extends Comparable<T>> extends ObjectCheckerImpl<T>
         implements ComparableChecker<T> {
 

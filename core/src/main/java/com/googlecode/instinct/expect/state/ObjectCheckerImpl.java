@@ -28,7 +28,7 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
     protected final T subject;
     private MatcherAssertEdge asserter = new MatcherAssertEdgeImpl();
 
-    public ObjectCheckerImpl(T subject) {
+    public ObjectCheckerImpl(final T subject) {
         this.subject = subject;
     }
 
@@ -36,27 +36,27 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         return asserter;
     }
 
-    public final void equalTo(T t) {
+    public final void equalTo(final T t) {
         getAsserter().expectThat(subject, Matchers.equalTo(t));
     }
 
-    public final void notEqualTo(T t) {
+    public final void notEqualTo(final T t) {
         getAsserter().expectNotThat(subject, Matchers.equalTo(t));
     }
 
-    public final void instanceOf(Class<T> cls) {
+    public final void instanceOf(final Class<T> cls) {
         getAsserter().expectThat(subject, Matchers.instanceOf(cls));
     }
 
-    public final void notInstanceOf(Class<T> cls) {
+    public final void notInstanceOf(final Class<T> cls) {
         getAsserter().expectNotThat(subject, Matchers.instanceOf(cls));
     }
 
-    public final void sameInstanceAs(T t) {
+    public final void sameInstanceAs(final T t) {
         getAsserter().expectThat(subject, Matchers.sameInstance(t));
     }
 
-    public final void notSameInstanceAs(T t) {
+    public final void notSameInstanceAs(final T t) {
         getAsserter().expectNotThat(subject, Matchers.sameInstance(t));
     }
 
@@ -68,47 +68,47 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectThat(subject, Matchers.notNullValue());
     }
 
-    public final void hasToString(Matcher<String> matcher) {
+    public final void hasToString(final Matcher<String> matcher) {
         getAsserter().expectThat(subject, Matchers.hasToString(matcher));
     }
 
-    public final void matchesAllOf(Matcher<T>... matchers) {
+    public final void matchesAllOf(final Matcher<T>... matchers) {
         getAsserter().expectThat(subject, Matchers.allOf(matchers));
     }
 
-    public final void matchesAllOf(Iterable<Matcher<T>> iterable) {
+    public final void matchesAllOf(final Iterable<Matcher<T>> iterable) {
         getAsserter().expectThat(subject, Matchers.allOf(iterable));
     }
 
-    public final void notMatchAllOf(Matcher<T>... matchers) {
+    public final void notMatchAllOf(final Matcher<T>... matchers) {
         getAsserter().expectNotThat(subject, Matchers.allOf(matchers));
     }
 
-    public final void notMatchAllOf(Iterable<Matcher<T>> iterable) {
+    public final void notMatchAllOf(final Iterable<Matcher<T>> iterable) {
         getAsserter().expectNotThat(subject, Matchers.allOf(iterable));
     }
 
-    public final void matchesAnyOf(Matcher<T>... matchers) {
+    public final void matchesAnyOf(final Matcher<T>... matchers) {
         getAsserter().expectThat(subject, Matchers.anyOf(matchers));
     }
 
-    public final void matchesAnyOf(Iterable<Matcher<T>> iterable) {
+    public final void matchesAnyOf(final Iterable<Matcher<T>> iterable) {
         getAsserter().expectThat(subject, Matchers.anyOf(iterable));
     }
 
-    public final void notMatchAnyOf(Matcher<T>... matchers) {
+    public final void notMatchAnyOf(final Matcher<T>... matchers) {
         getAsserter().expectNotThat(subject, Matchers.anyOf(matchers));
     }
 
-    public final void notMatchAnyOf(Iterable<Matcher<T>> iterable) {
+    public final void notMatchAnyOf(final Iterable<Matcher<T>> iterable) {
         getAsserter().expectNotThat(subject, Matchers.anyOf(iterable));
     }
 
-    public final void hasBeanProperty(String string) {
+    public final void hasBeanProperty(final String string) {
         getAsserter().expectThat(subject, Matchers.hasProperty(string));
     }
 
-    public final void hasBeanProperty(String string, Matcher matcher) {
+    public final void hasBeanProperty(final String string, final Matcher matcher) {
         getAsserter().expectThat(subject, Matchers.hasProperty(string, matcher));
     }
 }

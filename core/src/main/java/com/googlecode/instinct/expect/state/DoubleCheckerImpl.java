@@ -16,9 +16,10 @@
 
 package com.googlecode.instinct.expect.state;
 
+import com.googlecode.instinct.internal.util.Fix;
 import org.hamcrest.Matchers;
 
-// TODO Test this
+@Fix("Test this")
 public class DoubleCheckerImpl extends ComparableCheckerImpl<Double> implements DoubleChecker {
     public DoubleCheckerImpl(final Double subject) {
         super(subject);
