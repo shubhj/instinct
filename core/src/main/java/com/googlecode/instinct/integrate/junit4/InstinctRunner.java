@@ -33,24 +33,22 @@ import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 
 @Suggest("Test this.")
-public class InstinctRunner extends Runner {
-    @Suggest("Does this have to be global?")
-    private final Set<SpecificationMethod> methods = new HashSet<SpecificationMethod>();
+public final class InstinctRunner extends Runner {
     private final ExceptionFinder exceptionFinder = new ExceptionFinderImpl();
-    private final Description suiteDescription;
+    private final Class<?> classToRun;
 
-    public InstinctRunner(final Class<?> cls) {
-        createSpecifications(getAnnotatedClasses(cls));
-        suiteDescription = Description.createSuiteDescription("Instinct Specification Suite for " + cls.getName());
+    public InstinctRunner(final Class<?> classToRun) {
+        this.classToRun = classToRun;
     }
 
     @Override
-    public final Description getDescription() {
-        return suiteDescription;
+    public Description getDescription() {
+        return Description.createSuiteDescription(classToRun);
     }
 
     @Override
-    public final void run(final RunNotifier notifier) {
+    public void run(final RunNotifier notifier) {
+        final Set<SpecificationMethod> methods = createSpecifications(getAnnotatedClasses(classToRun));
         for (final SpecificationMethod specificationMethod : methods) {
             setUpAndRunSpecification(notifier, specificationMethod);
         }
@@ -73,14 +71,17 @@ public class InstinctRunner extends Runner {
         return new Failure(description, rootCause);
     }
 
-    private void createSpecifications(final Class<?>[] annotatedClasses) {
+    private Set<SpecificationMethod> createSpecifications(final Class<?>[] annotatedClasses) {
+        final Set<SpecificationMethod> methods = new HashSet<SpecificationMethod>();
         for (final Class<?> annotatedClass : annotatedClasses) {
             final ContextClass contextClass = new ContextClassImpl(annotatedClass);
             final Collection<SpecificationMethod> specificationMethods = contextClass.buildSpecificationMethods();
             methods.addAll(specificationMethods);
         }
+        return methods;
     }
 
+    @Suggest({"What if annotation not present?", "What if annotation is empty?"})
     private static Class<?>[] getAnnotatedClasses(final Class<?> cls) {
         final ContextClasses specificationClass = cls.getAnnotation(ContextClasses.class);
         return specificationClass.value();
