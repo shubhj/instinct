@@ -17,22 +17,50 @@
 package com.googlecode.instinct.internal.aggregate.locate;
 
 import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.internal.matcher.MethodMatcher;
+import com.googlecode.instinct.internal.runner.AContextWithAnnotationsAndNamingConventions;
 import com.googlecode.instinct.internal.runner.ASimpleNamingConventionContext;
+import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
 import java.lang.reflect.Method;
 import java.util.Collection;
+import org.hamcrest.Matcher;
 
+@SuppressWarnings({"unchecked"})
 public final class MarkedMethodLocatorImplSlowTest extends InstinctTestCase {
+    private MarkedMethodLocator locator;
+    private MarkingScheme markingScheme;
+
+    @Override
+    public void setUpTestDoubles() {
+        markingScheme = new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention());
+    }
+
+    @Override
+    public void setUpSubject() {
+        locator = new MarkedMethodLocatorImpl();
+    }
 
     public void testFindsNamingConventionMethodsInASimpleNamingConventionContext() {
-        final NamingConvention namingConvention = new SpecificationNamingConvention();
-        final MarkedMethodLocator locator = new MarkedMethodLocatorImpl();
-        final Collection<Method> methods = locator.locateAll(ASimpleNamingConventionContext.class,
-                new MarkingSchemeImpl(Specification.class, namingConvention));
+        final Collection<Method> methods = locate(ASimpleNamingConventionContext.class);
         expect.that(methods).hasSize(2);
+        expect.that(methods).containsItems(aMethodNamed("mustAlwaysReturnTrue"), aMethodNamed("shouldAlwaysReturnFalse"));
+    }
+
+    public void testFindsSpecMethodsInAClassContainingNamedMethodsAndAnnotatedMethods() {
+        final Collection<Method> methods = locate(AContextWithAnnotationsAndNamingConventions.class);
+        expect.that(methods).hasSize(3);
+        expect.that(methods).containsItems(aMethodNamed("mustDoSomethingRatherVague"), aMethodNamed("doSomeCrazyRequirement"), aMethodNamed("shouldDoSomethingReallyImportant"));
+    }
+
+    private <T> Collection<Method> locate(final Class<T> contextClass) {
+        return locator.locateAll(contextClass, markingScheme);
+    }
+
+    private Matcher<Method> aMethodNamed(final String methodName) {
+        return new MethodMatcher(methodName);
     }
 }

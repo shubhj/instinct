@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.internal.aggregate.locate;
 
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.naming.NamingConvention;
@@ -23,7 +24,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Set;
 
 public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
     private final AnnotatedMethodLocator annotatedMethodLocator = new AnnotatedMethodLocatorImpl();
@@ -31,9 +31,10 @@ public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
 
     @Suggest("Return an unmodifiable collection.")
     public <T> Collection<Method> locateAll(final Class<T> cls, final MarkingScheme markingScheme) {
+        checkNotNull(cls, markingScheme);
         final Collection<Method> annotatedMethods = findMethodsByAnnotation(cls, markingScheme.getAnnotationType());
         final Collection<Method> namedMethods = findMethodsByNamingConvention(cls, markingScheme.getNamingConvention());
-        final Set<Method> methods = new HashSet<Method>();
+        final Collection<Method> methods = new HashSet<Method>();
         methods.addAll(annotatedMethods);
         methods.addAll(namedMethods);
         return methods;
