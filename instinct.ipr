@@ -1017,11 +1017,11 @@
   <component name="libraryTable">
     <library name="junit">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/core/lib/junit/junit-4.3.1.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/junit/junit-4.4.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/core/etc/lib-src/junit-4.3.1-src.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/etc/lib-src/junit-4.4-src.jar!/" />
       </SOURCES>
     </library>
     <library name="boost">
@@ -1046,28 +1046,22 @@
     </library>
     <library name="hamcrest">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/core/lib/hamcrest/hamcrest-all-1.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/hamcrest/hamcrest-all-1.1.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/core/etc/lib-src/hamcrest-1.0-src.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/hamcrest/hamcrest-all-1.1.jar!/" />
       </SOURCES>
     </library>
     <library name="jmock2">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-junit3-2.1.0.jar!/" />
-        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-2.1.0.jar!/" />
-        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-junit4-2.1.0.jar!/" />
-        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-legacy-2.1.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-2.2.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-legacy-2.2.0.jar!/" />
       </CLASSES>
-      <JAVADOC>
-        <root url="jar://$PROJECT_DIR$/core/etc/lib-doc/jmock-2.1.0-javadoc.zip!/" />
-      </JAVADOC>
+      <JAVADOC />
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-junit3-2.1.0.jar!/" />
-        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-2.1.0.jar!/" />
-        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-junit4-2.1.0.jar!/" />
-        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-legacy-2.1.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-2.2.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-legacy-2.2.0.jar!/" />
       </SOURCES>
     </library>
     <library name="jmock1">

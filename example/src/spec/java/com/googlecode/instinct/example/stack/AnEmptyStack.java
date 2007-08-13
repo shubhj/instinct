@@ -19,7 +19,6 @@ public final class AnEmptyStack {
     @Specification
     void mustBeEmpty() {
         expect.that(stack.isEmpty()).equalTo(true);
-        expect.that(stack.isEmpty()).equalTo(false);
     }
 
     @Specification

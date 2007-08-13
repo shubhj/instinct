@@ -49,7 +49,7 @@ JAVA_BIN=${JAVA_HOME}/bin/java
 CLASSPATH=${CLASSPATH}:${LIBDIR}/ant/ant-1.7.0.jar
 CLASSPATH=${CLASSPATH}:${LIBDIR}/ant/ant-launcher-1.7.0.jar
 CLASSPATH=${CLASSPATH}:${LIBDIR}/ant/ant-junit-1.7.0.jar
-CLASSPATH=${CLASSPATH}:${LIBDIR}/junit-4.3.1.jar
+CLASSPATH=${CLASSPATH}:${LIBDIR}/junit-4.4.jar
 CLASSPATH=${CLASSPATH}:${LIBDIR}/clover/clover-1.3.13.jar
 
 # Try to include tools.jar for compilation

@@ -41,22 +41,21 @@ public interface ObjectChecker<T> {
 
     void matchesAllOf(Matcher<T>... matchers);
 
-    void matchesAllOf(Iterable<Matcher<T>> iterable);
+    void matchesAllOf(Iterable<Matcher<? extends T>> iterable);
 
     void notMatchAllOf(Matcher<T>... matchers);
 
-    void notMatchAllOf(Iterable<Matcher<T>> iterable);
+    void notMatchAllOf(Iterable<Matcher<? extends T>> iterable);
 
     void matchesAnyOf(Matcher<T>... matchers);
 
-    void matchesAnyOf(Iterable<Matcher<T>> iterable);
+    void matchesAnyOf(Iterable<Matcher<? extends T>> iterable);
 
     void notMatchAnyOf(Matcher<T>... matchers);
 
-    void notMatchAnyOf(Iterable<Matcher<T>> iterable);
+    void notMatchAnyOf(Iterable<Matcher<? extends T>> iterable);
 
     void hasBeanProperty(String string);
 
-    @Suggest("Can we type this?")
-    void hasBeanProperty(String string, Matcher matcher);
+    void hasBeanProperty(String string, Matcher<?> matcher);
 }

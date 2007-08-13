@@ -25,6 +25,7 @@ import org.hamcrest.Matchers;
 // SUPPRESS VisibilityModifier|IllegalToken {
 @Fix("Test this.")
 public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
+    @SuppressWarnings({"ProtectedField"})
     protected final T subject;
     private MatcherAssertEdge asserter = new MatcherAssertEdgeImpl();
 
@@ -76,7 +77,7 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectThat(subject, Matchers.allOf(matchers));
     }
 
-    public final void matchesAllOf(final Iterable<Matcher<T>> iterable) {
+    public final void matchesAllOf(final Iterable<Matcher<? extends T>> iterable) {
         getAsserter().expectThat(subject, Matchers.allOf(iterable));
     }
 
@@ -84,7 +85,7 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectNotThat(subject, Matchers.allOf(matchers));
     }
 
-    public final void notMatchAllOf(final Iterable<Matcher<T>> iterable) {
+    public final void notMatchAllOf(final Iterable<Matcher<? extends T>> iterable) {
         getAsserter().expectNotThat(subject, Matchers.allOf(iterable));
     }
 
@@ -92,7 +93,7 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectThat(subject, Matchers.anyOf(matchers));
     }
 
-    public final void matchesAnyOf(final Iterable<Matcher<T>> iterable) {
+    public final void matchesAnyOf(final Iterable<Matcher<? extends T>> iterable) {
         getAsserter().expectThat(subject, Matchers.anyOf(iterable));
     }
 
@@ -100,7 +101,7 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectNotThat(subject, Matchers.anyOf(matchers));
     }
 
-    public final void notMatchAnyOf(final Iterable<Matcher<T>> iterable) {
+    public final void notMatchAnyOf(final Iterable<Matcher<? extends T>> iterable) {
         getAsserter().expectNotThat(subject, Matchers.anyOf(iterable));
     }
 
@@ -108,7 +109,7 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectThat(subject, Matchers.hasProperty(string));
     }
 
-    public final void hasBeanProperty(final String string, final Matcher matcher) {
+    public final void hasBeanProperty(final String string, final Matcher<?> matcher) {
         getAsserter().expectThat(subject, Matchers.hasProperty(string, matcher));
     }
 }
