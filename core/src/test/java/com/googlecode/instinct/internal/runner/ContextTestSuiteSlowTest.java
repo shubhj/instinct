@@ -18,14 +18,13 @@ package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit3.ContextTestSuite;
-import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.test.InstinctTestCase;
 import junit.framework.TestResult;
 import junit.framework.TestSuite;
 
 public final class ContextTestSuiteSlowTest extends InstinctTestCase {
-    public void testRunsSuccessfullyTheTestsInASimpleContextClass() {
-        final TestSuite testSuite = new ContextTestSuite(new ContextClassImpl(ASimpleContext.class));
+    public void testRunsTheTestsInASimpleContextClass() {
+        final TestSuite testSuite = new ContextTestSuite(ASimpleContext.class);
         expect.that(testSuite.testCount()).equalTo(1);
         final TestResult result = new TestResult();
         testSuite.runTest(testSuite.testAt(0), result);

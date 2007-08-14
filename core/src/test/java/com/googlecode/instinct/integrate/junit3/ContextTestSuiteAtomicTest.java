@@ -17,29 +17,26 @@
 package com.googlecode.instinct.integrate.junit3;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.core.ContextClass;
-import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
-import com.googlecode.instinct.internal.util.Fix;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 public final class ContextTestSuiteAtomicTest extends InstinctTestCase {
+    private static final Class<?> CONTEXT_CLASS = ASimpleContext.class;
+    private TestSuite testSuite;
+
+    @Override
+    public void setUpSubject() {
+        testSuite = new ContextTestSuite(CONTEXT_CLASS);
+    }
 
     public void testConformsToClassTraits() {
         checkClass(ContextTestSuite.class, TestSuite.class);
     }
 
-    @Fix("For some crazy reason JMock is expecting ContextClassImpl.getName() to be called.  Using ASimpleContext instead.")
-    @Suggest("Because mocking isn't working this is looking more like an integration test.")
     public void testConstructionWillCreateSpecifications() {
-//        expects(contextClass).method("getName").will(returnValue("testConstruction"));
-//        new ContextTestSuite(contextClass);
-        final ContextClass context = new ContextClassImpl(ASimpleContext.class);
-        final TestSuite testSuite = new ContextTestSuite(context);
         expect.that(testSuite.countTestCases()).equalTo(1);
         final TestCase specificationTestCase = (TestCase) testSuite.testAt(0);
         expect.that(specificationTestCase).notNull();

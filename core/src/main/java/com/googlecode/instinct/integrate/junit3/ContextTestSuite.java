@@ -17,22 +17,24 @@
 package com.googlecode.instinct.integrate.junit3;
 
 import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
+import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.SpecificationListener;
 import java.util.Collection;
 import junit.framework.TestSuite;
 
 @SuppressWarnings({"ThisEscapedInObjectConstruction"})
 public final class ContextTestSuite extends TestSuite implements SpecificationListener {
+    private final ObjectFactory objectFactory = new ObjectFactoryImpl();
     private final ContextClass contextClass;
 
-    @Suggest("Just take the Class<?>, use object factory to new up a ContextClass")
-    public ContextTestSuite(final ContextClass contextClass) {
-        checkNotNull(contextClass);
-        this.contextClass = contextClass;
+    public <T> ContextTestSuite(final Class<T> contextType) {
+        checkNotNull(contextType);
+        contextClass = objectFactory.create(ContextClassImpl.class, contextType);
         contextClass.addSpecificationListener(this);
         addSpecificationsToSuite(contextClass.buildSpecificationMethods());
     }
