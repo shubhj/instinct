@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.integrate.junit4;
+package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.internal.core.SpecificationMethod;
-import com.googlecode.instinct.internal.util.ParamChecker;
-import java.util.Collection;
-import org.junit.runner.notification.RunNotifier;
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.annotate.Specification;
+import org.junit.runner.RunWith;
 
-public final class SpecificationRunnerImpl implements SpecificationRunner {
-    public SpecificationRunnerImpl(final RunNotifier notifier) {
-        ParamChecker.checkNotNull(notifier);
-    }
-
-    public void run(final Collection<SpecificationMethod> specificationMethods) {
-        ParamChecker.checkNotNull(specificationMethods);
+@RunWith(InstinctRunner.class)
+@Context
+public class ASuiteWithAContext {
+    @Specification
+    public void toCheckVerification() {
+        expect.that(true).equalTo(true);
     }
 }

@@ -16,17 +16,8 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
-import com.googlecode.instinct.internal.core.SpecificationMethod;
-import com.googlecode.instinct.internal.util.ParamChecker;
 import java.util.Collection;
-import org.junit.runner.notification.RunNotifier;
 
-public final class SpecificationRunnerImpl implements SpecificationRunner {
-    public SpecificationRunnerImpl(final RunNotifier notifier) {
-        ParamChecker.checkNotNull(notifier);
-    }
-
-    public void run(final Collection<SpecificationMethod> specificationMethods) {
-        ParamChecker.checkNotNull(specificationMethods);
-    }
+public interface ContextClassesFinder {
+    Collection<Class<?>> getContextClasses(Class<?> cls);
 }

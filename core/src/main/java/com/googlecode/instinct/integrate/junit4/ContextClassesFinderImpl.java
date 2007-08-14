@@ -16,17 +16,22 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
-import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.util.ParamChecker;
+import com.googlecode.instinct.marker.annotate.ContextClasses;
+import java.util.Arrays;
 import java.util.Collection;
-import org.junit.runner.notification.RunNotifier;
+import java.util.HashSet;
 
-public final class SpecificationRunnerImpl implements SpecificationRunner {
-    public SpecificationRunnerImpl(final RunNotifier notifier) {
-        ParamChecker.checkNotNull(notifier);
-    }
-
-    public void run(final Collection<SpecificationMethod> specificationMethods) {
-        ParamChecker.checkNotNull(specificationMethods);
+public final class ContextClassesFinderImpl implements ContextClassesFinder {
+    public Collection<Class<?>> getContextClasses(final Class<?> cls) {
+        final Collection<Class<?>> classes = new HashSet<Class<?>>();
+        ParamChecker.checkNotNull(cls);
+        final ContextClasses annotation = cls.getAnnotation(ContextClasses.class);
+        if (annotation == null) {
+            classes.add(cls);
+        } else {
+            classes.addAll(Arrays.asList((Class<?>[]) annotation.value()));
+        }
+        return classes;
     }
 }

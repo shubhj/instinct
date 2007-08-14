@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.integrate.junit4;
+package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.internal.core.SpecificationMethod;
-import com.googlecode.instinct.internal.util.ParamChecker;
-import java.util.Collection;
-import org.junit.runner.notification.RunNotifier;
+import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.marker.annotate.ContextClasses;
+import org.junit.runner.RunWith;
 
-public final class SpecificationRunnerImpl implements SpecificationRunner {
-    public SpecificationRunnerImpl(final RunNotifier notifier) {
-        ParamChecker.checkNotNull(notifier);
-    }
-
-    public void run(final Collection<SpecificationMethod> specificationMethods) {
-        ParamChecker.checkNotNull(specificationMethods);
+@RunWith(InstinctRunner.class)
+@ContextClasses(ASimpleContext.class)
+public class JUnit4SuiteWithContextAnnotation {
+    private JUnit4SuiteWithContextAnnotation() {
+        throw new UnsupportedOperationException();
     }
 }

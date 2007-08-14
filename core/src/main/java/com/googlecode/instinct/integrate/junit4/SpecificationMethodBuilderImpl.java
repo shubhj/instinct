@@ -16,11 +16,30 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
+import com.googlecode.instinct.internal.util.ParamChecker;
 import java.util.Collection;
+import java.util.HashSet;
 
-public class SpecificationMethodBuilderImpl implements SpecificationMethodBuilder {
-    public final <T> Collection<SpecificationMethod> build(final Class<T> cls) {
-        throw new UnsupportedOperationException();
+public final class SpecificationMethodBuilderImpl implements SpecificationMethodBuilder {
+    private ContextClassesFinder finder = new ContextClassesFinderImpl();
+    private ObjectFactory objectFactory = new ObjectFactoryImpl();
+
+    public <T> Collection<SpecificationMethod> build(final Class<T> cls) {
+        ParamChecker.checkNotNull(cls);
+        final Collection<SpecificationMethod> specificationMethods = new HashSet<SpecificationMethod>();
+        final Collection<Class<?>> classes = finder.getContextClasses(cls);
+        for (final Class<?> classWithContext : classes) {
+            final ContextClass contextClass = (ContextClass) objectFactory.create(ContextClassImpl.class, classWithContext);
+            specificationMethods.addAll(contextClass.buildSpecificationMethods());
+        }
+
+//        final ContextClasses annotation = cls.getAnnotation(ContextClasses.class);
+//        final Class<?>[] classes = annotation.value();
+        return specificationMethods;
     }
 }
