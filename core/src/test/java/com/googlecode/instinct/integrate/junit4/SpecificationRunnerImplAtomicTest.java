@@ -14,14 +14,19 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.runner;
+package com.googlecode.instinct.integrate.junit4;
 
+import static com.googlecode.instinct.expect.Mocker12.mock;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import com.googlecode.instinct.test.reflect.SubjectCreator;
+import org.junit.runner.notification.RunNotifier;
 
 public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     private SpecificationRunner specificationRunner;
+    private RunNotifier notifier;
+    private SpecificationMethod specificationMethod;
 
     @Override
     public void setUpTestDoubles() {
@@ -29,10 +34,17 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
 
     @Override
     public void setUpSubject() {
-        specificationRunner = SubjectCreator.createSubject(SpecificationRunnerImpl.class);
+        notifier = mock(RunNotifier.class);
+        specificationRunner = SubjectCreator.createSubjectWithConstructorArgs(SpecificationRunnerImpl.class, new Object[]{notifier});
+        specificationMethod = mock(SpecificationMethod.class);
     }
 
     public void testConformsToClassTraits() {
         checkClass(SpecificationRunnerImpl.class, SpecificationRunner.class);
     }
+
+//    public void testRunsSpecification() {
+//        expects(notifier).method("fireTestStarted").with()
+//        specificationRunner.run(specificationMethod);
+//    }
 }
