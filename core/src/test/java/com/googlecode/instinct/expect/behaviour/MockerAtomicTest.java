@@ -17,17 +17,48 @@
 package com.googlecode.instinct.expect.behaviour;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.expect.behaviour.Mocker.getMockery;
+import static com.googlecode.instinct.expect.behaviour.Mocker.getJMock2Mockery;
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
+import static com.googlecode.instinct.expect.behaviour.Mocker.verify;
+import static com.googlecode.instinct.expect.behaviour.Mocker.reset;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import org.jmock.Expectations;
+import org.jmock.api.ExpectationError;
 
 public final class MockerAtomicTest extends InstinctTestCase {
     public void testConformsToClassTraits() {
         checkClass(Mocker.class);
     }
 
-    public void testHoldsTheSingleMockeryInstance() {
-        expect.that(getMockery()).sameInstanceAs(getMockery());
-        expect.that(getMockery()).notNull();
+    public void testHoldsTheSingleJMock2MockeryInstance() {
+        expect.that(getJMock2Mockery()).sameInstanceAs(getJMock2Mockery());
+        expect.that(getJMock2Mockery()).isNotNull();
+    }
+
+    public void testCreatesMocks() {
+        final CharSequence chars = mock(CharSequence.class);
+        expect.that(chars).isNotNull();
+    }
+
+    public void testCreatesMocksWithRoleNames() {
+        final CharSequence chars = mock(CharSequence.class, "username");
+        expect.that(chars).isNotNull();
+    }
+
+    public void testVerifiesMockCalls() {
+        final CharSequence chars = mock(CharSequence.class);
+        getJMock2Mockery().checking(new Expectations() {
+            {
+                one(chars).charAt(0);
+            }
+        });
+        assertThrows(ExpectationError.class, new Runnable() {
+            public void run() {
+                verify();
+            }
+        });
+        reset();
     }
 }

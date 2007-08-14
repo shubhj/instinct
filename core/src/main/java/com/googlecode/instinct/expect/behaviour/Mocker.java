@@ -18,20 +18,31 @@ package com.googlecode.instinct.expect.behaviour;
 
 import com.googlecode.instinct.internal.expect.behaviour.JMock2Mockery;
 import com.googlecode.instinct.internal.expect.behaviour.JMock2MockeryImpl;
-import com.googlecode.instinct.internal.util.Suggest;
 
 public final class Mocker {
-    @Suggest("Use a DI container to get this?")
     private static final JMock2Mockery J_MOCK2_MOCKERY = new JMock2MockeryImpl();
 
     private Mocker() {
         throw new UnsupportedOperationException();
     }
 
-    @Suggest("Rename to getJMock2Mockery()?")
-    public static JMock2Mockery getMockery() {
+    public static JMock2Mockery getJMock2Mockery() {
         return J_MOCK2_MOCKERY;
     }
 
-    // FIX: Add all the methods from mockery, to allow for manual mocking.
+    public static <T> T mock(final Class<T> typeToMock) {
+        return J_MOCK2_MOCKERY.mock(typeToMock);
+    }
+
+    public static <T> T mock(final Class<T> typeToMock, final String roleName) {
+        return J_MOCK2_MOCKERY.mock(typeToMock, roleName);
+    }
+
+    public static void verify() {
+        J_MOCK2_MOCKERY.verify();
+    }
+
+    public static void reset() {
+        J_MOCK2_MOCKERY.reset();
+    }
 }

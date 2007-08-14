@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.test;
 
-import static com.googlecode.instinct.expect.Mocker12.reset;
-import static com.googlecode.instinct.expect.Mocker12.verify;
+import com.googlecode.instinct.expect.Mocker12;
+import com.googlecode.instinct.expect.behaviour.Mocker;
 import junit.framework.TestCase;
 
 @SuppressWarnings({"NoopMethodInAbstractClass", "ProhibitedExceptionDeclared"})
@@ -51,11 +51,13 @@ public abstract class InstinctTestCase extends TestCase {
         setUpSubject();
         try {
             runTest();
-            verify();
+            Mocker12.verify();
+            Mocker.verify();
         } catch (AssertionError t) {
             return t.getMessage();
         } finally {
-            reset();
+            Mocker12.reset();
+            Mocker.reset();
             tearDown();
         }
         return NO_ERRORS;

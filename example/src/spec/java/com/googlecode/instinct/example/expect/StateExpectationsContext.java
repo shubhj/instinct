@@ -26,7 +26,7 @@ public final class StateExpectationsContext {
         expect.that(this).sameInstanceAs(this);
         expect.that("fred").notSameInstanceAs("barney");
         expect.that(this).instanceOf(StateExpectationsContext.class);
-        expect.that(this).notNull();
+        expect.that(this).isNotNull();
         // Mixing with standard Hamcrest matchers
         expect.that("fred").matchesAllOf(Matchers.startsWith("fr"), Matchers.containsString("ed"));
         expect.that("fred", Matchers.equalTo("fred"));

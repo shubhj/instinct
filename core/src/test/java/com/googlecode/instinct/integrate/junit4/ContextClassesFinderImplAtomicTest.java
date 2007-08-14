@@ -50,7 +50,7 @@ public final class ContextClassesFinderImplAtomicTest extends InstinctTestCase {
 
     public void testReturnsEmptyCollectionWhenEmptyAnnotationIsFound() {
         final Collection<Class<?>> classes = finder.getContextClasses(ASuiteWithEmptyContextClassesAnnotation.class);
-        expect.that(classes).notNull();
+        expect.that(classes).isNotNull();
         expect.that(classes).isEmpty();
     }
 }

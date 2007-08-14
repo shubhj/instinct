@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.expect.state;
 
-import com.googlecode.instinct.internal.util.Suggest;
 import org.hamcrest.Matcher;
 
 public interface ObjectChecker<T> {
@@ -34,8 +33,7 @@ public interface ObjectChecker<T> {
 
     void isNull();
 
-    @Suggest("Change this to isNotNull(). -CM")
-    void notNull();
+    void isNotNull();
 
     void hasToString(Matcher<String> matcher);
 

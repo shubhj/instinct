@@ -22,4 +22,6 @@ public interface Mockery {
     <T> T mock(Class<T> typeToMock, String roleName);
 
     void verify();
+
+    void reset();
 }

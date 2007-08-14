@@ -17,7 +17,7 @@
 package com.googlecode.instinct.expect;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.expect.behaviour.Mocker.getMockery;
+import static com.googlecode.instinct.expect.behaviour.Mocker.getJMock2Mockery;
 import com.googlecode.instinct.internal.expect.behaviour.JMock2Mockery;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
@@ -31,7 +31,7 @@ public final class ExpectThatImplSlowTest extends InstinctTestCase {
     @Suggest("Don't use the mocker directly, use the Mocker. Requires methods to be exposed.")
     @Override
     public void setUpTestDoubles() {
-        mockery = getMockery();
+        mockery = getJMock2Mockery();
         charSequence = mockery.mock(CharSequence.class);
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.expect.behaviour;
+package com.googlecode.instinct.internal.edge.java.lang.reflect;
 
-import static com.googlecode.instinct.expect.behaviour.Mocker.getJMock2Mockery;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import org.jmock.internal.ExpectationBuilder;
+import java.lang.reflect.Field;
 
-public final class BehaviourExpectationsImpl implements BehaviourExpectations {
-    public void that(final ExpectationBuilder expectations) {
-        checkNotNull(expectations);
-        getJMock2Mockery().checking(expectations);
-    }
+public interface FieldEdge {
+    Object get(Field field, Object obj);
+
+    void set(Field field, Object obj, Object value);
 }

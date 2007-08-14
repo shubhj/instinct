@@ -47,7 +47,7 @@ public final class RegularExpressionMatcherAtomicTest extends InstinctTestCase {
     public void testContainsAStaticFactoryMethodAnnotatedWithHamcrestFactoryAnnotation() {
         final Method matchesRegexMethod = getMethod(RegularExpressionMatcher.class, "matchesRegex", String.class);
         final Factory factoryAnnotation = matchesRegexMethod.getAnnotation(Factory.class);
-        expect.that(factoryAnnotation).notNull();
+        expect.that(factoryAnnotation).isNotNull();
     }
 
     private void expectMatches(final String regularExpression, final String stringToMatch) {

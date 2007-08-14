@@ -39,7 +39,7 @@ public final class ContextTestSuiteAtomicTest extends InstinctTestCase {
     public void testConstructionWillCreateSpecifications() {
         expect.that(testSuite.countTestCases()).equalTo(1);
         final TestCase specificationTestCase = (TestCase) testSuite.testAt(0);
-        expect.that(specificationTestCase).notNull();
+        expect.that(specificationTestCase).isNotNull();
         expect.that(specificationTestCase.getName()).equalTo("toCheckVerification");
     }
 }

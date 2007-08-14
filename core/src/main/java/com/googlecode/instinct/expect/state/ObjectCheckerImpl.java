@@ -65,7 +65,7 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectThat(subject, Matchers.nullValue());
     }
 
-    public final void notNull() {
+    public final void isNotNull() {
         getAsserter().expectThat(subject, Matchers.notNullValue());
     }
 
