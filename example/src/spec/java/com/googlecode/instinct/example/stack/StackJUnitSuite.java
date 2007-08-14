@@ -1,7 +1,6 @@
 package com.googlecode.instinct.example.stack;
 
 import com.googlecode.instinct.integrate.junit3.ContextTestSuite;
-import com.googlecode.instinct.internal.core.ContextClassImpl;
 import junit.framework.TestSuite;
 
 public final class StackJUnitSuite {
@@ -21,7 +20,7 @@ public final class StackJUnitSuite {
         }
     }
 
-    private static <T> TestSuite newSuite(final Class<T> contextClass) {
-        return new ContextTestSuite(new ContextClassImpl(contextClass));
+    private static <T> TestSuite newSuite(final Class<T> contextType) {
+        return new ContextTestSuite(contextType);
     }
 }
