@@ -27,8 +27,8 @@ import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
 
 public final class InstinctRunner extends Runner {
-    private final ObjectFactory objectFactory = new ObjectFactoryImpl();
     private final SpecificationMethodBuilder specificationMethodBuilder = new SpecificationMethodBuilderImpl();
+    private final ObjectFactory objectFactory = new ObjectFactoryImpl();
     private final Class<?> classToRun;
 
     public InstinctRunner(final Class<?> classToRun) {
