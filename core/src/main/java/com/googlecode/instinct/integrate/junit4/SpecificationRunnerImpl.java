@@ -17,16 +17,47 @@
 package com.googlecode.instinct.integrate.junit4;
 
 import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdge;
+import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdgeImpl;
+import com.googlecode.instinct.internal.runner.SpecificationResult;
+import com.googlecode.instinct.internal.util.ExceptionFinder;
+import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
+import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import com.googlecode.instinct.internal.util.ParamChecker;
 import java.util.Collection;
+import org.junit.runner.Description;
+import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 
 public final class SpecificationRunnerImpl implements SpecificationRunner {
+    private final DescriptionEdge descriptionEdge = new DescriptionEdgeImpl();
+    private final ExceptionFinder exceptionFinder = new ExceptionFinderImpl();
+    private final ObjectFactory objectFactory = new ObjectFactoryImpl();
+    private final RunNotifier notifier;
+
     public SpecificationRunnerImpl(final RunNotifier notifier) {
         ParamChecker.checkNotNull(notifier);
+        this.notifier = notifier;
     }
 
     public void run(final Collection<SpecificationMethod> specificationMethods) {
         ParamChecker.checkNotNull(specificationMethods);
+        for (final SpecificationMethod specificationMethod : specificationMethods) {
+            final Description description = descriptionEdge.createTestDescription(specificationMethod.getSpecificationMethod().getDeclaringClass(),
+                    specificationMethod.getName());
+            notifier.fireTestStarted(description);
+            final SpecificationResult specificationResult = specificationMethod.run();
+            if (specificationResult.completedSuccessfully()) {
+                notifier.fireTestFinished(description);
+            } else {
+                notifier.fireTestFailure(createFailure(description, specificationResult));
+            }
+        }
+    }
+
+    private Failure createFailure(final Description description, final SpecificationResult specificationResult) {
+        final Throwable rootCause = exceptionFinder.getRootCause((Throwable) specificationResult.getStatus().getDetailedStatus());
+        return objectFactory.create(Failure.class, description, rootCause);
     }
 }

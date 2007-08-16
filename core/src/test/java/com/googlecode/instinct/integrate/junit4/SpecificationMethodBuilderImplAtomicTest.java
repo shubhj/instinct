@@ -41,8 +41,8 @@ public final class SpecificationMethodBuilderImplAtomicTest extends InstinctTest
     private Collection<Class<?>> contextClasses;
     private ObjectFactory objectFactory;
     private ContextClass contextClass;
-    private Collection<SpecificationMethod> specificationMethods;
     private SpecificationMethod specificationMethod;
+    private Collection<SpecificationMethod> mockSpecificationMethods;
 
     public void testConformsToClassTraits() {
         checkClass(SpecificationMethodBuilderImpl.class, SpecificationMethodBuilder.class);
@@ -52,13 +52,19 @@ public final class SpecificationMethodBuilderImplAtomicTest extends InstinctTest
     @Override
     public void setUpTestDoubles() {
         finder = mock(ContextClassesFinder.class);
-        contextClasses = new HashSet<Class<?>>();
-        contextClasses.add(ASimpleContext.class);
+        contextClasses = new HashSet<Class<?>>() {
+            {
+                add(ASimpleContext.class);
+            }
+        };
         objectFactory = mock(ObjectFactory.class);
         contextClass = mock(ContextClass.class);
         specificationMethod = mock(SpecificationMethod.class);
-        specificationMethods = new HashSet<SpecificationMethod>();
-        specificationMethods.add(specificationMethod);
+        mockSpecificationMethods = new HashSet<SpecificationMethod>() {
+            {
+                add(specificationMethod);
+            }
+        };
     }
 
     @Override
@@ -69,7 +75,7 @@ public final class SpecificationMethodBuilderImplAtomicTest extends InstinctTest
     public void testFindsSpecificationsOnWithContextClassAnnotation() {
         expects(finder).method("getContextClasses").with(eq(JUnit4SuiteWithContextAnnotation.class)).will(returnValue(contextClasses));
         expects(objectFactory).method("create").with(eq(ContextClassImpl.class), eq(new Object[]{ASimpleContext.class})).will(returnValue(contextClass));
-        expects(contextClass).method("buildSpecificationMethods").will(returnValue(specificationMethods));
+        expects(contextClass).method("buildSpecificationMethods").will(returnValue(mockSpecificationMethods));
         final Collection<SpecificationMethod> methods = builder.build(JUnit4SuiteWithContextAnnotation.class);
         expect.that(methods).hasSize(1);
         expect.that(methods).containsItem(specificationMethod);

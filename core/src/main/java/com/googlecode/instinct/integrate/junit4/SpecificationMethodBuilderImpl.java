@@ -34,7 +34,7 @@ public final class SpecificationMethodBuilderImpl implements SpecificationMethod
         final Collection<SpecificationMethod> specificationMethods = new HashSet<SpecificationMethod>();
         final Collection<Class<?>> classes = finder.getContextClasses(cls);
         for (final Class<?> classWithContext : classes) {
-            final ContextClass contextClass = (ContextClass) objectFactory.create(ContextClassImpl.class, classWithContext);
+            final ContextClass contextClass = objectFactory.create(ContextClassImpl.class, classWithContext);
             specificationMethods.addAll(contextClass.buildSpecificationMethods());
         }
 
