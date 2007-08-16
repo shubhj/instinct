@@ -16,19 +16,15 @@
 
 package com.googlecode.instinct.expect.state;
 
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;
 
-@Suggest("Determine whether or not the ArrayCheckerImpl class is designed for extension.")
 public final class ArrayCheckerImplAtomicTest extends InstinctTestCase {
     private ArrayChecker<String> checker;
 
     public void testConformsToClassTraits() {
         checkPublic(ArrayCheckerImpl.class);
-        // Is this class meant to be extended?
-//        ModifierChecker.checkFinal(ArrayCheckerImpl.class);
     }
 
     @Override
