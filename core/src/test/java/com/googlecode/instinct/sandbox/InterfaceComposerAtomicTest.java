@@ -20,6 +20,8 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertMessageContains;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.triangulate.Triangulation.getInstance;
+import com.googlecode.instinct.sandbox.composer.InterfaceComposer;
+import com.googlecode.instinct.sandbox.composer.InterfaceComposerImpl;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 

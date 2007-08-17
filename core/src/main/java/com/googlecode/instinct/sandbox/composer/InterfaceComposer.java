@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.sandbox;
+package com.googlecode.instinct.sandbox.composer;
 
 public interface InterfaceComposer {
     <T> T compose(Class<T> iface, Object... implementers);

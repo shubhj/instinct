@@ -1,4 +1,4 @@
-package com.googlecode.instinct.sandbox;
+package com.googlecode.instinct.sandbox.composer;
 
 import java.lang.reflect.Method;
 

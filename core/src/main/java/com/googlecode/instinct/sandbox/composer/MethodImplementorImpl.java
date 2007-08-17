@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.googlecode.instinct.sandbox;
+package com.googlecode.instinct.sandbox.composer;
 
 import com.googlecode.instinct.internal.util.Suggest;
 import java.lang.reflect.InvocationTargetException;
