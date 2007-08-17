@@ -17,10 +17,10 @@
 package com.googlecode.instinct.internal.mock.instance;
 
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
-import static com.googlecode.instinct.expect.Mocker12.mock;
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import com.googlecode.instinct.internal.util.Suggest;
 
-@Suggest("May be better to use dynamic proxies rather than mocks?")
+@Suggest("It may be better to use dynamic proxies rather than mocks?")
 public final class MockInstanceProvider implements InstanceProvider {
     @SuppressWarnings({"RawUseOfParameterizedType", "unchecked"})
     public Object newInstance(final Class cls) {

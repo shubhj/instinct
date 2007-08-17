@@ -2,7 +2,7 @@
 <idea-plugin>
     <name>InstinctIDEA</name>
     <description>Instinct IntelliJ IDEA Integration</description>
-    <version>0.1.4</version>
+    <version>0.1.5</version>
     <vendor logo="/resources/instinct.png" email="http://groups.google.com/group/instinct-general" url="http://code.google.com/p/instinct/">
         Instinct
     </vendor>

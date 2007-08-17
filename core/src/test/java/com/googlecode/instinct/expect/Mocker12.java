@@ -18,14 +18,12 @@ package com.googlecode.instinct.expect;
 
 import com.googlecode.instinct.internal.mock.JMock12Mockery;
 import com.googlecode.instinct.internal.mock.JMock12MockeryImpl;
-import com.googlecode.instinct.internal.util.Suggest;
 import org.jmock.builder.NameMatchBuilder;
 import org.jmock.core.Constraint;
 import org.jmock.core.InvocationMatcher;
 import org.jmock.core.Stub;
 import org.jmock.core.constraint.IsInstanceOf;
 
-@Suggest("This becomes the jMock 1.2 implementation of BehaviourExpectations.")
 public final class Mocker12 {
     private static final JMock12Mockery JMOCK_12_MOCKERY = new JMock12MockeryImpl();
 

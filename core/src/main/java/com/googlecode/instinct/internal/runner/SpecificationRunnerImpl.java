@@ -70,8 +70,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
             final Class<?> contextClass = specificationMethod.getSpecificationMethod().getDeclaringClass();
             final Object instance = invokeConstructor(contextClass);
             runSpecificationLifecycle(instance, specificationMethod);
-            final SpecificationRunStatus runStatus = SPECIFICATION_SUCCESS;
-            return createSpecResult(specificationMethod, runStatus, startTime);
+            return createSpecResult(specificationMethod, SPECIFICATION_SUCCESS, startTime);
         } catch (Throwable e) {
             final SpecificationRunStatus status = new SpecificationRunFailureStatus(e);
             return createSpecResult(specificationMethod, status, startTime);

@@ -56,6 +56,7 @@ public final class JMock2MockeryImpl implements JMock2Mockery {
         mockery.assertIsSatisfied();
     }
 
+    // Note. This is really horrible. As jMock
     public void reset() {
         clearListField("expectations");
         clearListField("stateMachines");
