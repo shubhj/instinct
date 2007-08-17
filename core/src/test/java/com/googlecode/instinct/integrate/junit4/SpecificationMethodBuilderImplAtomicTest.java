@@ -17,14 +17,10 @@
 package com.googlecode.instinct.integrate.junit4;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.expect.Mocker12.eq;
-import static com.googlecode.instinct.expect.Mocker12.expects;
-import static com.googlecode.instinct.expect.Mocker12.mock;
-import static com.googlecode.instinct.expect.Mocker12.returnValue;
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
-import com.googlecode.instinct.internal.matcher.SpecificationMatcher;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.JUnit4SuiteWithContextAnnotation;
 import com.googlecode.instinct.internal.util.ObjectFactory;
@@ -33,8 +29,9 @@ import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubject;
 import java.util.Collection;
 import java.util.HashSet;
-import org.hamcrest.Matcher;
+import org.jmock.Expectations;
 
+@SuppressWarnings({"serial", "CloneableClassWithoutClone", "ClassExtendsConcreteCollection"})
 public final class SpecificationMethodBuilderImplAtomicTest extends InstinctTestCase {
     private SpecificationMethodBuilder builder;
     private ContextClassesFinder finder;
@@ -42,13 +39,12 @@ public final class SpecificationMethodBuilderImplAtomicTest extends InstinctTest
     private ObjectFactory objectFactory;
     private ContextClass contextClass;
     private SpecificationMethod specificationMethod;
-    private Collection<SpecificationMethod> mockSpecificationMethods;
+    private Collection<SpecificationMethod> specificationMethods;
 
     public void testConformsToClassTraits() {
         checkClass(SpecificationMethodBuilderImpl.class, SpecificationMethodBuilder.class);
     }
 
-    @SuppressWarnings({"unchecked"})
     @Override
     public void setUpTestDoubles() {
         finder = mock(ContextClassesFinder.class);
@@ -60,7 +56,7 @@ public final class SpecificationMethodBuilderImplAtomicTest extends InstinctTest
         objectFactory = mock(ObjectFactory.class);
         contextClass = mock(ContextClass.class);
         specificationMethod = mock(SpecificationMethod.class);
-        mockSpecificationMethods = new HashSet<SpecificationMethod>() {
+        specificationMethods = new HashSet<SpecificationMethod>() {
             {
                 add(specificationMethod);
             }
@@ -73,15 +69,15 @@ public final class SpecificationMethodBuilderImplAtomicTest extends InstinctTest
     }
 
     public void testFindsSpecificationsOnWithContextClassAnnotation() {
-        expects(finder).method("getContextClasses").with(eq(JUnit4SuiteWithContextAnnotation.class)).will(returnValue(contextClasses));
-        expects(objectFactory).method("create").with(eq(ContextClassImpl.class), eq(new Object[]{ASimpleContext.class})).will(returnValue(contextClass));
-        expects(contextClass).method("buildSpecificationMethods").will(returnValue(mockSpecificationMethods));
+        expect.that(new Expectations() {
+            {
+                one(finder).getContextClasses(JUnit4SuiteWithContextAnnotation.class); will(returnValue(contextClasses));
+                one(objectFactory).create(ContextClassImpl.class, ASimpleContext.class); will(returnValue(contextClass));
+                one(contextClass).buildSpecificationMethods(); will(returnValue(specificationMethods));
+            }
+        });
         final Collection<SpecificationMethod> methods = builder.build(JUnit4SuiteWithContextAnnotation.class);
         expect.that(methods).hasSize(1);
         expect.that(methods).containsItem(specificationMethod);
-    }
-
-    private Matcher<SpecificationMethod> aMethodNamed(final String methodName) {
-        return new SpecificationMatcher(methodName);
     }
 }
