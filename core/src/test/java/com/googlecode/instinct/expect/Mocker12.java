@@ -55,10 +55,6 @@ public final class Mocker12 {
         return JMOCK_12_MOCKERY.times(expectedNumberOfCalls);
     }
 
-//    public static InvocationMatcher times(final int minNumberOfCalls, final int maxNumberOfCalls) {
-//        return JMOCK_12_MOCKERY.times(minNumberOfCalls, maxNumberOfCalls);
-//    }
-
     public static InvocationMatcher atLeastOnce() {
         return JMOCK_12_MOCKERY.atLeastOnce();
     }

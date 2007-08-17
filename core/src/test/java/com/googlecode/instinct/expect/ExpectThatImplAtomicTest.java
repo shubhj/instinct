@@ -16,20 +16,18 @@
 
 package com.googlecode.instinct.expect;
 
-import static com.googlecode.instinct.expect.Mocker12.expects;
-import static com.googlecode.instinct.expect.Mocker12.mock;
-import static com.googlecode.instinct.expect.Mocker12.returnValue;
-import static com.googlecode.instinct.expect.Mocker12.same;
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.expect.behaviour.BehaviourExpectations;
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import com.googlecode.instinct.expect.state.ObjectChecker;
 import com.googlecode.instinct.expect.state.StateExpectations;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubject;
+import org.jmock.Expectations;
 
-@Suggest({"Breadcrumb:",
-        "Behaviour expectations plan.",
+@Suggest({"Behaviour expectations plan.",
         "1. Drive out that(Expectations) to support jMock 2",
         "2. Move Mocker12 & JMock12Mockery infrastructure over to jMock2. Fix tests as required.",
         "3. Use that() to drive out facade on top of ObjectChecker that delegates to either a state or",
@@ -60,7 +58,9 @@ public final class ExpectThatImplAtomicTest extends InstinctTestCase {
 
     @Suggest("Write a delgation checker to check this for all methods.")
     public void testObjectFormThatDelegatesToStateExpectationsObjectFormThat() {
-        expects(stateExpectations).method("that").with(same(object)).will(returnValue(objectChecker));
+        expect.that(new Expectations() {{
+            one(stateExpectations).that(object); will(returnValue(objectChecker));
+        }});
         assertSame(objectChecker, expectThat.that(object));
     }
 }
