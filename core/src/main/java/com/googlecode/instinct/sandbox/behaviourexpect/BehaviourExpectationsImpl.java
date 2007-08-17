@@ -16,8 +16,6 @@
 
 package com.googlecode.instinct.sandbox.behaviourexpect;
 
-import com.googlecode.instinct.internal.mock.JMock12Mockery;
-import com.googlecode.instinct.internal.mock.JMock12MockeryImpl;
 import com.googlecode.instinct.internal.util.Suggest;
 import org.jmock.Expectations;
 import org.jmock.builder.ArgumentsMatchBuilder;
@@ -30,7 +28,6 @@ import org.jmock.core.stub.ThrowStub;
 @Suggest({"Null checks.",
         "This class should just delegate to the relevent mockery, instinct or jMock."})
 public final class BehaviourExpectationsImpl implements BehaviourExpectations {
-    private final JMock12Mockery instinctJMock12Mockery = new JMock12MockeryImpl();
     private final org.jmock.Mockery jMock2Mockery = new org.jmock.Mockery();
 
     public <T> T one(final T mockedObject) {
@@ -58,7 +55,7 @@ public final class BehaviourExpectationsImpl implements BehaviourExpectations {
     }
 
     public InvocationMatcher once() {
-        return instinctJMock12Mockery.once();
+        return null;
     }
 
     public InvocationMatcher times(final int expectedNumberOfCalls) {

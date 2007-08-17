@@ -21,7 +21,7 @@ import com.googlecode.instinct.internal.util.Suggest;
 import java.util.Arrays;
 import org.jmock.core.Constraint;
 
-@Suggest("Move to internal.expect.constraint.")
+@SuppressWarnings({"AssignmentToCollectionOrArrayFieldFromParameter"})
 public final class ArrayElementsSame implements Constraint {
     private Object[] expectedArray;
 

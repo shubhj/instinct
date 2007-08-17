@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.mock.instance;
+package com.googlecode.instinct.internal.instance;
 
-import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.ExceptionChecker.checkException;
+import au.net.netstorm.boost.nursery.instance.InstanceProvider;
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
+import com.googlecode.instinct.internal.util.Suggest;
 
-public final class InstantiationExceptionAtomicTest extends InstinctTestCase {
-    public void testConformsToClassTraits() {
-        checkException(InstantiationException.class);
+@Suggest("It may be better to use dynamic proxies rather than mocks?")
+public final class MockInstanceProvider implements InstanceProvider {
+    @SuppressWarnings({"RawUseOfParameterizedType", "unchecked"})
+    public Object newInstance(final Class cls) {
+        return mock(cls);
     }
 }

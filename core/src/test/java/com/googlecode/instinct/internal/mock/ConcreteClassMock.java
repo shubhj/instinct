@@ -18,7 +18,7 @@ package com.googlecode.instinct.internal.mock;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import com.googlecode.instinct.internal.mock.instance.ConcreteInstanceProvider;
+import com.googlecode.instinct.internal.instance.ConcreteInstanceProvider;
 import com.googlecode.instinct.internal.util.Suggest;
 import junit.framework.AssertionFailedError;
 import net.sf.cglib.proxy.Callback;

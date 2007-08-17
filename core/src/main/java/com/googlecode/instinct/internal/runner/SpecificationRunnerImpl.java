@@ -20,10 +20,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
-import com.googlecode.instinct.internal.mock.MockVerifier;
-import com.googlecode.instinct.internal.mock.MockVerifierImpl;
-import com.googlecode.instinct.internal.mock.TestDoubleAutoWirer;
-import com.googlecode.instinct.internal.mock.TestDoubleAutoWirerImpl;
+//import com.googlecode.instinct.internal.mock.MockVerifier;
+//import com.googlecode.instinct.internal.mock.MockVerifierImpl;
+//import com.googlecode.instinct.internal.mock.TestDoubleAutoWirer;
+//import com.googlecode.instinct.internal.mock.TestDoubleAutoWirerImpl;
 import static com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus.SPECIFICATION_SUCCESS;
 import com.googlecode.instinct.internal.util.Clock;
 import com.googlecode.instinct.internal.util.ClockImpl;
@@ -38,11 +38,11 @@ import com.googlecode.instinct.runner.SpecificationListener;
 public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final Collection<SpecificationListener> specificationListeners = new ArrayList<SpecificationListener>();
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
-    private final TestDoubleAutoWirer testDoubleAutoWirer = new TestDoubleAutoWirerImpl();
+//    private final TestDoubleAutoWirer testDoubleAutoWirer = new TestDoubleAutoWirerImpl();
     private final Clock clock = new ClockImpl();
     private MethodInvoker methodInvoker = new MethodInvokerImpl();
     private LifeCycleMethodValidator methodValidator = new LifeCycleMethodValidatorImpl();
-    private final MockVerifier mockVerifier = new MockVerifierImpl();
+//    private final MockVerifier mockVerifier = new MockVerifierImpl();
 
     public void addSpecificationListener(final SpecificationListener specificationListener) {
         checkNotNull(specificationListener);
@@ -88,10 +88,10 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
             "May need to stick verification of mocks in finally, if we report them as well as other errors."})
     private void runSpecificationLifecycle(final Object contextInstance, final SpecificationMethod specificationMethod) {
         try {
-            testDoubleAutoWirer.wire(contextInstance);
+//            testDoubleAutoWirer.wire(contextInstance);
             runMethods(contextInstance, specificationMethod.getBeforeSpecificationMethods());
             runMethod(contextInstance, specificationMethod.getSpecificationMethod());
-            mockVerifier.verify(contextInstance);
+//            mockVerifier.verify(contextInstance);
         } finally {
             runMethods(contextInstance, specificationMethod.getAfterSpecificationMethods());
         }
