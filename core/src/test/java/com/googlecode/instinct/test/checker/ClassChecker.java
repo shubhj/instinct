@@ -23,7 +23,7 @@ import au.net.netstorm.boost.nursery.reflect.checker.DefaultMethodNullParameterT
 import au.net.netstorm.boost.nursery.reflect.checker.MethodNullParameterTestChecker;
 import au.net.netstorm.boost.test.reflect.checker.ClassTestChecker;
 import au.net.netstorm.boost.test.reflect.checker.DefaultClassTestChecker;
-import com.googlecode.instinct.internal.instance.UberInstanceProvider;
+import com.googlecode.instinct.internal.mock.instance.UberInstanceProvider;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.test.checker.ModifierChecker.checkFinal;

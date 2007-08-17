@@ -23,7 +23,7 @@ import au.net.netstorm.boost.edge.java.lang.EdgeClass;
 import au.net.netstorm.boost.edge.java.lang.reflect.DefaultEdgeConstructor;
 import au.net.netstorm.boost.edge.java.lang.reflect.EdgeConstructor;
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
-import com.googlecode.instinct.internal.instance.UberInstanceProvider;
+import com.googlecode.instinct.internal.mock.instance.UberInstanceProvider;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.TestingException;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
