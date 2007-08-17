@@ -6,4 +6,5 @@
     <suppress checks="ConstantName" files="Expect.java"/>
     <suppress checks="GenericIllegalRegexp" files="TextRunner.java"/>
     <suppress checks="GenericIllegalRegexp" files="CommandLineRunner.java"/>
+    <suppress checks="EqualsHashCode" files="ObjectCheckerImpl.java"/>
 </suppressions>

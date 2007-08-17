@@ -626,6 +626,7 @@
         <inspection_tool class="ThrowableInstanceNeverThrown" level="WARNING" enabled="false" />
         <inspection_tool class="CaughtExceptionImmediatelyRethrown" level="WARNING" enabled="true" />
         <inspection_tool class="CheckedExceptionClass" level="WARNING" enabled="true" />
+        <inspection_tool class="EqualsWhichDoesntCheckParameterClass" level="WARNING" enabled="false" />
       </profile>
     </profiles>
     <list size="4">

@@ -16,20 +16,18 @@
 
 package com.googlecode.instinct.internal.aggregate;
 
-import java.io.File;
-import java.io.FileFilter;
-import static com.googlecode.instinct.expect.Mocker12.eq;
-import static com.googlecode.instinct.expect.Mocker12.expects;
-import static com.googlecode.instinct.expect.Mocker12.mock;
-import static com.googlecode.instinct.expect.Mocker12.returnValue;
-import static com.googlecode.instinct.expect.Mocker12.same;
+import static com.googlecode.instinct.expect.Expect.expect;
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;
+import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
+import java.io.File;
+import java.io.FileFilter;
+import org.jmock.Expectations;
 
 public final class AnnotatedContextAggregatorImplAtomicTest extends InstinctTestCase {
     private static final Class<?> CLASS_IN_SPEC_TREE = AnnotatedContextAggregatorImplAtomicTest.class;
@@ -53,18 +51,18 @@ public final class AnnotatedContextAggregatorImplAtomicTest extends InstinctTest
 
     @Override
     public void setUpSubject() {
-        aggregator = new AnnotatedContextAggregatorImpl(CLASS_IN_SPEC_TREE);
-        insertFieldValue(aggregator, "packageRootFinder", packageRootFinder);
-        insertFieldValue(aggregator, "classLocator", classLocator);
-        insertFieldValue(aggregator, "objectFactory", objectFactory);
+        aggregator = createSubjectWithConstructorArgs(AnnotatedContextAggregatorImpl.class, new Object[]{CLASS_IN_SPEC_TREE}, packageRootFinder, classLocator, objectFactory);
     }
 
     public void testGetContextNames() {
-        expects(packageRootFinder).method("getPackageRoot").with(same(CLASS_IN_SPEC_TREE)).will(returnValue(PACKAGE_ROOT));
-        expects(objectFactory).method("create").with(same(File.class), eq(new Object[]{PACKAGE_ROOT})).will(returnValue(packageRoot));
-        expects(objectFactory).method("create").with(same(AnnotationFileFilter.class), eq(new Object[]{packageRoot, Context.class})).will(
-                returnValue(fileFilter));
-        expects(classLocator).method("locate").with(same(packageRoot), same(fileFilter)).will(returnValue(CLASS_NAMES));
+        expect.that(new Expectations() {
+            {
+                one(packageRootFinder).getPackageRoot(CLASS_IN_SPEC_TREE); will(returnValue(PACKAGE_ROOT));
+                one(objectFactory).create(File.class, PACKAGE_ROOT); will(returnValue(packageRoot));
+                one(objectFactory).create(AnnotationFileFilter.class, packageRoot, Context.class); will(returnValue(fileFilter));
+                one(classLocator).locate(packageRoot, fileFilter); will(returnValue(CLASS_NAMES));
+            }
+        });
         final JavaClassName[] names = aggregator.getContextNames();
         assertSame(CLASS_NAMES, names);
     }
