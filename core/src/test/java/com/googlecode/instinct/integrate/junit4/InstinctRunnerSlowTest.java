@@ -16,13 +16,13 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
-import static com.googlecode.instinct.expect.Mocker12.eq;
-import static com.googlecode.instinct.expect.Mocker12.expects;
-import static com.googlecode.instinct.expect.Mocker12.mock;
+import static com.googlecode.instinct.expect.Expect.expect;
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ASuiteWithAContext;
 import com.googlecode.instinct.internal.runner.JUnit4SuiteWithContextAnnotation;
 import com.googlecode.instinct.test.InstinctTestCase;
+import org.jmock.Expectations;
 import org.junit.runner.Description;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
@@ -54,12 +54,16 @@ public final class InstinctRunnerSlowTest extends InstinctTestCase {
 
     private void runClass(final Class<?> classToRun) {
         instinctRunner = new InstinctRunner(classToRun);
-        runSuites(classToRun);
+        runSuites();
     }
 
-    private void runSuites(final Class<?> cls) {
-        expects(notifier).method("fireTestStarted").with(eq(description));
-        expects(notifier).method("fireTestFinished").with(eq(description));
+    private void runSuites() {
+        expect.that(new Expectations() {
+            {
+                one(notifier).fireTestStarted(description);
+                one(notifier).fireTestFinished(description);
+            }
+        });
         instinctRunner.run(notifier);
     }
 }

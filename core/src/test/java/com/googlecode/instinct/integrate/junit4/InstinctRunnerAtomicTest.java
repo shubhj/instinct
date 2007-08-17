@@ -16,17 +16,15 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
-import com.googlecode.instinct.expect.Expect;
-import static com.googlecode.instinct.expect.Mocker12.eq;
-import static com.googlecode.instinct.expect.Mocker12.expects;
-import static com.googlecode.instinct.expect.Mocker12.mock;
-import static com.googlecode.instinct.expect.Mocker12.returnValue;
+import static com.googlecode.instinct.expect.Expect.expect;
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
 import java.util.Collection;
+import org.jmock.Expectations;
 import org.junit.runner.Description;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
@@ -60,13 +58,17 @@ public final class InstinctRunnerAtomicTest extends InstinctTestCase {
     }
 
     public void testRunsSuitesContainingContextClasses() {
-        expects(specificationMethodBuilder).method("build").with(eq(CLASS_TO_RUN)).will(returnValue(specificationMethods));
-        expects(objectFactory).method("create").with(eq(SpecificationRunnerImpl.class), eq(new Object[]{runNotifier})).will(returnValue(specificationRunner));
-        expects(specificationRunner).method("run").with(eq(specificationMethods));
+        expect.that(new Expectations() {
+            {
+                one(specificationMethodBuilder).build(CLASS_TO_RUN); will(returnValue(specificationMethods));
+                one(objectFactory).create(SpecificationRunnerImpl.class, runNotifier); will(returnValue(specificationRunner));
+                one(specificationRunner).run(specificationMethods);
+            }
+        });
         runner.run(runNotifier);
     }
 
     public void testCreatesASuiteDescription() {
-        Expect.expect.that(runner.getDescription()).equalTo(Description.createSuiteDescription(CLASS_TO_RUN));
+        expect.that(runner.getDescription()).equalTo(Description.createSuiteDescription(CLASS_TO_RUN));
     }
 }
