@@ -21,7 +21,6 @@ import static com.googlecode.instinct.expect.Mocker12.expects;
 import static com.googlecode.instinct.expect.Mocker12.mock;
 import static com.googlecode.instinct.expect.Mocker12.returnValue;
 import static com.googlecode.instinct.expect.Mocker12.same;
-import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdge;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
@@ -44,7 +43,6 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     private DescriptionEdge descriptionEdge;
     private Description description;
     private SpecificationMethod specificationMethod;
-    private LifecycleMethod lifecycleMethod;
     private SpecificationResult specificationResult;
     private ExceptionFinder exceptionFinder;
     private Failure failure;
@@ -72,7 +70,6 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
                 add(specificationMethod);
             }
         };
-        lifecycleMethod = mock(LifecycleMethod.class);
         specificationResult = mock(SpecificationResult.class);
         failure = mock(Failure.class);
         specificationRunStatus = mock(SpecificationRunStatus.class);
@@ -103,9 +100,8 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     }
 
     private void createExpectations() {
-        expects(specificationMethod).method("getSpecificationMethod").will(returnValue(lifecycleMethod));
         expects(specificationMethod).method("getName").will(returnValue("dontCare"));
-        expects(lifecycleMethod).method("getDeclaringClass").will(returnValue(String.class));
+        expects(specificationMethod).method("getDeclaringClass").will(returnValue(String.class));
         expects(descriptionEdge).method("createTestDescription").with(eq(String.class), eq("dontCare")).will(returnValue(description));
         expects(notifier).method("fireTestStarted").with(eq(description));
         expects(specificationMethod).method("run").will(returnValue(specificationResult));

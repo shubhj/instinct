@@ -31,4 +31,6 @@ public interface SpecificationMethod extends RunnableItem {
     Collection<LifecycleMethod> getAfterSpecificationMethods();
 
     String getName();
+
+    Class<?> getDeclaringClass();
 }

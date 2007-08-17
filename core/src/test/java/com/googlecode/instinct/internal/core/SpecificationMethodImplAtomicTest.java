@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.internal.core;
 
-import java.util.Collection;
 import static com.googlecode.instinct.expect.Expect.expect;
 import static com.googlecode.instinct.expect.Mocker12.expects;
 import static com.googlecode.instinct.expect.Mocker12.mock;
@@ -30,6 +29,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
 import static com.googlecode.instinct.test.triangulate.Triangulation.getInstance;
+import java.util.Collection;
 
 @SuppressWarnings({"unchecked"})
 @Suggest({"Todo:", "Add a run method, pass a spec runner as a dependency, pass in other methods required for runners."})
@@ -90,6 +90,11 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
     public void testReturnsUnderlyingAfterSpecMethods() {
         final Collection<LifecycleMethod> returnedAfterSpecMethods = specificationMethod.getAfterSpecificationMethods();
         expect.that(returnedAfterSpecMethods).sameInstanceAs(afterSpecMethods);
+    }
+
+    public void testReturnsDeclaringClassOfLifecycleMethod() {
+        expects(specMethod).method("getDeclaringClass").will(returnValue(String.class));
+        assertEquals(String.class, specificationMethod.getDeclaringClass());
     }
 
     public void testReturnsNameFromUnderlyingLifecycleMethod() {

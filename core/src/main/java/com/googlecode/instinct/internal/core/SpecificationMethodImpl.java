@@ -16,13 +16,13 @@
 
 package com.googlecode.instinct.internal.core;
 
-import java.util.Collection;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
+import java.util.Collection;
 
 public final class SpecificationMethodImpl implements SpecificationMethod {
     private SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
@@ -53,6 +53,10 @@ public final class SpecificationMethodImpl implements SpecificationMethod {
 
     public LifecycleMethod getSpecificationMethod() {
         return specificationMethod;
+    }
+
+    public Class<?> getDeclaringClass() {
+        return specificationMethod.getDeclaringClass();
     }
 
     public Collection<LifecycleMethod> getBeforeSpecificationMethods() {

@@ -24,7 +24,7 @@ import com.googlecode.instinct.internal.util.ExceptionFinder;
 import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
-import com.googlecode.instinct.internal.util.ParamChecker;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.util.Collection;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
@@ -37,23 +37,30 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final RunNotifier notifier;
 
     public SpecificationRunnerImpl(final RunNotifier notifier) {
-        ParamChecker.checkNotNull(notifier);
+        checkNotNull(notifier);
         this.notifier = notifier;
     }
 
     public void run(final Collection<SpecificationMethod> specificationMethods) {
-        ParamChecker.checkNotNull(specificationMethods);
+        checkNotNull(specificationMethods);
         for (final SpecificationMethod specificationMethod : specificationMethods) {
-            final Description description = descriptionEdge.createTestDescription(specificationMethod.getSpecificationMethod().getDeclaringClass(),
-                    specificationMethod.getName());
-            notifier.fireTestStarted(description);
-            final SpecificationResult specificationResult = specificationMethod.run();
-            if (specificationResult.completedSuccessfully()) {
-                notifier.fireTestFinished(description);
-            } else {
-                notifier.fireTestFailure(createFailure(description, specificationResult));
-            }
+            runSpecification(specificationMethod);
         }
+    }
+
+    private void runSpecification(final SpecificationMethod specificationMethod) {
+        final Description description = createDescription(specificationMethod);
+        notifier.fireTestStarted(description);
+        final SpecificationResult specificationResult = specificationMethod.run();
+        if (specificationResult.completedSuccessfully()) {
+            notifier.fireTestFinished(description);
+        } else {
+            notifier.fireTestFailure(createFailure(description, specificationResult));
+        }
+    }
+
+    private Description createDescription(final SpecificationMethod specificationMethod) {
+        return descriptionEdge.createTestDescription(specificationMethod.getDeclaringClass(), specificationMethod.getName());
     }
 
     private Failure createFailure(final Description description, final SpecificationResult specificationResult) {
