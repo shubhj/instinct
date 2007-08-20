@@ -18,11 +18,27 @@ package com.googlecode.instinct.test;
 
 import com.googlecode.instinct.expect.Mocker12;
 import com.googlecode.instinct.expect.behaviour.Mocker;
+import java.lang.reflect.Field;
 import junit.framework.TestCase;
 
 @SuppressWarnings({"NoopMethodInAbstractClass", "ProhibitedExceptionDeclared"})
 public abstract class InstinctTestCase extends TestCase {
     private static final String NO_ERRORS = "";
+
+    protected void setUpAutoMocks() {
+        final Field[] fields = getClass().getDeclaredFields();
+        for (final Field field : fields) {
+            if (field.getName().startsWith("mock")) {
+                field.setAccessible(true);
+                final Class<?> type = field.getType();
+                try {
+                    field.set(this, Mocker12.mock(type));
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
 
     @Override
     public final void runBare() throws Throwable {
