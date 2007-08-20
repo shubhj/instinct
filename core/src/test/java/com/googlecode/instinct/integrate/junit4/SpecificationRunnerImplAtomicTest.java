@@ -59,8 +59,7 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     private ObjectFactory objectFactory;
     @Mock
     private Throwable rootCause;
-    @Mock
-    private RunNotifier notifier;
+    @Mock private RunNotifier notifier;
 
     @SuppressWarnings({"serial", "ClassExtendsConcreteCollection", "CloneableClassWithoutClone"})
     @Override
