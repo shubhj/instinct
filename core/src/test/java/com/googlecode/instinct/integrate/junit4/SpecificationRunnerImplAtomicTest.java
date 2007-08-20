@@ -41,24 +41,15 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     private SpecificationRunner specificationRunner;
     private Collection<SpecificationMethod> specificationMethods;
     private Description description;
-    @Mock
-    private DescriptionEdge descriptionEdge;
-    @Mock
-    private SpecificationMethod specificationMethod;
-    @Mock
-    private SpecificationResult specificationResult;
-    @Mock
-    private ExceptionFinder exceptionFinder;
-    @Mock
-    private Failure failure;
-    @Mock
-    private SpecificationRunStatus specificationRunStatus;
-    @Mock
-    private Throwable exception;
-    @Mock
-    private ObjectFactory objectFactory;
-    @Mock
-    private Throwable rootCause;
+    @Mock private DescriptionEdge descriptionEdge;
+    @Mock private SpecificationMethod specificationMethod;
+    @Mock private SpecificationResult specificationResult;
+    @Mock private ExceptionFinder exceptionFinder;
+    @Mock private Failure failure;
+    @Mock private SpecificationRunStatus specificationRunStatus;
+    @Mock private Throwable exception;
+    @Mock private ObjectFactory objectFactory;
+    @Mock private Throwable rootCause;
     @Mock private RunNotifier notifier;
 
     @SuppressWarnings({"serial", "ClassExtendsConcreteCollection", "CloneableClassWithoutClone"})
