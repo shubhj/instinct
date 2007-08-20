@@ -18,6 +18,7 @@ package com.googlecode.instinct.test;
 
 import com.googlecode.instinct.expect.Mocker12;
 import com.googlecode.instinct.expect.behaviour.Mocker;
+import com.googlecode.instinct.internal.util.Suggest;
 import java.lang.reflect.Field;
 import junit.framework.TestCase;
 
@@ -25,6 +26,7 @@ import junit.framework.TestCase;
 public abstract class InstinctTestCase extends TestCase {
     private static final String NO_ERRORS = "";
 
+    @Suggest("This needs to be invoked explicitly, until the JMock1.2 dependency is completely gone.")
     protected void setUpAutoMocks() {
         final Field[] fields = getClass().getDeclaredFields();
         for (final Field field : fields) {
