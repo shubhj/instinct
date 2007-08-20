@@ -26,6 +26,7 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
 import com.googlecode.instinct.internal.util.ExceptionFinder;
 import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import com.googlecode.instinct.test.reflect.SubjectCreator;
@@ -40,23 +41,33 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     private SpecificationRunner specificationRunner;
     private Collection<SpecificationMethod> specificationMethods;
     private Description description;
-    private DescriptionEdge mockDescriptionEdge;
-    private SpecificationMethod mockSpecificationMethod;
-    private SpecificationResult mockSpecificationResult;
-    private ExceptionFinder mockExceptionFinder;
-    private Failure mockFailure;
-    private SpecificationRunStatus mockSpecificationRunStatus;
-    private Throwable mockException;
-    private ObjectFactory mockObjectFactory;
-    private Throwable mockRootCause;
-    private RunNotifier mockNotifier;
+    @Mock
+    private DescriptionEdge descriptionEdge;
+    @Mock
+    private SpecificationMethod specificationMethod;
+    @Mock
+    private SpecificationResult specificationResult;
+    @Mock
+    private ExceptionFinder exceptionFinder;
+    @Mock
+    private Failure failure;
+    @Mock
+    private SpecificationRunStatus specificationRunStatus;
+    @Mock
+    private Throwable exception;
+    @Mock
+    private ObjectFactory objectFactory;
+    @Mock
+    private Throwable rootCause;
+    @Mock
+    private RunNotifier notifier;
 
+    @SuppressWarnings({"serial", "ClassExtendsConcreteCollection", "CloneableClassWithoutClone"})
     @Override
     public void setUpTestDoubles() {
-        setUpAutoMocks();
         specificationMethods = new HashSet<SpecificationMethod>() {
             {
-                add(mockSpecificationMethod);
+                add(specificationMethod);
             }
         };
     }
@@ -65,7 +76,8 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     @Override
     public void setUpSubject() {
         description = Description.createTestDescription(String.class, "dontCare");
-        specificationRunner = SubjectCreator.createSubjectWithConstructorArgs(SpecificationRunnerImpl.class, new Object[]{mockNotifier}, mockDescriptionEdge, mockExceptionFinder, mockObjectFactory);
+        specificationRunner = SubjectCreator.createSubjectWithConstructorArgs(SpecificationRunnerImpl.class, new Object[]{notifier}, descriptionEdge,
+                exceptionFinder, objectFactory);
     }
 
     public void testConformsToClassTraits() {
@@ -74,27 +86,27 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
 
     public void testRunsSpecificationSuccessfully() {
         createExpectations();
-        expects(mockSpecificationResult).method("completedSuccessfully").will(returnValue(true));
-        expects(mockNotifier).method("fireTestFinished").with(eq(description));
+        expects(specificationResult).method("completedSuccessfully").will(returnValue(true));
+        expects(notifier).method("fireTestFinished").with(eq(description));
         specificationRunner.run(specificationMethods);
     }
 
     public void testRunsSpecificationUnsuccessfully() {
         createExpectations();
-        expects(mockSpecificationResult).method("completedSuccessfully").will(returnValue(false));
-        expects(mockSpecificationResult).method("getStatus").will(returnValue(mockSpecificationRunStatus));
-        expects(mockSpecificationRunStatus).method("getDetailedStatus").will(returnValue(mockException));
-        expects(mockExceptionFinder).method("getRootCause").will(returnValue(mockRootCause));
-        expects(mockObjectFactory).method("create").with(same(Failure.class), eq(new Object[]{description, mockRootCause})).will(returnValue(mockFailure));
-        expects(mockNotifier).method("fireTestFailure").with(eq(mockFailure));
+        expects(specificationResult).method("completedSuccessfully").will(returnValue(false));
+        expects(specificationResult).method("getStatus").will(returnValue(specificationRunStatus));
+        expects(specificationRunStatus).method("getDetailedStatus").will(returnValue(exception));
+        expects(exceptionFinder).method("getRootCause").will(returnValue(rootCause));
+        expects(objectFactory).method("create").with(same(Failure.class), eq(new Object[]{description, rootCause})).will(returnValue(failure));
+        expects(notifier).method("fireTestFailure").with(eq(failure));
         specificationRunner.run(specificationMethods);
     }
 
     private void createExpectations() {
-        expects(mockSpecificationMethod).method("getName").will(returnValue("dontCare"));
-        expects(mockSpecificationMethod).method("getDeclaringClass").will(returnValue(String.class));
-        expects(mockDescriptionEdge).method("createTestDescription").with(eq(String.class), eq("dontCare")).will(returnValue(description));
-        expects(mockNotifier).method("fireTestStarted").with(eq(description));
-        expects(mockSpecificationMethod).method("run").will(returnValue(mockSpecificationResult));
+        expects(specificationMethod).method("getName").will(returnValue("dontCare"));
+        expects(specificationMethod).method("getDeclaringClass").will(returnValue(String.class));
+        expects(descriptionEdge).method("createTestDescription").with(eq(String.class), eq("dontCare")).will(returnValue(description));
+        expects(notifier).method("fireTestStarted").with(eq(description));
+        expects(specificationMethod).method("run").will(returnValue(specificationResult));
     }
 }

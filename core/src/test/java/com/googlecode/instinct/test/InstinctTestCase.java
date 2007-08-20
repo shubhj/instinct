@@ -19,6 +19,7 @@ package com.googlecode.instinct.test;
 import com.googlecode.instinct.expect.Mocker12;
 import com.googlecode.instinct.expect.behaviour.Mocker;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.annotate.Mock;
 import java.lang.reflect.Field;
 import junit.framework.TestCase;
 
@@ -27,17 +28,12 @@ public abstract class InstinctTestCase extends TestCase {
     private static final String NO_ERRORS = "";
 
     @Suggest("This needs to be invoked explicitly, until the JMock1.2 dependency is completely gone.")
-    protected void setUpAutoMocks() {
+    protected void setUpAutoMocks() throws IllegalAccessException {
         final Field[] fields = getClass().getDeclaredFields();
         for (final Field field : fields) {
-            if (field.getName().startsWith("mock")) {
+            if (field.getAnnotation(Mock.class) != null) {
                 field.setAccessible(true);
-                final Class<?> type = field.getType();
-                try {
-                    field.set(this, Mocker12.mock(type));
-                } catch (IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                }
+                field.set(this, Mocker12.mock(field.getType()));
             }
         }
     }
@@ -65,6 +61,7 @@ public abstract class InstinctTestCase extends TestCase {
 
     @SuppressWarnings({"ErrorNotRethrown"})
     private String doRunBare() throws Throwable {
+        setUpAutoMocks();
         setUpTestDoubles();
         setUpSubject();
         try {
