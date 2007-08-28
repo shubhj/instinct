@@ -7,8 +7,8 @@
     <property name="checkstyle.results.dir" value="${build.dir}/checkstyle"/>
 
     <property name="coverage.flush.interval" value="1000"/>
-    <property name="coverage.atomic.target" value="60%"/>
-    <property name="coverage.slow.target" value="49%"/>
+    <property name="coverage.atomic.target" value="64%"/>
+    <property name="coverage.slow.target" value="63%"/>
 
     <fileset id="covered.code.fileset" dir="${main.src.dir}">
         <include name="**/*.java"/>
