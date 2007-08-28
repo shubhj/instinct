@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.core;
+package com.googlecode.instinct.sandbox;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.ContextClassImpl;
 
-public interface LifecycleMethod {
-    String getName();
-
-    Method getMethod();
-
-    Class<?> getDeclaringClass();
-
-    Annotation[][] getParameterAnnotations();
+public class TheoryProcessor {
+    public final void run(final Class<?> classToRun) {
+        final ContextClass context = new ContextClassImpl(classToRun);
+        context.getSpecificationMethods();
+    }
 }

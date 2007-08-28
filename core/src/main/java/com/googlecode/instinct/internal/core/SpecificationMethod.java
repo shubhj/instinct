@@ -18,12 +18,14 @@ package com.googlecode.instinct.internal.core;
 
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.util.Suggest;
+import java.lang.annotation.Annotation;
 import java.util.Collection;
 
 @Suggest({"Breadcrumb - Add a getDeclaringClass() that returns ContextClass or raw class?"})
 public interface SpecificationMethod extends RunnableItem {
     SpecificationResult run();
 
+    @Suggest("Something is misnamed here.  This returns a LifecycleMethod and not a SpecMethod, which is this class.")
     LifecycleMethod getSpecificationMethod();
 
     Collection<LifecycleMethod> getBeforeSpecificationMethods();
@@ -33,4 +35,6 @@ public interface SpecificationMethod extends RunnableItem {
     String getName();
 
     Class<?> getDeclaringClass();
+
+    Annotation[][] getParameterAnnotations();
 }

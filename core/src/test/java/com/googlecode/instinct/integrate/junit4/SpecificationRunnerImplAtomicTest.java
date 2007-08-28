@@ -16,10 +16,7 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
-import static com.googlecode.instinct.expect.Mocker12.eq;
-import static com.googlecode.instinct.expect.Mocker12.expects;
-import static com.googlecode.instinct.expect.Mocker12.returnValue;
-import static com.googlecode.instinct.expect.Mocker12.same;
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdge;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
@@ -32,6 +29,7 @@ import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import com.googlecode.instinct.test.reflect.SubjectCreator;
 import java.util.Collection;
 import java.util.HashSet;
+import org.jmock.Expectations;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
@@ -76,27 +74,49 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
 
     public void testRunsSpecificationSuccessfully() {
         createExpectations();
-        expects(specificationResult).method("completedSuccessfully").will(returnValue(true));
-        expects(notifier).method("fireTestFinished").with(eq(description));
+        expect.that(new Expectations() {
+            {
+                one(specificationResult).completedSuccessfully();
+                will(returnValue(true));
+                one(notifier).fireTestFinished(description);
+            }
+        });
         specificationRunner.run(specificationMethods);
     }
 
     public void testRunsSpecificationUnsuccessfully() {
         createExpectations();
-        expects(specificationResult).method("completedSuccessfully").will(returnValue(false));
-        expects(specificationResult).method("getStatus").will(returnValue(specificationRunStatus));
-        expects(specificationRunStatus).method("getDetailedStatus").will(returnValue(exception));
-        expects(exceptionFinder).method("getRootCause").will(returnValue(rootCause));
-        expects(objectFactory).method("create").with(same(Failure.class), eq(new Object[]{description, rootCause})).will(returnValue(failure));
-        expects(notifier).method("fireTestFailure").with(eq(failure));
+        expect.that(new Expectations() {
+            {
+                one(specificationResult).completedSuccessfully();
+                will(returnValue(false));
+                one(specificationResult).getStatus();
+                will(returnValue(specificationRunStatus));
+                one(specificationRunStatus).getDetailedStatus();
+                will(returnValue(exception));
+                one(exceptionFinder).getRootCause(with(any(Throwable.class)));
+                will(returnValue(rootCause));
+                one(objectFactory).create(with(same(Failure.class)), with(equal(new Object[]{description, rootCause})));
+                will(returnValue(failure));
+                one(notifier).fireTestFailure(failure);
+            }
+        });
         specificationRunner.run(specificationMethods);
     }
 
     private void createExpectations() {
-        expects(specificationMethod).method("getName").will(returnValue("dontCare"));
-        expects(specificationMethod).method("getDeclaringClass").will(returnValue(String.class));
-        expects(descriptionEdge).method("createTestDescription").with(eq(String.class), eq("dontCare")).will(returnValue(description));
-        expects(notifier).method("fireTestStarted").with(eq(description));
-        expects(specificationMethod).method("run").will(returnValue(specificationResult));
+        expect.that(new Expectations() {
+            {
+                one(specificationMethod).getName();
+                will(returnValue("dontCare"));
+                one(specificationMethod).getDeclaringClass();
+                will(returnValue(String.class));
+                one(descriptionEdge).createTestDescription(String.class, "dontCare");
+                will(returnValue(description));
+                one(notifier).fireTestStarted(description);
+                one(specificationMethod).run();
+                will(returnValue(specificationResult));
+            }
+        });
     }
 }

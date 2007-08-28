@@ -16,24 +16,27 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import java.lang.reflect.Method;
 import au.net.netstorm.boost.edge.EdgeException;
+import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.ContextConfigurationException;
 import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
+import com.googlecode.instinct.sandbox.ForAll;
+import java.lang.reflect.Method;
 
 final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
     private final ClassEdge edgeClass = new ClassEdgeImpl();
+    private final ParameterAnnotationFinder annotationFinder = new ParameterAnnotationFinderImpl();
 
     @Suggest("Consider adding parameter types to message for overloaded methods")
-    public void checkMethodHasNoParameters(final Method method) {
+    public void checkMethodHasNoParameters(final LifecycleMethod method) {
         checkNotNull(method);
-        if (method.getParameterTypes().length > 0) {
+        if (method.getMethod().getParameterTypes().length > 0 && !annotationFinder.hasAnnotation(ForAll.class, method.getParameterAnnotations())) {
             final String methodDetails = method.getDeclaringClass().getSimpleName() + '.' + method.getName() + "(...)";
-            final String message = "Unable to run context. Method '" + methodDetails + "' cannot have parameters";
+            final String message = "Unable to run context. Specifaction method '" + methodDetails + "' cannot have parameters";
             throw new LifeCycleMethodConfigurationException(message);
         }
     }

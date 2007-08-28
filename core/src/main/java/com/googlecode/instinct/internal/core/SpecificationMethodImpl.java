@@ -22,6 +22,7 @@ import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
+import java.lang.annotation.Annotation;
 import java.util.Collection;
 
 public final class SpecificationMethodImpl implements SpecificationMethod {
@@ -57,6 +58,10 @@ public final class SpecificationMethodImpl implements SpecificationMethod {
 
     public Class<?> getDeclaringClass() {
         return specificationMethod.getDeclaringClass();
+    }
+
+    public Annotation[][] getParameterAnnotations() {
+        return specificationMethod.getParameterAnnotations();
     }
 
     public Collection<LifecycleMethod> getBeforeSpecificationMethods() {

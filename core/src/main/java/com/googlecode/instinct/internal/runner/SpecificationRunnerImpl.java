@@ -16,14 +16,8 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
-//import com.googlecode.instinct.internal.mock.MockVerifier;
-//import com.googlecode.instinct.internal.mock.MockVerifierImpl;
-//import com.googlecode.instinct.internal.mock.TestDoubleAutoWirer;
-//import com.googlecode.instinct.internal.mock.TestDoubleAutoWirerImpl;
 import static com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus.SPECIFICATION_SUCCESS;
 import com.googlecode.instinct.internal.util.Clock;
 import com.googlecode.instinct.internal.util.ClockImpl;
@@ -34,15 +28,18 @@ import com.googlecode.instinct.internal.util.MethodInvokerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.SpecificationListener;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final Collection<SpecificationListener> specificationListeners = new ArrayList<SpecificationListener>();
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
-//    private final TestDoubleAutoWirer testDoubleAutoWirer = new TestDoubleAutoWirerImpl();
+    //    private final TestDoubleAutoWirer testDoubleAutoWirer = new TestDoubleAutoWirerImpl();
     private final Clock clock = new ClockImpl();
     private MethodInvoker methodInvoker = new MethodInvokerImpl();
     private LifeCycleMethodValidator methodValidator = new LifeCycleMethodValidatorImpl();
-//    private final MockVerifier mockVerifier = new MockVerifierImpl();
+    //    private final MockVerifier mockVerifier = new MockVerifierImpl();
+    private MethodInvokerFactory methodInvokerFactory = new MethodInvokerFactoryImpl();
 
     public void addSpecificationListener(final SpecificationListener specificationListener) {
         checkNotNull(specificationListener);
@@ -90,11 +87,17 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         try {
 //            testDoubleAutoWirer.wire(contextInstance);
             runMethods(contextInstance, specificationMethod.getBeforeSpecificationMethods());
-            runMethod(contextInstance, specificationMethod.getSpecificationMethod());
+            runSpecificationMethod(contextInstance, specificationMethod.getSpecificationMethod());
 //            mockVerifier.verify(contextInstance);
         } finally {
             runMethods(contextInstance, specificationMethod.getAfterSpecificationMethods());
         }
+    }
+
+    private void runSpecificationMethod(final Object contextInstance, final LifecycleMethod specificationMethod) {
+        methodValidator.checkMethodHasNoParameters(specificationMethod);
+        final MethodInvoker specMethodInvoker = methodInvokerFactory.create(specificationMethod);
+        specMethodInvoker.invokeMethod(contextInstance, specificationMethod.getMethod());
     }
 
     private void notifyListenersOfPreSpecification(final SpecificationMethod specificationMethod) {
@@ -117,7 +120,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
 
     @Suggest("Share this check logic with the IntelliJ integration.")
     private void runMethod(final Object instance, final LifecycleMethod method) {
-        methodValidator.checkMethodHasNoParameters(method.getMethod());
+        methodValidator.checkMethodHasNoParameters(method);
         methodInvoker.invokeMethod(instance, method.getMethod());
     }
 

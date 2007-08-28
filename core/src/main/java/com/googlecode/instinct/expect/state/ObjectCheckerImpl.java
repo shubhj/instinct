@@ -50,7 +50,7 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectNotThat(subject, Matchers.equalTo(t));
     }
 
-    public final void instanceOf(final Class<T> cls) {
+    public final void instanceOf(final Class<? extends T> cls) {
         getAsserter().expectThat(subject, Matchers.instanceOf(cls));
     }
 

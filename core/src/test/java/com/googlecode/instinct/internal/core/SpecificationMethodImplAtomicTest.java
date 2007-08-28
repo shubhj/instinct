@@ -29,6 +29,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
 import static com.googlecode.instinct.test.triangulate.Triangulation.getInstance;
+import java.lang.annotation.Annotation;
 import java.util.Collection;
 
 @SuppressWarnings({"unchecked"})
@@ -100,5 +101,11 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
     public void testReturnsNameFromUnderlyingLifecycleMethod() {
         expects(specMethod).method("getName").will(returnValue(methodName));
         expect.that(specificationMethod.getName()).equalTo(methodName);
+    }
+
+    public void testReturnsParameterAnnotationsFromUnderlyingLifecycleMethod() {
+        final Annotation[][] fakeAnnotation = new Annotation[1][1];
+        expects(specMethod).method("getParameterAnnotations").will(returnValue(fakeAnnotation));
+        expect.that(specificationMethod.getParameterAnnotations()).sameInstanceAs(fakeAnnotation);
     }
 }

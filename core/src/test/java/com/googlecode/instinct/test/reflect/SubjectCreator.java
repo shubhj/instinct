@@ -20,6 +20,7 @@ import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValueUsingInferredType;
 
 @Suggest("Add another method to use constructor directly.")
 public final class SubjectCreator {
@@ -38,7 +39,7 @@ public final class SubjectCreator {
         checkNotNull(subjectClass, dependencies);
         final T subject = OBJECT_FACTORY.create(subjectClass, constructorArgs);
         for (final Object dependency : dependencies) {
-            Reflector.insertFieldValueUsingInferredType(subject, dependency);
+            insertFieldValueUsingInferredType(subject, dependency);
         }
         return subject;
     }

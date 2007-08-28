@@ -23,7 +23,7 @@ public interface ObjectChecker<T> {
 
     void notEqualTo(T t);
 
-    void instanceOf(Class<T> cls);
+    void instanceOf(Class<? extends T> cls);
 
     void notInstanceOf(Class<T> cls);
 

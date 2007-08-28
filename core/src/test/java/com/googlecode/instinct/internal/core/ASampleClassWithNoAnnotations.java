@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,10 @@
 
 package com.googlecode.instinct.internal.core;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
+import static com.googlecode.instinct.expect.Expect.expect;
 
-public interface LifecycleMethod {
-    String getName();
-
-    Method getMethod();
-
-    Class<?> getDeclaringClass();
-
-    Annotation[][] getParameterAnnotations();
+public class ASampleClassWithNoAnnotations {
+    public void someMethod() {
+        expect.that(Boolean.FALSE).isFalse();
+    }
 }

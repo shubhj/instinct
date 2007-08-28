@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.core;
+package com.googlecode.instinct.sandbox;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import java.lang.annotation.Target;
 
-public interface LifecycleMethod {
-    String getName();
+@Retention(RUNTIME)
+@Target({ElementType.PARAMETER})
+public @interface ForAll {
 
-    Method getMethod();
-
-    Class<?> getDeclaringClass();
-
-    Annotation[][] getParameterAnnotations();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.core;
+package com.googlecode.instinct.internal.runner;
 
-import java.lang.annotation.Annotation;
+import com.googlecode.instinct.internal.util.MethodInvoker;
+import com.googlecode.instinct.internal.util.Suggest;
 import java.lang.reflect.Method;
 
-public interface LifecycleMethod {
-    String getName();
+@Suggest("Test drive this.")
+public final class TheoryMethodInvokerImpl implements MethodInvoker {
+    public Object invokeMethod(final Object instance, final Method method) {
+        return null;
+    }
 
-    Method getMethod();
-
-    Class<?> getDeclaringClass();
-
-    Annotation[][] getParameterAnnotations();
+    public Object invokeMethod(final Object instance, final Method method, final Object... params) {
+        return null;
+    }
 }

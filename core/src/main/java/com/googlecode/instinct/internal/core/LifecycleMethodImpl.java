@@ -16,9 +16,10 @@
 
 package com.googlecode.instinct.internal.core;
 
-import java.lang.reflect.Method;
 import au.net.netstorm.boost.primordial.Primordial;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 
 public final class LifecycleMethodImpl extends Primordial implements LifecycleMethod {
     private final Method method;
@@ -38,5 +39,9 @@ public final class LifecycleMethodImpl extends Primordial implements LifecycleMe
 
     public Class<?> getDeclaringClass() {
         return method.getDeclaringClass();
+    }
+
+    public Annotation[][] getParameterAnnotations() {
+        return method.getParameterAnnotations();
     }
 }

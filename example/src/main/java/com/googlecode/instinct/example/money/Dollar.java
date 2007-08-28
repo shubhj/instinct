@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,12 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.core;
+package com.googlecode.instinct.example.money;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
+public interface Dollar {
+    int getAmount();
 
-public interface LifecycleMethod {
-    String getName();
+    Dollar multiplyBy(int multiplicationAmount);
 
-    Method getMethod();
-
-    Class<?> getDeclaringClass();
-
-    Annotation[][] getParameterAnnotations();
+    Dollar divideBy(int divisionAmount);
 }
