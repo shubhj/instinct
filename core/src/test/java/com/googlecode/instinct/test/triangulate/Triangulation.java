@@ -26,27 +26,27 @@ public final class Triangulation {
         throw new UnsupportedOperationException();
     }
 
-    public static <T> List<T> getListInstance(Class<T> elementType) {
+    public static <T> List<T> getListInstance(final Class<T> elementType) {
         return TRIANAGULATION_PROVIDER.getListInstance(elementType);
     }
 
-    public static <K, V> Map<K, V> getMapInstance(Class<K> keyType, Class<V> valueType) {
+    public static <K, V> Map<K, V> getMapInstance(final Class<K> keyType, final Class<V> valueType) {
         return TRIANAGULATION_PROVIDER.getMapInstance(keyType, valueType);
     }
 
-    public static <T> T[] getArrayInstance(Class<T> elementType) {
+    public static <T> T[] getArrayInstance(final Class<T> elementType) {
         return TRIANAGULATION_PROVIDER.getArrayInstance(elementType);
     }
 
-    public static <T> T getInstance(Class<T> type) {
+    public static <T> T getInstance(final Class<T> type) {
         return TRIANAGULATION_PROVIDER.getInstance(type);
     }
 
-    public static Object[] getInstances(Class[] types) {
+    public static Object[] getInstances(final Class<?>[] types) {
         return TRIANAGULATION_PROVIDER.getInstances(types);
     }
 
-    public static int intInRange(int min, int max) {
+    public static int intInRange(final int min, final int max) {
         return TRIANAGULATION_PROVIDER.intInRange(min, max);
     }
 }
