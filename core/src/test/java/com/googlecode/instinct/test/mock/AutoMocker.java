@@ -17,13 +17,16 @@
 package com.googlecode.instinct.test.mock;
 
 import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
+import com.googlecode.instinct.internal.mock.instance.UberInstanceProvider;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.test.TestingException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 
+@SuppressWarnings({"CatchGenericClass"})
 public final class AutoMocker {
     private static final int NUMBER_OF_MOCKS_IN_A_COLLECTION_FIELD = 3;
 
@@ -37,23 +40,32 @@ public final class AutoMocker {
         for (final Field field : fields) {
             if (isAnnotated(Mock.class, field)) {
                 injectMock(instanceToAutoWire, field);
+            } else if (isAnnotated(Dummy.class, field)) {
+                injectDummy(instanceToAutoWire, field);
             }
             // note. other test doubles here.
         }
     }
 
-    @SuppressWarnings({"CatchGenericClass"})
     private static void injectMock(final Object instanceToAutoWire, final Field field) {
+        injectFieldValue(instanceToAutoWire, field, createMockFieldValue(field.getType(), field.getName()), "mock");
+    }
+
+    private static void injectDummy(final Object instanceToAutoWire, final Field field) {
+        injectFieldValue(instanceToAutoWire, field, createDummyFieldValue(field.getType()), "dummy");
+    }
+
+    private static void injectFieldValue(final Object instanceToAutoWire, final Field field, final Object fieldValue, final String testDoubleType) {
         field.setAccessible(true);
         try {
-            field.set(instanceToAutoWire, createFieldValue(field.getType(), field.getName()));
+            field.set(instanceToAutoWire, fieldValue);
         } catch (Throwable e) {
-            final String message = "Unable to autowire a mock value into field '" + field.getName() + "' of type " + field.getType().getSimpleName();
+            final String message = "Unable to autowire a " + testDoubleType + " value into field '" + field.getName() + "' of type " + field.getType().getSimpleName();
             throw new TestingException(message, e);
         }
     }
 
-    private static Object createFieldValue(final Class<?> fieldType, final String fieldName) {
+    private static Object createMockFieldValue(final Class<?> fieldType, final String fieldName) {
         if (fieldType.isArray()) {
             return createArray(fieldType.getComponentType(), fieldName);
         } else {
@@ -61,8 +73,12 @@ public final class AutoMocker {
         }
     }
 
+    private static Object createDummyFieldValue(final Class<?> fieldType) {
+        return new UberInstanceProvider().newInstance(fieldType);
+    }
+
     @SuppressWarnings({"StringContatenationInLoop"})
-    private static <T> Object createArray(final Class<?> componentType, final String fieldName) {
+    private static <T> Object createArray(final Class<T> componentType, final String fieldName) {
         final Object array = Array.newInstance(componentType, NUMBER_OF_MOCKS_IN_A_COLLECTION_FIELD);
         for (int i = 0; i < NUMBER_OF_MOCKS_IN_A_COLLECTION_FIELD; i++) {
             Array.set(array, i, mock(componentType, fieldName + "-" + i));

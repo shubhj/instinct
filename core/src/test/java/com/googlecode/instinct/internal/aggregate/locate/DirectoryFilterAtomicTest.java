@@ -16,17 +16,23 @@
 
 package com.googlecode.instinct.internal.aggregate.locate;
 
-import java.io.File;
-import java.io.FileFilter;
-import static com.googlecode.instinct.expect.Mocker12.expects;
-import static com.googlecode.instinct.expect.Mocker12.mock;
-import static com.googlecode.instinct.expect.Mocker12.returnValue;
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import java.io.File;
+import java.io.FileFilter;
+import org.jmock.Expectations;
 
 public final class DirectoryFilterAtomicTest extends InstinctTestCase {
-    private File pathname;
-    private FileFilter filter;
+    @Subject private FileFilter filter;
+    @Mock private File pathname;
+
+    @Override
+    public void setUpSubject() {
+        filter = new DirectoryFilter();
+    }
 
     public void testConformsToClassTraits() {
         checkClass(DirectoryFilter.class, FileFilter.class);
@@ -37,18 +43,12 @@ public final class DirectoryFilterAtomicTest extends InstinctTestCase {
         checkAccept(false);
     }
 
-    private void checkAccept(final boolean value) {
-        expects(pathname).method("isDirectory").will(returnValue(value));
-        assertEquals(value, filter.accept(pathname));
-    }
-
-    @Override
-    public void setUpTestDoubles() {
-        pathname = mock(File.class);
-    }
-
-    @Override
-    public void setUpSubject() {
-        filter = new DirectoryFilter();
+    private void checkAccept(final boolean isADirectory) {
+        expect.that(new Expectations() {
+            {
+                one(pathname).isDirectory(); will(returnValue(isADirectory));
+            }
+        });
+        expect.that(filter.accept(pathname)).equalTo(isADirectory);
     }
 }

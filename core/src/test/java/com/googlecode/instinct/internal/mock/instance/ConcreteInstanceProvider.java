@@ -16,13 +16,15 @@
 
 package com.googlecode.instinct.internal.mock.instance;
 
-import java.lang.reflect.Array;
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
+import java.lang.reflect.Array;
+import java.lang.reflect.Field;
 import org.objenesis.Objenesis;
 import org.objenesis.ObjenesisStd;
+import com.googlecode.instinct.test.reflect.Reflector;
 
 // SUPPRESS CyclomaticComplexity|NPathComplexity|MethodLength {
-@SuppressWarnings({"RawUseOfParameterizedType", "MagicNumber"})
+@SuppressWarnings({"RawUseOfParameterizedType", "MagicNumber", "ReturnOfCollectionOrArrayField"})
 public final class ConcreteInstanceProvider implements InstanceProvider {
     private static final Object OBJECT = new Object();
     private static final Object[] OBJECT_ARRAY = {OBJECT};
@@ -53,6 +55,9 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
         }
         if (cls.equals(String.class)) {
             return "The quick brown fox jumps over the lazy dog.";
+        }
+        if (cls.equals(Field.class)) {
+            return Reflector.getFieldByName(getClass(), "OBJECT");
         }
         if (cls.isArray()) {
             return createArray(cls.getComponentType());

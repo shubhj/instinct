@@ -17,42 +17,37 @@
 package com.googlecode.instinct.internal.aggregate.locate;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.expect.Mocker12.anyTimes;
-import static com.googlecode.instinct.expect.Mocker12.expects;
-import static com.googlecode.instinct.expect.Mocker12.mock;
-import static com.googlecode.instinct.expect.Mocker12.returnValue;
 import com.googlecode.instinct.internal.matcher.MethodMatcher;
 import com.googlecode.instinct.internal.runner.AContextThatHasAMethodWithAnnotationAndNamingConvention;
 import com.googlecode.instinct.internal.runner.AContextWithAnnotationsAndNamingConventions;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ASimpleNamingConventionContext;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
+import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import org.hamcrest.Matcher;
+import org.jmock.Expectations;
 
 @SuppressWarnings({"unchecked"})
+@Suggest("This class needs a bit of a tidy up.")
 public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
-    private MarkedMethodLocator locator;
-    private NamingConvention namingConvention;
+    @Subject private MarkedMethodLocator locator;
+    @Mock private NamingConvention namingConvention;
 
     public void testConformsToClassTraits() {
         checkClass(MarkedMethodLocatorImpl.class, MarkedMethodLocator.class);
     }
 
     @Override
-    public void setUpTestDoubles() {
-        namingConvention = mock(NamingConvention.class);
-    }
-
-    @Override
     public void setUpSubject() {
-        super.setUpSubject();
         locator = new MarkedMethodLocatorImpl();
     }
 
@@ -74,13 +69,13 @@ public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
     }
 
     public void testFindsAnnotatedBeforeSpecificationMethodsInASimpleContext() {
-        final Collection<Method> methods = getBeforeSpecificationMethodsFromContextClass("", ASimpleContext.class);
+        final Collection<Method> methods = getBeforeSpecificationMethodsFromContextClass(ASimpleContext.class, "");
         expect.that(methods).hasSize(2);
         expect.that(methods).containsItems(aMethodNamed("setUp"), aMethodNamed("setUpAgain"));
     }
 
     public void testFindsNamingConventionBeforeSpecificationMethodsInASimpleNamingConventionContext() {
-        final Collection<Method> methods = getBeforeSpecificationMethodsFromContextClass("^before.*", ASimpleNamingConventionContext.class);
+        final Collection<Method> methods = getBeforeSpecificationMethodsFromContextClass(ASimpleNamingConventionContext.class, "^before.*");
         expect.that(methods).hasSize(2);
         expect.that(methods).containsItems(aMethodNamed("beforeSpecification"), aMethodNamed("beforeWeDoStuff"));
     }
@@ -99,14 +94,21 @@ public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
         return new MethodMatcher(methodName);
     }
 
-    private <T> Collection<Method> getBeforeSpecificationMethodsFromContextClass(final String namingPattern, final Class<T> cls) {
-        expects(namingConvention, anyTimes()).method("getPattern").will(returnValue(namingPattern));
-        return locator.locateAll(cls,
-                new MarkingSchemeImpl(BeforeSpecification.class, namingConvention));
+    private <T> Collection<Method> getBeforeSpecificationMethodsFromContextClass(final Class<T> cls, final String namingPattern) {
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(namingConvention).getPattern(); will(returnValue(namingPattern));
+            }
+        });
+        return locator.locateAll(cls, new MarkingSchemeImpl(BeforeSpecification.class, namingConvention));
     }
 
     private <T> Collection<Method> getSpecificationMethodsFromContextClass(final Class<T> cls) {
-        expects(namingConvention, anyTimes()).method("getPattern").will(returnValue("^must.*|^should.*"));
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(namingConvention).getPattern(); will(returnValue("^must.*|^should.*"));
+            }
+        });
         return locator.locateAll(cls, new MarkingSchemeImpl(Specification.class, namingConvention));
     }
 }
