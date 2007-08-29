@@ -17,12 +17,12 @@
 package com.googlecode.instinct.internal.aggregate;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
 import java.io.File;
@@ -34,20 +34,11 @@ public final class AnnotatedContextAggregatorImplAtomicTest extends InstinctTest
     private static final JavaClassName[] CLASS_NAMES = {};
     private static final String PACKAGE_ROOT = "";
     private ContextAggregator aggregator;
-    private PackageRootFinder packageRootFinder;
-    private ClassLocator classLocator;
-    private ObjectFactory objectFactory;
-    private File packageRoot;
-    private FileFilter fileFilter;
-
-    @Override
-    public void setUpTestDoubles() {
-        classLocator = mock(ClassLocator.class);
-        packageRootFinder = mock(PackageRootFinder.class);
-        objectFactory = mock(ObjectFactory.class);
-        fileFilter = mock(FileFilter.class);
-        packageRoot = mock(File.class);
-    }
+    @Mock private PackageRootFinder packageRootFinder;
+    @Mock private ClassLocator classLocator;
+    @Mock private ObjectFactory objectFactory;
+    @Mock private File packageRoot;
+    @Mock private FileFilter fileFilter;
 
     @Override
     public void setUpSubject() {

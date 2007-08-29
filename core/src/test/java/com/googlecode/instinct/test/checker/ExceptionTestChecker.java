@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.test;
+package com.googlecode.instinct.test.checker;
 
 import au.net.netstorm.boost.nursery.reflect.checker.AssertThrows;
 import au.net.netstorm.boost.nursery.reflect.checker.DefaultAssertThrows;

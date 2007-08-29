@@ -17,36 +17,38 @@
 package com.googlecode.instinct.internal.aggregate.locate;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.expect.Mocker12;
-import static com.googlecode.instinct.expect.Mocker12.expects;
-import static com.googlecode.instinct.expect.Mocker12.mock;
-import static com.googlecode.instinct.expect.Mocker12.returnValue;
+import com.googlecode.instinct.expect.behaviour.Mocker;
 import com.googlecode.instinct.internal.runner.ASimpleNamingConventionContext;
+import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
-import com.googlecode.instinct.test.checker.ClassChecker;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import org.hamcrest.Matcher;
+import org.jmock.Expectations;
 import org.jmock.internal.matcher.MethodNameMatcher;
 
 public final class NamingConventionMethodLocatorImplAtomicTest extends InstinctTestCase {
-    private NamingConvention namingConvention;
-
-    public void testConformsToClassTraits() {
-        ClassChecker.checkClass(NamingConventionMethodLocatorImpl.class, NamingConventionMethodLocator.class);
-    }
+    @Mock private NamingConvention namingConvention = Mocker.mock(NamingConvention.class);
+    private NamingConventionMethodLocator methodLocator;
 
     @Override
-    public void setUpTestDoubles() {
-        super.setUpTestDoubles();
-        namingConvention = mock(NamingConvention.class);
+    public void setUpSubject() {
+        methodLocator = new NamingConventionMethodLocatorImpl();
+    }
+
+    public void testConformsToClassTraits() {
+        checkClass(NamingConventionMethodLocatorImpl.class, NamingConventionMethodLocator.class);
     }
 
     public void testFindsMethodsConformingToTheNamingConvention() {
-        final NamingConventionMethodLocator locator = new NamingConventionMethodLocatorImpl();
-        expects(namingConvention, Mocker12.atLeastOnce()).method("getPattern").will(returnValue("^must.*"));
-        final Collection<Method> methods = locator.locate(ASimpleNamingConventionContext.class, namingConvention);
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(namingConvention).getPattern(); will(returnValue("^must.*"));
+            }
+        });
+        final Collection<Method> methods = methodLocator.locate(ASimpleNamingConventionContext.class, namingConvention);
         final Matcher<Method> aMethodNamedMustAlwaysReturnTrue = new MethodNameMatcher("^mustAlwaysReturnTrue$");
         expect.that(methods).containsItem(aMethodNamedMustAlwaysReturnTrue);
     }

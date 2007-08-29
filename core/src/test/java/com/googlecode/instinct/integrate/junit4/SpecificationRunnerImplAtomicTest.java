@@ -26,7 +26,7 @@ import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import com.googlecode.instinct.test.reflect.SubjectCreator;
+import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
 import java.util.Collection;
 import java.util.HashSet;
 import org.jmock.Expectations;
@@ -34,10 +34,10 @@ import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 
-@SuppressWarnings({"UnusedDeclaration"})
+@SuppressWarnings({"UnusedDeclaration", "unchecked"})
 public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     private SpecificationRunner specificationRunner;
-    private Collection<SpecificationMethod> specificationMethods;
+    @Mock private Collection<SpecificationMethod> specificationMethods;
     private Description description;
     @Mock private DescriptionEdge descriptionEdge;
     @Mock private SpecificationMethod specificationMethod;
@@ -60,12 +60,10 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
         };
     }
 
-    @SuppressWarnings({"unchecked"})
     @Override
     public void setUpSubject() {
         description = Description.createTestDescription(String.class, "dontCare");
-        specificationRunner = SubjectCreator.createSubjectWithConstructorArgs(SpecificationRunnerImpl.class, new Object[]{notifier}, descriptionEdge,
-                exceptionFinder, objectFactory);
+        specificationRunner = createSubjectWithConstructorArgs(SpecificationRunnerImpl.class, new Object[]{notifier}, descriptionEdge, exceptionFinder, objectFactory);
     }
 
     public void testConformsToClassTraits() {
@@ -73,7 +71,7 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     }
 
     public void testRunsSpecificationSuccessfully() {
-        createExpectations();
+        setUpCommonExpectations();
         expect.that(new Expectations() {
             {
                 one(specificationResult).completedSuccessfully();
@@ -85,37 +83,28 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     }
 
     public void testRunsSpecificationUnsuccessfully() {
-        createExpectations();
+        setUpCommonExpectations();
         expect.that(new Expectations() {
             {
-                one(specificationResult).completedSuccessfully();
-                will(returnValue(false));
-                one(specificationResult).getStatus();
-                will(returnValue(specificationRunStatus));
-                one(specificationRunStatus).getDetailedStatus();
-                will(returnValue(exception));
-                one(exceptionFinder).getRootCause(with(any(Throwable.class)));
-                will(returnValue(rootCause));
-                one(objectFactory).create(with(same(Failure.class)), with(equal(new Object[]{description, rootCause})));
-                will(returnValue(failure));
+                one(specificationResult).completedSuccessfully(); will(returnValue(false));
+                one(specificationResult).getStatus(); will(returnValue(specificationRunStatus));
+                one(specificationRunStatus).getDetailedStatus(); will(returnValue(exception));
+                one(exceptionFinder).getRootCause(with(any(Throwable.class))); will(returnValue(rootCause));
+                one(objectFactory).create(with(same(Failure.class)), with(equal(new Object[]{description, rootCause}))); will(returnValue(failure));
                 one(notifier).fireTestFailure(failure);
             }
         });
         specificationRunner.run(specificationMethods);
     }
 
-    private void createExpectations() {
+    private void setUpCommonExpectations() {
         expect.that(new Expectations() {
             {
-                one(specificationMethod).getName();
-                will(returnValue("dontCare"));
-                one(specificationMethod).getDeclaringClass();
-                will(returnValue(String.class));
-                one(descriptionEdge).createTestDescription(String.class, "dontCare");
-                will(returnValue(description));
+                one(specificationMethod).getName(); will(returnValue("dontCare"));
+                one(specificationMethod).getDeclaringClass(); will(returnValue(String.class));
+                one(descriptionEdge).createTestDescription(String.class, "dontCare"); will(returnValue(description));
                 one(notifier).fireTestStarted(description);
-                one(specificationMethod).run();
-                will(returnValue(specificationResult));
+                one(specificationMethod).run(); will(returnValue(specificationResult));
             }
         });
     }

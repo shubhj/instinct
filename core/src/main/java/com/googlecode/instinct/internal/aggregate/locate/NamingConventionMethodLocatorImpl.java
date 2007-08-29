@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public final class NamingConventionMethodLocatorImpl implements NamingConventionMethodLocator {
-
     public <T> Collection<Method> locate(final Class<T> cls, final NamingConvention namingConvention) {
         checkNotNull(cls, namingConvention);
         final Collection<Method> locatedMethods = new ArrayList<Method>();

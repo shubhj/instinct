@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.expect.state;
 
-import static com.googlecode.instinct.test.ExceptionTestChecker.expectException;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;

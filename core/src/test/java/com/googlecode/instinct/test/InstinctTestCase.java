@@ -18,7 +18,7 @@ package com.googlecode.instinct.test;
 
 import com.googlecode.instinct.expect.Mocker12;
 import com.googlecode.instinct.expect.behaviour.Mocker;
-import static com.googlecode.instinct.test.AutoMocker.setUpAutoMocks;
+import static com.googlecode.instinct.test.mock.AutoMocker.autoWireMockFields;
 import junit.framework.TestCase;
 
 @SuppressWarnings({"NoopMethodInAbstractClass", "ProhibitedExceptionDeclared"})
@@ -48,7 +48,7 @@ public abstract class InstinctTestCase extends TestCase {
 
     @SuppressWarnings({"ErrorNotRethrown"})
     private String doRunBare() throws Throwable {
-        setUpAutoMocks(this);
+        autoWireMockFields(this);
         setUpTestDoubles();
         setUpSubject();
         try {
