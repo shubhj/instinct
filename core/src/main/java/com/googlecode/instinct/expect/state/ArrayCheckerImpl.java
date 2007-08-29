@@ -25,11 +25,11 @@ public class ArrayCheckerImpl<T> extends ObjectCheckerImpl<T[]> implements Array
         super(subject);
     }
 
-    public void isEmpty() {
+    public final void isEmpty() {
         getAsserter().expectThat(subject.length == 0, Matchers.describedAs("length == 0", Matchers.equalTo(true)));
     }
 
-    public void notEmpty() {
+    public final void notEmpty() {
         getAsserter().expectThat(subject.length != 0, Matchers.describedAs("length != 0", Matchers.equalTo(true)));
     }
 
