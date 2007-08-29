@@ -19,6 +19,10 @@ package com.googlecode.instinct.expect.state;
 import org.hamcrest.Matcher;
 
 public interface ArrayChecker<T> extends ObjectChecker<T[]> {
+    void isEmpty();
+
+    void notEmpty();
+
     void containsItem(Matcher<T> matcher);
 
     void containsItem(T t);
@@ -27,5 +31,5 @@ public interface ArrayChecker<T> extends ObjectChecker<T[]> {
 
     void doesNotContainItem(T t);
 
-    void hasLength(int length);
+    void hasSize(int size);
 }

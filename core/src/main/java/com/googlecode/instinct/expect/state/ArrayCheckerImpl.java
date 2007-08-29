@@ -16,15 +16,21 @@
 
 package com.googlecode.instinct.expect.state;
 
-import com.googlecode.instinct.internal.util.Fix;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-@Fix("Test this")
 public class ArrayCheckerImpl<T> extends ObjectCheckerImpl<T[]> implements ArrayChecker<T> {
 
     public ArrayCheckerImpl(final T[] subject) {
         super(subject);
+    }
+
+    public void isEmpty() {
+        getAsserter().expectThat(subject.length == 0, Matchers.describedAs("length == 0", Matchers.equalTo(true)));
+    }
+
+    public void notEmpty() {
+        getAsserter().expectThat(subject.length != 0, Matchers.describedAs("length != 0", Matchers.equalTo(true)));
     }
 
     public final void containsItem(final Matcher<T> matcher) {
@@ -43,7 +49,7 @@ public class ArrayCheckerImpl<T> extends ObjectCheckerImpl<T[]> implements Array
         getAsserter().expectNotThat(subject, Matchers.hasItemInArray(t));
     }
 
-    public final void hasLength(final int length) {
-        getAsserter().expectThat(subject.length, Matchers.equalTo(length));
+    public final void hasSize(final int size) {
+        getAsserter().expectThat(subject.length, Matchers.equalTo(size));
     }
 }

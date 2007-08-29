@@ -57,8 +57,8 @@ public final class LifecycleMethodImplAtomicTest extends InstinctTestCase {
     public void testReturnsParametersAnnotations() {
         final Annotation[][] parameterAnnotations = lifecycleMethod.getParameterAnnotations();
         expect.that(parameterAnnotations).equalTo(method.getParameterAnnotations());
-        expect.that(parameterAnnotations).hasLength(1);
-        expect.that(parameterAnnotations[0]).hasLength(1);
+        expect.that(parameterAnnotations).hasSize(1);
+        expect.that(parameterAnnotations[0]).hasSize(1);
         expect.that(parameterAnnotations[0][0].annotationType().getClass().equals(ForAll.class));
     }
 }

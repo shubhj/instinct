@@ -21,21 +21,18 @@ import java.util.Collection;
 import org.hamcrest.Matchers;
 
 @Fix("Test this especially desc strings or make custom matchers?")
-public class CollectionCheckerImpl<E, T extends Collection<E>> extends IterableCheckerImpl<E, T>
-        implements CollectionChecker<E, T> {
+public class CollectionCheckerImpl<E, T extends Collection<E>> extends IterableCheckerImpl<E, T> implements CollectionChecker<E, T> {
 
     public CollectionCheckerImpl(final T subject) {
         super(subject);
     }
 
     public final void isEmpty() {
-        getAsserter().expectThat(subject.isEmpty(),
-                Matchers.describedAs("isEmpty() = <true>", Matchers.equalTo(true)));
+        getAsserter().expectThat(subject.isEmpty(), Matchers.describedAs("isEmpty() = <true>", Matchers.equalTo(true)));
     }
 
     public final void notEmpty() {
-        getAsserter().expectThat(subject.isEmpty(),
-                Matchers.describedAs("isEmpty() = <false>", Matchers.equalTo(false)));
+        getAsserter().expectThat(subject.isEmpty(), Matchers.describedAs("isEmpty() = <false>", Matchers.equalTo(false)));
     }
 
     public final void hasSize(final int size) {

@@ -73,7 +73,7 @@ public final class StateExpectationsContext {
     @Specification
     public void providesMatchersForMakingAssertionsAboutArrays() {
         final String[] greetings = {"hi", "there"};
-        expect.that(greetings).hasLength(2);
+        expect.that(greetings).hasSize(2);
         expect.that(greetings).containsItem("hi");
         expect.that(greetings).doesNotContainItem("bye");
         expect.that(greetings).doesNotContainItem(Matchers.greaterThan("zip"));
