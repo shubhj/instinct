@@ -1,6 +1,5 @@
 package com.googlecode.instinct.example.stack;
 
-interface MagazinePile {
-
+public interface MagazinePile {
     void addToPile(Magazine magazine);
 }

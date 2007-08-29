@@ -1,5 +1,5 @@
 package com.googlecode.instinct.example.stack;
 
-interface Magazine {
+public interface Magazine {
     String getTitle();
 }

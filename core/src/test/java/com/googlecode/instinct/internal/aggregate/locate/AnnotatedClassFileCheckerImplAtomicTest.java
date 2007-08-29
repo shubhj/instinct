@@ -16,46 +16,44 @@
 
 package com.googlecode.instinct.internal.aggregate.locate;
 
-import java.io.File;
-import static com.googlecode.instinct.expect.Mocker12.mock;
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.util.ClassInstantiator;
 import com.googlecode.instinct.internal.util.ClassInstantiatorFactory;
+import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;
+import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
+import java.io.File;
+import org.jmock.Expectations;
 
 public final class AnnotatedClassFileCheckerImplAtomicTest extends InstinctTestCase {
-    private AnnotatedClassFileChecker checker;
-    private File packageRoot;
-    private File classFile;
-    private AnnotationChecker annotationChecker;
-    private ClassInstantiator instantiator;
-    private ClassInstantiatorFactory instantiatorFactory;
+    @Subject private AnnotatedClassFileChecker checker;
+    @Mock private File packageRoot;
+    @Mock private File classFile;
+    @Mock private AnnotationChecker annotationChecker;
+    @Mock private ClassInstantiator instantiator;
+    @Mock private ClassInstantiatorFactory instantiatorFactory;
+
+    @Override
+    public void setUpSubject() {
+        checker = createSubjectWithConstructorArgs(AnnotatedClassFileCheckerImpl.class, new Object[]{packageRoot}, annotationChecker, instantiatorFactory);
+    }
 
     public void testConformsToClassTraits() {
         checkClass(AnnotatedClassFileCheckerImpl.class, AnnotatedClassFileChecker.class);
     }
 
-//    public void testIsAnnotated() {
-//        expects(instantiatorFactory).method("create").with(same(packageRoot)).will(returnValue(instantiator));
-//        expects(instantiator).method("instantiateClass").with(same(classFile)).will(returnValue(Class.class));
-//        expects(annotationChecker).method("isAnnotated").with(eq(Class.class), eq(Context.class)).will(returnValue(true));
-//        assertTrue(checker.isAnnotated(classFile, Context.class));
-//    }
-
-    @Override
-    public void setUpTestDoubles() {
-        packageRoot = mock(File.class, "mockPackageRoot");
-        classFile = mock(File.class, "mockClassFile");
-        annotationChecker = mock(AnnotationChecker.class);
-        instantiator = mock(ClassInstantiator.class);
-        instantiatorFactory = mock(ClassInstantiatorFactory.class);
-    }
-
-    @Override
-    public void setUpSubject() {
-        checker = new AnnotatedClassFileCheckerImpl(packageRoot);
-        insertFieldValue(checker, "annotationChecker", annotationChecker);
-        insertFieldValue(checker, "instantiatorFactory", instantiatorFactory);
+    public void testIsAnnotated() {
+        expect.that(new Expectations() {
+            {
+                one(classFile).getName(); will(returnValue("Class.class"));
+                one(instantiatorFactory).create(); will(returnValue(instantiator));
+                one(instantiator).instantiateClass(classFile, packageRoot); will(returnValue(Class.class));
+                one(annotationChecker).isAnnotated(Class.class, Context.class); will(returnValue(true));
+            }
+        });
+        assertTrue(checker.isAnnotated(classFile, Context.class));
     }
 }

@@ -46,24 +46,26 @@ public final class AutoMocker {
     private static void injectMock(final Object instanceToAutoWire, final Field field) {
         field.setAccessible(true);
         try {
-            field.set(instanceToAutoWire, createFieldValue(field.getType()));
+            field.set(instanceToAutoWire, createFieldValue(field.getType(), field.getName()));
         } catch (Throwable e) {
-            throw new TestingException("Unable to autowire a mock value into field '" + field.getName() + "' of type " + field.getType().getSimpleName(), e);
+            final String message = "Unable to autowire a mock value into field '" + field.getName() + "' of type " + field.getType().getSimpleName();
+            throw new TestingException(message, e);
         }
     }
 
-    private static Object createFieldValue(final Class<?> fieldType) {
+    private static Object createFieldValue(final Class<?> fieldType, final String fieldName) {
         if (fieldType.isArray()) {
-            return createArray(fieldType.getComponentType());
+            return createArray(fieldType.getComponentType(), fieldName);
         } else {
-            return mock(fieldType);
+            return mock(fieldType, fieldName);
         }
     }
 
-    private static <T> Object createArray(final Class<T> componentType) {
+    @SuppressWarnings({"StringContatenationInLoop"})
+    private static <T> Object createArray(final Class<?> componentType, final String fieldName) {
         final Object array = Array.newInstance(componentType, NUMBER_OF_MOCKS_IN_A_COLLECTION_FIELD);
         for (int i = 0; i < NUMBER_OF_MOCKS_IN_A_COLLECTION_FIELD; i++) {
-            Array.set(array, i, mock(componentType));
+            Array.set(array, i, mock(componentType, fieldName + "-" + i));
         }
         return array;
     }

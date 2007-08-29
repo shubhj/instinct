@@ -393,7 +393,6 @@
         </inspection_tool>
         <inspection_tool class="StringReplaceableByStringBuffer" level="WARNING" enabled="true" />
         <inspection_tool class="SubstringZero" level="WARNING" enabled="true" />
-        <inspection_tool class="LengthOneStringsInConcatenation" level="WARNING" enabled="true" />
         <inspection_tool class="SizeReplaceableByIsEmpty" level="WARNING" enabled="true">
           <option name="ignoreNegations" value="false" />
         </inspection_tool>

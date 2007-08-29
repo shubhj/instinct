@@ -1,12 +1,14 @@
 package com.googlecode.instinct.example.stack;
 
-import static com.googlecode.instinct.expect.Mocker12.expects;
-import static com.googlecode.instinct.expect.Mocker12.mock;
-import static com.googlecode.instinct.expect.Mocker12.same;
+import static com.googlecode.instinct.expect.Expect.expect;
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
+import static com.googlecode.instinct.expect.behaviour.Mocker.verify;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.AfterSpecification;
+import org.jmock.Expectations;
 
 @SuppressWarnings({"unchecked"})
 @Suggest({
@@ -28,9 +30,16 @@ public final class AnEmptyMagazineRack {
         magazineRack = new MagazineRackImpl(stack);
     }
 
+    @AfterSpecification
+    public void tearDown() {
+        verify();
+    }
+
     @Specification
     void callsPushOnStackWhenAddAMagazineIsAddedToThePile() {
-        expects(stack).method("push").with(same(magazine));
+        expect.that(new Expectations() {{
+            one(stack).push(magazine);
+        }});
         magazineRack.addToPile(magazine);
     }
 }

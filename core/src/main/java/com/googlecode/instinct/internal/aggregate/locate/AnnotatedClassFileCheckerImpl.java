@@ -16,14 +16,14 @@
 
 package com.googlecode.instinct.internal.aggregate.locate;
 
-import java.io.File;
-import java.lang.annotation.Annotation;
 import au.net.netstorm.boost.edge.EdgeException;
 import com.googlecode.instinct.internal.util.ClassInstantiator;
 import com.googlecode.instinct.internal.util.ClassInstantiatorFactory;
 import com.googlecode.instinct.internal.util.ClassInstantiatorFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import java.io.File;
+import java.lang.annotation.Annotation;
 
 public final class AnnotatedClassFileCheckerImpl implements AnnotatedClassFileChecker {
     private AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
