@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.mock.instance;
+package com.googlecode.instinct.test.mock;
 
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
-import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
+import com.googlecode.instinct.internal.mock.instance.ConcreteInstanceProvider;
 
-public final class MockInstanceProvider implements InstanceProvider {
-    @SuppressWarnings({"RawUseOfParameterizedType", "unchecked"})
-    public Object newInstance(final Class cls) {
-        return mock(cls);
+public class StubCreator implements ActorCreator {
+    private final InstanceProvider instanceProvider = new ConcreteInstanceProvider();
+
+    @SuppressWarnings({"unchecked"})
+    public <T> T create(final Class<T> type, final String roleName) {
+        return (T) instanceProvider.newInstance(type);
     }
 }

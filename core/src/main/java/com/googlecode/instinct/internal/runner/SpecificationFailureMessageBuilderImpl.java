@@ -16,19 +16,16 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintWriter;
 import com.googlecode.instinct.internal.util.ExceptionFinder;
 import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
-import com.googlecode.instinct.internal.util.ObjectFactory;
-import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintWriter;
 
 public final class SpecificationFailureMessageBuilderImpl implements SpecificationFailureMessageBuilder {
     private static final String NO_FAILURE = "";
     private static final boolean AUTO_FLUSH = true;
     private ExceptionFinder exceptionFinder = new ExceptionFinderImpl();
-    private ObjectFactory objectFactory = new ObjectFactoryImpl();
 
     public String buildMessage(final SpecificationRunStatus status) {
         checkNotNull(status);
@@ -40,9 +37,10 @@ public final class SpecificationFailureMessageBuilderImpl implements Specificati
         return getStackTrace(rootCause);
     }
 
+    @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
     private String getStackTrace(final Throwable rootCause) {
-        final ByteArrayOutputStream byteArrayOutputStream = objectFactory.create(ByteArrayOutputStream.class);
-        final PrintWriter printWriter = objectFactory.create(PrintWriter.class, byteArrayOutputStream, AUTO_FLUSH);
+        final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        final PrintWriter printWriter = new PrintWriter(byteArrayOutputStream, AUTO_FLUSH);
         writeStackTrace(rootCause, printWriter);
         return byteArrayOutputStream.toString();
     }

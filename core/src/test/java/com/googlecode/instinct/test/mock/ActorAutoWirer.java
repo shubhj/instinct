@@ -19,16 +19,18 @@ package com.googlecode.instinct.test.mock;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.TestingException;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Field;
 import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Field;
 
 @SuppressWarnings({"CatchGenericClass"})
 public final class ActorAutoWirer {
     private static final SubjectCreator SUBJECT_CREATOR = new SubjectCreatorImpl();
     private static final ActorCreator DUMMY_CREATOR = new DummyCreator();
+    private static final ActorCreator STUB_CREATOR = new StubCreator();
     private static final ActorCreator MOCK_CREATOR = new MockCreator();
 
     private ActorAutoWirer() {
@@ -43,6 +45,8 @@ public final class ActorAutoWirer {
                 injectMock(instanceToAutoWire, field);
             } else if (isAnnotated(Dummy.class, field)) {
                 injectDummy(instanceToAutoWire, field);
+            } else if (isAnnotated(Stub.class, field)) {
+                injectStub(instanceToAutoWire, field);
             }
         }
     }
@@ -62,6 +66,10 @@ public final class ActorAutoWirer {
 
     private static void injectDummy(final Object instanceToAutoWire, final Field field) {
         injectFieldValue(instanceToAutoWire, field, DUMMY_CREATOR.create(field.getType(), field.getName()), "dummy");
+    }
+
+    private static void injectStub(final Object instanceToAutoWire, final Field field) {
+        injectFieldValue(instanceToAutoWire, field, STUB_CREATOR.create(field.getType(), field.getName()), "dummy");
     }
 
     private static void injectSubject(final Object instanceToAutoWire, final Field field) {

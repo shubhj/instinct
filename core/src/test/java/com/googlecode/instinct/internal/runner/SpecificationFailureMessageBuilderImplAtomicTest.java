@@ -16,47 +16,35 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintWriter;
 import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.expect.Mocker12.eq;
-import static com.googlecode.instinct.expect.Mocker12.expects;
-import static com.googlecode.instinct.expect.Mocker12.mock;
-import static com.googlecode.instinct.expect.Mocker12.returnValue;
-import static com.googlecode.instinct.expect.Mocker12.same;
 import com.googlecode.instinct.internal.util.ExceptionFinder;
-import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Stub;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubject;
-import static com.googlecode.instinct.test.triangulate.Triangulation.getInstance;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintWriter;
+import org.jmock.Expectations;
 
 public final class SpecificationFailureMessageBuilderImplAtomicTest extends InstinctTestCase {
-    private SpecificationFailureMessageBuilder messageBuilder;
-    private SpecificationRunStatus successStatus;
+    @Subject(auto = false) private SpecificationFailureMessageBuilder failureMessageBuilder;
+    @Stub private Throwable failureCause;
+    @Stub private Throwable rootCause;
+    @Mock private ExceptionFinder exceptionFinder;
     private SpecificationRunStatus failureStatus;
-    private Throwable failureCause;
-    private ExceptionFinder exceptionFinder;
-    private ObjectFactory objectFactory;
-    private PrintWriter printWriter;
-    private ByteArrayOutputStream byteArrayOutputStream;
-    private String stackTrace;
+    private SpecificationRunStatus successStatus;
 
     @Override
     public void setUpTestDoubles() {
-        exceptionFinder = mock(ExceptionFinder.class);
-        objectFactory = mock(ObjectFactory.class);
-        failureCause = mock(Throwable.class);
         successStatus = new SpecificationRunSuccessStatus();
         failureStatus = new SpecificationRunFailureStatus(failureCause);
-        byteArrayOutputStream = mock(ByteArrayOutputStream.class);
-        printWriter = mock(PrintWriter.class);
-        stackTrace = getInstance(String.class);
     }
 
     @Override
     public void setUpSubject() {
-        messageBuilder = createSubject(SpecificationFailureMessageBuilderImpl.class, exceptionFinder, objectFactory);
+        failureMessageBuilder = createSubject(SpecificationFailureMessageBuilderImpl.class, exceptionFinder);
     }
 
     public void testConformsToClassTraits() {
@@ -64,22 +52,25 @@ public final class SpecificationFailureMessageBuilderImplAtomicTest extends Inst
     }
 
     public void testDoesNotBuildAMessageWhenGivenASuccessStatus() {
-        final String result = messageBuilder.buildMessage(successStatus);
-        expect.that(result).isEmpty();
+        final String failureMessage = failureMessageBuilder.buildMessage(successStatus);
+        expect.that(failureMessage).isEmpty();
     }
 
     public void testBuildsMessagesFromFailedSpecResults() {
-        expects(exceptionFinder).method("getRootCause").will(returnValue(failureCause));
-        expectStackTraceWritten();
-        final String result = messageBuilder.buildMessage(failureStatus);
-        expect.that(result).equalTo(stackTrace);
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(exceptionFinder).getRootCause(failureCause); will(returnValue(rootCause));
+            }
+        });
+        final String failureMessage = failureMessageBuilder.buildMessage(failureStatus);
+        final String rootCauseStackTrace = getRootCauseStackTrace();
+        expect.that(failureMessage).equalTo(rootCauseStackTrace);
     }
 
-    private void expectStackTraceWritten() {
-        expects(objectFactory).method("create").with(eq(ByteArrayOutputStream.class), eq(new Object[]{})).will(returnValue(byteArrayOutputStream));
-        expects(objectFactory).method("create").with(eq(PrintWriter.class), eq(new Object[]{byteArrayOutputStream, true})).will(
-                returnValue(printWriter));
-        expects(failureCause).method("printStackTrace").with(same(printWriter));
-        expects(byteArrayOutputStream).method("toString").will(returnValue(stackTrace));
+    @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
+    private String getRootCauseStackTrace() {
+        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        rootCause.printStackTrace(new PrintWriter(bytes, true));
+        return bytes.toString();
     }
 }

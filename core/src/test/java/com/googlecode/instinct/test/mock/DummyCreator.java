@@ -16,13 +16,16 @@
 
 package com.googlecode.instinct.test.mock;
 
+import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 import com.googlecode.instinct.internal.mock.instance.UberInstanceProvider;
 import com.googlecode.instinct.internal.util.Suggest;
 
 public final class DummyCreator implements ActorCreator {
+    private final InstanceProvider instanceProvider = new UberInstanceProvider();
+
     @Suggest("This isn't really creating dummies. Need to wrap a proxy around (non-final) classes and error out if methods called.")
     @SuppressWarnings({"unchecked"})
     public <T> T create(final Class<T> type, final String roleName) {
-        return (T) new UberInstanceProvider().newInstance(type);
+        return (T) instanceProvider.newInstance(type);
     }
 }
