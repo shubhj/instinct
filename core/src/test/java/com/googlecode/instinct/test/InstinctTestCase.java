@@ -18,7 +18,8 @@ package com.googlecode.instinct.test;
 
 import com.googlecode.instinct.expect.Mocker12;
 import com.googlecode.instinct.expect.behaviour.Mocker;
-import static com.googlecode.instinct.test.mock.AutoMocker.autoWireMockFields;
+import static com.googlecode.instinct.test.mock.ActorAutoWirer.autoWireMockFields;
+import static com.googlecode.instinct.test.mock.ActorAutoWirer.autoWireSubjectFields;
 import junit.framework.TestCase;
 
 @SuppressWarnings({"NoopMethodInAbstractClass", "ProhibitedExceptionDeclared", "ErrorNotRethrown"})
@@ -28,6 +29,7 @@ public abstract class InstinctTestCase extends TestCase {
     public final void runBare() throws Throwable {
         autoWireMockFields(this);
         setUpTestDoubles();
+        autoWireSubjectFields(this);
         setUpSubject();
         try {
             // FIX Wrap the runTest() in a try-catch so that we can still do verification afterwards. Don't lose either verification or test errors.

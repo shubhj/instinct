@@ -23,7 +23,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
 
 /**
- * A specification of behaviour, i.e. what a piece of code must do.
+ * A method in which the behaviour of a piece of code is specified.
+ * Specifications are executable examples that guide the design process and provide both documentation and tests. Specifications (specs) can be
+ * thought of as test methods in XUnit frameworks.
  */
 @Documented
 @Retention(RUNTIME)

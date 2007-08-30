@@ -35,7 +35,7 @@ import org.jmock.Expectations;
 @SuppressWarnings({"unchecked"})
 @Suggest({"Todo:", "Add a run method, pass a spec runner as a dependency, pass in other methods required for runners."})
 public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
-    @Subject private SpecificationMethod specificationMethod;
+    @Subject(auto = false) private SpecificationMethod specificationMethod;
     @Mock private SpecificationRunner specificationRunner;
     @Mock private LifecycleMethod specMethod;
     @Mock private SpecificationResult specificationResult;

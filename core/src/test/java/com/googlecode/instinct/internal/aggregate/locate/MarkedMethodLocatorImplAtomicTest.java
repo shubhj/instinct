@@ -46,11 +46,6 @@ public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
         checkClass(MarkedMethodLocatorImpl.class, MarkedMethodLocator.class);
     }
 
-    @Override
-    public void setUpSubject() {
-        locator = new MarkedMethodLocatorImpl();
-    }
-
     public void testFindsAnnotatedSpecificationMethodsInASimpleContext() {
         expect.that(specificationMethodsInASimpleContextClass()).containsItem(aMethodNamed("toCheckVerification"));
     }

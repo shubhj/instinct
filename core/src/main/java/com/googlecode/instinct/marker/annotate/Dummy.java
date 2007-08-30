@@ -22,6 +22,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Dummy objects are passed around but never actually used, they are usually used just to fill parameters to simplify specs (where their behaviour
+ * may not be important). Dummies will throw exceptions if methods are called on them. They are the simplest form of test double implementation.
+ */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})

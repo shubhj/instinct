@@ -29,7 +29,7 @@ import java.io.File;
 import org.jmock.Expectations;
 
 public final class AnnotatedClassFileCheckerImplAtomicTest extends InstinctTestCase {
-    @Subject private AnnotatedClassFileChecker checker;
+    @Subject(auto = false) private AnnotatedClassFileChecker checker;
     @Mock private File packageRoot;
     @Mock private File classFile;
     @Mock private AnnotationChecker annotationChecker;

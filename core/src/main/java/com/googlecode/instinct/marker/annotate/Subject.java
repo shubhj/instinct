@@ -22,8 +22,29 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * The class whose behaviour is under scrutiny.
+ */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface Subject {
+    /**
+     * For interfaces or abstract class, the implementation class of the subject. Required for auto-wiring an instance of the subject during
+     * specification running.
+     * @return The implementation class of the subject.
+     */
+    Class<?> implementation() default SubjectClassIsImplementationClass.class;
+
+    /**
+     * Whether to auto-create (auto-wire) an instance of this subject and insert the value into a context.
+     * Subjects that are not auto-wired must be created some other way, such as in the field delaration or in a
+     * {@linkplain BeforeSpecification before specification} method.
+     * @return <code>true</code> if the subject
+     */
+    boolean auto() default true;
+
+    @SuppressWarnings({"MarkerInterface"})
+    interface SubjectClassIsImplementationClass {
+    }
 }

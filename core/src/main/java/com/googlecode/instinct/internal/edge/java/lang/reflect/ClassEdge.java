@@ -23,7 +23,7 @@ import java.lang.reflect.Method;
 public interface ClassEdge {
     Class<?> forName(String className);
 
-    <T> Object newInstance(Class<T> cls);
+    <T> T newInstance(Class<T> cls);
 
     <T> Constructor<T> getConstructor(Class<T> cls, Class<?>... parameterTypes);
 

@@ -41,7 +41,7 @@ import org.jmock.Sequence;
 
 @SuppressWarnings({"unchecked"})
 public final class ContextClassImplAtomicTest extends InstinctTestCase {
-    @Subject private ContextClass contextClass;
+    @Subject(auto = false) private ContextClass contextClass;
     @Mock private ContextRunner contextRunner;
     @Mock private ContextResult contextResult;
     @Mock private MarkedMethodLocator methodLocator;

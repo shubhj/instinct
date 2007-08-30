@@ -26,13 +26,8 @@ import java.io.FileFilter;
 import org.jmock.Expectations;
 
 public final class DirectoryFilterAtomicTest extends InstinctTestCase {
-    @Subject private FileFilter filter;
+    @Subject(implementation = DirectoryFilter.class) private FileFilter filter;
     @Mock private File pathname;
-
-    @Override
-    public void setUpSubject() {
-        filter = new DirectoryFilter();
-    }
 
     public void testConformsToClassTraits() {
         checkClass(DirectoryFilter.class, FileFilter.class);

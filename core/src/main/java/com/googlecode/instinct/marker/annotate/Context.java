@@ -23,6 +23,10 @@ import java.lang.annotation.Retention;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
 
+/**
+ * A context in which a certain behaviour is valid. Contexts can be used to group specifications together and set up state in which a number of
+ * specifications are valid.
+ */
 @Documented
 @Inherited
 @Retention(RUNTIME)

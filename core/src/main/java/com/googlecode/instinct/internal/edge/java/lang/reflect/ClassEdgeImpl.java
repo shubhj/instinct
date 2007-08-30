@@ -30,7 +30,7 @@ public final class ClassEdgeImpl implements ClassEdge {
         }
     }
 
-    public <T> Object newInstance(final Class<T> cls) {
+    public <T> T newInstance(final Class<T> cls) {
         try {
             return cls.newInstance();
         } catch (InstantiationException e) {

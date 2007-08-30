@@ -23,6 +23,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * Mocks are more advanced stubs, that not only respond to calls made during a test but are also pre-programmed with expectations which form a
+ * specification of the calls they are expected to receive. Mocks will throw an exception if they receive a call they weren't expecting and are
+ * checked (called verification) to ensure they received all the calls they expected. Some mocks also verify the order of calls made.
+ */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})

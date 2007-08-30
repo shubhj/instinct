@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.internal.mock;
 
-import static com.googlecode.instinct.expect.Mocker12.mock;
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import org.jmock.core.Invocation;

@@ -29,7 +29,7 @@ import java.io.FileFilter;
 import org.jmock.Expectations;
 
 public final class AnnotationFileFilterAtomicTest extends InstinctTestCase {
-    @Subject private FileFilter filter;
+    @Subject(auto = false) private FileFilter filter;
     @Mock private File packageRoot;
     @Mock private File pathname;
     @Mock private ObjectFactory objectFactory;

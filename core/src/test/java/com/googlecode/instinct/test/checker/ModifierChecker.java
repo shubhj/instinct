@@ -22,6 +22,10 @@ import au.net.netstorm.boost.test.reflect.checker.ModifierTestChecker;
 public final class ModifierChecker {
     private static final ModifierTestChecker MODIFIER_CHECKER = new DefaultModifierTestChecker();
 
+    private ModifierChecker() {
+        throw new UnsupportedOperationException();
+    }
+
     public static <T> void checkPublic(final Class<T> cls) {
         MODIFIER_CHECKER.checkPublic(cls);
     }

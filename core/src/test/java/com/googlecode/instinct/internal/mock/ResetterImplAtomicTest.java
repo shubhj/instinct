@@ -16,36 +16,31 @@
 
 package com.googlecode.instinct.internal.mock;
 
-import static com.googlecode.instinct.expect.Mocker12.expects;
-import static com.googlecode.instinct.expect.Mocker12.mock;
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import org.jmock.Expectations;
 
 public final class ResetterImplAtomicTest extends InstinctTestCase {
-    private Resetter resetter;
-    private Resetable resetable1;
-    private Resetable resetable2;
-
-    @Override
-    public void setUpTestDoubles() {
-        resetable1 = mock(Resetable.class);
-        resetable2 = mock(Resetable.class);
-    }
-
-    @Override
-    public void setUpSubject() {
-        resetter = new ResetterImpl();
-    }
+    @Subject private Resetter resetter;
+    @Mock private Resetable resetable1;
+    @Mock private Resetable resetable2;
 
     public void testConformsToClassTraits() {
         checkClass(ResetterImpl.class, Resetter.class);
     }
 
     public void testResetsAllResetables() {
-        expects(resetable1).method("reset");
-        expects(resetable2).method("reset");
         resetter.addResetable(resetable1);
         resetter.addResetable(resetable2);
+        expect.that(new Expectations() {
+            {
+                one(resetable1).reset();
+                one(resetable2).reset();
+            }
+        });
         resetter.reset();
     }
 }
