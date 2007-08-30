@@ -22,7 +22,6 @@ import org.jmock.Sequence;
 
 public final class Mocker {
     private static final JMock2Mockery J_MOCK2_MOCKERY = new JMock2MockeryImpl();
-    private static int sequenceNumber;
 
     private Mocker() {
         throw new UnsupportedOperationException();
