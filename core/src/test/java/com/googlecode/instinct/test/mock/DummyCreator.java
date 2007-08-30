@@ -17,7 +17,7 @@
 package com.googlecode.instinct.test.mock;
 
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
-import com.googlecode.instinct.internal.mock.instance.UberInstanceProvider;
+import com.googlecode.instinct.internal.instance.UberInstanceProvider;
 import com.googlecode.instinct.internal.util.Suggest;
 
 public final class DummyCreator implements ActorCreator {

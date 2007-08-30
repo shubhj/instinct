@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.mock.instance;
+package com.googlecode.instinct.internal.instance;
 
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 import static com.googlecode.instinct.expect.behaviour.Mocker.mock;

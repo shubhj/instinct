@@ -17,7 +17,7 @@
 package com.googlecode.instinct.test.mock;
 
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
-import com.googlecode.instinct.internal.mock.instance.ConcreteInstanceProvider;
+import com.googlecode.instinct.internal.instance.ConcreteInstanceProvider;
 
 public class StubCreator implements ActorCreator {
     private final InstanceProvider instanceProvider = new ConcreteInstanceProvider();
