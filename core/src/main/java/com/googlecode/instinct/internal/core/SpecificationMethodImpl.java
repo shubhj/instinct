@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.internal.core;
 
+import au.net.netstorm.boost.primordial.Primordial;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
@@ -25,7 +26,7 @@ import com.googlecode.instinct.runner.SpecificationListener;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 
-public final class SpecificationMethodImpl implements SpecificationMethod {
+public final class SpecificationMethodImpl extends Primordial implements SpecificationMethod {
     private SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
     private final LifecycleMethod specificationMethod;
     private Collection<LifecycleMethod> beforeSpecificationMethods;

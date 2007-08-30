@@ -24,6 +24,7 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.lang.reflect.Field;
 import java.util.Collection;
 import org.jmock.Mockery;
+import org.jmock.Sequence;
 import org.jmock.api.Expectation;
 import org.jmock.internal.ExpectationBuilder;
 import org.jmock.lib.legacy.ClassImposteriser;
@@ -36,6 +37,7 @@ public final class JMock2MockeryImpl implements JMock2Mockery {
             setImposteriser(ClassImposteriser.INSTANCE);
         }
     };
+    private int sequenceNumber;
 
     public <T> T mock(final Class<T> typeToMock) {
         checkNotNull(typeToMock);
@@ -52,11 +54,15 @@ public final class JMock2MockeryImpl implements JMock2Mockery {
         mockery.checking(expectations);
     }
 
+    public Sequence sequence() {
+        return mockery.sequence("Sequence-" + sequenceNumber++);
+    }
+
     public void verify() {
         mockery.assertIsSatisfied();
     }
 
-    // Note. This is really horrible. As jMock
+    // Note. This is really horrible. As jMock lifecycle does not support (by design) the sharing of contexts across test invocations.
     public void reset() {
         clearListField("expectations");
         clearListField("stateMachines");

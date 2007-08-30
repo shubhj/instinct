@@ -18,9 +18,11 @@ package com.googlecode.instinct.expect.behaviour;
 
 import com.googlecode.instinct.internal.expect.behaviour.JMock2Mockery;
 import com.googlecode.instinct.internal.expect.behaviour.JMock2MockeryImpl;
+import org.jmock.Sequence;
 
 public final class Mocker {
     private static final JMock2Mockery J_MOCK2_MOCKERY = new JMock2MockeryImpl();
+    private static int sequenceNumber;
 
     private Mocker() {
         throw new UnsupportedOperationException();
@@ -36,6 +38,10 @@ public final class Mocker {
 
     public static <T> T mock(final Class<T> typeToMock, final String roleName) {
         return J_MOCK2_MOCKERY.mock(typeToMock, roleName);
+    }
+
+    public static Sequence sequence() {
+        return J_MOCK2_MOCKERY.sequence();
     }
 
     public static void verify() {

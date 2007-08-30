@@ -19,8 +19,9 @@ package com.googlecode.instinct.expect.behaviour;
 import static com.googlecode.instinct.expect.Expect.expect;
 import static com.googlecode.instinct.expect.behaviour.Mocker.getJMock2Mockery;
 import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
-import static com.googlecode.instinct.expect.behaviour.Mocker.verify;
 import static com.googlecode.instinct.expect.behaviour.Mocker.reset;
+import static com.googlecode.instinct.expect.behaviour.Mocker.sequence;
+import static com.googlecode.instinct.expect.behaviour.Mocker.verify;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
@@ -60,5 +61,9 @@ public final class MockerAtomicTest extends InstinctTestCase {
             }
         });
         reset();
+    }
+
+    public void testCreatesSequences() {
+        expect.that(sequence()).isNotNull();
     }
 }

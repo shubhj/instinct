@@ -21,17 +21,24 @@ import com.googlecode.instinct.expect.behaviour.Mocker;
 import static com.googlecode.instinct.test.mock.AutoMocker.autoWireMockFields;
 import junit.framework.TestCase;
 
-@SuppressWarnings({"NoopMethodInAbstractClass", "ProhibitedExceptionDeclared"})
+@SuppressWarnings({"NoopMethodInAbstractClass", "ProhibitedExceptionDeclared", "ErrorNotRethrown"})
 public abstract class InstinctTestCase extends TestCase {
-    private static final String NO_ERRORS = "";
 
     @Override
     public final void runBare() throws Throwable {
-        final String assertionError = doRunBare();
-        if (assertionError.trim().length() != 0) {
-            // Is there another way to report errors without throwing an exception? See the ED code. Need to propagate stack
-            // traces.
-            throw new AssertionError(assertionError);
+        autoWireMockFields(this);
+        setUpTestDoubles();
+        setUpSubject();
+        try {
+            // FIX Wrap the runTest() in a try-catch so that we can still do verification afterwards. Don't lose either verification or test errors.
+            // See ED codebase.
+            runTest();
+            Mocker12.verify();
+            Mocker.verify();
+        } finally {
+            Mocker12.reset();
+            Mocker.reset();
+            tearDown();
         }
     }
 
@@ -48,6 +55,7 @@ public abstract class InstinctTestCase extends TestCase {
 
     @SuppressWarnings({"ErrorNotRethrown"})
     private String doRunBare() throws Throwable {
+        Throwable baseError = null;
         autoWireMockFields(this);
         setUpTestDoubles();
         setUpSubject();
@@ -56,12 +64,12 @@ public abstract class InstinctTestCase extends TestCase {
             Mocker12.verify();
             Mocker.verify();
         } catch (AssertionError t) {
-            return t.getMessage();
+            baseError = t;
         } finally {
             Mocker12.reset();
             Mocker.reset();
             tearDown();
         }
-        return NO_ERRORS;
+        throw baseError;
     }
 }

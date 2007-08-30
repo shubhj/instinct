@@ -17,11 +17,14 @@
 package com.googlecode.instinct.internal.expect.behaviour;
 
 import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubject;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
+import org.jmock.Sequence;
 import org.jmock.internal.ExpectationBuilder;
 import org.jmock.lib.legacy.ClassImposteriser;
 
@@ -32,20 +35,20 @@ public final class JMock2MockeryImplAtomicTest extends InstinctTestCase {
             setImposteriser(ClassImposteriser.INSTANCE);
         }
     };
-    private JMock2Mockery jMock2Mockery;
+    @Subject private JMock2Mockery jMock2Mockery;
+    @Dummy private Class<CharSequence> typeToMock;
+    @Dummy private String returnedMock;
+    @Dummy private String roleName;
+    // Note. We can't use automocking here as we're testing the mocking infrastructure. Need to use raw jMock instead.
     private ExpectationBuilder expectations;
-    private Class<CharSequence> typeToMock;
-    private String returnedMock;
-    private String roleName;
+    private Sequence sequence;
     private Mockery mockery;
 
     @Override
     public void setUpTestDoubles() {
         mockery = context.mock(Mockery.class);
         expectations = context.mock(Expectations.class);
-        typeToMock = CharSequence.class;
-        returnedMock = "a mocked string";
-        roleName = "roleName";
+        sequence = context.mock(Sequence.class);
     }
 
     @Override
@@ -98,5 +101,14 @@ public final class JMock2MockeryImplAtomicTest extends InstinctTestCase {
             }
         });
         jMock2Mockery.verify();
+    }
+
+    public void testDelegatesSequenceCallToUnderlyingMockery() {
+        context.checking(new Expectations() {
+            {
+                one(mockery).sequence("Sequence-0"); will(returnValue(sequence));
+            }
+        });
+        expect.that(jMock2Mockery.sequence()).sameInstanceAs(sequence);
     }
 }
