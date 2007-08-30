@@ -16,15 +16,17 @@
 
 package com.googlecode.instinct.internal.util;
 
-import java.io.File;
-import static com.googlecode.instinct.expect.Mocker12.mock;
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import java.io.File;
 
 public final class JavaClassNameFactoryImplAtomicTest extends InstinctTestCase {
-    private File classesRoot;
-    private File fileDir;
-    private JavaClassNameFactory factory;
+    @Subject private JavaClassNameFactory factory;
+    @Mock private File classesRoot;
+    @Mock private File fileDir;
 
     public void testConformsToClassTraits() {
         checkClass(JavaClassNameFactoryImpl.class, JavaClassNameFactory.class);
@@ -32,18 +34,7 @@ public final class JavaClassNameFactoryImplAtomicTest extends InstinctTestCase {
 
     public void testCreate() {
         final JavaClassName name = factory.create(classesRoot, fileDir);
-        assertNotNull(name);
-        assertEquals(JavaClassNameImpl.class, name.getClass());
-    }
-
-    @Override
-    public void setUpTestDoubles() {
-        classesRoot = mock(File.class);
-        fileDir = mock(File.class);
-    }
-
-    @Override
-    public void setUpSubject() {
-        factory = new JavaClassNameFactoryImpl();
+        expect.that(name).isNotNull();
+        expect.that(JavaClassNameImpl.class.equals(name.getClass())).isTrue();
     }
 }

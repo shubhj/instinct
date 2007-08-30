@@ -16,15 +16,19 @@
 
 package com.googlecode.instinct.marker.naming;
 
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import static com.googlecode.instinct.expect.Expect.expect;
 
 public final class DummyNamingConventionAtomicTest extends InstinctTestCase {
+    @Subject(implementation = DummyNamingConvention.class) private NamingConvention namingConvention;
+
     public void testConformsToClassTraits() {
         checkClass(DummyNamingConvention.class, NamingConvention.class);
     }
 
     public void testGetPattern() {
-        assertEquals("^dummy", new DummyNamingConvention().getPattern());
+        expect.that(namingConvention.getPattern()).equalTo("^dummy");
     }
 }

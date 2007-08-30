@@ -18,13 +18,17 @@ package com.googlecode.instinct.marker.naming;
 
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import com.googlecode.instinct.marker.annotate.Subject;
+import static com.googlecode.instinct.expect.Expect.expect;
 
 public final class StubNamingConventionAtomicTest extends InstinctTestCase {
+    @Subject(implementation = StubNamingConvention.class) private NamingConvention namingConvention;
+
     public void testConformsToClassTraits() {
         checkClass(StubNamingConvention.class, NamingConvention.class);
     }
 
     public void testGetPattern() {
-        assertEquals("^stub", new StubNamingConvention().getPattern());
+        expect.that(namingConvention.getPattern()).equalTo("^stub");
     }
 }

@@ -18,9 +18,7 @@ package com.googlecode.instinct.runner;
 
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.runner.ContextResult;
-import com.googlecode.instinct.internal.util.Suggest;
 
-@Suggest("Add javadoc.")
 public interface ContextListener {
     void preContextRun(ContextClass contextClass);
 

@@ -18,13 +18,17 @@ package com.googlecode.instinct.marker.naming;
 
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import com.googlecode.instinct.marker.annotate.Subject;
+import static com.googlecode.instinct.expect.Expect.expect;
 
 public final class SpecificationNamingConventionAtomicTest extends InstinctTestCase {
+    @Subject(implementation = SpecificationNamingConvention.class) private NamingConvention namingConvention;
+
     public void testConformsToClassTraits() {
         checkClass(SpecificationNamingConvention.class, NamingConvention.class);
     }
 
     public void testGetPattern() {
-        assertEquals("^must.*|^should.*", new SpecificationNamingConvention().getPattern());
+        expect.that(namingConvention.getPattern()).equalTo("^must.*|^should.*");
     }
 }

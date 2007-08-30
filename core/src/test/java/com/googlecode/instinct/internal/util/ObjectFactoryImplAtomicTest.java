@@ -16,11 +16,13 @@
 
 package com.googlecode.instinct.internal.util;
 
-import static com.googlecode.instinct.expect.Mocker12.mock;
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
-import com.googlecode.instinct.test.triangulate.Triangulation;
 import java.io.FileReader;
 import java.io.FilterReader;
 import java.io.FilterWriter;
@@ -34,22 +36,10 @@ import java.io.Writer;
 public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
     private static final Class<ObjectFactory> AN_INTERFACE_1 = ObjectFactory.class;
     private static final Class<Serializable> AN_INTERFACE_2 = Serializable.class;
-    private ObjectFactory factory;
-    private Reader reader;
-    private Writer writer;
-    private String string;
-
-    @Override
-    public void setUpTestDoubles() {
-        string = Triangulation.getInstance(String.class);
-        reader = mock(Reader.class);
-        writer = mock(Writer.class);
-    }
-
-    @Override
-    public void setUpSubject() {
-        factory = new ObjectFactoryImpl();
-    }
+    @Subject private ObjectFactory factory;
+    @Mock private Reader reader;
+    @Mock private Writer writer;
+    @Dummy private String string;
 
     // Note. Because this is used in code that needs to accept nulls, we can't null check argument values.
     public void testConformsToClassTraits() {
