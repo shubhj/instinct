@@ -16,18 +16,20 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import static com.googlecode.instinct.expect.Mocker12.mock;
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
 public final class SpecificationRunFailueStatusAtomicTest extends InstinctTestCase {
+    @Dummy private Throwable error;
+
     public void testConformsToClassTraits() {
         checkClass(SpecificationRunFailureStatus.class, SpecificationRunStatus.class);
     }
 
     public void testGetDetailedStatusReturnsError() {
-        final Throwable error = mock(Throwable.class);
         final SpecificationRunStatus runStatus = new SpecificationRunFailureStatus(error);
-        assertSame(error, runStatus.getDetailedStatus());
+        expect.that(runStatus.getDetailedStatus()).sameInstanceAs(error);
     }
 }

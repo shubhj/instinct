@@ -16,24 +16,19 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import static com.googlecode.instinct.expect.Mocker12.mock;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubject;
 
 @Suggest("Breadcrumb - Write this.")
 public final class StandardContextRunnerAtomicTest extends InstinctTestCase {
-    private ContextRunner contextRunner;
-    private SpecificationRunner specificationRunner;
-    private ContextClass contextClass;
-
-    @Override
-    public void setUpTestDoubles() {
-        specificationRunner = mock(SpecificationRunner.class);
-        contextClass = mock(ContextClass.class);
-    }
+    @Subject(auto = false) private ContextRunner contextRunner;
+    @Mock private SpecificationRunner specificationRunner;
+    @Mock private ContextClass contextClass;
 
     @Override
     public void setUpSubject() {

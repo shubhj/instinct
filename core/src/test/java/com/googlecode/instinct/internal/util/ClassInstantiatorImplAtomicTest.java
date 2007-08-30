@@ -16,36 +16,27 @@
 
 package com.googlecode.instinct.internal.util;
 
-import java.io.File;
 import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.expect.Mocker12.eq;
-import static com.googlecode.instinct.expect.Mocker12.expects;
-import static com.googlecode.instinct.expect.Mocker12.mock;
-import static com.googlecode.instinct.expect.Mocker12.returnValue;
-import static com.googlecode.instinct.expect.Mocker12.same;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Stub;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubject;
+import java.io.File;
+import org.jmock.Expectations;
 
 public final class ClassInstantiatorImplAtomicTest extends InstinctTestCase {
-    @Suggest("This string becomes a dummy.")
-    private static final String FULLY_QUALIFIED_CLASS_NAME = "FQN";
-    private ClassInstantiator instantiator;
-    private File packageRoot;
-    private File classFile;
-    private ClassEdge classEdge;
-    private JavaClassNameFactory classNameFactory;
-    private JavaClassName className;
-
-    @Override
-    public void setUpTestDoubles() {
-        packageRoot = mock(File.class, "packageRoot");
-        classFile = mock(File.class);
-        classEdge = mock(ClassEdge.class);
-        classNameFactory = mock(JavaClassNameFactory.class);
-        className = mock(JavaClassName.class);
-    }
+    @Subject(auto = false) private ClassInstantiator instantiator;
+    @Dummy private String fullyQualifiedClassName;
+    @Mock private File packageRoot;
+    @Mock private File classFile;
+    @Mock private ClassEdge classEdge;
+    @Mock private JavaClassNameFactory classNameFactory;
+    @Mock private JavaClassName className;
+    @Stub private Class<?> cls;
 
     @Override
     public void setUpSubject() {
@@ -57,16 +48,24 @@ public final class ClassInstantiatorImplAtomicTest extends InstinctTestCase {
     }
 
     public void testInstantiatesClassFromClassFiles() {
-        expects(classNameFactory).method("create").with(same(packageRoot), same(classFile)).will(returnValue(className));
-        expects(className).method("getFullyQualifiedName").will(returnValue(FULLY_QUALIFIED_CLASS_NAME));
-        expects(classEdge).method("forName").with(eq(FULLY_QUALIFIED_CLASS_NAME)).will(returnValue(Class.class));
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(classNameFactory).create(packageRoot, classFile); will(returnValue(className));
+                atLeast(1).of(className).getFullyQualifiedName(); will(returnValue(fullyQualifiedClassName));
+                atLeast(1).of(classEdge).forName(fullyQualifiedClassName); will(returnValue(cls));
+            }
+        });
         final Class<?> actualClass = instantiator.instantiateClass(classFile, packageRoot);
-        assertSame(Class.class, actualClass);
+        expect.that(actualClass == cls).isTrue();
     }
 
     public void testInstantiatesClassesFromClassNames() {
-        expects(classEdge).method("forName").with(eq(String.class.getName())).will(returnValue(String.class));
-        final Class<?> actualClass = instantiator.instantiateClass(String.class.getName());
-        expect.that(actualClass == String.class).isTrue();
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(classEdge).forName(cls.getName()); will(returnValue(cls));
+            }
+        });
+        final Class<?> actualClass = instantiator.instantiateClass(cls.getName());
+        expect.that(actualClass == cls).isTrue();
     }
 }
