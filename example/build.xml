@@ -24,8 +24,6 @@
         <fileset dir="${basedir}">
             <include name="${lib.dir}/boost-982.jar"/>
             <include name="${lib.dir}/cglib-nodep-2.2_beta1.jar"/>
-            <include name="${lib.dir}/jmock-core-1.2.0.jar"/>
-            <include name="${lib.dir}/jmock-cglib-1.2.0.jar"/>
             <include name="${lib.dir}/jmock-2.2.0.jar"/>
             <include name="${lib.dir}/jmock-legacy-2.2.0.jar"/>
             <include name="${lib.dir}/objenesis-1.0.jar"/>

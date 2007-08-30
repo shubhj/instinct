@@ -18,11 +18,7 @@ package com.googlecode.instinct.sandbox.behaviourexpect;
 
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
-import static com.googlecode.instinct.sandbox.behaviourexpect.BehaviourExpect.eq;
 import static com.googlecode.instinct.sandbox.behaviourexpect.BehaviourExpect.expect;
-import static com.googlecode.instinct.sandbox.behaviourexpect.BehaviourExpect.once;
-import static com.googlecode.instinct.sandbox.behaviourexpect.BehaviourExpect.one;
-import static com.googlecode.instinct.sandbox.behaviourexpect.BehaviourExpect.returnValue;
 import java.util.ArrayList;
 import java.util.List;
 import org.jmock.Expectations;
@@ -40,12 +36,12 @@ public final class BehaviourExpectationsExample {
     void playingWithBehaviourExpectations() {
 
         // Option 1 - jMock 1 fallback
-        expect.that(stringList, once()).method("add").with(eq("abc")).will(returnValue(true));
-        expect.that(stringList).method("clear");
+//        expect.that(stringList, once()).method("add").with(eq("abc")).will(returnValue(true));
+//        expect.that(stringList).method("clear");
 
         // Option 2 - DSL w/ method completion
-        expect.that(one(stringList).add("abc")).will(returnValue(true));
-        expect.that().one(stringList).clear();
+//        expect.that(one(stringList).add("abc")).will(returnValue(true));
+//        expect.that().one(stringList).clear();
 
         // Option 3 - jMock 2 style
         expect.that(new Expectations() {
