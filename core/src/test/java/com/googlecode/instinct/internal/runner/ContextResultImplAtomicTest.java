@@ -16,65 +16,62 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import java.util.List;
-import static com.googlecode.instinct.expect.Mocker12.atLeastOnce;
-import static com.googlecode.instinct.expect.Mocker12.expects;
-import static com.googlecode.instinct.expect.Mocker12.mock;
-import static com.googlecode.instinct.expect.Mocker12.returnValue;
-import com.googlecode.instinct.internal.util.Suggest;
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import java.util.List;
+import org.jmock.Expectations;
 
-@Suggest("Test new getters")
 public final class ContextResultImplAtomicTest extends InstinctTestCase {
-    private ContextResult contextResult;
-    private SpecificationResult specificationResult;
-
-    @Override
-    public void setUpTestDoubles() {
-        specificationResult = mock(SpecificationResult.class);
-    }
+    @Subject(auto = false) private ContextResult contextResult;
+    @Mock private SpecificationResult specificationResult1;
+    @Mock private SpecificationResult specificationResult2;
+    @Dummy private String contextName;
 
     @Override
     public void setUpSubject() {
-        contextResult = new ContextResultImpl("AnEmptyStack");
+        contextResult = new ContextResultImpl(contextName);
     }
 
     public void testConformsToClassTraits() {
         checkClass(ContextResultImpl.class, ContextResult.class);
     }
 
-    public void testGetContextName() {
-        checkGetContextName("name1");
-        checkGetContextName("name2");
+    public void testGetterReturnsContextNamePassedInConstructor() {
+        final ContextResult result = new ContextResultImpl(contextName);
+        expect.that(result.getContextName()).equalTo(contextName);
     }
 
     public void testResultAddedAppearsInListReturnedFromGetResults() {
-        contextResult.addSpecificationResult(specificationResult);
+        contextResult.addSpecificationResult(specificationResult1);
         final List<SpecificationResult> results = contextResult.getSpecificationResults();
-        assertTrue(results.contains(specificationResult));
+        expect.that(results).containsItem(specificationResult1);
     }
 
     public void testAllSpecificationsCompletedSuccessfullyMeansContextCompletedSuccessfully() {
-        expects(specificationResult).method("completedSuccessfully").will(returnValue(true));
-        contextResult.addSpecificationResult(specificationResult);
-        assertTrue(contextResult.completedSuccessfully());
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(specificationResult1).completedSuccessfully(); will(returnValue(true));
+            }
+        });
+        contextResult.addSpecificationResult(specificationResult1);
+        expect.that(contextResult.completedSuccessfully()).isTrue();
     }
 
-    public void testIfOneSpecificationsFailsContextFails() {
-        final SpecificationResult result1 = mock(SpecificationResult.class);
-        final SpecificationResult result2 = mock(SpecificationResult.class);
-        expects(result1, atLeastOnce()).method("completedSuccessfully").will(returnValue(true));
-        expects(result2, atLeastOnce()).method("completedSuccessfully").will(returnValue(false));
-        contextResult.addSpecificationResult(result1);
-        contextResult.addSpecificationResult(result2);
-        assertFalse(contextResult.completedSuccessfully());
-        assertEquals(1, contextResult.getNumberOfFailures());
-        assertEquals(1, contextResult.getNumberOfSuccesses());
-    }
-
-    private void checkGetContextName(final String contextName) {
-        final ContextResult result = new ContextResultImpl(contextName);
-        assertEquals(contextName, result.getContextName());
+    public void testContextFailsIfOneSpecificationsFails() {
+        expect.that(new Expectations() {
+            {
+                allowing(specificationResult1).completedSuccessfully(); will(returnValue(false));
+                allowing(specificationResult2).completedSuccessfully(); will(returnValue(true));
+            }
+        });
+        contextResult.addSpecificationResult(specificationResult1);
+        contextResult.addSpecificationResult(specificationResult2);
+        expect.that(contextResult.completedSuccessfully()).isFalse();
+        expect.that(contextResult.getNumberOfFailures()).equalTo(1);
+        expect.that(contextResult.getNumberOfSuccesses()).equalTo(1);
     }
 }

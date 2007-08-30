@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.core;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.expect.Mocker12.mock;
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.util.Suggest;
