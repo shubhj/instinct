@@ -17,47 +17,37 @@
 package com.googlecode.instinct.internal.core;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.expect.Mocker12.expects;
 import static com.googlecode.instinct.expect.Mocker12.mock;
-import static com.googlecode.instinct.expect.Mocker12.returnValue;
-import static com.googlecode.instinct.expect.Mocker12.same;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.runner.SpecificationListener;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
-import static com.googlecode.instinct.test.triangulate.Triangulation.getInstance;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
+import org.jmock.Expectations;
 
 @SuppressWarnings({"unchecked"})
 @Suggest({"Todo:", "Add a run method, pass a spec runner as a dependency, pass in other methods required for runners."})
 public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
-    private SpecificationMethod specificationMethod;
-    private SpecificationRunner specificationRunner;
-    private LifecycleMethod specMethod;
-    private SpecificationResult specificationResult;
-    private Collection<LifecycleMethod> beforeSpecMethods;
-    private Collection<LifecycleMethod> afterSpecMethods;
-    private String methodName;
-
-    @Override
-    public void setUpTestDoubles() {
-        specMethod = mock(LifecycleMethod.class);
-        specificationRunner = mock(SpecificationRunner.class);
-        specificationResult = mock(SpecificationResult.class);
-        beforeSpecMethods = mock(Collection.class);
-        afterSpecMethods = mock(Collection.class);
-        methodName = getInstance(String.class);
-    }
+    @Subject private SpecificationMethod specificationMethod;
+    @Mock private SpecificationRunner specificationRunner;
+    @Mock private LifecycleMethod specMethod;
+    @Mock private SpecificationResult specificationResult;
+    @Mock private Collection<LifecycleMethod> beforeSpecMethods;
+    @Mock private Collection<LifecycleMethod> afterSpecMethods;
+    @Dummy private String methodName;
+    @Dummy private Class<?> declaringClass;
 
     @Override
     public void setUpSubject() {
         final Object[] constructorArgs = {specMethod, beforeSpecMethods, afterSpecMethods};
-        final Object[] dependencies = {specificationRunner};
-        specificationMethod = createSubjectWithConstructorArgs(SpecificationMethodImpl.class, constructorArgs, dependencies);
+        specificationMethod = createSubjectWithConstructorArgs(SpecificationMethodImpl.class, constructorArgs, specificationRunner);
     }
 
     public void testConformsToClassTraits() {
@@ -65,15 +55,21 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
     }
 
     public void testPassesSpecificationListenersToSpecificationRunner() {
-        for (int i = 0; i < 3; i++) {
-            final SpecificationListener specificationListener = mock(SpecificationListener.class);
-            expects(specificationRunner).method("addSpecificationListener").with(same(specificationListener));
-            specificationMethod.addSpecificationListener(specificationListener);
-        }
+        final SpecificationListener specificationListener = mock(SpecificationListener.class);
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(specificationRunner).addSpecificationListener(specificationListener);
+            }
+        });
+        specificationMethod.addSpecificationListener(specificationListener);
     }
 
     public void testRunsSpecificationUsingASpecificationRunner() {
-        expects(specificationRunner).method("run").with(same(specificationMethod)).will(returnValue(specificationResult));
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(specificationRunner).run(specificationMethod); will(returnValue(specificationResult));
+            }
+        });
         final SpecificationResult result = specificationMethod.run();
         expect.that(result).sameInstanceAs(specificationResult);
     }
@@ -94,18 +90,30 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
     }
 
     public void testReturnsDeclaringClassOfLifecycleMethod() {
-        expects(specMethod).method("getDeclaringClass").will(returnValue(String.class));
-        assertEquals(String.class, specificationMethod.getDeclaringClass());
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(specMethod).getDeclaringClass(); will(returnValue(declaringClass));
+            }
+        });
+        assertEquals(declaringClass, specificationMethod.getDeclaringClass());
     }
 
     public void testReturnsNameFromUnderlyingLifecycleMethod() {
-        expects(specMethod).method("getName").will(returnValue(methodName));
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(specMethod).getName(); will(returnValue(methodName));
+            }
+        });
         expect.that(specificationMethod.getName()).equalTo(methodName);
     }
 
     public void testReturnsParameterAnnotationsFromUnderlyingLifecycleMethod() {
-        final Annotation[][] fakeAnnotation = new Annotation[1][1];
-        expects(specMethod).method("getParameterAnnotations").will(returnValue(fakeAnnotation));
-        expect.that(specificationMethod.getParameterAnnotations()).sameInstanceAs(fakeAnnotation);
+        final Annotation[][] fakeAnnotations = new Annotation[1][1];
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(specMethod).getParameterAnnotations(); will(returnValue(fakeAnnotations));
+            }
+        });
+        expect.that(specificationMethod.getParameterAnnotations()).sameInstanceAs(fakeAnnotations);
     }
 }
