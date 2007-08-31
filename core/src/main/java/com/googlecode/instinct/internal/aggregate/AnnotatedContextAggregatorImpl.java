@@ -18,9 +18,9 @@ package com.googlecode.instinct.internal.aggregate;
 
 import java.io.File;
 import java.io.FileFilter;
-import com.googlecode.instinct.internal.aggregate.locate.AnnotationFileFilter;
-import com.googlecode.instinct.internal.aggregate.locate.ClassLocator;
-import com.googlecode.instinct.internal.aggregate.locate.ClassLocatorImpl;
+import com.googlecode.instinct.internal.locate.AnnotationFileFilter;
+import com.googlecode.instinct.internal.locate.ClassLocator;
+import com.googlecode.instinct.internal.locate.ClassLocatorImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;

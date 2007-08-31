@@ -17,8 +17,8 @@
 package com.googlecode.instinct.internal.core;
 
 import au.net.netstorm.boost.primordial.Primordial;
-import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocator;
-import com.googlecode.instinct.internal.aggregate.locate.MarkedMethodLocatorImpl;
+import com.googlecode.instinct.internal.locate.MarkedMethodLocator;
+import com.googlecode.instinct.internal.locate.MarkedMethodLocatorImpl;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;

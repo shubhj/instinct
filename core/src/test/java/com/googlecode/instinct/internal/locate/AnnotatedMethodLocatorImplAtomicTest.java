@@ -14,25 +14,33 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.aggregate;
+package com.googlecode.instinct.internal.locate;
 
-import com.googlecode.instinct.internal.locate.AnnotatedMethodLocator;
-import com.googlecode.instinct.internal.locate.AnnotatedMethodLocatorImpl;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
-public final class AnnotatedMethodLocatorSlowTest extends InstinctTestCase {
+public final class AnnotatedMethodLocatorImplAtomicTest extends InstinctTestCase {
     private AnnotatedMethodLocator locator;
+
+    public void testConformsToClassTraits() {
+        checkClass(AnnotatedMethodLocatorImpl.class, AnnotatedMethodLocator.class);
+    }
+
+    public void testLocateOnAClassWithNoAnnotationsGiveNoMethod() {
+        final Collection<Method> methods = locator.locate(WithoutRuntimeAnnotations.class, Specification.class);
+        assertEquals(0, methods.size());
+    }
+
+    public void testLocateOnAClassWithSeveralAnnotationsGiveSeveralMethod() {
+        final Collection<Method> methods = locator.locate(WithRuntimeAnnotations.class, Specification.class);
+        assertEquals(2, methods.size());
+    }
 
     @Override
     public void setUpSubject() {
         locator = new AnnotatedMethodLocatorImpl();
-    }
-
-    public void testFindsCorrectNumberOfSpecificationsWhenGivenSpecsWithDifferentAccessModifiers() {
-        final Collection<Method> methods = locator.locate(ContextWithSpecsWithDifferentAccessModifiers.class, Specification.class);
-        assertEquals(5, methods.size());
     }
 }
