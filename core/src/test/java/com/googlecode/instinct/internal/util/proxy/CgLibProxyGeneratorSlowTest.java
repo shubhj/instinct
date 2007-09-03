@@ -18,8 +18,10 @@ package com.googlecode.instinct.internal.util.proxy;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.testdouble.DummyMethodInterceptor;
+import com.googlecode.instinct.internal.testdouble.IllegalInvocationException;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,11 +31,21 @@ public final class CgLibProxyGeneratorSlowTest extends InstinctTestCase {
     public void testGeneratesProxiesForInterfaces() {
         final Iterable<?> proxy = proxyGenerator.newProxy(Iterable.class, new DummyMethodInterceptor());
         expect.that(proxy).isNotNull();
+        expectException(IllegalInvocationException.class, new Runnable() {
+            public void run() {
+                proxy.iterator();
+            }
+        });
     }
 
     public void testGeneratesProxiesForNonFinalClasses() {
         final List<?> list = proxyGenerator.newProxy(ArrayList.class, new DummyMethodInterceptor());
         expect.that(list).isNotNull();
+        expectException(IllegalInvocationException.class, new Runnable() {
+            public void run() {
+                list.size();
+            }
+        });
     }
 
     public void testProxiesStaticInnerClasses() {
@@ -44,15 +56,11 @@ public final class CgLibProxyGeneratorSlowTest extends InstinctTestCase {
         proxyGenerator.newProxy(NonStaticInnerClass.class, new DummyMethodInterceptor());
     }
 
-    @SuppressWarnings({"ALL"})
+    @SuppressWarnings({"ClassMayBeInterface", "InnerClassMayBeStatic"})
     private class NonStaticInnerClass {
-        public NonStaticInnerClass() {
-        }
     }
 
-    @SuppressWarnings({"ALL"})
+    @SuppressWarnings({"ClassMayBeInterface", "InnerClassMayBeStatic"})
     private static class StaticInnerClass {
-        public StaticInnerClass() {
-        }
     }
 }

@@ -64,10 +64,8 @@ public final class CgLibProxyGeneratorAtomicTest extends InstinctTestCase {
         expectEnhancerCreated(typeToProxy);
         expect.that(new Expectations() {
             {
-                one(enhancer).createClass();
-                will(returnValue(enhancedProxyType));
-                one(objenesis).newInstance(enhancedProxyType);
-                will(returnValue(proxy));
+                one(enhancer).createClass(); will(returnValue(enhancedProxyType));
+                one(objenesis).newInstance(enhancedProxyType); will(returnValue(proxy));
             }
         });
         final Object createdProxy = proxyGenerator.newProxy(typeToProxy, methodInterceptor);

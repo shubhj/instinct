@@ -19,7 +19,6 @@ package com.googlecode.instinct.internal.util.proxy;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 import static java.lang.reflect.Modifier.isFinal;
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.Factory;
@@ -33,19 +32,26 @@ public final class CgLibProxyGenerator implements ProxyGenerator {
 
     @SuppressWarnings({"unchecked"})
     public <T> T newProxy(final Class<T> typeToProxy, final MethodInterceptor methodInterceptor) {
-        checkNotNull(typeToProxy, methodInterceptor);
-        checkNotFinal(typeToProxy);
-        final Class<?> proxiedType = createProxy(typeToProxy, methodInterceptor);
-        final Factory factory = (Factory) objenesis.newInstance(proxiedType);
-        factory.setCallbacks(new Callback[]{methodInterceptor});
+        checkArguments(typeToProxy, methodInterceptor);
+        final Class<T> proxyInstance = createProxiedClass(typeToProxy, methodInterceptor);
+        final Object factory = instantiateProxiedType(proxyInstance);
+        registerMethodInterceptor(factory, methodInterceptor);
         return (T) factory;
     }
 
-    @Suggest("Refactor...")
-    private <T> Class<T> createProxy(final Class<T> typeToProxy, final MethodInterceptor methodInterceptor) {
+    @SuppressWarnings({"unchecked"})
+    private <T> Class<T> createProxiedClass(final Class<T> typeToProxy, final MethodInterceptor methodInterceptor) {
         final CgLibEnhancer enhancer = createEnhancer(typeToProxy);
         enhancer.setCallbackType(methodInterceptor.getClass());
         return (Class<T>) enhancer.createClass();
+    }
+
+    private <T> Object instantiateProxiedType(final Class<T> proxiedType) {
+        return objenesis.newInstance(proxiedType);
+    }
+
+    private void registerMethodInterceptor(final Object proxyInstance, final MethodInterceptor methodInterceptor) {
+        ((Factory) proxyInstance).setCallbacks(new Callback[]{methodInterceptor});
     }
 
     private <T> CgLibEnhancer createEnhancer(final Class<T> typeToProxy) {
@@ -71,5 +77,10 @@ public final class CgLibProxyGenerator implements ProxyGenerator {
         if (isFinal(typeToProxy.getModifiers())) {
             throw new IllegalArgumentException("Cannot proxy final class " + typeToProxy.getName());
         }
+    }
+
+    private <T> void checkArguments(final Class<T> typeToProxy, final MethodInterceptor methodInterceptor) {
+        checkNotNull(typeToProxy, methodInterceptor);
+        checkNotFinal(typeToProxy);
     }
 }
