@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.instance;
+package com.googlecode.instinct.internal.util.instance;
 
-public final class InstantiationException extends RuntimeException {
-    private static final long serialVersionUID = -3116405763603412997L;
+import au.net.netstorm.boost.nursery.instance.InstanceProvider;
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
+import com.googlecode.instinct.internal.util.Suggest;
 
-    public InstantiationException(final String message) {
-        super(message);
-    }
-
-    public InstantiationException(final Throwable cause) {
-        super(cause);
+@Suggest("Move into test source.")
+public final class MockInstanceProvider implements InstanceProvider {
+    @SuppressWarnings({"RawUseOfParameterizedType", "unchecked"})
+    public Object newInstance(final Class cls) {
+        return mock(cls);
     }
 }
-
-

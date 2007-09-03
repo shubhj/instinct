@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.test.mock;
+package com.googlecode.instinct.internal.util.proxy;
 
-public interface ActorCreator {
-    <T> T create(final Class<T> type, String roleName);
+import net.sf.cglib.proxy.MethodInterceptor;
+
+public interface ProxyGenerator {
+    <T> T newProxy(Class<T> typeToProxy, MethodInterceptor methodInterceptor);
 }

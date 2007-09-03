@@ -23,10 +23,10 @@ import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValueUsingInferredType;
 
 @Suggest("Make use of the Subject annotation to auto-create subjects.")
-public final class SubjectCreator {
+public final class TestSubjectCreator {
     private static final ObjectFactory OBJECT_FACTORY = new ObjectFactoryImpl();
 
-    private SubjectCreator() {
+    private TestSubjectCreator() {
         throw new UnsupportedOperationException();
     }
 

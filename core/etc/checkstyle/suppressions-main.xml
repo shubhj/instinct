@@ -7,4 +7,5 @@
     <suppress checks="GenericIllegalRegexp" files="TextRunner.java"/>
     <suppress checks="GenericIllegalRegexp" files="CommandLineRunner.java"/>
     <suppress checks="EqualsHashCode" files="ObjectCheckerImpl.java"/>
+    <suppress checks="IllegalThrows" files="DummyMethodInterceptor.java"/>
 </suppressions>

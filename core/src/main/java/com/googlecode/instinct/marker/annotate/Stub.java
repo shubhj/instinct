@@ -29,4 +29,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface Stub {
+    /**
+     * Whether to auto-create (auto-wire) an instance of this stub and insert the value into a context.
+     * Stubs that are not auto-wired must be created some other way, such as in the field delaration or in a
+     * {@linkplain BeforeSpecification before specification} method.
+     * @return <code>true</code> if the stub should be auto-wired.
+     */
+    boolean auto() default true;
 }

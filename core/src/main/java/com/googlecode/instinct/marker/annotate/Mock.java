@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.marker.annotate;
 
-import com.googlecode.instinct.internal.util.Suggest;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -31,6 +30,12 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
-@Suggest("Add rolename as the default field.")
 public @interface Mock {
+    /**
+     * Whether to auto-create (auto-wire) an instance of this mock and insert the value into a context.
+     * Mocks that are not auto-wired must be created some other way, such as in the field delaration or in a
+     * {@linkplain BeforeSpecification before specification} method.
+     * @return <code>true</code> if the mock should be auto-wired.
+     */
+    boolean auto() default true;
 }

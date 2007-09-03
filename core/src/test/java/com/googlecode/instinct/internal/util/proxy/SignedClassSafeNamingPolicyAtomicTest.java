@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,40 +14,44 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.locate;
+package com.googlecode.instinct.internal.util.proxy;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Subject;
-import com.googlecode.instinct.marker.naming.DummyNamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
-import java.lang.reflect.Field;
+import net.sf.cglib.core.NamingPolicy;
+import net.sf.cglib.core.Predicate;
 import org.jmock.Expectations;
 
-public final class MarkedFieldLocatorImplAtomicTest extends InstinctTestCase {
-    @Subject private MarkedFieldLocator fieldLocator;
-    @Mock private AnnotatedFieldLocator annotatedFieldLocator;
-    @Dummy private Field[] annotatedFields;
+public final class SignedClassSafeNamingPolicyAtomicTest extends InstinctTestCase {
+    @Subject(auto = false) private NamingPolicy signedClassNamingPolicy;
+    @Dummy private String prefix;
+    @Dummy private String source;
+    @Dummy private Object key;
+    @Dummy private Predicate names;
+    @Dummy private String defaultClassName;
+    @Mock private NamingPolicy defaultNamingPolicy;
 
     @Override
     public void setUpSubject() {
-        fieldLocator = createSubject(MarkedFieldLocatorImpl.class, annotatedFieldLocator);
+        signedClassNamingPolicy = createSubject(SignedClassSafeNamingPolicy.class, defaultNamingPolicy);
     }
 
     public void testConformsToClassTraits() {
-        checkClass(MarkedFieldLocatorImpl.class, MarkedFieldLocator.class);
+        checkClass(SignedClassSafeNamingPolicy.class, NamingPolicy.class);
     }
 
-    public void testUsesAnnotatedLocator() {
+    public void testReturnsClassNameWithinInstinctPackageHeirarchy() {
         expect.that(new Expectations() {
             {
-                one(annotatedFieldLocator).locate(WithRuntimeAnnotations.class, Dummy.class); will(returnValue(annotatedFields));
+                one(defaultNamingPolicy).getClassName(prefix, source, key, names); will(returnValue(defaultClassName));
             }
         });
-        final Field[] fields = fieldLocator.locateAll(WithRuntimeAnnotations.class, Dummy.class, new DummyNamingConvention());
-        expect.that(fields).equalTo(annotatedFields);
+        final String signedClassSafeName = signedClassNamingPolicy.getClassName(prefix, source, key, names);
+        expect.that(signedClassSafeName).equalTo("com.googlecode.instinct.gen." + defaultClassName);
     }
 }

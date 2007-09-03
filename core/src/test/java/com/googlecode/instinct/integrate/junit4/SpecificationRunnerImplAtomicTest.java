@@ -26,7 +26,7 @@ import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
+import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubjectWithConstructorArgs;
 import java.util.Collection;
 import java.util.HashSet;
 import org.jmock.Expectations;

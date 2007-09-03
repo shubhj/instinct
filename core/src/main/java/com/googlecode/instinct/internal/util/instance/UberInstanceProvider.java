@@ -14,11 +14,13 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.instance;
+package com.googlecode.instinct.internal.util.instance;
 
-import static java.lang.reflect.Modifier.isFinal;
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
+import com.googlecode.instinct.internal.util.Suggest;
+import static java.lang.reflect.Modifier.isFinal;
 
+@Suggest("Move into test source.")
 public final class UberInstanceProvider implements InstanceProvider {
     // Note. Needs to be static as the concrete provider creates an instance of this class, and blows the stack.
     private static final InstanceProvider CONCRETE_INSTANCE_PROVIDER = new ConcreteInstanceProvider();

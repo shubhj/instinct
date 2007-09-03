@@ -14,17 +14,20 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.instance;
+package com.googlecode.instinct.internal.util.instance;
 
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
+import com.googlecode.instinct.internal.util.Suggest;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import org.objenesis.Objenesis;
 import org.objenesis.ObjenesisStd;
-import com.googlecode.instinct.test.reflect.Reflector;
 
 // SUPPRESS CyclomaticComplexity|NPathComplexity|MethodLength {
-@SuppressWarnings({"RawUseOfParameterizedType", "MagicNumber", "ReturnOfCollectionOrArrayField"})
+@Suggest("This becomes StubCreator and this becomes a wrapper for InstanceProvider.")
+@SuppressWarnings({"RawUseOfParameterizedType", "MagicNumber", "ReturnOfCollectionOrArrayField", "OverlyComplexMethod"})
 public final class ConcreteInstanceProvider implements InstanceProvider {
     private static final Object OBJECT = new Object();
     private static final Object[] OBJECT_ARRAY = {OBJECT};
@@ -35,11 +38,14 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
         if (cls.isEnum()) {
             return cls.getEnumConstants()[0];
         }
+        if (cls.isAnnotation()) {
+            return AnAnnotation.class;
+        }
         if (cls.isPrimitive()) {
             return getPrimitiveInstance(cls);
         }
         if (cls.equals(Class.class)) {
-            return Class.class;
+            return ArrayList.class;
         }
         if (cls.equals(Object.class)) {
             return OBJECT;
@@ -57,7 +63,10 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
             return "The quick brown fox jumps over the lazy dog.";
         }
         if (cls.equals(Field.class)) {
-            return Reflector.getFieldByName(getClass(), "OBJECT");
+            return createField();
+        }
+        if (cls.equals(Method.class)) {
+            return createMethod();
         }
         if (cls.isArray()) {
             return createArray(cls.getComponentType());
@@ -72,6 +81,18 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
     }
 
     private Object getPrimitiveInstance(final Class type) {
+        if (type == boolean.class) {
+            return false;
+        }
+        if (type == byte.class) {
+            return "x".getBytes()[0];
+        }
+        if (type == char.class) {
+            return 'x';
+        }
+        if (type == short.class) {
+            return 42;
+        }
         if (type == int.class) {
             return 34177239;
         }
@@ -81,20 +102,33 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
         if (type == float.class) {
             return 31.123475f;
         }
-        if (type == char.class) {
-            return 'x';
+        if (type == double.class) {
+            return 299.792458d;
         }
-        if (type == byte.class) {
-            return "x".getBytes()[0];
-        }
-        if (type == boolean.class) {
-            return false;
-        }
-        throw new InstantiationException("Unable to return an instance of primitive type " + type);
+        throw new InstantiationException("Unable to create an instance of primitive type " + type);
     }
 
     private Object createConcreteInstance(final Class<?> implementationClass) {
         return objenesis.newInstance(implementationClass);
+    }
+
+    private Field createField() {
+        try {
+            return getClass().getDeclaredField("OBJECT");
+        } catch (NoSuchFieldException e) {
+            throw new InstantiationException("Unable to create an instance of type " + Field.class.getName(), e);
+        }
+    }
+
+    private Object createMethod() {
+        try {
+            return ArrayList.class.getMethod("size");
+        } catch (NoSuchMethodException e) {
+            throw new InstantiationException("Unable to create an instance of type " + Method.class.getName(), e);
+        }
+    }
+
+    private @interface AnAnnotation {
     }
 }
 // } SUPPRESS CyclomaticComplexity|NPathComplexity|MethodLength

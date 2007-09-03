@@ -14,17 +14,8 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.test.mock;
+package com.googlecode.instinct.internal.testdouble;
 
-import au.net.netstorm.boost.nursery.instance.InstanceProvider;
-import com.googlecode.instinct.internal.util.instance.ConcreteInstanceProvider;
-import com.googlecode.instinct.internal.testdouble.SpecificationDoubleCreator;
-
-public class StubCreator implements SpecificationDoubleCreator {
-    private final InstanceProvider instanceProvider = new ConcreteInstanceProvider();
-
-    @SuppressWarnings({"unchecked"})
-    public <T> T createDouble(final Class<T> doubleType, final String roleName) {
-        return (T) instanceProvider.newInstance(doubleType);
-    }
+public interface SpecificationDoubleCreator {
+    <T> T createDouble(final Class<T> doubleType, String roleName);
 }

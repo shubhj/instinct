@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.test.mock;
+package com.googlecode.instinct.internal.util.proxy;
 
-import au.net.netstorm.boost.nursery.instance.InstanceProvider;
-import com.googlecode.instinct.internal.util.instance.ConcreteInstanceProvider;
-import com.googlecode.instinct.internal.testdouble.SpecificationDoubleCreator;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import java.lang.reflect.Method;
+import net.sf.cglib.proxy.CallbackFilter;
 
-public class StubCreator implements SpecificationDoubleCreator {
-    private final InstanceProvider instanceProvider = new ConcreteInstanceProvider();
-
-    @SuppressWarnings({"unchecked"})
-    public <T> T createDouble(final Class<T> doubleType, final String roleName) {
-        return (T) instanceProvider.newInstance(doubleType);
+public final class IgnoreBridgeMethodsCallbackFilter implements CallbackFilter {
+    public int accept(final Method method) {
+        checkNotNull(method);
+        return method.isBridge() ? 1 : 0;
     }
 }

@@ -16,25 +16,25 @@
 
 package com.googlecode.instinct.test.checker;
 
-import au.net.netstorm.boost.nursery.reflect.checker.AssertThrows;
-import au.net.netstorm.boost.nursery.reflect.checker.DefaultAssertThrows;
+import com.googlecode.instinct.internal.util.Suggest;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectMessageContains;
 
+@Suggest("Remove the use of this class!!!")
 public final class AssertThrowsChecker {
-    private static final AssertThrows ASSERT_THROWS = new DefaultAssertThrows();
-
     private AssertThrowsChecker() {
         throw new UnsupportedOperationException();
     }
 
-    public static <T> Throwable assertThrows(final Class<T> expectedException, final String message, final Runnable block) {
-        return ASSERT_THROWS.assertThrows(expectedException, message, block);
+    public static <T extends Throwable> Throwable assertThrows(final Class<T> expectedException, final String message, final Runnable block) {
+        return expectException(expectedException, message, block);
     }
 
-    public static <T> Throwable assertThrows(final Class<T> expectedException, final Runnable block) {
-        return ASSERT_THROWS.assertThrows(expectedException, block);
+    public static <T extends Throwable> Throwable assertThrows(final Class<T> expectedException, final Runnable block) {
+        return expectException(expectedException, block);
     }
 
     public static void assertMessageContains(final Throwable t, final String fragment) {
-        ASSERT_THROWS.assertMessageContains(t, fragment);
+        expectMessageContains(t, fragment);
     }
 }

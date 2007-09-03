@@ -30,10 +30,10 @@
     <orderEntry type="library" name="cglib" level="project" />
     <orderEntry type="library" name="hamcrest" level="project" />
     <orderEntry type="library" name="jmock2" level="project" />
-    <orderEntry type="library" name="jmock1" level="project" />
     <orderEntry type="library" name="objenisis" level="project" />
     <orderEntry type="library" name="Clover" level="project" />
     <orderEntry type="library" name="boost" level="project" />
+    <orderEntry type="library" name="cglib" level="project" />
     <orderEntryProperties />
   </component>
   <component name="copyright">

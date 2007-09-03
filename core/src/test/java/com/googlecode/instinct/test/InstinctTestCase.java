@@ -17,11 +17,12 @@
 package com.googlecode.instinct.test;
 
 import com.googlecode.instinct.expect.behaviour.Mocker;
+import static com.googlecode.instinct.expect.behaviour.Mocker.verify;
 import static com.googlecode.instinct.test.mock.ActorAutoWirer.autoWireMockFields;
 import static com.googlecode.instinct.test.mock.ActorAutoWirer.autoWireSubjectFields;
 import junit.framework.TestCase;
 
-@SuppressWarnings({"NoopMethodInAbstractClass"})
+@SuppressWarnings({"NoopMethodInAbstractClass", "CatchGenericClass"})
 public abstract class InstinctTestCase extends TestCase {
 
     @Override
@@ -30,14 +31,22 @@ public abstract class InstinctTestCase extends TestCase {
         setUpTestDoubles();
         autoWireSubjectFields(this);
         setUpSubject();
+        String message = null;
         try {
             // FIX Wrap the runTest() in a try-catch so that we can still do verification afterwards. Don't lose either verification or test errors.
             // See ED codebase.
             runTest();
-            Mocker.verify();
+            try {
+                verify();
+            } catch (Throwable throwable) {
+                message = throwable.toString();
+            }
         } finally {
             Mocker.reset();
             tearDown();
+        }
+        if (message != null) {
+            throw new TestingException(message);
         }
     }
 

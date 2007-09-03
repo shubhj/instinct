@@ -16,7 +16,8 @@
 
 package com.googlecode.instinct.test.mock;
 
-import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.testdouble.DummyCreator;
+import com.googlecode.instinct.internal.testdouble.SpecificationDoubleCreator;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Stub;
@@ -29,24 +30,23 @@ import java.lang.reflect.Field;
 @SuppressWarnings({"CatchGenericClass"})
 public final class ActorAutoWirer {
     private static final SubjectCreator SUBJECT_CREATOR = new SubjectCreatorImpl();
-    private static final ActorCreator DUMMY_CREATOR = new DummyCreator();
-    private static final ActorCreator STUB_CREATOR = new StubCreator();
-    private static final ActorCreator MOCK_CREATOR = new MockCreator();
+    private static final SpecificationDoubleCreator DUMMY_CREATOR = new DummyCreator();
+    private static final SpecificationDoubleCreator STUB_CREATOR = new StubCreator();
+    private static final SpecificationDoubleCreator MOCK_CREATOR = new MockCreator();
 
     private ActorAutoWirer() {
         throw new UnsupportedOperationException();
     }
 
-    @Suggest("Add other test doubles here.")
     public static void autoWireMockFields(final Object instanceToAutoWire) {
         final Field[] fields = instanceToAutoWire.getClass().getDeclaredFields();
         for (final Field field : fields) {
-            if (isAnnotated(Mock.class, field)) {
+            if (isAnnotated(Mock.class, field) && autoWireMock(field)) {
                 injectMock(instanceToAutoWire, field);
-            } else if (isAnnotated(Dummy.class, field)) {
-                injectDummy(instanceToAutoWire, field);
-            } else if (isAnnotated(Stub.class, field)) {
+            } else if (isAnnotated(Stub.class, field) && autoWireStub(field)) {
                 injectStub(instanceToAutoWire, field);
+            } else if (isAnnotated(Dummy.class, field) && autoWireDummy(field)) {
+                injectDummy(instanceToAutoWire, field);
             }
         }
     }
@@ -61,15 +61,15 @@ public final class ActorAutoWirer {
     }
 
     private static void injectMock(final Object instanceToAutoWire, final Field field) {
-        injectFieldValue(instanceToAutoWire, field, MOCK_CREATOR.create(field.getType(), field.getName()), "mock");
+        injectFieldValue(instanceToAutoWire, field, MOCK_CREATOR.createDouble(field.getType(), field.getName()), "mock");
     }
 
     private static void injectDummy(final Object instanceToAutoWire, final Field field) {
-        injectFieldValue(instanceToAutoWire, field, DUMMY_CREATOR.create(field.getType(), field.getName()), "dummy");
+        injectFieldValue(instanceToAutoWire, field, DUMMY_CREATOR.createDouble(field.getType(), field.getName()), "dummy");
     }
 
     private static void injectStub(final Object instanceToAutoWire, final Field field) {
-        injectFieldValue(instanceToAutoWire, field, STUB_CREATOR.create(field.getType(), field.getName()), "dummy");
+        injectFieldValue(instanceToAutoWire, field, STUB_CREATOR.createDouble(field.getType(), field.getName()), "dummy");
     }
 
     private static void injectSubject(final Object instanceToAutoWire, final Field field) {
@@ -93,6 +93,21 @@ public final class ActorAutoWirer {
 
     private static boolean autoWireSubject(final AnnotatedElement subjectField) {
         final Subject annotation = subjectField.getAnnotation(Subject.class);
+        return annotation.auto();
+    }
+
+    private static boolean autoWireMock(final AnnotatedElement mockField) {
+        final Mock annotation = mockField.getAnnotation(Mock.class);
+        return annotation.auto();
+    }
+
+    private static boolean autoWireStub(final AnnotatedElement stubField) {
+        final Stub annotation = stubField.getAnnotation(Stub.class);
+        return annotation.auto();
+    }
+
+    private static boolean autoWireDummy(final AnnotatedElement dummyField) {
+        final Dummy annotation = dummyField.getAnnotation(Dummy.class);
         return annotation.auto();
     }
 }

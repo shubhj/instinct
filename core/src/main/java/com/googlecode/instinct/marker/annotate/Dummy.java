@@ -30,4 +30,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface Dummy {
+    /**
+     * Whether to auto-create (auto-wire) an instance of this dummy and insert the value into a context.
+     * Dummies that are not auto-wired must be created some other way, such as in the field delaration or in a
+     * {@linkplain BeforeSpecification before specification} method.
+     * @return <code>true</code> if the dummy should be auto-wired.
+     */
+    boolean auto() default true;
 }

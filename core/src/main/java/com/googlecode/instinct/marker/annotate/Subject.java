@@ -40,7 +40,7 @@ public @interface Subject {
      * Whether to auto-create (auto-wire) an instance of this subject and insert the value into a context.
      * Subjects that are not auto-wired must be created some other way, such as in the field delaration or in a
      * {@linkplain BeforeSpecification before specification} method.
-     * @return <code>true</code> if the subject
+     * @return <code>true</code> if the subject should be auto-wired.
      */
     boolean auto() default true;
 

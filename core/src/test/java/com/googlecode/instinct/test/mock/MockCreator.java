@@ -17,17 +17,18 @@
 package com.googlecode.instinct.test.mock;
 
 import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
+import com.googlecode.instinct.internal.testdouble.SpecificationDoubleCreator;
 import java.lang.reflect.Array;
 
-public final class MockCreator implements ActorCreator {
+public final class MockCreator implements SpecificationDoubleCreator {
     private static final int NUMBER_OF_MOCKS_IN_AN_ARRAY = 3;
 
     @SuppressWarnings({"unchecked"})
-    public <T> T create(final Class<T> type, final String roleName) {
-        if (type.isArray()) {
-            return (T) createArray(type.getComponentType(), roleName);
+    public <T> T createDouble(final Class<T> doubleType, final String roleName) {
+        if (doubleType.isArray()) {
+            return (T) createArray(doubleType.getComponentType(), roleName);
         } else {
-            return mock(type, roleName);
+            return mock(doubleType, roleName);
         }
     }
 

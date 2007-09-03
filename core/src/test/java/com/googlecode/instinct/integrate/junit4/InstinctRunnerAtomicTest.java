@@ -22,7 +22,7 @@ import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
+import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubjectWithConstructorArgs;
 import java.util.Collection;
 import org.jmock.Expectations;
 import org.junit.runner.Description;

@@ -72,9 +72,19 @@ public final class Reflector {
         }
     }
 
+    public static <T> Method getDeclaredMethod(final Class<T> cls, final String methodName, final Class<?>... paramTypes) {
+        checkNotNull(cls, paramTypes);
+        checkNotWhitespace(methodName);
+        try {
+            return cls.getDeclaredMethod(methodName, paramTypes);
+        } catch (NoSuchMethodException e) {
+            throw new TestingException(e);
+        }
+    }
+
     public static Object invokeMethod(final Object instance, final String methodName, final Class<?>[] paramTypes, final Object... params) {
         if (paramTypes.length != params.length) {
-            throw new TestingException("Paramter types array and values array must be the same length");            
+            throw new TestingException("Paramter types array and values array must be the same length");
         }
         final Method method = getMethod(instance.getClass(), methodName, paramTypes);
         return METHOD_INVOKER.invokeMethod(instance, method, params);

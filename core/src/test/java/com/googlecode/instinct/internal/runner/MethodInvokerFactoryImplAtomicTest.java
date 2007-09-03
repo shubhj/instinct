@@ -26,7 +26,7 @@ import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.sandbox.ForAll;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import com.googlecode.instinct.test.reflect.SubjectCreator;
+import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
 import java.lang.annotation.Annotation;
 import org.jmock.Expectations;
 
@@ -52,7 +52,7 @@ public final class MethodInvokerFactoryImplAtomicTest extends InstinctTestCase {
 
     @Override
     public void setUpSubject() {
-        methodInvokerFactory = SubjectCreator.createSubject(MethodInvokerFactoryImpl.class, finder);
+        methodInvokerFactory = createSubject(MethodInvokerFactoryImpl.class, finder);
     }
 
     public void testWillReturnADefaultMethodInvokerForAMethodWithoutForAllAnnotation() {

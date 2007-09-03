@@ -26,7 +26,7 @@ import com.googlecode.instinct.internal.runner.JUnit4SuiteWithContextAnnotation;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubject;
+import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
 import java.util.Collection;
 import java.util.HashSet;
 import org.jmock.Expectations;

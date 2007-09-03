@@ -23,7 +23,7 @@ import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
+import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubjectWithConstructorArgs;
 import java.io.File;
 import java.io.FileFilter;
 import org.jmock.Expectations;

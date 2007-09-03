@@ -27,7 +27,7 @@ import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.runner.SpecificationListener;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
+import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubjectWithConstructorArgs;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import org.jmock.Expectations;

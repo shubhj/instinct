@@ -31,7 +31,7 @@ import com.googlecode.instinct.runner.SpecificationListener;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.Reflector.getMethod;
-import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubjectWithConstructorArgs;
+import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubjectWithConstructorArgs;
 import java.lang.reflect.Method;
 import static java.util.Arrays.asList;
 import java.util.Collection;

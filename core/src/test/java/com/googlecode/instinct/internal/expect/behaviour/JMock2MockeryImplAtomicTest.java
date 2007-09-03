@@ -21,7 +21,7 @@ import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubject;
+import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.Sequence;

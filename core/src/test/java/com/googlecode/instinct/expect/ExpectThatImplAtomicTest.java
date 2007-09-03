@@ -24,14 +24,14 @@ import com.googlecode.instinct.expect.state.StateExpectations;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
-import static com.googlecode.instinct.test.reflect.SubjectCreator.createSubject;
+import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
 import org.jmock.Expectations;
 
 @Suggest({"Behaviour expectations plan.",
         "1. Drive out that(Expectations) to support jMock 2",
         "2. Move Mocker12 & JMock12Mockery infrastructure over to jMock2. Fix tests as required.",
         "3. Use that() to drive out facade on top of ObjectChecker that delegates to either a state or",
-        "mock aware checker depending on object status (i.e. is it a mock?)."})
+        "mock aware checker depending on object status (i.e. is it a testdouble?)."})
 public final class ExpectThatImplAtomicTest extends InstinctTestCase {
     private ExpectThat expectThat;
     private StateExpectations stateExpectations;
