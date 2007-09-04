@@ -19,6 +19,7 @@ package com.googlecode.instinct.internal.testdouble;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.proxy.ProxyGenerator;
+import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
@@ -29,8 +30,8 @@ import org.jmock.Expectations;
 
 // Note. Cannot use auto-wired dummies here as we're testing the dummy creator.
 public final class DummyCreatorAtomicTest extends InstinctTestCase {
-    private Class<Object> type = Object.class;
-    private Object proxy = new Object();
+    @Dummy(auto = false) private Class<Object> type = Object.class;
+    @Dummy(auto = false) private Object proxy = new Object();
     @Subject(auto = false) private SpecificationDoubleCreator dummyCreator;
     @Mock private ProxyGenerator proxyGenerator;
     @Mock private ObjectFactory objectFactory;
@@ -48,8 +49,10 @@ public final class DummyCreatorAtomicTest extends InstinctTestCase {
     public void testCreatesProxiesForInterfacesUsingTheDummyMethodInterceptor() {
         expect.that(new Expectations() {
             {
-                one(objectFactory).create(DummyMethodInterceptor.class); will(returnValue(methodInterceptor));
-                one(proxyGenerator).newProxy(type, methodInterceptor); will(returnValue(proxy));
+                one(objectFactory).create(DummyMethodInterceptor.class);
+                will(returnValue(methodInterceptor));
+                one(proxyGenerator).newProxy(type, methodInterceptor);
+                will(returnValue(proxy));
             }
         });
         expect.that(dummyCreator.createDouble(type, "doesNotMatter")).sameInstanceAs(proxy);

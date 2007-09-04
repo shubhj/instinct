@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.test;
 
-import com.googlecode.instinct.expect.behaviour.Mocker;
+import static com.googlecode.instinct.expect.behaviour.Mocker.reset;
 import static com.googlecode.instinct.expect.behaviour.Mocker.verify;
 import static com.googlecode.instinct.test.mock.ActorAutoWirer.autoWireMockFields;
 import static com.googlecode.instinct.test.mock.ActorAutoWirer.autoWireSubjectFields;
@@ -42,7 +42,7 @@ public abstract class InstinctTestCase extends TestCase {
                 message = throwable.toString();
             }
         } finally {
-            Mocker.reset();
+            reset();
             tearDown();
         }
         if (message != null) {
