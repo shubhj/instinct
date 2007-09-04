@@ -19,7 +19,7 @@ package com.googlecode.instinct.internal.util.proxy;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
-public final class CgLibEnhancerAtomicTest extends InstinctTestCase {
+public final class CgLibEnhancerImplAtomicTest extends InstinctTestCase {
     public void testConformsToClassTraits() {
         checkClass(CgLibEnhancerImpl.class, CgLibEnhancer.class);
     }

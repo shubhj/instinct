@@ -17,14 +17,12 @@
 package com.googlecode.instinct.internal.util.proxy;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
+import java.util.List;
 import net.sf.cglib.core.NamingPolicy;
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.CallbackFilter;
 import net.sf.cglib.proxy.Enhancer;
-import java.util.List;
 
-@Suggest("Test this...")
 public final class CgLibEnhancerImpl implements CgLibEnhancer {
     private final Enhancer enhancer = new AllConstructorsEnhancer();
 
