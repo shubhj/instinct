@@ -24,7 +24,7 @@ import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import org.junit.runner.RunWith;
 
-//TODO: A Shopping cart implementation should implement the ShoppingCart interface. (done)
+//A Shopping cart implementation should implement the ShoppingCart interface. (done)
 @RunWith(InstinctRunner.class)
 @Context
 public class AShoppingCartImplementation {

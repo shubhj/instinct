@@ -27,9 +27,8 @@ import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import org.junit.runner.RunWith;
 
-//TODO: Ability to add items.(done)
-//TODO: Ability to remove items. (done)
-
+//Ability to add items.(done)
+//Ability to remove items. (done)
 //Note: This specification has not been refactored to make it easier to read.
 @RunWith(InstinctRunner.class)
 @Context
