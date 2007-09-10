@@ -54,7 +54,9 @@ public final class AnEmptyShoppingCart {
     @Specification
     public void canHaveAnItemAddedToIt() {
         expect.that(cart.isEmpty()).isTrue();
+
         cart.addItem(mockItem1);
+
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).equalTo(1);
         expect.that(cart.contains(mockItem1)).isTrue();
@@ -63,11 +65,15 @@ public final class AnEmptyShoppingCart {
     @Specification
     public void canHaveMultipleItemsAddedToIt() {
         expect.that(cart.isEmpty()).isTrue();
+
         cart.addItem(mockItem1);
+
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).equalTo(1);
         expect.that(cart.contains(mockItem1)).isTrue();
+
         cart.addItem(mockItem2);
+
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).equalTo(2);
         expect.that(cart.contains(mockItem2)).isTrue();
@@ -76,8 +82,9 @@ public final class AnEmptyShoppingCart {
 
     @Specification
     public void doesNotFailWhenAnItemIsRemovedFromIt() {
-        expect.that(cart.isEmpty()).isTrue();
         final Item item = createMockItem();
+
+        expect.that(cart.isEmpty()).isTrue();
         cart.remove(item);
         expect.that(cart.isEmpty()).isTrue();
     }

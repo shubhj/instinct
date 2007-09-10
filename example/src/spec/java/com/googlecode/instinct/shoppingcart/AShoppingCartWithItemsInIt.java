@@ -57,14 +57,17 @@ public final class AShoppingCartWithItemsInIt {
     @Specification
     public void canHaveAnItemAddedToIt() {
         createCartWithThreeItems();
+        final Item item = createMockItem();
+
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).equalTo(3);
         expect.that(cart.contains(mockItem1)).isTrue();
         expect.that(cart.contains(mockItem2)).isTrue();
         expect.that(cart.contains(mockItem3)).isTrue();
-        final Item item = createMockItem();
         expect.that(cart.contains(item)).isFalse();
+
         cart.addItem(item);
+
         expect.that(cart.size()).equalTo(4);
         expect.that(cart.contains(item)).isTrue();
         expect.that(cart.contains(mockItem1)).isTrue();
@@ -75,20 +78,25 @@ public final class AShoppingCartWithItemsInIt {
     @Specification
     public void canHaveMultipleItemsAddedToIt() {
         createCartWithThreeItems();
+        final Item item1 = createMockItem();
+        final Item item2 = createMockItem();
+
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).equalTo(3);
         expect.that(cart.contains(mockItem1)).isTrue();
         expect.that(cart.contains(mockItem2)).isTrue();
         expect.that(cart.contains(mockItem3)).isTrue();
-        final Item item1 = createMockItem();
-        final Item item2 = createMockItem();
+
         cart.addItem(item1);
+
         expect.that(cart.size()).equalTo(4);
         expect.that(cart.contains(item1));
         expect.that(cart.contains(mockItem1)).isTrue();
         expect.that(cart.contains(mockItem2)).isTrue();
         expect.that(cart.contains(mockItem3)).isTrue();
+
         cart.addItem(item2);
+
         expect.that(cart.size()).equalTo(5);
         expect.that(cart.contains(item2)).isTrue();
         expect.that(cart.contains(item1)).isTrue();
@@ -100,12 +108,15 @@ public final class AShoppingCartWithItemsInIt {
     @Specification
     public void canHaveAnExistingItemRemovedFromIt() {
         createCartWithThreeItems();
+
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).equalTo(3);
         expect.that(cart.contains(mockItem1)).isTrue();
         expect.that(cart.contains(mockItem2)).isTrue();
         expect.that(cart.contains(mockItem3)).isTrue();
+
         cart.remove(mockItem1);
+
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).equalTo(2);
         expect.that(cart.contains(mockItem1)).isFalse();
@@ -116,18 +127,23 @@ public final class AShoppingCartWithItemsInIt {
     @Specification
     public void canHaveMultipleExistingItemsRemovedFromIt() {
         createCartWithThreeItems();
+
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).equalTo(3);
         expect.that(cart.contains(mockItem1)).isTrue();
         expect.that(cart.contains(mockItem2)).isTrue();
         expect.that(cart.contains(mockItem3)).isTrue();
+
         cart.remove(mockItem2);
+
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).equalTo(2);
         expect.that(cart.contains(mockItem2)).isFalse();
         expect.that(cart.contains(mockItem1)).isTrue();
         expect.that(cart.contains(mockItem3)).isTrue();
+
         cart.remove(mockItem3);
+
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).equalTo(1);
         expect.that(cart.contains(mockItem2)).isFalse();
@@ -139,12 +155,15 @@ public final class AShoppingCartWithItemsInIt {
     public void shouldNotRemoveAnItemThatIsNotInIt() {
         createCartWithThreeItems();
         final Item item = createMockItem();
+
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).equalTo(3);
         expect.that(cart.contains(mockItem1)).isTrue();
         expect.that(cart.contains(mockItem2)).isTrue();
         expect.that(cart.contains(mockItem3)).isTrue();
+
         cart.remove(item);
+
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).equalTo(3);
         expect.that(cart.contains(mockItem1)).isTrue();
