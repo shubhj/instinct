@@ -18,15 +18,19 @@ package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.util.ParamChecker;
+
 import java.lang.reflect.Method;
 
 @Suggest("Test drive this.")
 public final class TheoryMethodInvokerImpl implements MethodInvoker {
     public Object invokeMethod(final Object instance, final Method method) {
+        ParamChecker.checkNotNull(instance, method);
         return null;
     }
 
     public Object invokeMethod(final Object instance, final Method method, final Object... params) {
+        ParamChecker.checkNotNull(instance, method, params);
         return null;
     }
 }
