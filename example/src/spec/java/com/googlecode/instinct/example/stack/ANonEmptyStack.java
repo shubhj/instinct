@@ -8,7 +8,7 @@ import com.googlecode.instinct.marker.annotate.Specification;
 
 @Context
 public final class ANonEmptyStack {
-  private static final int SIZE = 10;
+    private static final int SIZE = 10;
     private Stack<Integer> stack;
 
     @BeforeSpecification
@@ -23,7 +23,7 @@ public final class ANonEmptyStack {
     @Specification
     void mustNoLongerBeFullAfterPop() {
         stack.pop();
-        expect.that(stack.isEmpty()).equalTo(false);
+        expect.that(stack.isEmpty()).isFalse();
     }
 
     @Specification
@@ -31,6 +31,6 @@ public final class ANonEmptyStack {
         for (int i = 0; i < SIZE; i++) {
             stack.pop();
         }
-        expect.that(stack.isEmpty()).equalTo(true);
+        expect.that(stack.isEmpty()).isTrue();
     }
 }
