@@ -19,7 +19,5 @@ package com.googlecode.instinct.internal.runner;
 public interface SpecificationResult extends ItemResult {
     String getSpecificationName();
 
-    long getExecutionTime();
-
     SpecificationRunStatus getStatus();
 }

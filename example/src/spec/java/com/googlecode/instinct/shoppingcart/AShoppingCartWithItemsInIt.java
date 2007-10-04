@@ -27,9 +27,6 @@ import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import org.junit.runner.RunWith;
 
-//Ability to add items.(done)
-//Ability to remove items. (done)
-//Note: This specification has not been refactored to make it easier to read.
 @RunWith(InstinctRunner.class)
 @Context
 public final class AShoppingCartWithItemsInIt {

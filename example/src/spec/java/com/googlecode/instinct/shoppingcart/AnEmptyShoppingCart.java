@@ -28,9 +28,6 @@ import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
 import org.junit.runner.RunWith;
 
-//Ability to add items (done)
-//Removing items leaves the cart unchanged. (done)
-//Note: This specification has not been refactored to make it easier to read.
 @RunWith(InstinctRunner.class)
 @Context
 public final class AnEmptyShoppingCart {

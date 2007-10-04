@@ -3,12 +3,14 @@ package com.googlecode.instinct.example.stack;
 import static com.googlecode.instinct.expect.Expect.expect;
 import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import static com.googlecode.instinct.expect.behaviour.Mocker.verify;
+import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import org.jmock.Expectations;
+import org.junit.runner.RunWith;
 
 @SuppressWarnings({"unchecked"})
 @Suggest({
@@ -17,6 +19,7 @@ import org.jmock.Expectations;
         "TechTalk: Show how removing fillUpStack() simplifies code but removes explicitness.",
         "TechTalk: Show how annotating mocks & subject adds a level of explicitness."
         })
+@RunWith(InstinctRunner.class)
 @Context
 public final class AnEmptyMagazineRack {
     private MagazineRack magazineRack;

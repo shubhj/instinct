@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.googlecode.instinct.marker.annotate;
 
 import java.lang.annotation.Documented;
@@ -31,4 +30,14 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 @Target({METHOD})
 public @interface Specification {
+    /**
+     * The state of a specification. Pending specifications are not run by Instinct (but are still reported).
+     *
+     * @return The state of the specification.
+     */
+    SpecificationState state() default SpecificationState.COMPLETE;
+
+    enum SpecificationState {
+        PENDING, COMPLETE
+    }
 }

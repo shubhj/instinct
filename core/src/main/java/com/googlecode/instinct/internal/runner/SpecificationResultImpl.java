@@ -16,10 +16,11 @@
 
 package com.googlecode.instinct.internal.runner;
 
+import au.net.netstorm.boost.primordial.Primordial;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 
-public final class SpecificationResultImpl implements SpecificationResult {
+public final class SpecificationResultImpl extends Primordial implements SpecificationResult {
     private final String specificationName;
     private final SpecificationRunStatus status;
     private final long executionTime;

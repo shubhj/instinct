@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.googlecode.instinct.integrate.junit4;
 
 import com.googlecode.instinct.internal.core.SpecificationMethod;
@@ -24,13 +23,11 @@ import com.googlecode.instinct.internal.util.ExceptionFinder;
 import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
-import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.util.Collection;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
-import org.jmock.api.ExpectationError;
 
 public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final DescriptionEdge descriptionEdge = new DescriptionEdgeImpl();
@@ -46,7 +43,9 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     public void run(final Collection<SpecificationMethod> specificationMethods) {
         checkNotNull(specificationMethods);
         for (final SpecificationMethod specificationMethod : specificationMethods) {
-            runSpecification(specificationMethod);
+            if (!specificationMethod.isPending()) {
+                runSpecification(specificationMethod);
+            }
         }
     }
 
@@ -67,16 +66,6 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
 
     private Failure createFailure(final Description description, final SpecificationResult specificationResult) {
         final Throwable rootCause = exceptionFinder.getRootCause((Throwable) specificationResult.getStatus().getDetailedStatus());
-        return objectFactory.create(Failure.class, description, wrapRootCause(rootCause));
-    }
-
-    @Fix("Test the wrapping of jMock exceptions here. Or, move the logic somewhere better.")
-    private Throwable wrapRootCause(final Throwable rootCause) {
-        if (rootCause instanceof ExpectationError) {
-            final String message = "Unexpected invocation. You may need to wrap the code in your new Expections(){{}} block with cardinality "
-                    + "constraints, one(), atLeast(), etc.\n";
-            return new RuntimeException(message + rootCause.toString(), rootCause);
-        }
-        return rootCause;
+        return objectFactory.create(Failure.class, description, rootCause);
     }
 }

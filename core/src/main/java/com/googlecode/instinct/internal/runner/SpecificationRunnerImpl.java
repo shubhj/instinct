@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.core.LifecycleMethod;
@@ -23,6 +22,7 @@ import com.googlecode.instinct.internal.util.Clock;
 import com.googlecode.instinct.internal.util.ClockImpl;
 import com.googlecode.instinct.internal.util.ConstructorInvoker;
 import com.googlecode.instinct.internal.util.ConstructorInvokerImpl;
+import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
@@ -30,6 +30,7 @@ import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.SpecificationListener;
 import java.util.ArrayList;
 import java.util.Collection;
+import org.jmock.api.ExpectationError;
 
 public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final Collection<SpecificationListener> specificationListeners = new ArrayList<SpecificationListener>();
@@ -57,11 +58,20 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         return specificationResult;
     }
 
-    // SUPPRESS IllegalCatch {
-    @SuppressWarnings({"CatchGenericClass"})
-    @Suggest("Make a clock wrapper that looks like org.jbehave.core.util.Timer.")
+    @Suggest({"Make a clock wrapper that looks like org.jbehave.core.util.Timer.", "Break out pending specs."})
     private SpecificationResult doRun(final SpecificationMethod specificationMethod) {
         final long startTime = clock.getCurrentTime();
+        if (specificationMethod.isPending()) {
+            final SpecificationRunStatus status = new SpecificationRunPendingStatus();
+            return createSpecResult(specificationMethod, status, startTime);
+        } else {
+            return tryRun(specificationMethod, startTime);
+        }
+    }
+
+    // SUPPRESS IllegalCatch {
+    @SuppressWarnings({"CatchGenericClass"})
+    private SpecificationResult tryRun(final SpecificationMethod specificationMethod, final long startTime) {
         try {
             // expose the context class, rather than getting the method
             final Class<?> contextClass = specificationMethod.getSpecificationMethod().getDeclaringClass();
@@ -69,11 +79,21 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
             runSpecificationLifecycle(instance, specificationMethod);
             return createSpecResult(specificationMethod, SPECIFICATION_SUCCESS, startTime);
         } catch (Throwable e) {
-            final SpecificationRunStatus status = new SpecificationRunFailureStatus(e);
+            final SpecificationRunStatus status = new SpecificationRunFailureStatus(wrapCommonExceptions(e));
             return createSpecResult(specificationMethod, status, startTime);
         }
     }
     // } SUPPRESS IllegalCatch
+
+    @Fix("Test the wrapping of jMock exceptions here.")
+    private Throwable wrapCommonExceptions(final Throwable throwable) {
+        if (throwable instanceof ExpectationError) {
+            final String message = "Unexpected invocation. You may need to wrap the code in your new Expections(){{}} block with cardinality "
+                    + "constraints, one(), atLeast(), etc.\n";
+            return new RuntimeException(message + throwable.toString(), throwable);
+        }
+        return throwable;
+    }
 
     private SpecificationResult createSpecResult(final SpecificationMethod specificationMethod, final SpecificationRunStatus runStatus,
             final long startTime) {
@@ -81,8 +101,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         return new SpecificationResultImpl(specificationMethod.getName(), runStatus, executionTime);
     }
 
-    @Suggest({"Expose this lifecycle?",
-            "May need to stick verification of mocks in finally, if we report them as well as other errors."})
+    @Suggest({"Expose this lifecycle?", "May need to stick verification of mocks in finally, if we report them as well as other errors."})
     private void runSpecificationLifecycle(final Object contextInstance, final SpecificationMethod specificationMethod) {
         try {
 //            testDoubleAutoWirer.wire(contextInstance);

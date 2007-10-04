@@ -197,7 +197,9 @@
         </inspection_tool>
         <inspection_tool class="LabeledStatement" level="WARNING" enabled="true" />
         <inspection_tool class="SwitchStatementWithConfusingDeclaration" level="WARNING" enabled="true" />
-        <inspection_tool class="LoopConditionNotUpdatedInsideLoop" level="WARNING" enabled="true" />
+        <inspection_tool class="LoopConditionNotUpdatedInsideLoop" level="WARNING" enabled="true">
+          <option name="ignoreIterators" value="false" />
+        </inspection_tool>
         <inspection_tool class="NestedSwitchStatement" level="WARNING" enabled="true" />
         <inspection_tool class="PointlessIndexOfComparison" level="WARNING" enabled="true" />
         <inspection_tool class="SwitchStatement" level="WARNING" enabled="true" />
@@ -267,7 +269,6 @@
           <option name="m_ignorePrimitives" value="false" />
         </inspection_tool>
         <inspection_tool class="NonFinalStaticVariableUsedInClassInitialization" level="WARNING" enabled="true" />
-        <inspection_tool class="OverriddenMethodCallInConstructor" level="WARNING" enabled="true" />
         <inspection_tool class="StaticVariableInitialization" level="WARNING" enabled="true">
           <option name="m_ignorePrimitives" value="false" />
         </inspection_tool>
@@ -283,7 +284,9 @@
         <inspection_tool class="AssertStatement" level="WARNING" enabled="true" />
         <inspection_tool class="AssertAsName" level="WARNING" enabled="true" />
         <inspection_tool class="EnumAsName" level="WARNING" enabled="true" />
-        <inspection_tool class="TestCaseWithNoTestMethods" level="WARNING" enabled="true" />
+        <inspection_tool class="TestCaseWithNoTestMethods" level="WARNING" enabled="true">
+          <option name="ignoreSupers" value="false" />
+        </inspection_tool>
         <inspection_tool class="MisspelledSetUp" level="WARNING" enabled="true" />
         <inspection_tool class="SetupIsPublicVoidNoArg" level="WARNING" enabled="true" />
         <inspection_tool class="SimplifiableJUnitAssertion" level="WARNING" enabled="true" />
@@ -839,6 +842,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="svn" />
   </component>
+  <component name="WebServicesPlugin" addRequiredLibraries="true" />
   <component name="com.intellij.jsf.UserDefinedFacesConfigs">
     <option name="USER_DEFINED_CONFIGS">
       <value>

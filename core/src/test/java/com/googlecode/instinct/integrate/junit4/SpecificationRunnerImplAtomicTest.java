@@ -74,8 +74,7 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
         setUpCommonExpectations();
         expect.that(new Expectations() {
             {
-                one(specificationResult).completedSuccessfully();
-                will(returnValue(true));
+                one(specificationResult).completedSuccessfully(); will(returnValue(true));
                 one(notifier).fireTestFinished(description);
             }
         });
@@ -102,6 +101,7 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
             {
                 one(specificationMethod).getName(); will(returnValue("dontCare"));
                 one(specificationMethod).getDeclaringClass(); will(returnValue(String.class));
+                one(specificationMethod).isPending(); will(returnValue(false));
                 one(descriptionEdge).createTestDescription(String.class, "dontCare"); will(returnValue(description));
                 one(notifier).fireTestStarted(description);
                 one(specificationMethod).run(); will(returnValue(specificationResult));

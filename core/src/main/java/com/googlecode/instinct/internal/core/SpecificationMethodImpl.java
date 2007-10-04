@@ -20,6 +20,7 @@ import au.net.netstorm.boost.primordial.Primordial;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
+import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
@@ -51,6 +52,12 @@ public final class SpecificationMethodImpl extends Primordial implements Specifi
 
     public SpecificationResult run() {
         return specificationRunner.run(this);
+    }
+
+    @Fix("Flesh this out.")
+    public boolean isPending() {
+//        return SpecificationState.COMPLETE == SpecificationState.COMPLETE;
+        return false;
     }
 
     public LifecycleMethod getSpecificationMethod() {

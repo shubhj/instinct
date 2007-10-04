@@ -1,6 +1,7 @@
 package com.googlecode.instinct.example.expect;
 
 import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
@@ -10,12 +11,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.hamcrest.Matchers;
+import org.junit.runner.RunWith;
 
 /**
  * The examples below illustrate Instinct's state-based expectation API.
  * @see com.googlecode.instinct.expect.state.StateExpectations
  */
 @SuppressWarnings({"MagicNumber", "unchecked"})
+@RunWith(InstinctRunner.class)
 @Context
 public final class StateExpectationsContext {
 

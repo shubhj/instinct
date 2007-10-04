@@ -19,9 +19,12 @@ package com.googlecode.instinct.sandbox;
 import com.googlecode.instinct.example.money.Dollar;
 import com.googlecode.instinct.example.money.DollarImpl;
 import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
+import org.junit.runner.RunWith;
 
+@RunWith(InstinctRunner.class)
 public class DollarMultiplication {
     private static final int INITIAL_AMOUNT = 10;
     private Dollar dollar;

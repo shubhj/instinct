@@ -25,6 +25,8 @@ import java.util.Collection;
 public interface SpecificationMethod extends RunnableItem {
     SpecificationResult run();
 
+    boolean isPending();
+
     @Suggest("Something is misnamed here.  This returns a LifecycleMethod and not a SpecMethod, which is this class.")
     LifecycleMethod getSpecificationMethod();
 

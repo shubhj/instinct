@@ -55,6 +55,8 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
                 will(returnValue(new ArrayList()));
                 one(underlyingSpecMethod).getDeclaringClass();
                 will(returnValue(String.class));
+                one(specificationMethod).isPending();
+                will(returnValue(false));
                 one(underlyingSpecMethod).getMethod();
                 will(returnValue(null));
                 one(specificationMethod).getAfterSpecificationMethods();
