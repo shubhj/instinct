@@ -394,7 +394,6 @@
         <inspection_tool class="MultiplyOrDivideByPowerOfTwo" level="WARNING" enabled="true">
           <option name="checkDivision" value="false" />
         </inspection_tool>
-        <inspection_tool class="StringReplaceableByStringBuffer" level="WARNING" enabled="true" />
         <inspection_tool class="SubstringZero" level="WARNING" enabled="true" />
         <inspection_tool class="SizeReplaceableByIsEmpty" level="WARNING" enabled="true">
           <option name="ignoreNegations" value="false" />
@@ -625,7 +624,6 @@
         </inspection_tool>
         <inspection_tool class="MethodOverloadsParentMethod" level="WARNING" enabled="true" />
         <inspection_tool class="ThrowableInstanceNeverThrown" level="WARNING" enabled="false" />
-        <inspection_tool class="CaughtExceptionImmediatelyRethrown" level="WARNING" enabled="true" />
         <inspection_tool class="EqualsWhichDoesntCheckParameterClass" level="WARNING" enabled="false" />
       </profile>
     </profiles>

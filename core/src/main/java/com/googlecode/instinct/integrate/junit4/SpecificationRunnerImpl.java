@@ -61,7 +61,11 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     }
 
     private Description createDescription(final SpecificationMethod specificationMethod) {
-        return descriptionEdge.createTestDescription(specificationMethod.getDeclaringClass(), specificationMethod.getName());
+        String name = specificationMethod.getName();
+        if (specificationMethod.isPending()) {
+            name += " (pending)"; 
+        }
+        return descriptionEdge.createTestDescription(specificationMethod.getDeclaringClass(), name);
     }
 
     private Failure createFailure(final Description description, final SpecificationResult specificationResult) {

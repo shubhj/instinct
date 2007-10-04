@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.internal.report;
 
-import static java.lang.System.getProperty;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilder;
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilderImpl;
@@ -24,7 +23,9 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ResultMessageBuilder;
+import static java.lang.System.getProperty;
 
+@Suggest("Add pending here")
 public final class VerboseResultMessageBuilder implements ResultMessageBuilder {
     private static final double MILLISECONDS_IN_SECONDS = 1000.0;
     private static final String TAB = "\t";

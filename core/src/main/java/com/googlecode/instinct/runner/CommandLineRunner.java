@@ -16,11 +16,6 @@
 
 package com.googlecode.instinct.runner;
 
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import static java.lang.System.out;
-import java.util.Collection;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.RunnableItem;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
@@ -37,6 +32,11 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import com.googlecode.instinct.report.ResultMessageBuilder;
+import java.io.BufferedWriter;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import static java.lang.System.out;
+import java.util.Collection;
 
 /**
  * Command line specification runner. Runs a context or specification method sending the results to standard out.
@@ -51,7 +51,8 @@ import com.googlecode.instinct.report.ResultMessageBuilder;
  */
 @Fix({"Write atomic test for this."})
 @Suggest({"Add formatting options as command line argument.",
-        "Can the formatting be moved into the brief runner? Make this not implement spec listener"})
+        "Can the formatting be moved into the BriefResultMessageBuilder?", "Make this not implement spec listener",
+        "Why is there this & the commane line runner? This should use text runner"})
 @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed", "UseOfSystemOutOrSystemErr"})
 public final class CommandLineRunner implements ContextListener, SpecificationListener {
     private static final CommandLineUsage USAGE = new CommandLineUsageImpl();

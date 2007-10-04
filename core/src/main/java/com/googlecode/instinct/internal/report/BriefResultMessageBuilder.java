@@ -16,12 +16,6 @@
 
 package com.googlecode.instinct.internal.report;
 
-import static java.lang.System.getProperty;
-import java.util.Iterator;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import static java.util.regex.Pattern.MULTILINE;
-import static java.util.regex.Pattern.compile;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilder;
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilderImpl;
@@ -29,7 +23,14 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ResultMessageBuilder;
+import static java.lang.System.getProperty;
+import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import static java.util.regex.Pattern.MULTILINE;
+import static java.util.regex.Pattern.compile;
 
+@Suggest("Add pending here")
 public final class BriefResultMessageBuilder implements ResultMessageBuilder {
     private static final Pattern START_OF_LINE = compile("^", MULTILINE);
     private static final String NEW_LINE = getProperty("line.separator");
