@@ -38,4 +38,8 @@ public class CollectionCheckerImpl<E, T extends Collection<E>> extends IterableC
     public final void hasSize(final int size) {
         getAsserter().expectThat(subject.size(), Matchers.equalTo(size));
     }
+
+    public final void isOfSize(final int size) {
+        getAsserter().expectThat(subject.size(), Matchers.equalTo(size));
+    }
 }

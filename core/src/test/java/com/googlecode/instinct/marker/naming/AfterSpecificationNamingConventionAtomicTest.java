@@ -29,6 +29,6 @@ public final class AfterSpecificationNamingConventionAtomicTest extends Instinct
     }
 
     public void testGetPattern() {
-        expect.that(namingConvention.getPattern()).equalTo("^tearDown");
+        expect.that(namingConvention.getPattern()).equalTo("^tearDown|^after");
     }
 }

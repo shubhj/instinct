@@ -18,6 +18,6 @@ package com.googlecode.instinct.marker.naming;
 
 public final class AfterSpecificationNamingConvention implements NamingConvention {
     public String getPattern() {
-        return "^tearDown";
+        return "^tearDown|^after";
     }
 }

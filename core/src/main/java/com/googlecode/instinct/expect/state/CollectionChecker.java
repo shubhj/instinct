@@ -24,4 +24,6 @@ public interface CollectionChecker<E, T extends Collection<E>> extends IterableC
     void notEmpty();
 
     void hasSize(int size);
+
+    void isOfSize(int size);
 }

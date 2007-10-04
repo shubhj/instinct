@@ -37,6 +37,13 @@ public @interface Specification {
      */
     SpecificationState state() default SpecificationState.COMPLETE;
 
+    /**
+     * The group the specification belongs to.
+     * Groups can be used to run different sets of specifications at different times, for example slow specifications and slow specifications.
+     * @return The group the specification belongs to.
+     */
+    String[] groups() default "None";
+
     enum SpecificationState {
         PENDING, COMPLETE
     }

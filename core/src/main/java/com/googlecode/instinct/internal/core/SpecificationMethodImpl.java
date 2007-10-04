@@ -13,18 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.googlecode.instinct.internal.core;
 
 import au.net.netstorm.boost.primordial.Primordial;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
-import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.Specification.SpecificationState;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.util.Collection;
 
 public final class SpecificationMethodImpl extends Primordial implements SpecificationMethod {
@@ -54,10 +55,9 @@ public final class SpecificationMethodImpl extends Primordial implements Specifi
         return specificationRunner.run(this);
     }
 
-    @Fix("Flesh this out.")
     public boolean isPending() {
-//        return SpecificationState.COMPLETE == SpecificationState.COMPLETE;
-        return false;
+        final Method method = specificationMethod.getMethod();
+        return method.isAnnotationPresent(Specification.class) && method.getAnnotation(Specification.class).state() == SpecificationState.PENDING;
     }
 
     public LifecycleMethod getSpecificationMethod() {

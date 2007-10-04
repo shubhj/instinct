@@ -23,7 +23,6 @@ import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.TestingException;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 
@@ -41,11 +40,11 @@ public final class ActorAutoWirer {
     public static void autoWireMockFields(final Object instanceToAutoWire) {
         final Field[] fields = instanceToAutoWire.getClass().getDeclaredFields();
         for (final Field field : fields) {
-            if (isAnnotated(Mock.class, field) && autoWireMock(field)) {
+            if (field.isAnnotationPresent(Mock.class) && autoWireMock(field)) {
                 injectMock(instanceToAutoWire, field);
-            } else if (isAnnotated(Stub.class, field) && autoWireStub(field)) {
+            } else if (field.isAnnotationPresent(Stub.class) && autoWireStub(field)) {
                 injectStub(instanceToAutoWire, field);
-            } else if (isAnnotated(Dummy.class, field) && autoWireDummy(field)) {
+            } else if (field.isAnnotationPresent(Dummy.class) && autoWireDummy(field)) {
                 injectDummy(instanceToAutoWire, field);
             }
         }
@@ -54,7 +53,7 @@ public final class ActorAutoWirer {
     public static void autoWireSubjectFields(final Object instanceToAutoWire) {
         final Field[] fields = instanceToAutoWire.getClass().getDeclaredFields();
         for (final Field field : fields) {
-            if (isAnnotated(Subject.class, field) && autoWireSubject(field)) {
+            if (field.isAnnotationPresent(Subject.class) && autoWireSubject(field)) {
                 injectSubject(instanceToAutoWire, field);
             }
         }
@@ -85,10 +84,6 @@ public final class ActorAutoWirer {
                     field.getType().getSimpleName();
             throw new TestingException(message, throwable);
         }
-    }
-
-    private static <T extends Annotation> boolean isAnnotated(final Class<T> annotation, final Field field) {
-        return field.getAnnotation(annotation) != null;
     }
 
     private static boolean autoWireSubject(final AnnotatedElement subjectField) {
