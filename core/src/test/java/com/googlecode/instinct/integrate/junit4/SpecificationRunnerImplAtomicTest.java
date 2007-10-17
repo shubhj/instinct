@@ -76,6 +76,7 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
             {
                 one(specificationResult).completedSuccessfully(); will(returnValue(true));
                 one(notifier).fireTestFinished(description);
+                ignoring(specificationResult).getStatus();
             }
         });
         specificationRunner.run(specificationMethods);

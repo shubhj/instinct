@@ -21,7 +21,7 @@ import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.marker.annotate.Specification.SpecificationState;
+import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
 import java.lang.annotation.Annotation;
@@ -57,7 +57,7 @@ public final class SpecificationMethodImpl extends Primordial implements Specifi
 
     public boolean isPending() {
         final Method method = specificationMethod.getMethod();
-        return method.isAnnotationPresent(Specification.class) && method.getAnnotation(Specification.class).state() == SpecificationState.PENDING;
+        return method.isAnnotationPresent(Specification.class) && method.getAnnotation(Specification.class).state() == PENDING;
     }
 
     public LifecycleMethod getSpecificationMethod() {

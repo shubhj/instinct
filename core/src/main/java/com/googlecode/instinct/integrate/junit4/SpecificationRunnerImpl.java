@@ -24,6 +24,7 @@ import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
 import java.util.Collection;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
@@ -43,9 +44,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     public void run(final Collection<SpecificationMethod> specificationMethods) {
         checkNotNull(specificationMethods);
         for (final SpecificationMethod specificationMethod : specificationMethods) {
-            if (!specificationMethod.isPending()) {
-                runSpecification(specificationMethod);
-            }
+            runSpecification(specificationMethod);
         }
     }
 
@@ -54,7 +53,11 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         notifier.fireTestStarted(description);
         final SpecificationResult specificationResult = specificationMethod.run();
         if (specificationResult.completedSuccessfully()) {
-            notifier.fireTestFinished(description);
+            if (specificationResult.getStatus().getDetailedStatus().equals(PENDING)) {
+                notifier.fireTestIgnored(description);
+            } else {
+                notifier.fireTestFinished(description);
+            }
         } else {
             notifier.fireTestFailure(createFailure(description, specificationResult));
         }
@@ -63,7 +66,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     private Description createDescription(final SpecificationMethod specificationMethod) {
         String name = specificationMethod.getName();
         if (specificationMethod.isPending()) {
-            name += " (pending)"; 
+            name = name + " [PENDING]";
         }
         return descriptionEdge.createTestDescription(specificationMethod.getDeclaringClass(), name);
     }

@@ -5,7 +5,7 @@ import au.net.netstorm.boost.primordial.Primordial;
 
 public final class SpecificationRunPendingStatus extends Primordial implements SpecificationRunStatus {
     public Object getDetailedStatus() {
-        return SpecificationState.PENDING.toString();
+        return SpecificationState.PENDING;
     }
 
     public boolean runSuccessful() {
