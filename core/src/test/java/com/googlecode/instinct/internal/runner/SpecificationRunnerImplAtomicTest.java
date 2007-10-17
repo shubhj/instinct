@@ -20,7 +20,9 @@ import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.util.MethodInvoker;
+import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
@@ -29,12 +31,13 @@ import org.jmock.Expectations;
 
 @SuppressWarnings({"UnusedDeclaration"})
 public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
-    private SpecificationRunner specificationRunner;
+    @Subject(auto = false) private SpecificationRunner specificationRunner;
     @Mock private SpecificationMethod specificationMethod;
     @Mock private LifecycleMethod underlyingSpecMethod;
     @Mock private MethodInvokerFactory methodInvokerFactory;
     @Mock private MethodInvoker invoker;
     @Mock private LifeCycleMethodValidator methodValidator;
+    @Dummy private Class exceptionClass;
 
     public void testConformsToClassTraits() {
         checkClass(SpecificationRunnerImpl.class, SpecificationRunner.class);
@@ -61,8 +64,8 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
                 will(returnValue(null));
                 one(specificationMethod).getAfterSpecificationMethods();
                 will(returnValue(new ArrayList()));
-                one(specificationMethod).getName();
-                will(returnValue("someName"));
+                one(specificationMethod).getName(); will(returnValue("someName"));
+                one(specificationMethod).getExpectedException(); will(returnValue(exceptionClass));
                 one(methodValidator).checkMethodHasNoParameters(underlyingSpecMethod);
                 one(methodInvokerFactory).create(underlyingSpecMethod);
                 will(returnValue(invoker));

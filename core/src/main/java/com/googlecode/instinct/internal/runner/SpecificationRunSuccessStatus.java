@@ -17,10 +17,11 @@
 package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.util.Suggest;
+import au.net.netstorm.boost.primordial.Primordial;
 
 @Suggest({"Implement readObject() & writeObject() to ensure only ever one VERIFICATION_SUCCESS",
         "Can this be implemented as an enum? Perhaps this becomes an enum & the methods go into the SpecificationResult."})
-public final class SpecificationRunSuccessStatus implements SpecificationRunStatus {
+public final class SpecificationRunSuccessStatus extends Primordial implements SpecificationRunStatus {
     public static final SpecificationRunStatus SPECIFICATION_SUCCESS = new SpecificationRunSuccessStatus();
 
     public Object getDetailedStatus() {

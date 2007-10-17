@@ -27,11 +27,14 @@ import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.runner.SpecificationListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.jmock.api.ExpectationError;
 
+@Fix("This class is huge. Split it!")
+@SuppressWarnings({"OverlyCoupledClass"})
 public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final Collection<SpecificationListener> specificationListeners = new ArrayList<SpecificationListener>();
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
@@ -71,29 +74,63 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     // SUPPRESS IllegalCatch {
     @SuppressWarnings({"CatchGenericClass"})
     private SpecificationResult doNonPendingRun(final SpecificationMethod specificationMethod, final long startTime) {
+        final Class<? extends Throwable> expectedException = specificationMethod.getExpectedException();
         try {
             // expose the context class, rather than getting the method
             final Class<?> contextClass = specificationMethod.getSpecificationMethod().getDeclaringClass();
             final Object instance = invokeConstructor(contextClass);
             runSpecificationLifecycle(instance, specificationMethod);
-            return createSpecResult(specificationMethod, SPECIFICATION_SUCCESS, startTime);
-        } catch (Throwable e) {
-
-//            specificationMethod.getSpecificationMethod().getMethod().isAnnotationPresent(Specification.class) &&
-//                    method.getAnnotation(Specification.class).state() == Specification.SpecificationState.PENDING;
-
-            final SpecificationRunStatus status = new SpecificationRunFailureStatus(wrapCommonExceptions(e));
-            return createSpecResult(specificationMethod, status, startTime);
+            if (expectedException.equals(Specification.NoExpectedException.class)) {
+                return createSpecResult(specificationMethod, SPECIFICATION_SUCCESS, startTime);
+            } else {
+                final String message = "Expected exception " + expectedException + " was not thrown in body of specification";
+                final Throwable failure = new SpecificationFailureException(message);
+                final SpecificationRunStatus status = new SpecificationRunFailureStatus(failure);
+                return createSpecResult(specificationMethod, status, startTime);
+            }
+        } catch (Throwable exceptionThrown) {
+            if (expectedException.equals(Specification.NoExpectedException.class)) {
+                final SpecificationRunStatus status = new SpecificationRunFailureStatus(wrapCommonExceptions(exceptionThrown));
+                return createSpecResult(specificationMethod, status, startTime);
+            } else {
+                final Throwable exceptionThrownBySpec = exceptionThrown.getCause().getCause();
+                return expectFailure(specificationMethod, startTime, expectedException, exceptionThrownBySpec);
+            }
         }
     }
     // } SUPPRESS IllegalCatch
+
+    @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
+    private SpecificationResult expectFailure(final SpecificationMethod specificationMethod, final long startTime,
+            final Class<? extends Throwable> expectedExceptionClass, final Throwable thrownException) {
+        if (thrownException.getClass().equals(expectedExceptionClass)) {
+            final String expectedMessage = specificationMethod.getExpectedExceptionMessage();
+            if (expectedMessage.equals(Specification.NO_MESSAGE)) {
+                return createSpecResult(specificationMethod, SPECIFICATION_SUCCESS, startTime);
+            } else {
+                if (expectedMessage.equals(thrownException.getMessage())) {
+                    return createSpecResult(specificationMethod, SPECIFICATION_SUCCESS, startTime);
+                } else {
+                    final String message = "Exception message thrown does not match expected: " + expectedMessage;
+                    final Throwable failure = new SpecificationFailureException(message);
+                    final SpecificationRunStatus status = new SpecificationRunFailureStatus(failure);
+                    return createSpecResult(specificationMethod, status, startTime);
+                }
+            }
+        } else {
+            final String message = "Expected " + expectedExceptionClass + " to be thrown but was " + thrownException.getClass();
+            final Throwable failure = new SpecificationFailureException(message, thrownException);
+            final SpecificationRunStatus status = new SpecificationRunFailureStatus(failure);
+            return createSpecResult(specificationMethod, status, startTime);
+        }
+    }
 
     @Fix("Test the wrapping of jMock exceptions here.")
     private Throwable wrapCommonExceptions(final Throwable throwable) {
         if (throwable instanceof ExpectationError) {
             final String message = "Unexpected invocation. You may need to wrap the code in your new Expections(){{}} block with cardinality "
                     + "constraints, one(), atLeast(), etc.\n";
-            return new RuntimeException(message + throwable.toString(), throwable);
+            return new SpecificationFailureException(message + throwable.toString(), throwable);
         }
         return throwable;
     }

@@ -16,14 +16,18 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
+import com.googlecode.instinct.internal.core.LifecycleMethodImpl;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethodImpl;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.reflect.Reflector.getMethod;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 @SuppressWarnings({"StringContatenationInLoop"})
 public final class SpecificationRunnerSlowTest extends InstinctTestCase {
@@ -45,6 +49,46 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
         checkInvalidMethodsBarf(ContextWithSpecificationMethodContainingParameter.class);
         checkInvalidMethodsBarf(ContextWithInvalidlyMarkedAfterSpecification2.class);
         checkInvalidMethodsBarf(ContextWithInvalidlyMarkedBeforeSpecification2.class);
+    }
+
+    public void testExpectedFailuresSucceed() {
+        final SpecificationResult specificationResult = runner.run(getSpecificationMethod(ContextWithExpectedFailures.class, "failsWithoutMessage"));
+        expect.that(specificationResult.completedSuccessfully()).isTrue();
+    }
+
+    public void testExpectedFailureWithDifferentExceptionFails() {
+        final SpecificationResult specificationResult = runner.run(getSpecificationMethod(ContextWithExpectedFailures.class, "failsWithDifferentException"));
+        expect.that(specificationResult.completedSuccessfully()).isFalse();
+    }
+
+    public void testExpectedFailuresWithExpectedMessageSucceeds() {
+        final SpecificationResult specificationResult = runner.run(getSpecificationMethod(ContextWithExpectedFailures.class, "failsWithMessage"));
+        expect.that(specificationResult.completedSuccessfully()).isTrue();
+    }
+
+    public void testExpectedFailuresWithDifferentMessageCausesFailure() {
+        final SpecificationResult specificationResult = runner.run(getSpecificationMethod(ContextWithExpectedFailures.class, "failsWithDifferentMessage"));
+        expect.that(specificationResult.completedSuccessfully()).isFalse();
+    }
+
+    public void testExpectedFailureButDoesNotFail() {
+        final SpecificationResult specificationResult = runner.run(getSpecificationMethod(ContextWithExpectedFailures.class, "markedAsFailureButDoesNot"));
+        expect.that(specificationResult.completedSuccessfully()).isFalse();
+    }
+
+    public void testExpectedFailureWithEdgeException() {
+        final SpecificationResult specificationResult = runner.run(getSpecificationMethod(ContextWithExpectedFailures.class, "expectedFailureWithEdgeException"));
+        expect.that(specificationResult.completedSuccessfully()).isTrue();
+    }
+
+    public void testExpectedFailureWithEdgeExceptionWithNestedInvocationTargetException() {
+        final SpecificationResult specificationResult = runner.run(getSpecificationMethod(ContextWithExpectedFailures.class, "expectedFailureWithEdgeExceptionWithInvocationTargetException"));
+        expect.that(specificationResult.completedSuccessfully()).isTrue();
+    }
+
+    private SpecificationMethod getSpecificationMethod(final Class<ContextWithExpectedFailures> contextClass, final String specMethodName) {
+        return new SpecificationMethodImpl(new LifecycleMethodImpl(getMethod(contextClass, specMethodName)), Collections.<LifecycleMethod>emptyList(),
+                Collections.<LifecycleMethod>emptyList());
     }
 
     private <T> void checkContextsRunWithoutError(final Class<T> contextClass) {

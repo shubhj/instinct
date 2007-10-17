@@ -1,8 +1,9 @@
 package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.marker.annotate.Specification.SpecificationState;
+import au.net.netstorm.boost.primordial.Primordial;
 
-public final class SpecificationRunPendingStatus implements SpecificationRunStatus {
+public final class SpecificationRunPendingStatus extends Primordial implements SpecificationRunStatus {
     public Object getDetailedStatus() {
         return SpecificationState.PENDING.toString();
     }
