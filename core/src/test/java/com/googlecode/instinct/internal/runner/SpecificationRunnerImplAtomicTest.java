@@ -37,15 +37,15 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     @Mock private MethodInvokerFactory methodInvokerFactory;
     @Mock private MethodInvoker invoker;
     @Mock private LifeCycleMethodValidator methodValidator;
-    @Dummy private Class exceptionClass;
-
-    public void testConformsToClassTraits() {
-        checkClass(SpecificationRunnerImpl.class, SpecificationRunner.class);
-    }
+    @Dummy private Class<?> exceptionClass;
 
     @Override
     public void setUpSubject() {
         specificationRunner = createSubject(SpecificationRunnerImpl.class, methodInvokerFactory, methodValidator);
+    }
+
+    public void testConformsToClassTraits() {
+        checkClass(SpecificationRunnerImpl.class, SpecificationRunner.class);
     }
 
     public void testWillRunASpecificationMethod() {
