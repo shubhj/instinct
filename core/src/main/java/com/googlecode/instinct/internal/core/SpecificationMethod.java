@@ -41,4 +41,6 @@ public interface SpecificationMethod extends RunnableItem {
     Annotation[][] getParameterAnnotations();
 
     Class<? extends Throwable> getExpectedException();
+
+    String getExpectedExceptionMessage();
 }

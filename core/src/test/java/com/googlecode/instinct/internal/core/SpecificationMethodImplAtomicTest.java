@@ -48,12 +48,15 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
     @Dummy private Class<?> declaringClass;
     @Dummy(auto = false) private Method annotatedSpec;
     @Dummy(auto = false) private Method annotatedFailingSpec;
+    @Dummy(auto = false) private Method annotatedFailingSpecWithMessage;
     @Dummy(auto = false) private Method nonAnnotatedSpec;
     @Dummy(auto = false) private Method notASpec;
 
     @Override public void setUpTestDoubles() {
         annotatedSpec = getMethod(ContextWithSpecificationsMarkedInDifferentWays.class, "annotatedSpecificationMethod");
         annotatedFailingSpec = getMethod(ContextWithSpecificationsMarkedInDifferentWays.class, "annotatedSpecificationMethodThatShouldFail");
+        annotatedFailingSpecWithMessage =
+                getMethod(ContextWithSpecificationsMarkedInDifferentWays.class, "annotatedSpecificationMethodThatShouldFailWithAMessage");
         nonAnnotatedSpec = getMethod(ContextWithSpecificationsMarkedInDifferentWays.class, "shouldBeAspecificationThatIsNotAnnotated");
         notASpec = getMethod(ContextWithSpecificationsMarkedInDifferentWays.class, "isNotASpecification");
     }
@@ -81,7 +84,8 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
     public void testRunsSpecificationUsingASpecificationRunner() {
         expect.that(new Expectations() {
             {
-                atLeast(1).of(specificationRunner).run(specificationMethod); will(returnValue(specificationResult));
+                atLeast(1).of(specificationRunner).run(specificationMethod);
+                will(returnValue(specificationResult));
             }
         });
         final SpecificationResult result = specificationMethod.run();
@@ -106,7 +110,8 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
     public void testReturnsDeclaringClassOfLifecycleMethod() {
         expect.that(new Expectations() {
             {
-                atLeast(1).of(specMethod).getDeclaringClass(); will(returnValue(declaringClass));
+                atLeast(1).of(specMethod).getDeclaringClass();
+                will(returnValue(declaringClass));
             }
         });
         assertEquals(declaringClass, specificationMethod.getDeclaringClass());
@@ -138,6 +143,7 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
             }
         });
         expect.that(specificationMethod.getExpectedException() == Specification.NoExpectedException.class).isTrue();
+        expect.that(specificationMethod.getExpectedExceptionMessage()).equalTo(Specification.NO_MESSAGE);
     }
 
     public void testReturnsExpectedExceptionClassForASpecThatIsAnnotatedAsFailing() {
@@ -147,6 +153,7 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
             }
         });
         expect.that(specificationMethod.getExpectedException() == RuntimeException.class).isTrue();
+        expect.that(specificationMethod.getExpectedExceptionMessage()).equalTo(Specification.NO_MESSAGE);
     }
 
     public void testReturnsNoExpectedExceptionClassForASpecThatIsNotAnnotated() {
@@ -156,6 +163,7 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
             }
         });
         expect.that(specificationMethod.getExpectedException() == Specification.NoExpectedException.class).isTrue();
+        expect.that(specificationMethod.getExpectedExceptionMessage()).equalTo(Specification.NO_MESSAGE);
     }
 
     public void testReturnsNoExpectedExceptionClassForANonSpecMethod() {
@@ -165,6 +173,17 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
             }
         });
         expect.that(specificationMethod.getExpectedException() == Specification.NoExpectedException.class).isTrue();
+        expect.that(specificationMethod.getExpectedExceptionMessage()).equalTo(Specification.NO_MESSAGE);
+    }
+
+    public void testReturnsExpectedExceptionMessageClassForASpecThatIsAnnotatedAsFailing() {
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(specMethod).getMethod(); will(returnValue(annotatedFailingSpecWithMessage));
+            }
+        });
+        expect.that(specificationMethod.getExpectedException() == RuntimeException.class).isTrue();
+        expect.that(specificationMethod.getExpectedExceptionMessage()).equalTo("Arrrgghh...!");
     }
 
     private static final class ContextWithSpecificationsMarkedInDifferentWays {
@@ -174,6 +193,10 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
 
         @Specification(expectedException = RuntimeException.class)
         public void annotatedSpecificationMethodThatShouldFail() {
+        }
+
+        @Specification(expectedException = RuntimeException.class, expectedExceptionMessage = "Arrrgghh...!")
+        public void annotatedSpecificationMethodThatShouldFailWithAMessage() {
         }
 
         public void shouldBeAspecificationThatIsNotAnnotated() {
