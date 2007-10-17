@@ -1,15 +1,21 @@
 * Instinct Release 0.1.5 *
 
 o Features
-  o Behavioural expectation API (i.e. mocking) - com.googlecode.instinct.expect.Expect.
-  o Moved old mocking code to jMock 2, removed jMock 1.2 dependency.
-  o Added JUnit 4 runner, with @ContextClasses annotation.
-  o Added marking of specifications with naming conventions.
-  o Add regular expression checking to string checker.
-  o Add empty checks to array checker.
-  o Prototype QuickCheck style properties API (like Popper/JUnit 4 Theories).
+  o Core
+    o Initial cut of pending specifications (doesn't report correctly in JUnit).
+    o Added marking of specifications with naming conventions.
+  o Expectation API
+    o Behavioural expectation API (i.e. mocking) - com.googlecode.instinct.expect.Expect.
+    o Expected exception (simple version, encoded in specification annotation).
+    o Add regular expression checking to string checker.
+    o Add empty checks to array checker.
+  o Properties
+    o Prototype QuickCheck style properties API (like Popper/JUnit 4 Theories).
+  o Integration
+    o Added JUnit 4 runner, with @ContextClasses annotation.
+    o Moved old mocking code to jMock 2, removed jMock 1.2 dependency.
 o Bugs
-  o Fixed Issue 4 - Add newlines between context output in brief runner
+  o Fixed Issue 4 - Add newlines between context output in brief runner.
   o Fixed concurrent modification issue with the JUnit runner.
 o Misc
   o Upgraded to jMock 2.2.

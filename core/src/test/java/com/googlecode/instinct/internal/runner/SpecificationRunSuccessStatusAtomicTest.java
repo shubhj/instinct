@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.internal.runner;
 
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
@@ -26,6 +27,6 @@ public final class SpecificationRunSuccessStatusAtomicTest extends InstinctTestC
 
     public void testGetDetailedStatusReturnsSuccessMessage() {
         final SpecificationRunStatus runStatus = new SpecificationRunSuccessStatus();
-        assertEquals("Specification of behaviour verified correctly", (String) runStatus.getDetailedStatus());
+        expect.that(runStatus.getDetailedStatus()).equalTo("Specification of behaviour verified correctly");
     }
 }

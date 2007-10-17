@@ -26,10 +26,6 @@ public final class CommandLineUsageImplAtomicTest extends InstinctTestCase {
     private CommandLineUsage commandLineUsage;
 
     @Override
-    public void setUpTestDoubles() {
-    }
-
-    @Override
     public void setUpSubject() {
         commandLineUsage = new CommandLineUsageImpl();
     }

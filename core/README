@@ -8,12 +8,10 @@
 * What is Instinct? *
 
 Instinct is a Behaviour Driven Development (BDD) framework for Java. Inspired
-by RSpec, Instinct provides flexible annotation of contexts, specifications,
-test actors, etc. (via Java 1.5 annotations, marker interfaces or naming
-conventions); automatic creation of test doubles (dummies, mocks & stubs) &
-test subjects; state and behavioural (mocks) expectation API; JUnit test runner
-integration & Ant tasks.
-
+by RSpec, Instinct provides flexible annotation of contexts, specifications
+and actors; automatic creation of test doubles and test subjects; a state and
+behaviour expectation API; JUnit test runner integration; Ant support and an
+IntelliJ IDEA plugin.
 
 * Distribution Contents *
 
