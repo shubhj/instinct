@@ -32,11 +32,9 @@ Instinct depends on the following libraries at runtime.
 
 o boost-982.jar
 o cglib-nodep-2.2_beta1.jar
-o hamcrest-all-1.0.jar
-o jmock-core-1.2.0.jar
-o jmock-cglib-1.2.0.jar
-o jmock-2.1.0-RC1.jar
-o jmock-objenesis-2.1.0-RC1.jar
+o hamcrest-all-1.1.jar
+o jmock-2.2.0.jar
+o jmock-legacy-2.2.0.jar
 o objenesis-1.0.jar
 
 In addition, to use the Instinct Ant task, you'll need:
@@ -45,7 +43,7 @@ o ant-1.7.0.jar
 
 In addition, to use the JUnit 3/4 runners, you'll need:
 
-o junit-4.3.1.jar
+o junit-4.4.jar
 
 
 * Documentation *
@@ -96,7 +94,7 @@ com.googlecode.instinct.runner
 Source code is available within the distribution Jars, complete source is
 available at: http://code.google.com/p/instinct/source
 
-To build from source, Instinct requires Ant 1.7.0 and JUnit 4.3.1.
+To build from source, Instinct requires Ant 1.7.0 and JUnit 4.4.
 
 Shell scripts for Unix & Windows systems are provided in the project's root
 directory. These do not require any other dependencies and can be run standalone.
@@ -110,13 +108,16 @@ ANT_HOME/lib directory.
 Developers
 o Tom Adams
 o Ben Warren
+o Chris Myers
 
 Contributions
 o Lyall Ward
+o Sanjiv Sahayam
 
 Thanks to the work done on RSpec, jMock, EasyMock, Boost & JRDF. These libraries
 inspired Instinct. Thanks also to the EasyDoc team, past & present, your work is
 inspirational.
 
-Instinct development is supported by Workingmouse: http://workingmouse.com/.
-Code coverage is provided by Clover: http://cenqua.com/clover.
+Instinct development and research is supported by Workingmouse: http://workingmouse.com/.
+Code coverage is provided by Atlassian Clover: http://www.atlassian.com/software/clover/.
+IntelliJ IDEA licences provided by JetBrains: http://www.jetbrains.com/.
