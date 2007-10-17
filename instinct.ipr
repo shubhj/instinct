@@ -133,7 +133,6 @@
         <inspection_tool class="ClassNameDiffersFromFileName" level="WARNING" enabled="true" />
         <inspection_tool class="ClassInTopLevelPackage" level="WARNING" enabled="true" />
         <inspection_tool class="ConstantDeclaredInAbstractClass" level="WARNING" enabled="true" />
-        <inspection_tool class="ConstantDeclaredInInterface" level="WARNING" enabled="true" />
         <inspection_tool class="FinalMethodInFinalClass" level="WARNING" enabled="true" />
         <inspection_tool class="InnerClassOnInterface" level="WARNING" enabled="true">
           <option name="m_ignoreInnerInterfaces" value="false" />

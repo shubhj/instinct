@@ -22,14 +22,16 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Target;
 
 /**
- * A method in which the behaviour of a piece of code is specified.
- * Specifications are executable examples that guide the design process and provide both documentation and tests. Specifications (specs) can be
- * thought of as test methods in XUnit frameworks.
+ * A specification is method in which the behaviour of a piece of code is specified.
+ * Specifications are executable examples that guide the design process and provide both documentation and tests. Specifications (specs) are analogous
+ * to test methods in XUnit frameworks.
  */
 @Documented
 @Retention(RUNTIME)
 @Target({METHOD})
 public @interface Specification {
+    String NO_MESSAGE = "Specification is not expected to throw an exception.";
+
     /**
      * The state of a specification. Pending specifications are not run by Instinct (but are still reported).
      *
@@ -40,11 +42,34 @@ public @interface Specification {
     /**
      * The group the specification belongs to.
      * Groups can be used to run different sets of specifications at different times, for example slow specifications and slow specifications.
+     *
      * @return The group the specification belongs to.
      */
     String[] groups() default "None";
 
+    /**
+     * The exception the specification is expected to throw, that is, successfully executing the specification will yield the exception.
+     * If this is not specified, the specification is assumed to succeed and any errors will be reported as failures.
+     *
+     * @return The exception the specification is expected to throw.
+     */
+    Class<? extends Throwable> expectedException() default NoExpectedException.class;
+
+    /**
+     * The message within the exception that this specification is expected to throw.
+     * Specifying this field is optional, if it is not supplied the exception message will not be checked.
+     * This field must be used together with @link{expectedException()} or not at all.
+     *
+     * @return The message of the exception that this specification is expected to throw. 
+     */
+    String expectedExceptionMessage() default NO_MESSAGE;
+
     enum SpecificationState {
         PENDING, COMPLETE
+    }
+
+    @SuppressWarnings({"NonExceptionNameEndsWithException"})
+    class NoExpectedException extends Throwable {
+        private static final long serialVersionUID = -8070871793364595469L;
     }
 }
