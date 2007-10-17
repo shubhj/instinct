@@ -62,16 +62,15 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     private SpecificationResult doRun(final SpecificationMethod specificationMethod) {
         final long startTime = clock.getCurrentTime();
         if (specificationMethod.isPending()) {
-            final SpecificationRunStatus status = new SpecificationRunPendingStatus();
-            return createSpecResult(specificationMethod, status, startTime);
+            return createSpecResult(specificationMethod, new SpecificationRunPendingStatus(), startTime);
         } else {
-            return tryRun(specificationMethod, startTime);
+            return doNonPendingRun(specificationMethod, startTime);
         }
     }
 
     // SUPPRESS IllegalCatch {
     @SuppressWarnings({"CatchGenericClass"})
-    private SpecificationResult tryRun(final SpecificationMethod specificationMethod, final long startTime) {
+    private SpecificationResult doNonPendingRun(final SpecificationMethod specificationMethod, final long startTime) {
         try {
             // expose the context class, rather than getting the method
             final Class<?> contextClass = specificationMethod.getSpecificationMethod().getDeclaringClass();
@@ -79,6 +78,10 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
             runSpecificationLifecycle(instance, specificationMethod);
             return createSpecResult(specificationMethod, SPECIFICATION_SUCCESS, startTime);
         } catch (Throwable e) {
+
+//            specificationMethod.getSpecificationMethod().getMethod().isAnnotationPresent(Specification.class) &&
+//                    method.getAnnotation(Specification.class).state() == Specification.SpecificationState.PENDING;
+
             final SpecificationRunStatus status = new SpecificationRunFailureStatus(wrapCommonExceptions(e));
             return createSpecResult(specificationMethod, status, startTime);
         }

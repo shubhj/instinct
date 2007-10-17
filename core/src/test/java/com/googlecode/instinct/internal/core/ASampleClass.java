@@ -17,9 +17,11 @@
 package com.googlecode.instinct.internal.core;
 
 import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.sandbox.ForAll;
 
 public class ASampleClass {
+    @Specification
     public void someMethod(@ForAll final int x) {
         expect.that(Boolean.TRUE).isTrue();
     }

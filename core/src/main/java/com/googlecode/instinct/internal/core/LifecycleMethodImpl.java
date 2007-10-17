@@ -41,6 +41,10 @@ public final class LifecycleMethodImpl extends Primordial implements LifecycleMe
         return method.getDeclaringClass();
     }
 
+    public Annotation[] getAnnotations() {
+        return method.getAnnotations();
+    }
+
     public Annotation[][] getParameterAnnotations() {
         return method.getParameterAnnotations();
     }

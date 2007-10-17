@@ -80,6 +80,15 @@ public final class SpecificationMethodImpl extends Primordial implements Specifi
         return afterSpecificationMethods;
     }
 
+    public Class<? extends Throwable> getExpectedException() {
+        final Method method = specificationMethod.getMethod();
+        if (method.isAnnotationPresent(Specification.class)) {
+            return method.getAnnotation(Specification.class).expectedException();
+        } else {
+            return Specification.NoExpectedException.class;
+        }
+    }
+
     public String getName() {
         return specificationMethod.getName();
     }

@@ -23,12 +23,15 @@ import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.runner.SpecificationListener;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import static com.googlecode.instinct.test.reflect.Reflector.getMethod;
 import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubjectWithConstructorArgs;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.util.Collection;
 import org.jmock.Expectations;
 
@@ -43,6 +46,17 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
     @Mock private Collection<LifecycleMethod> afterSpecMethods;
     @Dummy private String methodName;
     @Dummy private Class<?> declaringClass;
+    @Dummy(auto = false) private Method annotatedSpec;
+    @Dummy(auto = false) private Method annotatedFailingSpec;
+    @Dummy(auto = false) private Method nonAnnotatedSpec;
+    @Dummy(auto = false) private Method notASpec;
+
+    @Override public void setUpTestDoubles() {
+        annotatedSpec = getMethod(ContextWithSpecificationsMarkedInDifferentWays.class, "annotatedSpecificationMethod");
+        annotatedFailingSpec = getMethod(ContextWithSpecificationsMarkedInDifferentWays.class, "annotatedSpecificationMethodThatShouldFail");
+        nonAnnotatedSpec = getMethod(ContextWithSpecificationsMarkedInDifferentWays.class, "shouldBeAspecificationThatIsNotAnnotated");
+        notASpec = getMethod(ContextWithSpecificationsMarkedInDifferentWays.class, "isNotASpecification");
+    }
 
     @Override
     public void setUpSubject() {
@@ -115,5 +129,57 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
             }
         });
         expect.that(specificationMethod.getParameterAnnotations()).sameInstanceAs(fakeAnnotations);
+    }
+
+    public void testReturnsNoExpectedExceptionClassForASpecThatIsAnnotated() {
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(specMethod).getMethod(); will(returnValue(annotatedSpec));
+            }
+        });
+        expect.that(specificationMethod.getExpectedException() == Specification.NoExpectedException.class).isTrue();
+    }
+
+    public void testReturnsExpectedExceptionClassForASpecThatIsAnnotatedAsFailing() {
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(specMethod).getMethod(); will(returnValue(annotatedFailingSpec));
+            }
+        });
+        expect.that(specificationMethod.getExpectedException() == RuntimeException.class).isTrue();
+    }
+
+    public void testReturnsNoExpectedExceptionClassForASpecThatIsNotAnnotated() {
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(specMethod).getMethod(); will(returnValue(nonAnnotatedSpec));
+            }
+        });
+        expect.that(specificationMethod.getExpectedException() == Specification.NoExpectedException.class).isTrue();
+    }
+
+    public void testReturnsNoExpectedExceptionClassForANonSpecMethod() {
+        expect.that(new Expectations() {
+            {
+                atLeast(1).of(specMethod).getMethod(); will(returnValue(notASpec));
+            }
+        });
+        expect.that(specificationMethod.getExpectedException() == Specification.NoExpectedException.class).isTrue();
+    }
+
+    private static final class ContextWithSpecificationsMarkedInDifferentWays {
+        @Specification
+        public void annotatedSpecificationMethod() {
+        }
+
+        @Specification(expectedException = RuntimeException.class)
+        public void annotatedSpecificationMethodThatShouldFail() {
+        }
+
+        public void shouldBeAspecificationThatIsNotAnnotated() {
+        }
+
+        public void isNotASpecification() {
+        }
     }
 }

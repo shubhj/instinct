@@ -48,11 +48,11 @@ public final class ObjectFactoryImpl implements ObjectFactory {
     }
 
     private <T> Constructor<T> findConstructor(final Class<T> cls, final Object... argumentValues) throws ObjectCreationException {
-        final Constructor<T>[] constructors = cls.getDeclaredConstructors();
-        for (final Constructor<T> constructor : constructors) {
+        final Constructor<?>[] constructors = cls.getDeclaredConstructors();
+        for (final Constructor<?> constructor : constructors) {
             final Class<?>[] types = constructor.getParameterTypes();
             if (argumentValues.length == types.length && typesMatch(types, argumentValues)) {
-                return constructor;
+                return (Constructor<T>) constructor;
             }
         }
         throw new ObjectCreationException(createFailureMessage(cls, argumentValues));

@@ -39,4 +39,6 @@ public interface SpecificationMethod extends RunnableItem {
     Class<?> getDeclaringClass();
 
     Annotation[][] getParameterAnnotations();
+
+    Class<? extends Throwable> getExpectedException();
 }

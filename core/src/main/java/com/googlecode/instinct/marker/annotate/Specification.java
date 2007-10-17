@@ -60,7 +60,7 @@ public @interface Specification {
      * Specifying this field is optional, if it is not supplied the exception message will not be checked.
      * This field must be used together with @link{expectedException()} or not at all.
      *
-     * @return The message of the exception that this specification is expected to throw. 
+     * @return The message of the exception that this specification is expected to throw.
      */
     String expectedExceptionMessage() default NO_MESSAGE;
 
