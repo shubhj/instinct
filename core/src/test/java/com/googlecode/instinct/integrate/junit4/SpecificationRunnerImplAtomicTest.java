@@ -24,6 +24,7 @@ import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
 import com.googlecode.instinct.internal.util.ExceptionFinder;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.marker.annotate.Mock;
+import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubjectWithConstructorArgs;
@@ -49,6 +50,7 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     @Mock private ObjectFactory objectFactory;
     @Mock private Throwable rootCause;
     @Mock private RunNotifier notifier;
+    @Mock private SpecificationRunStatus pendingRunStatus;
 
     @SuppressWarnings({"serial", "ClassExtendsConcreteCollection", "CloneableClassWithoutClone"})
     @Override
@@ -75,8 +77,21 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
         expect.that(new Expectations() {
             {
                 one(specificationResult).completedSuccessfully(); will(returnValue(true));
-                one(notifier).fireTestFinished(description);
                 ignoring(specificationResult).getStatus();
+                one(notifier).fireTestFinished(description);
+            }
+        });
+        specificationRunner.run(specificationMethods);
+    }
+
+    public void testFiresIgnoredTestsForPendingSpecifications() {
+        setUpCommonExpectations();
+        expect.that(new Expectations() {
+            {
+                one(specificationResult).completedSuccessfully(); will(returnValue(true));
+                one(specificationResult).getStatus(); will(returnValue(pendingRunStatus));
+                one(pendingRunStatus).getDetailedStatus(); will(returnValue(PENDING));
+                one(notifier).fireTestIgnored(description);
             }
         });
         specificationRunner.run(specificationMethods);
