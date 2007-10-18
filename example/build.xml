@@ -49,7 +49,7 @@
         <sequential>
             <mkdir dir="@{output.dir}"/>
             <javac source="1.5" srcdir="@{src.dir}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="true"
-                    debuglevel="source,lines,vars" deprecation="false" optimize="true">
+                   debuglevel="source,lines,vars" deprecation="false" optimize="true">
                 <src>
                     <path path="@{src.path}"/>
                 </src>
@@ -61,9 +61,9 @@
 
     <target name="-compile">
         <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}"
-                src.path="${main.src.dir}"/>
+                       src.path="${main.src.dir}"/>
         <compile.macro src.dir="${spec.src.dir}" classpath.ref="spec.class.path" output.dir="${spec.classes.dir}"
-                src.path="${spec.src.dir}"/>
+                       src.path="${spec.src.dir}"/>
     </target>
 
     <target name="-run-specs" depends="-compile">
@@ -78,7 +78,7 @@
     <target name="-run-junit3-integration" depends="-compile">
         <junit failureproperty="tests-failed" fork="true" forkmode="perBatch">
             <classpath refid="spec.class.path"/>
-            <test name="com.googlecode.instinct.example.stack.StackJUnitSuite"/>
+            <test name="com.googlecode.instinct.example.junit.StackJUnitSuite"/>
             <formatter type="brief" usefile="false"/>
         </junit>
         <fail if="tests-failed" message="JUnit 3 integration suite failed."/>
@@ -87,7 +87,7 @@
     <target name="-run-junit4-integration" depends="-compile">
         <junit failureproperty="tests-failed" fork="true" forkmode="perBatch">
             <classpath refid="spec.class.path"/>
-            <test name="com.googlecode.instinct.example.stack.StackJUnit4Suite"/>
+            <test name="com.googlecode.instinct.example.junit.StackJUnit4Suite"/>
             <formatter type="brief" usefile="false"/>
         </junit>
         <fail if="tests-failed" message="JUnit 4 integration suite failed."/>

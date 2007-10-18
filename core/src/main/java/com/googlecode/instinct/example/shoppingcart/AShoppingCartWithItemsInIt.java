@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.shoppingcart;
+package com.googlecode.instinct.example.shoppingcart;
 
 import com.googlecode.instinct.example.shoppingcart.Item;
 import com.googlecode.instinct.example.shoppingcart.ShoppingCart;

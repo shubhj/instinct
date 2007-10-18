@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.shoppingcart;
+package com.googlecode.instinct.example.shoppingcart;
 
-import com.googlecode.instinct.example.shoppingcart.Item;
-import com.googlecode.instinct.example.shoppingcart.ShoppingCart;
-import com.googlecode.instinct.example.shoppingcart.ShoppingCartImpl;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.expect.behaviour.Mocker;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
@@ -26,12 +23,13 @@ import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.Subject;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
 @Context
 public final class AnEmptyShoppingCart {
-    private ShoppingCart cart;
+    @Subject private ShoppingCart cart;
     @Mock private Item mockItem1;
     @Mock private Item mockItem2;
 
@@ -50,9 +48,7 @@ public final class AnEmptyShoppingCart {
     @Specification
     public void canHaveAnItemAddedToIt() {
         expect.that(cart.isEmpty()).isTrue();
-
         cart.addItem(mockItem1);
-
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).equalTo(1);
         expect.that(cart.contains(mockItem1)).isTrue();
@@ -61,15 +57,11 @@ public final class AnEmptyShoppingCart {
     @Specification
     public void canHaveMultipleItemsAddedToIt() {
         expect.that(cart.isEmpty()).isTrue();
-
         cart.addItem(mockItem1);
-
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).equalTo(1);
         expect.that(cart.contains(mockItem1)).isTrue();
-
         cart.addItem(mockItem2);
-
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).equalTo(2);
         expect.that(cart.contains(mockItem2)).isTrue();
@@ -79,7 +71,6 @@ public final class AnEmptyShoppingCart {
     @Specification
     public void doesNotFailWhenAnItemIsRemovedFromIt() {
         final Item item = createMockItem();
-
         expect.that(cart.isEmpty()).isTrue();
         cart.remove(item);
         expect.that(cart.isEmpty()).isTrue();
