@@ -32,17 +32,17 @@ public class ContextWithExpectedFailures {
         throw new RuntimeException();
     }
 
-    @Specification(expectedException = RuntimeException.class, expectedExceptionMessage = "Some message")
+    @Specification(expectedException = RuntimeException.class, withMessage = "Some message")
     public void failsWithMessage() {
         throw new RuntimeException("Some message");
     }
 
-    @Specification(expectedException = RuntimeException.class, expectedExceptionMessage = "Some message")
+    @Specification(expectedException = RuntimeException.class, withMessage = "Some message")
     public void failsWithDifferentException() {
         throw new IllegalStateException("Some message");
     }
 
-    @Specification(expectedException = RuntimeException.class, expectedExceptionMessage = "Some message")
+    @Specification(expectedException = RuntimeException.class, withMessage = "Some message")
     public void failsWithDifferentMessage() {
         throw new RuntimeException("A different message");
     }

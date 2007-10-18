@@ -92,7 +92,7 @@ public final class SpecificationMethodImpl extends Primordial implements Specifi
     public String getExpectedExceptionMessage() {
         final Method method = specificationMethod.getMethod();
         if (method.isAnnotationPresent(Specification.class)) {
-            return method.getAnnotation(Specification.class).expectedExceptionMessage();
+            return method.getAnnotation(Specification.class).withMessage();
         } else {
             return Specification.NO_MESSAGE;
         }

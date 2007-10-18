@@ -195,7 +195,7 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
         public void annotatedSpecificationMethodThatShouldFail() {
         }
 
-        @Specification(expectedException = RuntimeException.class, expectedExceptionMessage = "Arrrgghh...!")
+        @Specification(expectedException = RuntimeException.class, withMessage = "Arrrgghh...!")
         public void annotatedSpecificationMethodThatShouldFailWithAMessage() {
         }
 

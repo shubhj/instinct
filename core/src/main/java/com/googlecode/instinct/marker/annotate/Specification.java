@@ -62,7 +62,7 @@ public @interface Specification {
      *
      * @return The message of the exception that this specification is expected to throw.
      */
-    String expectedExceptionMessage() default NO_MESSAGE;
+    String withMessage() default NO_MESSAGE;
 
     enum SpecificationState {
         PENDING, COMPLETE
