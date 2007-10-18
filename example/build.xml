@@ -70,7 +70,7 @@
         <taskdef resource="instincttask.properties" classpathref="spec.class.path"/>
         <instinct failureproperty="specs-failed">
             <specifications dir="${spec.classes.dir}"/>
-            <formatter type="verbose"/>
+            <formatter type="brief"/>
         </instinct>
         <fail if="specs-failed" message="Specifications failed."/>
     </target>
