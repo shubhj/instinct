@@ -84,7 +84,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
                 return createSpecResult(specificationMethod, SPECIFICATION_SUCCESS, startTime);
             } else {
                 final String message = "Expected exception " + expectedException + " was not thrown in body of specification";
-                final Throwable failure = new SpecificationFailureException(message);
+                final Throwable failure = new AssertionError(message);
                 final SpecificationRunStatus status = new SpecificationRunFailureStatus(failure);
                 return createSpecResult(specificationMethod, status, startTime);
             }
@@ -118,7 +118,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
                 }
             }
         } else {
-            final String message = "Expected " + expectedExceptionClass + " to be thrown but was " + thrownException.getClass();
+            final String message = "Expected exception was not thrown\nExpected: " + expectedExceptionClass + "\n     got: " + thrownException.getClass();
             final Throwable failure = new SpecificationFailureException(message, thrownException);
             final SpecificationRunStatus status = new SpecificationRunFailureStatus(failure);
             return createSpecResult(specificationMethod, status, startTime);
