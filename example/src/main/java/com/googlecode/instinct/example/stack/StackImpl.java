@@ -2,7 +2,6 @@ package com.googlecode.instinct.example.stack;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.googlecode.instinct.internal.util.Suggest;
 
 public final class StackImpl<T> implements Stack<T> {
     private final List<T> objects = new ArrayList<T>();
@@ -15,10 +14,10 @@ public final class StackImpl<T> implements Stack<T> {
         objects.add(t);
     }
 
-    @Suggest("Fix this.")
     public T pop() {
-//        objects.remove(0);
+        if (isEmpty()) {
+            throw new IllegalStateException("Cannot pop an empty stack");
+        }
         return objects.remove(0);
-//        return null;
     }
 }

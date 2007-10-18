@@ -6,6 +6,7 @@ import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Specification;
+import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
 import com.googlecode.instinct.marker.annotate.Subject;
 import org.junit.runner.RunWith;
 
@@ -22,20 +23,30 @@ public final class AnEmptyStack {
     }
 
     @Specification
-    void mustBeEmpty() {
+    void isEmpty() {
         expect.that(stack.isEmpty()).isTrue();
     }
 
     @Specification
-    void mustNoLongerBeEmptyAfterPush() {
+    void isNoLongerBeEmptyAfterPush() {
         stack.push(new Object());
         expect.that(stack.isEmpty()).isFalse();
     }
 
     @Specification
-    void willReturnTheSameObjectWhenPushed() {
+    void returnTheSameObjectWhenPushed() {
         stack.push(object);
         final Object o = stack.pop();
         expect.that(o).sameInstanceAs(object);
+    }
+
+    @Specification(expectedException = IllegalStateException.class, withMessage = "Cannot pop an empty stack")
+    void throwsExceptionWhenPoppedWithNoElements() {
+        stack.pop();
+    }
+
+    @Specification(state = PENDING)
+    void hasSomeNewFeatureWeHaveNotThoughtOfYet() {
+        expect.that(true).isFalse();
     }
 }

@@ -16,9 +16,6 @@
 
 package com.googlecode.instinct.example.shoppingcart;
 
-import com.googlecode.instinct.example.shoppingcart.Item;
-import com.googlecode.instinct.example.shoppingcart.ShoppingCart;
-import com.googlecode.instinct.example.shoppingcart.ShoppingCartImpl;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.expect.behaviour.Mocker;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;

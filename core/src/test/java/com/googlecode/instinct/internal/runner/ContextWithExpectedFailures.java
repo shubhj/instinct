@@ -16,10 +16,10 @@
 
 package com.googlecode.instinct.internal.runner;
 
+import java.lang.reflect.InvocationTargetException;
+import au.net.netstorm.boost.edge.EdgeException;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
-import au.net.netstorm.boost.edge.EdgeException;
-import java.lang.reflect.InvocationTargetException;
 
 @Context
 public class ContextWithExpectedFailures {
@@ -55,5 +55,10 @@ public class ContextWithExpectedFailures {
     @Specification(expectedException = EdgeException.class)
     public void expectedFailureWithEdgeExceptionWithInvocationTargetException() {
         throw new EdgeException(new InvocationTargetException(new RuntimeException()));
+    }
+
+    @Specification(expectedException = IndexOutOfBoundsException.class)
+    public void expectedFailureWithIndexOutOfBoundsException() {
+        throw new IndexOutOfBoundsException();
     }
 }
