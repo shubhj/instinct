@@ -12,13 +12,11 @@ import org.junit.runner.RunWith;
 @RunWith(InstinctRunner.class)
 @Context
 public final class AnEmptyStack {
-    @Subject
-    private Stack<Object> stack;
-    @Dummy
-    private Object object;
+    @Subject private Stack<Object> stack;
+    @Dummy private Object object;
 
     @BeforeSpecification
-    void setUp() {
+    void before() {
         object = new Object();
         stack = new StackImpl<Object>();
     }
