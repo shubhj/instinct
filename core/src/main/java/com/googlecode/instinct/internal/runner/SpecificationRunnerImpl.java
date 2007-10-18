@@ -111,7 +111,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
                 if (expectedMessage.equals(thrownException.getMessage())) {
                     return createSpecResult(specificationMethod, SPECIFICATION_SUCCESS, startTime);
                 } else {
-                    final String message = "Exception message incorrect\nExpected: "
+                    final String message = "Expected exception message was incorrect\nExpected: "
                             + expectedMessage + "\n     got: " + thrownException.getMessage();
                     final Throwable failure = new AssertionError(message);
                     final SpecificationRunStatus status = new SpecificationRunFailureStatus(failure);
