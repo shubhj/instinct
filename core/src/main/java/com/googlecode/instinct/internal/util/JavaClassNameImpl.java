@@ -24,7 +24,6 @@ public final class JavaClassNameImpl extends Primordial implements JavaClassName
     private final File classesRoot;
     private final File classFile;
 
-    @Suggest("Null check this class")
     public JavaClassNameImpl(final File classesRoot, final File classFile) {
         checkNotNull(classesRoot, classFile);
         this.classesRoot = classesRoot;

@@ -16,15 +16,19 @@
 
 package com.googlecode.instinct.internal.aggregate;
 
-import java.io.File;
-import java.io.FileFilter;
+import static com.googlecode.instinct.expect.Expect.expect;
 import static com.googlecode.instinct.internal.aggregate.ContextAggregatorSlowTest.EXPECTED_CONTEXTS;
-import com.googlecode.instinct.internal.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.locate.ClassLocator;
 import com.googlecode.instinct.internal.locate.ClassLocatorImpl;
+import com.googlecode.instinct.internal.locate.ClassWithContextAnnotationFileFilter;
 import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.naming.ContextNamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
+import java.io.File;
+import java.io.FileFilter;
+import java.util.Set;
 
 public final class ClassLocatorSlowTest extends InstinctTestCase {
     private PackageRootFinder packageRootFinder;
@@ -37,9 +41,9 @@ public final class ClassLocatorSlowTest extends InstinctTestCase {
     }
 
     public void testFindsCorrectNumberOfContexts() {
-        final FileFilter filter = new AnnotationFileFilter(getSpecPackageRoot(), Context.class);
-        final JavaClassName[] names = locator.locate(getSpecPackageRoot(), filter);
-        assertEquals(EXPECTED_CONTEXTS, names.length);
+        final FileFilter filter = new ClassWithContextAnnotationFileFilter(getSpecPackageRoot(), new MarkingSchemeImpl(Context.class, new ContextNamingConvention()));
+        final Set<JavaClassName> names = locator.locate(getSpecPackageRoot(), filter);
+        expect.that(names).isOfSize(EXPECTED_CONTEXTS);
     }
 
     private File getSpecPackageRoot() {

@@ -17,49 +17,45 @@
 package com.googlecode.instinct.internal.locate;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.internal.util.ClassInstantiator;
+import com.googlecode.instinct.internal.util.ClassInstantiatorFactory;
+import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Subject;
+import com.googlecode.instinct.marker.naming.ContextNamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubjectWithConstructorArgs;
 import java.io.File;
-import java.io.FileFilter;
 import org.jmock.Expectations;
 
-public final class AnnotationFileFilterAtomicTest extends InstinctTestCase {
-    @Subject(auto = false) private FileFilter filter;
+public final class ClassMarkedClassFileCheckerAtomicTest extends InstinctTestCase {
+    @Subject(auto = false) private MarkedFileChecker checker;
     @Mock private File packageRoot;
-    @Mock private File pathname;
-    @Mock private ObjectFactory objectFactory;
-    @Mock private AnnotatedClassFileChecker checker;
+    @Mock private File classFile;
+    @Mock private AnnotationChecker annotationChecker;
+    @Mock private ClassInstantiator instantiator;
+    @Mock private ClassInstantiatorFactory instantiatorFactory;
 
     @Override
     public void setUpSubject() {
-        filter = createSubjectWithConstructorArgs(AnnotationFileFilter.class, new Object[]{packageRoot, Context.class}, objectFactory);
+        checker = createSubjectWithConstructorArgs(ClassMarkedFileChecker.class, new Object[]{packageRoot}, annotationChecker, instantiatorFactory);
     }
 
     public void testConformsToClassTraits() {
-        checkClass(AnnotationFileFilter.class, FileFilter.class);
+        checkClass(ClassMarkedFileChecker.class, MarkedFileChecker.class);
     }
 
-    public void testAccept() {
-        checkAccept(false, true, true);
-        checkAccept(true, false, false);
-    }
-
-    private void checkAccept(final boolean pathIsADirectory, final boolean classHasAnnotation, final boolean isAnnotated) {
+    public void testIsAnnotated() {
         expect.that(new Expectations() {
             {
-                one(objectFactory).create(AnnotatedClassFileCheckerImpl.class, packageRoot); will(returnValue(checker));
-                one(pathname).isDirectory(); will(returnValue(pathIsADirectory));
-                if (!pathIsADirectory) {
-                    one(checker).isAnnotated(pathname, Context.class); will(returnValue(classHasAnnotation));
-                }
+                one(classFile).getName(); will(returnValue("Class.class"));
+                one(instantiatorFactory).create(); will(returnValue(instantiator));
+                one(instantiator).instantiateClass(classFile, packageRoot); will(returnValue(Class.class));
+                one(annotationChecker).isAnnotated(Class.class, Context.class); will(returnValue(true));
             }
         });
-        final boolean accept = filter.accept(pathname);
-        expect.that(accept).equalTo(isAnnotated);
+        assertTrue(checker.isMarked(classFile, new MarkingSchemeImpl(Context.class, new ContextNamingConvention())));
     }
 }

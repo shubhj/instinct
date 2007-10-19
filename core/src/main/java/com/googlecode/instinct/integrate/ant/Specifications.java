@@ -16,19 +16,28 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import java.io.File;
-import java.io.FileFilter;
-import com.googlecode.instinct.internal.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.locate.ClassLocator;
 import com.googlecode.instinct.internal.locate.ClassLocatorImpl;
+import com.googlecode.instinct.internal.locate.ClassWithContextAnnotationFileFilter;
+import com.googlecode.instinct.internal.locate.ClassWithMarkedMethodsFileFilter;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.MarkingScheme;
+import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.naming.ContextNamingConvention;
+import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
+import java.io.File;
+import java.io.FileFilter;
+import java.util.Set;
 import org.apache.tools.ant.Project;
 
 public final class Specifications {
+    private static final MarkingScheme CONTEXT_MARKING_SCHEME = new MarkingSchemeImpl(Context.class, new ContextNamingConvention());
+    private static final MarkingScheme SPECIFICATION_MARKING_SCHEME = new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention());
     private final ClassLocator classLocator = new ClassLocatorImpl();
     private final Project project;
     private File specPackageRoot;
@@ -50,11 +59,17 @@ public final class Specifications {
     }
 
     @Suggest({"This should return ContextClass's, that way we don't need to instantiate them.",
-            "Don't return an array, use an ordered set."})
+            "he filters already instantiate them, do so here and re-use", "Don't return an array, use an ordered set."})
     public JavaClassName[] getContextClasses() {
         checkPreconditions();
-        final FileFilter filter = new AnnotationFileFilter(specPackageRoot, Context.class);
-        return classLocator.locate(specPackageRoot, filter);
+        final Set<JavaClassName> contextClasses = findContextClasses();
+        return contextClasses.toArray(new JavaClassName[contextClasses.size()]);
+    }
+
+    private Set<JavaClassName> findContextClasses() {
+        final FileFilter annotatedClasses = new ClassWithContextAnnotationFileFilter(specPackageRoot, CONTEXT_MARKING_SCHEME);
+        final FileFilter markedMethodClasses = new ClassWithMarkedMethodsFileFilter(specPackageRoot, SPECIFICATION_MARKING_SCHEME);
+        return classLocator.locate(specPackageRoot, annotatedClasses, markedMethodClasses);
     }
 
     private void checkPreconditions() {

@@ -16,31 +16,39 @@
 
 package com.googlecode.instinct.internal.aggregate;
 
-import java.io.File;
-import java.io.FileFilter;
-import com.googlecode.instinct.internal.locate.AnnotationFileFilter;
 import com.googlecode.instinct.internal.locate.ClassLocator;
 import com.googlecode.instinct.internal.locate.ClassLocatorImpl;
+import com.googlecode.instinct.internal.locate.ClassWithContextAnnotationFileFilter;
+import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.marker.MarkingScheme;
+import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.naming.ContextNamingConvention;
+import java.io.File;
+import java.io.FileFilter;
+import java.util.Set;
 
-public final class AnnotatedContextAggregatorImpl implements ContextAggregator {
+public final class ContextClassAggregatorImpl implements ContextAggregator {
+    private MarkingScheme contextMarkingScheme = new MarkingSchemeImpl(Context.class, new ContextNamingConvention());
     private PackageRootFinder packageRootFinder = new PackageRootFinderImpl();
     private ClassLocator classLocator = new ClassLocatorImpl();
     private ObjectFactory objectFactory = new ObjectFactoryImpl();
     private final Class<?> classInSpecTree;
 
-    public <T> AnnotatedContextAggregatorImpl(final Class<T> classInSpecTree) {
+    public <T> ContextClassAggregatorImpl(final Class<T> classInSpecTree) {
         checkNotNull(classInSpecTree);
         this.classInSpecTree = classInSpecTree;
     }
 
+    @Fix("Return a set here.")
     public JavaClassName[] getContextNames() {
         final File packageRoot = objectFactory.create(File.class, packageRootFinder.getPackageRoot(classInSpecTree));
-        final FileFilter filter = objectFactory.create(AnnotationFileFilter.class, packageRoot, Context.class);
-        return classLocator.locate(packageRoot, filter);
+        final FileFilter filter = objectFactory.create(ClassWithContextAnnotationFileFilter.class, packageRoot, contextMarkingScheme);
+        final Set<JavaClassName> names = classLocator.locate(packageRoot, filter);
+        return names.toArray(new JavaClassName[names.size()]);
     }
 }

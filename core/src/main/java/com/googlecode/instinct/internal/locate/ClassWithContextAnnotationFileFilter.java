@@ -19,24 +19,24 @@ package com.googlecode.instinct.internal.locate;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.marker.MarkingScheme;
 import java.io.File;
 import java.io.FileFilter;
-import java.lang.annotation.Annotation;
 
-public final class AnnotationFileFilter implements FileFilter {
+public final class ClassWithContextAnnotationFileFilter implements FileFilter {
     private ObjectFactory objectFactory = new ObjectFactoryImpl();
     private final File packageRoot;
-    private final Class<? extends Annotation> annotationType;
+    private final MarkingScheme markingScheme;
 
-    public <T extends Annotation> AnnotationFileFilter(final File packageRoot, final Class<T> annotationType) {
-        checkNotNull(packageRoot, annotationType);
+    public ClassWithContextAnnotationFileFilter(final File packageRoot, final MarkingScheme markingScheme) {
+        checkNotNull(packageRoot, markingScheme);
         this.packageRoot = packageRoot;
-        this.annotationType = annotationType;
+        this.markingScheme = markingScheme;
     }
 
     public boolean accept(final File pathname) {
         checkNotNull(pathname);
-        final AnnotatedClassFileChecker checker = objectFactory.create(AnnotatedClassFileCheckerImpl.class, packageRoot);
-        return !pathname.isDirectory() && checker.isAnnotated(pathname, annotationType);
+        final MarkedFileChecker checker = objectFactory.create(ClassMarkedFileChecker.class, packageRoot);
+        return !pathname.isDirectory() && checker.isMarked(pathname, markingScheme);
     }
 }

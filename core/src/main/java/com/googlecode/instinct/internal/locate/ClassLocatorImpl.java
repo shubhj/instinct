@@ -16,6 +16,10 @@
 
 package com.googlecode.instinct.internal.locate;
 
+import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.internal.util.JavaClassNameImpl;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
@@ -23,29 +27,27 @@ import static java.util.Arrays.asList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import com.googlecode.instinct.internal.util.JavaClassName;
-import com.googlecode.instinct.internal.util.JavaClassNameImpl;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
+import java.util.Set;
+import java.util.TreeSet;
 
 @Suggest("Test drive this class")
 public final class ClassLocatorImpl implements ClassLocator {
     private final Comparator<File> comparator = new FileNameComparator();
 
-    public JavaClassName[] locate(final File root, final FileFilter filter) {
+    public Set<JavaClassName> locate(final File root, final FileFilter... filter) {
         checkNotNull(root, filter);
         final File[] files = sortedDeepLocate(root, filter);
         return toClasses(root, files);
     }
 
-    private File[] sortedDeepLocate(final File root, final FileFilter filter) {
+    private File[] sortedDeepLocate(final File root, final FileFilter... filter) {
         final List<File> result = new ArrayList<File>();
         recursiveLocate(result, root, filter);
         sort(result);
         return result.toArray(new File[result.size()]);
     }
 
-    private void recursiveLocate(final List<File> result, final File searchBase, final FileFilter filter) {
+    private void recursiveLocate(final List<File> result, final File searchBase, final FileFilter... filter) {
         ensureDir(searchBase);
         final File[] subdirs = getSubdirectories(searchBase);
         for (final File subdir : subdirs) {
@@ -59,17 +61,20 @@ public final class ClassLocatorImpl implements ClassLocator {
         return dir.listFiles(filter);
     }
 
-    private JavaClassName[] toClasses(final File root, final File[] files) {
-        final JavaClassName[] result = new JavaClassNameImpl[files.length];
-        for (int i = 0; i < result.length; i++) {
-            result[i] = new JavaClassNameImpl(root, files[i]);
+    private Set<JavaClassName> toClasses(final File root, final File[] files) {
+        final Set<JavaClassName> result = new TreeSet<JavaClassName>();
+        for (final File file : files) {
+            System.out.println("result = " + result);
+            result.add(new JavaClassNameImpl(root, file));
         }
         return result;
     }
 
-    private void findMatchingClasses(final List<File> result, final File dir, final FileFilter filter) {
-        final List<File> list = asList(dir.listFiles(filter));
-        result.addAll(list);
+    private void findMatchingClasses(final List<File> result, final File dir, final FileFilter... filters) {
+        for (final FileFilter fileFilter : filters) {
+            final File[] files = dir.listFiles(fileFilter);
+            result.addAll(asList(files));
+        }
     }
 
     private void sort(final List<File> files) {

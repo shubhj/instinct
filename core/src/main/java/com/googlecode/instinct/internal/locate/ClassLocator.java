@@ -16,10 +16,11 @@
 
 package com.googlecode.instinct.internal.locate;
 
+import com.googlecode.instinct.internal.util.JavaClassName;
 import java.io.File;
 import java.io.FileFilter;
-import com.googlecode.instinct.internal.util.JavaClassName;
+import java.util.Set;
 
 public interface ClassLocator {
-    JavaClassName[] locate(File root, final FileFilter filter);
+    Set<JavaClassName> locate(File root, final FileFilter... filter);
 }

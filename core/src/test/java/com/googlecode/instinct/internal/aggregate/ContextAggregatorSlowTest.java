@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.internal.aggregate;
 
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.test.InstinctTestCase;
 
@@ -25,11 +26,11 @@ public final class ContextAggregatorSlowTest extends InstinctTestCase {
 
     @Override
     public void setUpSubject() {
-        aggregator = new AnnotatedContextAggregatorImpl(ContextAggregatorSlowTest.class);
+        aggregator = new ContextClassAggregatorImpl(ContextAggregatorSlowTest.class);
     }
 
     public void testFindsCorrectNumberOfContexts() {
         final JavaClassName[] contexts = aggregator.getContextNames();
-        assertEquals(EXPECTED_CONTEXTS, contexts.length);
+        expect.that(contexts).hasSize(EXPECTED_CONTEXTS);
     }
 }
