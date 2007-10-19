@@ -31,6 +31,7 @@ import java.lang.annotation.Target;
 @Target({METHOD})
 public @interface Specification {
     String NO_MESSAGE = "Specification is not expected to throw an exception.";
+    String NO_REASON = "";
 
     /**
      * The state of a specification. Pending specifications are not run by Instinct (but are still reported).
@@ -38,6 +39,13 @@ public @interface Specification {
      * @return The state of the specification.
      */
     SpecificationState state() default SpecificationState.COMPLETE;
+
+    /**
+     * The reason the specification has been given its @link{state()}.
+     *
+     * @return The reason the specification has been given its state.
+     */
+    String reason() default NO_REASON;
 
     /**
      * The group the specification belongs to.
