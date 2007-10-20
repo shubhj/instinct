@@ -16,19 +16,19 @@
 
 package com.googlecode.instinct.internal.locate;
 
-import com.googlecode.instinct.internal.util.JavaClassName;
-import com.googlecode.instinct.internal.util.JavaClassNameImpl;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
+import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.internal.util.JavaClassNameImpl;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 
 @Suggest("Test drive this class")
 public final class ClassLocatorImpl implements ClassLocator {
@@ -61,11 +61,10 @@ public final class ClassLocatorImpl implements ClassLocator {
         return dir.listFiles(filter);
     }
 
-    private Set<JavaClassName> toClasses(final File root, final File[] files) {
-        final Set<JavaClassName> result = new TreeSet<JavaClassName>();
-        for (final File file : files) {
-            System.out.println("result = " + result);
-            result.add(new JavaClassNameImpl(root, file));
+    private Set<JavaClassName> toClasses(final File root, final File[] classFiles) {
+        final Set<JavaClassName> result = new HashSet<JavaClassName>();
+        for (final File classFile : classFiles) {
+            result.add(new JavaClassNameImpl(root, classFile));
         }
         return result;
     }
