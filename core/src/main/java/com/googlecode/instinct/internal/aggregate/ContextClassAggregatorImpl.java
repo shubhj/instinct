@@ -22,6 +22,7 @@ import java.util.Set;
 import com.googlecode.instinct.internal.locate.ClassLocator;
 import com.googlecode.instinct.internal.locate.ClassLocatorImpl;
 import com.googlecode.instinct.internal.locate.ClassWithContextAnnotationFileFilter;
+import com.googlecode.instinct.internal.locate.ClassWithMarkedMethodsFileFilter;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.ObjectFactory;
@@ -30,8 +31,10 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.naming.ContextNamingConvention;
 import com.googlecode.instinct.marker.naming.NamingConvention;
+import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 
 public final class ContextClassAggregatorImpl implements ContextAggregator {
     private PackageRootFinder packageRootFinder = new PackageRootFinderImpl();
@@ -44,17 +47,33 @@ public final class ContextClassAggregatorImpl implements ContextAggregator {
         this.classInSpecTree = classInSpecTree;
     }
 
-    @Fix("Return a set here.")
+    @Fix({"Return a set here.", "Add the ClassWithMarkedMethodsFileFilterHereAlso"})
     public JavaClassName[] getContextNames() {
         final File packageRoot = objectFactory.create(File.class, packageRootFinder.getPackageRoot(classInSpecTree));
-        final FileFilter filter = createFilter(packageRoot);
-        final Set<JavaClassName> names = classLocator.locate(packageRoot, filter);
+
+        final FileFilter filter = createMarkedClassFileFilter(packageRoot);
+        final FileFilter filter2 = createMarkedMethodsFilter(packageRoot);
+        final Set<JavaClassName> names = classLocator.locate(packageRoot, filter, filter2);
         return names.toArray(new JavaClassName[names.size()]);
     }
 
-    private FileFilter createFilter(final File packageRoot) {
-        final NamingConvention contextNamingConvention = objectFactory.create(ContextNamingConvention.class);
-        final MarkingScheme contextMarkingScheme = objectFactory.create(MarkingSchemeImpl.class, Context.class, contextNamingConvention);
-        return objectFactory.create(ClassWithContextAnnotationFileFilter.class, packageRoot, contextMarkingScheme);
+    private FileFilter createMarkedClassFileFilter(final File packageRoot) {
+        final MarkingScheme markingScheme = createContextMarkingScheme();
+        return objectFactory.create(ClassWithContextAnnotationFileFilter.class, packageRoot, markingScheme);
+    }
+
+    private FileFilter createMarkedMethodsFilter(final File packageRoot) {
+        final MarkingScheme markingScheme = createSpecificationMarkingScheme();
+        return objectFactory.create(ClassWithMarkedMethodsFileFilter.class, packageRoot, markingScheme);
+    }
+
+    private MarkingScheme createContextMarkingScheme() {
+        final NamingConvention namingConvention = objectFactory.create(ContextNamingConvention.class);
+        return objectFactory.create(MarkingSchemeImpl.class, Context.class, namingConvention);
+    }
+
+    private MarkingScheme createSpecificationMarkingScheme() {
+        final NamingConvention namingConvention = objectFactory.create(SpecificationNamingConvention.class);
+        return new MarkingSchemeImpl(Specification.class, namingConvention);
     }
 }

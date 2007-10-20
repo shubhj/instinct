@@ -113,11 +113,12 @@ o Chris Myers
 Contributions
 o Lyall Ward
 o Sanjiv Sahayam
+o Nicholas Partridge
 
 Thanks to the work done on RSpec, jMock, EasyMock, Boost & JRDF. These libraries
 inspired Instinct. Thanks also to the EasyDoc team, past & present, your work is
 inspirational.
 
 Instinct development and research is supported by Workingmouse: http://workingmouse.com/.
-Code coverage is provided by Atlassian Clover: http://www.atlassian.com/software/clover/.
+Code coverage provided by Atlassian Clover: http://www.atlassian.com/software/clover/.
 IntelliJ IDEA licences provided by JetBrains: http://www.jetbrains.com/.
