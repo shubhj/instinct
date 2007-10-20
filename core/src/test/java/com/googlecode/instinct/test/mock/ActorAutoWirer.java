@@ -16,15 +16,16 @@
 
 package com.googlecode.instinct.test.mock;
 
+import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Field;
 import com.googlecode.instinct.internal.testdouble.DummyCreator;
 import com.googlecode.instinct.internal.testdouble.SpecificationDoubleCreator;
+import com.googlecode.instinct.internal.testdouble.StubCreator;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.TestingException;
-import java.lang.reflect.AnnotatedElement;
-import java.lang.reflect.Field;
 
 @SuppressWarnings({"CatchGenericClass"})
 public final class ActorAutoWirer {

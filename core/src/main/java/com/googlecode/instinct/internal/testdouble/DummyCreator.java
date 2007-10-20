@@ -16,15 +16,14 @@
 
 package com.googlecode.instinct.internal.testdouble;
 
+import static java.lang.reflect.Modifier.isFinal;
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.instance.ConcreteInstanceProvider;
 import com.googlecode.instinct.internal.util.proxy.CgLibProxyGenerator;
 import com.googlecode.instinct.internal.util.proxy.ProxyGenerator;
-import static java.lang.reflect.Modifier.isFinal;
 import net.sf.cglib.proxy.MethodInterceptor;
 
 public final class DummyCreator implements SpecificationDoubleCreator {
@@ -41,7 +40,6 @@ public final class DummyCreator implements SpecificationDoubleCreator {
         }
     }
 
-    @Suggest("Test final class logic")
     @SuppressWarnings({"unchecked"})
     private <T> T createInstanceForType(final Class<T> doubleType) {
         return (T) concreteInstanceProvider.newInstance(doubleType);
