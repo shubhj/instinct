@@ -16,10 +16,10 @@
 
 package com.googlecode.instinct.internal.locate;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.marker.MarkingScheme;
 import java.io.File;
 import java.io.FileFilter;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.marker.MarkingScheme;
 
 public final class ClassWithMarkedMethodsFileFilter implements FileFilter {
     private final MarkingScheme markingScheme;

@@ -18,12 +18,10 @@ package com.googlecode.instinct.example.shoppingcart;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
-@Context
 public class AShoppingCartImplementation {
 
     @Specification

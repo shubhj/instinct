@@ -16,15 +16,15 @@
 
 package com.googlecode.instinct.internal.locate;
 
+import java.io.File;
+import java.lang.reflect.Method;
+import java.util.Collection;
 import au.net.netstorm.boost.edge.EdgeException;
 import com.googlecode.instinct.internal.util.ClassInstantiator;
 import com.googlecode.instinct.internal.util.ClassInstantiatorImpl;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.MarkingScheme;
-import java.io.File;
-import java.lang.reflect.Method;
-import java.util.Collection;
 
 @Fix("Remove dupe with MarkedFileChecker.")
 public final class MethodMarkedFileChecker implements MarkedFileChecker {
