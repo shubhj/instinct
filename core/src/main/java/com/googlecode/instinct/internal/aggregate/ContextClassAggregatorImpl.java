@@ -74,6 +74,6 @@ public final class ContextClassAggregatorImpl implements ContextAggregator {
 
     private MarkingScheme createSpecificationMarkingScheme() {
         final NamingConvention namingConvention = objectFactory.create(SpecificationNamingConvention.class);
-        return new MarkingSchemeImpl(Specification.class, namingConvention);
+        return objectFactory.create(MarkingSchemeImpl.class, Specification.class, namingConvention);
     }
 }

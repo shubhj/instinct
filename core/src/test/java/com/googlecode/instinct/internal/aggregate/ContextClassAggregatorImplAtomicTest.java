@@ -73,10 +73,7 @@ public final class ContextClassAggregatorImplAtomicTest extends InstinctTestCase
                 classLocator, objectFactory);
     }
 
-    public void testNothing() {
-    }
-
-    public void pvTestGetContextNames() {
+    public void testGetContextNames() {
         expect.that(new Expectations() {
             {
                 one(packageRootFinder).getPackageRoot(CLASS_IN_SPEC_TREE);
