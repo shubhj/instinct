@@ -30,7 +30,7 @@ import com.googlecode.instinct.internal.util.JavaClassNameImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 
-@Suggest("Test drive this class")
+@Suggest("Test drive this class, steal the test from ContextClassAggregator")
 public final class ClassLocatorImpl implements ClassLocator {
     private final Comparator<File> comparator = new FileNameComparator();
 

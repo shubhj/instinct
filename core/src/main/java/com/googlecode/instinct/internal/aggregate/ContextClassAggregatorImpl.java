@@ -47,13 +47,12 @@ public final class ContextClassAggregatorImpl implements ContextAggregator {
         this.classInSpecTree = classInSpecTree;
     }
 
-    @Fix({"Return a set here.", "Add the ClassWithMarkedMethodsFileFilterHereAlso"})
+    @Fix({"Return a set here.", "Merge with ClassLocator, delete this class."})
     public JavaClassName[] getContextNames() {
         final File packageRoot = objectFactory.create(File.class, packageRootFinder.getPackageRoot(classInSpecTree));
-
-        final FileFilter filter = createMarkedClassFileFilter(packageRoot);
-        final FileFilter filter2 = createMarkedMethodsFilter(packageRoot);
-        final Set<JavaClassName> names = classLocator.locate(packageRoot, filter, filter2);
+        final FileFilter annotatedClasses = createMarkedClassFileFilter(packageRoot);
+        final FileFilter markedMethodClasses = createMarkedMethodsFilter(packageRoot);
+        final Set<JavaClassName> names = classLocator.locate(packageRoot, annotatedClasses, markedMethodClasses);
         return names.toArray(new JavaClassName[names.size()]);
     }
 
