@@ -19,16 +19,16 @@ package com.googlecode.instinct.marker;
 import java.lang.annotation.Annotation;
 import au.net.netstorm.boost.primordial.Primordial;
 import com.googlecode.instinct.internal.util.Fix;
-import com.googlecode.instinct.internal.util.ParamChecker;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 
-@Fix({"Test drive.", "Turn this into an enumeration."})
+@Fix({"Test drive.", "Turn this into an enumeration?"})
 public final class MarkingSchemeImpl extends Primordial implements MarkingScheme {
     private final Class<?> annotationType;
     private final NamingConvention namingConvention;
 
     public <A extends Annotation> MarkingSchemeImpl(final Class<A> annotationType, final NamingConvention namingConvention) {
-        ParamChecker.checkNotNull(annotationType, namingConvention);
+        checkNotNull(annotationType, namingConvention);
         this.annotationType = annotationType;
         this.namingConvention = namingConvention;
     }

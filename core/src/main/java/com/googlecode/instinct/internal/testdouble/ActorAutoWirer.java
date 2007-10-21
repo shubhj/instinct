@@ -17,5 +17,5 @@
 package com.googlecode.instinct.internal.testdouble;
 
 public interface ActorAutoWirer {
-
+    void autoWireFields(Object instanceToAutoWire);
 }

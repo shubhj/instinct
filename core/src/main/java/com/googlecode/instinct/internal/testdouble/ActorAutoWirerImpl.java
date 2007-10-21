@@ -18,7 +18,21 @@ package com.googlecode.instinct.internal.testdouble;
 
 import com.googlecode.instinct.internal.locate.MarkedFieldLocator;
 import com.googlecode.instinct.internal.locate.MarkedFieldLocatorImpl;
+import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
+import com.googlecode.instinct.marker.MarkingScheme;
+import com.googlecode.instinct.marker.MarkingSchemeImpl;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.naming.DummyNamingConvention;
+import com.googlecode.instinct.marker.naming.NamingConvention;
 
 public final class ActorAutoWirerImpl implements ActorAutoWirer {
-    private MarkedFieldLocator markedFieldLocator = new MarkedFieldLocatorImpl();
+    private final MarkedFieldLocator markedFieldLocator = new MarkedFieldLocatorImpl();
+    private final ObjectFactory objectFactory = new ObjectFactoryImpl();
+
+    public void autoWireFields(final Object instanceToAutoWire) {
+        final NamingConvention namingConvention = objectFactory.create(DummyNamingConvention.class);
+        final MarkingScheme markingScheme = objectFactory.create(MarkingSchemeImpl.class, Dummy.class, namingConvention);
+        markedFieldLocator.locateAll(instanceToAutoWire.getClass(), markingScheme);
+    }
 }

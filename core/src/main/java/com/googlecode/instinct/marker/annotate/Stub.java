@@ -21,6 +21,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import com.googlecode.instinct.internal.util.Suggest;
 
 /**
  * Stubs respond to method calls made during a test by providing canned answers.
@@ -28,6 +29,8 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
+@Suggest({"Add implementationClass here? Are there cases where it makes sense to declare a stub as an interface?",
+        "Add componentType (for Collections) in order to fill with mocks."})
 public @interface Stub {
     /**
      * Whether to auto-create (auto-wire) an instance of this stub and insert the value into a context.
