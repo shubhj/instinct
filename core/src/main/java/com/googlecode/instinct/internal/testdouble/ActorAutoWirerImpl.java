@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.locate;
+package com.googlecode.instinct.internal.testdouble;
 
-import java.lang.reflect.Field;
-import com.googlecode.instinct.marker.MarkingScheme;
+import com.googlecode.instinct.internal.locate.MarkedFieldLocator;
+import com.googlecode.instinct.internal.locate.MarkedFieldLocatorImpl;
 
-public interface MarkedFieldLocator {
-    <T> Field[] locateAll(Class<T> cls, MarkingScheme markingScheme);
+public final class ActorAutoWirerImpl implements ActorAutoWirer {
+    private MarkedFieldLocator markedFieldLocator = new MarkedFieldLocatorImpl();
 }

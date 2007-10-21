@@ -15,6 +15,8 @@
  */
 package com.googlecode.instinct.internal.runner;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import static com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus.SPECIFICATION_SUCCESS;
@@ -29,8 +31,6 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.runner.SpecificationListener;
-import java.util.ArrayList;
-import java.util.Collection;
 import org.jmock.api.ExpectationError;
 
 @Fix("This class is huge. Split it!")
@@ -119,9 +119,9 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
                 }
             }
         } else {
-//            new StringCheckerImpl("").equalTo();
-            final String message =
-                    "Expected exception was not thrown\nExpected: " + expectedExceptionClass + "\n     got: " + thrownException.getClass();
+            //new StringCheckerImpl("").equalTo();
+            final String message = "Expected exception was not thrown\nExpected: "
+                    + expectedExceptionClass + "\n     got: " + thrownException.getClass();
             final Throwable failure = new SpecificationFailureException(message, thrownException);
             final SpecificationRunStatus status = new SpecificationRunFailureStatus(failure);
             return createSpecResult(specificationMethod, status, startTime);
