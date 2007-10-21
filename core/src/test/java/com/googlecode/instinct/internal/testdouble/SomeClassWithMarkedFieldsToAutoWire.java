@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Workingmouse
+ * Copyright 2006-2007 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,14 @@
 
 package com.googlecode.instinct.internal.testdouble;
 
-public interface SpecificationDoubleCreator {
-    int NUMBER_OF_DOUBLES_IN_AN_ARRAY = 3;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Stub;
+import com.googlecode.instinct.marker.annotate.Subject;
 
-    <T> T createDouble(final Class<T> doubleType, String roleName);
+public final class SomeClassWithMarkedFieldsToAutoWire {
+    @Subject private CharSequence aSubject;
+    @Mock private CharSequence aMock;
+    @Stub private CharSequence aStub;
+    @Dummy private CharSequence aDummy;
 }

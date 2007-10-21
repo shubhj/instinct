@@ -18,11 +18,13 @@ package com.googlecode.instinct.internal.testdouble;
 
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.instance.ConcreteInstanceProvider;
 
 public final class StubCreator implements SpecificationDoubleCreator {
     private final InstanceProvider instanceProvider = new ConcreteInstanceProvider();
 
+    @Suggest("Fill stub arrays with stubs ala mock creator.")
     @SuppressWarnings({"unchecked"})
     public <T> T createDouble(final Class<T> doubleType, final String roleName) {
         checkNotNull(doubleType, roleName);

@@ -21,6 +21,7 @@ import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.instance.ConcreteInstanceProvider;
 import com.googlecode.instinct.internal.util.proxy.CgLibProxyGenerator;
 import com.googlecode.instinct.internal.util.proxy.ProxyGenerator;
@@ -31,6 +32,7 @@ public final class DummyCreator implements SpecificationDoubleCreator {
     private final ProxyGenerator proxyGenerator = new CgLibProxyGenerator();
     private final ObjectFactory objectFactory = new ObjectFactoryImpl();
 
+    @Suggest("Fill dummy arrays with dummies ala mock creator.")
     public <T> T createDouble(final Class<T> doubleType, final String roleName) {
         checkNotNull(doubleType, roleName);
         if (isFinalClass(doubleType)) {

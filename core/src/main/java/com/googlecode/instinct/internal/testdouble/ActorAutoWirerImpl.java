@@ -16,6 +16,9 @@
 
 package com.googlecode.instinct.internal.testdouble;
 
+import java.lang.reflect.Field;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdge;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdgeImpl;
 import com.googlecode.instinct.internal.locate.MarkedFieldLocator;
 import com.googlecode.instinct.internal.locate.MarkedFieldLocatorImpl;
 import com.googlecode.instinct.internal.util.ObjectFactory;
@@ -29,10 +32,25 @@ import com.googlecode.instinct.marker.naming.NamingConvention;
 public final class ActorAutoWirerImpl implements ActorAutoWirer {
     private final MarkedFieldLocator markedFieldLocator = new MarkedFieldLocatorImpl();
     private final ObjectFactory objectFactory = new ObjectFactoryImpl();
+    private final SpecificationDoubleCreator dummyCreator = new DummyCreator();
+    private final FieldEdge fieldEdge = new FieldEdgeImpl();
 
     public void autoWireFields(final Object instanceToAutoWire) {
+        autoWireDummies(instanceToAutoWire);
+    }
+
+    private void autoWireDummies(final Object instanceToAutoWire) {
+        final MarkingScheme markingScheme = createDummyMarkingScheme();
+        final Field[] fields = markedFieldLocator.locateAll(instanceToAutoWire.getClass(), markingScheme);
+        for (final Field field : fields) {
+            final Object createdDouble = dummyCreator.createDouble(field.getType(), field.getName());
+            field.setAccessible(true);
+            fieldEdge.set(field, instanceToAutoWire, createdDouble);
+        }
+    }
+
+    private MarkingScheme createDummyMarkingScheme() {
         final NamingConvention namingConvention = objectFactory.create(DummyNamingConvention.class);
-        final MarkingScheme markingScheme = objectFactory.create(MarkingSchemeImpl.class, Dummy.class, namingConvention);
-        markedFieldLocator.locateAll(instanceToAutoWire.getClass(), markingScheme);
+        return objectFactory.create(MarkingSchemeImpl.class, Dummy.class, namingConvention);
     }
 }

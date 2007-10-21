@@ -21,8 +21,6 @@ import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class MockCreator implements SpecificationDoubleCreator {
-    private static final int NUMBER_OF_MOCKS_IN_AN_ARRAY = 3;
-
     @SuppressWarnings({"unchecked"})
     public <T> T createDouble(final Class<T> doubleType, final String roleName) {
         checkNotNull(doubleType, roleName);
@@ -35,8 +33,8 @@ public final class MockCreator implements SpecificationDoubleCreator {
 
     @SuppressWarnings({"StringContatenationInLoop", "unchecked"})
     private <E> Object createArray(final Class<E> componentType, final String fieldName) {
-        final Object array = Array.newInstance(componentType, NUMBER_OF_MOCKS_IN_AN_ARRAY);
-        for (int i = 0; i < NUMBER_OF_MOCKS_IN_AN_ARRAY; i++) {
+        final Object array = Array.newInstance(componentType, NUMBER_OF_DOUBLES_IN_AN_ARRAY);
+        for (int i = 0; i < NUMBER_OF_DOUBLES_IN_AN_ARRAY; i++) {
             Array.set(array, i, mock(componentType, fieldName + "-" + i));
         }
         return array;
