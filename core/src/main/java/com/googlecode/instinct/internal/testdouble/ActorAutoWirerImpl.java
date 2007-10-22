@@ -48,32 +48,46 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
 
     private void autoWireDummies(final Object instanceToAutoWire) {
         final MarkingScheme dummyMarkingScheme = new MarkingSchemeImpl(Dummy.class, new DummyNamingConvention());
-        autoWireField(dummyCreator, instanceToAutoWire, dummyMarkingScheme, new DummyAutoWireDeterminator());
+        autoWireMarkedFields(dummyCreator, instanceToAutoWire, dummyMarkingScheme, new DummyAutoWireDeterminator());
     }
 
     private void autoWireStubs(final Object instanceToAutoWire) {
         final MarkingScheme stubMarkingScheme = new MarkingSchemeImpl(Stub.class, new StubNamingConvention());
-        autoWireField(stubCreator, instanceToAutoWire, stubMarkingScheme, new StubAutoWireDeterminator());
+        autoWireMarkedFields(stubCreator, instanceToAutoWire, stubMarkingScheme, new StubAutoWireDeterminator());
     }
 
     private void autoWireMocks(final Object instanceToAutoWire) {
         final MarkingScheme mockMarkingScheme = new MarkingSchemeImpl(Mock.class, new MockNamingConvention());
-        autoWireField(mockCreator, instanceToAutoWire, mockMarkingScheme, new MockAutoWireDeterminator());
+        autoWireMarkedFields(mockCreator, instanceToAutoWire, mockMarkingScheme, new MockAutoWireDeterminator());
     }
 
-    private void autoWireField(final SpecificationDoubleCreator doubleCreator, final Object instanceToAutoWire, final MarkingScheme markingScheme,
-            final AutoWireDeterminator autoWireDeterminator) {
+    private void autoWireMarkedFields(final SpecificationDoubleCreator doubleCreator, final Object instanceToAutoWire,
+            final MarkingScheme markingScheme, final AutoWireDeterminator autoWireDeterminator) {
         final Field[] fields = markedFieldLocator.locateAll(instanceToAutoWire.getClass(), markingScheme);
         for (final Field field : fields) {
             if (autoWireDeterminator.autoWire(field)) {
-                final Object createdDouble = doubleCreator.createDouble(field.getType(), field.getName());
-                field.setAccessible(true);
-                fieldEdge.set(field, instanceToAutoWire, createdDouble);
+                autoWireField(instanceToAutoWire, field, doubleCreator);
             }
         }
     }
 
+    @SuppressWarnings({"CatchGenericClass"})
+    // SUPPRESS IllegalCatch {
+    private void autoWireField(final Object instanceToAutoWire, final Field field, final SpecificationDoubleCreator doubleCreator) {
+        try {
+            final Object createdDouble = doubleCreator.createDouble(field.getType(), field.getName());
+            field.setAccessible(true);
+            fieldEdge.set(field, instanceToAutoWire, createdDouble);
+        } catch (Throwable throwable) {
+            final String message = "Unable to autowire a specification double value into field '" + field.getName() + "' (type "
+                    + field.getType().getSimpleName() + ") in class " + instanceToAutoWire.getClass().getSimpleName();
+            throw new AutoWireException(message, throwable);
+        }
+    }
+    // } SUPPRESS IllegalCatch
+
     // Note. This stuff below is bollocks, as we cannot specify a shared type between annotations!
+
     private interface AutoWireDeterminator {
         boolean autoWire(Field field);
     }

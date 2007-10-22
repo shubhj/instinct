@@ -18,6 +18,7 @@ package com.googlecode.instinct.internal.testdouble;
 
 import java.lang.reflect.Field;
 import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
@@ -28,8 +29,10 @@ import org.jmock.api.ExpectationError;
 @SuppressWarnings({"InstanceVariableOfConcreteClass"})
 public final class ActorAutoWirerSlowTest extends InstinctTestCase {
     @Subject(implementation = ActorAutoWirerImpl.class) private ActorAutoWirer actorAutoWirer;
-    @Stub private SomeClassWithMarkedFieldsToAutoWire instanceWithFieldsToWire;
-    @Stub private SomeClassWithMarkedFieldsToNotAutowire instanceWithFieldsNotToWire;
+    @Stub private AClassWithMarkedFieldsToAutoWire instanceWithFieldsToWire;
+    @Stub private AClassWithMarkedFieldsToNotAutowire instanceWithFieldsNotToWire;
+    @Stub private AClassWithBadlyMarkedStubsToAutoWire instanceWithBadlyMarkedStubsToWire;
+    @Stub private AClassWithBadlyMarkedMocksToAutoWire instanceWithBadlyMarkedMocksToWire;
 
     public void testAutoWiresDummiesIntoClasses() throws Exception {
         actorAutoWirer.autoWireFields(instanceWithFieldsToWire);
@@ -81,9 +84,33 @@ public final class ActorAutoWirerSlowTest extends InstinctTestCase {
         expect.that(value).isNull();
     }
 
+    public void testDisplaysADecentExceptionWhenTryingToStubIncorrectlyMarkedField() {
+        expectException(AutoWireException.class, new Runnable() {
+            public void run() {
+                actorAutoWirer.autoWireFields(instanceWithBadlyMarkedStubsToWire);
+            }
+        });
+    }
+
+    public void testDisplaysADecentExceptionWhenTryingToMockIncorrectlyMarkedField() {
+        expectException(AutoWireException.class, new Runnable() {
+            public void run() {
+                actorAutoWirer.autoWireFields(instanceWithBadlyMarkedMocksToWire);
+            }
+        });
+    }
+
     private Field getField(final Object instance, final String fieldName) {
         final Field field = getFieldByName(instance.getClass(), fieldName);
         field.setAccessible(true);
         return field;
+    }
+
+    private static final class AClassWithBadlyMarkedStubsToAutoWire {
+        @Stub private CharSequence stub;
+    }
+
+    private static final class AClassWithBadlyMarkedMocksToAutoWire {
+        @Mock private String mock;
     }
 }
