@@ -22,6 +22,7 @@ import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdgeImpl;
 import com.googlecode.instinct.internal.locate.MarkedFieldLocator;
 import com.googlecode.instinct.internal.locate.MarkedFieldLocatorImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Dummy;
@@ -39,6 +40,7 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
     private final SpecificationDoubleCreator stubCreator = new StubCreator();
     private final SpecificationDoubleCreator mockCreator = new MockCreator();
 
+    @Suggest("Add in subject auto-wiring.")
     public void autoWireFields(final Object instanceToAutoWire) {
         checkNotNull(instanceToAutoWire);
         autoWireDummies(instanceToAutoWire);

@@ -18,38 +18,21 @@ package com.googlecode.instinct.test.mock;
 
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
-import com.googlecode.instinct.internal.actor.DummyCreator;
-import com.googlecode.instinct.internal.actor.MockCreator;
-import com.googlecode.instinct.internal.actor.SpecificationDoubleCreator;
-import com.googlecode.instinct.internal.actor.StubCreator;
-import com.googlecode.instinct.marker.annotate.Dummy;
-import com.googlecode.instinct.marker.annotate.Mock;
-import com.googlecode.instinct.marker.annotate.Stub;
+import com.googlecode.instinct.internal.actor.ActorAutoWirerImpl;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.TestingException;
 
 @SuppressWarnings({"CatchGenericClass"})
 public final class ActorAutoWirer {
     private static final SubjectCreator SUBJECT_CREATOR = new SubjectCreatorImpl();
-    private static final SpecificationDoubleCreator DUMMY_CREATOR = new DummyCreator();
-    private static final SpecificationDoubleCreator STUB_CREATOR = new StubCreator();
-    private static final SpecificationDoubleCreator MOCK_CREATOR = new MockCreator();
+    private static final com.googlecode.instinct.internal.actor.ActorAutoWirer actorAutoWirer = new ActorAutoWirerImpl();
 
     private ActorAutoWirer() {
         throw new UnsupportedOperationException();
     }
 
     public static void autoWireMockFields(final Object instanceToAutoWire) {
-        final Field[] fields = instanceToAutoWire.getClass().getDeclaredFields();
-        for (final Field field : fields) {
-            if (field.isAnnotationPresent(Mock.class) && autoWireMock(field)) {
-                injectMock(instanceToAutoWire, field);
-            } else if (field.isAnnotationPresent(Stub.class) && autoWireStub(field)) {
-                injectStub(instanceToAutoWire, field);
-            } else if (field.isAnnotationPresent(Dummy.class) && autoWireDummy(field)) {
-                injectDummy(instanceToAutoWire, field);
-            }
-        }
+        actorAutoWirer.autoWireFields(instanceToAutoWire);
     }
 
     public static void autoWireSubjectFields(final Object instanceToAutoWire) {
@@ -59,18 +42,6 @@ public final class ActorAutoWirer {
                 injectSubject(instanceToAutoWire, field);
             }
         }
-    }
-
-    private static void injectMock(final Object instanceToAutoWire, final Field field) {
-        injectFieldValue(instanceToAutoWire, field, MOCK_CREATOR.createDouble(field.getType(), field.getName()), "mock");
-    }
-
-    private static void injectDummy(final Object instanceToAutoWire, final Field field) {
-        injectFieldValue(instanceToAutoWire, field, DUMMY_CREATOR.createDouble(field.getType(), field.getName()), "dummy");
-    }
-
-    private static void injectStub(final Object instanceToAutoWire, final Field field) {
-        injectFieldValue(instanceToAutoWire, field, STUB_CREATOR.createDouble(field.getType(), field.getName()), "dummy");
     }
 
     private static void injectSubject(final Object instanceToAutoWire, final Field field) {
@@ -90,21 +61,6 @@ public final class ActorAutoWirer {
 
     private static boolean autoWireSubject(final AnnotatedElement subjectField) {
         final Subject annotation = subjectField.getAnnotation(Subject.class);
-        return annotation.auto();
-    }
-
-    private static boolean autoWireMock(final AnnotatedElement mockField) {
-        final Mock annotation = mockField.getAnnotation(Mock.class);
-        return annotation.auto();
-    }
-
-    private static boolean autoWireStub(final AnnotatedElement stubField) {
-        final Stub annotation = stubField.getAnnotation(Stub.class);
-        return annotation.auto();
-    }
-
-    private static boolean autoWireDummy(final AnnotatedElement dummyField) {
-        final Dummy annotation = dummyField.getAnnotation(Dummy.class);
         return annotation.auto();
     }
 }
