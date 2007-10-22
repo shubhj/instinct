@@ -16,14 +16,14 @@
 
 package com.googlecode.instinct.test.reflect;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import com.googlecode.instinct.test.TestingException;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 public final class Reflector {
     private static final MethodInvoker METHOD_INVOKER = new MethodInvokerImpl();
@@ -112,7 +112,7 @@ public final class Reflector {
         }
     }
 
-    private static boolean setFieldValueUsingParentInterface(Object instance, Object value) {
+    private static boolean setFieldValueUsingParentInterface(final Object instance, final Object value) {
         for (final Class<?> implementedInterfaceType : value.getClass().getInterfaces()) {
             if (containsFieldOfType(instance.getClass(), implementedInterfaceType)) {
                 setFieldValue(instance, implementedInterfaceType, value);

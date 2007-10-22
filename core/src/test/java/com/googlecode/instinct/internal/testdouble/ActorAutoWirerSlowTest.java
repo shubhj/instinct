@@ -16,9 +16,13 @@
 
 package com.googlecode.instinct.internal.testdouble;
 
+import java.lang.reflect.Field;
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
+import static com.googlecode.instinct.test.reflect.Reflector.getFieldByName;
 
 @SuppressWarnings({"InstanceVariableOfConcreteClass"})
 public final class ActorAutoWirerSlowTest extends InstinctTestCase {
@@ -26,7 +30,27 @@ public final class ActorAutoWirerSlowTest extends InstinctTestCase {
     @Stub private SomeClassWithMarkedFieldsToAutoWire instanceWithFieldsToWire;
     @Stub private SomeClassWithMarkedFieldsToNotAutowire instanceWithFieldsNotToWire;
 
-    public void testAutoWiresDummiesIntoClasses() {
+    public void testAutoWiresDummiesIntoClasses() throws Exception {
         actorAutoWirer.autoWireFields(instanceWithFieldsToWire);
+        final Field dummyField = getField(instanceWithFieldsToWire, "dummy");
+        final CharSequence value = (CharSequence) dummyField.get(instanceWithFieldsToWire);
+        expectException(IllegalInvocationException.class, new Runnable() {
+            public void run() {
+                value.charAt(0);
+            }
+        });
+    }
+
+    public void testDoesNotAutoWireDummiesWhenNotRequested() throws Exception {
+        actorAutoWirer.autoWireFields(instanceWithFieldsNotToWire);
+        final Field dummyField = getField(instanceWithFieldsNotToWire, "dummy");
+        final CharSequence value = (CharSequence) dummyField.get(instanceWithFieldsNotToWire);
+        expect.that(value).isNull();
+    }
+
+    private Field getField(final Object instance, final String fieldName) {
+        final Field field = getFieldByName(instance.getClass(), fieldName);
+        field.setAccessible(true);
+        return field;
     }
 }

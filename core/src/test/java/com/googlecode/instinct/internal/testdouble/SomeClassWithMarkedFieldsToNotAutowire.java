@@ -22,8 +22,8 @@ import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 
 final class SomeClassWithMarkedFieldsToNotAutowire {
-    @Subject(auto = false) private CharSequence aSubject;
-    @Mock(auto = false) private CharSequence aMock;
-    @Stub(auto = false) private CharSequence aStub;
-    @Dummy(auto = false) private CharSequence aDummy;
+    @Subject(auto = false) private CharSequence subject;
+    @Mock(auto = false) private CharSequence mock;
+    @Stub(auto = false) private CharSequence stub;
+    @Dummy(auto = false) private CharSequence dummy;
 }

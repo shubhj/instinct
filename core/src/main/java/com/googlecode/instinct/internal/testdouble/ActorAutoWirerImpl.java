@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.internal.testdouble;
 
+import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdgeImpl;
@@ -23,6 +24,7 @@ import com.googlecode.instinct.internal.locate.MarkedFieldLocator;
 import com.googlecode.instinct.internal.locate.MarkedFieldLocatorImpl;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Dummy;
@@ -36,6 +38,7 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
     private final FieldEdge fieldEdge = new FieldEdgeImpl();
 
     public void autoWireFields(final Object instanceToAutoWire) {
+        checkNotNull(instanceToAutoWire);
         autoWireDummies(instanceToAutoWire);
     }
 
@@ -46,14 +49,21 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
     private void autoWireDummies(final SpecificationDoubleCreator doubleCreator, final Object instanceToAutoWire, final MarkingScheme markingScheme) {
         final Field[] fields = markedFieldLocator.locateAll(instanceToAutoWire.getClass(), markingScheme);
         for (final Field field : fields) {
-            final Object createdDouble = doubleCreator.createDouble(field.getType(), field.getName());
-            field.setAccessible(true);
-            fieldEdge.set(field, instanceToAutoWire, createdDouble);
+            if (autoWireDummy(field)) {
+                final Object createdDouble = doubleCreator.createDouble(field.getType(), field.getName());
+                field.setAccessible(true);
+                fieldEdge.set(field, instanceToAutoWire, createdDouble);
+            }
         }
     }
 
     private MarkingScheme createDummyMarkingScheme() {
         final NamingConvention namingConvention = objectFactory.create(DummyNamingConvention.class);
         return objectFactory.create(MarkingSchemeImpl.class, Dummy.class, namingConvention);
+    }
+
+    private boolean autoWireDummy(final AnnotatedElement dummyField) {
+        final Dummy annotation = dummyField.getAnnotation(Dummy.class);
+        return annotation != null && annotation.auto();
     }
 }
