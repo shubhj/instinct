@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.actor;
 
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ExceptionChecker.checkException;

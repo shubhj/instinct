@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.actor;
 
 public final class IllegalInvocationException extends RuntimeException {
     private static final long serialVersionUID = -3020616634147454073L;

@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.actor;
 
-import com.googlecode.instinct.marker.annotate.Dummy;
-import com.googlecode.instinct.marker.annotate.Mock;
-import com.googlecode.instinct.marker.annotate.Stub;
-import com.googlecode.instinct.marker.annotate.Subject;
+import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
-final class AClassWithMarkedFieldsToNotAutowire {
-    @Subject(auto = false) private String subject;
-    @Mock(auto = false) private CharSequence mock;
-    @Stub(auto = false) private String stub;
-    @Dummy(auto = false) private CharSequence dummy;
+public final class ActorAutoWirerImplAtomicTest extends InstinctTestCase {
+    public void testConformsToClassTraits() {
+        checkClass(ActorAutoWirerImpl.class, ActorAutoWirer.class);
+    }
 }

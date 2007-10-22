@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.actor;
 
-import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+public interface SpecificationDoubleCreator {
+    int NUMBER_OF_DOUBLES_IN_AN_ARRAY = 3;
 
-public final class ActorAutoWirerImplAtomicTest extends InstinctTestCase {
-    public void testConformsToClassTraits() {
-        checkClass(ActorAutoWirerImpl.class, ActorAutoWirer.class);
-    }
+    <T> T createDouble(final Class<T> doubleType, String roleName);
 }

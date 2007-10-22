@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.actor;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.lang.reflect.Method;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 

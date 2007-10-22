@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.actor;
 
+import java.util.ArrayList;
+import java.util.List;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
-import java.util.ArrayList;
-import java.util.List;
 
 public final class DummyCreatorSlowTest extends InstinctTestCase {
     @Subject(implementation = DummyCreator.class) private SpecificationDoubleCreator dummyCreator;

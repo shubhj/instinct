@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.actor;
 
 import java.lang.reflect.Field;
 import static com.googlecode.instinct.expect.Expect.expect;

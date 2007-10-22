@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.actor;
 
+import java.lang.reflect.Method;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
@@ -23,7 +24,6 @@ import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.Reflector.getDeclaredMethod;
-import java.lang.reflect.Method;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 import org.jmock.Expectations;

@@ -14,21 +14,29 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.actor;
 
-import au.net.netstorm.boost.nursery.instance.InstanceProvider;
+import java.lang.reflect.Array;
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.internal.util.instance.ConcreteInstanceProvider;
 
-public final class StubCreator implements SpecificationDoubleCreator {
-    private final InstanceProvider instanceProvider = new ConcreteInstanceProvider();
-
-    @Suggest("Fill stub arrays with stubs ala mock creator.")
+public final class MockCreator implements SpecificationDoubleCreator {
     @SuppressWarnings({"unchecked"})
     public <T> T createDouble(final Class<T> doubleType, final String roleName) {
         checkNotNull(doubleType, roleName);
-        return (T) instanceProvider.newInstance(doubleType);
+        if (doubleType.isArray()) {
+            return (T) createArray(doubleType.getComponentType(), roleName);
+        } else {
+            return mock(doubleType, roleName);
+        }
+    }
+
+    @SuppressWarnings({"StringContatenationInLoop", "unchecked"})
+    private <E> Object createArray(final Class<E> componentType, final String fieldName) {
+        final Object array = Array.newInstance(componentType, NUMBER_OF_DOUBLES_IN_AN_ARRAY);
+        for (int i = 0; i < NUMBER_OF_DOUBLES_IN_AN_ARRAY; i++) {
+            Array.set(array, i, mock(componentType, fieldName + "-" + i));
+        }
+        return array;
     }
 }
-

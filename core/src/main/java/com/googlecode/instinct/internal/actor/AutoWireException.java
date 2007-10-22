@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.actor;
 
 public final class AutoWireException extends RuntimeException {
     private static final long serialVersionUID = 3542387970454974034L;

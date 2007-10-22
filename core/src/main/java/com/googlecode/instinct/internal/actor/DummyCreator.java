@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.actor;
 
 import static java.lang.reflect.Modifier.isFinal;
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;

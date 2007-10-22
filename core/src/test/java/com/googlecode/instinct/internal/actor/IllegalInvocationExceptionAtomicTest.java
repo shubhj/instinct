@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.actor;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.marker.annotate.Dummy;

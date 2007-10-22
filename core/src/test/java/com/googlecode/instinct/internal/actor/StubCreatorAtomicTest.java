@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.testdouble;
+package com.googlecode.instinct.internal.actor;
 
 import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 import static com.googlecode.instinct.expect.Expect.expect;
