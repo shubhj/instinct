@@ -40,10 +40,13 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
     }
 
     private void autoWireDummies(final Object instanceToAutoWire) {
-        final MarkingScheme markingScheme = createDummyMarkingScheme();
+        autoWireDummies(dummyCreator, instanceToAutoWire, createDummyMarkingScheme());
+    }
+
+    private void autoWireDummies(final SpecificationDoubleCreator doubleCreator, final Object instanceToAutoWire, final MarkingScheme markingScheme) {
         final Field[] fields = markedFieldLocator.locateAll(instanceToAutoWire.getClass(), markingScheme);
         for (final Field field : fields) {
-            final Object createdDouble = dummyCreator.createDouble(field.getType(), field.getName());
+            final Object createdDouble = doubleCreator.createDouble(field.getType(), field.getName());
             field.setAccessible(true);
             fieldEdge.set(field, instanceToAutoWire, createdDouble);
         }
