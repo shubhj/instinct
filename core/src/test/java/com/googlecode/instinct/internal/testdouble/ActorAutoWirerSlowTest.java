@@ -23,6 +23,7 @@ import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 import static com.googlecode.instinct.test.reflect.Reflector.getFieldByName;
+import org.jmock.api.ExpectationError;
 
 @SuppressWarnings({"InstanceVariableOfConcreteClass"})
 public final class ActorAutoWirerSlowTest extends InstinctTestCase {
@@ -45,6 +46,38 @@ public final class ActorAutoWirerSlowTest extends InstinctTestCase {
         actorAutoWirer.autoWireFields(instanceWithFieldsNotToWire);
         final Field dummyField = getField(instanceWithFieldsNotToWire, "dummy");
         final CharSequence value = (CharSequence) dummyField.get(instanceWithFieldsNotToWire);
+        expect.that(value).isNull();
+    }
+
+    public void testAutoWiresStubsIntoClasses() throws Exception {
+        actorAutoWirer.autoWireFields(instanceWithFieldsToWire);
+        final Field stubField = getField(instanceWithFieldsToWire, "stub");
+        final String value = (String) stubField.get(instanceWithFieldsToWire);
+        expect.that(value).isNotNull();
+    }
+
+    public void testDoesNotAutoWireStubsWhenNotRequested() throws Exception {
+        actorAutoWirer.autoWireFields(instanceWithFieldsNotToWire);
+        final Field stubField = getField(instanceWithFieldsNotToWire, "stub");
+        final String value = (String) stubField.get(instanceWithFieldsNotToWire);
+        expect.that(value).isNull();
+    }
+
+    public void testAutoWiresMocksIntoClasses() throws Exception {
+        actorAutoWirer.autoWireFields(instanceWithFieldsToWire);
+        final Field mockField = getField(instanceWithFieldsToWire, "mock");
+        final CharSequence value = (CharSequence) mockField.get(instanceWithFieldsToWire);
+        expectException(ExpectationError.class, new Runnable() {
+            public void run() {
+                value.charAt(0);
+            }
+        });
+    }
+
+    public void testDoesNotAutoWireMocksWhenNotRequested() throws Exception {
+        actorAutoWirer.autoWireFields(instanceWithFieldsNotToWire);
+        final Field mockField = getField(instanceWithFieldsNotToWire, "mock");
+        final String value = (String) mockField.get(instanceWithFieldsNotToWire);
         expect.that(value).isNull();
     }
 

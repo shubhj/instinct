@@ -16,40 +16,56 @@
 
 package com.googlecode.instinct.internal.testdouble;
 
-import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdgeImpl;
 import com.googlecode.instinct.internal.locate.MarkedFieldLocator;
 import com.googlecode.instinct.internal.locate.MarkedFieldLocatorImpl;
-import com.googlecode.instinct.internal.util.ObjectFactory;
-import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.naming.DummyNamingConvention;
-import com.googlecode.instinct.marker.naming.NamingConvention;
+import com.googlecode.instinct.marker.naming.MockNamingConvention;
+import com.googlecode.instinct.marker.naming.StubNamingConvention;
 
+@SuppressWarnings({"OverlyCoupledClass"})
 public final class ActorAutoWirerImpl implements ActorAutoWirer {
     private final MarkedFieldLocator markedFieldLocator = new MarkedFieldLocatorImpl();
-    private final ObjectFactory objectFactory = new ObjectFactoryImpl();
-    private final SpecificationDoubleCreator dummyCreator = new DummyCreator();
     private final FieldEdge fieldEdge = new FieldEdgeImpl();
+    private final SpecificationDoubleCreator dummyCreator = new DummyCreator();
+    private final SpecificationDoubleCreator stubCreator = new StubCreator();
+    private final SpecificationDoubleCreator mockCreator = new MockCreator();
 
     public void autoWireFields(final Object instanceToAutoWire) {
         checkNotNull(instanceToAutoWire);
         autoWireDummies(instanceToAutoWire);
+        autoWireStubs(instanceToAutoWire);
+        autoWireMocks(instanceToAutoWire);
     }
 
     private void autoWireDummies(final Object instanceToAutoWire) {
-        autoWireDummies(dummyCreator, instanceToAutoWire, createDummyMarkingScheme());
+        final MarkingScheme dummyMarkingScheme = new MarkingSchemeImpl(Dummy.class, new DummyNamingConvention());
+        autoWireField(dummyCreator, instanceToAutoWire, dummyMarkingScheme, new DummyAutoWireDeterminator());
     }
 
-    private void autoWireDummies(final SpecificationDoubleCreator doubleCreator, final Object instanceToAutoWire, final MarkingScheme markingScheme) {
+    private void autoWireStubs(final Object instanceToAutoWire) {
+        final MarkingScheme stubMarkingScheme = new MarkingSchemeImpl(Stub.class, new StubNamingConvention());
+        autoWireField(stubCreator, instanceToAutoWire, stubMarkingScheme, new StubAutoWireDeterminator());
+    }
+
+    private void autoWireMocks(final Object instanceToAutoWire) {
+        final MarkingScheme mockMarkingScheme = new MarkingSchemeImpl(Mock.class, new MockNamingConvention());
+        autoWireField(mockCreator, instanceToAutoWire, mockMarkingScheme, new MockAutoWireDeterminator());
+    }
+
+    private void autoWireField(final SpecificationDoubleCreator doubleCreator, final Object instanceToAutoWire, final MarkingScheme markingScheme,
+            final AutoWireDeterminator autoWireDeterminator) {
         final Field[] fields = markedFieldLocator.locateAll(instanceToAutoWire.getClass(), markingScheme);
         for (final Field field : fields) {
-            if (autoWireDummy(field)) {
+            if (autoWireDeterminator.autoWire(field)) {
                 final Object createdDouble = doubleCreator.createDouble(field.getType(), field.getName());
                 field.setAccessible(true);
                 fieldEdge.set(field, instanceToAutoWire, createdDouble);
@@ -57,13 +73,29 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
         }
     }
 
-    private MarkingScheme createDummyMarkingScheme() {
-        final NamingConvention namingConvention = objectFactory.create(DummyNamingConvention.class);
-        return objectFactory.create(MarkingSchemeImpl.class, Dummy.class, namingConvention);
+    // Note. This stuff below is bollocks, as we cannot specify a shared type between annotations!
+    private interface AutoWireDeterminator {
+        boolean autoWire(Field field);
     }
 
-    private boolean autoWireDummy(final AnnotatedElement dummyField) {
-        final Dummy annotation = dummyField.getAnnotation(Dummy.class);
-        return annotation != null && annotation.auto();
+    private static class DummyAutoWireDeterminator implements AutoWireDeterminator {
+        public boolean autoWire(final Field field) {
+            final Dummy annotation = field.getAnnotation(Dummy.class);
+            return annotation != null && annotation.auto();
+        }
+    }
+
+    private static class StubAutoWireDeterminator implements AutoWireDeterminator {
+        public boolean autoWire(final Field field) {
+            final Stub annotation = field.getAnnotation(Stub.class);
+            return annotation != null && annotation.auto();
+        }
+    }
+
+    private static class MockAutoWireDeterminator implements AutoWireDeterminator {
+        public boolean autoWire(final Field field) {
+            final Mock annotation = field.getAnnotation(Mock.class);
+            return annotation != null && annotation.auto();
+        }
     }
 }
