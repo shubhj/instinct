@@ -8,4 +8,6 @@
     <suppress checks="GenericIllegalRegexp" files="CommandLineRunner.java"/>
     <suppress checks="EqualsHashCode" files="ObjectCheckerImpl.java"/>
     <suppress checks="IllegalThrows" files="DummyMethodInterceptor.java"/>
+    <suppress checks="IllegalCatch" files="StubCreator.java"/>
+    <suppress checks="IllegalCatch" files="MockCreator.java"/>
 </suppressions>
