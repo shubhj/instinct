@@ -50,6 +50,15 @@ public final class MockCreatorAtomicTest extends InstinctTestCase {
         }
     }
 
+    public void testWrapsLowerLevelExceptionsInSomethingMoreUsable() {
+        final String message = "Unable to create a mock java.lang.String (with role name 'string'). Mock types cannot be final.";
+        expectException(SpecificationDoubleCreationException.class, message, new Runnable() {
+            public void run() {
+                mockCreator.createDouble(String.class, "string");
+            }
+        });
+    }
+
     private void expectThatElementIsAMock(final CharSequence mockSequence) {
         expectException(ExpectationError.class, new Runnable() {
             public void run() {

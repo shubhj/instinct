@@ -24,11 +24,20 @@ import com.googlecode.instinct.internal.util.instance.ConcreteInstanceProvider;
 public final class StubCreator implements SpecificationDoubleCreator {
     private final InstanceProvider instanceProvider = new ConcreteInstanceProvider();
 
-    @Suggest("Fill stub arrays with stubs ala mock creator.")
-    @SuppressWarnings({"unchecked"})
+    @Suggest({"Fill stub arrays with stubs ala mock creator.", "We should be able to stub out interfaces as well, ",
+            "by wrapping in a proxy that returns a stub value (the type is the method return type) from an instance provider call"})
+    @SuppressWarnings({"unchecked", "CatchGenericClass"})
+    // SUPPRESS IllegalCatch {
     public <T> T createDouble(final Class<T> doubleType, final String roleName) {
         checkNotNull(doubleType, roleName);
-        return (T) instanceProvider.newInstance(doubleType);
+        try {
+            return (T) instanceProvider.newInstance(doubleType);
+        } catch (Throwable e) {
+            final String message = "Unable to create stub " + doubleType.getName() + " (with role name '" + roleName
+                    + "'). Stub types must be non-abstract classes.";
+            throw new SpecificationDoubleCreationException(message, e);
+        }
     }
+    // } SUPPRESS IllegalCatch
 }
 

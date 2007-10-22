@@ -23,6 +23,7 @@ import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
 import org.jmock.Expectations;
 
@@ -50,5 +51,14 @@ public final class StubCreatorAtomicTest extends InstinctTestCase {
         });
         final String returnedStub = stubCreator.createDouble(String.class, "role name is ignored");
         expect.that(returnedStub).sameInstanceAs(theStub);
+    }
+
+    public void testWrapsLowerLevelExceptionsInSomethingMoreUsable() {
+        final String message = "Unable to create stub java.lang.CharSequence (with role name 'charSequence'). Stub types must be non-abstract classes.";
+        expectException(SpecificationDoubleCreationException.class, message, new Runnable() {
+            public void run() {
+                stubCreator.createDouble(CharSequence.class, "charSequence");
+            }
+        });
     }
 }

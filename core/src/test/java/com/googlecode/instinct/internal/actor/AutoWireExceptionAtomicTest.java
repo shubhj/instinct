@@ -19,7 +19,7 @@ package com.googlecode.instinct.internal.actor;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ExceptionChecker.checkException;
 
-public final class AutoWireExceptionImplAtomicTest extends InstinctTestCase {
+public final class AutoWireExceptionAtomicTest extends InstinctTestCase {
     public void testConformsToClassTraits() {
         checkException(AutoWireException.class);
     }

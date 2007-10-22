@@ -21,9 +21,22 @@ import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class MockCreator implements SpecificationDoubleCreator {
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({"CatchGenericClass"})
+    // SUPPRESS IllegalCatch {
     public <T> T createDouble(final Class<T> doubleType, final String roleName) {
         checkNotNull(doubleType, roleName);
+        try {
+            return doCreateDouble(doubleType, roleName);
+        } catch (Throwable e) {
+            final String message = "Unable to create a mock " + doubleType.getName() + " (with role name '" + roleName
+                    + "'). Mock types cannot be final.";
+            throw new SpecificationDoubleCreationException(message, e);
+        }
+    }
+    // } SUPPRESS IllegalCatch
+
+    @SuppressWarnings({"unchecked"})
+    private <T> T doCreateDouble(final Class<T> doubleType, final String roleName) {
         if (doubleType.isArray()) {
             return (T) createArray(doubleType.getComponentType(), roleName);
         } else {

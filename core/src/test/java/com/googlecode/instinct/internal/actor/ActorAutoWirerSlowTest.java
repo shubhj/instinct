@@ -85,19 +85,21 @@ public final class ActorAutoWirerSlowTest extends InstinctTestCase {
     }
 
     public void testDisplaysADecentExceptionWhenTryingToStubIncorrectlyMarkedField() {
-        expectException(AutoWireException.class, new Runnable() {
+        final Throwable throwable = expectException(AutoWireException.class, new Runnable() {
             public void run() {
                 actorAutoWirer.autoWireFields(instanceWithBadlyMarkedStubsToWire);
             }
         });
+        throwable.printStackTrace();
     }
 
     public void testDisplaysADecentExceptionWhenTryingToMockIncorrectlyMarkedField() {
-        expectException(AutoWireException.class, new Runnable() {
+        final Throwable throwable = expectException(AutoWireException.class, new Runnable() {
             public void run() {
                 actorAutoWirer.autoWireFields(instanceWithBadlyMarkedMocksToWire);
             }
         });
+        throwable.printStackTrace();
     }
 
     private Field getField(final Object instance, final String fieldName) {
