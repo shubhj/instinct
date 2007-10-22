@@ -10,4 +10,5 @@
     <suppress checks="IllegalThrows" files="DummyMethodInterceptor.java"/>
     <suppress checks="IllegalCatch" files="StubCreator.java"/>
     <suppress checks="IllegalCatch" files="MockCreator.java"/>
+    <suppress checks="IllegalCatch" files="SpecificationRunnerImpl.java"/>
 </suppressions>

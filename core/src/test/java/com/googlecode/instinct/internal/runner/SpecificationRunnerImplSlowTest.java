@@ -14,23 +14,25 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.aggregate;
+package com.googlecode.instinct.internal.runner;
 
-import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 
-public final class ContextAggregatorSlowTest extends InstinctTestCase {
-    public static final int EXPECTED_CONTEXTS = 34;
-    private ContextAggregator aggregator;
+public final class SpecificationRunnerImplSlowTest extends InstinctTestCase {
+    @Subject(implementation = SpecificationRunnerImpl.class) private SpecificationRunner specificationRunner;
 
-    @Override
-    public void setUpSubject() {
-        aggregator = new ContextClassAggregatorImpl(ContextAggregatorSlowTest.class);
+    public void testWiresIn() {
+
     }
 
-    public void testFindsCorrectNumberOfContexts() {
-        final JavaClassName[] contexts = aggregator.getContextNames();
-        expect.that(contexts).hasSize(EXPECTED_CONTEXTS);
+    private static final class ContextWithAutoWiredFields {
+        @Mock private CharSequence charSequence;
+
+        @Specification
+        public void isItNotGrand() {
+        }
     }
 }

@@ -38,7 +38,7 @@ import org.jmock.api.ExpectationError;
 public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final Collection<SpecificationListener> specificationListeners = new ArrayList<SpecificationListener>();
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
-    //    private final TestDoubleAutoWirer testDoubleAutoWirer = new TestDoubleAutoWirerImpl();
+    //    private final ActorAutoWirer actorAutoWirer = new ActorAutoWirerImpl();
     private final Clock clock = new ClockImpl();
     private MethodInvoker methodInvoker = new MethodInvokerImpl();
     private LifeCycleMethodValidator methodValidator = new LifeCycleMethodValidatorImpl();
@@ -50,9 +50,6 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         specificationListeners.add(specificationListener);
     }
 
-    @Suggest({"Does each specification get it's own JMock12Mockery?", " How will this work if we want to allow manual mocking?",
-            "Need access to the same statics",
-            "Maybe pass in a BC class instantiation strategy, so that we can enable creating of only one instance of a BC, rather than one per spec"})
     public SpecificationResult run(final SpecificationMethod specificationMethod) {
         checkNotNull(specificationMethod);
         notifyListenersOfPreSpecification(specificationMethod);
@@ -61,7 +58,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         return specificationResult;
     }
 
-    @Suggest({"Make a clock wrapper that looks like org.jbehave.core.util.Timer.", "Break out pending specs."})
+    @Suggest({"Make a clock wrapper that looks like org.jbehave.core.util.Timer."})
     private SpecificationResult doRun(final SpecificationMethod specificationMethod) {
         final long startTime = clock.getCurrentTime();
         if (specificationMethod.isPending()) {
@@ -71,7 +68,6 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         }
     }
 
-    // SUPPRESS IllegalCatch {
     @SuppressWarnings({"CatchGenericClass"})
     private SpecificationResult doNonPendingRun(final SpecificationMethod specificationMethod, final long startTime) {
         final Class<? extends Throwable> expectedException = specificationMethod.getExpectedException();
@@ -94,14 +90,13 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
                 return createSpecResult(specificationMethod, status, startTime);
             } else {
                 final Throwable exceptionThrownBySpec = exceptionThrown.getCause().getCause();
-                return expectFailure(specificationMethod, startTime, expectedException, exceptionThrownBySpec);
+                return processExpectedFailure(specificationMethod, startTime, expectedException, exceptionThrownBySpec);
             }
         }
     }
-    // } SUPPRESS IllegalCatch
 
     @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
-    private SpecificationResult expectFailure(final SpecificationMethod specificationMethod, final long startTime,
+    private SpecificationResult processExpectedFailure(final SpecificationMethod specificationMethod, final long startTime,
             final Class<? extends Throwable> expectedExceptionClass, final Throwable thrownException) {
         if (thrownException.getClass().equals(expectedExceptionClass)) {
             final String expectedMessage = specificationMethod.getExpectedExceptionMessage();
@@ -119,7 +114,6 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
                 }
             }
         } else {
-            //new StringCheckerImpl("").equalTo();
             final String message = "Expected exception was not thrown\nExpected: "
                     + expectedExceptionClass + "\n     got: " + thrownException.getClass();
             final Throwable failure = new SpecificationFailureException(message, thrownException);

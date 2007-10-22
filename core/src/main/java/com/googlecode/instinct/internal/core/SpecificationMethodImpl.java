@@ -15,18 +15,19 @@
  */
 package com.googlecode.instinct.internal.core;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.util.Collection;
 import au.net.netstorm.boost.primordial.Primordial;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.util.Collection;
 
 public final class SpecificationMethodImpl extends Primordial implements SpecificationMethod {
     private SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
@@ -55,6 +56,7 @@ public final class SpecificationMethodImpl extends Primordial implements Specifi
         return specificationRunner.run(this);
     }
 
+    @Suggest("Pending specifications should use a different runner, then we may be able to remove this method")
     public boolean isPending() {
         final Method method = specificationMethod.getMethod();
         return method.isAnnotationPresent(Specification.class) && method.getAnnotation(Specification.class).state() == PENDING;
