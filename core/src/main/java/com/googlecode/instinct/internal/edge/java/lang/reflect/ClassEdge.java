@@ -27,6 +27,8 @@ public interface ClassEdge {
 
     <T> Constructor<T> getConstructor(Class<T> cls, Class<?>... parameterTypes);
 
+    <T> Constructor<T> getDeclaredConstructor(Class<T> cls, Class<?>... parameterTypes);
+
     <T> Method getMethod(Class<T> cls, String methodName, Class<?>... parameterTypes);
 
     <T> Method getDeclaredMethod(Class<T> cls, String methodName, Class<?>... parameterTypes);

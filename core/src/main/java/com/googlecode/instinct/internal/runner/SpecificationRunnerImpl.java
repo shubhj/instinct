@@ -17,6 +17,8 @@ package com.googlecode.instinct.internal.runner;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import com.googlecode.instinct.internal.actor.ActorAutoWirer;
+import com.googlecode.instinct.internal.actor.ActorAutoWirerImpl;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import static com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus.SPECIFICATION_SUCCESS;
@@ -38,7 +40,7 @@ import org.jmock.api.ExpectationError;
 public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final Collection<SpecificationListener> specificationListeners = new ArrayList<SpecificationListener>();
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
-    //    private final ActorAutoWirer actorAutoWirer = new ActorAutoWirerImpl();
+    private final ActorAutoWirer actorAutoWirer = new ActorAutoWirerImpl();
     private final Clock clock = new ClockImpl();
     private MethodInvoker methodInvoker = new MethodInvokerImpl();
     private LifeCycleMethodValidator methodValidator = new LifeCycleMethodValidatorImpl();
@@ -140,11 +142,11 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
 
     @Suggest({"Expose this lifecycle?", "May need to stick verification of mocks in finally, if we report them as well as other errors."})
     private void runSpecificationLifecycle(final Object contextInstance, final SpecificationMethod specificationMethod) {
+        actorAutoWirer.autoWireFields(contextInstance);
         try {
-//            testDoubleAutoWirer.wire(contextInstance);
             runMethods(contextInstance, specificationMethod.getBeforeSpecificationMethods());
             runSpecificationMethod(contextInstance, specificationMethod.getSpecificationMethod());
-//            mockVerifier.verify(contextInstance);
+            //mockVerifier.verify(contextInstance);
         } finally {
             runMethods(contextInstance, specificationMethod.getAfterSpecificationMethods());
         }

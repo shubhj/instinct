@@ -16,12 +16,10 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 
-@SuppressWarnings({"EmptyClass", "UnusedDeclaration", "ProtectedMemberInFinalClass"})
+@SuppressWarnings({"EmptyClass", "UnusedDeclaration", "ProtectedMemberInFinalClass", "ClassMayBeInterface"})
 public final class ContextContainerWithConstructors {
-    @Context
     public static final class AConstructorWithParameters {
         public AConstructorWithParameters(final String someField) {
         }
@@ -31,7 +29,6 @@ public final class ContextContainerWithConstructors {
         }
     }
 
-    @Context
     public static final class APrivateConstructor {
         private APrivateConstructor() {
         }
@@ -41,7 +38,6 @@ public final class ContextContainerWithConstructors {
         }
     }
 
-    @Context
     public static final class AProtectedConstructor {
         protected AProtectedConstructor() {
         }
@@ -51,7 +47,6 @@ public final class ContextContainerWithConstructors {
         }
     }
 
-    @Context
     public static final class APackageLocalConstructor {
         APackageLocalConstructor() {
         }
@@ -61,7 +56,6 @@ public final class ContextContainerWithConstructors {
         }
     }
 
-    @Context
     public static final class APublicConstructor {
         @Specification
         public void aSpecification() {

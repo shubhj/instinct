@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.internal.runner;
 
+import java.lang.reflect.Method;
 import au.net.netstorm.boost.edge.EdgeException;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
@@ -25,7 +26,6 @@ import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.ContextConfigurationException;
 import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
 import com.googlecode.instinct.sandbox.ForAll;
-import java.lang.reflect.Method;
 
 final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
     private final ClassEdge edgeClass = new ClassEdgeImpl();
@@ -52,14 +52,14 @@ final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
 
     public <T> void checkContextConstructor(final Class<T> cls) {
         checkNotNull(cls);
-        checkForPublicNullaryConstructor(cls);
+        checkClassContainsNullaryConstructor(cls);
     }
 
-    private <T> void checkForPublicNullaryConstructor(final Class<T> cls) {
+    private <T> void checkClassContainsNullaryConstructor(final Class<T> cls) {
         try {
-            edgeClass.getConstructor(cls);
+            edgeClass.getDeclaredConstructor(cls);
         } catch (EdgeException e) {
-            final String message = "Unable to run context. Context '" + cls.getSimpleName() + "' must have a public no-argument constructor";
+            final String message = "Unable to run context. Context '" + cls.getSimpleName() + "' must have a no-argument constructor";
             throw new ContextConfigurationException(message, e);
         }
     }

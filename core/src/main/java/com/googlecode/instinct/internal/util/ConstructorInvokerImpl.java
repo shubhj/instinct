@@ -16,13 +16,19 @@
 
 package com.googlecode.instinct.internal.util;
 
-import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
-import au.net.netstorm.boost.edge.java.lang.EdgeClass;
+import java.lang.reflect.Constructor;
+import au.net.netstorm.boost.edge.java.lang.reflect.DefaultEdgeConstructor;
+import au.net.netstorm.boost.edge.java.lang.reflect.EdgeConstructor;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
 
 public final class ConstructorInvokerImpl implements ConstructorInvoker {
-    private final EdgeClass edgeClass = new DefaultEdgeClass();
+    private final ClassEdge classEdge = new ClassEdgeImpl();
+    private final EdgeConstructor edgeConstructor = new DefaultEdgeConstructor();
 
     public <T> Object invokeNullaryConstructor(final Class<T> cls) {
-        return edgeClass.newInstance(cls);
+        final Constructor<T> constructor = classEdge.getDeclaredConstructor(cls);
+        constructor.setAccessible(true);
+        return edgeConstructor.newInstance(constructor, new Object[]{});
     }
 }

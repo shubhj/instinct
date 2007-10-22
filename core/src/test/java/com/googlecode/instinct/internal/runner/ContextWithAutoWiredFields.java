@@ -16,23 +16,24 @@
 
 package com.googlecode.instinct.internal.runner;
 
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.marker.annotate.Subject;
-import com.googlecode.instinct.test.InstinctTestCase;
+import org.jmock.Expectations;
 
-public final class SpecificationRunnerImplSlowTest extends InstinctTestCase {
-    @Subject(implementation = SpecificationRunnerImpl.class) private SpecificationRunner specificationRunner;
+public final class ContextWithAutoWiredFields {
+    @Mock private CharSequence charSequence;
+    @Dummy private Character character;
 
-    public void testWiresIn() {
-
-    }
-
-    private static final class ContextWithAutoWiredFields {
-        @Mock private CharSequence charSequence;
-
-        @Specification
-        public void isItNotGrand() {
-        }
+    @Specification
+    public void doSomethingWithAutoWiredDoubles() {
+        expect.that(new Expectations() {
+            {
+                one(charSequence).charAt(0);
+                will(returnValue(character));
+            }
+        });
+        charSequence.charAt(0);
     }
 }

@@ -26,23 +26,22 @@ import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.core.LifecycleMethodImpl;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethodImpl;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.reflect.Reflector.getMethod;
 
-@SuppressWarnings({"StringContatenationInLoop"})
+@SuppressWarnings({"StringContatenationInLoop", "OverlyCoupledClass"})
 public final class SpecificationRunnerSlowTest extends InstinctTestCase {
-    private SpecificationRunner runner;
-
-    @Override
-    public void setUpSubject() {
-        runner = new SpecificationRunnerImpl();
-    }
+    @Subject(implementation = SpecificationRunnerImpl.class) private SpecificationRunner runner;
 
     public void testRunWithSuccess() {
         checkContextsRunWithoutError(ContextContainerWithSetUpAndTearDown.class);
         checkContextsRunWithoutError(ContextWithSpecificationWithReturnType.class);
         checkContextsRunWithoutError(ContextWithBeforeSpecificationWithReturnType.class);
         checkContextsRunWithoutError(ContextWithAfterSpecificationWithReturnType.class);
+        checkContextsRunWithoutError(ContextContainerWithConstructors.APrivateConstructor.class);
+        checkContextsRunWithoutError(ContextContainerWithConstructors.APackageLocalConstructor.class);
+        checkContextsRunWithoutError(ContextContainerWithConstructors.AProtectedConstructor.class);
     }
 
     public void testInvalidMethodsBarf() {
@@ -92,12 +91,18 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
     }
 
     public void testExpectedFailureWithIndexOutOfBoundsException() {
-        final SpecificationResult specificationResult = runner.run(
-                getSpecificationMethod(ContextWithExpectedFailures.class, "expectedFailureWithIndexOutOfBoundsException"));
+        final SpecificationMethod method = getSpecificationMethod(ContextWithExpectedFailures.class, "expectedFailureWithIndexOutOfBoundsException");
+        final SpecificationResult specificationResult = runner.run(method);
         expect.that(specificationResult.completedSuccessfully()).isTrue();
     }
 
-    private SpecificationMethod getSpecificationMethod(final Class<ContextWithExpectedFailures> contextClass, final String specMethodName) {
+    public void testWiresInStubsMocksAndDummiesForUseSpecifications() {
+        final SpecificationMethod method = getSpecificationMethod(ContextWithAutoWiredFields.class, "doSomethingWithAutoWiredDoubles");
+        final SpecificationResult result = runner.run(method);
+        expect.that(result.completedSuccessfully()).isTrue();
+    }
+
+    private <T> SpecificationMethod getSpecificationMethod(final Class<T> contextClass, final String specMethodName) {
         return new SpecificationMethodImpl(new LifecycleMethodImpl(getMethod(contextClass, specMethodName)), Collections.<LifecycleMethod>emptyList(),
                 Collections.<LifecycleMethod>emptyList());
     }
@@ -105,7 +110,8 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
     private <T> void checkContextsRunWithoutError(final Class<T> contextClass) {
         final Collection<SpecificationMethod> specificationMethods = findSpecificationMethods(contextClass);
         for (final SpecificationMethod specificationMethod : specificationMethods) {
-            runner.run(specificationMethod);
+            final SpecificationResult result = runner.run(specificationMethod);
+            expect.that(result.completedSuccessfully()).isTrue();
         }
     }
 

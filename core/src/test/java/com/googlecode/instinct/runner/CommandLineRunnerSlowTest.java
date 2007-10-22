@@ -16,6 +16,15 @@
 
 package com.googlecode.instinct.runner;
 
+import java.io.File;
+import static java.io.File.pathSeparatorChar;
+import static java.io.File.separatorChar;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import au.net.netstorm.boost.edge.java.io.DefaultEdgeInputStream;
 import au.net.netstorm.boost.util.io.DefaultStreamConverter;
 import au.net.netstorm.boost.util.nullo.NullMaster;
@@ -29,17 +38,10 @@ import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
 import com.googlecode.instinct.test.TestingException;
 import com_cenqua_clover.Clover;
-import java.io.File;
-import static java.io.File.pathSeparatorChar;
-import static java.io.File.separatorChar;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import net.sf.cglib.proxy.CallbackFilter;
 import org.hamcrest.Matchers;
 import org.jmock.api.ExpectationError;
+import org.objenesis.Objenesis;
 
 @SuppressWarnings({"HardcodedFileSeparator", "IOResourceOpenedButNotSafelyClosed"})
 public final class CommandLineRunnerSlowTest extends InstinctTestCase {
@@ -149,10 +151,14 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
         final String hamcrest = getJarFilePath(Matchers.class);
         final String clover = getJarFilePath(Clover.class);
         final String jMock = getJarFilePath(ExpectationError.class);
+        final String objenesis = getJarFilePath(Objenesis.class);
+        final String cgLib = getJarFilePath(CallbackFilter.class);
         return getSourceRoot() + pathSeparatorChar + getTestRoot() + pathSeparatorChar + hamcrest + pathSeparatorChar
                 + boost + pathSeparatorChar
                 + clover + pathSeparatorChar
-                + jMock + pathSeparatorChar;
+                + jMock + pathSeparatorChar
+                + objenesis + pathSeparatorChar
+                + cgLib + pathSeparatorChar;
     }
 
     private String getSourceRoot() {

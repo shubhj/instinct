@@ -27,11 +27,6 @@ public final class ContextRunnerSlowTest extends InstinctTestCase {
         runner = new StandardContextRunner();
     }
 
-//    public void testRunsContextsWrittenAsInnerClasses() {
-//        runContext(ContextContainerWithSetUpAndTearDown.class, 1);
-//        runContext(ContextContainerWithConstructors.class, 1);
-//    }
-
     public void testRunsContexts() {
         runContext(ContextContainerWithSetUpAndTearDown.AnEmbeddedPublicContext.class);
         runContext(ContextContainerWithConstructors.APublicConstructor.class);
@@ -40,9 +35,6 @@ public final class ContextRunnerSlowTest extends InstinctTestCase {
 
     public void testInvalidConstructorsThrowConfigException() {
         checkInvalidConstructorsGivesFailedStatus(ContextContainerWithConstructors.AConstructorWithParameters.class);
-        checkInvalidConstructorsGivesFailedStatus(ContextContainerWithConstructors.APrivateConstructor.class);
-        checkInvalidConstructorsGivesFailedStatus(ContextContainerWithConstructors.APackageLocalConstructor.class);
-        checkInvalidConstructorsGivesFailedStatus(ContextContainerWithConstructors.AProtectedConstructor.class);
     }
 
     private <T> void runContext(final Class<T> contextClass) {

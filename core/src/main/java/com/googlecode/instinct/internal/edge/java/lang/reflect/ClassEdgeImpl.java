@@ -48,6 +48,14 @@ public final class ClassEdgeImpl implements ClassEdge {
         }
     }
 
+    public <T> Constructor<T> getDeclaredConstructor(final Class<T> cls, final Class<?>... parameterTypes) {
+        try {
+            return cls.getDeclaredConstructor(parameterTypes);
+        } catch (NoSuchMethodException e) {
+            throw new EdgeException(e);
+        }
+    }
+
     public <T> Method getMethod(final Class<T> cls, final String methodName, final Class<?>... parameterTypes) {
         try {
             return cls.getMethod(methodName, parameterTypes);
