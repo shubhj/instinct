@@ -24,6 +24,7 @@ import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
 import java.util.Collection;
 import org.junit.runner.Description;
@@ -66,7 +67,12 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     private Description createDescription(final SpecificationMethod specificationMethod) {
         String name = specificationMethod.getName();
         if (specificationMethod.isPending()) {
-            name = name + " [PENDING]";
+            final String reason = specificationMethod.getPendingReason();
+            name = " [PENDING";
+            if (!reason.equals(Specification.NO_REASON)) {
+                name += " (" + reason + ")";
+            }
+            name += "]";
         }
         return descriptionEdge.createTestDescription(specificationMethod.getDeclaringClass(), name);
     }

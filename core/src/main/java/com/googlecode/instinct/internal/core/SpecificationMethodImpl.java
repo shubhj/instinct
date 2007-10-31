@@ -62,6 +62,16 @@ public final class SpecificationMethodImpl extends Primordial implements Specifi
         return method.isAnnotationPresent(Specification.class) && method.getAnnotation(Specification.class).state() == PENDING;
     }
 
+    @Suggest("Pending specifications should use a different runner, then we may be able to remove this method")
+    public String getPendingReason() {
+        if (isPending()) {
+            final Method method = specificationMethod.getMethod();
+            return method.getAnnotation(Specification.class).reason();
+        } else {
+            return Specification.NO_REASON;
+        }
+    }
+
     public LifecycleMethod getSpecificationMethod() {
         return specificationMethod;
     }

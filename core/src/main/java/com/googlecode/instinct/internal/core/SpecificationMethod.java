@@ -24,10 +24,13 @@ import java.util.Collection;
 @Suggest({"Breadcrumb - Add a getDeclaringClass() that returns ContextClass or raw class?"})
 public interface SpecificationMethod extends RunnableItem {
     SpecificationResult run();
-
+    
+    @Suggest("Something is misnamed here. This returns a LifecycleMethod and not a SpecMethod, which is this class.")
     boolean isPending();
 
-    @Suggest("Something is misnamed here.  This returns a LifecycleMethod and not a SpecMethod, which is this class.")
+    String getPendingReason();
+
+    @Suggest("Something is misnamed here. This returns a LifecycleMethod and not a SpecMethod, which is this class.")
     LifecycleMethod getSpecificationMethod();
 
     Collection<LifecycleMethod> getBeforeSpecificationMethods();
