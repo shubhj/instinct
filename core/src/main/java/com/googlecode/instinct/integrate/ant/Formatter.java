@@ -16,20 +16,23 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import static java.util.Arrays.asList;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import com.googlecode.instinct.report.ResultFormat;
-import static com.googlecode.instinct.report.ResultFormat.BRIEF;
-import static com.googlecode.instinct.report.ResultFormat.VERBOSE;
 import static com.googlecode.instinct.report.ResultFormat.valueOf;
 import com.googlecode.instinct.report.ResultMessageBuilder;
+import static java.util.Arrays.asList;
 
 public final class Formatter {
     private ResultFormat type;
 
     public void setType(final String type) {
         checkNotWhitespace(type);
-        if (!type.equalsIgnoreCase(BRIEF.name()) && !type.equalsIgnoreCase(VERBOSE.name())) {
+        boolean isAMatchedFormat = false;
+        for (final ResultFormat resultFormat : ResultFormat.values()) {
+            isAMatchedFormat = isAMatchedFormat || type.equalsIgnoreCase(resultFormat.name());
+        }
+
+        if (!isAMatchedFormat) {
             throw new UnsupportedOperationException(
                     "Formatter type '" + type + "' is not supported, supported types " + asList(ResultFormat.values()));
         }

@@ -17,11 +17,19 @@
 package com.googlecode.instinct.report;
 
 import com.googlecode.instinct.internal.report.BriefResultMessageBuilder;
+import com.googlecode.instinct.internal.report.QuietResultMessageBuilder;
 import com.googlecode.instinct.internal.report.VerboseResultMessageBuilder;
 import com.googlecode.instinct.internal.util.Suggest;
 
 @Suggest("Figure out how to test this sucker.")
 public enum ResultFormat {
+    QUIET {
+        @Override
+        public ResultMessageBuilder getMessageBuilder() {
+            return new QuietResultMessageBuilder();
+        }
+    },
+
     BRIEF {
         @Override
         public ResultMessageBuilder getMessageBuilder() {
