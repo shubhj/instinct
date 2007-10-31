@@ -47,7 +47,7 @@ public final class AntContextRunner implements ContextRunner {
         checkNotNull(specificationListener);
     }
 
-    @Suggest("This logging should be done on the fly by the runner, potentially removing the need for this class.")
+    @Suggest("This logging should be done on the fly by the ant task, potentially removing the need for this class.")
     public ContextResult run(final ContextClass contextClass) {
         checkNotNull(contextClass);
         final ContextResult contextResult = delegate.run(contextClass);
