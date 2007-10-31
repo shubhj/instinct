@@ -24,13 +24,12 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import static java.lang.System.getProperty;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import static java.util.regex.Pattern.MULTILINE;
 import static java.util.regex.Pattern.compile;
 
-@Suggest("Add pending here")
+@Suggest("Only print out context name for pending or failed specs. For pending or failed specs print spec names also.")
 public final class QuietResultMessageBuilder implements ResultMessageBuilder {
     private static final Pattern START_OF_LINE = compile("^", MULTILINE);
     private static final String NEW_LINE = getProperty("line.separator");
@@ -50,8 +49,7 @@ public final class QuietResultMessageBuilder implements ResultMessageBuilder {
     private String buildContextResultMessage(final ContextResult contextResult) {
         final StringBuilder builder = new StringBuilder();
         builder.append(contextResult.getContextName());
-        for (final Iterator<SpecificationResult> iterator = contextResult.getSpecificationResults().iterator(); iterator.hasNext();) {
-            final SpecificationResult specificationResult = iterator.next();
+        for (final SpecificationResult specificationResult : contextResult.getSpecificationResults()) {
             if (!specificationResult.completedSuccessfully()) {
                 builder.append(NEW_LINE);
                 builder.append("- ").append(buildSpecificationResultMessage(specificationResult));

@@ -14,21 +14,8 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.report;
+package com.googlecode.instinct.integrate.ant;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import java.io.PrintWriter;
-
-public final class PrintWriterStatusLogger implements StatusLogger {
-    private final PrintWriter writer;
-
-    public PrintWriterStatusLogger(final PrintWriter writer) {
-        checkNotNull(writer);
-        this.writer = writer;
-    }
-
-    public void log(final String message) {
-        checkNotNull(message);
-        writer.println(message);
-    }
+public interface StatusLogger {
+    void log(String message);
 }

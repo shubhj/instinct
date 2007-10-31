@@ -50,7 +50,7 @@ import java.util.Collection;
  * @see CommandLineUsage
  */
 @Fix({"Write atomic test for this."})
-@Suggest({"Add formatting options as command line argument.",
+@Suggest({"Add formatter/message builder as command line argument.",
         "Can the formatting be moved into the BriefResultMessageBuilder?", "Make this not implement spec listener",
         "Why is there this & the commane line runner? This should use text runner"})
 @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed", "UseOfSystemOutOrSystemErr"})
@@ -77,7 +77,10 @@ public final class CommandLineRunner implements ContextListener, SpecificationLi
 
     public void postSpecificationMethod(final SpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
         checkNotNull(specificationMethod, specificationResult);
-        writer.println("- " + messageBuilder.buildMessage(specificationResult));
+        final String message = messageBuilder.buildMessage(specificationResult);
+        if (message.trim().length() != 0) {
+            writer.println("- " + message);
+        }
     }
 
     private void run(final String itemsToRun) {

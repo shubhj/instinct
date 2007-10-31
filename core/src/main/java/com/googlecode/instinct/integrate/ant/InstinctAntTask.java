@@ -16,12 +16,9 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import java.util.ArrayList;
-import static java.util.Arrays.asList;
-import java.util.List;
-import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
-import au.net.netstorm.boost.edge.java.lang.EdgeClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
@@ -29,15 +26,16 @@ import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
-import com.googlecode.instinct.report.StatusLogger;
-import com.googlecode.instinct.runner.StatusLoggingContextRunner;
+import java.util.ArrayList;
+import static java.util.Arrays.asList;
+import java.util.List;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 
 @SuppressWarnings({"MethodParameterOfConcreteClass", "InstanceVariableOfConcreteClass"})
 public final class InstinctAntTask extends Task implements StatusLogger {
     private final List<Specifications> specificationLocators = new ArrayList<Specifications>();
-    private final EdgeClass edgeClass = new DefaultEdgeClass();
+    private final ClassEdge classEdge = new ClassEdgeImpl();
     private String failureProperty;
     private Formatter formatter;
 
@@ -82,7 +80,7 @@ public final class InstinctAntTask extends Task implements StatusLogger {
     @Fix("Register as a runner, so that we recieve results as it happens.")
     private void runContexts() {
         final List<JavaClassName> contextClasses = findContextsFromAllAggregators();
-        final ContextRunner runner = new StatusLoggingContextRunner(new StandardContextRunner(),
+        final ContextRunner runner = new AntContextRunner(new StandardContextRunner(),
                 formatter.createMessageBuilder(), this);
         runContexts(runner, contextClasses);
     }
@@ -102,7 +100,7 @@ public final class InstinctAntTask extends Task implements StatusLogger {
     }
 
     private void runContext(final ContextRunner runner, final JavaClassName contextClass) {
-        final Class<?> cls = edgeClass.forName(contextClass.getFullyQualifiedName());
+        final Class<?> cls = classEdge.forName(contextClass.getFullyQualifiedName());
         final ContextResult result = runner.run(new ContextClassImpl(cls));
         if (!result.completedSuccessfully()) {
             getProject().setProperty(failureProperty, "true");

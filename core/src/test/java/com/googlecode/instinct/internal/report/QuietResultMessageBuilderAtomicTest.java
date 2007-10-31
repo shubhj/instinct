@@ -47,7 +47,7 @@ public final class QuietResultMessageBuilderAtomicTest extends InstinctTestCase 
 
     @Override
     public void setUpTestDoubles() {
-        contextResult = new ContextResultImpl("Context");
+        contextResult = new ContextResultImpl("ContextName");
         failureMessageBuilder = new SpecificationFailureMessageBuilderImpl();
         final RuntimeException failureCause = new RuntimeException("Failure cause");
         failureStatus = new SpecificationRunFailureStatus(failureCause);
@@ -69,7 +69,7 @@ public final class QuietResultMessageBuilderAtomicTest extends InstinctTestCase 
     }
 
     public void testCreatesQuietContextResultMessages() {
-        final String expectedContextMessage = "Context" + NEW_LINE
+        final String expectedContextMessage = "ContextName" + NEW_LINE
                 + "- fails (FAILED)" + NEW_LINE + NEW_LINE
                 + formatFailureCause();
         expect.that(quietResultMessageBuilder.buildMessage(contextResult)).equalTo(expectedContextMessage);
