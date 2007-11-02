@@ -24,9 +24,11 @@ import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
+import java.util.regex.Pattern;
 
 @Suggest({"Remove this class, refactor Ant runner to not use it, make Ant runner receive the callback and write in real time."})
 public final class AntContextRunner implements ContextRunner {
+    private static final Pattern NEWLINE = Pattern.compile("\n");
     private final ContextRunner delegate;
     private final ResultMessageBuilder messageBuilder;
     private final StatusLogger statusLogger;
@@ -58,7 +60,10 @@ public final class AntContextRunner implements ContextRunner {
     private void logResults(final ContextResult contextResult) {
         final String message = messageBuilder.buildMessage(contextResult);
         if (message.trim().length() > 0) {
-            statusLogger.log(message);
+            final String[] lines = NEWLINE.split(message);
+            for (final String line : lines) {
+                statusLogger.log(line);
+            }
         }
     }
 }
