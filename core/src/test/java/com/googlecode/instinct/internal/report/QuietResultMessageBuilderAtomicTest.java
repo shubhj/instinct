@@ -39,7 +39,8 @@ public final class QuietResultMessageBuilderAtomicTest extends InstinctTestCase 
     private static final String NEW_LINE = getProperty("line.separator");
     private static final String TAB = "\t";
     private ResultMessageBuilder quietResultMessageBuilder;
-    private ContextResult contextResult;
+    private ContextResult failingContextResult;
+    private ContextResult succeedingContextResult;
     private SpecificationResult succeedingSpec1;
     private SpecificationResult failingSpec;
     private SpecificationRunStatus failureStatus;
@@ -47,16 +48,18 @@ public final class QuietResultMessageBuilderAtomicTest extends InstinctTestCase 
 
     @Override
     public void setUpTestDoubles() {
-        contextResult = new ContextResultImpl("ContextName");
+        succeedingContextResult = new ContextResultImpl("SucceedingContextName");
+        failingContextResult = new ContextResultImpl("FailingContextName");
         failureMessageBuilder = new SpecificationFailureMessageBuilderImpl();
         final RuntimeException failureCause = new RuntimeException("Failure cause");
         failureStatus = new SpecificationRunFailureStatus(failureCause);
         failingSpec = new SpecificationResultImpl("fails", failureStatus, 1L);
         final SpecificationRunStatus successStatus = new SpecificationRunSuccessStatus();
         succeedingSpec1 = new SpecificationResultImpl("runs", successStatus, 1L);
-        contextResult.addSpecificationResult(failingSpec);
-        contextResult.addSpecificationResult(succeedingSpec1);
-        contextResult.addSpecificationResult(new SpecificationResultImpl("soDoesThis", successStatus, 2L));
+        succeedingContextResult.addSpecificationResult(succeedingSpec1);
+        failingContextResult.addSpecificationResult(failingSpec);
+        failingContextResult.addSpecificationResult(succeedingSpec1);
+        failingContextResult.addSpecificationResult(new SpecificationResultImpl("soDoesThis", successStatus, 2L));
     }
 
     @Override
@@ -68,11 +71,15 @@ public final class QuietResultMessageBuilderAtomicTest extends InstinctTestCase 
         checkClass(BriefResultMessageBuilder.class, ResultMessageBuilder.class);
     }
 
-    public void testCreatesQuietContextResultMessages() {
-        final String expectedContextMessage = "ContextName" + NEW_LINE
+    public void testCreatesQuietContextResultMessagesForContextsWithFails() {
+        final String expectedContextMessage = "FailingContextName" + NEW_LINE
                 + "- fails (FAILED)" + NEW_LINE + NEW_LINE
                 + formatFailureCause();
-        expect.that(quietResultMessageBuilder.buildMessage(contextResult)).equalTo(expectedContextMessage);
+        expect.that(quietResultMessageBuilder.buildMessage(failingContextResult)).equalTo(expectedContextMessage);
+    }
+
+    public void testShowsNoMessagesForContextResultWithNoFails() {
+        expect.that(quietResultMessageBuilder.buildMessage(succeedingContextResult)).isEmpty();
     }
 
     public void testCreatesQuietSpecificationSuccessResultMessages() {

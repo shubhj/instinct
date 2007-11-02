@@ -38,7 +38,11 @@ public final class QuietResultMessageBuilder implements ResultMessageBuilder {
 
     public String buildMessage(final ContextResult contextResult) {
         checkNotNull(contextResult);
-        return buildContextResultMessage(contextResult);
+        if (contextResult.completedSuccessfully()) {
+            return "";
+        } else {
+            return buildContextResultMessage(contextResult);
+        }
     }
 
     public String buildMessage(final SpecificationResult specificationResult) {
