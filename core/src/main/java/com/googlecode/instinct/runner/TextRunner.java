@@ -80,7 +80,10 @@ public final class TextRunner implements ContextRunner, ContextListener {
     @Fix("Use a specification listener to report these as they come out.")
     public void postContextRun(final ContextClass contextClass, final ContextResult contextResult) {
         checkNotNull(contextClass, contextResult);
-        writer.println(messageBuilder.buildMessage(contextResult));
+        final String contextResultMessage = messageBuilder.buildMessage(contextResult);
+        if (contextResultMessage.length() > 0) {
+            writer.println(contextResultMessage);
+        }
     }
 
     public ContextResult run(final ContextClass contextClass) {

@@ -41,7 +41,7 @@ public final class QuietResultMessageBuilder implements ResultMessageBuilder {
         if (contextResult.completedSuccessfully()) {
             return "";
         } else {
-            return buildContextResultMessage(contextResult);
+            return buildFailingContextResultMessage(contextResult);
         }
     }
 
@@ -50,7 +50,7 @@ public final class QuietResultMessageBuilder implements ResultMessageBuilder {
         return buildSpecificationResultMessage(specificationResult);
     }
 
-    private String buildContextResultMessage(final ContextResult contextResult) {
+    private String buildFailingContextResultMessage(final ContextResult contextResult) {
         final StringBuilder builder = new StringBuilder();
         builder.append(contextResult.getContextName());
         for (final SpecificationResult specificationResult : contextResult.getSpecificationResults()) {
