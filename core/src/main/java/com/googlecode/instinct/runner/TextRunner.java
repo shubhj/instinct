@@ -81,7 +81,7 @@ public final class TextRunner implements ContextRunner, ContextListener {
     public void postContextRun(final ContextClass contextClass, final ContextResult contextResult) {
         checkNotNull(contextClass, contextResult);
         final String contextResultMessage = messageBuilder.buildMessage(contextResult);
-        if (contextResultMessage.length() > 0) {
+        if (contextResultMessage.trim().length() > 0) {
             writer.println(contextResultMessage);
         }
     }

@@ -80,8 +80,7 @@ public final class InstinctAntTask extends Task implements StatusLogger {
     @Fix("Register as a runner, so that we recieve results as it happens.")
     private void runContexts() {
         final List<JavaClassName> contextClasses = findContextsFromAllAggregators();
-        final ContextRunner runner = new AntContextRunner(new StandardContextRunner(),
-                formatter.createMessageBuilder(), this);
+        final ContextRunner runner = new AntContextRunner(new StandardContextRunner(), formatter.createMessageBuilder(), this);
         runContexts(runner, contextClasses);
     }
 

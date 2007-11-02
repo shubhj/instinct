@@ -57,6 +57,8 @@ public final class AntContextRunner implements ContextRunner {
 
     private void logResults(final ContextResult contextResult) {
         final String message = messageBuilder.buildMessage(contextResult);
-        statusLogger.log(message);
+        if (message.trim().length() > 0) {
+            statusLogger.log(message);
+        }
     }
 }

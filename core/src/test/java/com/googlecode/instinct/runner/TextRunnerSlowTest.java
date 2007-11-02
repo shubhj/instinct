@@ -57,6 +57,14 @@ public final class TextRunnerSlowTest extends InstinctTestCase {
         checkRunnerSendsSpeciciationResultsToOutput(ContextWithSpecsWithDifferentAccessModifiers.class);
     }
 
+    public void testXxx() {
+        doWithRedirectedStandardOut(outputBuffer, new Runnable() {
+            public void run() {
+                runContexts(ASimpleContext.class, ContextContainerWithSetUpAndTearDown.class, ContextWithSpecsWithDifferentAccessModifiers.class);
+            }
+        });
+    }
+
     private <T> void checkSendsSpeciciationResultsToOutput(final Class<T> contextClass) {
         contextRunner.run(new ContextClassImpl(contextClass));
         checkRunnerSendsSpeciciationResultsToOutput(contextClass);
