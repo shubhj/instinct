@@ -16,20 +16,23 @@
 
 package com.googlecode.instinct.runner;
 
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.aggregate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ContextContainerWithSetUpAndTearDown;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
+import static com.googlecode.instinct.report.ResultFormat.QUIET;
 import static com.googlecode.instinct.runner.TextRunner.runContexts;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.io.StreamRedirector.doWithRedirectedStandardOut;
 import java.io.ByteArrayOutputStream;
 
 public final class TextRunnerSlowTest extends InstinctTestCase {
-    private ContextRunner contextRunner;
+    private ContextRunner briefContextRunner;
     private ByteArrayOutputStream outputBuffer;
+    private ContextRunner quietContextRunner;
 
     @Override
     public void setUpTestDoubles() {
@@ -38,7 +41,8 @@ public final class TextRunnerSlowTest extends InstinctTestCase {
 
     @Override
     public void setUpSubject() {
-        contextRunner = new TextRunner(outputBuffer, BRIEF);
+        briefContextRunner = new TextRunner(outputBuffer, BRIEF);
+        quietContextRunner = new TextRunner(outputBuffer, QUIET);
     }
 
     public void testSendsSpeciciationResultsToOutput() {
@@ -57,21 +61,22 @@ public final class TextRunnerSlowTest extends InstinctTestCase {
         checkRunnerSendsSpeciciationResultsToOutput(ContextWithSpecsWithDifferentAccessModifiers.class);
     }
 
-    public void testXxx() {
+    public void testQuietTextRunner() {
         doWithRedirectedStandardOut(outputBuffer, new Runnable() {
             public void run() {
-                runContexts(ASimpleContext.class, ContextContainerWithSetUpAndTearDown.class, ContextWithSpecsWithDifferentAccessModifiers.class);
+                quietContextRunner.run(new ContextClassImpl(ASimpleContext.class));
             }
         });
+        expect.that(outputBuffer.toString()).isEmpty();
     }
 
     private <T> void checkSendsSpeciciationResultsToOutput(final Class<T> contextClass) {
-        contextRunner.run(new ContextClassImpl(contextClass));
+        briefContextRunner.run(new ContextClassImpl(contextClass));
         checkRunnerSendsSpeciciationResultsToOutput(contextClass);
     }
 
     private <T> void checkRunnerSendsSpeciciationResultsToOutput(final Class<T> contextClass) {
         final String runnerOutput = new String(outputBuffer.toByteArray());
-        assertTrue("Expected to find context name", runnerOutput.contains(contextClass.getSimpleName()));
+        expect.that(runnerOutput).containsString(contextClass.getSimpleName());
     }
 }
