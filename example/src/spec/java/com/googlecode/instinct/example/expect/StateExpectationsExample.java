@@ -95,10 +95,9 @@ public final class StateExpectationsExample {
     }
 
     @Specification
-    @Fix("Adding the new Double() is a hack to get the correct matcher. Problem with autoboxing.")
     public void providesMatchersForMakingAssertionsAboutDoubles() {
-        expect.that(new Double(1.1)).closeTo(1.0, 0.11);
-        expect.that(new Double(1.1)).notCloseTo(1.0, 0.1);
+        expect.that(1.1).closeTo(1.0, 0.11);
+        expect.that(1.1).notCloseTo(1.0, 0.1);
     }
 
     @Specification
