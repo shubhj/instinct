@@ -103,13 +103,6 @@
             <!-- Allow 2 x flush interval for any final coverage flushes. -->
             <sleep milliseconds="${coverage.flush.interval}"/>
             <sleep milliseconds="${coverage.flush.interval}"/>
-            <cloverreport.macro test.type="@{test.type}"/>
-        </sequential>
-    </macrodef>
-
-    <macrodef name="cloverreport.macro">
-        <attribute name="test.type"/>
-        <sequential>
             <clovercommon.macro test.type="@{test.type}"/>
             <clover-report initString="${coverage.@{test.type}.dir}/coverage.db">
                 <current outfile="${coverage.@{test.type}.dir}" title="${project.shortname} @{test.type} test code coverage">
