@@ -35,11 +35,15 @@ public class CollectionCheckerImpl<E, T extends Collection<E>> extends IterableC
         getAsserter().expectThat(subject.isEmpty(), Matchers.describedAs("isEmpty() = <false>", Matchers.equalTo(false)));
     }
 
+    public void isNotEmpty() {
+        notEmpty();
+    }
+
     public final void hasSize(final int size) {
         getAsserter().expectThat(subject.size(), Matchers.equalTo(size));
     }
 
     public final void isOfSize(final int size) {
-        getAsserter().expectThat(subject.size(), Matchers.equalTo(size));
+        hasSize(size);
     }
 }

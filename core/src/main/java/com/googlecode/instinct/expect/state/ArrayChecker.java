@@ -23,6 +23,8 @@ public interface ArrayChecker<T> extends ObjectChecker<T[]> {
 
     void notEmpty();
 
+    void isNotEmpty();
+
     void containsItem(Matcher<T> matcher);
 
     void containsItem(T t);
@@ -32,4 +34,6 @@ public interface ArrayChecker<T> extends ObjectChecker<T[]> {
     void doesNotContainItem(T t);
 
     void hasSize(int size);
+
+    void isOfSize(int size);
 }
