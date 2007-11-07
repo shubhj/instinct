@@ -21,6 +21,8 @@ import org.hamcrest.Matcher;
 public interface ObjectChecker<T> {
     void equalTo(T t);
 
+    void isEqualTo(T t);
+
     void notEqualTo(T t);
 
     void instanceOf(Class<? extends T> cls);

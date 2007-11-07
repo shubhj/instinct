@@ -41,6 +41,10 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectThat(subject, Matchers.equalTo(t));
     }
 
+    public final void isEqualTo(final T t) {
+        equalTo(t);
+    }
+
     @Override
     public final boolean equals(final Object obj) {
         throw new UnsupportedOperationException("Equality on checkers is not supported, you probably want equalTo() instead.");
