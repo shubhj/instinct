@@ -35,7 +35,7 @@ public class CollectionCheckerImpl<E, T extends Collection<E>> extends IterableC
         getAsserter().expectThat(subject.isEmpty(), Matchers.describedAs("isEmpty() = <false>", Matchers.equalTo(false)));
     }
 
-    public void isNotEmpty() {
+    public final void isNotEmpty() {
         notEmpty();
     }
 

@@ -17,6 +17,7 @@
 package com.googlecode.instinct.expect.state;
 
 import org.hamcrest.Matcher;
+import java.util.Collection;
 
 public interface IterableChecker<E, T extends Iterable<E>> extends ObjectChecker<T> {
 
@@ -35,4 +36,6 @@ public interface IterableChecker<E, T extends Iterable<E>> extends ObjectChecker
     void notContainItems(Matcher<E>... matchers);
 
     void notContainItems(E... items);
+
+    void containsItems(Collection<E> items);
 }
