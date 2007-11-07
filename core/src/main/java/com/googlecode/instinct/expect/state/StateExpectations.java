@@ -20,6 +20,7 @@ import com.googlecode.instinct.internal.util.Fix;
 import java.util.Collection;
 import java.util.EventObject;
 import java.util.Map;
+import java.io.File;
 import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 
@@ -58,6 +59,8 @@ public interface StateExpectations {
     <T extends EventObject> EventObjectChecker<T> that(T eventObject);
 
     <T extends Node> NodeChecker<T> that(T node);
+
+    FileChecker that(File file);
 
     <T> void that(T t, Matcher<T> hamcrestMatcher);
 

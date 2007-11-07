@@ -17,17 +17,26 @@
 package com.googlecode.instinct.expect.state;
 
 import java.io.File;
+import org.hamcrest.Description;
+import org.hamcrest.TypeSafeMatcher;
+import org.hamcrest.Factory;
+import org.hamcrest.Matcher;
 
-public final class FileCheckerImpl extends ObjectCheckerImpl<File> implements FileChecker {
-    public FileCheckerImpl(final File subject) {
-        super(subject);
+public class FileExistsMatcher extends TypeSafeMatcher<File> {
+    private FileExistsMatcher() {
     }
 
-    public void exists() {
-        getAsserter().expectThat(subject, FileExistsMatcher.exists());
+    @Override
+    public boolean matchesSafely(final File item) {
+        return item.exists();
     }
 
-    public void doesNotExist() {
-        getAsserter().expectNotThat(subject, FileExistsMatcher.exists());
+    public void describeTo(final Description description) {
+        description.appendText("exists");
+    }
+
+    @Factory
+    public static Matcher<File> exists() {
+        return new FileExistsMatcher();
     }
 }

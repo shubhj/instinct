@@ -20,4 +20,6 @@ import java.io.File;
 
 public interface FileChecker extends ObjectChecker<File> {
     void exists();
+
+    void doesNotExist();
 }

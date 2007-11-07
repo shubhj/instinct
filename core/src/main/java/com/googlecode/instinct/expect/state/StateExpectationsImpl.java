@@ -24,6 +24,7 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.util.Collection;
 import java.util.EventObject;
 import java.util.Map;
+import java.io.File;
 import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 
@@ -80,8 +81,12 @@ public final class StateExpectationsImpl implements StateExpectations {
         return (NodeChecker<T>) createChecker(NodeCheckerImpl.class, node);
     }
 
+    public FileChecker that(final File file) {
+        return createChecker(FileCheckerImpl.class, file);
+    }
+
     public <T> void that(final T t, final Matcher<T> hamcrestMatcher) {
-        checkNotNull(t, hamcrestMatcher);
+        checkNotNull(hamcrestMatcher);
         matcher.expectThat(t, hamcrestMatcher);
     }
 

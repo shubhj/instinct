@@ -25,6 +25,7 @@ import com.googlecode.instinct.expect.state.CollectionChecker;
 import com.googlecode.instinct.expect.state.ComparableChecker;
 import com.googlecode.instinct.expect.state.DoubleChecker;
 import com.googlecode.instinct.expect.state.EventObjectChecker;
+import com.googlecode.instinct.expect.state.FileChecker;
 import com.googlecode.instinct.expect.state.IterableChecker;
 import com.googlecode.instinct.expect.state.MapChecker;
 import com.googlecode.instinct.expect.state.NodeChecker;
@@ -34,6 +35,7 @@ import com.googlecode.instinct.expect.state.StateExpectationsImpl;
 import com.googlecode.instinct.expect.state.StringChecker;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import java.io.File;
 import java.util.Collection;
 import java.util.EventObject;
 import java.util.Map;
@@ -92,6 +94,14 @@ public final class ExpectThatImpl implements ExpectThat {
 
     public <T extends Node> NodeChecker<T> that(final T node) {
         return stateExpectations.that(node);
+    }
+
+    public FileChecker that(final File file) {
+        return stateExpectations.that(file);
+    }
+
+    public <T extends File> FileChecker that(final T file) {
+        return stateExpectations.that(file);
     }
 
     public <T> void that(final T t, final Matcher<T> hamcrestMatcher) {
