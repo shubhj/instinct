@@ -22,7 +22,7 @@ import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 
-public class FileExistsMatcher extends TypeSafeMatcher<File> {
+public final class FileExistsMatcher extends TypeSafeMatcher<File> {
     private FileExistsMatcher() {
     }
 

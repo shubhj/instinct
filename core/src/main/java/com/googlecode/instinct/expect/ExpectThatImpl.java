@@ -100,10 +100,6 @@ public final class ExpectThatImpl implements ExpectThat {
         return stateExpectations.that(file);
     }
 
-    public <T extends File> FileChecker that(final T file) {
-        return stateExpectations.that(file);
-    }
-
     public <T> void that(final T t, final Matcher<T> hamcrestMatcher) {
         checkNotNull(hamcrestMatcher);
         stateExpectations.that(hamcrestMatcher);
