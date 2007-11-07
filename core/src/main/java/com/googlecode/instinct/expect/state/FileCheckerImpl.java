@@ -18,7 +18,7 @@ package com.googlecode.instinct.expect.state;
 
 import java.io.File;
 
-public class FileCheckerImpl extends ObjectCheckerImpl<File> implements FileChecker {
+public final class FileCheckerImpl extends ObjectCheckerImpl<File> implements FileChecker {
     public FileCheckerImpl(final File subject) {
         super(subject);
     }
