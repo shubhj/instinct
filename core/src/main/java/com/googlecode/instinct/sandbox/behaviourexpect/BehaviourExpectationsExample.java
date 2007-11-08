@@ -46,8 +46,7 @@ public final class BehaviourExpectationsExample {
         // Option 3 - jMock 2 style
         expect.that(new Expectations() {
             {
-                one(stringList).add("abc");
-                will(returnValue(true));
+                one(stringList).add("abc"); will(returnValue(true));
                 one(stringList).clear();
             }
         });

@@ -25,6 +25,7 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import com.googlecode.instinct.test.TestingException;
 
+@Fix("Move this into the prod tree")
 public final class Reflector {
     private static final MethodInvoker METHOD_INVOKER = new MethodInvokerImpl();
 

@@ -28,39 +28,39 @@ public final class TestTriangulationProviderImpl implements TestTriangulationPro
             new au.net.netstorm.boost.test.atom.TestTriangulationProvider();
     private final RandomProvider randomProvider = new RandomProviderImpl();
 
-    public <T> List<T> getListInstance(Class<T> elementType) {
-        List<T> result = new ArrayList<T>();
-        int numElements = intInRange(1, 5);
+    public <T> List<T> getListInstance(final Class<T> elementType) {
+        final List<T> result = new ArrayList<T>();
+        final int numElements = intInRange(1, 5);
         for (int i = 0; i < numElements; i++) {
             result.add(getInstance(elementType));
         }
         return result;
     }
 
-    public <K, V> Map<K, V> getMapInstance(Class<K> keyType, Class<V> valueType) {
-        Map<K, V> result = new HashMap<K, V>();
-        int numElements = intInRange(1, 5);
+    public <K, V> Map<K, V> getMapInstance(final Class<K> keyType, final Class<V> valueType) {
+        final Map<K, V> result = new HashMap<K, V>();
+        final int numElements = intInRange(1, 5);
         for (int i = 0; i < numElements; i++) {
             result.put(getInstance(keyType), getInstance(valueType));
         }
         return result;
     }
 
-    public <T> T[] getArrayInstance(Class<T> elementType) {
-        List<T> elementList = getListInstance(elementType);
-        T[] result = (T[]) newInstance(elementType, elementList.size());
+    public <T> T[] getArrayInstance(final Class<T> elementType) {
+        final List<T> elementList = getListInstance(elementType);
+        final T[] result = (T[]) newInstance(elementType, elementList.size());
         return elementList.toArray(result);
     }
 
-    public <T> T getInstance(Class<T> type) {
+    public <T> T getInstance(final Class<T> type) {
         return (T) delegate.getInstance(type);
     }
 
-    public Object[] getInstances(Class[] types) {
+    public Object[] getInstances(final Class[] types) {
         return delegate.getInstances(types);
     }
 
-    public int intInRange(int min, int max) {
+    public int intInRange(final int min, final int max) {
         return randomProvider.intInRange(min, max);
     }
 }

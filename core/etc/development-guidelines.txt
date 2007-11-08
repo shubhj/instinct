@@ -7,11 +7,11 @@ Prod code
   or use manual field injection. Avoid setter injection.
 - Prefer interfaces for all classes.
 - Try to write real objects, not procedural code.
-- Reject nulls.
+- Reject nulls. Don't return them, don't use them (some external libraries like them).
 - Prefer "immutable" classes. Don't use setters that allow an object to be set up in
   a bad state, only use them for optional fields or where the usage requires
   mutability.
-- Prefer to use final on local variables and parameters.
+- Use final on local variables and parameters.
 - Make all classes final, unless they've been designed for inheritance.
 
 Test code

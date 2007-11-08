@@ -34,6 +34,7 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
     private final InstanceProvider uberInstanceProvider = new UberInstanceProvider();
     private final Objenesis objenesis = new ObjenesisStd();
 
+    @Suggest("THis should use the  triangulation provider, or boost random utilities.")
     public Object newInstance(final Class cls) {
         if (cls.isEnum()) {
             return cls.getEnumConstants()[0];

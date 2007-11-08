@@ -58,15 +58,18 @@ the published API when using Instinct. However, you are welcome to use the
 internal classes, though relying on the internal APIs is not advised as they
 will change from release to release.
 
+
 Published packages
 
 com.googlecode.instinct.expect
-  Expectations API - includes support for setting state & behaviour expectations.
+  Expectation API -Includes support for setting state & behaviour expectations.
 
 com.googlecode.instinct.integrate
-  Integration with
+  Integration with other tools such as JUnit and Ant.
 
 com.googlecode.instinct.marker
+  Annotations and naming conventions for making code available to Instinct.
+
 
 Internal packages
 
