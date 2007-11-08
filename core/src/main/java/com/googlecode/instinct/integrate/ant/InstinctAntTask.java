@@ -31,6 +31,8 @@ import static java.util.Arrays.asList;
 import java.util.List;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
+import org.apache.tools.ant.types.Path;
+import org.apache.tools.ant.types.CommandlineJava;
 
 @SuppressWarnings({"MethodParameterOfConcreteClass", "InstanceVariableOfConcreteClass"})
 public final class InstinctAntTask extends Task implements StatusLogger {
@@ -53,6 +55,11 @@ public final class InstinctAntTask extends Task implements StatusLogger {
         checkNotNull(formatter);
         checkFormatterNotAlreadyAssigned();
         this.formatter = formatter;
+    }
+
+    public Path createClasspath() {
+        final CommandlineJava commandLine = new CommandlineJava();
+        return commandLine.createClasspath(getProject()).createPath();
     }
 
     @Override
