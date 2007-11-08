@@ -26,13 +26,14 @@ import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
+import com.googlecode.instinct.internal.util.Suggest;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import java.util.List;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
-import org.apache.tools.ant.types.Path;
 import org.apache.tools.ant.types.CommandlineJava;
+import org.apache.tools.ant.types.Path;
 
 @SuppressWarnings({"MethodParameterOfConcreteClass", "InstanceVariableOfConcreteClass"})
 public final class InstinctAntTask extends Task implements StatusLogger {
@@ -57,6 +58,7 @@ public final class InstinctAntTask extends Task implements StatusLogger {
         this.formatter = formatter;
     }
 
+    @Suggest("Cache this like JUnit does? Why?")
     public Path createClasspath() {
         final CommandlineJava commandLine = new CommandlineJava();
         return commandLine.createClasspath(getProject()).createPath();
