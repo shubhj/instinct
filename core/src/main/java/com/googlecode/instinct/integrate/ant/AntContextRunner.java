@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.integrate.ant;
 
+import java.util.regex.Pattern;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
@@ -24,7 +25,8 @@ import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
-import java.util.regex.Pattern;
+import static org.apache.tools.ant.Project.MSG_ERR;
+import static org.apache.tools.ant.Project.MSG_INFO;
 
 @Suggest({"Remove this class, refactor Ant runner to not use it, make Ant runner receive the callback and write in real time."})
 public final class AntContextRunner implements ContextRunner {
@@ -58,11 +60,16 @@ public final class AntContextRunner implements ContextRunner {
     }
 
     private void logResults(final ContextResult contextResult) {
-        final String message = messageBuilder.buildMessage(contextResult);
-        if (message.trim().length() > 0) {
-            final String[] lines = NEWLINE.split(message);
+        final String results = messageBuilder.buildMessage(contextResult);
+        final int logLevel = contextResult.completedSuccessfully() ? MSG_INFO : MSG_ERR;
+        logResults(results, logLevel);
+    }
+
+    private void logResults(final String results, final int logLevel) {
+        if (results.trim().length() > 0) {
+            final String[] lines = NEWLINE.split(results);
             for (final String line : lines) {
-                statusLogger.log(line);
+                statusLogger.log(line, logLevel);
             }
         }
     }

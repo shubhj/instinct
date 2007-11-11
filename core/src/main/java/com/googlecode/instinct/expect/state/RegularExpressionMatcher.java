@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.expect.state;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.util.regex.Pattern;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
@@ -31,6 +31,10 @@ public final class RegularExpressionMatcher extends TypeSafeMatcher<String> {
 
     private RegularExpressionMatcher(final String regularExpression) {
         pattern = Pattern.compile(regularExpression);
+    }
+
+    private RegularExpressionMatcher(final String regularExpression, final int flags) {
+        pattern = Pattern.compile(regularExpression, flags);
     }
 
     /**
@@ -59,5 +63,17 @@ public final class RegularExpressionMatcher extends TypeSafeMatcher<String> {
     public static Matcher<String> matchesRegex(final String regularExpression) {
         checkNotNull(regularExpression);
         return new RegularExpressionMatcher(regularExpression);
+    }
+
+    /**
+     * Returns a matcher for the given <code>regularExpression</code>.
+     * @param regularExpression The regular expression to match against.
+     * @param flags Match flags, a bit mask passed directly to  {@link Pattern#compile(String, int)}.
+     * @throws java.util.regex.PatternSyntaxException if the given <code>regularExpression</code> is syntactically invalid.
+     */
+    @Factory
+    public static Matcher<String> matchesRegex(final String regularExpression, final int flags) {
+        checkNotNull(regularExpression);
+        return new RegularExpressionMatcher(regularExpression, flags);
     }
 }

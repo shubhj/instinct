@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Nicholas Partridge
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,11 @@
 
 package com.googlecode.instinct.internal.report;
 
+import static java.lang.System.getProperty;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import static java.util.regex.Pattern.MULTILINE;
+import static java.util.regex.Pattern.compile;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilder;
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilderImpl;
@@ -23,11 +28,6 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ResultMessageBuilder;
-import static java.lang.System.getProperty;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import static java.util.regex.Pattern.MULTILINE;
-import static java.util.regex.Pattern.compile;
 
 @Suggest("Only print out context name for pending or failed specs. For pending or failed specs print spec names also.")
 public final class QuietResultMessageBuilder implements ResultMessageBuilder {

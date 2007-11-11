@@ -69,6 +69,7 @@
     <target name="-run-specs" depends="-compile">
         <taskdef resource="instincttask.properties" classpathref="spec.class.path"/>
         <instinct failureproperty="specs-failed">
+            <classpath refid="spec.class.path"/>
             <specifications dir="${spec.classes.dir}"/>
             <formatter type="brief"/>
         </instinct>

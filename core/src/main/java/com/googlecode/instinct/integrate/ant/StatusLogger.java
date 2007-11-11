@@ -17,5 +17,5 @@
 package com.googlecode.instinct.integrate.ant;
 
 public interface StatusLogger {
-    void log(String message);
+    void log(String message, int logLevel);
 }

@@ -42,6 +42,7 @@ public abstract class InstinctTestCase extends TestCase {
                 message = throwable.toString();
             }
         } finally {
+            // Note. Resetting the mocker here causes jMock error messages to loose their state.
             reset();
             tearDown();
         }

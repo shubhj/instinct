@@ -45,5 +45,9 @@ public interface StringChecker extends ComparableChecker<String> {
 
     void matchesRegex(String regularExpression);
 
+    void matchesRegex(String regularExpression, int flags);
+
     void doesNotMatchRegex(String regularExpression);
+
+    void doesNotMatchRegex(String regularExpression, int flags);
 }
