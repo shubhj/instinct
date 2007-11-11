@@ -92,7 +92,7 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
         getAsserter().expectThat(subject, RegularExpressionMatcher.matchesRegex(regularExpression));
     }
 
-    public void matchesRegex(final String regularExpression, final int flags) {
+    public final void matchesRegex(final String regularExpression, final int flags) {
         nullCheckString(regularExpression, "matchesRegex");
         getAsserter().expectThat(subject, RegularExpressionMatcher.matchesRegex(regularExpression, flags));
     }
@@ -102,7 +102,7 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
         getAsserter().expectNotThat(subject, RegularExpressionMatcher.matchesRegex(regularExpression));
     }
 
-    public void doesNotMatchRegex(final String regularExpression, final int flags) {
+    public final void doesNotMatchRegex(final String regularExpression, final int flags) {
         nullCheckString(regularExpression, "doesNotMatchRegex");
         getAsserter().expectNotThat(subject, RegularExpressionMatcher.matchesRegex(regularExpression, flags));
     }
