@@ -17,13 +17,12 @@
 package com.googlecode.instinct.expect.state;
 
 import com.googlecode.instinct.internal.util.Fix;
+import java.util.Collection;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
-import java.util.Collection;
 
 @Fix("Test this")
-public class IterableCheckerImpl<E, T extends Iterable<E>>
-        extends ObjectCheckerImpl<T> implements IterableChecker<E, T> {
+public class IterableCheckerImpl<E, T extends Iterable<E>> extends ObjectCheckerImpl<T> implements IterableChecker<E, T> {
 
     public IterableCheckerImpl(final T subject) {
         super(subject);
@@ -54,6 +53,7 @@ public class IterableCheckerImpl<E, T extends Iterable<E>>
         getAsserter().expectThat(subject, iterableMatcher);
     }
 
+    @SuppressWarnings({"unchecked"})
     public final void containsItems(final Collection<E> items) {
         getAsserter().expectThat(subject, Matchers.hasItems((E[]) items.toArray()));
     }
