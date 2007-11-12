@@ -25,7 +25,6 @@ import org.junit.Test;
 import org.junit.internal.runners.JUnit4ClassRunner;
 import org.junit.runner.RunWith;
 
-@SuppressWarnings({"unchecked"})
 @RunWith(JUnit4ClassRunner.class)
 public final class CsvLineSplitterTest {
     private static final String NOTHING_TO_SPLIT = "";
@@ -46,7 +45,6 @@ public final class CsvLineSplitterTest {
     @Test
     public void correctlySplitsInputIntoTokens() {
         final String[] split = lineSplitter.split("foo,bar,baz");
-        assertThat(split, array(equalTo("foo"), equalTo("bar"), equalTo("baz")));
         assertThat(split, equalTo(new String[]{"foo", "bar", "baz"}));
     }
 

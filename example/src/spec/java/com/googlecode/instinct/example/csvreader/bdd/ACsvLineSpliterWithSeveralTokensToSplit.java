@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.example.csvreader.bdd;
 
-import java.util.List;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
@@ -24,7 +23,6 @@ import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
 import org.junit.runner.RunWith;
 
-@SuppressWarnings({"serial"})
 @RunWith(InstinctRunner.class)
 public final class ACsvLineSpliterWithSeveralTokensToSplit {
     @Subject private CsvLineSplitter lineSplitter;
