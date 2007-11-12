@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.example.csvreader.junit;
 
-import org.hamcrest.collection.IsArray;
 import static org.hamcrest.collection.IsArray.array;
 import static org.hamcrest.collection.IsArrayContaining.hasItemInArray;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -25,9 +24,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.internal.runners.JUnit4ClassRunner;
 import org.junit.runner.RunWith;
-import com.googlecode.instinct.marker.annotate.Specification;
-import static com.googlecode.instinct.expect.Expect.expect;
 
+@SuppressWarnings({"unchecked"})
 @RunWith(JUnit4ClassRunner.class)
 public final class CsvLineSplitterTest {
     private static final String NOTHING_TO_SPLIT = "";
@@ -49,11 +47,18 @@ public final class CsvLineSplitterTest {
     public void correctlySplitsInputIntoTokens() {
         final String[] split = lineSplitter.split("foo,bar,baz");
         assertThat(split, array(equalTo("foo"), equalTo("bar"), equalTo("baz")));
+        assertThat(split, equalTo(new String[]{"foo", "bar", "baz"}));
     }
 
     @Test
     public void correctlyHandlesLinesWithNoDelimiterPresent() {
         final String[] split = lineSplitter.split("foobarbaz");
-        assertThat(split, array(equalTo("foobarbaz")));
+        assertThat(split, equalTo(new String[]{"foobarbaz"}));
+    }
+
+    @Test
+    public void correctlyHandlesTwoDelimitersInSequence() {
+        final String[] split = lineSplitter.split("foo,bar,,baz");
+        assertThat(split, equalTo(new String[]{"foo", "bar", "", "baz"}));
     }
 }
