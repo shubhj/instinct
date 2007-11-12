@@ -25,7 +25,6 @@ import org.junit.Test;
 import org.junit.internal.runners.JUnit4ClassRunner;
 import org.junit.runner.RunWith;
 
-@RunWith(JUnit4ClassRunner.class)
 public final class CsvLineSplitterTest {
     private static final String NOTHING_TO_SPLIT = "";
     private CsvLineSplitter lineSplitter;
