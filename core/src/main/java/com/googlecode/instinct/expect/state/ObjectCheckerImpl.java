@@ -66,7 +66,7 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         instanceOf(cls);
     }
 
-    public void ofType(final Class<? extends T> cls) {
+    public final void ofType(final Class<? extends T> cls) {
         instanceOf(cls);
     }
 
