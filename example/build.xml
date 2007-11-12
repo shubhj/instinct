@@ -82,16 +82,17 @@
             <test name="com.googlecode.instinct.example.junit.StackJUnitSuite"/>
             <formatter type="brief" usefile="false"/>
         </junit>
-        <fail if="tests-failed" message="JUnit 3 integration suite failed."/>
+        <fail if="tests-failed" message="JUnit 3 integration suite(s) failed."/>
     </target>
 
     <target name="-run-junit4-integration" depends="-compile">
         <junit failureproperty="tests-failed" fork="true" forkmode="perBatch">
             <classpath refid="spec.class.path"/>
             <test name="com.googlecode.instinct.example.junit.StackJUnit4Suite"/>
+            <test name="com.googlecode.instinct.example.csvreader.junit.CsvReaderJUnitTests"/>
             <formatter type="brief" usefile="false"/>
         </junit>
-        <fail if="tests-failed" message="JUnit 4 integration suite failed."/>
+        <fail if="tests-failed" message="JUnit 4 integration suite(s) failed."/>
     </target>
 
 </project>
