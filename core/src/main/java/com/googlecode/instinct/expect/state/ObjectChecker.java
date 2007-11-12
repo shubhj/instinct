@@ -27,7 +27,19 @@ public interface ObjectChecker<T> {
 
     void instanceOf(Class<? extends T> cls);
 
+    void isAnInstanceOf(Class<? extends T> cls);
+
+    void isOfType(Class<? extends T> cls);
+
+    void ofType(Class<? extends T> cls);
+
     void notInstanceOf(Class<T> cls);
+
+    void isNotAnInstanceOf(Class<T> cls);
+
+    void isNotOfType(Class<T> cls);
+
+    void notOfType(Class<T> cls);
 
     void sameInstanceAs(T t);
 

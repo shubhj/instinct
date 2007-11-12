@@ -58,8 +58,32 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectThat(subject, Matchers.instanceOf(cls));
     }
 
+    public final void isAnInstanceOf(final Class<? extends T> cls) {
+        instanceOf(cls);
+    }
+
+    public final void isOfType(final Class<? extends T> cls) {
+        instanceOf(cls);
+    }
+
+    public void ofType(final Class<? extends T> cls) {
+        instanceOf(cls);
+    }
+
     public final void notInstanceOf(final Class<T> cls) {
         getAsserter().expectNotThat(subject, Matchers.instanceOf(cls));
+    }
+
+    public final void isNotAnInstanceOf(final Class<T> cls) {
+        notInstanceOf(cls);
+    }
+
+    public final void isNotOfType(final Class<T> cls) {
+        notInstanceOf(cls);
+    }
+
+    public final void notOfType(final Class<T> cls) {
+        notInstanceOf(cls);
     }
 
     public final void sameInstanceAs(final T t) {

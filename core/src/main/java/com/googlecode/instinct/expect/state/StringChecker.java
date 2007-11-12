@@ -41,7 +41,15 @@ public interface StringChecker extends ComparableChecker<String> {
 
     void notEmpty();
 
+    void isNotEmpty();
+
     void hasLength(int length);
+
+    void hasSize(int length);
+
+    void isOfLength(int length);
+
+    void isOfSize(int length);
 
     void matchesRegex(String regularExpression);
 
