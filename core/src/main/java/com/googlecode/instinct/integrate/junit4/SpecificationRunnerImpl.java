@@ -83,7 +83,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         String name = specificationMethod.getName() + " [PENDING";
         final String reason = specificationMethod.getPendingReason();
         if (!reason.equals(Specification.NO_REASON)) {
-            name += " (" + reason + ")";
+            name += ", " + reason;
         }
         return name + "]";
     }
