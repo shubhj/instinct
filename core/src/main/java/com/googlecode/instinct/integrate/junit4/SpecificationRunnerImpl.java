@@ -15,6 +15,7 @@
  */
 package com.googlecode.instinct.integrate.junit4;
 
+import java.util.Collection;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdge;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdgeImpl;
@@ -25,9 +26,8 @@ import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.marker.annotate.Specification;
+import static com.googlecode.instinct.marker.annotate.Specification.NO_REASON;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
-import java.util.Collection;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
@@ -80,12 +80,14 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     }
 
     private String createPendingName(final SpecificationMethod specificationMethod) {
-        String name = specificationMethod.getName() + " [PENDING";
+        final String name = specificationMethod.getName() + " [PENDING";
+        final String reason = getPendingReason(specificationMethod);
+        return name + reason + "]";
+    }
+
+    private String getPendingReason(final SpecificationMethod specificationMethod) {
         final String reason = specificationMethod.getPendingReason();
-        if (!reason.equals(Specification.NO_REASON)) {
-            name += ", " + reason;
-        }
-        return name + "]";
+        return reason.equals(NO_REASON) ? "" : "  - " + reason;
     }
 
     private Failure createFailure(final Description description, final SpecificationResult specificationResult) {
