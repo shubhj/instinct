@@ -14,10 +14,17 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.example.csvreader.bdd;
+package com.googlecode.instinct.edge;
 
-public interface CsvFile {
-    boolean hasMoreLines();
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
-    String readLine();
+public final class FileReaderEdgeImpl implements FileReaderEdge {
+    public FileReader newFileReader(final String fileName) {
+        try {
+            return new FileReader(fileName);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

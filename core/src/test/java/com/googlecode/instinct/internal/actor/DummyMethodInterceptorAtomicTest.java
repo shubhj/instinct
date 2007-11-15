@@ -20,18 +20,23 @@ import java.lang.reflect.Method;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.Reflector.getDeclaredMethod;
+import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
+import net.sf.cglib.proxy.NoOp;
 import org.jmock.Expectations;
 
+@SuppressWarnings({"InstanceVariableOfConcreteClass"})
 public final class DummyMethodInterceptorAtomicTest extends InstinctTestCase {
     @Subject(implementation = DummyMethodInterceptor.class) private MethodInterceptor methodInterceptor;
     @Mock private MethodProxy methodProxy;
-    @Dummy private Object obj;
+    @Stub private Object obj;
+    @Stub private OveriddenObjectMethods overiddenObjectMethods;
     @Dummy private Method method;
     @Dummy private Object[] args;
 
@@ -59,17 +64,73 @@ public final class DummyMethodInterceptorAtomicTest extends InstinctTestCase {
             fail("Expected IllegalInvocationException thrown");
         } catch (Throwable t) {
             expect.that(t).instanceOf(IllegalInvocationException.class);
-            expect.that(t.getMessage()).equalTo("Method size() was called on a dummy instance of class " + obj.getClass().getName() + ". " +
+            expect.that(t.getMessage()).equalTo("Method size() was called on a dummy instance of " + obj.getClass().getName() + ". " +
                     "If you expect methods to be called on this double you should make it a mock or stub.");
         }
     }
 
+    public void testThrowsExceptionsOnAllMethodNonObjectCallsUsingCorrectTypeForCgLibEnhancedClasses() throws Exception {
+        final Enhancer enhancer = new Enhancer();
+        enhancer.setCallback(NoOp.INSTANCE);
+        enhancer.setSuperclass(Object.class);
+        final Object enhancedObject = enhancer.createClass().newInstance();
+        try {
+            methodInterceptor.intercept(enhancedObject, method, args, methodProxy);
+            fail("Expected IllegalInvocationException thrown");
+        } catch (Throwable t) {
+            expect.that(t).instanceOf(IllegalInvocationException.class);
+            expect.that(t.getMessage()).equalTo("Method size() was called on a dummy instance of Object.class. " +
+                    "If you expect methods to be called on this double you should make it a mock or stub.");
+        }
+    }
+
+    public void testPassesAllOveriddenObjectMethodsThroughToSuperclass() throws Throwable {
+        checkPassesObjectMethodsToSuperClass(overiddenObjectMethods, "clone");
+        checkPassesObjectMethodsToSuperClass(overiddenObjectMethods, "equals", Object.class);
+        checkPassesObjectMethodsToSuperClass(overiddenObjectMethods, "finalize");
+        checkPassesObjectMethodsToSuperClass(overiddenObjectMethods, "hashCode");
+        checkPassesObjectMethodsToSuperClass(overiddenObjectMethods, "toString");
+    }
+
     private void checkPassesObjectMethodsToSuperClass(final String methodName, final Class<?>... paramTypes) throws Throwable {
+        checkPassesObjectMethodsToSuperClass(obj, methodName, paramTypes);
+    }
+
+    private void checkPassesObjectMethodsToSuperClass(
+            final Object proxiedObject, final String methodName, final Class<?>... paramTypes) throws Throwable {
         expect.that(new Expectations() {
             {
-                one(methodProxy).invokeSuper(obj, args);
+                one(methodProxy).invokeSuper(proxiedObject, args);
             }
         });
-        methodInterceptor.intercept(obj, getDeclaredMethod(Object.class, methodName, paramTypes), args, methodProxy);
+        methodInterceptor.intercept(proxiedObject, getDeclaredMethod(proxiedObject.getClass(), methodName, paramTypes), args, methodProxy);
+    }
+
+    @SuppressWarnings({"FinalizeDeclaration", "CloneInNonCloneableClass", "ProhibitedExceptionDeclared"})
+    private static final class OveriddenObjectMethods {
+        @Override
+        protected Object clone() throws CloneNotSupportedException {
+            return super.clone();
+        }
+
+        @Override
+        protected void finalize() throws Throwable {
+            super.finalize();
+        }
+
+        @Override
+        public boolean equals(final Object obj) {
+            return super.equals(obj);
+        }
+
+        @Override
+        public int hashCode() {
+            return super.hashCode();
+        }
+
+        @Override
+        public String toString() {
+            return super.toString();
+        }
     }
 }

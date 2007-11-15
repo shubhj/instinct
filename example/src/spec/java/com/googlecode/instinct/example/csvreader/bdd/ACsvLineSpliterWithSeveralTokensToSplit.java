@@ -16,6 +16,8 @@
 
 package com.googlecode.instinct.example.csvreader.bdd;
 
+import com.googlecode.instinct.example.csvreader.CsvLineSplitter;
+import com.googlecode.instinct.example.csvreader.CsvLineSplitterImpl;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;

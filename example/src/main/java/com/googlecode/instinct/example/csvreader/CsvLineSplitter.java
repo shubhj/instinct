@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.example.csvreader.bdd;
+package com.googlecode.instinct.example.csvreader;
 
 public interface CsvLineSplitter {
     String[] split(String contentToSplit);

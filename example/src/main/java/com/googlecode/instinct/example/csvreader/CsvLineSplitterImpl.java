@@ -14,23 +14,16 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.example.csvreader.bdd;
+package com.googlecode.instinct.example.csvreader;
 
-public final class CsvFileImpl implements CsvFile {
-    private final String filename;
+public final class CsvLineSplitterImpl implements CsvLineSplitter {
+    private final char delimiter;
 
-    public CsvFileImpl(final String filename) {
-        this.filename = filename;
+    public CsvLineSplitterImpl(final char delimiter) {
+        this.delimiter = delimiter;
     }
 
-    public boolean hasMoreLines() {
-        return false;
-    }
-
-    public String readLine() {
-        if (!hasMoreLines()) {
-            throw new IllegalStateException("No lines to read");
-        }
-        return null;
+    public String[] split(final String contentToSplit) {
+        return contentToSplit.split(Character.toString(delimiter));
     }
 }

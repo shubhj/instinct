@@ -14,16 +14,8 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.example.csvreader.bdd;
+package com.googlecode.instinct.example.csvreader;
 
-public final class CsvLineSplitterImpl implements CsvLineSplitter {
-    private final char delimiter;
-
-    public CsvLineSplitterImpl(final char delimiter) {
-        this.delimiter = delimiter;
-    }
-
-    public String[] split(final String contentToSplit) {
-        return contentToSplit.split(Character.toString(delimiter));
-    }
+public interface CsvFileReader {
+    String[] nextLine();
 }

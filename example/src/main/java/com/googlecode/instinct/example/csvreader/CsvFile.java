@@ -14,8 +14,12 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.example.csvreader.junit;
+package com.googlecode.instinct.example.csvreader;
 
-public interface CsvLineSplitter {
-    String[] split(String contentToSplit);
+public interface CsvFile {
+    boolean hasMoreLines();
+
+    String readLine();
+
+    void close();
 }

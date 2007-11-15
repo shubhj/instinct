@@ -16,14 +16,13 @@
 
 package com.googlecode.instinct.example.csvreader.junit;
 
-import static org.hamcrest.collection.IsArray.array;
+import com.googlecode.instinct.example.csvreader.CsvLineSplitter;
+import com.googlecode.instinct.example.csvreader.CsvLineSplitterImpl;
 import static org.hamcrest.collection.IsArrayContaining.hasItemInArray;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.internal.runners.JUnit4ClassRunner;
-import org.junit.runner.RunWith;
 
 public final class CsvLineSplitterTest {
     private static final String NOTHING_TO_SPLIT = "";

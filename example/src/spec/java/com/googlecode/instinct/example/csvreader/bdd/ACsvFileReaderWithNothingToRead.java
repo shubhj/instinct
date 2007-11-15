@@ -16,12 +16,48 @@
 
 package com.googlecode.instinct.example.csvreader.bdd;
 
+import com.googlecode.instinct.example.csvreader.CsvFile;
+import com.googlecode.instinct.example.csvreader.CsvFileReader;
+import com.googlecode.instinct.example.csvreader.CsvFileReaderImpl;
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.marker.annotate.BeforeSpecification;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
+import com.googlecode.instinct.marker.annotate.Subject;
+import org.jmock.Expectations;
+import org.junit.runner.RunWith;
 
+@RunWith(InstinctRunner.class)
 public final class ACsvFileReaderWithNothingToRead {
-    @Specification(state = PENDING, reason = "Breadcrumb: Drive out CsvFile, then use it to read a CSV file, mock out it's use.")
+    @Subject CsvFileReader csvFileReader;
+    @Mock CsvFile csvFile;
+    @Dummy private Throwable throwable;
+
+    @BeforeSpecification
+    public void before() {
+        csvFileReader = new CsvFileReaderImpl(csvFile);
+    }
+
+    @Specification
+    public void closesTheUnderlyingFileOnAllExceptions() {
+        expect.that(new Expectations() {
+            {
+                one(csvFile).readLine();
+                will(throwException(throwable));
+                atLeast(1).of(csvFile).close();
+            }
+        });
+        csvFileReader.nextLine();
+    }
+
+    @Specification(state = PENDING)
     public void returnsNoLines() {
-//        new CsvFileReader();
+        expect.that(new Expectations() {
+            {
+            }
+        });
     }
 }
