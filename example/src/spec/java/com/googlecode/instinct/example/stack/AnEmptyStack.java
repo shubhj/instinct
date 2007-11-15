@@ -12,11 +12,11 @@ import org.junit.runner.RunWith;
 @RunWith(InstinctRunner.class)
 public final class AnEmptyStack {
     @Subject private Stack<Object> stack;
-    @Dummy private Object object;
+    @Dummy private Object object1;
+    @Dummy private Object object2;
 
     @BeforeSpecification
     void before() {
-        object = new Object();
         stack = new StackImpl<Object>();
     }
 
@@ -31,15 +31,8 @@ public final class AnEmptyStack {
         expect.that(stack.isEmpty()).isFalse();
     }
 
-    @Specification
-    void returnTheSameObjectWhenPushed() {
-        stack.push(object);
-        final Object o = stack.pop();
-        expect.that(o).sameInstanceAs(object);
-    }
-
     @Specification(expectedException = IllegalStateException.class, withMessage = "Cannot pop an empty stack")
-    void throwsExceptionWhenPoppedWithNoElements() {
+    void throwsExceptionWhenPopped() {
         stack.pop();
     }
 
