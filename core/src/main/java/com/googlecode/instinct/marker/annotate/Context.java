@@ -32,4 +32,13 @@ import java.lang.annotation.Target;
 @Retention(RUNTIME)
 @Target({TYPE})
 public @interface Context {
+    /**
+     * The group(s) the specifications in this context belong to.
+     * Setting this attribute will cause all specifications in the context to be marked as belonging to the specified group. In this way using this
+     * attribute is a shorthand method of marking every individual specification.
+     *
+     * @return The group(s) the specifications in this context belong to.
+     * @See Specification#groups()
+     */
+    String[] groups() default "ALL";
 }

@@ -26,12 +26,14 @@ import java.lang.annotation.Target;
  * Specifications are executable examples that guide the design process and provide both documentation and tests. Specifications (specs) are analogous
  * to test methods in XUnit frameworks.
  */
+@SuppressWarnings({"PublicStaticArrayField"})
 @Documented
 @Retention(RUNTIME)
 @Target({METHOD})
 public @interface Specification {
     String NO_MESSAGE = "Specification is not expected to throw an exception.";
     String NO_REASON = "";
+    String ALL_GROUPS = "ALL";
 
     /**
      * The state of a specification. Pending specifications are not run by Instinct (but are still reported).
@@ -48,12 +50,12 @@ public @interface Specification {
     String reason() default NO_REASON;
 
     /**
-     * The group the specification belongs to.
-     * Groups can be used to run different sets of specifications at different times, for example slow specifications and slow specifications.
+     * The group(s) the specification belongs to.
+     * Groups can be used to run different sets of specifications at different times, for example fast specifications and slow specifications.
      *
-     * @return The group the specification belongs to.
+     * @return The group(s) the specification belongs to.
      */
-    String[] groups() default "None";
+    String[] groups() default "ALL";
 
     /**
      * The exception the specification is expected to throw, that is, successfully executing the specification will yield the exception.
@@ -73,7 +75,7 @@ public @interface Specification {
     String withMessage() default NO_MESSAGE;
 
     enum SpecificationState {
-        PENDING, COMPLETE
+        IN_PROGRESS, PENDING, COMPLETE
     }
 
     @SuppressWarnings({"NonExceptionNameEndsWithException"})

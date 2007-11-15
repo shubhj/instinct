@@ -26,12 +26,12 @@ import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.MarkingScheme;
 import java.io.File;
 
-public final class ClassMarkedFileChecker implements MarkedFileChecker {
+public final class MarkedClassFileChecker implements MarkedFileChecker {
     private AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
     private ClassInstantiatorFactory instantiatorFactory = new ClassInstantiatorFactoryImpl();
     private final File packageRoot;
 
-    public ClassMarkedFileChecker(final File packageRoot) {
+    public MarkedClassFileChecker(final File packageRoot) {
         checkNotNull(packageRoot);
         this.packageRoot = packageRoot;
     }

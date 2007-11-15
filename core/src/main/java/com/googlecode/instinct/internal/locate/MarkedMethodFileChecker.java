@@ -27,12 +27,12 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.MarkingScheme;
 
 @Fix("Remove dupe with MarkedFileChecker.")
-public final class MethodMarkedFileChecker implements MarkedFileChecker {
+public final class MarkedMethodFileChecker implements MarkedFileChecker {
     private final MarkedMethodLocator markedMethodLocator = new MarkedMethodLocatorImpl();
     private final ClassInstantiator classInstantiator = new ClassInstantiatorImpl();
     private final File packageRoot;
 
-    public MethodMarkedFileChecker(final File packageRoot) {
+    public MarkedMethodFileChecker(final File packageRoot) {
         checkNotNull(packageRoot);
         this.packageRoot = packageRoot;
     }

@@ -40,11 +40,11 @@ public final class ClassMarkedClassFileCheckerAtomicTest extends InstinctTestCas
 
     @Override
     public void setUpSubject() {
-        checker = createSubjectWithConstructorArgs(ClassMarkedFileChecker.class, new Object[]{packageRoot}, annotationChecker, instantiatorFactory);
+        checker = createSubjectWithConstructorArgs(MarkedClassFileChecker.class, new Object[]{packageRoot}, annotationChecker, instantiatorFactory);
     }
 
     public void testConformsToClassTraits() {
-        checkClass(ClassMarkedFileChecker.class, MarkedFileChecker.class);
+        checkClass(MarkedClassFileChecker.class, MarkedFileChecker.class);
     }
 
     public void testIsAnnotated() {

@@ -36,7 +36,7 @@ public final class ClassWithContextAnnotationFileFilter implements FileFilter {
 
     public boolean accept(final File pathname) {
         checkNotNull(pathname);
-        final MarkedFileChecker checker = objectFactory.create(ClassMarkedFileChecker.class, packageRoot);
+        final MarkedFileChecker checker = objectFactory.create(MarkedClassFileChecker.class, packageRoot);
         return !pathname.isDirectory() && checker.isMarked(pathname, markingScheme);
     }
 }

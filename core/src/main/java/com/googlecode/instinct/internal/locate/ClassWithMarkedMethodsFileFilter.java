@@ -28,7 +28,7 @@ public final class ClassWithMarkedMethodsFileFilter implements FileFilter {
     public ClassWithMarkedMethodsFileFilter(final File packageRoot, final MarkingScheme markingScheme) {
         checkNotNull(packageRoot, markingScheme);
         this.markingScheme = markingScheme;
-        markedFileChecker = new MethodMarkedFileChecker(packageRoot);
+        markedFileChecker = new MarkedMethodFileChecker(packageRoot);
     }
 
     public boolean accept(final File pathname) {

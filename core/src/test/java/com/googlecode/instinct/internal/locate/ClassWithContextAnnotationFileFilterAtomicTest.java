@@ -61,7 +61,7 @@ public final class ClassWithContextAnnotationFileFilterAtomicTest extends Instin
     private void checkAccept(final boolean pathIsADirectory, final boolean classHasAnnotation, final boolean isAnnotated) {
         expect.that(new Expectations() {
             {
-                one(objectFactory).create(ClassMarkedFileChecker.class, packageRoot); will(returnValue(checker));
+                one(objectFactory).create(MarkedClassFileChecker.class, packageRoot); will(returnValue(checker));
                 one(pathname).isDirectory(); will(returnValue(pathIsADirectory));
                 if (!pathIsADirectory) {
                     one(checker).isMarked(pathname, markingScheme); will(returnValue(classHasAnnotation));

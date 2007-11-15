@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
-import com.googlecode.instinct.internal.util.ParamChecker;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.annotate.ContextClasses;
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,13 +24,13 @@ import java.util.HashSet;
 
 public final class ContextClassesFinderImpl implements ContextClassesFinder {
     public Collection<Class<?>> getContextClasses(final Class<?> cls) {
+        checkNotNull(cls);
         final Collection<Class<?>> classes = new HashSet<Class<?>>();
-        ParamChecker.checkNotNull(cls);
         final ContextClasses annotation = cls.getAnnotation(ContextClasses.class);
         if (annotation == null) {
             classes.add(cls);
         } else {
-            classes.addAll(Arrays.asList((Class<?>[]) annotation.value()));
+            classes.addAll(Arrays.asList(annotation.value()));
         }
         return classes;
     }
