@@ -38,6 +38,9 @@ public final class InstinctRunnerSlowTest extends InstinctTestCase {
         notifier = mock(RunNotifier.class);
     }
 
+    public void testFoo() {
+    }
+
     @Fix("Test double: Re-enable this.")
     public void nsoTestRunsASuiteAWithContext() {
         final Class<ASuiteWithAContext> classToRun = ASuiteWithAContext.class;
