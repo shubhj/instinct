@@ -59,29 +59,17 @@ public final class DummyMethodInterceptorAtomicTest extends InstinctTestCase {
     }
 
     public void testThrowsExceptionsOnAllMethodNonObjectCalls() {
-        try {
-            methodInterceptor.intercept(obj, method, args, methodProxy);
-            fail("Expected IllegalInvocationException thrown");
-        } catch (Throwable t) {
-            expect.that(t).instanceOf(IllegalInvocationException.class);
-            expect.that(t.getMessage()).equalTo("Method size() was called on a dummy instance of " + obj.getClass().getName() + ". " +
-                    "If you expect methods to be called on this double you should make it a mock or stub.");
-        }
+        final Object instanceToIntercept = obj;
+        final String expectedClassName = instanceToIntercept.getClass().getName();
+        expectIllegalInvocationThrown(instanceToIntercept, expectedClassName);
     }
 
     public void testThrowsExceptionsOnAllMethodNonObjectCallsUsingCorrectTypeForCgLibEnhancedClasses() throws Exception {
         final Enhancer enhancer = new Enhancer();
-        enhancer.setCallback(NoOp.INSTANCE);
+        enhancer.setCallbackType(NoOp.class);
         enhancer.setSuperclass(Object.class);
         final Object enhancedObject = enhancer.createClass().newInstance();
-        try {
-            methodInterceptor.intercept(enhancedObject, method, args, methodProxy);
-            fail("Expected IllegalInvocationException thrown");
-        } catch (Throwable t) {
-            expect.that(t).instanceOf(IllegalInvocationException.class);
-            expect.that(t.getMessage()).equalTo("Method size() was called on a dummy instance of Object.class. " +
-                    "If you expect methods to be called on this double you should make it a mock or stub.");
-        }
+        expectIllegalInvocationThrown(enhancedObject, enhancedObject.getClass().getSuperclass().getName());
     }
 
     public void testPassesAllOveriddenObjectMethodsThroughToSuperclass() throws Throwable {
@@ -90,6 +78,18 @@ public final class DummyMethodInterceptorAtomicTest extends InstinctTestCase {
         checkPassesObjectMethodsToSuperClass(overiddenObjectMethods, "finalize");
         checkPassesObjectMethodsToSuperClass(overiddenObjectMethods, "hashCode");
         checkPassesObjectMethodsToSuperClass(overiddenObjectMethods, "toString");
+    }
+
+    // Note. Can't use ExceptionTestChecker as it doesn't handle checked exceptions.
+    private void expectIllegalInvocationThrown(final Object instanceToIntercept, final String expectedClassName) {
+        try {
+            methodInterceptor.intercept(instanceToIntercept, method, args, methodProxy);
+            fail("Expected IllegalInvocationException to be thrown");
+        } catch (Throwable t) {
+            expect.that(t).instanceOf(IllegalInvocationException.class);
+            expect.that(t.getMessage()).equalTo("Method " + method.getName() + "() was called on a dummy instance of " + expectedClassName + ". " +
+                    "If you expect methods to be called on this specification double you should make it a mock or stub.");
+        }
     }
 
     private void checkPassesObjectMethodsToSuperClass(final String methodName, final Class<?>... paramTypes) throws Throwable {

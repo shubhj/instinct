@@ -35,7 +35,7 @@ public final class DummyMethodInterceptor implements MethodInterceptor {
 
     private Object rejectAllNonObjectMethodCalls(final Object obj, final Method method) {
         final String message = "Method " + method.getName() + "() was called on a dummy instance of " + getDummyClassName(obj) + ". "
-                + "If you expect methods to be called on this double you should make it a mock or stub.";
+                + "If you expect methods to be called on this specification double you should make it a mock or stub.";
         throw new IllegalInvocationException(message);
     }
 
