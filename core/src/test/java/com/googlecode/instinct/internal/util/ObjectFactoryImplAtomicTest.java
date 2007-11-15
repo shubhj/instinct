@@ -16,13 +16,6 @@
 
 package com.googlecode.instinct.internal.util;
 
-import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
-import com.googlecode.instinct.marker.annotate.Dummy;
-import com.googlecode.instinct.marker.annotate.Mock;
-import com.googlecode.instinct.marker.annotate.Subject;
-import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
 import java.io.FileReader;
 import java.io.FilterReader;
 import java.io.FilterWriter;
@@ -31,6 +24,13 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Serializable;
 import java.io.Writer;
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Subject;
+import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 
 @SuppressWarnings({"ExceptionClassNameDoesntEndWithException", "UnusedDeclaration"})
 public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
@@ -117,7 +117,7 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
 
     private <T, E extends RuntimeException> void checkFailsWithException(final Class<E> expectedException, final Class<T> toCreate,
             final Object... values) {
-        assertThrows(expectedException, new Runnable() {
+        expectException(expectedException, new Runnable() {
             public void run() {
                 factory.create(toCreate, values);
             }
@@ -125,7 +125,7 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
     }
 
     private <T> void checkRejectsInterfaces(final Class<T> anInterface) {
-        assertThrows(IllegalArgumentException.class, new Runnable() {
+        expectException(IllegalArgumentException.class, new Runnable() {
             public void run() {
                 new ObjectFactoryImpl().create(anInterface);
             }

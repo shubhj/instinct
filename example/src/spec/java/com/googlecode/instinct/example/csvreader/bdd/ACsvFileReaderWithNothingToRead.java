@@ -41,7 +41,7 @@ public final class ACsvFileReaderWithNothingToRead {
         csvFileReader = new CsvFileReaderImpl(csvFile);
     }
 
-    @Specification
+    @Specification(groups = {"osdc"})
     public void closesTheUnderlyingFileOnAllExceptions() {
         expect.that(new Expectations() {
             {
@@ -53,7 +53,7 @@ public final class ACsvFileReaderWithNothingToRead {
         csvFileReader.nextLine();
     }
 
-    @Specification(state = PENDING)
+    @Specification(groups = {"osdc"}, state = PENDING)
     public void returnsNoLines() {
         expect.that(new Expectations() {
             {

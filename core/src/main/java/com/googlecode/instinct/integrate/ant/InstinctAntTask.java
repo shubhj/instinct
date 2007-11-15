@@ -16,6 +16,9 @@
 
 package com.googlecode.instinct.integrate.ant;
 
+import java.util.ArrayList;
+import static java.util.Arrays.asList;
+import java.util.List;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
@@ -27,9 +30,6 @@ import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import com.googlecode.instinct.internal.util.Suggest;
-import java.util.ArrayList;
-import static java.util.Arrays.asList;
-import java.util.List;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.types.CommandlineJava;
@@ -58,7 +58,7 @@ public final class InstinctAntTask extends Task implements StatusLogger {
         this.formatter = formatter;
     }
 
-    @Suggest("Cache this like JUnit does? Why?")
+    @Suggest("Fix this...")
     public Path createClasspath() {
         final CommandlineJava commandLine = new CommandlineJava();
         return commandLine.createClasspath(getProject()).createPath();

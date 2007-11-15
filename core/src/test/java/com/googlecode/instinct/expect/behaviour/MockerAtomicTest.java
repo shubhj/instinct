@@ -23,8 +23,8 @@ import static com.googlecode.instinct.expect.behaviour.Mocker.reset;
 import static com.googlecode.instinct.expect.behaviour.Mocker.sequence;
 import static com.googlecode.instinct.expect.behaviour.Mocker.verify;
 import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 import org.jmock.Expectations;
 import org.jmock.api.ExpectationError;
 
@@ -55,7 +55,7 @@ public final class MockerAtomicTest extends InstinctTestCase {
                 one(chars).charAt(0);
             }
         });
-        assertThrows(ExpectationError.class, new Runnable() {
+        expectException(ExpectationError.class, new Runnable() {
             public void run() {
                 verify();
             }

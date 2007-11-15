@@ -25,6 +25,7 @@ import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.annotate.Specification;
+import static com.googlecode.instinct.marker.annotate.Specification.NO_REASON;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
@@ -68,7 +69,7 @@ public final class SpecificationMethodImpl extends Primordial implements Specifi
             final Method method = specificationMethod.getMethod();
             return method.getAnnotation(Specification.class).reason();
         } else {
-            return Specification.NO_REASON;
+            return NO_REASON;
         }
     }
 

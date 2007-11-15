@@ -17,7 +17,7 @@
 package com.googlecode.instinct.expect.state;
 
 import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;
 
 public final class ArrayCheckerImplAtomicTest extends InstinctTestCase {
@@ -59,7 +59,7 @@ public final class ArrayCheckerImplAtomicTest extends InstinctTestCase {
     }
 
     public void testThrowsExceptionWhenUnexpectedItemsAreFoundInSubjectArray() {
-        assertThrows(AssertionError.class, new Runnable() {
+        expectException(AssertionError.class, new Runnable() {
             public void run() {
                 checker.doesNotContainItem("hello");
             }
@@ -67,7 +67,7 @@ public final class ArrayCheckerImplAtomicTest extends InstinctTestCase {
     }
 
     private void checkExceptionIsThrownWhenContainItemIsCalled(final ArrayChecker<String> checker, final String searchString) {
-        assertThrows(AssertionError.class, new Runnable() {
+        expectException(AssertionError.class, new Runnable() {
             public void run() {
                 checker.containsItem(searchString);
             }

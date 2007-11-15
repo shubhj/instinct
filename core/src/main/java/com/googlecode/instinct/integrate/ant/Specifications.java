@@ -16,13 +16,15 @@
 
 package com.googlecode.instinct.integrate.ant;
 
+import java.io.File;
+import java.io.FileFilter;
+import java.util.Set;
 import com.googlecode.instinct.internal.locate.ClassLocator;
 import com.googlecode.instinct.internal.locate.ClassLocatorImpl;
 import com.googlecode.instinct.internal.locate.ClassWithContextAnnotationFileFilter;
 import com.googlecode.instinct.internal.locate.ClassWithMarkedMethodsFileFilter;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
@@ -30,9 +32,6 @@ import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.naming.ContextNamingConvention;
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
-import java.io.File;
-import java.io.FileFilter;
-import java.util.Set;
 import org.apache.tools.ant.Project;
 
 public final class Specifications {
@@ -41,6 +40,7 @@ public final class Specifications {
     private final ClassLocator classLocator = new ClassLocatorImpl();
     private final Project project;
     private File specPackageRoot;
+    private String groups;
 
     public Specifications(final Project project) {
         checkNotNull(project);
@@ -48,7 +48,7 @@ public final class Specifications {
     }
 
     public void setDir(final String dir) {
-        checkNotWhitespace(dir);
+        checkValidString("dir", dir);
         specPackageRoot = new File(dir);
         if (!specPackageRoot.exists()) {
             specPackageRoot = new File(project.getBaseDir(), dir);
@@ -56,6 +56,11 @@ public final class Specifications {
                 throw new IllegalArgumentException("Specifications directory '" + dir + "' does not exist");
             }
         }
+    }
+
+    public void setGroups(final String groups) {
+        checkValidString("groups", groups);
+        this.groups = groups;
     }
 
     @Suggest({"This should return ContextClass's, that way we don't need to instantiate them.",
@@ -75,6 +80,12 @@ public final class Specifications {
     private void checkPreconditions() {
         if (specPackageRoot == null) {
             throw new IllegalStateException("Specification package root must be specified");
+        }
+    }
+
+    private void checkValidString(final String attributeName, final String attribute) {
+        if (attribute == null || attribute.trim().length() == 0) {
+            throw new IllegalArgumentException("Attribute '" + attributeName + "' can not be null, the empty string or exclusively whitespace");
         }
     }
 }

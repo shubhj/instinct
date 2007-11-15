@@ -25,6 +25,11 @@ public final class InstinctAntTaskAtomicTest extends InstinctTestCase {
     private static final String FAILURE_PROPERTY = "specifications-failed";
     private InstinctAntTask antTask;
 
+    @Override
+    public void setUpSubject() {
+        antTask = new InstinctAntTask();
+    }
+
     public void testConformsToClassTraits() {
         checkClass(InstinctAntTask.class, Task.class);
     }
@@ -40,10 +45,5 @@ public final class InstinctAntTaskAtomicTest extends InstinctTestCase {
 
     public void testHasACloneMethodToSupportTaskApi() throws CloneNotSupportedException {
         antTask.clone();
-    }
-
-    @Override
-    public void setUpSubject() {
-        antTask = new InstinctAntTask();
     }
 }

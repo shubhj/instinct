@@ -16,11 +16,11 @@
 
 package com.googlecode.instinct.expect.state;
 
-import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;
-import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import java.io.File;
 import java.io.IOException;
+import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
+import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;
 
 public final class FileCheckerImplAtomicTest extends InstinctTestCase {
     private FileChecker checkerWithExistingFile;
@@ -44,7 +44,7 @@ public final class FileCheckerImplAtomicTest extends InstinctTestCase {
     }
 
     public void testFailsIfFileDoesNotExist() {
-        assertThrows(AssertionError.class, new Runnable() {
+        expectException(AssertionError.class, new Runnable() {
             public void run() {
                 checkerWithNonExistingFile.exists();
             }

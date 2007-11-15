@@ -22,14 +22,13 @@
     <path id="spec.class.path">
         <path refid="main.class.path"/>
         <fileset dir="${basedir}">
-            <include name="${lib.dir}/boost-982.jar"/>
-            <include name="${lib.dir}/cglib-nodep-2.2_beta1.jar"/>
-            <include name="${lib.dir}/jmock-2.2.0.jar"/>
-            <include name="${lib.dir}/jmock-legacy-2.2.0.jar"/>
-            <include name="${lib.dir}/objenesis-1.0.jar"/>
-            <include name="${lib.dir}/ant-1.7.0.jar"/>
-            <include name="${lib.dir}/hamcrest-all-1.1.jar"/>
-            <include name="${lib.dir}/junit-4.4.jar"/>
+            <include name="${lib.dir}/boost-*.jar"/>
+            <include name="${lib.dir}/cglib-nodep-*.jar"/>
+            <include name="${lib.dir}/jmock-*.jar"/>
+            <include name="${lib.dir}/objenesis-*.jar"/>
+            <include name="${lib.dir}/ant-1.*.jar"/>
+            <include name="${lib.dir}/hamcrest-all-*.jar"/>
+            <include name="${lib.dir}/junit-*.jar"/>
         </fileset>
         <pathelement location="${spec.classes.dir}"/>
     </path>
@@ -70,7 +69,7 @@
         <taskdef resource="instincttask.properties" classpathref="spec.class.path"/>
         <instinct failureproperty="specs-failed">
             <classpath refid="spec.class.path"/>
-            <specifications dir="${spec.classes.dir}"/>
+            <specifications dir="${spec.classes.dir}" groups="osdc,state"/>
             <formatter type="brief"/>
         </instinct>
         <fail if="specs-failed" message="Specifications failed."/>

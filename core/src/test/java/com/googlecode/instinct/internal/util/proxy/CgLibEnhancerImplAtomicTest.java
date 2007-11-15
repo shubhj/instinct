@@ -16,9 +16,11 @@
 
 package com.googlecode.instinct.internal.util.proxy;
 
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
+@Suggest("Breadcrumb: Auto test double creation - up to here")
 public final class CgLibEnhancerImplAtomicTest extends InstinctTestCase {
     public void testConformsToClassTraits() {
         checkClass(CgLibEnhancerImpl.class, CgLibEnhancer.class);

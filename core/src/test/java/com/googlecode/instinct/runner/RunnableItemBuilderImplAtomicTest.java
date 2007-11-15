@@ -16,6 +16,8 @@
 
 package com.googlecode.instinct.runner;
 
+import java.util.Collection;
+import java.util.Iterator;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.aggregate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.internal.core.ContextClass;
@@ -30,11 +32,9 @@ import com.googlecode.instinct.internal.util.ClassInstantiator;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
-import java.util.Collection;
-import java.util.Iterator;
 import org.jmock.Expectations;
 
 @SuppressWarnings({"InnerClassTooDeeplyNested", "InnerClassTooDeeplyNested"})
@@ -61,7 +61,8 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
     public void testBuildsSingleContextNameIntoARunnableItem() {
         expect.that(new Expectations() {
             {
-                atLeast(1).of(classInstantiator).instantiateClass(CONTEXT_CLASS_1.getName()); will(returnValue(CONTEXT_CLASS_1));
+                atLeast(1).of(classInstantiator).instantiateClass(CONTEXT_CLASS_1.getName());
+                will(returnValue(CONTEXT_CLASS_1));
             }
         });
         final Collection<RunnableItem> builtItems = runnableItemBuilder.build(CONTEXT_CLASS_1.getName());
@@ -72,7 +73,8 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
     public void testBuildsASingleSpecificationMethodNameIntoARunnableItem() {
         expect.that(new Expectations() {
             {
-                atLeast(1).of(classInstantiator).instantiateClass(CONTEXT_CLASS_1.getName()); will(returnValue(CONTEXT_CLASS_1));
+                atLeast(1).of(classInstantiator).instantiateClass(CONTEXT_CLASS_1.getName());
+                will(returnValue(CONTEXT_CLASS_1));
             }
         });
         final String specificationMethod = CONTEXT_CLASS_1.getName() + METHOD_SEPARATOR + "toCheckVerification";
@@ -84,8 +86,10 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
     public void testBuildsMultipleContextNamesIntoRunnableItems() {
         expect.that(new Expectations() {
             {
-                atLeast(1).of(classInstantiator).instantiateClass(CONTEXT_CLASS_1.getName()); will(returnValue(CONTEXT_CLASS_1));
-                atLeast(1).of(classInstantiator).instantiateClass(CONTEXT_CLASS_2.getName()); will(returnValue(CONTEXT_CLASS_2));
+                atLeast(1).of(classInstantiator).instantiateClass(CONTEXT_CLASS_1.getName());
+                will(returnValue(CONTEXT_CLASS_1));
+                atLeast(1).of(classInstantiator).instantiateClass(CONTEXT_CLASS_2.getName());
+                will(returnValue(CONTEXT_CLASS_2));
             }
         });
         final String itemsToRun = CONTEXT_CLASS_1.getName() + ITEM_SEPARATOR + CONTEXT_CLASS_2.getName();
@@ -96,8 +100,10 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
     public void testBuildsMultipleContextsAndSpecificationsIntoRunnableItems() {
         expect.that(new Expectations() {
             {
-                atLeast(1).of(classInstantiator).instantiateClass(CONTEXT_CLASS_1.getName()); will(returnValue(CONTEXT_CLASS_1));
-                atLeast(1).of(classInstantiator).instantiateClass(CONTEXT_CLASS_2.getName()); will(returnValue(CONTEXT_CLASS_2));
+                atLeast(1).of(classInstantiator).instantiateClass(CONTEXT_CLASS_1.getName());
+                will(returnValue(CONTEXT_CLASS_1));
+                atLeast(1).of(classInstantiator).instantiateClass(CONTEXT_CLASS_2.getName());
+                will(returnValue(CONTEXT_CLASS_2));
             }
         });
         final String specificationMethod = CONTEXT_CLASS_1.getName() + METHOD_SEPARATOR + "toCheckVerification";
@@ -107,7 +113,8 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
     }
 
     public void testRejectsSpecsMarkedWithTwoMethods() {
-        assertThrows(IllegalArgumentException.class, "Specifications to run cannot contain more than one " + METHOD_SEPARATOR, new Runnable() {
+        expectException(IllegalArgumentException.class,
+                "Specifications to run cannot contain more than one " + METHOD_SEPARATOR, new Runnable() {
             public void run() {
                 runnableItemBuilder.build("ClassName" + METHOD_SEPARATOR + "specName" + METHOD_SEPARATOR + "anotherSpec");
             }
@@ -116,11 +123,12 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
 
     public void testRejectsUnknownSpecs() {
         final String specToRun = CONTEXT_CLASS_1.getName() + METHOD_SEPARATOR + UNKNOWN_SPEC;
-        assertThrows(IllegalArgumentException.class, "Specification method '" + specToRun + "' does not exist", new Runnable() {
+        expectException(IllegalArgumentException.class, "Specification method '" + specToRun + "' does not exist", new Runnable() {
             public void run() {
                 expect.that(new Expectations() {
                     {
-                        atLeast(1).of(classInstantiator).instantiateClass(CONTEXT_CLASS_1.getName()); will(returnValue(CONTEXT_CLASS_1));
+                        atLeast(1).of(classInstantiator).instantiateClass(CONTEXT_CLASS_1.getName());
+                        will(returnValue(CONTEXT_CLASS_1));
                     }
                 });
                 runnableItemBuilder.build(specToRun);

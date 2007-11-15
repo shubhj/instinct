@@ -17,8 +17,8 @@
 package com.googlecode.instinct.sandbox.composer;
 
 import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertMessageContains;
-import static com.googlecode.instinct.test.checker.AssertThrowsChecker.assertThrows;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectMessageContains;
 import static com.googlecode.instinct.test.triangulate.Triangulation.getInstance;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -29,7 +29,7 @@ public class InterfaceComposerAtomicTest extends InstinctTestCase {
     private One one = new One();
     private Two two = new Two();
     private Three three = new Three();
-    private final ComposedInterface mockComposedInterface = context.mock(ComposedInterface.class);
+    private ComposedInterface mockComposedInterface = context.mock(ComposedInterface.class);
     private ComposedInterface oneAndTwo;
     private ComposedInterface oneTwoAndThree;
     private ComposedInterface backedByMockImplementation;
@@ -46,12 +46,13 @@ public class InterfaceComposerAtomicTest extends InstinctTestCase {
     }
 
     public void testThrowsNoSuchMethodExceptionWhenMethodNotFound() {
-        final Throwable throwable = assertThrows(NoSuchMethodError.class, new Runnable() {
-            public void run() {
-                oneAndTwo.notImplemented();
-            }
-        });
-        assertMessageContains(throwable, "No implementation found for: ");
+        final Throwable throwable = expectException(NoSuchMethodError.class,
+                new Runnable() {
+                    public void run() {
+                        oneAndTwo.notImplemented();
+                    }
+                });
+        expectMessageContains(throwable, "No implementation found for: ");
     }
 
     public void testReThrowsErrors() {
@@ -99,11 +100,12 @@ public class InterfaceComposerAtomicTest extends InstinctTestCase {
                 will(throwException(expectedThrowable));
             }
         });
-        final Throwable actualThrowable = assertThrows(expectedThrowable.getClass(), new Runnable() {
-            public void run() {
-                mockComposedInterface.returnANumber();
-            }
-        });
+        final Throwable actualThrowable = expectException(expectedThrowable.getClass(),
+                new Runnable() {
+                    public void run() {
+                        mockComposedInterface.returnANumber();
+                    }
+                });
         context.assertIsSatisfied();
         assertSame(expectedThrowable, actualThrowable);
     }

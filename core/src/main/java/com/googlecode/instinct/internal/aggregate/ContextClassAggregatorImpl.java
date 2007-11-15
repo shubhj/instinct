@@ -36,6 +36,7 @@ import com.googlecode.instinct.marker.naming.ContextNamingConvention;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 
+@SuppressWarnings({"OverlyCoupledClass"})
 public final class ContextClassAggregatorImpl implements ContextAggregator {
     private PackageRootFinder packageRootFinder = new PackageRootFinderImpl();
     private ClassLocator classLocator = new ClassLocatorImpl();

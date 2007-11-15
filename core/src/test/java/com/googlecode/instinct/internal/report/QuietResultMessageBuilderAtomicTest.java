@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Nicholas Partridge
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,11 @@
 
 package com.googlecode.instinct.internal.report;
 
+import static java.lang.System.getProperty;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import static java.util.regex.Pattern.MULTILINE;
+import static java.util.regex.Pattern.compile;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextResultImpl;
@@ -29,11 +34,6 @@ import com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static java.lang.System.getProperty;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import static java.util.regex.Pattern.MULTILINE;
-import static java.util.regex.Pattern.compile;
 
 public final class QuietResultMessageBuilderAtomicTest extends InstinctTestCase {
     private static final String NEW_LINE = getProperty("line.separator");

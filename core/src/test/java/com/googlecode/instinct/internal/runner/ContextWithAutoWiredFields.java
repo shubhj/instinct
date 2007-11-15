@@ -36,4 +36,14 @@ public final class ContextWithAutoWiredFields {
         });
         charSequence.charAt(0);
     }
+
+    @Specification
+    public void autoWiredMocksFailToBeCalled() {
+        expect.that(new Expectations() {
+            {
+                one(charSequence).charAt(0);
+                will(returnValue(character));
+            }
+        });
+    }
 }
