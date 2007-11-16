@@ -20,10 +20,13 @@ import com.googlecode.instinct.internal.locate.ClassLocator;
 import com.googlecode.instinct.internal.locate.ClassLocatorImpl;
 import com.googlecode.instinct.internal.locate.ClassWithContextAnnotationFileFilter;
 import com.googlecode.instinct.internal.locate.ClassWithMarkedMethodsFileFilter;
+import com.googlecode.instinct.internal.util.GroupSanitiser;
+import com.googlecode.instinct.internal.util.GroupSanitiserImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.AnnotationAttribute;
+import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Context;
@@ -38,9 +41,10 @@ import org.apache.tools.ant.Project;
 @SuppressWarnings({"InstanceVariableOfConcreteClass"})
 public final class Specifications {
     private final ClassLocator classLocator = new ClassLocatorImpl();
+    private GroupSanitiser groupSanitiser = new GroupSanitiserImpl();
     private final Project project;
     private File specPackageRoot;
-    private AnnotationAttribute groups;
+    private AnnotationAttribute specificationGroupsConstraint;
 
     public Specifications(final Project project) {
         checkNotNull(project);
@@ -60,20 +64,28 @@ public final class Specifications {
 
     public void setGroups(final String groups) {
         checkValidString("groups", groups);
-        this.groups = new AnnotationAttribute("groups", groups);
+        specificationGroupsConstraint = groupSanitiser.sanitise(groups);
     }
 
     @Suggest({"This should return ContextClass's, that way we don't need to instantiate them.",
-            "he filters already instantiate them, do so here and re-use", "Don't return an array, use an ordered set."})
+            "The filters already instantiate them, do so here and re-use", "Don't return an array, use an ordered set."})
     public JavaClassName[] getContextClasses() {
         checkPreconditions();
+        ensureSpecificationGroupIsSet();
         final Set<JavaClassName> contextClasses = findContextClasses();
         return contextClasses.toArray(new JavaClassName[contextClasses.size()]);
     }
 
+    private void ensureSpecificationGroupIsSet() {
+        if (specificationGroupsConstraint == null) {
+            specificationGroupsConstraint = IGNORE;
+        }
+    }
+
     private Set<JavaClassName> findContextClasses() {
-        final MarkingScheme contextMarking = new MarkingSchemeImpl(Context.class, new ContextNamingConvention(), groups);
-        final MarkingScheme specificationMarking = new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention(), groups);
+        final MarkingScheme contextMarking = new MarkingSchemeImpl(Context.class, new ContextNamingConvention(), specificationGroupsConstraint);
+        final MarkingScheme specificationMarking =
+                new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention(), specificationGroupsConstraint);
         final FileFilter annotatedClasses = new ClassWithContextAnnotationFileFilter(specPackageRoot, contextMarking);
         final FileFilter markedMethodClasses = new ClassWithMarkedMethodsFileFilter(specPackageRoot, specificationMarking);
         return classLocator.locate(specPackageRoot, annotatedClasses, markedMethodClasses);

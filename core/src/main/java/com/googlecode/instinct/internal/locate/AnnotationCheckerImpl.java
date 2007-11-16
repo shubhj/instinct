@@ -32,19 +32,19 @@ public final class AnnotationCheckerImpl implements AnnotationChecker {
     private final ClassEdge classEdge = new ClassEdgeImpl();
 
     public <A extends Annotation> boolean isAnnotated(
-            final AnnotatedElement annotatedElement, final Class<A> annotationType, final AnnotationAttribute annotationAttribute) {
-        checkNotNull(annotatedElement, annotationType, annotationAttribute);
+            final AnnotatedElement annotatedElement, final Class<A> annotationType, final AnnotationAttribute attributeConstraint) {
+        checkNotNull(annotatedElement, annotationType, attributeConstraint);
         final boolean annotationPresent = annotatedElement.isAnnotationPresent(annotationType);
-        return annotationPresent && annotationValueMatchesRequestedValue(annotatedElement, annotationType, annotationAttribute);
+        return annotationPresent && annotationValueMatchesRequestedValue(annotatedElement, annotationType, attributeConstraint);
     }
 
     private <A extends Annotation> boolean annotationValueMatchesRequestedValue(
-            final AnnotatedElement annotatedElement, final Class<A> annotationType, final AnnotationAttribute annotationAttribute) {
-        if (annotationAttribute.equals(IGNORE)) {
+            final AnnotatedElement annotatedElement, final Class<A> annotationType, final AnnotationAttribute attributeConstraint) {
+        if (attributeConstraint.equals(IGNORE)) {
             return true;
         } else {
-            final Object expectedAnnotationValue = annotationAttribute.getAttributeValue();
-            final Object actualAnnotationValue = getActualAttributeValue(annotationType, annotationAttribute, annotatedElement);
+            final Object expectedAnnotationValue = attributeConstraint.getAttributeValue();
+            final Object actualAnnotationValue = getActualAttributeValue(annotationType, attributeConstraint, annotatedElement);
             if (actualAnnotationValue.getClass().isArray() && expectedAnnotationValue.getClass().isArray()) {
                 return Arrays.equals((Object[]) actualAnnotationValue, (Object[]) expectedAnnotationValue);
             } else {
@@ -54,8 +54,8 @@ public final class AnnotationCheckerImpl implements AnnotationChecker {
     }
 
     private <A extends Annotation> Object getActualAttributeValue(
-            final Class<A> annotationType, final AnnotationAttribute annotationAttribute, final AnnotatedElement annotatedElement) {
+            final Class<A> annotationType, final AnnotationAttribute annotationAttribute, final AnnotatedElement attributeConstraint) {
         final Method attributeMethod = classEdge.getDeclaredMethod(annotationType, annotationAttribute.getAttributeName());
-        return new MethodEdgeImpl(attributeMethod).invoke(annotatedElement.getAnnotation(annotationType));
+        return new MethodEdgeImpl(attributeMethod).invoke(attributeConstraint.getAnnotation(annotationType));
     }
 }
