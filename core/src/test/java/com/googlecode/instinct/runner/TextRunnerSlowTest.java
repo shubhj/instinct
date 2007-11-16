@@ -17,7 +17,7 @@
 package com.googlecode.instinct.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.aggregate.ContextWithSpecsWithDifferentAccessModifiers;
+import com.googlecode.instinct.internal.locate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ContextContainerWithSetUpAndTearDown;

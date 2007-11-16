@@ -16,6 +16,9 @@
 
 package com.googlecode.instinct.internal.locate;
 
+import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.internal.util.JavaClassNameImpl;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
@@ -25,12 +28,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import com.googlecode.instinct.internal.util.JavaClassName;
-import com.googlecode.instinct.internal.util.JavaClassNameImpl;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 
-@Suggest("Test drive this class, steal the test from ContextClassAggregator")
 public final class ClassLocatorImpl implements ClassLocator {
     private final Comparator<File> comparator = new FileNameComparator();
 

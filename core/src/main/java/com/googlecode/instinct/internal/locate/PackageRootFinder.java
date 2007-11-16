@@ -14,12 +14,8 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.integrate.junit3;
+package com.googlecode.instinct.internal.locate;
 
-import junit.framework.Test;
-
-public interface JUnitTestSuiteBuilder {
-    Test buildSuite(String suiteName);
-
-    Test buildSuite(String suiteName, String[] specificationGroups);
+public interface PackageRootFinder {
+    <T> String getPackageRoot(Class<T> classToFindRootOf);
 }

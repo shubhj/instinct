@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.integrate.junit3;
+package com.googlecode.instinct.internal.locate;
 
-import junit.framework.Test;
+import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
-public interface JUnitTestSuiteBuilder {
-    Test buildSuite(String suiteName);
-
-    Test buildSuite(String suiteName, String[] specificationGroups);
+public final class PackageRootFinderImplAtomicTest extends InstinctTestCase {
+    public void testConformsToClassTraits() {
+        checkClass(PackageRootFinderImpl.class, PackageRootFinder.class);
+    }
 }

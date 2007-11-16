@@ -47,7 +47,7 @@ public final class MarkedClassFileChecker implements MarkedFileChecker {
         try {
             final ClassInstantiator instantiator = instantiatorFactory.create();
             final Class<?> candidateClass = instantiator.instantiateClass(classFile, packageRoot);
-            return annotationChecker.isAnnotated(candidateClass, markingScheme.getAnnotationType(), markingScheme.getAnnotationAttribute());
+            return annotationChecker.isAnnotated(candidateClass, markingScheme.getAnnotationType(), markingScheme.getAttributeConstraint());
         } catch (EdgeException e) {
             return false;
         }

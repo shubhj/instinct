@@ -16,12 +16,11 @@
 
 package com.googlecode.instinct.integrate.junit3;
 
-import java.lang.reflect.InvocationTargetException;
 import au.net.netstorm.boost.edge.EdgeException;
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
-import com.googlecode.instinct.internal.aggregate.ContextAggregator;
-import com.googlecode.instinct.internal.aggregate.ContextClassAggregatorImpl;
+import com.googlecode.instinct.internal.locate.ContextFinder;
+import com.googlecode.instinct.internal.locate.ContextFinderImpl;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
@@ -29,7 +28,9 @@ import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.marker.ContextConfigurationException;
 import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
+import static com.googlecode.instinct.marker.annotate.Specification.ALL_GROUPS;
 import com.googlecode.instinct.test.InstinctTestCase;
+import java.lang.reflect.InvocationTargetException;
 
 @SuppressWarnings({"ProhibitedExceptionThrown"})
 public final class AllContextsSlowTest extends InstinctTestCase {
@@ -45,8 +46,8 @@ public final class AllContextsSlowTest extends InstinctTestCase {
     }
 
     private void runAllContexts() {
-        final ContextAggregator contextAggregator = new ContextClassAggregatorImpl(AllContextsSlowTest.class);
-        final JavaClassName[] contextClasses = contextAggregator.getContextNames();
+        final ContextFinder contextFinder = new ContextFinderImpl(AllContextsSlowTest.class);
+        final JavaClassName[] contextClasses = contextFinder.getContextNames(ALL_GROUPS);
         for (final JavaClassName contextClassName : contextClasses) {
             final Class<?> cls = edgeClass.forName(contextClassName.getFullyQualifiedName());
             invokeContextIgnoringConfigurationExceptions(cls);

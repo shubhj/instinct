@@ -19,7 +19,7 @@ package com.googlecode.instinct.runner;
 import java.util.Collection;
 import java.util.Iterator;
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.aggregate.ContextWithSpecsWithDifferentAccessModifiers;
+import com.googlecode.instinct.internal.locate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.RunnableItem;
 import com.googlecode.instinct.internal.core.SpecificationMethod;

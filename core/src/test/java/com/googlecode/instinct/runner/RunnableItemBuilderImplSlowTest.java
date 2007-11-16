@@ -18,7 +18,7 @@ package com.googlecode.instinct.runner;
 
 import java.util.Collection;
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.aggregate.ContextWithSpecsWithDifferentAccessModifiers;
+import com.googlecode.instinct.internal.locate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.internal.core.RunnableItem;
 import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
 import static com.googlecode.instinct.internal.runner.RunnableItemBuilder.METHOD_SEPARATOR;

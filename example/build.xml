@@ -69,7 +69,7 @@
         <taskdef resource="instincttask.properties" classpathref="spec.class.path"/>
         <instinct failureproperty="specs-failed">
             <classpath refid="spec.class.path"/>
-            <specifications dir="${spec.classes.dir}" groups="osdc,state"/>
+            <specifications dir="${spec.classes.dir}" groups="osdc"/>
             <formatter type="brief"/>
         </instinct>
         <fail if="specs-failed" message="Specifications failed."/>

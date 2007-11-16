@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.aggregate;
+package com.googlecode.instinct.internal.locate;
 
 import com.googlecode.instinct.internal.locate.AnnotatedMethodLocator;
 import com.googlecode.instinct.internal.locate.AnnotatedMethodLocatorImpl;

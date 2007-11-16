@@ -18,8 +18,8 @@ package com.googlecode.instinct.integrate.junit3;
 
 import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
 import au.net.netstorm.boost.edge.java.lang.EdgeClass;
-import com.googlecode.instinct.internal.aggregate.ContextClassAggregatorImpl;
-import com.googlecode.instinct.internal.aggregate.ContextAggregator;
+import com.googlecode.instinct.internal.locate.ContextFinderImpl;
+import com.googlecode.instinct.internal.locate.ContextFinder;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
@@ -29,16 +29,22 @@ import junit.framework.TestSuite;
 @Suggest("Move this (& all JUnit stuff) into a seperate distribution")
 public final class JUnitTestSuiteBuilderImpl implements JUnitTestSuiteBuilder {
     private final EdgeClass edgeClass = new DefaultEdgeClass();
-    private final ContextAggregator aggregator;
+    private final ContextFinder finder;
 
     public <T> JUnitTestSuiteBuilderImpl(final Class<T> classInSpecTree) {
         checkNotNull(classInSpecTree);
-        aggregator = new ContextClassAggregatorImpl(classInSpecTree);
+        finder = new ContextFinderImpl(classInSpecTree);
     }
 
     public Test buildSuite(final String suiteName) {
         checkNotNull(suiteName);
-        final JavaClassName[] contextClasses = aggregator.getContextNames();
+        final JavaClassName[] contextClasses = finder.getContextNames(new String[]{"ALL"});
+        return buildSuite(suiteName, contextClasses);
+    }
+
+    public Test buildSuite(final String suiteName, final String[] specificationGroups) {
+        checkNotNull(suiteName, specificationGroups);
+        final JavaClassName[] contextClasses = finder.getContextNames(specificationGroups);
         return buildSuite(suiteName, contextClasses);
     }
 

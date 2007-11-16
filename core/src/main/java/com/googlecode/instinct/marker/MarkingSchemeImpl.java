@@ -27,14 +27,14 @@ import java.lang.annotation.Annotation;
 public final class MarkingSchemeImpl extends Primordial implements MarkingScheme {
     private final Class<?> annotationType;
     private final NamingConvention namingConvention;
-    private final AnnotationAttribute annotationAttribute;
+    private final AnnotationAttribute attributeConstraint;
 
     public <A extends Annotation> MarkingSchemeImpl(
-            final Class<A> annotationType, final NamingConvention namingConvention, final AnnotationAttribute annotationAttribute) {
-        this.annotationAttribute = annotationAttribute;
-        checkNotNull(annotationType, namingConvention, annotationAttribute);
+            final Class<A> annotationType, final NamingConvention namingConvention, final AnnotationAttribute attributeConstraint) {
+        checkNotNull(annotationType, namingConvention, attributeConstraint);
         this.annotationType = annotationType;
         this.namingConvention = namingConvention;
+        this.attributeConstraint = attributeConstraint;
     }
 
     @SuppressWarnings({"unchecked"})
@@ -46,7 +46,7 @@ public final class MarkingSchemeImpl extends Primordial implements MarkingScheme
         return namingConvention;
     }
 
-    public AnnotationAttribute getAnnotationAttribute() {
-        return annotationAttribute;
+    public AnnotationAttribute getAttributeConstraint() {
+        return attributeConstraint;
     }
 }

@@ -16,8 +16,10 @@
 
 package com.googlecode.instinct.expect.state;
 
+import com.googlecode.instinct.internal.util.Suggest;
 import org.hamcrest.Matcher;
 
+@Suggest("Put hasSizeGreaterThan, etc. & also on collections & strings")
 public interface ArrayChecker<T> extends ObjectChecker<T[]> {
     void isEmpty();
 

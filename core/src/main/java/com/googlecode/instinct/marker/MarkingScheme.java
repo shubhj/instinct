@@ -25,5 +25,5 @@ public interface MarkingScheme {
 
     NamingConvention getNamingConvention();
 
-    AnnotationAttribute getAnnotationAttribute();
+    AnnotationAttribute getAttributeConstraint();
 }

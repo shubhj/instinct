@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.aggregate;
+package com.googlecode.instinct.internal.locate;
 
-import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import com.googlecode.instinct.internal.util.JavaClassName;
 
-public final class PackageRootFinderImplAtomicTest extends InstinctTestCase {
-    public void testConformsToClassTraits() {
-        checkClass(PackageRootFinderImpl.class, PackageRootFinder.class);
-    }
+public interface ContextFinder {
+    JavaClassName[] getContextNames(String... specificationGroups);
 }
