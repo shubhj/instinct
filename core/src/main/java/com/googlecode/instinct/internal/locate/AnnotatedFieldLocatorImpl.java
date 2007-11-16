@@ -16,11 +16,12 @@
 
 package com.googlecode.instinct.internal.locate;
 
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class AnnotatedFieldLocatorImpl implements AnnotatedFieldLocator {
     private AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
@@ -33,7 +34,7 @@ public final class AnnotatedFieldLocatorImpl implements AnnotatedFieldLocator {
     private <A extends Annotation> Field[] findAnnotatedFields(final Field[] declaredFields, final Class<A> runtimeAnnotationType) {
         final List<Field> annotatedFields = new ArrayList<Field>();
         for (final Field field : declaredFields) {
-            if (annotationChecker.isAnnotated(field, runtimeAnnotationType)) {
+            if (annotationChecker.isAnnotated(field, runtimeAnnotationType, IGNORE)) {
                 annotatedFields.add(field);
             }
         }

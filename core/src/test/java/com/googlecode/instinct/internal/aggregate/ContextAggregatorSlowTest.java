@@ -21,7 +21,7 @@ import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 public final class ContextAggregatorSlowTest extends InstinctTestCase {
-    public static final int EXPECTED_CONTEXTS = 34;
+    public static final int EXPECTED_CONTEXTS = 35;
     private ContextAggregator aggregator;
 
     @Override

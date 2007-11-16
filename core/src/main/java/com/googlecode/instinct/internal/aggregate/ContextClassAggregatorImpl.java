@@ -16,9 +16,6 @@
 
 package com.googlecode.instinct.internal.aggregate;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.util.Set;
 import com.googlecode.instinct.internal.locate.ClassLocator;
 import com.googlecode.instinct.internal.locate.ClassLocatorImpl;
 import com.googlecode.instinct.internal.locate.ClassWithContextAnnotationFileFilter;
@@ -28,6 +25,7 @@ import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Context;
@@ -35,6 +33,9 @@ import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.naming.ContextNamingConvention;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
+import java.io.File;
+import java.io.FileFilter;
+import java.util.Set;
 
 @SuppressWarnings({"OverlyCoupledClass"})
 public final class ContextClassAggregatorImpl implements ContextAggregator {
@@ -69,11 +70,11 @@ public final class ContextClassAggregatorImpl implements ContextAggregator {
 
     private MarkingScheme createContextMarkingScheme() {
         final NamingConvention namingConvention = objectFactory.create(ContextNamingConvention.class);
-        return objectFactory.create(MarkingSchemeImpl.class, Context.class, namingConvention);
+        return objectFactory.create(MarkingSchemeImpl.class, Context.class, namingConvention, IGNORE);
     }
 
     private MarkingScheme createSpecificationMarkingScheme() {
         final NamingConvention namingConvention = objectFactory.create(SpecificationNamingConvention.class);
-        return objectFactory.create(MarkingSchemeImpl.class, Specification.class, namingConvention);
+        return objectFactory.create(MarkingSchemeImpl.class, Specification.class, namingConvention, IGNORE);
     }
 }

@@ -16,9 +16,6 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.util.Set;
 import com.googlecode.instinct.internal.locate.ClassLocator;
 import com.googlecode.instinct.internal.locate.ClassLocatorImpl;
 import com.googlecode.instinct.internal.locate.ClassWithContextAnnotationFileFilter;
@@ -26,21 +23,24 @@ import com.googlecode.instinct.internal.locate.ClassWithMarkedMethodsFileFilter;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.AnnotationAttribute;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.naming.ContextNamingConvention;
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
+import java.io.File;
+import java.io.FileFilter;
+import java.util.Set;
 import org.apache.tools.ant.Project;
 
+@SuppressWarnings({"InstanceVariableOfConcreteClass"})
 public final class Specifications {
-    private static final MarkingScheme CONTEXT_MARKING_SCHEME = new MarkingSchemeImpl(Context.class, new ContextNamingConvention());
-    private static final MarkingScheme SPECIFICATION_MARKING_SCHEME = new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention());
     private final ClassLocator classLocator = new ClassLocatorImpl();
     private final Project project;
     private File specPackageRoot;
-    private String groups;
+    private AnnotationAttribute groups;
 
     public Specifications(final Project project) {
         checkNotNull(project);
@@ -60,7 +60,7 @@ public final class Specifications {
 
     public void setGroups(final String groups) {
         checkValidString("groups", groups);
-        this.groups = groups;
+        this.groups = new AnnotationAttribute("groups", groups);
     }
 
     @Suggest({"This should return ContextClass's, that way we don't need to instantiate them.",
@@ -72,8 +72,10 @@ public final class Specifications {
     }
 
     private Set<JavaClassName> findContextClasses() {
-        final FileFilter annotatedClasses = new ClassWithContextAnnotationFileFilter(specPackageRoot, CONTEXT_MARKING_SCHEME);
-        final FileFilter markedMethodClasses = new ClassWithMarkedMethodsFileFilter(specPackageRoot, SPECIFICATION_MARKING_SCHEME);
+        final MarkingScheme contextMarking = new MarkingSchemeImpl(Context.class, new ContextNamingConvention(), groups);
+        final MarkingScheme specificationMarking = new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention(), groups);
+        final FileFilter annotatedClasses = new ClassWithContextAnnotationFileFilter(specPackageRoot, contextMarking);
+        final FileFilter markedMethodClasses = new ClassWithMarkedMethodsFileFilter(specPackageRoot, specificationMarking);
         return classLocator.locate(specPackageRoot, annotatedClasses, markedMethodClasses);
     }
 

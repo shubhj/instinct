@@ -16,13 +16,46 @@
 
 package com.googlecode.instinct.internal.locate;
 
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.MethodEdgeImpl;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.marker.AnnotationAttribute;
+import static com.googlecode.instinct.marker.AnnotationAttribute.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import java.lang.reflect.Method;
+import java.util.Arrays;
 
+@SuppressWarnings({"MethodParameterOfConcreteClass"})
 public final class AnnotationCheckerImpl implements AnnotationChecker {
-    public <A extends Annotation> boolean isAnnotated(final AnnotatedElement annotatedElement, final Class<A> annotationType) {
-        checkNotNull(annotatedElement, annotationType);
-        return annotatedElement.isAnnotationPresent(annotationType);
+    private final ClassEdge classEdge = new ClassEdgeImpl();
+
+    public <A extends Annotation> boolean isAnnotated(
+            final AnnotatedElement annotatedElement, final Class<A> annotationType, final AnnotationAttribute annotationAttribute) {
+        checkNotNull(annotatedElement, annotationType, annotationAttribute);
+        final boolean annotationPresent = annotatedElement.isAnnotationPresent(annotationType);
+        return annotationPresent && annotationValueMatchesRequestedValue(annotatedElement, annotationType, annotationAttribute);
+    }
+
+    private <A extends Annotation> boolean annotationValueMatchesRequestedValue(
+            final AnnotatedElement annotatedElement, final Class<A> annotationType, final AnnotationAttribute annotationAttribute) {
+        if (annotationAttribute.equals(IGNORE)) {
+            return true;
+        } else {
+            final Object expectedAnnotationValue = annotationAttribute.getAttributeValue();
+            final Object actualAnnotationValue = getActualAttributeValue(annotationType, annotationAttribute, annotatedElement);
+            if (actualAnnotationValue.getClass().isArray() && expectedAnnotationValue.getClass().isArray()) {
+                return Arrays.equals((Object[]) actualAnnotationValue, (Object[]) expectedAnnotationValue);
+            } else {
+                return actualAnnotationValue.equals(expectedAnnotationValue);
+            }
+        }
+    }
+
+    private <A extends Annotation> Object getActualAttributeValue(
+            final Class<A> annotationType, final AnnotationAttribute annotationAttribute, final AnnotatedElement annotatedElement) {
+        final Method attributeMethod = classEdge.getDeclaredMethod(annotationType, annotationAttribute.getAttributeName());
+        return new MethodEdgeImpl(attributeMethod).invoke(annotatedElement.getAnnotation(annotationType));
     }
 }

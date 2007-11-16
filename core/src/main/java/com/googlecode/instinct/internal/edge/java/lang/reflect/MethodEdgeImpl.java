@@ -27,7 +27,7 @@ public final class MethodEdgeImpl implements MethodEdge {
         this.method = method;
     }
 
-    public Object invoke(Object obj, Object... args) {
+    public Object invoke(final Object obj, final Object... args) {
         try {
             return method.invoke(obj, args);
         } catch (IllegalAccessException e) {

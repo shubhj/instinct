@@ -18,7 +18,9 @@ package com.googlecode.instinct.internal.locate;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
+import com.googlecode.instinct.marker.AnnotationAttribute;
 
+@SuppressWarnings({"MethodParameterOfConcreteClass"})
 public interface AnnotationChecker {
-    <A extends Annotation> boolean isAnnotated(AnnotatedElement annotatedElement, Class<A> annotationType);
+    <A extends Annotation> boolean isAnnotated(AnnotatedElement annotatedElement, Class<A> annotationType, AnnotationAttribute annotationAttribute);
 }

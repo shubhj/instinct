@@ -20,6 +20,7 @@ import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.matcher.MethodMatcher;
 import com.googlecode.instinct.internal.runner.AContextWithAnnotationsAndNamingConventions;
 import com.googlecode.instinct.internal.runner.ASimpleNamingConventionContext;
+import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Specification;
@@ -36,7 +37,7 @@ public final class MarkedMethodLocatorImplSlowTest extends InstinctTestCase {
 
     @Override
     public void setUpTestDoubles() {
-        markingScheme = new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention());
+        markingScheme = new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention(), IGNORE);
     }
 
     @Override

@@ -17,6 +17,7 @@
 package com.googlecode.instinct.internal.locate;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public final class AnnotatedMethodLocatorImpl implements AnnotatedMethodLocator 
         checkNotNull(cls, runtimeAnnotationType);
         final List<Method> annotatedMethods = new ArrayList<Method>();
         for (final Method method : cls.getDeclaredMethods()) {
-            if (annotationChecker.isAnnotated(method, runtimeAnnotationType)) {
+            if (annotationChecker.isAnnotated(method, runtimeAnnotationType, IGNORE)) {
                 annotatedMethods.add(method);
             }
         }

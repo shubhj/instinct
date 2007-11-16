@@ -17,6 +17,7 @@
 package com.googlecode.instinct.internal.locate;
 
 import static com.googlecode.instinct.expect.Expect.expect;
+import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Subject;
@@ -44,7 +45,7 @@ public final class AnnotatedFieldLocatorImplAtomicTest extends InstinctTestCase 
     public void testLocateOnAClassWithNoAnnotationsReturnsNoFields() {
         expect.that(new Expectations() {
             {
-                one(checker).isAnnotated(with(any(AnnotatedElement.class)), with(same(Dummy.class))); will(returnValue(false));
+                one(checker).isAnnotated(with(any(AnnotatedElement.class)), with(same(Dummy.class)), with(equal(IGNORE))); will(returnValue(false));
             }
         });
         final Field[] fields = locator.locate(WithoutRuntimeAnnotations.class, Dummy.class);
@@ -60,11 +61,11 @@ public final class AnnotatedFieldLocatorImplAtomicTest extends InstinctTestCase 
         final Field field5 = getField("string5");
         expect.that(new Expectations() {
             {
-                one(checker).isAnnotated(field1, Dummy.class); will(returnValue(true));
-                one(checker).isAnnotated(field2, Dummy.class); will(returnValue(true));
-                one(checker).isAnnotated(field3, Dummy.class); will(returnValue(true));
-                one(checker).isAnnotated(field4, Dummy.class); will(returnValue(true));
-                one(checker).isAnnotated(field5, Dummy.class); will(returnValue(false));
+                one(checker).isAnnotated(field1, Dummy.class, IGNORE); will(returnValue(true));
+                one(checker).isAnnotated(field2, Dummy.class, IGNORE); will(returnValue(true));
+                one(checker).isAnnotated(field3, Dummy.class, IGNORE); will(returnValue(true));
+                one(checker).isAnnotated(field4, Dummy.class, IGNORE); will(returnValue(true));
+                one(checker).isAnnotated(field5, Dummy.class, IGNORE); will(returnValue(false));
             }
         });
         final Field[] fields = locator.locate(WithRuntimeAnnotations.class, Dummy.class);

@@ -19,7 +19,9 @@ package com.googlecode.instinct.internal.locate;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.util.ClassInstantiator;
 import com.googlecode.instinct.internal.util.ClassInstantiatorFactory;
+import com.googlecode.instinct.marker.AnnotationAttribute;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
+import static com.googlecode.instinct.marker.AnnotationAttribute.*;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Subject;
@@ -53,9 +55,9 @@ public final class ClassMarkedClassFileCheckerAtomicTest extends InstinctTestCas
                 one(classFile).getName(); will(returnValue("Class.class"));
                 one(instantiatorFactory).create(); will(returnValue(instantiator));
                 one(instantiator).instantiateClass(classFile, packageRoot); will(returnValue(Class.class));
-                one(annotationChecker).isAnnotated(Class.class, Context.class); will(returnValue(true));
+                one(annotationChecker).isAnnotated(Class.class, Context.class, IGNORE); will(returnValue(true));
             }
         });
-        assertTrue(checker.isMarked(classFile, new MarkingSchemeImpl(Context.class, new ContextNamingConvention())));
+        assertTrue(checker.isMarked(classFile, new MarkingSchemeImpl(Context.class, new ContextNamingConvention(), IGNORE)));
     }
 }

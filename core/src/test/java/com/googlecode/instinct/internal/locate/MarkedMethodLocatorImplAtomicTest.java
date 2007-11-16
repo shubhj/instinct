@@ -23,6 +23,7 @@ import com.googlecode.instinct.internal.runner.AContextWithAnnotationsAndNamingC
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ASimpleNamingConventionContext;
 import com.googlecode.instinct.internal.util.Suggest;
+import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Mock;
@@ -95,7 +96,7 @@ public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
                 atLeast(1).of(namingConvention).getPattern(); will(returnValue(namingPattern));
             }
         });
-        return locator.locateAll(cls, new MarkingSchemeImpl(BeforeSpecification.class, namingConvention));
+        return locator.locateAll(cls, new MarkingSchemeImpl(BeforeSpecification.class, namingConvention, IGNORE));
     }
 
     private <T> Collection<Method> getSpecificationMethodsFromContextClass(final Class<T> cls) {
@@ -104,6 +105,6 @@ public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
                 atLeast(1).of(namingConvention).getPattern(); will(returnValue("^must.*|^should.*"));
             }
         });
-        return locator.locateAll(cls, new MarkingSchemeImpl(Specification.class, namingConvention));
+        return locator.locateAll(cls, new MarkingSchemeImpl(Specification.class, namingConvention, IGNORE));
     }
 }

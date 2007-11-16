@@ -16,13 +16,13 @@
 
 package com.googlecode.instinct.internal.actor;
 
-import java.lang.reflect.Field;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdgeImpl;
 import com.googlecode.instinct.internal.locate.MarkedFieldLocator;
 import com.googlecode.instinct.internal.locate.MarkedFieldLocatorImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Dummy;
@@ -31,6 +31,7 @@ import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.naming.DummyNamingConvention;
 import com.googlecode.instinct.marker.naming.MockNamingConvention;
 import com.googlecode.instinct.marker.naming.StubNamingConvention;
+import java.lang.reflect.Field;
 
 @SuppressWarnings({"OverlyCoupledClass"})
 public final class ActorAutoWirerImpl implements ActorAutoWirer {
@@ -49,17 +50,17 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
     }
 
     private void autoWireDummies(final Object instanceToAutoWire) {
-        final MarkingScheme dummyMarkingScheme = new MarkingSchemeImpl(Dummy.class, new DummyNamingConvention());
+        final MarkingScheme dummyMarkingScheme = new MarkingSchemeImpl(Dummy.class, new DummyNamingConvention(), IGNORE);
         autoWireMarkedFields(dummyCreator, instanceToAutoWire, dummyMarkingScheme, new DummyAutoWireDeterminator());
     }
 
     private void autoWireStubs(final Object instanceToAutoWire) {
-        final MarkingScheme stubMarkingScheme = new MarkingSchemeImpl(Stub.class, new StubNamingConvention());
+        final MarkingScheme stubMarkingScheme = new MarkingSchemeImpl(Stub.class, new StubNamingConvention(), IGNORE);
         autoWireMarkedFields(stubCreator, instanceToAutoWire, stubMarkingScheme, new StubAutoWireDeterminator());
     }
 
     private void autoWireMocks(final Object instanceToAutoWire) {
-        final MarkingScheme mockMarkingScheme = new MarkingSchemeImpl(Mock.class, new MockNamingConvention());
+        final MarkingScheme mockMarkingScheme = new MarkingSchemeImpl(Mock.class, new MockNamingConvention(), IGNORE);
         autoWireMarkedFields(mockCreator, instanceToAutoWire, mockMarkingScheme, new MockAutoWireDeterminator());
     }
 

@@ -18,8 +18,9 @@ package com.googlecode.instinct.internal.locate;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.util.ObjectFactory;
-import com.googlecode.instinct.marker.MarkingSchemeImpl;
+import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.MarkingScheme;
+import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Subject;
@@ -40,7 +41,7 @@ public final class ClassWithContextAnnotationFileFilterAtomicTest extends Instin
     private MarkingScheme markingScheme;
 
     @Override public void setUpTestDoubles() {
-        markingScheme = new MarkingSchemeImpl(Context.class, new ContextNamingConvention());
+        markingScheme = new MarkingSchemeImpl(Context.class, new ContextNamingConvention(), IGNORE);
     }
 
     @Override

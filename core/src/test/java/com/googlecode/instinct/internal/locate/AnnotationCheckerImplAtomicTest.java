@@ -16,39 +16,113 @@
 
 package com.googlecode.instinct.internal.locate;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedElement;
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.marker.AnnotationAttribute;
+import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Specification;
+import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import static com.googlecode.instinct.test.reflect.Reflector.getDeclaredMethod;
 import static com.googlecode.instinct.test.reflect.Reflector.getFieldByName;
 import static com.googlecode.instinct.test.reflect.Reflector.getMethod;
+import java.lang.reflect.Method;
 
+@SuppressWarnings({"MethodReturnOfConcreteClass"})
 public final class AnnotationCheckerImplAtomicTest extends InstinctTestCase {
+    private AnnotationChecker annotationChecker;
+
+    @Override
+    public void setUpSubject() {
+        annotationChecker = new AnnotationCheckerImpl();
+    }
+
     public void testConformsToClassTraits() {
         checkClass(AnnotationCheckerImpl.class, AnnotationChecker.class);
     }
 
     public void testClassIsAnnotated() {
-        checkIsAnnotated(WithRuntimeAnnotations.class, Context.class, true);
-        checkIsAnnotated(WithoutRuntimeAnnotations.class, Context.class, false);
+        expect.that(annotationChecker.isAnnotated(WithRuntimeAnnotations.class, Context.class, IGNORE)).isTrue();
+        expect.that(annotationChecker.isAnnotated(WithoutRuntimeAnnotations.class, Context.class, IGNORE)).isFalse();
     }
 
     public void testMethodIsAnnotated() {
-        checkIsAnnotated(getMethod(WithRuntimeAnnotations.class, "toString"), Specification.class, true);
-        checkIsAnnotated(getMethod(WithoutRuntimeAnnotations.class, "toString"), Specification.class, false);
+        expect.that(annotationChecker.isAnnotated(getMethod(WithRuntimeAnnotations.class, "toString"), Specification.class, IGNORE)).isTrue();
+        expect.that(annotationChecker.isAnnotated(getMethod(WithoutRuntimeAnnotations.class, "toString"), Specification.class, IGNORE)).isFalse();
     }
 
     public void testFieldIsAnnotated() {
-        checkIsAnnotated(getFieldByName(WithRuntimeAnnotations.class, "string1"), Dummy.class, true);
-        checkIsAnnotated(getFieldByName(WithoutRuntimeAnnotations.class, "string1"), Dummy.class, false);
+        expect.that(annotationChecker.isAnnotated(getFieldByName(WithRuntimeAnnotations.class, "string1"), Dummy.class, IGNORE)).isTrue();
+        expect.that(annotationChecker.isAnnotated(getFieldByName(WithoutRuntimeAnnotations.class, "string1"), Dummy.class, IGNORE)).isFalse();
     }
 
-    private <A extends Annotation> void checkIsAnnotated(final AnnotatedElement annotatedElement, final Class<A> expectedAnnotation,
-            final boolean expectingAnnotation) {
-        final AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
-        assertEquals(expectingAnnotation, annotationChecker.isAnnotated(annotatedElement, expectedAnnotation));
+    public void testFindsAnnotatedElementsWithSingleAttribute() {
+        final Method annotatedMethod = getAnnotatedMethod("withSingleGroupAnnonation");
+        final Object[] attributeValue = new String[]{"Single"};
+        final boolean isAnnotated = annotationChecker.isAnnotated(annotatedMethod, Specification.class, groupAttribute("groups", attributeValue));
+        expect.that(isAnnotated).isTrue();
+    }
+
+    public void testFindsAnnotatedElementsWithSingleAttributeAsArray() {
+        final Method annotatedMethod = getAnnotatedMethod("withSingleGroupAnnonation");
+        final Object[] attributeValue = new String[]{"Single"};
+        final boolean isAnnotated = annotationChecker.isAnnotated(annotatedMethod, Specification.class, groupAttribute("groups", attributeValue));
+        expect.that(isAnnotated).isTrue();
+    }
+
+    public void testDoesNotFindsAnnotatedElementsAttributesDoNotMatch() {
+        final Method annotatedMethod = getAnnotatedMethod("withSingleGroupAnnonation");
+        final Object[] attributeValue = new String[]{"No Match"};
+        final boolean isAnnotated = annotationChecker.isAnnotated(annotatedMethod, Specification.class, groupAttribute("groups", attributeValue));
+        expect.that(isAnnotated).isFalse();
+    }
+
+    public void testFindsAnnotatedElementsWithMultipleAttributes() {
+        final Method annotatedMethod = getAnnotatedMethod("withMultipleGroupAnnonation");
+        final Object[] attributeValue = new String[]{"Group 1", "Group 2"};
+        final boolean isAnnotated = annotationChecker.isAnnotated(annotatedMethod, Specification.class, groupAttribute("groups", attributeValue));
+        expect.that(isAnnotated).isTrue();
+    }
+
+    public void testFindsAnnotatedElementsWithEmptyAttributes() {
+        final Method annotatedMethod = getAnnotatedMethod("withEmptyGroupAnnonation");
+        final Object[] attributeValue = new String[]{};
+        final boolean isAnnotated = annotationChecker.isAnnotated(annotatedMethod, Specification.class,
+                groupAttribute("groups", attributeValue));
+        expect.that(isAnnotated).isTrue();
+    }
+
+    public void testFindsNonArrayAnnotatedElements() {
+        final Method annotatedMethod = getAnnotatedMethod("withNonArrayAnnotation");
+        final boolean isAnnotated = annotationChecker.isAnnotated(annotatedMethod, Specification.class, groupAttribute("state", PENDING));
+        expect.that(isAnnotated).isTrue();
+    }
+
+    private Method getAnnotatedMethod(final String methodName) {
+        return getDeclaredMethod(WithGroupAnnotationOnSpecifications.class, methodName);
+    }
+
+    private AnnotationAttribute groupAttribute(final String attributeName, final Object attributeValue) {
+        return new AnnotationAttribute(attributeName, attributeValue);
+    }
+
+    private static final class WithGroupAnnotationOnSpecifications {
+        @Specification(groups = "Single")
+        public void withSingleGroupAnnonation() {
+        }
+
+        @Specification(groups = {})
+        public void withEmptyGroupAnnonation() {
+        }
+
+        @Specification(groups = {"Group 1", "Group 2"})
+        public void withMultipleGroupAnnonation() {
+        }
+
+        @Specification(state = PENDING)
+        public void withNonArrayAnnotation() {
+        }
     }
 }

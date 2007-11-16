@@ -24,6 +24,7 @@ import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.AfterSpecification;
@@ -38,6 +39,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@SuppressWarnings({"OverlyCoupledClass"})
 public final class ContextClassImpl extends Primordial implements ContextClass {
     private ContextRunner contextRunner = new StandardContextRunner();
     private MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
@@ -72,15 +74,15 @@ public final class ContextClassImpl extends Primordial implements ContextClass {
     }
 
     public Collection<LifecycleMethod> getSpecificationMethods() {
-        return findMethods(new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention()));
+        return findMethods(new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention(), IGNORE));
     }
 
     public Collection<LifecycleMethod> getBeforeSpecificationMethods() {
-        return findMethods(new MarkingSchemeImpl(BeforeSpecification.class, new BeforeSpecificationNamingConvention()));
+        return findMethods(new MarkingSchemeImpl(BeforeSpecification.class, new BeforeSpecificationNamingConvention(), IGNORE));
     }
 
     public Collection<LifecycleMethod> getAfterSpecificationMethods() {
-        return findMethods(new MarkingSchemeImpl(AfterSpecification.class, new AfterSpecificationNamingConvention()));
+        return findMethods(new MarkingSchemeImpl(AfterSpecification.class, new AfterSpecificationNamingConvention(), IGNORE));
     }
 
     @Suggest({"This logic is duplicated in StandardContextRunner.createSpecificationMethod()"})

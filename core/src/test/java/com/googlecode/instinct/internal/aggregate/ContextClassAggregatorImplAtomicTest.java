@@ -29,6 +29,7 @@ import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
+import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
@@ -89,7 +90,7 @@ public final class ContextClassAggregatorImplAtomicTest extends InstinctTestCase
             private void expectClassFileFilterCreated() {
                 one(objectFactory).create(ContextNamingConvention.class);
                 will(returnValue(contextNamingConvention));
-                one(objectFactory).create(MarkingSchemeImpl.class, Context.class, contextNamingConvention);
+                one(objectFactory).create(MarkingSchemeImpl.class, Context.class, contextNamingConvention, IGNORE);
                 will(returnValue(contextMarkingScheme));
                 one(objectFactory).create(ClassWithContextAnnotationFileFilter.class, packageRoot, contextMarkingScheme);
                 will(returnValue(classFileFilter));
@@ -98,7 +99,7 @@ public final class ContextClassAggregatorImplAtomicTest extends InstinctTestCase
             private void expectMethodFileFilterCreated() {
                 one(objectFactory).create(SpecificationNamingConvention.class);
                 will(returnValue(specificationNamingConvention));
-                one(objectFactory).create(MarkingSchemeImpl.class, Specification.class, specificationNamingConvention);
+                one(objectFactory).create(MarkingSchemeImpl.class, Specification.class, specificationNamingConvention, IGNORE);
                 will(returnValue(specificationMarkingScheme));
                 one(objectFactory).create(ClassWithMarkedMethodsFileFilter.class, packageRoot, specificationMarkingScheme);
                 will(returnValue(methodFileFilter));

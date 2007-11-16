@@ -16,19 +16,23 @@
 
 package com.googlecode.instinct.marker;
 
-import java.lang.annotation.Annotation;
 import au.net.netstorm.boost.primordial.Primordial;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.naming.NamingConvention;
+import java.lang.annotation.Annotation;
 
-@Fix({"Test drive.", "Turn this into an enumeration?"})
+@SuppressWarnings({"MethodParameterOfConcreteClass", "InstanceVariableOfConcreteClass", "MethodReturnOfConcreteClass"})
+@Fix({"Test drive."})
 public final class MarkingSchemeImpl extends Primordial implements MarkingScheme {
     private final Class<?> annotationType;
     private final NamingConvention namingConvention;
+    private final AnnotationAttribute annotationAttribute;
 
-    public <A extends Annotation> MarkingSchemeImpl(final Class<A> annotationType, final NamingConvention namingConvention) {
-        checkNotNull(annotationType, namingConvention);
+    public <A extends Annotation> MarkingSchemeImpl(
+            final Class<A> annotationType, final NamingConvention namingConvention, final AnnotationAttribute annotationAttribute) {
+        this.annotationAttribute = annotationAttribute;
+        checkNotNull(annotationType, namingConvention, annotationAttribute);
         this.annotationType = annotationType;
         this.namingConvention = namingConvention;
     }
@@ -40,5 +44,9 @@ public final class MarkingSchemeImpl extends Primordial implements MarkingScheme
 
     public NamingConvention getNamingConvention() {
         return namingConvention;
+    }
+
+    public AnnotationAttribute getAnnotationAttribute() {
+        return annotationAttribute;
     }
 }
