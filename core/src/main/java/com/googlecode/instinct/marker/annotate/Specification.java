@@ -37,14 +37,12 @@ public @interface Specification {
 
     /**
      * The state of a specification. Pending specifications are not run by Instinct (but are still reported).
-     *
      * @return The state of the specification.
      */
     SpecificationState state() default SpecificationState.COMPLETE;
 
     /**
      * The reason the specification has been given its @link{state()}.
-     *
      * @return The reason the specification has been given its state.
      */
     String reason() default NO_REASON;
@@ -52,7 +50,6 @@ public @interface Specification {
     /**
      * The group(s) the specification belongs to.
      * Groups can be used to run different sets of specifications at different times, for example fast specifications and slow specifications.
-     *
      * @return The group(s) the specification belongs to.
      */
     String[] groups() default "ALL";
@@ -60,7 +57,6 @@ public @interface Specification {
     /**
      * The exception the specification is expected to throw, that is, successfully executing the specification will yield the exception.
      * If this is not specified, the specification is assumed to succeed and any errors will be reported as failures.
-     *
      * @return The exception the specification is expected to throw.
      */
     Class<? extends Throwable> expectedException() default NoExpectedException.class;
@@ -69,13 +65,26 @@ public @interface Specification {
      * The message within the exception that this specification is expected to throw.
      * Specifying this field is optional, if it is not supplied the exception message will not be checked.
      * This field must be used together with @link{expectedException()} or not at all.
-     *
      * @return The message of the exception that this specification is expected to throw.
      */
     String withMessage() default NO_MESSAGE;
 
     enum SpecificationState {
-        IN_PROGRESS, PENDING, COMPLETE
+        /**
+         * The specification and/or the behaviour it is specifying is currently under development.
+         */
+        IN_PROGRESS,
+
+        /**
+         * The specification and/or the behaviour is not complete. Pending specifications are not run by Instinct, however they are reported in
+         * specification results.
+         */
+        PENDING,
+
+        /**
+         * The specification and/or the behaviour it is specifying is complete. This is the default state of a specification.
+         */
+        COMPLETE
     }
 
     @SuppressWarnings({"NonExceptionNameEndsWithException"})
