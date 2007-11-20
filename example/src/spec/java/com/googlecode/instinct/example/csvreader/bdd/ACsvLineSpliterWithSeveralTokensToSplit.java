@@ -21,11 +21,13 @@ import com.googlecode.instinct.example.csvreader.CsvLineSplitterImpl;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
+import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
+@Context(groups = {"osdc"})
 public final class ACsvLineSpliterWithSeveralTokensToSplit {
     @Subject private CsvLineSplitter lineSplitter;
 

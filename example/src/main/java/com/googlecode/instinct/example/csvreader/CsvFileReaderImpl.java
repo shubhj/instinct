@@ -16,14 +16,35 @@
 
 package com.googlecode.instinct.example.csvreader;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class CsvFileReaderImpl implements CsvFileReader {
+    private CsvLineSplitter lineSplitter = new CsvLineSplitterImpl(',');
     private final CsvFile csvFile;
 
     public CsvFileReaderImpl(final CsvFile csvFile) {
         this.csvFile = csvFile;
     }
 
-    public String[] nextLine() {
-        return new String[0];
+    public CsvLine[] readLines() {
+        try {
+            return doReadLines();
+        } finally {
+            csvFile.close();
+        }
+    }
+
+    private CsvLine[] doReadLines() {
+        final List<CsvLine> lines = new ArrayList<CsvLine>();
+        while (csvFile.hasMoreLines()) {
+            lines.add(parseLine());
+        }
+        return lines.toArray(new CsvLine[lines.size()]);
+    }
+
+    private CsvLine parseLine() {
+        final String line = csvFile.readLine();
+        return new CsvLine(lineSplitter.split(line));
     }
 }

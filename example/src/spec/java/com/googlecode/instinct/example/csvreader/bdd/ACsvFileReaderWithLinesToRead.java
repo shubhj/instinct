@@ -20,54 +20,53 @@ import com.googlecode.instinct.example.csvreader.CsvFile;
 import com.googlecode.instinct.example.csvreader.CsvFileReader;
 import com.googlecode.instinct.example.csvreader.CsvFileReaderImpl;
 import com.googlecode.instinct.example.csvreader.CsvLine;
+import com.googlecode.instinct.example.csvreader.CsvLineSplitter;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
+import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValueUsingInferredType;
 import org.jmock.Expectations;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
 @Context(groups = {"osdc"})
-public final class ACsvFileReaderWithNothingToRead {
+public final class ACsvFileReaderWithLinesToRead {
     @Subject private CsvFileReader csvFileReader;
     @Mock private CsvFile csvFile;
-    @Stub(auto = false) private CsvLine[] noLines;
-    @Stub private RuntimeException exception;
+    @Mock private CsvLineSplitter csvLineSplitter;
+    @Stub private CsvLine[] parsedLines;
+    @Dummy private String line1;
+    @Dummy(auto = false) private String[] splitColumns;
 
     @BeforeSpecification
     public void before() {
-        noLines = new CsvLine[]{};
+        splitColumns = new String[]{"A", "B"};
+        parsedLines = new CsvLine[]{new CsvLine("A", "B")};
         csvFileReader = new CsvFileReaderImpl(csvFile);
+        insertFieldValueUsingInferredType(csvFileReader, csvLineSplitter);
     }
 
-    @Specification(expectedException = RuntimeException.class)
-    public void closesTheUnderlyingFileOnAllExceptions() {
+    @Specification
+    public void parsesLinesUsingThe() {
         expect.that(new Expectations() {
             {
                 one(csvFile).hasMoreLines();
                 will(returnValue(true));
                 one(csvFile).readLine();
-                will(throwException(exception));
-                atLeast(1).of(csvFile).close();
-            }
-        });
-        csvFileReader.readLines();
-    }
-
-    @Specification
-    public void returnsNoLines() {
-        expect.that(new Expectations() {
-            {
+                will(returnValue(line1));
+                one(csvLineSplitter).split(line1);
+                will(returnValue(splitColumns));
                 one(csvFile).hasMoreLines();
                 will(returnValue(false));
                 ignoring(csvFile).close();
             }
         });
-        expect.that(csvFileReader.readLines()).equalTo(noLines);
+        expect.that(csvFileReader.readLines()).equalTo(parsedLines);
     }
 }

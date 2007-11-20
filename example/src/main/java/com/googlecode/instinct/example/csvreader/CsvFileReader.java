@@ -17,5 +17,5 @@
 package com.googlecode.instinct.example.csvreader;
 
 public interface CsvFileReader {
-    String[] nextLine();
+    CsvLine[] readLines();
 }

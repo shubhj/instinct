@@ -16,31 +16,43 @@
 
 package com.googlecode.instinct.example.csvreader.bdd;
 
-import com.googlecode.instinct.example.csvreader.CsvLineSplitter;
-import com.googlecode.instinct.example.csvreader.CsvLineSplitterImpl;
+import com.googlecode.instinct.example.csvreader.CsvLine;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
 @Context(groups = {"osdc"})
-public final class ACsvLineSpliterWithNothingToSplit {
-    private static final String NOTHING_TO_SPLIT = "";
-    @Subject private CsvLineSplitter lineSplitter;
+public final class CsvLineContext {
+    @Subject private CsvLine csvLine;
+    @Dummy private String column1;
+    @Dummy private String column2;
+    @Dummy private String column3;
 
     @BeforeSpecification
     public void before() {
-        lineSplitter = new CsvLineSplitterImpl(',');
+        csvLine = new CsvLine(column1, column2, column3);
+    }
+
+    @Specification(expectedException = IllegalArgumentException.class, withMessage = "Invalid colum index, 0 >= columnIndex < 3")
+    public void throwsExceptionWhenTooLowAnIndexIsProvided() {
+        csvLine.getColumn(-1);
+    }
+
+    @Specification(expectedException = IllegalArgumentException.class, withMessage = "Invalid colum index, 0 >= columnIndex < 3")
+    public void throwsExceptionWhenTooHighAnIndexIsProvided() {
+        csvLine.getColumn(3);
     }
 
     @Specification
-    public void returnsTheContentPassedIn() {
-        final String[] split = lineSplitter.split(NOTHING_TO_SPLIT);
-        expect.that(split).isOfSize(1);
-        expect.that(split).containsItem(NOTHING_TO_SPLIT);
+    public void providesAccessToColumnsByIndex() {
+        expect.that(csvLine.getColumn(0)).equalTo(column1);
+        expect.that(csvLine.getColumn(1)).equalTo(column2);
+        expect.that(csvLine.getColumn(2)).equalTo(column3);
     }
 }
