@@ -24,6 +24,7 @@ import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
+import static org.hamcrest.core.IsEqual.equalTo;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
@@ -54,5 +55,46 @@ public final class CsvLineContext {
         expect.that(csvLine.getColumn(0)).equalTo(column1);
         expect.that(csvLine.getColumn(1)).equalTo(column2);
         expect.that(csvLine.getColumn(2)).equalTo(column3);
+    }
+
+    @Specification
+    public void isEqualToObjectsWithTheSameColumns() {
+        expect.that(new CsvLine()).equalTo(new CsvLine());
+        expect.that(new CsvLine("A")).equalTo(new CsvLine("A"));
+        expect.that(new CsvLine("A", "B")).equalTo(new CsvLine("A", "B"));
+    }
+
+    @Specification
+    public void isNotEqualToObjectsWithTheDifferentColumns() {
+        expect.that(new CsvLine()).notEqualTo(new CsvLine("A", "B"));
+        expect.that(new CsvLine("A", "A")).notEqualTo(new CsvLine("A", "B"));
+    }
+
+    @Specification
+    public void isNotEqualToNull() {
+        expect.that(new CsvLine("")).notEqualTo(null);
+    }
+
+    @SuppressWarnings({"EqualsBetweenInconvertibleTypes"})
+    @Specification
+    public void isNotEqualToDifferentClasses() {
+        final String notACsvLine = "";
+        expect.that(new CsvLine("").equals(notACsvLine)).isFalse();
+    }
+
+    @Specification
+    public void hasAHasCodeThatIsThatOfTheColumns() {
+        final String[] columns = {""};
+        expect.that(new CsvLine(columns).hashCode()).equalTo(columns.hashCode());
+    }
+
+    @Specification
+    public void providesColumnsAsAString() {
+        expect.that(new CsvLine("A", "B")).hasToString(equalTo("[A, B]"));
+    }
+
+    @Specification
+    public void returnsAnEmptyStringWhenNoColumns() {
+        expect.that(new CsvLine()).hasToString(equalTo("[]"));
     }
 }

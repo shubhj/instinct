@@ -18,6 +18,7 @@ package com.googlecode.instinct.example.csvreader;
 
 import java.util.Arrays;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 
 public final class CsvLine {
     private final String[] columns;
@@ -35,6 +36,7 @@ public final class CsvLine {
     }
 
     @SuppressWarnings({"InstanceofInterfaces", "CastToConcreteClass", "AccessingNonPublicFieldOfAnotherObject"})
+    @Suggest("Accessing the columns is a hack, consider exposing the field using a getter.")
     @Override
     public boolean equals(final Object obj) {
         return obj instanceof CsvLine && Arrays.equals(((CsvLine) obj).columns, columns);
