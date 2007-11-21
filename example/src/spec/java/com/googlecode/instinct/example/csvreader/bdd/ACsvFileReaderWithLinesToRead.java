@@ -53,7 +53,7 @@ public final class ACsvFileReaderWithLinesToRead {
     }
 
     @Specification
-    public void parsesLinesAndSplitThem() {
+    public void parsesBothLinesAndSplitsThem() {
         expect.that(new Expectations() {
             {
                 one(csvFile).hasMoreLines();

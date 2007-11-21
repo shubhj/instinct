@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({CsvLineSplitterTest.class, CsvLineTest.class, CsvFileTest.class})
+@Suite.SuiteClasses({CsvLineSplitterTest.class, CsvLineTest.class, CsvFileTest.class, CsvFileReaderTest.class})
 public final class CsvReaderJUnitTests {
     private CsvReaderJUnitTests() {
         throw new UnsupportedOperationException();

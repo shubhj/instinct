@@ -21,7 +21,10 @@ import com.googlecode.instinct.example.csvreader.CsvFileReader;
 import com.googlecode.instinct.example.csvreader.CsvFileReaderImpl;
 import com.googlecode.instinct.example.csvreader.CsvLine;
 import static com.googlecode.instinct.expect.Expect.expect;
+import static com.googlecode.instinct.expect.behaviour.Mocker.reset;
+import static com.googlecode.instinct.expect.behaviour.Mocker.verify;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Mock;
@@ -41,8 +44,14 @@ public final class ACsvFileReaderWithNothingToRead {
 
     @BeforeSpecification
     public void before() {
+        reset();
         noLines = new CsvLine[]{};
         csvFileReader = new CsvFileReaderImpl(csvFile);
+    }
+
+    @AfterSpecification
+    public void after() {
+        verify();
     }
 
     @Specification(expectedException = RuntimeException.class)
