@@ -31,7 +31,7 @@ public final class CsvLineTest {
     private String column3;
 
     @Before
-    public void before() {
+    public void setup() {
         column1 = "A";
         column2 = "B";
         column3 = "C";
