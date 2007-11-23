@@ -63,10 +63,8 @@ public final class CsvFileReaderTest {
     public void closesTheUnderlyingFileOnAllExceptions() {
         mockery.checking(new Expectations() {
             {
-                one(csvFile).hasMoreLines();
-                will(returnValue(true));
-                one(csvFile).readLine();
-                will(throwException(exception));
+                one(csvFile).hasMoreLines(); will(returnValue(true));
+                one(csvFile).readLine(); will(throwException(exception));
                 atLeast(1).of(csvFile).close();
             }
         });
@@ -77,8 +75,7 @@ public final class CsvFileReaderTest {
     public void whenThereIsNothingToReadItReturnsNoLines() {
         mockery.checking(new Expectations() {
             {
-                one(csvFile).hasMoreLines();
-                will(returnValue(false));
+                one(csvFile).hasMoreLines(); will(returnValue(false));
                 ignoring(csvFile).close();
             }
         });
@@ -89,14 +86,10 @@ public final class CsvFileReaderTest {
     public void whenThereIsTwoLinesParsesBothLinesAndSplitsThem() {
         mockery.checking(new Expectations() {
             {
-                one(csvFile).hasMoreLines();
-                will(returnValue(true));
-                one(csvFile).readLine();
-                will(returnValue(line1));
-                one(csvLineSplitter).split(line1);
-                will(returnValue(splitColumns));
-                one(csvFile).hasMoreLines();
-                will(returnValue(false));
+                one(csvFile).hasMoreLines(); will(returnValue(true));
+                one(csvFile).readLine(); will(returnValue(line1));
+                one(csvLineSplitter).split(line1); will(returnValue(splitColumns));
+                one(csvFile).hasMoreLines(); will(returnValue(false));
                 ignoring(csvFile).close();
             }
         });

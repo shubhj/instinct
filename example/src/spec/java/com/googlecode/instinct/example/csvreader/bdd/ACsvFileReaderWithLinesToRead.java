@@ -56,14 +56,10 @@ public final class ACsvFileReaderWithLinesToRead {
     public void parsesBothLinesAndSplitsThem() {
         expect.that(new Expectations() {
             {
-                one(csvFile).hasMoreLines();
-                will(returnValue(true));
-                one(csvFile).readLine();
-                will(returnValue(line1));
-                one(csvLineSplitter).split(line1);
-                will(returnValue(splitColumns));
-                one(csvFile).hasMoreLines();
-                will(returnValue(false));
+                one(csvFile).hasMoreLines(); will(returnValue(true));
+                one(csvFile).readLine(); will(returnValue(line1));
+                one(csvLineSplitter).split(line1); will(returnValue(splitColumns));
+                one(csvFile).hasMoreLines(); will(returnValue(false));
                 ignoring(csvFile).close();
             }
         });
