@@ -24,7 +24,6 @@ o RELEASE-NOTES                     - Release notes for this & previous releases
 o instinct-<version>.jar            - Instinct Jar file, source code is included in the
                                       Jar for convenience.
 o instinct-<version>-javadoc.jar    - Instinct API javadoc (does not include internal API).
-                                      Jar for convenience.
 o lib/                              - Libraries required by Instinct at runtime (including
                                       licences), see below for details.
 
@@ -48,12 +47,12 @@ o junit-4.4.jar
 
 * Documentation *
 
-Documentation can be found at: http://code.google.com/p/instinct/.
+Documentation can be found at: http://instinct.googlecode.com/.
 
 
 * Package Structure *
 
-Instinct is organsed into published APIs and internal packages. You should use
+Instinct is organised into published APIs and internal packages. You should use
 the published API when using Instinct. However, you are welcome to use the
 internal classes, though relying on the internal APIs is not advised as they
 will change from release to release.
@@ -94,8 +93,8 @@ com.googlecode.instinct.runner
 
 * Source *
 
-Source code is available within the distribution Jars, complete source is
-available at: http://code.google.com/p/instinct/source
+Source code is available within the distribution Jars. Complete source is
+available at: http://instinct.googlecode.com/
 
 To build from source, Instinct requires Ant 1.7.0 and JUnit 4.4.
 
@@ -104,8 +103,6 @@ directory. These do not require any other dependencies and can be run standalone
 
 To use a default Ant installation, you will need to add the JUnit jar to
 ANT_HOME/lib directory.
-
-
 * Contributions *
 
 Developers
