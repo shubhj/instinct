@@ -72,8 +72,7 @@ public final class ACsvFileReaderWithNothingToRead {
     public void returnsNoLines() {
         expect.that(new Expectations() {
             {
-                one(csvFile).hasMoreLines();
-                will(returnValue(false));
+                one(csvFile).hasMoreLines(); will(returnValue(false));
                 ignoring(csvFile).close();
             }
         });

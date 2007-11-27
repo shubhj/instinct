@@ -31,7 +31,7 @@ public final class ANonEmptyStack {
 
     @Suggest("This is bogus, need an isFull() method.")
     @Specification
-    void mustNoLongerBeFullAfterPop() {
+    void isNoLongerBeFullAfterPop() {
         stack.pop();
         expect.that(stack.isEmpty()).isFalse();
     }
@@ -50,7 +50,7 @@ public final class ANonEmptyStack {
     }
 
     @Specification
-    void shouldPopPushedValue() {
+    void popsPushedValue() {
         stack.push(number1);
         final Object o = stack.pop();
         expect.that(o).sameInstanceAs(number1);

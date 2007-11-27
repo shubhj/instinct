@@ -12,8 +12,7 @@ import org.junit.runner.RunWith;
 @RunWith(InstinctRunner.class)
 public final class AnEmptyStack {
     @Subject private Stack<Object> stack;
-    @Dummy private Object object1;
-    @Dummy private Object object2;
+    @Dummy private Object object;
 
     @BeforeSpecification
     void before() {
@@ -27,7 +26,7 @@ public final class AnEmptyStack {
 
     @Specification
     void isNoLongerBeEmptyAfterPush() {
-        stack.push(new Object());
+        stack.push(object);
         expect.that(stack.isEmpty()).isFalse();
     }
 

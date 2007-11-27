@@ -46,7 +46,7 @@ public final class CsvFileTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void qNoLineFileThrowsExceptionWhenLinesAttemptToBeRead() {
+    public void aNoLineFileThrowsExceptionWhenLinesAttemptToBeRead() {
         noLineFile.readLine();
     }
 
