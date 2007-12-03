@@ -16,10 +16,8 @@
 
 package com.googlecode.instinct.internal.locate;
 
-import com.googlecode.instinct.defect.defect8.AContext;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
@@ -48,21 +46,4 @@ public final class AnAnnotatedMethodLocatorContext {
         final Collection<Method> methods = locator.locate(WithRuntimeAnnotations.class, Specification.class);
         expect.that(methods).hasSize(2);
     }
-
-    @Specification
-    public void shouldReturnAMethodThatMatchesTheSuppliedCriteriaInASuperClass() {
-        final Collection<Method> methods = locator.locate(AContext.class, BeforeSpecification.class);
-        expect.that(methods).hasSize(1);
-        expect.that(methods.iterator().next().getName()).equalTo("setup");
-    }
-
-//    @Specification
-//    public void shouldReturnAnotherMethodThatMatchesTheSuppliedCriteriaInASuperClass() {
-//        final Collection<Method> methods = locator.locate(AContext.class, Specification.class);
-//        expect.that(methods).hasSize(2);
-//
-//        final Iterator<Method> methodIterator = methods.iterator();
-//        expect.that(methodIterator.next().getName()).equalTo("shouldFailIfBeforeSpecificationWasNotCalled");
-//        expect.that(methodIterator.next().getName()).equalTo("shouldEquateTrueToTrue");
-//    }
 }

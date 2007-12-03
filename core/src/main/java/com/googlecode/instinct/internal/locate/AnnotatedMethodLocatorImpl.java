@@ -16,15 +16,15 @@
 
 package com.googlecode.instinct.internal.locate;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.ClassUtil;
 import com.googlecode.instinct.internal.util.ClassUtilImpl;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public final class AnnotatedMethodLocatorImpl implements AnnotatedMethodLocator {
     private final AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
@@ -32,45 +32,28 @@ public final class AnnotatedMethodLocatorImpl implements AnnotatedMethodLocator 
 
     public <A extends Annotation, T> Collection<Method> locate(final Class<T> cls, final Class<A> runtimeAnnotationType) {
         checkNotNull(cls, runtimeAnnotationType);
-        final List<Method> annotatedMethods = new ArrayList<Method>();
-        final List<Class<?>> searchedClasses = getCurrentAndSuperClasses(cls);
+        final Set<Method> annotatedMethods = new HashSet<Method>();
+        for (final Method method : cls.getMethods()) {
+            //skip java and javax classes since since we wouldn't have annotated them.
+            if (methodIsNotOnAJavaLibraryClass(method) && methodIsAnnotated(runtimeAnnotationType, method)) {
+                annotatedMethods.add(method);
+            }
+        }
 
-        for (final Class<?> clazz : searchedClasses) {
-            for (final Method method : clazz.getDeclaredMethods()) {
-                if (annotationChecker.isAnnotated(method, runtimeAnnotationType, IGNORE)) {
-                    annotatedMethods.add(method);
-                }
+        for (final Method method : cls.getDeclaredMethods()) {
+            if (methodIsAnnotated(runtimeAnnotationType, method)) {
+                annotatedMethods.add(method);
             }
         }
 
         return annotatedMethods;
     }
 
-    @SuppressWarnings({"NestedAssignment"})
-    private List<Class<?>> getCurrentAndSuperClasses(final Class<?> clazz) {
-        final List<Class<?>> classes = new ArrayList<Class<?>>();
-        classes.add(clazz);
-        Class<?> superClazz = clazz;
-
-        while ((superClazz = findSuperClass(superClazz)) != null) {
-            classes.add(superClazz);
-        }
-
-        return classes;
+    private <A extends Annotation, T> boolean methodIsNotOnAJavaLibraryClass(final Method method) {
+        return !classUtil.isJavaLibraryClass(method.getDeclaringClass());
     }
 
-    private Class<?> findSuperClass(final Class<?> clazz) {
-        final Class<?> superClazz = clazz.getSuperclass();
-        //TODO: is this a permature optimization? Remove if unncessary.
-        if (superClazz != null && isNotAJavaLibraryClass(superClazz)) {
-            return clazz.getSuperclass();
-        }
-
-        //TODO: get rid off nulls.
-        return null;
-    }
-
-    private boolean isNotAJavaLibraryClass(Class<?> superClazz) {
-        return !classUtil.isJavaLibraryClass(superClazz);
+    private <A extends Annotation, T> boolean methodIsAnnotated(final Class<A> runtimeAnnotationType, final Method method) {
+        return annotationChecker.isAnnotated(method, runtimeAnnotationType, IGNORE);
     }
 }

@@ -1,5 +1,3 @@
-package com.googlecode.instinct.internal.util;
-
 /*
  * Copyright 2006-2007 Tom Adams
  *
@@ -16,11 +14,20 @@ package com.googlecode.instinct.internal.util;
  * limitations under the License.
  */
 
-public final class ClassUtilImpl implements ClassUtil {
+package com.googlecode.instinct.defect.defect8.data;
 
-    public boolean isJavaLibraryClass(final Class<?> clazz) {
-        final String packageName = clazz.getPackage().getName();
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.annotate.Specification;
+import org.junit.runner.RunWith;
 
-        return packageName.startsWith("java.") || packageName.startsWith("javax.");
+@RunWith(InstinctRunner.class)
+@Context
+public class AnotherContext extends AnotherSuperContext {
+
+    @Specification
+    public void shouldEquateFalseToFalse() {
+        expect.that(false).isFalse();
     }
 }

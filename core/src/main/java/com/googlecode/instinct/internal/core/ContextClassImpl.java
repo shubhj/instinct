@@ -99,7 +99,7 @@ public final class ContextClassImpl extends Primordial implements ContextClass {
         final Collection<LifecycleMethod> list = new ArrayList<LifecycleMethod>();
         final Collection<Method> methods = methodLocator.locateAll(contextType, markingScheme);
         for (final Method method : methods) {
-            list.add(new LifecycleMethodImpl(method));
+            list.add(new LifecycleMethodImpl(method, contextType));
         }
         return list;
     }
