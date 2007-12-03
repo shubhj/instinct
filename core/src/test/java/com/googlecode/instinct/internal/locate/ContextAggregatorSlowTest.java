@@ -22,7 +22,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.marker.annotate.Specification.ALL_GROUPS;
 
 public final class ContextAggregatorSlowTest extends InstinctTestCase {
-    public static final int EXPECTED_CONTEXTS = 28;
+    public static final int EXPECTED_CONTEXTS = 31;
     private ContextFinder finder;
 
     @Override

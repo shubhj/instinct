@@ -17,6 +17,8 @@
 package com.googlecode.instinct.internal.locate;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.ClassUtil;
+import com.googlecode.instinct.internal.util.ClassUtilImpl;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -26,15 +28,49 @@ import java.util.List;
 
 public final class AnnotatedMethodLocatorImpl implements AnnotatedMethodLocator {
     private final AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
+    private final ClassUtil classUtil = new ClassUtilImpl();
 
     public <A extends Annotation, T> Collection<Method> locate(final Class<T> cls, final Class<A> runtimeAnnotationType) {
         checkNotNull(cls, runtimeAnnotationType);
         final List<Method> annotatedMethods = new ArrayList<Method>();
-        for (final Method method : cls.getDeclaredMethods()) {
-            if (annotationChecker.isAnnotated(method, runtimeAnnotationType, IGNORE)) {
-                annotatedMethods.add(method);
+        final List<Class<?>> searchedClasses = getCurrentAndSuperClasses(cls);
+
+        for (final Class<?> clazz : searchedClasses) {
+            for (final Method method : clazz.getDeclaredMethods()) {
+                if (annotationChecker.isAnnotated(method, runtimeAnnotationType, IGNORE)) {
+                    annotatedMethods.add(method);
+                }
             }
         }
+
         return annotatedMethods;
+    }
+
+    @SuppressWarnings({"NestedAssignment"})
+    private List<Class<?>> getCurrentAndSuperClasses(final Class<?> clazz) {
+        final List<Class<?>> classes = new ArrayList<Class<?>>();
+        classes.add(clazz);
+        Class<?> superClazz = clazz;
+
+        while ((superClazz = findSuperClass(superClazz)) != null) {
+            classes.add(superClazz);
+        }
+
+        return classes;
+    }
+
+    private Class<?> findSuperClass(final Class<?> clazz) {
+        final Class<?> superClazz = clazz.getSuperclass();
+        //TODO: is this a permature optimization? Remove if unncessary.
+        if (superClazz != null && isNotAJavaLibraryClass(superClazz)) {
+            return clazz.getSuperclass();
+        }
+
+        //TODO: get rid off nulls.
+        return null;
+    }
+
+    private boolean isNotAJavaLibraryClass(Class<?> superClazz) {
+        return !classUtil.isJavaLibraryClass(superClazz);
     }
 }

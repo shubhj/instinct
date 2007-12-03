@@ -193,9 +193,7 @@
         </inspection_tool>
         <inspection_tool class="LabeledStatement" level="WARNING" enabled="true" />
         <inspection_tool class="SwitchStatementWithConfusingDeclaration" level="WARNING" enabled="true" />
-        <inspection_tool class="LoopConditionNotUpdatedInsideLoop" level="WARNING" enabled="true">
-          <option name="ignoreIterators" value="false" />
-        </inspection_tool>
+        <inspection_tool class="LoopConditionNotUpdatedInsideLoop" level="WARNING" enabled="true" />
         <inspection_tool class="NestedSwitchStatement" level="WARNING" enabled="true" />
         <inspection_tool class="PointlessIndexOfComparison" level="WARNING" enabled="true" />
         <inspection_tool class="SwitchStatement" level="WARNING" enabled="true" />
@@ -280,9 +278,7 @@
         <inspection_tool class="AssertStatement" level="WARNING" enabled="true" />
         <inspection_tool class="AssertAsName" level="WARNING" enabled="true" />
         <inspection_tool class="EnumAsName" level="WARNING" enabled="true" />
-        <inspection_tool class="TestCaseWithNoTestMethods" level="WARNING" enabled="true">
-          <option name="ignoreSupers" value="false" />
-        </inspection_tool>
+        <inspection_tool class="TestCaseWithNoTestMethods" level="WARNING" enabled="true" />
         <inspection_tool class="MisspelledSetUp" level="WARNING" enabled="true" />
         <inspection_tool class="SetupIsPublicVoidNoArg" level="WARNING" enabled="true" />
         <inspection_tool class="SimplifiableJUnitAssertion" level="WARNING" enabled="true" />
