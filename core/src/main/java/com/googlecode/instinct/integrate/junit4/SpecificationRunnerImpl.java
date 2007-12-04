@@ -67,7 +67,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
 
     private Description createDescription(final SpecificationMethod specificationMethod) {
         final String name = createSpecificationName(specificationMethod);
-        return descriptionEdge.createTestDescription(specificationMethod.getDeclaringClass(), name);
+        return descriptionEdge.createTestDescription(specificationMethod.getContextClass(), name);
     }
 
     @Suggest("Push this into the pending specification stuff.")

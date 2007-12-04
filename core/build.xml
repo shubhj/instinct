@@ -42,6 +42,8 @@
                     src.pattern="all.code.pattern"/>
             <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}" src.path="test.code.path"
                     src.pattern="all.code.pattern"/>
+            <compile.macro src.dir="${spec.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}" src.path="spec.code.path"
+                    src.pattern="all.code.pattern"/>
         </sequential>
     </macrodef>
 

@@ -77,10 +77,6 @@ public final class SpecificationMethodImpl extends Primordial implements Specifi
         return specificationMethod;
     }
 
-    public Class<?> getDeclaringClass() {
-        return specificationMethod.getDeclaringClass();
-    }
-
     public Annotation[][] getParameterAnnotations() {
         return specificationMethod.getParameterAnnotations();
     }
@@ -109,6 +105,10 @@ public final class SpecificationMethodImpl extends Primordial implements Specifi
         } else {
             return Specification.NO_MESSAGE;
         }
+    }
+
+    public Class<?> getContextClass() {
+        return specificationMethod.getContextClass();
     }
 
     public String getName() {

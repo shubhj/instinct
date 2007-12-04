@@ -18,12 +18,15 @@
     <property name="lib.dir" value="lib"/>
     <property name="src.dir" value="src/main"/>
     <property name="test.dir" value="src/test"/>
+    <property name="spec.dir" value="src/spec"/>
 
     <property name="main.src.dir" value="${src.dir}/java"/>
     <property name="test.src.dir" value="${test.dir}/java"/>
+    <property name="spec.src.dir" value="${spec.dir}/java"/>
     <property name="properties.src.dir" value="${src.dir}/properties"/>
     <property name="main.classes.dir" value="${build.dir}/main-classes"/>
     <property name="test.classes.dir" value="${build.dir}/test-classes"/>
+    <property name="spec.classes.dir" value="${build.dir}/spec-classes"/>
     <property name="release.dir" value="${build.dir}/release"/>
     <property name="javadoc.dir" value="${build.dir}/javadoc"/>
     <property name="test.results.dir" value="${build.dir}/test-results"/>
@@ -79,6 +82,9 @@
     <path id="test.code.path">
         <pathelement location="${test.src.dir}"/>
     </path>
+    <path id="spec.code.path">
+        <pathelement location="${spec.src.dir}"/>
+    </path>
 
     <path id="main.class.path">
         <pathelement location="${main.classes.dir}"/>
@@ -94,7 +100,6 @@
             <patternset refid="test.classpath.pattern"/>
         </fileset>
     </path>
-
     <path id="atomic.test.class.path">
         <path refid="test.class.path"/>
     </path>

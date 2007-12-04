@@ -23,8 +23,6 @@ public interface LifecycleMethod {
 
     Method getMethod();
 
-    Class<?> getDeclaringClass();
-
     Annotation[] getAnnotations();
 
     Annotation[][] getParameterAnnotations();

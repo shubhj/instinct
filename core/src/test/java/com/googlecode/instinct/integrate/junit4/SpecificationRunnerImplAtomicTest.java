@@ -116,7 +116,7 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
         expect.that(new Expectations() {
             {
                 one(specificationMethod).getName(); will(returnValue("dontCare"));
-                one(specificationMethod).getDeclaringClass(); will(returnValue(String.class));
+                one(specificationMethod).getContextClass(); will(returnValue(String.class));
                 atLeast(1).of(specificationMethod).isPending(); will(returnValue(false));
                 one(descriptionEdge).createTestDescription(String.class, "dontCare"); will(returnValue(description));
                 one(notifier).fireTestStarted(description);

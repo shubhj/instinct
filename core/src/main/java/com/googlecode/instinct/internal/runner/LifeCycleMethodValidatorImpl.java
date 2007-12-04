@@ -35,7 +35,7 @@ final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
     public void checkMethodHasNoParameters(final LifecycleMethod method) {
         checkNotNull(method);
         if (method.getMethod().getParameterTypes().length > 0 && !annotationFinder.hasAnnotation(ForAll.class, method.getParameterAnnotations())) {
-            final String methodDetails = method.getDeclaringClass().getSimpleName() + '.' + method.getName() + "(...)";
+            final String methodDetails = method.getContextClass().getSimpleName() + '.' + method.getName() + "(...)";
             final String message = "Unable to run context. Specifaction method '" + methodDetails + "' cannot have parameters";
             throw new LifeCycleMethodConfigurationException(message);
         }

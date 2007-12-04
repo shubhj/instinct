@@ -19,10 +19,8 @@ package com.googlecode.instinct.internal.core;
 import au.net.netstorm.boost.primordial.Primordial;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import static java.lang.reflect.Modifier.isAbstract;
 
 public final class LifecycleMethodImpl extends Primordial implements LifecycleMethod {
     private final Method method;
@@ -49,15 +47,6 @@ public final class LifecycleMethodImpl extends Primordial implements LifecycleMe
         return method;
     }
 
-    @Suggest("Find a better way to return the declaring class when it's abstract.")
-    public Class<?> getDeclaringClass() {
-        if  (isAbstract(method.getDeclaringClass().getModifiers())) {
-            return contextClass;
-        }
-
-        return method.getDeclaringClass();
-    }
-
     public Annotation[] getAnnotations() {
         return method.getAnnotations();
     }
@@ -67,6 +56,6 @@ public final class LifecycleMethodImpl extends Primordial implements LifecycleMe
     }
 
     public Class<?> getContextClass() {
-        return contextClass; 
+        return contextClass;
     }
 }

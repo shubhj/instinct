@@ -23,19 +23,19 @@ import com.googlecode.instinct.marker.annotate.Specification;
 public class StaticBaseContext {
 
     @SuppressWarnings({"StaticNonFinalField"})
-    private boolean flag;
+    private static boolean flag;
 
-    @Specification(expectedException = RuntimeException.class, withMessage = "Indicates that @AfterSpecification was invoked.")
-    public void shouldWaysBeFalse() {
+    @Specification
+    public static void shouldWaysBeFalse() {
         expect.that(false).isFalse();
     }
 
-    public boolean isFlag() {
+    public static boolean isFlag() {
         return flag;
     }
 
     @BeforeSpecification
-    public void setup() {
+    public static void setup() {
         flag = true;
     }
 }

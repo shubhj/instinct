@@ -114,11 +114,11 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
     public void testReturnsDeclaringClassOfLifecycleMethod() {
         expect.that(new Expectations() {
             {
-                atLeast(1).of(specMethod).getDeclaringClass();
+                atLeast(1).of(specMethod).getContextClass();
                 will(returnValue(declaringClass));
             }
         });
-        assertEquals(declaringClass, specificationMethod.getDeclaringClass());
+        assertEquals(declaringClass, specificationMethod.getContextClass());
     }
 
     public void testReturnsNameFromUnderlyingLifecycleMethod() {
