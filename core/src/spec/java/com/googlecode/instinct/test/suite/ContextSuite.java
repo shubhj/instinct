@@ -19,6 +19,9 @@ package com.googlecode.instinct.test.suite;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithAnAnnotationMethodLocator;
 import com.googlecode.instinct.defect.defect8.data.AContext;
 import com.googlecode.instinct.defect.defect8.data.AnotherContext;
+import com.googlecode.instinct.defect.defect8.data.StaticSubContext;
+import com.googlecode.instinct.defect.defect8.data.ASubContextOfAAnAccessRestrictedClass;
+import com.googlecode.instinct.defect.defect8.data.ASubContextWithAfter;
 import com.googlecode.instinct.internal.locate.AHierarchicalMethodLocatorContext;
 import com.googlecode.instinct.internal.locate.AnAnnotatedMethodLocatorContext;
 import org.junit.runner.RunWith;
@@ -30,7 +33,9 @@ import org.junit.runners.Suite;
                      AHierarchicalMethodLocatorContext.class,
                      AContext.class,
                      AnotherContext.class,
-                     AllTestSuite.class})
+                     StaticSubContext.class,
+                     ASubContextWithAfter.class,
+                     ASubContextOfAAnAccessRestrictedClass.class})
 public final class ContextSuite {
     //Suite classs.
 }
