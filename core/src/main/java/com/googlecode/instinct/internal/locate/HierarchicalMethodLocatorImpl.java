@@ -25,9 +25,8 @@ import java.util.Set;
 public final class HierarchicalMethodLocatorImpl implements HierarchicalMethodLocator {
 
     public Set<Method> locate(final Class<?> cls) {
-        final List<Method> methodList = getAllMethodsForClass(cls);
         final Set<Method> methods = new HashSet<Method>();
-        methods.addAll(methodList);
+        methods.addAll(getAllMethodsForClass(cls));
 
         Class<?> superClass = cls.getSuperclass();
         while(superClass != null) {
