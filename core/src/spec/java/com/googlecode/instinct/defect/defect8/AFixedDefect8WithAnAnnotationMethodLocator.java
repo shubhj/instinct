@@ -39,7 +39,7 @@ public class AFixedDefect8WithAnAnnotationMethodLocator {
     private final AnnotatedMethodLocator locator = new AnnotatedMethodLocatorImpl();
 
     @Specification
-    public void shouldReturnABeforeSpeciifcationDefinedInABaseClass() {
+    public void shouldReturnABeforeSpecificationDefinedInABaseClass() {
         final Collection<Method> methods = locator.locate(AContext.class, BeforeSpecification.class);
         expect.that(methods).hasSize(1);
         expect.that(methods.iterator().next().getName()).equalTo("setup");
@@ -56,13 +56,19 @@ public class AFixedDefect8WithAnAnnotationMethodLocator {
     public void shouldReturnSpecificationsInAContextAndItsBaseClasses() {
         final Collection<Method> methods = locator.locate(AnotherContext.class, Specification.class);
         expect.that(methods).hasSize(2);
-        final Iterator<Method> methodIterator = methods.iterator();
-        final List<String> expectList = new ArrayList<String>();
 
+        final List<String> expectList = new ArrayList<String>();
         expectList.add("shouldEquateTrueToTrue");
         expectList.add("shouldEquateFalseToFalse");
 
+        final Iterator<Method> methodIterator = methods.iterator();
         expect.that(expectList).containsItem(methodIterator.next().getName());
         expect.that(expectList).containsItem(methodIterator.next().getName());
+    }
+
+    @Specification
+    public void shouldReturnStaticSpecifications() {
+        final Collection<Method> methods = locator.locate(AContext.class, Specification.class);
+        expect.that(methods).hasSize(1);
     }
 }

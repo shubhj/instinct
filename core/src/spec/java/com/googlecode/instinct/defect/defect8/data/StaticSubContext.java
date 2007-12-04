@@ -16,18 +16,24 @@
 
 package com.googlecode.instinct.defect.defect8.data;
 
-import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.marker.annotate.Context;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.marker.annotate.AfterSpecification;
+import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.annotate.Specification;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
 @Context
-public class AnotherSuperContext {
+public final class StaticSubContext extends StaticBaseContext {
 
-    @Specification
-    public void shouldEquateTrueToTrue() {
-        expect.that(true).isTrue();
+    @AfterSpecification
+    public void tearDown() {
+        throw new RuntimeException("Indicates that @AfterSpecification was invoked.");
+    }
+
+    @Specification(expectedException = RuntimeException.class, withMessage = "Indicates that @AfterSpecification was invoked.")
+    public void shouldCallBeforeSpecification() {
+        expect.that(isFlag()).isTrue();
     }
 }

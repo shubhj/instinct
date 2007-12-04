@@ -16,18 +16,25 @@
 
 package com.googlecode.instinct.defect.defect8.data;
 
-import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.marker.annotate.Context;
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import org.junit.runner.RunWith;
+import com.googlecode.instinct.marker.annotate.BeforeSpecification;
+import com.googlecode.instinct.marker.annotate.Specification;
 
-@RunWith(InstinctRunner.class)
-@Context
-public class AnotherSuperContext {
+public class AContextWithBefore {
+
+    private boolean success;
 
     @Specification
-    public void shouldEquateTrueToTrue() {
-        expect.that(true).isTrue();
+    public void shouldAlwaysBeTrue() {
+        expect.that(success).isTrue();
+    }
+
+    @BeforeSpecification
+    public void setup() {
+        success = true;
+    }
+
+    public boolean isSuccess() {
+        return success;
     }
 }

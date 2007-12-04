@@ -65,4 +65,8 @@ public final class LifecycleMethodImpl extends Primordial implements LifecycleMe
     public Annotation[][] getParameterAnnotations() {
         return method.getParameterAnnotations();
     }
+
+    public Class<?> getContextClass() {
+        return contextClass; 
+    }
 }

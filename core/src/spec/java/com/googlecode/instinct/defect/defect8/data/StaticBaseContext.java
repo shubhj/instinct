@@ -16,18 +16,26 @@
 
 package com.googlecode.instinct.defect.defect8.data;
 
-import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.marker.annotate.Context;
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import org.junit.runner.RunWith;
+import com.googlecode.instinct.marker.annotate.BeforeSpecification;
+import com.googlecode.instinct.marker.annotate.Specification;
 
-@RunWith(InstinctRunner.class)
-@Context
-public class AnotherSuperContext {
+public class StaticBaseContext {
 
-    @Specification
-    public void shouldEquateTrueToTrue() {
-        expect.that(true).isTrue();
+    @SuppressWarnings({"StaticNonFinalField"})
+    private boolean flag;
+
+    @Specification(expectedException = RuntimeException.class, withMessage = "Indicates that @AfterSpecification was invoked.")
+    public void shouldWaysBeFalse() {
+        expect.that(false).isFalse();
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    @BeforeSpecification
+    public void setup() {
+        flag = true;
     }
 }

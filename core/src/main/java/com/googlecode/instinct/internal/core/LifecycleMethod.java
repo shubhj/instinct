@@ -28,4 +28,6 @@ public interface LifecycleMethod {
     Annotation[] getAnnotations();
 
     Annotation[][] getParameterAnnotations();
+
+    Class<?> getContextClass();
 }

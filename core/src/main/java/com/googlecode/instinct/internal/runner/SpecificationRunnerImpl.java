@@ -75,7 +75,8 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         final Class<? extends Throwable> expectedException = specificationMethod.getExpectedException();
         try {
             // expose the context class, rather than getting the method
-            final Class<?> contextClass = specificationMethod.getSpecificationMethod().getDeclaringClass();
+//            final Class<?> contextClass = specificationMethod.getSpecificationMethod().getDeclaringClass();
+            final Class<?> contextClass = specificationMethod.getSpecificationMethod().getContextClass();
             final Object instance = invokeConstructor(contextClass);
             runSpecificationLifecycle(instance, specificationMethod);
             if (expectedException.equals(Specification.NoExpectedException.class)) {
