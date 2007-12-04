@@ -1,5 +1,3 @@
-package com.googlecode.instinct.internal.util;
-
 /*
  * Copyright 2006-2007 Tom Adams
  *
@@ -16,10 +14,12 @@ package com.googlecode.instinct.internal.util;
  * limitations under the License.
  */
 
-public final class ClassUtilImpl implements ClassUtil {
+package com.googlecode.instinct.internal.locate;
 
-    public boolean isJavaLibraryClass(final Class<?> cls) {
-        final String packageName = cls.getPackage().getName();
-        return packageName.startsWith("java.") || packageName.startsWith("javax.");
-    }
+import java.lang.reflect.Method;
+import java.util.Set;
+
+public interface HierarchicalMethodLocator {
+
+    Set<Method> locate(Class<?> cls);
 }

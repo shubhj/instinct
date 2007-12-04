@@ -18,5 +18,5 @@ package com.googlecode.instinct.internal.util;
 
 public interface ClassUtil {
 
-    boolean isJavaLibraryClass(Class<?> clazz);
+    boolean isJavaLibraryClass(Class<?> cls);
 }

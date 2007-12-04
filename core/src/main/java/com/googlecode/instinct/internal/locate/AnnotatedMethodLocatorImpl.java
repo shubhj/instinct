@@ -16,31 +16,22 @@
 
 package com.googlecode.instinct.internal.locate;
 
-import com.googlecode.instinct.internal.util.ClassUtil;
-import com.googlecode.instinct.internal.util.ClassUtilImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 public final class AnnotatedMethodLocatorImpl implements AnnotatedMethodLocator {
     private final AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
-    private final ClassUtil classUtil = new ClassUtilImpl();
 
     public <A extends Annotation, T> Collection<Method> locate(final Class<T> cls, final Class<A> runtimeAnnotationType) {
         checkNotNull(cls, runtimeAnnotationType);
         final Set<Method> annotatedMethods = new HashSet<Method>();
-        for (final Method method : cls.getMethods()) {
-            //skip java and javax classes since since we wouldn't have annotated them.
-            if (methodIsNotOnAJavaLibraryClass(method) && methodIsAnnotated(runtimeAnnotationType, method)) {
-                annotatedMethods.add(method);
-            }
-        }
-
-        for (final Method method : cls.getDeclaredMethods()) {
+        for (final Method method : findMethods(cls)) {
             if (methodIsAnnotated(runtimeAnnotationType, method)) {
                 annotatedMethods.add(method);
             }
@@ -49,8 +40,11 @@ public final class AnnotatedMethodLocatorImpl implements AnnotatedMethodLocator 
         return annotatedMethods;
     }
 
-    private <A extends Annotation, T> boolean methodIsNotOnAJavaLibraryClass(final Method method) {
-        return !classUtil.isJavaLibraryClass(method.getDeclaringClass());
+    private Set<Method> findMethods(final Class<?> cls) {
+        final Set<Method> methods = new HashSet<Method>();
+        methods.addAll(Arrays.<Method>asList(cls.getMethods()));
+        methods.addAll(Arrays.<Method>asList(cls.getDeclaredMethods()));
+        return methods;
     }
 
     private <A extends Annotation, T> boolean methodIsAnnotated(final Class<A> runtimeAnnotationType, final Method method) {

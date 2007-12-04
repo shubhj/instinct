@@ -19,12 +19,14 @@ package com.googlecode.instinct.internal.locate;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.JavaClassName;
+import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.marker.annotate.Specification.ALL_GROUPS;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 @Fix("This is a very brittle spec. Everytime we add a new Spec this breaks!")
+@Suggest("Could we have a sample directory of some sort that contains a known number of specs?")
 public final class ContextAggregatorSlowTest extends InstinctTestCase {
-    public static final int EXPECTED_CONTEXTS = 34;
+    public static final int EXPECTED_CONTEXTS = 35;
     private ContextFinder finder;
 
     @Override

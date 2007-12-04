@@ -16,6 +16,8 @@
 
 package com.googlecode.instinct.defect.defect8;
 
+import com.googlecode.instinct.defect.defect8.data.AContext;
+import com.googlecode.instinct.defect.defect8.data.AnotherContext;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.internal.locate.AnnotatedMethodLocator;
@@ -24,8 +26,6 @@ import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.defect.defect8.data.AnotherContext;
-import com.googlecode.instinct.defect.defect8.data.AContext;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -58,9 +58,11 @@ public class AFixedDefect8WithAnAnnotationMethodLocator {
         expect.that(methods).hasSize(2);
         final Iterator<Method> methodIterator = methods.iterator();
         final List<String> expectList = new ArrayList<String>();
+
         expectList.add("shouldEquateTrueToTrue");
         expectList.add("shouldEquateFalseToFalse");
-        expect.that(expectList.contains(methodIterator.next().getName())).isTrue();
-        expect.that(expectList.contains(methodIterator.next().getName())).isTrue();
+
+        expect.that(expectList).containsItem(methodIterator.next().getName());
+        expect.that(expectList).containsItem(methodIterator.next().getName());
     }
 }
