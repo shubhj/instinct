@@ -18,13 +18,10 @@ package com.googlecode.instinct.defect.defect8;
 
 import com.googlecode.instinct.defect.defect8.data.AContext;
 import com.googlecode.instinct.defect.defect8.data.ASubContextOfAAnAccessRestrictedClass;
-import com.googlecode.instinct.defect.defect8.data.ASubContextOverridingExceptionalMethods;
 import com.googlecode.instinct.defect.defect8.data.AnotherContext;
 import com.googlecode.instinct.defect.defect8.data.StaticSubContext;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.internal.core.ContextClass;
-import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.locate.AnnotatedMethodLocator;
 import com.googlecode.instinct.internal.locate.AnnotatedMethodLocatorImpl;
 import com.googlecode.instinct.internal.locate.MarkedMethodLocator;
@@ -84,11 +81,5 @@ public class AFixedDefect8WithAnAnnotationMethodLocator {
     public void shouldReturnSpecificationsOfAllVisibilitiesFromAContextAndItsBaseClasses() {
         final Collection<Method> methods = locator.locate(ASubContextOfAAnAccessRestrictedClass.class, Specification.class);
         expect.that(methods).hasSize(4);
-    }
-
-    @Specification
-    public void shouldReturnAnOverridenSpecOnly() {
-        final ContextClass contextClass = new ContextClassImpl(ASubContextOverridingExceptionalMethods.class);
-        expect.that(contextClass.getSpecificationMethods()).hasSize(2);
     }
 }

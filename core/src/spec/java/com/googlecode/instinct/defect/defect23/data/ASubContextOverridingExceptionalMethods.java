@@ -14,30 +14,39 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.defect.defect8.data;
+package com.googlecode.instinct.defect.defect23.data;
 
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
+import org.junit.runner.RunWith;
 
-public class ABaseContextWithExceptionalMethods {
+@RunWith(InstinctRunner.class)
+public class ASubContextOverridingExceptionalMethods extends ABaseContextWithExceptionalMethods {
 
+    @Override
     @BeforeSpecification
     public void setup() {
-        throw new IllegalStateException("setup should be called from subclasses");
+        //do nothing.
     }
 
+    @Override
     @AfterSpecification
     public void tearDown() {
-        throw new IllegalStateException("tearDown should be called from subclasses");
+        //do nothing.
     }
 
+    @Override
     @Specification
     public void shouldBeCalledFromSubclasses() {
-        throw new IllegalStateException("shouldBeCalledFromSubclasses should be called from subclasses");
+        expect.that(true).isTrue();
     }
 
+    @Override
+    @Specification
     public void shouldAlsoBeCalledFromSubclasses() {
-        throw new IllegalStateException("shouldAlsoBeCalledFromSubclasses should be called from subclasses");
+        expect.that(true).isTrue();
     }
 }
