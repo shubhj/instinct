@@ -20,7 +20,7 @@ import com.googlecode.instinct.defect.defect23.data.ASubContextOverridingExcepti
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithANamingConventionLocator;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithAnAnnotationMethodLocator;
 import com.googlecode.instinct.defect.defect8.data.annotation.AContext;
-import com.googlecode.instinct.defect.defect8.data.annotation.ASubContextOfAAnAccessRestrictedClass;
+import com.googlecode.instinct.defect.defect8.data.annotation.ASubContextOfAnAccessRestrictedContext;
 import com.googlecode.instinct.defect.defect8.data.annotation.ASubContextWithAfter;
 import com.googlecode.instinct.defect.defect8.data.annotation.AnotherContext;
 import com.googlecode.instinct.defect.defect8.data.annotation.StaticSubContext;
@@ -38,7 +38,7 @@ import org.junit.runners.Suite;
                      StaticSubContext.class,
                      ASubContextWithAfter.class,
                      ASubContextOverridingExceptionalMethods.class,
-                     ASubContextOfAAnAccessRestrictedClass.class,
+                     ASubContextOfAnAccessRestrictedContext.class,
                      AFixedDefect8WithANamingConventionLocator.class})
 public final class ContextSuite {
     //Suite classs.

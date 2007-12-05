@@ -17,6 +17,8 @@
 package com.googlecode.instinct.defect.defect8;
 
 import com.googlecode.instinct.defect.defect8.data.naming.ASubContext;
+import com.googlecode.instinct.defect.defect8.data.naming.StaticSubContext;
+import com.googlecode.instinct.defect.defect8.data.naming.ASubContextOfAnAccessRestrictedContext;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.internal.locate.NamingConventionMethodLocator;
@@ -42,26 +44,52 @@ public class AFixedDefect8WithANamingConventionLocator {
     @Specification
     public void shouldReturnBeforeSpecificationsDefinedInABaseClass() {
         final List<String> methodList = createMethodList("setup", "setUp", "givenSomething", "before");
-        expectNamingConventionIsFollowed(new BeforeSpecificationNamingConvention(), methodList.size(), methodList);
+        expectNamingConventionIsFollowed(ASubContext.class, new BeforeSpecificationNamingConvention(), methodList.size(), methodList);
     }
 
     @Specification
     public void shouldReturnAfterSpecificationsDefinedInABaseClass() {
         final List<String> methodList = createMethodList("tearDown", "teardown", "after");
-        expectNamingConventionIsFollowed(new AfterSpecificationNamingConvention(), methodList.size(), methodList);
+        expectNamingConventionIsFollowed(ASubContext.class, new AfterSpecificationNamingConvention(), methodList.size(), methodList);
     }
 
     @Specification
     public void shouldReturnSpecificationsInAContextAndItsBaseClasses() {
         final List<String> methodList = createMethodList("mustBeCalledFromTheSuperClass", "shouldBeCalledFromTheSuperClass",
                 "mustBeCalledFromTheSubClass", "shouldBeCalledFromTheSubClass");
-        expectNamingConventionIsFollowed(new SpecificationNamingConvention(), methodList.size(), methodList);
+        expectNamingConventionIsFollowed(ASubContext.class, new SpecificationNamingConvention(), methodList.size(), methodList);
     }
 
-    private void expectNamingConventionIsFollowed(final NamingConvention namingConvention, final int numOfExpectedMethods,
-            final List<String> expectedMethodNames) {
+    @Specification
+    public void shouldReturnStaticBeforeSpecificationsInAContextAndItsBasesClasses() {
+        final List<String> beforeList = createMethodList("setup", "setUp", "givenStatic", "before");
+        expectNamingConventionIsFollowed(StaticSubContext.class, new BeforeSpecificationNamingConvention(), beforeList.size(), beforeList);
+    }
+
+    @Specification
+    public void shouldReturnStaticAfterSpecificationsInAContextAndItsBasesClasses() {
+        final List<String> afterList = createMethodList("tearDown", "teardown", "after");
+        expectNamingConventionIsFollowed(StaticSubContext.class, new AfterSpecificationNamingConvention(), afterList.size(), afterList);
+    }
+
+    @Specification
+    public void shouldReturnStaticSpecificationsInAContextAndItsBasesClasses() {
+        final List<String> specList = createMethodList("shouldDoSomething", "mustDoSomething");
+        expectNamingConventionIsFollowed(StaticSubContext.class, new SpecificationNamingConvention(), specList.size(), specList);
+    }
+
+    @Specification
+    public void shouldReturnSpecificationsOfAllVisibilitiesFromAContextAndItsBaseClasses() {
+        final List<String> specList = createMethodList("shouldRunPrivateSpecsLocally", "mustRunPrivateSpecsLocally", "shouldRunParentSpecs",
+                "shouldRunProtectedSpecs", "shouldRunDefaultSpecs", "shouldRunPrivateSpecs");       
+        expectNamingConventionIsFollowed(ASubContextOfAnAccessRestrictedContext.class, new SpecificationNamingConvention(), specList.size(),
+                specList);
+    }
+
+    private void expectNamingConventionIsFollowed(final Class<?> targetClass, final NamingConvention namingConvention,
+            final int numOfExpectedMethods, final List<String> expectedMethodNames) {
         final Collection<Method> locatedMethods =
-                locator.locate(ASubContext.class, namingConvention);
+                locator.locate(targetClass, namingConvention);
 
         expect.that(locatedMethods).hasSize(numOfExpectedMethods);
         for (final Method aLocatedMethod : locatedMethods) {

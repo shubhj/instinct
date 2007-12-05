@@ -17,7 +17,7 @@
 package com.googlecode.instinct.defect.defect8;
 
 import com.googlecode.instinct.defect.defect8.data.annotation.AContext;
-import com.googlecode.instinct.defect.defect8.data.annotation.ASubContextOfAAnAccessRestrictedClass;
+import com.googlecode.instinct.defect.defect8.data.annotation.ASubContextOfAnAccessRestrictedContext;
 import com.googlecode.instinct.defect.defect8.data.annotation.AnotherContext;
 import com.googlecode.instinct.defect.defect8.data.annotation.StaticSubContext;
 import static com.googlecode.instinct.expect.Expect.expect;
@@ -76,7 +76,7 @@ public class AFixedDefect8WithAnAnnotationMethodLocator {
 
     @Specification
     public void shouldReturnSpecificationsOfAllVisibilitiesFromAContextAndItsBaseClasses() {
-        final Collection<Method> methods = locator.locate(ASubContextOfAAnAccessRestrictedClass.class, Specification.class);
+        final Collection<Method> methods = locator.locate(ASubContextOfAnAccessRestrictedContext.class, Specification.class);
         expect.that(methods).hasSize(4);
     }
 }

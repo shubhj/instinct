@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.defect.defect8.data.annotation;
+package com.googlecode.instinct.defect.defect8.data.naming;
 
-import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.Context;
-import com.googlecode.instinct.marker.annotate.Specification;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
 @Context
-public class ASubContextOfAAnAccessRestrictedClass extends AnAccessRestrictedClass {
+public class StaticSubContext extends StaticBaseContext {
 
-    @Specification
-    private void shouldRunParentSpecs() {
-        expect.that(false).isFalse();
-    }
+    public static void shouldDoSomething() { }
+    public static void after() { }
+    public static void tearDown() { }
 }
