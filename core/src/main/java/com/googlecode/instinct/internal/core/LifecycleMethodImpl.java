@@ -24,7 +24,7 @@ import java.lang.reflect.Method;
 
 public final class LifecycleMethodImpl extends Primordial implements LifecycleMethod {
     private final Method method;
-    private final Class<?> contextClass;
+    private final Class<?> contextClass;    
 
     @Fix("Can't call this() because of the null check :| Remove this duplication if possible.")
     public LifecycleMethodImpl(final Method method) {

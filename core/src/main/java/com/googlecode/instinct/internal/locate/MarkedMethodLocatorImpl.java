@@ -28,6 +28,7 @@ import java.util.HashSet;
 public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
     private final AnnotatedMethodLocator annotatedMethodLocator = new AnnotatedMethodLocatorImpl();
     private final NamingConventionMethodLocator namingConventionMethodLocator = new NamingConventionMethodLocatorImpl();
+    private final OverridenMethodRemover overridenMethodRemover = new OverridenMethodRemoverImpl();
 
     @Suggest("Return an unmodifiable collection.")
     public <T> Collection<Method> locateAll(final Class<T> cls, final MarkingScheme markingScheme) {
@@ -37,7 +38,7 @@ public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
         final Collection<Method> methods = new HashSet<Method>();
         methods.addAll(annotatedMethods);
         methods.addAll(namedMethods);
-        return methods;
+        return overridenMethodRemover.removeOverridenMethods(methods);
     }
 
     private <T> Collection<Method> findMethodsByNamingConvention(final Class<T> cls, final NamingConvention namingConvention) {
