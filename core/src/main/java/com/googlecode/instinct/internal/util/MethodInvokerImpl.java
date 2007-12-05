@@ -21,10 +21,10 @@ import java.lang.reflect.Method;
 
 @Suggest("Test this.")
 public final class MethodInvokerImpl implements MethodInvoker {
-    private static final Object[] NO_PARAMS = {};
+    private static final Object[] WITH_NO_PARAMS = {};
 
     public Object invokeMethod(final Object instance, final Method method) {
-        return invokeMethod(instance, method, NO_PARAMS);
+        return invokeMethod(instance, method, WITH_NO_PARAMS);
     }
 
     public Object invokeMethod(final Object instance, final Method method, final Object... params) {

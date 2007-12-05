@@ -18,4 +18,6 @@ package com.googlecode.instinct.internal.edge.java.lang.reflect;
 
 public interface MethodEdge {
     String getName();
+
+    Object invoke(Object obj, Object... args);
 }

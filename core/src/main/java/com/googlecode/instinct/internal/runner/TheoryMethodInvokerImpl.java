@@ -16,21 +16,28 @@
 
 package com.googlecode.instinct.internal.runner;
 
+import com.googlecode.instinct.internal.edge.java.lang.reflect.MethodEdge;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.MethodEdgeImpl;
 import com.googlecode.instinct.internal.util.MethodInvoker;
-import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import com.googlecode.instinct.internal.util.ParamChecker;
+import com.googlecode.instinct.internal.util.Suggest;
 
 import java.lang.reflect.Method;
 
 @Suggest("Test drive this.")
 public final class TheoryMethodInvokerImpl implements MethodInvoker {
+    private final ObjectFactory factory = new ObjectFactoryImpl();
+    // This method should never get called.
     public Object invokeMethod(final Object instance, final Method method) {
         ParamChecker.checkNotNull(instance, method);
-        return null;
+        throw new NotAValidTheoryMethodException();
     }
 
     public Object invokeMethod(final Object instance, final Method method, final Object... params) {
         ParamChecker.checkNotNull(instance, method, params);
-        return null;
+        final MethodEdge methodEdge = factory.create(MethodEdgeImpl.class, method);
+        return methodEdge.invoke(instance, method, 5);
     }
 }
