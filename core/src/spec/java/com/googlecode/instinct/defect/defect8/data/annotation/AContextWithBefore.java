@@ -14,20 +14,27 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.defect.defect8.data;
+package com.googlecode.instinct.defect.defect8.data.annotation;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
-import org.junit.runner.RunWith;
 
-@RunWith(InstinctRunner.class)
-@Context
-public class AnotherContext extends AnotherSuperContext {
+public class AContextWithBefore {
+
+    private boolean success;
 
     @Specification
-    public void shouldEquateFalseToFalse() {
-        expect.that(false).isFalse();
+    public void shouldAlwaysBeTrue() {
+        expect.that(success).isTrue();
+    }
+
+    @BeforeSpecification
+    public void setup() {
+        success = true;
+    }
+
+    public boolean isSuccess() {
+        return success;
     }
 }

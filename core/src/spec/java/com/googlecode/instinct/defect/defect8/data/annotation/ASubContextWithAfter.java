@@ -14,28 +14,26 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.defect.defect8.data;
+package com.googlecode.instinct.defect.defect8.data.annotation;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.marker.annotate.BeforeSpecification;
+import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.marker.annotate.AfterSpecification;
+import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
+import org.junit.runner.RunWith;
 
-public class StaticBaseContext {
-
-    @SuppressWarnings({"StaticNonFinalField"})
-    private static boolean flag;
+@RunWith(InstinctRunner.class)
+@Context
+public class ASubContextWithAfter extends AContextWithBefore {
 
     @Specification
-    public static void shouldWaysBeFalse() {
-        expect.that(false).isFalse();
+    public void shouldAlwaysReturnTrue() {
+        expect.that(isSuccess()).isTrue();
     }
 
-    public static boolean isFlag() {
-        return flag;
-    }
-
-    @BeforeSpecification
-    public static void setup() {
-        flag = true;
+    @AfterSpecification
+    public void tearDown() {
+        //do nothing
     }
 }

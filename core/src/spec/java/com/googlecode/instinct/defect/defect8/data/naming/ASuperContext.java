@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Workingmouse
+ * Copyright 2006-2007 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,24 +14,20 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.defect.defect8.data;
+package com.googlecode.instinct.defect.defect8.data.naming;
 
-import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.marker.annotate.Specification;
 
-public class AnAccessRestrictedClass {
+@SuppressWarnings({"MethodNamesDifferingOnlyByCase"})
+public class ASuperContext {
 
-    @Specification
-    protected void shouldRunProtectedSpecs() {
-        expect.that(true).isTrue();
-    }
-    @Specification
-    void shouldRunDefaultSpecs() {
-        expect.that(true).isTrue();
-    }
+    public void setup() { }
+    public void setUp() { }
+    public void givenSomething() { }
+    public void before() { }
+    public void tearDown() { }
+    public void teardown() { }
+    public void after() { }
+    public void mustBeCalledFromTheSuperClass() { }
+    public void shouldBeCalledFromTheSuperClass() { }
 
-    @Specification
-    private void shouldRunPrivateSpecs() {
-        expect.that(true).isTrue();
-    }
 }

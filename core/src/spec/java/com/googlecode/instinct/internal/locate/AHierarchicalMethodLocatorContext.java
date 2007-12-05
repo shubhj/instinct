@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.internal.locate;
 
-import com.googlecode.instinct.defect.defect8.data.AContext;
-import com.googlecode.instinct.defect.defect8.data.SuperContext;
+import com.googlecode.instinct.defect.defect8.data.annotation.AContext;
+import com.googlecode.instinct.defect.defect8.data.annotation.SuperContext;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.expect.ExpectAtomicTest;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;

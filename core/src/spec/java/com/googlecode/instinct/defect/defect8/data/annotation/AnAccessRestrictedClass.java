@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,26 +14,24 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.defect.defect8.data;
+package com.googlecode.instinct.defect.defect8.data.annotation;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.marker.annotate.AfterSpecification;
-import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
-import org.junit.runner.RunWith;
 
-@RunWith(InstinctRunner.class)
-@Context
-public class ASubContextWithAfter extends AContextWithBefore {
+public class AnAccessRestrictedClass {
 
     @Specification
-    public void shouldAlwaysReturnTrue() {
-        expect.that(isSuccess()).isTrue();
+    protected void shouldRunProtectedSpecs() {
+        expect.that(true).isTrue();
+    }
+    @Specification
+    void shouldRunDefaultSpecs() {
+        expect.that(true).isTrue();
     }
 
-    @AfterSpecification
-    public void tearDown() {
-        //do nothing
+    @Specification
+    private void shouldRunPrivateSpecs() {
+        expect.that(true).isTrue();
     }
 }

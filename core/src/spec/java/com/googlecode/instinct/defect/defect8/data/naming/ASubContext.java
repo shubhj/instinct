@@ -14,26 +14,16 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.defect.defect8.data;
+package com.googlecode.instinct.defect.defect8.data.naming;
 
-import com.googlecode.instinct.marker.annotate.AfterSpecification;
-import com.googlecode.instinct.marker.annotate.BeforeSpecification;
+import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.marker.annotate.Context;
+import org.junit.runner.RunWith;
 
-@SuppressWarnings({"AbstractClassWithoutAbstractMethods"})
-public abstract class SuperContext {
-    private boolean flag;
+@RunWith(InstinctRunner.class)
+@Context
+public class ASubContext extends ASuperContext {
 
-    @BeforeSpecification
-    public void setup() {
-        flag = true;
-    }
-
-    public boolean isFlag() {
-        return flag;
-    }
-
-    @AfterSpecification
-    public void tearDown() {
-        throw new RuntimeException("Indicates that @AfterSpecification was invoked.");
-    }
+    public void mustBeCalledFromTheSubClass() { }
+    public void shouldBeCalledFromTheSubClass() { }
 }
