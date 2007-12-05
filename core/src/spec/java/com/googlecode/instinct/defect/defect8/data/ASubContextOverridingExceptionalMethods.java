@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.defect.defect8.data;
 
-import com.googlecode.instinct.expect.Expect;
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
@@ -41,6 +41,12 @@ public class ASubContextOverridingExceptionalMethods extends ABaseContextWithExc
     @Override
     @Specification
     public void shouldBeCalledFromSubclasses() {
-        Expect.expect.that(true).isTrue();
+        expect.that(true).isTrue();
+    }
+
+    @Override
+    @Specification
+    public void shouldAlsoBeCalledFromSubclasses() {
+        expect.that(true).isTrue();
     }
 }

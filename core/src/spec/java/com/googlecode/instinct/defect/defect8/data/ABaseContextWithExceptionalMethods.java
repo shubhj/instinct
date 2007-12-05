@@ -36,4 +36,8 @@ public class ABaseContextWithExceptionalMethods {
     public void shouldBeCalledFromSubclasses() {
         throw new IllegalStateException("shouldBeCalledFromSubclasses should be called from subclasses");
     }
+
+    public void shouldAlsoBeCalledFromSubclasses() {
+        throw new IllegalStateException("shouldAlsoBeCalledFromSubclasses should be called from subclasses");
+    }
 }

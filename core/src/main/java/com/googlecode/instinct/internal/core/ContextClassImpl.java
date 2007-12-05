@@ -38,6 +38,8 @@ import com.googlecode.instinct.runner.SpecificationListener;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @SuppressWarnings({"OverlyCoupledClass"})
 public final class ContextClassImpl extends Primordial implements ContextClass {
@@ -96,11 +98,11 @@ public final class ContextClassImpl extends Primordial implements ContextClass {
     }
 
     private Collection<LifecycleMethod> findMethods(final MarkingScheme markingScheme) {
-        final Collection<LifecycleMethod> list = new ArrayList<LifecycleMethod>();
+        final Set<LifecycleMethod> lifecycleMethodSet = new HashSet<LifecycleMethod>();
         final Collection<Method> methods = methodLocator.locateAll(contextType, markingScheme);
         for (final Method method : methods) {
-            list.add(new LifecycleMethodImpl(method, contextType));
+            lifecycleMethodSet.add(new LifecycleMethodImpl(method, contextType));
         }
-        return list;
+        return lifecycleMethodSet;
     }
 }

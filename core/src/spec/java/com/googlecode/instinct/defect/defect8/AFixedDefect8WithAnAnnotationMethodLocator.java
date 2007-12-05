@@ -23,6 +23,8 @@ import com.googlecode.instinct.defect.defect8.data.AnotherContext;
 import com.googlecode.instinct.defect.defect8.data.StaticSubContext;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.locate.AnnotatedMethodLocator;
 import com.googlecode.instinct.internal.locate.AnnotatedMethodLocatorImpl;
 import com.googlecode.instinct.internal.locate.MarkedMethodLocator;
@@ -31,9 +33,6 @@ import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
-import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
-import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -89,9 +88,7 @@ public class AFixedDefect8WithAnAnnotationMethodLocator {
 
     @Specification
     public void shouldReturnAnOverridenSpecOnly() {
-        final Collection<Method> methods = markedlocator.locateAll(ASubContextOverridingExceptionalMethods.class,
-                new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention(), IGNORE));
-//        final Collection<Method> methods = locator.locate(ASubContextOverridingExceptionalMethods.class, Specification.class);
-        expect.that(methods).hasSize(1);
+        final ContextClass contextClass = new ContextClassImpl(ASubContextOverridingExceptionalMethods.class);
+        expect.that(contextClass.getSpecificationMethods()).hasSize(2);
     }
 }

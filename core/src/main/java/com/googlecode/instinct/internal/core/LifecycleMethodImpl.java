@@ -19,18 +19,19 @@ package com.googlecode.instinct.internal.core;
 import au.net.netstorm.boost.primordial.Primordial;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.TechNote;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 public final class LifecycleMethodImpl extends Primordial implements LifecycleMethod {
     private final Method method;
-    private final Class<?> contextClass;    
+    private final Class<?> contextClass;
 
     @Fix("Can't call this() because of the null check :| Remove this duplication if possible.")
     public LifecycleMethodImpl(final Method method) {
         checkNotNull(method);
         this.method = method;
-        this.contextClass = method.getDeclaringClass();
+        contextClass = method.getDeclaringClass();
     }
 
     public LifecycleMethodImpl(final Method method, final Class<?> contextClass) {
@@ -57,5 +58,23 @@ public final class LifecycleMethodImpl extends Primordial implements LifecycleMe
 
     public Class<?> getContextClass() {
         return contextClass;
+    }
+
+    @TechNote("generate the hashCode based on the method name, as methods with the same name on different classes have different hashCodes.")
+    @Override
+    public int hashCode() {
+        return method.getName().hashCode();
+    }
+
+    @SuppressWarnings({"ParameterNameDiffersFromOverriddenParameter"})
+    @TechNote("equals() is only called if the hashCodes are equal. Implied by the spec but tricky non-the-less.")
+    @Override
+    public boolean equals(final Object object) {
+        checkNotNull(object);
+        if (object == null || !(object instanceof LifecycleMethod)) {
+            return false;
+        }
+        final Method methodToCompare = ((LifecycleMethod) object).getMethod();
+        return method.getName().equals(methodToCompare.getName()) || method.equals(object);
     }
 }
