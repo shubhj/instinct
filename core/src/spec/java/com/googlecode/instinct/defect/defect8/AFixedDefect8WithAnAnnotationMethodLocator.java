@@ -24,8 +24,6 @@ import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.internal.locate.AnnotatedMethodLocator;
 import com.googlecode.instinct.internal.locate.AnnotatedMethodLocatorImpl;
-import com.googlecode.instinct.internal.locate.MarkedMethodLocator;
-import com.googlecode.instinct.internal.locate.MarkedMethodLocatorImpl;
 import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
@@ -41,7 +39,6 @@ import org.junit.runner.RunWith;
 @Context
 public class AFixedDefect8WithAnAnnotationMethodLocator {
     private final AnnotatedMethodLocator locator = new AnnotatedMethodLocatorImpl();
-    private final MarkedMethodLocator markedlocator = new MarkedMethodLocatorImpl();
 
     @Specification
     public void shouldReturnABeforeSpecificationDefinedInABaseClass() {
