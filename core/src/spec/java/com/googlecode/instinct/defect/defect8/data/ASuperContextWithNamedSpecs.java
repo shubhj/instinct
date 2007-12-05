@@ -16,22 +16,22 @@
 
 package com.googlecode.instinct.defect.defect8.data;
 
+
+@SuppressWarnings({"MethodNamesDifferingOnlyByCase"})
 public class ASuperContextWithNamedSpecs {
 
-    public void setup() {
-        //do nothing.
-    }
+    public void setup() { }
 
-    public void setUp() {
-        //do nothing.
-    }
+    public void setUp() { }
 
-    public void givenSomething() {
-        //do nothing.
-    }
+    public void givenSomething() { }
 
-    public void before() {
-        //do nothing.
-    }
+    public void before() { }
+
+    public void tearDown() { }
+
+    public void teardown() { }
+
+    public void after() { }
 
 }

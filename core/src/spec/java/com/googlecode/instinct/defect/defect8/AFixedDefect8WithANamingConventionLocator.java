@@ -21,10 +21,14 @@ import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.internal.locate.NamingConventionMethodLocator;
 import com.googlecode.instinct.internal.locate.NamingConventionMethodLocatorImpl;
+import com.googlecode.instinct.internal.util.TechNote;
 import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.naming.AfterSpecificationNamingConvention;
 import com.googlecode.instinct.marker.naming.BeforeSpecificationNamingConvention;
+import com.googlecode.instinct.marker.naming.NamingConvention;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import static java.util.Arrays.asList;
 import java.util.Collection;
 import java.util.List;
 import org.junit.runner.RunWith;
@@ -33,19 +37,34 @@ import org.junit.runner.RunWith;
 public class AFixedDefect8WithANamingConventionLocator {
     private final NamingConventionMethodLocator locator = new NamingConventionMethodLocatorImpl();
 
+    @TechNote("This spec also proves that more than one BeforeSpecification method will be invoked should they exist.")
     @Specification
-    public void shouldReturnABeforeSpecificationDefinedInABaseClass() {
-        final Collection<Method> methods = locator.locate(ASubContextThatExtendsASuperContextWithNamedSpecs.class,
-                new BeforeSpecificationNamingConvention());
-        expect.that(methods).hasSize(4);
-        final List<String> beforeMethodNames = new ArrayList<String>();
-        beforeMethodNames.add("setup");
-        beforeMethodNames.add("setUp");
-        beforeMethodNames.add("givenSomething");
-        beforeMethodNames.add("before");
+    public void shouldReturnBeforeSpecificationsDefinedInABaseClass() {
+        final List<String> methodList = createMethodList("setup", "setUp", "givenSomething", "before");
+        expectNamingConventionIsFollowed(new BeforeSpecificationNamingConvention(), methodList.size(), methodList);
+    }
 
-        for (final Method method : methods) {
-            expect.that(beforeMethodNames).containsItem(method.getName());
+
+    @Specification
+    public void shouldReturnAfterSpecificationsDefinedInABaseClass() {
+        final List<String> methodList = createMethodList("tearDown", "teardown", "after");
+        expectNamingConventionIsFollowed(new AfterSpecificationNamingConvention(), methodList.size(), methodList);
+    }
+
+    private void expectNamingConventionIsFollowed(final NamingConvention namingConvention, final int numOfExpectedMethods,
+            final List<String> expectedMethodNames) {
+        final Collection<Method> locatedMethods =
+                locator.locate(ASubContextThatExtendsASuperContextWithNamedSpecs.class, namingConvention);
+
+        expect.that(locatedMethods).hasSize(numOfExpectedMethods);
+        for (final Method aLocatedMethod : locatedMethods) {
+            expect.that(expectedMethodNames).containsItem(aLocatedMethod.getName());
         }
+    }
+
+    private List<String> createMethodList(final String... methodNames) {
+        final List<String> beforeMethodNames = new ArrayList<String>();
+        beforeMethodNames.addAll(asList(methodNames));
+        return beforeMethodNames;
     }
 }
