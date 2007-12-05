@@ -16,30 +16,20 @@
 
 package com.googlecode.instinct.test.suite;
 
-import com.googlecode.instinct.defect.defect23.data.ASubContextOverridingExceptionalMethods;
-import com.googlecode.instinct.defect.defect8.AFixedDefect8WithANamingConventionLocator;
+import com.googlecode.instinct.defect.defect23.AFixedDefect23;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithAnAnnotationMethodLocator;
-import com.googlecode.instinct.defect.defect8.data.annotation.AContext;
-import com.googlecode.instinct.defect.defect8.data.annotation.ASubContextOfAnAccessRestrictedContext;
-import com.googlecode.instinct.defect.defect8.data.annotation.ASubContextWithAfter;
-import com.googlecode.instinct.defect.defect8.data.annotation.AnotherContext;
-import com.googlecode.instinct.defect.defect8.data.annotation.StaticSubContext;
+import com.googlecode.instinct.defect.defect8.AFixedDefect8WithANamingConventionLocator;
 import com.googlecode.instinct.internal.locate.AHierarchicalMethodLocatorContext;
 import com.googlecode.instinct.internal.locate.AnAnnotatedMethodLocatorContext;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({AFixedDefect8WithAnAnnotationMethodLocator.class,
-                     AnAnnotatedMethodLocatorContext.class,
+@Suite.SuiteClasses({AnAnnotatedMethodLocatorContext.class,
                      AHierarchicalMethodLocatorContext.class,
-                     AContext.class,
-                     AnotherContext.class,
-                     StaticSubContext.class,
-                     ASubContextWithAfter.class,
-                     ASubContextOverridingExceptionalMethods.class,
-                     ASubContextOfAnAccessRestrictedContext.class,
-                     AFixedDefect8WithANamingConventionLocator.class})
+                     AFixedDefect8WithAnAnnotationMethodLocator.class,
+                     AFixedDefect8WithANamingConventionLocator.class,
+                     AFixedDefect23.class})
 public final class ContextSuite {
     //Suite classs.
 }
