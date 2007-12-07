@@ -29,6 +29,7 @@ import java.lang.reflect.Method;
 @Suggest("Test drive this.")
 public final class TheoryMethodInvokerImpl implements MethodInvoker {
     private final ObjectFactory factory = new ObjectFactoryImpl();
+
     // This method should never get called.
     public Object invokeMethod(final Object instance, final Method method) {
         ParamChecker.checkNotNull(instance, method);
@@ -38,6 +39,10 @@ public final class TheoryMethodInvokerImpl implements MethodInvoker {
     public Object invokeMethod(final Object instance, final Method method, final Object... params) {
         ParamChecker.checkNotNull(instance, method, params);
         final MethodEdge methodEdge = factory.create(MethodEdgeImpl.class, method);
-        return methodEdge.invoke(instance, method, 5);
+        Object object = null;
+        for (int i = 0; i < 5; i++) {
+            object = methodEdge.invoke(instance, method, 5);
+        }
+        return object;
     }
 }

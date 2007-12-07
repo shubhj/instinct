@@ -44,11 +44,11 @@ public class TheoryMethodInvokerImplAtomicTest extends InstinctTestCase {
         }
     }
 
-    public void testWillInvokeMethodWithValue5() {
+    public void testWillInvokeMethodWithValue5FiveTimes() {
         expect.that(new Expectations() {
             {
                 one(objectFactory).create(MethodEdgeImpl.class, forAllMethod); will(returnValue(methodEdge));
-                one(methodEdge).invoke(sampleClass, forAllMethod, 5);
+                exactly(5).of(methodEdge).invoke(sampleClass, forAllMethod, 5);
             }
         });
         theoryMethodInvoker.invokeMethod(sampleClass, forAllMethod, params);
