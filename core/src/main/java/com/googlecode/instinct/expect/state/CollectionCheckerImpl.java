@@ -48,12 +48,12 @@ public class CollectionCheckerImpl<E, T extends Collection<E>> extends IterableC
         hasSize(size);
     }
 
-    public void hasTheSameContentAs(final Collection<E> items) {
+    public final void hasTheSameContentAs(final Collection<E> items) {
         getAsserter().expectThat(subject.size(), Matchers.equalTo(items.size()));
         containsItems(items);
     }
 
-    public void hasTheSameContentAs(final E... items) {
+    public final void hasTheSameContentAs(final E... items) {
         hasTheSameContentAs(asList(items));
     }
 }
