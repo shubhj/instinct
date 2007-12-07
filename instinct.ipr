@@ -1028,7 +1028,7 @@
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/core/lib/hamcrest/hamcrest-all-1.1.jar!/" />
+        <root url="jar://$PROJECT_DIR$/example/lib/hamcrest-all-1.1.jar!/" />
       </SOURCES>
     </library>
     <library name="jmock2">

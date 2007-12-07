@@ -17,6 +17,7 @@
 package com.googlecode.instinct.expect.state;
 
 import com.googlecode.instinct.internal.util.Fix;
+import static java.util.Arrays.asList;
 import java.util.Collection;
 import org.hamcrest.Matchers;
 
@@ -45,5 +46,14 @@ public class CollectionCheckerImpl<E, T extends Collection<E>> extends IterableC
 
     public final void isOfSize(final int size) {
         hasSize(size);
+    }
+
+    public void hasTheSameContentAs(final Collection<E> items) {
+        getAsserter().expectThat(subject.size(), Matchers.equalTo(items.size()));
+        containsItems(items);
+    }
+
+    public void hasTheSameContentAs(final E... items) {
+        hasTheSameContentAs(asList(items));
     }
 }

@@ -30,4 +30,8 @@ public interface CollectionChecker<E, T extends Collection<E>> extends IterableC
     void hasSize(int size);
 
     void isOfSize(int size);
+
+    void hasTheSameContentAs(Collection<E> items);
+
+    void hasTheSameContentAs(E... items);
 }
