@@ -16,31 +16,32 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import java.util.ArrayList;
-import static java.util.Arrays.asList;
-import java.util.List;
-import com.googlecode.instinct.internal.core.ContextClassImpl;
-import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
-import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
-import com.googlecode.instinct.internal.runner.ContextResult;
-import com.googlecode.instinct.internal.runner.ContextRunner;
-import com.googlecode.instinct.internal.runner.StandardContextRunner;
+import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
-import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.runner.CommandLineRunner;
+import java.io.IOException;
+import java.util.ArrayList;
+import static java.util.Arrays.asList;
+import java.util.Iterator;
+import java.util.List;
 import org.apache.tools.ant.BuildException;
+import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
+import org.apache.tools.ant.taskdefs.Execute;
+import org.apache.tools.ant.taskdefs.LogStreamHandler;
 import org.apache.tools.ant.types.CommandlineJava;
 import org.apache.tools.ant.types.Path;
+import org.apache.tools.ant.types.Reference;
 
 @SuppressWarnings({"MethodParameterOfConcreteClass", "InstanceVariableOfConcreteClass"})
 public final class InstinctAntTask extends Task implements StatusLogger {
     private final List<Specifications> specificationLocators = new ArrayList<Specifications>();
-    private final ClassEdge classEdge = new ClassEdgeImpl();
     private String failureProperty;
     private Formatter formatter;
+    private CommandlineJava javaCommandLine;
 
     public void setFailureProperty(final String failureProperty) {
         checkNotWhitespace(failureProperty);
@@ -58,10 +59,16 @@ public final class InstinctAntTask extends Task implements StatusLogger {
         this.formatter = formatter;
     }
 
-    @Suggest("Fix this...")
     public Path createClasspath() {
-        final CommandlineJava commandLine = new CommandlineJava();
-        return commandLine.createClasspath(getProject()).createPath();
+        return getJavaCommandLine().createClasspath(getProject()).createPath();
+    }
+
+    public void setClasspath(final Path s) {
+        createClasspath().append(s);
+    }
+
+    public void setClasspathRef(final Reference r) {
+        createClasspath().setRefid(r);
     }
 
     @Override
@@ -73,6 +80,25 @@ public final class InstinctAntTask extends Task implements StatusLogger {
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    private int executeAsForked(final CommandlineJava commandline) {
+        final Execute execute = new Execute(new LogStreamHandler(this, Project.MSG_INFO, Project.MSG_WARN));
+        execute.setCommandline(commandline.getCommandline());
+        execute.setAntRun(getProject());
+        log(commandline.describeCommand(), Project.MSG_VERBOSE);
+        try {
+            return execute.execute();
+        } catch (IOException e) {
+            throw new BuildException("Unable to run specifications", e, getLocation());
+        }
+    }
+
+    private CommandlineJava getJavaCommandLine() {
+        if (javaCommandLine == null) {
+            javaCommandLine = new CommandlineJava();
+        }
+        return javaCommandLine;
     }
 
     @SuppressWarnings({"CatchGenericClass"})
@@ -87,11 +113,52 @@ public final class InstinctAntTask extends Task implements StatusLogger {
     // } SUPPRESS IllegalCatch
 
     @Fix("Register as a runner, so that we recieve results as it happens.")
+    // TODO The runners also need to be passed a group, so they don't run the wrong thing.
     private void runContexts() {
+        final CommandlineJava commandLine = createCommandLine();
+        executeAsForked(commandLine);
+    }
+
+    private CommandlineJava createCommandLine() {
+//        addInstinctClassesToClasspath();
+        final CommandlineJava commandLine = getJavaCommandLine();
+        commandLine.setClassname(CommandLineRunner.class.getName());
+        final String contexts = getContextNamesToRun();
+        commandLine.createArgument().setValue(contexts);
+        return commandLine;
+    }
+
+//    private void addInstinctClassesToClasspath() {
+////        addClassToClassPath(CommandLineRunner.class);
+////        addClassToClassPath(EdgeException.class);
+//    }
+
+//    private <T> void addClassToClassPath(final Class<T> cls) {
+//        final Path path = new Path(getProject());
+//        path.setLocation(findClass(cls));
+//        createClasspath().add(path);
+//    }
+
+//    private <T> File findClass(final Class<T> cls) {
+//        final String pathName = cls.getName().replace(".", "/") + ".class";
+//        final File source = LoaderUtils.getResourceSource(getClass().getClassLoader(), pathName);
+//        if (source == null) {
+//            throw new BuildException("Unable");
+//        }
+//        return source;
+//    }
+
+    private String getContextNamesToRun() {
         final List<JavaClassName> contextClasses = findContextsFromAllAggregators();
-        // TODO The runners also need to be passed a group, so they don't run the wrong thing. 
-        final ContextRunner runner = new AntContextRunner(new StandardContextRunner(), formatter.createMessageBuilder(), this);
-        runContexts(runner, contextClasses);
+        final StringBuilder builder = new StringBuilder();
+        for (final Iterator<JavaClassName> iterator = contextClasses.iterator(); iterator.hasNext();) {
+            final JavaClassName contextClass = iterator.next();
+            builder.append(contextClass.getFullyQualifiedName());
+            if (iterator.hasNext()) {
+                builder.append(RunnableItemBuilder.ITEM_SEPARATOR);
+            }
+        }
+        return builder.toString();
     }
 
     private List<JavaClassName> findContextsFromAllAggregators() {
@@ -100,20 +167,6 @@ public final class InstinctAntTask extends Task implements StatusLogger {
             contextClasses.addAll(asList(specificationLocator.getContextClasses()));
         }
         return contextClasses;
-    }
-
-    private void runContexts(final ContextRunner contextRunner, final List<JavaClassName> contextClasses) {
-        for (final JavaClassName contextClass : contextClasses) {
-            runContext(contextRunner, contextClass);
-        }
-    }
-
-    private void runContext(final ContextRunner runner, final JavaClassName contextClass) {
-        final Class<?> cls = classEdge.forName(contextClass.getFullyQualifiedName());
-        final ContextResult result = runner.run(new ContextClassImpl(cls));
-        if (!result.completedSuccessfully()) {
-            getProject().setProperty(failureProperty, "true");
-        }
     }
 
     private void checkExecutePreconditions() {
