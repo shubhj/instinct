@@ -63,12 +63,14 @@ public final class InstinctAntTask extends Task implements StatusLogger {
         return getJavaCommandLine().createClasspath(getProject()).createPath();
     }
 
-    public void setClasspath(final Path s) {
-        createClasspath().append(s);
+    public void setClasspath(final Path classPath) {
+        checkNotNull(classPath);
+        createClasspath().append(classPath);
     }
 
-    public void setClasspathRef(final Reference r) {
-        createClasspath().setRefid(r);
+    public void setClasspathRef(final Reference classPathRefId) {
+        checkNotNull(classPathRefId);
+        createClasspath().setRefid(classPathRefId);
     }
 
     @Override
