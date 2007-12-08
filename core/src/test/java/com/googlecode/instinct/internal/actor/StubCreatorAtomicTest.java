@@ -16,49 +16,74 @@
 
 package com.googlecode.instinct.internal.actor;
 
-import au.net.netstorm.boost.nursery.instance.InstanceProvider;
-import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.marker.annotate.Mock;
-import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
-import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
-import org.jmock.Expectations;
 
-// Note. Cannot use auto-wired stubs here as we're testing the stub creator.
 public final class StubCreatorAtomicTest extends InstinctTestCase {
-    @Stub(auto = false) private String theStub = "A string";
-    @Subject(auto = false) private SpecificationDoubleCreator stubCreator;
-    @Mock private InstanceProvider instanceProvider;
-
-    @Override
-    public void setUpSubject() {
-        stubCreator = createSubject(StubCreator.class, instanceProvider);
-    }
+    @Subject(implementation = StubCreator.class) private SpecificationDoubleCreator stubCreator;
 
     public void testConformsToClassTraits() {
         checkClass(StubCreator.class, SpecificationDoubleCreator.class);
     }
 
-    public void testDelegatesAllCallsToInstanceProvider() {
-        expect.that(new Expectations() {
-            {
-                one(instanceProvider).newInstance(String.class);
-                will(returnValue(theStub));
-            }
-        });
-        final String returnedStub = stubCreator.createDouble(String.class, "role name is ignored");
-        expect.that(returnedStub).sameInstanceAs(theStub);
+    // TODO Create a proxy that returns stubs for all method calls.
+    public void testCreatesStubsForInterfaces() {
+//        final Object specDouble = stubCreator.createDouble(AnInterface.class, "anInterface");
+//        expect.that(specDouble).isNotNull();
     }
 
-    public void testWrapsLowerLevelExceptionsInSomethingMoreUsable() {
-        final String message = "Unable to create stub java.lang.CharSequence (with role name 'charSequence'). Stub types must be non-abstract classes.";
-        expectException(SpecificationDoubleCreationException.class, message, new Runnable() {
-            public void run() {
-                stubCreator.createDouble(CharSequence.class, "charSequence");
-            }
-        });
+    public void testCreatesStubsForAbstractClasses() {
+    }
+
+    public void testCreatesStubsForFinalClasses() {
+    }
+
+    public void testCreatesStubsForEnums() {
+    }
+
+    public void testCreatesStubsForNonFinalClasses() {
+    }
+
+    public void testCreatesStubsForClassesWithConstructorArgs() {
+    }
+
+    // TODO Create a proxy that keeps the real object as the delegate, and for methods not constructor initialised, returns a stub (how do we tell?).
+    public void testStubsClassesContainingMethodsThatReturnValuesThatAreNotInitialisedInTheConstructor() {
+    }
+
+    @SuppressWarnings({"ALL"})
+    private static interface AnInterface {
+    }
+
+    @SuppressWarnings({"ALL"})
+    private abstract static class AbstractClass {
+    }
+
+    @SuppressWarnings({"ALL"})
+    private static enum AnEnum {
+    }
+
+    @SuppressWarnings({"ALL"})
+    private static final class AFinalClass {
+    }
+
+    @SuppressWarnings({"ALL"})
+    private static final class ClassWithConstructorArgs {
+        private ClassWithConstructorArgs(AnEnum anEnum, AnInterface anInterface) {
+        }
+    }
+
+    @SuppressWarnings({"ALL"})
+    private static final class ClassWithMethodsNotInitialisedInConstructor {
+        private String stringValueNotInitialisedInConstructor;
+
+        public void setStringValueNotInitialisedInConstructor(String stringValueNotInitialisedInConstructor) {
+            this.stringValueNotInitialisedInConstructor = stringValueNotInitialisedInConstructor;
+        }
+
+        public String getStringValueNotInitialisedInConstructor() {
+            return stringValueNotInitialisedInConstructor;
+        }
     }
 }
