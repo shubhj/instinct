@@ -47,13 +47,13 @@ public final class MarkedMethodLocatorImplSlowTest extends InstinctTestCase {
 
     public void testFindsNamingConventionMethodsInASimpleNamingConventionContext() {
         final Collection<Method> methods = locate(ASimpleNamingConventionContext.class);
-        expect.that(methods).hasSize(2);
+        expect.that(methods).isOfSize(2);
         expect.that(methods).containsItems(aMethodNamed("mustAlwaysReturnTrue"), aMethodNamed("shouldAlwaysReturnFalse"));
     }
 
     public void testFindsSpecMethodsInAClassContainingNamedMethodsAndAnnotatedMethods() {
         final Collection<Method> methods = locate(AContextWithAnnotationsAndNamingConventions.class);
-        expect.that(methods).hasSize(3);
+        expect.that(methods).isOfSize(3);
         expect.that(methods).containsItems(aMethodNamed("mustDoSomethingRatherVague"), aMethodNamed("doSomeCrazyRequirement"), aMethodNamed("shouldDoSomethingReallyImportant"));
     }
 

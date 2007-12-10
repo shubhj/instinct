@@ -53,32 +53,32 @@ public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
 
     public void testFindsSpecificationMethodsConformingToNamingConventionInASimpleNamingConventionContext() {
         final Collection<Method> specificationMethods = getSpecificationMethodsFromContextClass(ASimpleNamingConventionContext.class);
-        expect.that(specificationMethods).hasSize(2);
+        expect.that(specificationMethods).isOfSize(2);
         expect.that(specificationMethods).containsItems(aMethodNamed("mustAlwaysReturnTrue"), aMethodNamed("shouldAlwaysReturnFalse"));
     }
 
     public void testFindsBothAnnotatedAndNamedSpecificationMethodsInTheSameClass() {
         final Collection<Method> methods = getSpecificationMethodsFromContextClass(AContextWithAnnotationsAndNamingConventions.class);
-        expect.that(methods).hasSize(3);
+        expect.that(methods).isOfSize(3);
         expect.that(methods).containsItems(aMethodNamed("mustDoSomethingRatherVague"), aMethodNamed("doSomeCrazyRequirement"),
                 aMethodNamed("shouldDoSomethingReallyImportant"));
     }
 
     public void testFindsAnnotatedBeforeSpecificationMethodsInASimpleContext() {
         final Collection<Method> methods = getBeforeSpecificationMethodsFromContextClass(ASimpleContext.class, "");
-        expect.that(methods).hasSize(2);
+        expect.that(methods).isOfSize(2);
         expect.that(methods).containsItems(aMethodNamed("setUp"), aMethodNamed("setUpAgain"));
     }
 
     public void testFindsNamingConventionBeforeSpecificationMethodsInASimpleNamingConventionContext() {
         final Collection<Method> methods = getBeforeSpecificationMethodsFromContextClass(ASimpleNamingConventionContext.class, "^before.*");
-        expect.that(methods).hasSize(2);
+        expect.that(methods).isOfSize(2);
         expect.that(methods).containsItems(aMethodNamed("beforeSpecification"), aMethodNamed("beforeWeDoStuff"));
     }
 
     public void testReturnsAUniqueListOfMethodsWhenAMethodHasBothAnnotationAndNamingConvention() {
         final Collection<Method> methods = getSpecificationMethodsFromContextClass(AContextThatHasAMethodWithAnnotationAndNamingConvention.class);
-        expect.that(methods).hasSize(1);
+        expect.that(methods).isOfSize(1);
         expect.that(methods).containsItem(aMethodNamed("mustDoSomething"));
     }
 

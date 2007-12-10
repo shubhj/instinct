@@ -70,7 +70,7 @@ public final class AnnotatedFieldLocatorImplAtomicTest extends InstinctTestCase 
         });
         final Field[] fields = locator.locate(WithRuntimeAnnotations.class, Dummy.class);
         expect.that(fields).isNotNull();
-        expect.that(fields).hasSize(4);
+        expect.that(fields).isOfSize(4);
         expect.that(fields[0]).equalTo(field1);
         expect.that(fields[1]).equalTo(field2);
         expect.that(fields[2]).equalTo(field3);

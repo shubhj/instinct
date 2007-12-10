@@ -43,21 +43,21 @@ public class AFixedDefect8WithAnAnnotationMethodLocator {
     @Specification
     public void shouldReturnABeforeSpecificationDefinedInABaseClass() {
         final Collection<Method> methods = locator.locate(AContext.class, BeforeSpecification.class);
-        expect.that(methods).hasSize(1);
+        expect.that(methods).isOfSize(1);
         expect.that(methods.iterator().next().getName()).equalTo("setup");
     }
 
     @Specification
     public void shouldReturnAnAfterSpecificationDefinedInABaseClass() {
         final Collection<Method> methods = locator.locate(AContext.class, AfterSpecification.class);
-        expect.that(methods).hasSize(1);
+        expect.that(methods).isOfSize(1);
         expect.that(methods.iterator().next().getName()).equalTo("tearDown");
     }
 
     @Specification
     public void shouldReturnSpecificationsInAContextAndItsBaseClasses() {
         final Collection<Method> methods = locator.locate(AnotherContext.class, Specification.class);
-        expect.that(methods).hasSize(2);
+        expect.that(methods).isOfSize(2);
 
         final List<String> expectList = new ArrayList<String>();
         expectList.add("shouldEquateTrueToTrue");
@@ -71,12 +71,12 @@ public class AFixedDefect8WithAnAnnotationMethodLocator {
     @Specification
     public void shouldReturnStaticSpecificationsInAContextAndItsBasesClasses() {
         final Collection<Method> methods = locator.locate(StaticSubContext.class, Specification.class);
-        expect.that(methods).hasSize(2);
+        expect.that(methods).isOfSize(2);
     }
 
     @Specification
     public void shouldReturnSpecificationsOfAllVisibilitiesFromAContextAndItsBaseClasses() {
         final Collection<Method> methods = locator.locate(ASubContextOfAnAccessRestrictedContext.class, Specification.class);
-        expect.that(methods).hasSize(4);
+        expect.that(methods).isOfSize(4);
     }
 }

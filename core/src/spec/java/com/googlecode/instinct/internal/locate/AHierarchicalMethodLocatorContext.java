@@ -44,7 +44,7 @@ public class AHierarchicalMethodLocatorContext {
         final Set<Method> returnedMethods = locator.locate(AContext.class);
         final Set<Method> expectedMethods = getExpectedMethodsForAContext();
 
-        expect.that(returnedMethods).hasSize(expectedMethods.size());
+        expect.that(returnedMethods).isOfSize(expectedMethods.size());
         expect.that(returnedMethods).containsItems(expectedMethods);
     }
 
@@ -53,7 +53,7 @@ public class AHierarchicalMethodLocatorContext {
         final Set<Method> returnedMethods = locator.locate(ExpectAtomicTest.class);
         final Set<Method> expectedMethods = getExpectedMethodsForExceptAtomicTest();
 
-        expect.that(returnedMethods).hasSize(expectedMethods.size());
+        expect.that(returnedMethods).isOfSize(expectedMethods.size());
         expect.that(returnedMethods).containsItems(expectedMethods);
     }
 

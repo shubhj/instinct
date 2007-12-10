@@ -36,6 +36,6 @@ public final class ContextAggregatorSlowTest extends InstinctTestCase {
 
     public void testFindsCorrectNumberOfContexts() {
         final JavaClassName[] contexts = finder.getContextNames(ALL_GROUPS);
-        expect.that(contexts).hasSize(EXPECTED_CONTEXTS);
+        expect.that(contexts).isOfSize(EXPECTED_CONTEXTS);
     }
 }

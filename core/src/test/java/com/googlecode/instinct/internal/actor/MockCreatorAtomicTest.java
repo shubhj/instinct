@@ -44,7 +44,7 @@ public final class MockCreatorAtomicTest extends InstinctTestCase {
     public void testCreatesArraysFullOfMocks() {
         final CharSequence[] sequences = {};
         final CharSequence[] mockSequences = mockCreator.createDouble(sequences.getClass(), "some sequences");
-        expect.that(mockSequences).hasSize(3);
+        expect.that(mockSequences).isOfSize(3);
         for (final CharSequence mockSequence : mockSequences) {
             expectThatElementIsAMock(mockSequence);
         }

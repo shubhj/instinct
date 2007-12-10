@@ -38,12 +38,12 @@ public final class AnAnnotatedMethodLocatorContext {
     @Specification
     public void shouldNotReturnMethodsThatDoNotMatchTheSuppliedCriteria() {
         final Collection<Method> methods = locator.locate(WithoutRuntimeAnnotations.class, Specification.class);
-        expect.that(methods).hasSize(0);
+        expect.that(methods).isOfSize(0);
     }
 
     @Specification
     public void shouldReturnMethodsThatMatchTheSuppliedCriteria() {
         final Collection<Method> methods = locator.locate(WithRuntimeAnnotations.class, Specification.class);
-        expect.that(methods).hasSize(2);
+        expect.that(methods).isOfSize(2);
     }
 }

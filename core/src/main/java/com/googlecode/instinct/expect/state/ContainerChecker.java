@@ -16,13 +16,14 @@
 
 package com.googlecode.instinct.expect.state;
 
-import com.googlecode.instinct.internal.util.Suggest;
-import java.util.Collection;
+import org.hamcrest.Matcher;
 
-public interface CollectionChecker<E, T extends Collection<E>> extends IterableChecker<E, T>, SizeChecker {
-    @Suggest("Move these into a SizeChecker?")
+public interface ContainerChecker<T> {
+    void containsItem(Matcher<T> matcher);
 
-    void hasTheSameContentAs(Collection<E> items);
+    void containsItem(T t);
 
-    void hasTheSameContentAs(E... items);
+    void doesNotContainItem(Matcher<T> matcher);
+
+    void doesNotContainItem(T t);
 }

@@ -32,6 +32,6 @@ public class AFixedDefect23 {
     @Specification
     public void shouldReturnOverridenSpecsOnceOnly() {
         final ContextClass contextClass = new ContextClassImpl(ASubContextOverridingExceptionalMethods.class);
-        expect.that(contextClass.getSpecificationMethods()).hasSize(2);
+        expect.that(contextClass.getSpecificationMethods()).isOfSize(2);
     }
 }

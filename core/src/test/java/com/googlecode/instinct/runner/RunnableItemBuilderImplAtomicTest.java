@@ -66,7 +66,7 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
             }
         });
         final Collection<RunnableItem> builtItems = runnableItemBuilder.build(CONTEXT_CLASS_1.getName());
-        expect.that(builtItems).hasSize(1);
+        expect.that(builtItems).isOfSize(1);
         expectRunnableItemIsAContextClass(builtItems.iterator().next(), CONTEXT_CLASS_1);
     }
 
@@ -79,7 +79,7 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
         });
         final String specificationMethod = CONTEXT_CLASS_1.getName() + METHOD_SEPARATOR + "toCheckVerification";
         final Collection<RunnableItem> builtItems = runnableItemBuilder.build(specificationMethod);
-        expect.that(builtItems).hasSize(1);
+        expect.that(builtItems).isOfSize(1);
         expectRunnableItemIsASpecificationMethod(builtItems.iterator().next(), "toCheckVerification");
     }
 
@@ -137,14 +137,14 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
     }
 
     private void expectTwoContextsBuilt(final Collection<RunnableItem> builtItems) {
-        expect.that(builtItems).hasSize(2);
+        expect.that(builtItems).isOfSize(2);
         final Iterator<RunnableItem> iterator = builtItems.iterator();
         expectRunnableItemIsAContextClass(iterator.next(), CONTEXT_CLASS_1);
         expectRunnableItemIsAContextClass(iterator.next(), CONTEXT_CLASS_2);
     }
 
     private void expectAContextAndASpecificationMethodBuilt(final Collection<RunnableItem> builtItems) {
-        expect.that(builtItems).hasSize(2);
+        expect.that(builtItems).isOfSize(2);
         final Iterator<RunnableItem> iterator = builtItems.iterator();
         expectRunnableItemIsASpecificationMethod(iterator.next(), "toCheckVerification");
         expectRunnableItemIsAContextClass(iterator.next(), CONTEXT_CLASS_2);

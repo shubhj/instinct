@@ -36,7 +36,7 @@ public final class ContextClassAggregatorImplSlowTest extends InstinctTestCase {
     @Fix("Breadcrumb: COme back and fix this.")
     public void nsoTestFindsCorrectContextClasses() {
         final JavaClassName[] classNames = finder.getContextNames("_custom_specification_group_");
-        expect.that(classNames).hasSize(1);
+        expect.that(classNames).isOfSize(1);
         expect.that(classNames).containsItem(new JavaClassName() {
             public String getFullyQualifiedName() {
                 return CustomSpecificationGroup.class.getName();
@@ -44,7 +44,7 @@ public final class ContextClassAggregatorImplSlowTest extends InstinctTestCase {
         });
     }
 
-    public void testNothing() {        
+    public void testNothing() {
     }
 
     private static final class CustomSpecificationGroup {

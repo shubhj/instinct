@@ -43,6 +43,6 @@ public final class RunnableItemBuilderImplSlowTest extends InstinctTestCase {
 
     private <T> void checkBuildCorrectNumberOfItems(final Class<T> contextClass, final String methodName, final int expectedRunnables) {
         final Collection<RunnableItem> items = runnableItemBuilder.build(contextClass.getName() + METHOD_SEPARATOR + methodName);
-        expect.that(items).hasSize(expectedRunnables);
+        expect.that(items).isOfSize(expectedRunnables);
     }
 }

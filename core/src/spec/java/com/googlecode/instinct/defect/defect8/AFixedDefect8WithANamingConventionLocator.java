@@ -81,7 +81,7 @@ public class AFixedDefect8WithANamingConventionLocator {
     @Specification
     public void shouldReturnSpecificationsOfAllVisibilitiesFromAContextAndItsBaseClasses() {
         final List<String> specList = createMethodList("shouldRunPrivateSpecsLocally", "mustRunPrivateSpecsLocally", "shouldRunParentSpecs",
-                "shouldRunProtectedSpecs", "shouldRunDefaultSpecs", "shouldRunPrivateSpecs");       
+                "shouldRunProtectedSpecs", "shouldRunDefaultSpecs", "shouldRunPrivateSpecs");
         expectNamingConventionIsFollowed(ASubContextOfAnAccessRestrictedContext.class, new SpecificationNamingConvention(), specList.size(),
                 specList);
     }
@@ -91,7 +91,7 @@ public class AFixedDefect8WithANamingConventionLocator {
         final Collection<Method> locatedMethods =
                 locator.locate(targetClass, namingConvention);
 
-        expect.that(locatedMethods).hasSize(numOfExpectedMethods);
+        expect.that(locatedMethods).isOfSize(numOfExpectedMethods);
         for (final Method aLocatedMethod : locatedMethods) {
             expect.that(expectedMethodNames).containsItem(aLocatedMethod.getName());
         }

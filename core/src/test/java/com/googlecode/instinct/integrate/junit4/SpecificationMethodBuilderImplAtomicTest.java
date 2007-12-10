@@ -77,7 +77,7 @@ public final class SpecificationMethodBuilderImplAtomicTest extends InstinctTest
             }
         });
         final Collection<SpecificationMethod> methods = builder.build(JUnit4SuiteWithContextAnnotation.class);
-        expect.that(methods).hasSize(1);
+        expect.that(methods).isOfSize(1);
         expect.that(methods).containsItem(specificationMethod);
     }
 }

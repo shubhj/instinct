@@ -44,7 +44,7 @@ public final class ContextClassesFinderImplAtomicTest extends InstinctTestCase {
 
     public void testReturnsSuiteClassWhenNoAnnotationFound() {
         final Collection<Class<?>> classes = finder.getContextClasses(ASuiteWithAContext.class);
-        expect.that(classes).hasSize(1);
+        expect.that(classes).isOfSize(1);
         expect.that(classes).containsItem(ASuiteWithAContext.class);
     }
 
