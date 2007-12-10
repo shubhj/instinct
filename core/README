@@ -13,6 +13,7 @@ and actors; automatic creation of test doubles and test subjects; a state and
 behaviour expectation API; JUnit test runner integration; Ant support and an
 IntelliJ IDEA plugin.
 
+
 * Distribution Contents *
 
 The distribution contains the following contents:

@@ -18,12 +18,12 @@ IntelliJ IDEA plugin.
 
 The distribution contains the following contents:
 
-o README                            - This readme file.
-o LICENCE                           - Instinct licence file.
-o NOTICE                            - Licence notices for libraries used in Instinct.
-o RELEASE-NOTES                     - Release notes for this & previous releases.
-o lib/                              - Libraries required by Instinct at runtime (including
-                                      licences).
+o README          - This readme file.
+o LICENCE         - Instinct licence file.
+o NOTICE          - Licence notices for libraries used in Instinct.
+o RELEASE-NOTES   - Release notes for this & previous releases.
+o lib/            - Libraries required by Instinct at runtime (including licences).
+
 
 * Documentation *
 
