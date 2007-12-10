@@ -20,7 +20,7 @@ import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.Reflector.getMethod;
+import static com.googlecode.instinct.internal.util.Reflector.getMethod;
 import java.lang.reflect.Method;
 import net.sf.cglib.proxy.CallbackFilter;
 

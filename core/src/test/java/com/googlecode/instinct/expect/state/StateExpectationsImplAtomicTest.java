@@ -31,7 +31,7 @@ import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
-import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;
+import static com.googlecode.instinct.internal.util.Reflector.insertFieldValue;
 import org.hamcrest.Matcher;
 import org.jmock.Expectations;
 

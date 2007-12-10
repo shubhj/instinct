@@ -23,7 +23,7 @@ import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
-import static com.googlecode.instinct.test.reflect.Reflector.getFieldByName;
+import static com.googlecode.instinct.internal.util.Reflector.getFieldByName;
 import org.jmock.api.ExpectationError;
 
 @SuppressWarnings({"InstanceVariableOfConcreteClass"})

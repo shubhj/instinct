@@ -23,7 +23,7 @@ import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.Reflector.getFieldByName;
+import static com.googlecode.instinct.internal.util.Reflector.getFieldByName;
 import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;

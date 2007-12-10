@@ -14,20 +14,19 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.test.reflect;
+package com.googlecode.instinct.internal.util;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import com.googlecode.instinct.internal.util.Fix;
-import com.googlecode.instinct.internal.util.MethodInvoker;
-import com.googlecode.instinct.internal.util.MethodInvokerImpl;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdge;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdgeImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
-import com.googlecode.instinct.test.TestingException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 @Fix("Move this into the prod tree")
 public final class Reflector {
     private static final MethodInvoker METHOD_INVOKER = new MethodInvokerImpl();
+    private static final FieldEdge FIELD_EDGE = new FieldEdgeImpl();
 
     private Reflector() {
         throw new UnsupportedOperationException();
@@ -69,7 +68,7 @@ public final class Reflector {
         try {
             return cls.getMethod(methodName, paramTypes);
         } catch (NoSuchMethodException e) {
-            throw new TestingException(e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -79,13 +78,13 @@ public final class Reflector {
         try {
             return cls.getDeclaredMethod(methodName, paramTypes);
         } catch (NoSuchMethodException e) {
-            throw new TestingException(e);
+            throw new RuntimeException(e);
         }
     }
 
     public static Object invokeMethod(final Object instance, final String methodName, final Class<?>[] paramTypes, final Object... params) {
         if (paramTypes.length != params.length) {
-            throw new TestingException("Paramter types array and values array must be the same length");
+            throw new RuntimeException("Paramter types array and values array must be the same length");
         }
         final Method method = getMethod(instance.getClass(), methodName, paramTypes);
         return METHOD_INVOKER.invokeMethod(instance, method, params);
@@ -97,7 +96,7 @@ public final class Reflector {
         try {
             return cls.getDeclaredField(fieldName);
         } catch (NoSuchFieldException e) {
-            throw new TestingException("Unable to find field '" + fieldName + "' on class " + cls.getSimpleName(), e);
+            throw new RuntimeException("Unable to find field '" + fieldName + "' on class " + cls.getSimpleName(), e);
         }
     }
 
@@ -107,8 +106,8 @@ public final class Reflector {
         } else {
             final boolean fieldSetUsingParentInterface = setFieldValueUsingParentInterface(instance, value);
             if (!fieldSetUsingParentInterface) {
-                throw new TestingException("Unable to find field of type "
-                        + value.getClass().getSimpleName() + " on class " + instance.getClass().getSimpleName());
+                throw new RuntimeException(
+                        "Unable to find field of type " + value.getClass().getSimpleName() + " on class " + instance.getClass().getSimpleName());
             }
         }
     }
@@ -135,7 +134,7 @@ public final class Reflector {
                 return field;
             }
         }
-        throw new TestingException("Unable to find field of type '" + fieldType.getSimpleName() + "' on class " + cls.getSimpleName());
+        throw new RuntimeException("Unable to find field of type '" + fieldType.getSimpleName() + "' on class " + cls.getSimpleName());
     }
 
     private static <T, U> boolean containsFieldOfType(final Class<T> cls, final Class<U> targetType) {
@@ -153,11 +152,7 @@ public final class Reflector {
     }
 
     private static void setValue(final Field field, final Object instance, final Object value) {
-        try {
-            field.setAccessible(true);
-            field.set(instance, value);
-        } catch (IllegalAccessException e) {
-            throw new TestingException(e);
-        }
+        field.setAccessible(true);
+        FIELD_EDGE.set(field, instance, value);
     }
 }

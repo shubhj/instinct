@@ -20,7 +20,7 @@ import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValueUsingInferredType;
+import static com.googlecode.instinct.internal.util.Reflector.insertFieldValueUsingInferredType;
 
 @Suggest("Make use of the Subject annotation to auto-create subjects.")
 public final class TestSubjectCreator {

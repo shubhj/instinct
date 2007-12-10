@@ -29,7 +29,7 @@ import com.googlecode.instinct.marker.annotate.*;
 import com.googlecode.instinct.runner.SpecificationListener;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.Reflector.getMethod;
+import static com.googlecode.instinct.internal.util.Reflector.getMethod;
 import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubjectWithConstructorArgs;
 import org.jmock.Expectations;
 
