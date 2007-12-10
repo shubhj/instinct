@@ -1,20 +1,21 @@
 package com.googlecode.instinct.example.expect;
 
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.expect.state.StateExpectations;
+import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.annotate.Specification;
 import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.marker.annotate.Context;
-import com.googlecode.instinct.marker.annotate.Specification;
 import org.hamcrest.Matchers;
 import org.junit.runner.RunWith;
 
 /**
  * The examples below illustrate Instinct's state-based expectation API.
- * @see com.googlecode.instinct.expect.state.StateExpectations
+ * @see StateExpectations
  */
 @SuppressWarnings({"MagicNumber", "unchecked"})
 @RunWith(InstinctRunner.class)
@@ -42,11 +43,11 @@ public final class StateExpectationsExample {
 
     @Specification
     public void providesMatchersForMakingAssertionsAboutStrings() {
-        expect.that("andersdabeerz").equalToIgnoringCase("AndersDaBeerz");
+        expect.that("andersdabeerz").isEqualToIgnoringCase("AndersDaBeerz");
         expect.that("andersdabeerz").startsWith("anders");
         expect.that("andersdabeerz").containsString("da");
         expect.that("andersdabeerz").endsWith("beerz");
-        expect.that("andersdabeerz").equalToIgnoringWhiteSpace(" andersdabeerz ");
+        expect.that("andersdabeerz").isEqualToIgnoringWhiteSpace(" andersdabeerz ");
         expect.that("andersdabeerz").doesNotContainString("water");
     }
 
@@ -86,8 +87,8 @@ public final class StateExpectationsExample {
         final Map<String, String> map = new HashMap<String, String>();
         expect.that(map).isEmpty();
         map.put("key", "value");
-        expect.that(map).notEmpty();
-        expect.that(map).hasSize(1);
+        expect.that(map).isNotEmpty();
+        expect.that(map).isOfSize(1);
         expect.that(map).containsKey("key");
         expect.that(map).containsValue("value");
         expect.that(map).containsEntry("key", "value");
