@@ -28,19 +28,19 @@ public class IterableCheckerImpl<E, T extends Iterable<E>> extends ObjectChecker
         super(subject);
     }
 
-    public final void containsItem(final E element) {
-        getAsserter().expectThat(subject, Matchers.hasItem(element));
+    public final void containsItem(final E item) {
+        getAsserter().expectThat(subject, Matchers.hasItem(item));
     }
 
     public final void containsItem(final Matcher<E> matcher) {
         getAsserter().expectThat(subject, Matchers.hasItem(matcher));
     }
 
-    public final void notContainItem(final E item) {
+    public final void doesNotContainItem(final E item) {
         getAsserter().expectNotThat(subject, Matchers.hasItem(item));
     }
 
-    public final void notContainItem(final Matcher<E> matcher) {
+    public final void doesNotContainItem(final Matcher<E> matcher) {
         getAsserter().expectNotThat(subject, Matchers.hasItem(matcher));
     }
 
@@ -58,11 +58,11 @@ public class IterableCheckerImpl<E, T extends Iterable<E>> extends ObjectChecker
         getAsserter().expectThat(subject, Matchers.hasItems((E[]) items.toArray()));
     }
 
-    public final void notContainItems(final Matcher<E>... matchers) {
+    public final void doesNotContainItems(final Matcher<E>... matchers) {
         getAsserter().expectNotThat(subject, Matchers.hasItems(matchers));
     }
 
-    public final void notContainItems(final E... items) {
+    public final void doesNotContainItems(final E... items) {
         getAsserter().expectNotThat(subject, Matchers.hasItems(items));
     }
 }
