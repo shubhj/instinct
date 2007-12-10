@@ -29,12 +29,8 @@ public class ArrayCheckerImpl<T> extends ObjectCheckerImpl<T[]> implements Array
         getAsserter().expectThat(subject.length == 0, Matchers.describedAs("length == 0", Matchers.equalTo(true)));
     }
 
-    public final void notEmpty() {
-        getAsserter().expectThat(subject.length != 0, Matchers.describedAs("length != 0", Matchers.equalTo(true)));
-    }
-
     public final void isNotEmpty() {
-        notEmpty();
+        getAsserter().expectThat(subject.length != 0, Matchers.describedAs("length != 0", Matchers.equalTo(true)));
     }
 
     public final void containsItem(final Matcher<T> matcher) {
@@ -56,8 +52,4 @@ public class ArrayCheckerImpl<T> extends ObjectCheckerImpl<T[]> implements Array
     public final void isOfSize(final int size) {
         getAsserter().expectThat(subject.length, Matchers.equalTo(size));
     }
-
-//    public final void isOfSize(final int size) {
-//        isOfSize(size);
-//    }
 }
