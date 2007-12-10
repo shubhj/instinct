@@ -51,7 +51,7 @@ public final class AShoppingCartWithItemsInIt {
         final Item item = createMockItem();
 
         expect.that(cart.isEmpty()).isFalse();
-        expect.that(cart.size()).equalTo(3);
+        expect.that(cart.size()).isEqualTo(3);
         expect.that(cart.contains(mockItem1)).isTrue();
         expect.that(cart.contains(mockItem2)).isTrue();
         expect.that(cart.contains(mockItem3)).isTrue();
@@ -59,7 +59,7 @@ public final class AShoppingCartWithItemsInIt {
 
         cart.addItem(item);
 
-        expect.that(cart.size()).equalTo(4);
+        expect.that(cart.size()).isEqualTo(4);
         expect.that(cart.contains(item)).isTrue();
         expect.that(cart.contains(mockItem1)).isTrue();
         expect.that(cart.contains(mockItem2)).isTrue();
@@ -73,14 +73,14 @@ public final class AShoppingCartWithItemsInIt {
         final Item item2 = createMockItem();
 
         expect.that(cart.isEmpty()).isFalse();
-        expect.that(cart.size()).equalTo(3);
+        expect.that(cart.size()).isEqualTo(3);
         expect.that(cart.contains(mockItem1)).isTrue();
         expect.that(cart.contains(mockItem2)).isTrue();
         expect.that(cart.contains(mockItem3)).isTrue();
 
         cart.addItem(item1);
 
-        expect.that(cart.size()).equalTo(4);
+        expect.that(cart.size()).isEqualTo(4);
         expect.that(cart.contains(item1));
         expect.that(cart.contains(mockItem1)).isTrue();
         expect.that(cart.contains(mockItem2)).isTrue();
@@ -88,7 +88,7 @@ public final class AShoppingCartWithItemsInIt {
 
         cart.addItem(item2);
 
-        expect.that(cart.size()).equalTo(5);
+        expect.that(cart.size()).isEqualTo(5);
         expect.that(cart.contains(item2)).isTrue();
         expect.that(cart.contains(item1)).isTrue();
         expect.that(cart.contains(mockItem1)).isTrue();
@@ -101,7 +101,7 @@ public final class AShoppingCartWithItemsInIt {
         createCartWithThreeItems();
 
         expect.that(cart.isEmpty()).isFalse();
-        expect.that(cart.size()).equalTo(3);
+        expect.that(cart.size()).isEqualTo(3);
         expect.that(cart.contains(mockItem1)).isTrue();
         expect.that(cart.contains(mockItem2)).isTrue();
         expect.that(cart.contains(mockItem3)).isTrue();
@@ -109,7 +109,7 @@ public final class AShoppingCartWithItemsInIt {
         cart.remove(mockItem1);
 
         expect.that(cart.isEmpty()).isFalse();
-        expect.that(cart.size()).equalTo(2);
+        expect.that(cart.size()).isEqualTo(2);
         expect.that(cart.contains(mockItem1)).isFalse();
         expect.that(cart.contains(mockItem2)).isTrue();
         expect.that(cart.contains(mockItem3)).isTrue();
@@ -120,7 +120,7 @@ public final class AShoppingCartWithItemsInIt {
         createCartWithThreeItems();
 
         expect.that(cart.isEmpty()).isFalse();
-        expect.that(cart.size()).equalTo(3);
+        expect.that(cart.size()).isEqualTo(3);
         expect.that(cart.contains(mockItem1)).isTrue();
         expect.that(cart.contains(mockItem2)).isTrue();
         expect.that(cart.contains(mockItem3)).isTrue();
@@ -128,7 +128,7 @@ public final class AShoppingCartWithItemsInIt {
         cart.remove(mockItem2);
 
         expect.that(cart.isEmpty()).isFalse();
-        expect.that(cart.size()).equalTo(2);
+        expect.that(cart.size()).isEqualTo(2);
         expect.that(cart.contains(mockItem2)).isFalse();
         expect.that(cart.contains(mockItem1)).isTrue();
         expect.that(cart.contains(mockItem3)).isTrue();
@@ -136,7 +136,7 @@ public final class AShoppingCartWithItemsInIt {
         cart.remove(mockItem3);
 
         expect.that(cart.isEmpty()).isFalse();
-        expect.that(cart.size()).equalTo(1);
+        expect.that(cart.size()).isEqualTo(1);
         expect.that(cart.contains(mockItem2)).isFalse();
         expect.that(cart.contains(mockItem3)).isFalse();
         expect.that(cart.contains(mockItem1)).isTrue();
@@ -148,7 +148,7 @@ public final class AShoppingCartWithItemsInIt {
         final Item item = createMockItem();
 
         expect.that(cart.isEmpty()).isFalse();
-        expect.that(cart.size()).equalTo(3);
+        expect.that(cart.size()).isEqualTo(3);
         expect.that(cart.contains(mockItem1)).isTrue();
         expect.that(cart.contains(mockItem2)).isTrue();
         expect.that(cart.contains(mockItem3)).isTrue();
@@ -156,7 +156,7 @@ public final class AShoppingCartWithItemsInIt {
         cart.remove(item);
 
         expect.that(cart.isEmpty()).isFalse();
-        expect.that(cart.size()).equalTo(3);
+        expect.that(cart.size()).isEqualTo(3);
         expect.that(cart.contains(mockItem1)).isTrue();
         expect.that(cart.contains(mockItem2)).isTrue();
         expect.that(cart.contains(mockItem3)).isTrue();

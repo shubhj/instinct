@@ -24,11 +24,11 @@ public final class StateExpectationsExample {
 
     @Specification
     public void providesMatchersForMakingAssertionsAboutObjects() {
-        expect.that("fred").equalTo("fred");
-        expect.that("fred").notEqualTo("barney");
-        expect.that(this).sameInstanceAs(this);
-        expect.that("fred").notSameInstanceAs("barney");
-        expect.that(this).instanceOf(StateExpectationsExample.class);
+        expect.that("fred").isEqualTo("fred");
+        expect.that("fred").isNotEqualTo("barney");
+        expect.that(this).isTheSameInstanceAs(this);
+        expect.that("fred").isNotTheSameInstanceAs("barney");
+        expect.that(this).isOfType(StateExpectationsExample.class);
         expect.that(this).isNotNull();
         // Mixing with standard Hamcrest matchers
         expect.that("fred").matchesAllOf(Matchers.startsWith("fr"), Matchers.containsString("ed"));
@@ -53,11 +53,11 @@ public final class StateExpectationsExample {
 
     @Specification
     public void providesMatchersForMakingAssertionsAboutComparables() {
-        expect.that(1).equalTo(1);
-        expect.that(1).greaterThan(0);
-        expect.that(1).greaterThanOrEqualTo(0);
-        expect.that(1).lessThan(2);
-        expect.that(1).lessThanOrEqualTo(2);
+        expect.that(1).isEqualTo(1);
+        expect.that(1).isGreaterThan(0);
+        expect.that(1).isGreaterThanOrEqualTo(0);
+        expect.that(1).isLessThan(2);
+        expect.that(1).isLessThanOrEqualTo(2);
     }
 
     @Specification
@@ -96,8 +96,8 @@ public final class StateExpectationsExample {
 
     @Specification
     public void providesMatchersForMakingAssertionsAboutDoubles() {
-        expect.that(1.1).closeTo(1.0, 0.11);
-        expect.that(1.1).notCloseTo(1.0, 0.1);
+        expect.that(1.1).isCloseTo(1.0, 0.11);
+        expect.that(1.1).isNotCloseTo(1.0, 0.1);
     }
 
     @Specification

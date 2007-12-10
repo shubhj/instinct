@@ -18,6 +18,6 @@ public final class AGlossyMagazine {
 
     private void checkSavesTitleGivenInConstructor(final String title) {
         final Magazine magazine = new MagazineImpl(title);
-        expect.that(magazine.getTitle()).equalTo(title);
+        expect.that(magazine.getTitle()).isEqualTo(title);
     }
 }

@@ -39,18 +39,18 @@ public final class ACsvLineSpliterWithSeveralTokensToSplit {
     @Specification
     public void correctlySplitsInputIntoTokens() {
         final String[] split = lineSplitter.split("foo,bar,baz");
-        expect.that(split).equalTo(new String[]{"foo", "bar", "baz"});
+        expect.that(split).isEqualTo(new String[]{"foo", "bar", "baz"});
     }
 
     @Specification
     public void correctlyHandlesLinesWithNoDelimiterPresent() {
         final String[] split = lineSplitter.split("foobarbaz");
-        expect.that(split).equalTo(new String[]{"foobarbaz"});
+        expect.that(split).isEqualTo(new String[]{"foobarbaz"});
     }
 
     @Specification
     public void correctlyHandlesTwoDelimitersInSequence() {
         final String[] split = lineSplitter.split("foo,bar,,baz");
-        expect.that(split).equalTo(new String[]{"foo", "bar", "", "baz"});
+        expect.that(split).isEqualTo(new String[]{"foo", "bar", "", "baz"});
     }
 }

@@ -36,6 +36,6 @@ public class DollarMultiplication {
 
     @Specification
     public void mustBeTheInverseOfDivide(@ForAll final int x) {
-        expect.that(dollar.multiplyBy(x).divideBy(x).getAmount()).equalTo(dollar.getAmount());
+        expect.that(dollar.multiplyBy(x).divideBy(x).getAmount()).isEqualTo(dollar.getAmount());
     }
 }

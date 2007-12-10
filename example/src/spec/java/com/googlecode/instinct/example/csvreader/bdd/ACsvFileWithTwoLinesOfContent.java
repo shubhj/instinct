@@ -50,9 +50,9 @@ public final class ACsvFileWithTwoLinesOfContent {
     @Specification
     public void readsTwoLinesThenHasNoMoreToRead() {
         expect.that(csvFile.hasMoreLines()).isTrue();
-        expect.that(csvFile.readLine()).equalTo("A,B,C,D,E,F");
+        expect.that(csvFile.readLine()).isEqualTo("A,B,C,D,E,F");
         expect.that(csvFile.hasMoreLines()).isTrue();
-        expect.that(csvFile.readLine()).equalTo("G,H,I,J,K,L");
+        expect.that(csvFile.readLine()).isEqualTo("G,H,I,J,K,L");
         expect.that(csvFile.hasMoreLines()).isFalse();
     }
 }

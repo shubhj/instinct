@@ -50,27 +50,27 @@ public final class CsvLineContext {
 
     @Specification
     public void providesAccessToColumnsByIndex() {
-        expect.that(csvLine.getColumn(0)).equalTo(column1);
-        expect.that(csvLine.getColumn(1)).equalTo(column2);
-        expect.that(csvLine.getColumn(2)).equalTo(column3);
+        expect.that(csvLine.getColumn(0)).isEqualTo(column1);
+        expect.that(csvLine.getColumn(1)).isEqualTo(column2);
+        expect.that(csvLine.getColumn(2)).isEqualTo(column3);
     }
 
     @Specification
     public void isEqualToObjectsWithTheSameColumns() {
-        expect.that(new CsvLine()).equalTo(new CsvLine());
-        expect.that(new CsvLine("A")).equalTo(new CsvLine("A"));
-        expect.that(new CsvLine("A", "B")).equalTo(new CsvLine("A", "B"));
+        expect.that(new CsvLine()).isEqualTo(new CsvLine());
+        expect.that(new CsvLine("A")).isEqualTo(new CsvLine("A"));
+        expect.that(new CsvLine("A", "B")).isEqualTo(new CsvLine("A", "B"));
     }
 
     @Specification
     public void isNotEqualToObjectsWithTheDifferentColumns() {
-        expect.that(new CsvLine()).notEqualTo(new CsvLine("A", "B"));
-        expect.that(new CsvLine("A", "A")).notEqualTo(new CsvLine("A", "B"));
+        expect.that(new CsvLine()).isNotEqualTo(new CsvLine("A", "B"));
+        expect.that(new CsvLine("A", "A")).isNotEqualTo(new CsvLine("A", "B"));
     }
 
     @Specification
     public void isNotEqualToNull() {
-        expect.that(new CsvLine("")).notEqualTo(null);
+        expect.that(new CsvLine("")).isNotEqualTo(null);
     }
 
     @SuppressWarnings({"EqualsBetweenInconvertibleTypes"})
@@ -83,7 +83,7 @@ public final class CsvLineContext {
     @Specification
     public void hasAHasCodeThatIsThatOfTheColumns() {
         final String[] columns = {""};
-        expect.that(new CsvLine(columns).hashCode()).equalTo(columns.hashCode());
+        expect.that(new CsvLine(columns).hashCode()).isEqualTo(columns.hashCode());
     }
 
     @Specification

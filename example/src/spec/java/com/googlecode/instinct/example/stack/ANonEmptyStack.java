@@ -53,14 +53,14 @@ public final class ANonEmptyStack {
     void popsPushedValue() {
         stack.push(number1);
         final Object o = stack.pop();
-        expect.that(o).sameInstanceAs(number1);
+        expect.that(o).isTheSameInstanceAs(number1);
     }
 
     @Specification
     void shouldPopSecondPushedValueFirst() {
         stack.push(number1);
         stack.push(number2);
-        expect.that(stack.pop()).equalTo(number2);
+        expect.that(stack.pop()).isEqualTo(number2);
     }
 
     @Specification
@@ -68,6 +68,6 @@ public final class ANonEmptyStack {
         stack.push(number1);
         final Integer peekResult = stack.peek();
         final Integer popResult = stack.pop();
-        expect.that(popResult).sameInstanceAs(peekResult);
+        expect.that(popResult).isTheSameInstanceAs(peekResult);
     }
 }

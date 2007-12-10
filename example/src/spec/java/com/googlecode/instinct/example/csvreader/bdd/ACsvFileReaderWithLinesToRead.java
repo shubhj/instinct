@@ -23,13 +23,13 @@ import com.googlecode.instinct.example.csvreader.CsvLine;
 import com.googlecode.instinct.example.csvreader.CsvLineSplitter;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import static com.googlecode.instinct.internal.util.Reflector.insertFieldValueUsingInferredType;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
-import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValueUsingInferredType;
 import org.jmock.Expectations;
 import org.junit.runner.RunWith;
 
@@ -55,13 +55,17 @@ public final class ACsvFileReaderWithLinesToRead {
     public void parsesBothLinesAndSplitsThem() {
         expect.that(new Expectations() {
             {
-                one(csvFile).hasMoreLines(); will(returnValue(true));
-                one(csvFile).readLine(); will(returnValue(line1));
-                one(csvLineSplitter).split(line1); will(returnValue(splitColumns));
-                one(csvFile).hasMoreLines(); will(returnValue(false));
+                one(csvFile).hasMoreLines();
+                will(returnValue(true));
+                one(csvFile).readLine();
+                will(returnValue(line1));
+                one(csvLineSplitter).split(line1);
+                will(returnValue(splitColumns));
+                one(csvFile).hasMoreLines();
+                will(returnValue(false));
                 ignoring(csvFile).close();
             }
         });
-        expect.that(csvFileReader.readLines()).equalTo(parsedLines);
+        expect.that(csvFileReader.readLines()).isEqualTo(parsedLines);
     }
 }

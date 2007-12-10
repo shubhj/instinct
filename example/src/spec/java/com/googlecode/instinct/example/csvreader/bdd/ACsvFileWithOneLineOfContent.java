@@ -52,7 +52,7 @@ public final class ACsvFileWithOneLineOfContent {
     @Specification
     public void readsOneLineThenHasNoMoreToRead() {
         expect.that(csvFile.hasMoreLines()).isTrue();
-        expect.that(csvFile.readLine()).equalTo("A,B,C,D,E,F");
+        expect.that(csvFile.readLine()).isEqualTo("A,B,C,D,E,F");
         expect.that(csvFile.hasMoreLines()).isFalse();
     }
 }

@@ -21,7 +21,7 @@ import com.googlecode.instinct.example.csvreader.CsvFileReader;
 import com.googlecode.instinct.example.csvreader.CsvFileReaderImpl;
 import com.googlecode.instinct.example.csvreader.CsvLine;
 import com.googlecode.instinct.example.csvreader.CsvLineSplitter;
-import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValueUsingInferredType;
+import com.googlecode.instinct.internal.util.Reflector;
 import static org.hamcrest.core.IsEqual.equalTo;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
@@ -51,7 +51,7 @@ public final class CsvFileReaderTest {
         parsedLines = new CsvLine[]{new CsvLine("A", "B")};
         line1 = "A,B,C";
         csvFileReader = new CsvFileReaderImpl(csvFile);
-        insertFieldValueUsingInferredType(csvFileReader, csvLineSplitter);
+        Reflector.insertFieldValueUsingInferredType(csvFileReader, csvLineSplitter);
     }
 
     @After
@@ -63,8 +63,10 @@ public final class CsvFileReaderTest {
     public void closesTheUnderlyingFileOnAllExceptions() {
         mockery.checking(new Expectations() {
             {
-                one(csvFile).hasMoreLines(); will(returnValue(true));
-                one(csvFile).readLine(); will(throwException(exception));
+                one(csvFile).hasMoreLines();
+                will(returnValue(true));
+                one(csvFile).readLine();
+                will(throwException(exception));
                 atLeast(1).of(csvFile).close();
             }
         });
@@ -75,7 +77,8 @@ public final class CsvFileReaderTest {
     public void whenThereIsNothingToReadItReturnsNoLines() {
         mockery.checking(new Expectations() {
             {
-                one(csvFile).hasMoreLines(); will(returnValue(false));
+                one(csvFile).hasMoreLines();
+                will(returnValue(false));
                 ignoring(csvFile).close();
             }
         });
@@ -86,10 +89,14 @@ public final class CsvFileReaderTest {
     public void whenThereIsTwoLinesParsesBothLinesAndSplitsThem() {
         mockery.checking(new Expectations() {
             {
-                one(csvFile).hasMoreLines(); will(returnValue(true));
-                one(csvFile).readLine(); will(returnValue(line1));
-                one(csvLineSplitter).split(line1); will(returnValue(splitColumns));
-                one(csvFile).hasMoreLines(); will(returnValue(false));
+                one(csvFile).hasMoreLines();
+                will(returnValue(true));
+                one(csvFile).readLine();
+                will(returnValue(line1));
+                one(csvLineSplitter).split(line1);
+                will(returnValue(splitColumns));
+                one(csvFile).hasMoreLines();
+                will(returnValue(false));
                 ignoring(csvFile).close();
             }
         });

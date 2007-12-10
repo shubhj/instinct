@@ -76,6 +76,6 @@ public final class ACsvFileReaderWithNothingToRead {
                 ignoring(csvFile).close();
             }
         });
-        expect.that(csvFileReader.readLines()).equalTo(noLines);
+        expect.that(csvFileReader.readLines()).isEqualTo(noLines);
     }
 }

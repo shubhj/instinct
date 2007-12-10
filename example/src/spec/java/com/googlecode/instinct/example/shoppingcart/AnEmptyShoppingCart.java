@@ -48,7 +48,7 @@ public final class AnEmptyShoppingCart {
         expect.that(cart.isEmpty()).isTrue();
         cart.addItem(mockItem1);
         expect.that(cart.isEmpty()).isFalse();
-        expect.that(cart.size()).equalTo(1);
+        expect.that(cart.size()).isEqualTo(1);
         expect.that(cart.contains(mockItem1)).isTrue();
     }
 
@@ -57,11 +57,11 @@ public final class AnEmptyShoppingCart {
         expect.that(cart.isEmpty()).isTrue();
         cart.addItem(mockItem1);
         expect.that(cart.isEmpty()).isFalse();
-        expect.that(cart.size()).equalTo(1);
+        expect.that(cart.size()).isEqualTo(1);
         expect.that(cart.contains(mockItem1)).isTrue();
         cart.addItem(mockItem2);
         expect.that(cart.isEmpty()).isFalse();
-        expect.that(cart.size()).equalTo(2);
+        expect.that(cart.size()).isEqualTo(2);
         expect.that(cart.contains(mockItem2)).isTrue();
         expect.that(cart.contains(mockItem1)).isTrue();
     }
