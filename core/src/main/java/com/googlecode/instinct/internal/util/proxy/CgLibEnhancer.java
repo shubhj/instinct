@@ -21,7 +21,7 @@ import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.CallbackFilter;
 
 public interface CgLibEnhancer {
-    <T extends Callback> void setCallbackType(Class<T> callbackType);
+    void setCallbackTypes(Class<? extends Callback>... callbackTypes);
 
     void setCallbackFilter(CallbackFilter filter);
 

@@ -16,10 +16,10 @@
 
 package com.googlecode.instinct.internal.edge.java.lang.reflect;
 
+import com.googlecode.instinct.internal.edge.EdgeException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import au.net.netstorm.boost.edge.EdgeException;
 
 public final class ClassEdgeImpl implements ClassEdge {
     public Class<?> forName(final String className) {
@@ -75,6 +75,14 @@ public final class ClassEdgeImpl implements ClassEdge {
     public <T> Field getDeclaredField(final Class<T> cls, final String fieldName) {
         try {
             return cls.getDeclaredField(fieldName);
+        } catch (NoSuchFieldException e) {
+            throw new EdgeException(e);
+        }
+    }
+
+    public <T> Field getField(final Class<T> cls, final String name) {
+        try {
+            return cls.getField(name);
         } catch (NoSuchFieldException e) {
             throw new EdgeException(e);
         }

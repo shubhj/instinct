@@ -16,14 +16,14 @@
 
 package com.googlecode.instinct.test.triangulate;
 
-import au.net.netstorm.boost.test.atom.DefaultRandomProvider;
-import com.googlecode.instinct.internal.util.Suggest;
 import java.util.Random;
+import com.googlecode.instinct.internal.util.Suggest;
 
 @SuppressWarnings({"unchecked"})
 @Suggest("How does this differ from TriangulationProvider? Can they be merged?")
 public final class RandomProviderImpl implements RandomProvider {
-    private DefaultRandomProvider randomProvider = new DefaultRandomProvider();
+    private com.googlecode.instinct.internal.util.boost.RandomProviderImpl randomProvider =
+            new com.googlecode.instinct.internal.util.boost.RandomProviderImpl();
     private Random random = new Random();
 
     public <T> T getRandom(final Class<T> type) {

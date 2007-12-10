@@ -16,42 +16,48 @@
 
 package com.googlecode.instinct.sandbox.composer;
 
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Stub;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectMessageContains;
 import static com.googlecode.instinct.test.triangulate.Triangulation.getInstance;
 import org.jmock.Expectations;
-import org.jmock.Mockery;
 
 @SuppressWarnings({"InstanceVariableOfConcreteClass", "QuestionableName", "ProtectedField", "ProhibitedExceptionDeclared"})
-public class InterfaceComposerAtomicTest extends InstinctTestCase {
-    private Mockery context = new Mockery();
-    private One one = new One();
-    private Two two = new Two();
-    private Three three = new Three();
-    private ComposedInterface mockComposedInterface = context.mock(ComposedInterface.class);
-    private ComposedInterface oneAndTwo;
-    private ComposedInterface oneTwoAndThree;
-    private ComposedInterface backedByMockImplementation;
+public final class InterfaceComposerAtomicTest extends InstinctTestCase {
+    @Subject(implementation = InterfaceComposerImpl.class) private InterfaceComposer interfaceComposer;
+    @Mock private ComposedInterface composedInterface;
+    @Stub private One one;
+    @Stub private Two two;
+    @Stub private Three three;
+    @Stub(auto = false) private ComposedInterface oneAndTwo;
+    @Stub(auto = false) private ComposedInterface oneTwoAndThree;
+    @Stub(auto = false) private ComposedInterface backedByMockImplementation;
+    @Stub private Throwable throwable;
 
-    public void testConformsToClassTraits() {
-        // TODO
+    @Override
+    public void setUpSubject() {
+        oneAndTwo = interfaceComposer.compose(ComposedInterface.class, one, two);
+        oneTwoAndThree = interfaceComposer.compose(ComposedInterface.class, one, two, three);
+        backedByMockImplementation = interfaceComposer.compose(ComposedInterface.class, composedInterface);
     }
 
     public void testDelgatesToMethodWithMostSpecificReturnType() {
-        assertEquals(one.returnANumber(), oneAndTwo.returnANumber());
-        assertEquals(two.returnAnotherNumber(), oneAndTwo.returnAnotherNumber());
-        assertEquals(two.getObject(), oneAndTwo.getObject());
-        assertEquals(three.getObject(), oneTwoAndThree.getObject());
+        expect.that(oneAndTwo.returnANumber()).equalTo(one.returnANumber());
+        expect.that(oneAndTwo.returnAnotherNumber()).equalTo(two.returnAnotherNumber());
+        expect.that(oneAndTwo.getObject()).equalTo(two.getObject());
+        expect.that(oneTwoAndThree.getObject()).equalTo(three.getObject());
     }
 
     public void testThrowsNoSuchMethodExceptionWhenMethodNotFound() {
-        final Throwable throwable = expectException(NoSuchMethodError.class,
-                new Runnable() {
-                    public void run() {
-                        oneAndTwo.notImplemented();
-                    }
-                });
+        final Throwable throwable = expectException(NoSuchMethodError.class, new Runnable() {
+            public void run() {
+                oneAndTwo.notImplemented();
+            }
+        });
         expectMessageContains(throwable, "No implementation found for: ");
     }
 
@@ -64,50 +70,33 @@ public class InterfaceComposerAtomicTest extends InstinctTestCase {
     }
 
     public void testWrapsOtherThrowables() throws Throwable {
-        final Throwable expectedThrowable = new Throwable();
-        context.checking(new Expectations() {
+        expect.that(new Expectations() {
             {
-                one(mockComposedInterface).throwSomething();
-                will(throwException(expectedThrowable));
+                one(composedInterface).throwSomething();
+                will(throwException(throwable));
             }
         });
         try {
             backedByMockImplementation.throwSomething();
         } catch (Throwable actualThrowable) {
-            context.assertIsSatisfied();
-            assertSame(RuntimeException.class, actualThrowable.getClass());
-            assertSame(expectedThrowable, actualThrowable.getCause());
+            expect.that(actualThrowable).isOfType(RuntimeException.class);
+            expect.that(actualThrowable.getCause()).sameInstanceAs(throwable);
         }
     }
 
-    @Override
-    public void setUpTestDoubles() {
-    }
-
-    @Override
-    public void setUpSubject() {
-        final InterfaceComposer interfaceComposer = new InterfaceComposerImpl();
-        oneAndTwo = interfaceComposer.compose(ComposedInterface.class, one, two);
-        oneTwoAndThree = interfaceComposer.compose(ComposedInterface.class, one, two, three);
-        backedByMockImplementation = interfaceComposer.compose(ComposedInterface.class, mockComposedInterface);
-    }
-
     private void checkRethrowsSameThrowable(final Throwable expectedThrowable) {
-        final ComposedInterface mockComposedInterface = context.mock(ComposedInterface.class);
-        context.checking(new Expectations() {
+        expect.that(new Expectations() {
             {
-                one(mockComposedInterface).returnANumber();
+                one(composedInterface).returnANumber();
                 will(throwException(expectedThrowable));
             }
         });
-        final Throwable actualThrowable = expectException(expectedThrowable.getClass(),
-                new Runnable() {
-                    public void run() {
-                        mockComposedInterface.returnANumber();
-                    }
-                });
-        context.assertIsSatisfied();
-        assertSame(expectedThrowable, actualThrowable);
+        final Throwable actualThrowable = expectException(expectedThrowable.getClass(), new Runnable() {
+            public void run() {
+                composedInterface.returnANumber();
+            }
+        });
+        expect.that(actualThrowable).sameInstanceAs(expectedThrowable);
     }
 
     private static class One {

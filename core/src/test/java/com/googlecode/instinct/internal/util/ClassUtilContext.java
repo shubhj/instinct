@@ -41,9 +41,9 @@ public final class ClassUtilContext {
 
     @Specification
     public void shouldNotDetectNonJavaLibaries() {
-       expectNotJavaLibrary(InstinctRunner.class);
-       expectNotJavaLibrary(AnnotatedMethodLocatorImpl.class);
-       expectNotJavaLibrary(ClassUtilContext.class);
+        expectNotJavaLibrary(InstinctRunner.class);
+        expectNotJavaLibrary(AnnotatedMethodLocatorImpl.class);
+        expectNotJavaLibrary(ClassUtilContext.class);
     }
 
     private void expectNotJavaLibrary(final Class<?> clazz) {

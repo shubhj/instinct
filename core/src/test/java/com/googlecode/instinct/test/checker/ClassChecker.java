@@ -16,26 +16,24 @@
 
 package com.googlecode.instinct.test.checker;
 
-import au.net.netstorm.boost.nursery.instance.InstanceProvider;
-import au.net.netstorm.boost.nursery.reflect.checker.ConstructorNullParameterTestChecker;
-import au.net.netstorm.boost.nursery.reflect.checker.DefaultConstructorNullParameterTestChecker;
-import au.net.netstorm.boost.nursery.reflect.checker.DefaultMethodNullParameterTestChecker;
-import au.net.netstorm.boost.nursery.reflect.checker.MethodNullParameterTestChecker;
-import au.net.netstorm.boost.test.reflect.checker.ClassTestChecker;
-import au.net.netstorm.boost.test.reflect.checker.DefaultClassTestChecker;
-import com.googlecode.instinct.internal.util.instance.UberInstanceProvider;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.util.boost.ClassTestChecker;
+import com.googlecode.instinct.internal.util.boost.ConstructorNullParameterTestChecker;
+import com.googlecode.instinct.internal.util.boost.MehodNullParameterTestChecker;
+import com.googlecode.instinct.internal.util.boost.MehodNullParameterTestCheckerImpl;
+import com.googlecode.instinct.internal.util.instance.InstanceProvider;
+import com.googlecode.instinct.internal.util.instance.GenericInstanceProvider;
 import static com.googlecode.instinct.test.checker.ModifierChecker.checkFinal;
 import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;
 
 public final class ClassChecker {
-    private static final ClassTestChecker CLASS_CHECKER = new DefaultClassTestChecker();
+    private static final ClassTestChecker CLASS_CHECKER = new com.googlecode.instinct.internal.util.boost.ClassTestCheckerImpl();
     @Fix("This returns mocks - which aint much use when testing a specific implementation see StateExpectationsImplAtomicTest.")
-    private static final InstanceProvider INSTANCE_PROVIDER = new UberInstanceProvider();
-    private static final ConstructorNullParameterTestChecker CONSTRUCTOR_NULL_CHECKER = new DefaultConstructorNullParameterTestChecker(
+    private static final InstanceProvider INSTANCE_PROVIDER = new GenericInstanceProvider();
+    private static final ConstructorNullParameterTestChecker CONSTRUCTOR_NULL_CHECKER = new com.googlecode.instinct.internal.util.boost.ConstructorNullParameterTestCheckerImpl(
             INSTANCE_PROVIDER);
-    private static final MethodNullParameterTestChecker METHOD_NULL_CHECKER = new DefaultMethodNullParameterTestChecker(INSTANCE_PROVIDER);
+    private static final MehodNullParameterTestChecker METHOD_NULL_CHECKER = new MehodNullParameterTestCheckerImpl(INSTANCE_PROVIDER);
 
     private ClassChecker() {
         throw new UnsupportedOperationException();

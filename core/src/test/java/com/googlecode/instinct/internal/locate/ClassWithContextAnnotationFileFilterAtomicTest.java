@@ -24,6 +24,7 @@ import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Subject;
+import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.naming.ContextNamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
@@ -38,9 +39,10 @@ public final class ClassWithContextAnnotationFileFilterAtomicTest extends Instin
     @Mock private File pathname;
     @Mock private ObjectFactory objectFactory;
     @Mock private MarkedFileChecker checker;
-    private MarkingScheme markingScheme;
+    @Stub(auto = false) private MarkingScheme markingScheme;
 
-    @Override public void setUpTestDoubles() {
+    @Override
+    public void setUpTestDoubles() {
         markingScheme = new MarkingSchemeImpl(Context.class, new ContextNamingConvention(), IGNORE);
     }
 

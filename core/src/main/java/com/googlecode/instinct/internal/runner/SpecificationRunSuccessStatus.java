@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.util.Suggest;
-import au.net.netstorm.boost.primordial.Primordial;
+import com.googlecode.instinct.internal.util.lang.Primordial;
 
 @Suggest({"Implement readObject() & writeObject() to ensure only ever one VERIFICATION_SUCCESS",
         "Can this be implemented as an enum? Perhaps this becomes an enum & the methods go into the SpecificationResult."})

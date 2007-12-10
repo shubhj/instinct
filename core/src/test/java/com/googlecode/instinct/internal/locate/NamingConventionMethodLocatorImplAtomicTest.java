@@ -17,9 +17,9 @@
 package com.googlecode.instinct.internal.locate;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.expect.behaviour.Mocker;
 import com.googlecode.instinct.internal.runner.ASimpleNamingConventionContext;
 import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
@@ -30,13 +30,8 @@ import org.jmock.Expectations;
 import org.jmock.internal.matcher.MethodNameMatcher;
 
 public final class NamingConventionMethodLocatorImplAtomicTest extends InstinctTestCase {
-    @Mock private NamingConvention namingConvention = Mocker.mock(NamingConvention.class);
-    private NamingConventionMethodLocator methodLocator;
-
-    @Override
-    public void setUpSubject() {
-        methodLocator = new NamingConventionMethodLocatorImpl();
-    }
+    @Subject(implementation = NamingConventionMethodLocatorImpl.class) private NamingConventionMethodLocator methodLocator;
+    @Mock private NamingConvention namingConvention;
 
     public void testConformsToClassTraits() {
         checkClass(NamingConventionMethodLocatorImpl.class, NamingConventionMethodLocator.class);
@@ -45,7 +40,8 @@ public final class NamingConventionMethodLocatorImplAtomicTest extends InstinctT
     public void testFindsMethodsConformingToTheNamingConvention() {
         expect.that(new Expectations() {
             {
-                atLeast(1).of(namingConvention).getPattern(); will(returnValue("^must.*"));
+                atLeast(1).of(namingConvention).getPattern();
+                will(returnValue("^must.*"));
             }
         });
         final Collection<Method> methods = methodLocator.locate(ASimpleNamingConventionContext.class, namingConvention);

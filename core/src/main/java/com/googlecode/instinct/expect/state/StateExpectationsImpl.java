@@ -21,10 +21,10 @@ import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdgeImpl;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import java.io.File;
 import java.util.Collection;
 import java.util.EventObject;
 import java.util.Map;
-import java.io.File;
 import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 

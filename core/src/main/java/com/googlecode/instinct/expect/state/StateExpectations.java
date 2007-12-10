@@ -17,10 +17,10 @@
 package com.googlecode.instinct.expect.state;
 
 import com.googlecode.instinct.internal.util.Fix;
+import java.io.File;
 import java.util.Collection;
 import java.util.EventObject;
 import java.util.Map;
-import java.io.File;
 import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 

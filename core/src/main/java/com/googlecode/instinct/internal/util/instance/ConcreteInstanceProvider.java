@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.internal.util.instance;
 
-import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 import com.googlecode.instinct.internal.util.Suggest;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -25,57 +24,58 @@ import java.util.ArrayList;
 import org.objenesis.Objenesis;
 import org.objenesis.ObjenesisStd;
 
-// SUPPRESS CyclomaticComplexity|NPathComplexity|MethodLength {
-@Suggest("This becomes StubCreator and this becomes a wrapper for InstanceProvider.")
-@SuppressWarnings({"RawUseOfParameterizedType", "MagicNumber", "ReturnOfCollectionOrArrayField", "OverlyComplexMethod"})
+// SUPPRESS CyclomaticComplexity|NPathComplexity|MethodLength|IllegalInstantiation {
+@Suggest("THis should use the  triangulation provider, or boost random utilities.")
+@SuppressWarnings(
+        {"RawUseOfParameterizedType", "MagicNumber", "ReturnOfCollectionOrArrayField", "OverlyComplexMethod", "CachedNumberConstructorCall"})
 public final class ConcreteInstanceProvider implements InstanceProvider {
     private static final Object OBJECT = new Object();
     private static final Object[] OBJECT_ARRAY = {OBJECT};
-    private final InstanceProvider uberInstanceProvider = new UberInstanceProvider();
+    private final InstanceProvider uberInstanceProvider = new GenericInstanceProvider();
     private final Objenesis objenesis = new ObjenesisStd();
 
-    @Suggest("THis should use the  triangulation provider, or boost random utilities.")
-    public Object newInstance(final Class cls) {
+    @SuppressWarnings({"unchecked"})
+    public <T> T newInstance(final Class<T> cls) {
         if (cls.isEnum()) {
             return cls.getEnumConstants()[0];
         }
         if (cls.isAnnotation()) {
-            return AnAnnotation.class;
+            return (T) AnAnnotation.class;
         }
         if (cls.isPrimitive()) {
-            return getPrimitiveInstance(cls);
+            return (T) getPrimitiveInstance(cls);
         }
         if (cls.equals(Class.class)) {
-            return ArrayList.class;
+            return (T) ArrayList.class;
         }
         if (cls.equals(Object.class)) {
-            return OBJECT;
+            return (T) OBJECT;
         }
         if (cls.equals(Object[].class)) {
-            return OBJECT_ARRAY;
+            return (T) OBJECT_ARRAY;
         }
         if (cls.equals(Long.class)) {
-            return 1L;
+            return (T) new Long(1L);
         }
         if (cls.equals(Integer.class)) {
-            return 1;
+            return (T) new Integer(1);
         }
         if (cls.equals(String.class)) {
-            return "The quick brown fox jumps over the lazy dog.";
+            return (T) "The quick brown fox jumps over the lazy dog.";
         }
         if (cls.equals(Field.class)) {
-            return createField();
+            return (T) createField();
         }
         if (cls.equals(Method.class)) {
-            return createMethod();
+            return (T) createMethod();
         }
         if (cls.isArray()) {
-            return createArray(cls.getComponentType());
+            return (T) createArray(cls.getComponentType());
         }
-        return createConcreteInstance(cls);
+        return (T) createConcreteInstance(cls);
     }
 
-    private Object createArray(final Class componentType) {
+    private <T> Object createArray(final Class<T> componentType) {
         final Object array = Array.newInstance(componentType, 1);
         Array.set(array, 0, uberInstanceProvider.newInstance(componentType));
         return array;
@@ -113,7 +113,7 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
         return objenesis.newInstance(implementationClass);
     }
 
-    private Field createField() {
+    private Object createField() {
         try {
             return getClass().getDeclaredField("OBJECT");
         } catch (NoSuchFieldException e) {
@@ -132,4 +132,4 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
     private @interface AnAnnotation {
     }
 }
-// } SUPPRESS CyclomaticComplexity|NPathComplexity|MethodLength
+// } SUPPRESS CyclomaticComplexity|NPathComplexity|MethodLength|IllegalInstantiation

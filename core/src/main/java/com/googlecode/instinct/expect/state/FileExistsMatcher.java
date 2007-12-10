@@ -18,9 +18,9 @@ package com.googlecode.instinct.expect.state;
 
 import java.io.File;
 import org.hamcrest.Description;
-import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
 public final class FileExistsMatcher extends TypeSafeMatcher<File> {
     private FileExistsMatcher() {

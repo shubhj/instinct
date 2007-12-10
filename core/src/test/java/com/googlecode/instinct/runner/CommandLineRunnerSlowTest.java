@@ -25,9 +25,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import au.net.netstorm.boost.edge.java.io.DefaultEdgeInputStream;
-import au.net.netstorm.boost.util.io.DefaultStreamConverter;
-import au.net.netstorm.boost.util.nullo.NullMaster;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.locate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.internal.locate.PackageRootFinder;
@@ -35,6 +32,7 @@ import com.googlecode.instinct.internal.locate.PackageRootFinderImpl;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.util.io.InputStreamConvertorImpl;
 import com.googlecode.instinct.test.InstinctTestCase;
 import com.googlecode.instinct.test.TestingException;
 import com_cenqua_clover.Clover;
@@ -48,7 +46,6 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
     private static final Class<?> CONTEXT_CLASS_1 = ASimpleContext.class;
     private static final Class<?> CONTEXT_CLASS_2 = ContextWithSpecsWithDifferentAccessModifiers.class;
     private final PackageRootFinder packageRootFinder = new PackageRootFinderImpl();
-    private final DefaultStreamConverter streamConverter = new DefaultStreamConverter();
 
     @Suggest("Use the WM written stream convertor, not boost's.")
     public void testRunsContextsFromTheCommandLine() {
@@ -147,14 +144,12 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
     }
 
     private String buildClassPath() {
-        final String boost = getJarFilePath(NullMaster.class);
         final String hamcrest = getJarFilePath(Matchers.class);
         final String clover = getJarFilePath(Clover.class);
         final String jMock = getJarFilePath(ExpectationError.class);
         final String objenesis = getJarFilePath(Objenesis.class);
         final String cgLib = getJarFilePath(CallbackFilter.class);
         return getSourceRoot() + pathSeparatorChar + getTestRoot() + pathSeparatorChar + hamcrest + pathSeparatorChar
-                + boost + pathSeparatorChar
                 + clover + pathSeparatorChar
                 + jMock + pathSeparatorChar
                 + objenesis + pathSeparatorChar
@@ -197,6 +192,6 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
     }
 
     private byte[] read(final InputStream inputStream) {
-        return streamConverter.read(new DefaultEdgeInputStream(inputStream));
+        return new InputStreamConvertorImpl(inputStream).read();
     }
 }

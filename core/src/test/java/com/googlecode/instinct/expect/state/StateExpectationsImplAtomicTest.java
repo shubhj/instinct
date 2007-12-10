@@ -16,37 +16,37 @@
 
 package com.googlecode.instinct.expect.state;
 
-import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
-import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
-import com.googlecode.instinct.internal.util.ObjectFactory;
-import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
-import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.Map;
+import static com.googlecode.instinct.expect.Expect.expect;
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
+import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
+import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Stub;
+import com.googlecode.instinct.marker.annotate.Subject;
+import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
+import static com.googlecode.instinct.test.reflect.Reflector.insertFieldValue;
 import org.hamcrest.Matcher;
 import org.jmock.Expectations;
 
 @SuppressWarnings({"unchecked", "RawUseOfParameterizedType", "OverlyCoupledClass"})
 public final class StateExpectationsImplAtomicTest extends InstinctTestCase {
-    private ObjectFactory objectFactory;
-    private MatcherAssertEdge matcherAssert;
-    private StateExpectations stateExpectations;
-    private Matcher hamcrestMatcher;
-    private Collection<String> collection;
-    private Object object;
+    @Subject private StateExpectations stateExpectations;
+    @Mock private ObjectFactory objectFactory;
+    @Mock private MatcherAssertEdge matcherAssert;
+    @Mock private Matcher hamcrestMatcher;
+    @Stub(auto = false) private Collection<String> collection;
+    @Dummy private Object object;
 
     @Override
     public void setUpTestDoubles() {
-        objectFactory = mock(ObjectFactory.class);
-        matcherAssert = mock(MatcherAssertEdge.class);
-        hamcrestMatcher = mock(Matcher.class);
         collection = new ArrayList<String>();
-        object = new Object();
     }
 
     @Override

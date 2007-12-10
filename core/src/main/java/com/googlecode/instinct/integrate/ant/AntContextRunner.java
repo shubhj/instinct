@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import java.util.regex.Pattern;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
@@ -25,6 +24,7 @@ import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
+import java.util.regex.Pattern;
 import static org.apache.tools.ant.Project.MSG_ERR;
 import static org.apache.tools.ant.Project.MSG_INFO;
 

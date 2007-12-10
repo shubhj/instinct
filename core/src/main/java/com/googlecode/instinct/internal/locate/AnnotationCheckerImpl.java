@@ -21,7 +21,7 @@ import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.MethodEdgeImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.AnnotationAttribute;
-import static com.googlecode.instinct.marker.AnnotationAttribute.*;
+import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;

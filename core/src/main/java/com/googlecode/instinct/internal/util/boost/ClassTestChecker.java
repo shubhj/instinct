@@ -1,0 +1,31 @@
+/*
+ * Copyright 2006-2007 Tom Adams
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.googlecode.instinct.internal.util.boost;
+
+public interface ClassTestChecker {
+    <U, T extends U> void checkImplementsAndFinal(final Interface<U> expectedInterface, final Class<T> implementationClass);
+
+    <U, T extends U> void checkImplementsAndFinal(Class<U> expectedInterface, Class<T> implementationClass);
+
+    void checkSubInterfaceOf(Interface subInterface, Interface superInterface);
+
+    <U, T extends U> void checkSubclassOf(Class<T> subClass, Class<U> superClass);
+
+    <T> void checkSubclassOfRef(Class<T> expectedImpl, Object ref);
+
+    <T> void checkSynchronized(Class<T> cls);
+}

@@ -15,8 +15,7 @@
  */
 package com.googlecode.instinct.internal.runner;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import com.googlecode.instinct.expect.behaviour.Mocker;
 import com.googlecode.instinct.internal.actor.ActorAutoWirer;
 import com.googlecode.instinct.internal.actor.ActorAutoWirerImpl;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
@@ -24,17 +23,20 @@ import com.googlecode.instinct.internal.core.SpecificationMethod;
 import static com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus.SPECIFICATION_SUCCESS;
 import com.googlecode.instinct.internal.util.Clock;
 import com.googlecode.instinct.internal.util.ClockImpl;
-import com.googlecode.instinct.internal.util.ConstructorInvoker;
-import com.googlecode.instinct.internal.util.ConstructorInvokerImpl;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.util.lang.ConstructorInvoker;
+import com.googlecode.instinct.internal.util.lang.ConstructorInvokerImpl;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.runner.SpecificationListener;
+import java.util.ArrayList;
+import java.util.Collection;
 import org.jmock.api.ExpectationError;
 
+// SUPPRESS GenericIllegalRegex|MethodLength {
 @Fix("This class is huge. Split it!")
 @SuppressWarnings({"OverlyCoupledClass"})
 public final class SpecificationRunnerImpl implements SpecificationRunner {
@@ -91,6 +93,8 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
                 final SpecificationRunStatus status = new SpecificationRunFailureStatus(wrapCommonExceptions(exceptionThrown));
                 return createSpecResult(specificationMethod, status, startTime);
             } else {
+//                System.out.println("exceptionThrown = " + exceptionThrown);
+//                System.out.println("exceptionThrown.getCause() = " + exceptionThrown.getCause());
                 final Throwable exceptionThrownBySpec = exceptionThrown.getCause().getCause();
                 return processExpectedFailure(specificationMethod, startTime, expectedException, exceptionThrownBySpec);
             }
@@ -124,7 +128,9 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         }
     }
 
-    @Fix("Test the wrapping of jMock exceptions here.")
+    @Fix({"Test the wrapping of jMock exceptions here."})
+    @Suggest({"Wrap 'unexpected ...' jMock cardinality exception if you a mock is used in a test without expectations being set on it",
+            "Call this thing an ExceptionSanitiser"})
     private Throwable wrapCommonExceptions(final Throwable throwable) {
         if (throwable instanceof ExpectationError) {
             final String message = "Unexpected invocation. You may need to wrap the code in your new Expections(){{}} block with cardinality "
@@ -140,15 +146,16 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         return new SpecificationResultImpl(specificationMethod.getName(), runStatus, executionTime);
     }
 
-    @Suggest({"Expose this lifecycle?", "May need to stick verification of mocks in finally, if we report them as well as other errors."})
+    @Suggest({"Expose this lifecycle?"})
     private void runSpecificationLifecycle(final Object contextInstance, final SpecificationMethod specificationMethod) {
         actorAutoWirer.autoWireFields(contextInstance);
         try {
             runMethods(contextInstance, specificationMethod.getBeforeSpecificationMethods());
             runSpecificationMethod(contextInstance, specificationMethod.getSpecificationMethod());
-            //mockVerifier.verify(contextInstance);
         } finally {
+            // Note. What order do we run this in? Does it need to go in the finally?
             runMethods(contextInstance, specificationMethod.getAfterSpecificationMethods());
+            Mocker.verify();
         }
     }
 
@@ -188,3 +195,4 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         return constructorInvoker.invokeNullaryConstructor(cls);
     }
 }
+// } SUPPRESS GenericIllegalRegex|MethodLength

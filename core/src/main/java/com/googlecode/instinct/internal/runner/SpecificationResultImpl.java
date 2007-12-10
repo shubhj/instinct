@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import au.net.netstorm.boost.primordial.Primordial;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
+import com.googlecode.instinct.internal.util.lang.Primordial;
 
 public final class SpecificationResultImpl extends Primordial implements SpecificationResult {
     private final String specificationName;
@@ -26,8 +26,8 @@ public final class SpecificationResultImpl extends Primordial implements Specifi
     private final long executionTime;
 
     public SpecificationResultImpl(final String specificationName, final SpecificationRunStatus status, final long executionTime) {
+        checkNotNull(specificationName, status);
         checkNotWhitespace(specificationName);
-        checkNotNull(status);
         this.specificationName = specificationName;
         this.status = status;
         this.executionTime = executionTime;

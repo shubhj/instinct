@@ -67,8 +67,9 @@ public final class Specifications {
         specificationGroupsConstraint = groupSanitiser.sanitise(groups);
     }
 
-    @Suggest({"This should return ContextClass's, that way we don't need to instantiate them.",
-            "The filters already instantiate them, do so here and re-use", "Don't return an array, use an ordered set."})
+    @Suggest({"This should return ContextClass's, that way we don't need to instantiate them.", 
+            "The filters already instantiate them, do so here and re-use",
+            "Don't return an array, use an ordered set."})
     public JavaClassName[] getContextClasses() {
         checkPreconditions();
         ensureSpecificationGroupIsSet();

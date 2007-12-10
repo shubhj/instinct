@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.expect.state;
 
-import java.util.regex.Pattern;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import java.util.regex.Pattern;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;

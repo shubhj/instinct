@@ -23,7 +23,6 @@ import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import com.googlecode.instinct.internal.util.ParamChecker;
 import com.googlecode.instinct.internal.util.Suggest;
-
 import java.lang.reflect.Method;
 
 @Suggest("Test drive this.")

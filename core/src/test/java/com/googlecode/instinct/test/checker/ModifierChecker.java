@@ -16,11 +16,10 @@
 
 package com.googlecode.instinct.test.checker;
 
-import au.net.netstorm.boost.test.reflect.checker.DefaultModifierTestChecker;
-import au.net.netstorm.boost.test.reflect.checker.ModifierTestChecker;
+import com.googlecode.instinct.internal.util.boost.ModifierTestChecker;
 
 public final class ModifierChecker {
-    private static final ModifierTestChecker MODIFIER_CHECKER = new DefaultModifierTestChecker();
+    private static final ModifierTestChecker MODIFIER_CHECKER = new com.googlecode.instinct.internal.util.boost.ModifierTestCheckerImpl();
 
     private ModifierChecker() {
         throw new UnsupportedOperationException();

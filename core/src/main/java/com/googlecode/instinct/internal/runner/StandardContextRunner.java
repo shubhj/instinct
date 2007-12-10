@@ -16,8 +16,6 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
@@ -26,6 +24,8 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Suggest({"Make a runner that runs all contexts in a class (embedded anon inner)"})
 public final class StandardContextRunner implements ContextRunner {

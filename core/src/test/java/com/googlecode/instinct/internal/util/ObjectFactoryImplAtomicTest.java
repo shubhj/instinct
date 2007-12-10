@@ -16,6 +16,13 @@
 
 package com.googlecode.instinct.internal.util;
 
+import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Stub;
+import com.googlecode.instinct.marker.annotate.Subject;
+import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 import java.io.FileReader;
 import java.io.FilterReader;
 import java.io.FilterWriter;
@@ -24,13 +31,6 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.io.Serializable;
 import java.io.Writer;
-import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
-import com.googlecode.instinct.marker.annotate.Dummy;
-import com.googlecode.instinct.marker.annotate.Mock;
-import com.googlecode.instinct.marker.annotate.Subject;
-import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
-import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 
 @SuppressWarnings({"ExceptionClassNameDoesntEndWithException", "UnusedDeclaration"})
 public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
@@ -39,7 +39,7 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
     @Subject private ObjectFactory factory;
     @Mock private Reader reader;
     @Mock private Writer writer;
-    @Dummy private String string;
+    @Stub private String string;
 
     // Note. Because this is used in code that needs to accept nulls, we can't null check argument values.
     public void testConformsToClassTraits() {
@@ -89,8 +89,8 @@ public final class ObjectFactoryImplAtomicTest extends InstinctTestCase {
 
     private void checkSubclassTypeInferenceSucceed() {
         checkSucceeds(ClassWithConstructors.class, reader, writer);
-        checkSucceeds(ClassWithConstructors.class, mock(InputStreamReader.class), mock(PrintWriter.class));
-        checkSucceeds(ClassWithConstructors.class, mock(InputStreamReader.class), mock(PrintWriter.class));
+        checkSucceeds(ClassWithConstructors.class, mock(InputStreamReader.class, "reader1"), mock(PrintWriter.class, "writer1"));
+        checkSucceeds(ClassWithConstructors.class, mock(InputStreamReader.class, "reader2"), mock(PrintWriter.class, "writer2"));
         checkSucceeds(ClassWithConstructors.class, mock(FilterReader.class), mock(FilterWriter.class));
     }
 

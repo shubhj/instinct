@@ -27,6 +27,7 @@ public abstract class InstinctTestCase extends TestCase {
 
     @Override
     public final void runBare() throws Throwable {
+        reset();
         autoWireMockFields(this);
         setUpTestDoubles();
         autoWireSubjectFields(this);
@@ -43,7 +44,7 @@ public abstract class InstinctTestCase extends TestCase {
             }
         } finally {
             // Note. Resetting the mocker here causes jMock error messages to loose their state.
-            reset();
+//            reset();
             tearDown();
         }
         if (message != null) {

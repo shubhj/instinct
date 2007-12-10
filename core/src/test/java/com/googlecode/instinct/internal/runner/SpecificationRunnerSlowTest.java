@@ -16,10 +16,8 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.expect.behaviour.Mocker;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
@@ -29,6 +27,10 @@ import com.googlecode.instinct.internal.core.SpecificationMethodImpl;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.reflect.Reflector.getMethod;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import org.jmock.api.ExpectationError;
 
 @SuppressWarnings({"StringContatenationInLoop", "OverlyCoupledClass"})
 public final class SpecificationRunnerSlowTest extends InstinctTestCase {
@@ -100,6 +102,19 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
         final SpecificationMethod method = getSpecificationMethod(ContextWithAutoWiredFields.class, "doSomethingWithAutoWiredDoubles");
         final SpecificationResult result = runner.run(method);
         expect.that(result.completedSuccessfully()).isTrue();
+    }
+
+    public void testVerifiesAutoWiredMocks() {
+        final SpecificationMethod method = getSpecificationMethod(ContextWithAutoWiredFields.class, "autoWiredMocksFailToBeCalled");
+        final SpecificationResult result = runner.run(method);
+        // Note. Need to reset the mocker or the error will be caught in the InstinctTestCase super class.
+        Mocker.reset();
+        expect.that(result.completedSuccessfully()).isFalse();
+        final Object detailedStatus = result.getStatus().getDetailedStatus();
+        expect.that(detailedStatus).instanceOf(SpecificationFailureException.class);
+        final Throwable failureCause = ((Throwable) detailedStatus).getCause();
+        expect.that(failureCause).instanceOf(ExpectationError.class);
+        expect.that(failureCause.getMessage()).matchesRegex("not all expectations were satisfied");
     }
 
     private <T> SpecificationMethod getSpecificationMethod(final Class<T> contextClass, final String specMethodName) {

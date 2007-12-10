@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.internal.locate;
 
-import java.net.URL;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import java.net.URL;
 
 @SuppressWarnings({"HardcodedFileSeparator"})
 public final class PackageRootFinderImpl implements PackageRootFinder {

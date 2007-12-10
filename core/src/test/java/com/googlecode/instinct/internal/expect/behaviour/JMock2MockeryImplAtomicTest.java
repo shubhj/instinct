@@ -19,6 +19,7 @@ package com.googlecode.instinct.internal.expect.behaviour;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Subject;
+import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
@@ -36,9 +37,9 @@ public final class JMock2MockeryImplAtomicTest extends InstinctTestCase {
         }
     };
     @Subject private JMock2Mockery jMock2Mockery;
-    @Dummy private Class<CharSequence> typeToMock;
-    @Dummy private String returnedMock;
-    @Dummy private String roleName;
+    @Stub private Class<CharSequence> typeToMock;
+    @Stub private String returnedMock;
+    @Stub private String roleName;
     // Note. We can't use automocking here as we're testing the mocking infrastructure. Need to use raw jMock instead.
     private ExpectationBuilder expectations;
     private Sequence sequence;

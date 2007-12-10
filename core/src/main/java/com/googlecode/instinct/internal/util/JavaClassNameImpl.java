@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.internal.util;
 
-import java.io.File;
-import au.net.netstorm.boost.primordial.Primordial;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.lang.Primordial;
+import java.io.File;
 
 public final class JavaClassNameImpl extends Primordial implements JavaClassName {
     private final File classesRoot;

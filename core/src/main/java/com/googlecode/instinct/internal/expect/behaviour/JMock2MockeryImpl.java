@@ -22,11 +22,13 @@ import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdgeImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.lang.reflect.Field;
-import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 import org.jmock.Mockery;
 import org.jmock.Sequence;
 import org.jmock.api.Expectation;
 import org.jmock.internal.ExpectationBuilder;
+import org.jmock.internal.InvocationDispatcher;
 import org.jmock.lib.legacy.ClassImposteriser;
 
 public final class JMock2MockeryImpl implements JMock2Mockery {
@@ -64,20 +66,26 @@ public final class JMock2MockeryImpl implements JMock2Mockery {
 
     // Note. This is really horrible. As jMock lifecycle does not support (by design) the sharing of contexts across test invocations.
     public void reset() {
-        clearListField("expectations");
-        clearListField("stateMachines");
+        clearMockNames();
+        clearDispatcherListField("expectations");
+        clearDispatcherListField("stateMachines");
+    }
+
+    private void clearMockNames() {
+        final Set<String> mockNames = getFieldValue(Mockery.class, mockery, "mockNames");
+        mockNames.clear();
+    }
+
+    private void clearDispatcherListField(final String fieldName) {
+        final InvocationDispatcher dispatcher = getFieldValue(Mockery.class, mockery, "dispatcher");
+        final List<Expectation> list = getFieldValue(dispatcher.getClass(), dispatcher, fieldName);
+        list.clear();
     }
 
     @SuppressWarnings({"unchecked"})
-    private void clearListField(final String fieldName) {
-        final Object dispatcher = getFieldValue(Mockery.class, mockery, "dispatcher");
-        final Object expectations = getFieldValue(dispatcher.getClass(), dispatcher, fieldName);
-        ((Collection<Expectation>) expectations).clear();
-    }
-
-    private <T> Object getFieldValue(final Class<T> cls, final Object instance, final String fieldName) {
+    private <T, F> F getFieldValue(final Class<T> cls, final Object instance, final String fieldName) {
         final Field field = classEdge.getDeclaredField(cls, fieldName);
         field.setAccessible(true);
-        return fieldEdge.get(field, instance);
+        return (F) fieldEdge.get(field, instance);
     }
 }

@@ -152,7 +152,6 @@
             <fileset dir="${build.dir}" includes="${project.jar}"/>
             <fileset dir="${build.dir}" includes="${javadoc.zip}"/>
             <zipfileset dir="${lib.dir}/ant" prefix="lib" includes="ant-1.*.jar,ant-license.txt"/>
-            <zipfileset dir="${lib.dir}/boost" prefix="lib"/>
             <zipfileset dir="${lib.dir}/cglib" prefix="lib"/>
             <zipfileset dir="${lib.dir}/hamcrest" prefix="lib"/>
             <zipfileset dir="${lib.dir}/jmock" prefix="lib"/>

@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import java.util.Collection;
 import com.googlecode.instinct.internal.core.RunnableItem;
+import java.util.Collection;
 
 public interface RunnableItemBuilder {
     String METHOD_SEPARATOR = "#";

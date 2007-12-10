@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.internal.util;
 
-import au.net.netstorm.boost.edge.EdgeException;
+import com.googlecode.instinct.internal.edge.EdgeException;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.lang.reflect.InvocationTargetException;
 

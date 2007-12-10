@@ -24,8 +24,8 @@ import java.util.Map;
 
 @SuppressWarnings({"unchecked"})
 public final class TestTriangulationProviderImpl implements TestTriangulationProvider {
-    private final au.net.netstorm.boost.test.atom.TestTriangulationProvider delegate =
-            new au.net.netstorm.boost.test.atom.TestTriangulationProvider();
+    private final com.googlecode.instinct.internal.util.boost.TestTriangulationProvider delegate =
+            new com.googlecode.instinct.internal.util.boost.TestTriangulationProviderImpl();
     private final RandomProvider randomProvider = new RandomProviderImpl();
 
     public <T> List<T> getListInstance(final Class<T> elementType) {

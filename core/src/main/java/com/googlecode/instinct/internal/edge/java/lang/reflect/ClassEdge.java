@@ -34,4 +34,6 @@ public interface ClassEdge {
     <T> Method getDeclaredMethod(Class<T> cls, String methodName, Class<?>... parameterTypes);
 
     <T> Field getDeclaredField(Class<T> cls, String fieldName);
+
+    <T> Field getField(Class<T> cls, String name);
 }

@@ -16,22 +16,22 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import au.net.netstorm.boost.edge.EdgeException;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.LifecycleMethodImpl;
 import com.googlecode.instinct.internal.core.RunnableItem;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethodImpl;
+import com.googlecode.instinct.internal.edge.EdgeException;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
 import com.googlecode.instinct.internal.util.ClassInstantiator;
 import com.googlecode.instinct.internal.util.ClassInstantiatorImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public final class RunnableItemBuilderImpl implements RunnableItemBuilder {
     private ClassInstantiator classInstantiator = new ClassInstantiatorImpl();

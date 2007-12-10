@@ -16,11 +16,11 @@
 
 package com.googlecode.instinct.test.checker;
 
-import au.net.netstorm.boost.nursery.reflect.checker.AssertThrows;
-import au.net.netstorm.boost.nursery.reflect.checker.DefaultAssertThrows;
+import com.googlecode.instinct.internal.util.boost.AssertThrows;
+import com.googlecode.instinct.internal.util.boost.AssertThrowsImpl;
 
 public final class ExceptionTestChecker {
-    private static final AssertThrows ASSERT_THROWS = new DefaultAssertThrows();
+    private static final AssertThrows ASSERT_THROWS = new AssertThrowsImpl();
 
     private ExceptionTestChecker() {
         throw new UnsupportedOperationException();

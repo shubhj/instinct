@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.internal.util;
 
-import au.net.netstorm.boost.edge.EdgeException;
+import com.googlecode.instinct.internal.edge.EdgeException;
 
 public interface ExceptionFinder {
     Throwable getRootCause(Throwable topLevelCause);

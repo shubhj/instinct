@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.integrate.junit3;
 
-import au.net.netstorm.boost.edge.EdgeException;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.edge.EdgeException;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
 import com.googlecode.instinct.internal.util.ExceptionFinder;

@@ -17,44 +17,116 @@
 package com.googlecode.instinct.internal.actor;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.util.ObjectFactory;
-import com.googlecode.instinct.internal.util.proxy.ProxyGenerator;
-import com.googlecode.instinct.marker.annotate.Dummy;
-import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
-import net.sf.cglib.proxy.MethodInterceptor;
-import org.jmock.Expectations;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
+import static com.googlecode.instinct.internal.actor.SpecificationDoubleCreator.NUMBER_OF_DOUBLES_IN_AN_ARRAY;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 // Note. Cannot use auto-wired dummies here as we're testing the dummy creator.
 public final class DummyCreatorAtomicTest extends InstinctTestCase {
-    @Dummy(auto = false) private Class<Object> type = Object.class;
-    @Dummy(auto = false) private Object proxy = new Object();
-    @Subject(auto = false) private SpecificationDoubleCreator dummyCreator;
-    @Mock private ProxyGenerator proxyGenerator;
-    @Mock private ObjectFactory objectFactory;
-    @Mock private MethodInterceptor methodInterceptor;
-
-    @Override
-    public void setUpSubject() {
-        dummyCreator = createSubject(DummyCreator.class, proxyGenerator, objectFactory);
-    }
+    @Subject(implementation = DummyCreator.class) private SpecificationDoubleCreator dummyCreator;
 
     public void testConformsToClassTraits() {
         checkClass(DummyCreator.class, SpecificationDoubleCreator.class);
     }
 
-    public void testCreatesProxiesForInterfacesUsingTheDummyMethodInterceptor() {
-        expect.that(new Expectations() {
-            {
-                one(objectFactory).create(DummyMethodInterceptor.class);
-                will(returnValue(methodInterceptor));
-                one(proxyGenerator).newProxy(type, methodInterceptor);
-                will(returnValue(proxy));
+    public void testWillNotCreateDummiesForFinalClasses() {
+        final String message = "Unable to create a dummy " + AFinalClass.class.getName() +
+                " (with role name 'aFinalClass'). Dummy types cannot be primitives, final classes or enums, use a stub for these.";
+        expectException(SpecificationDoubleCreationException.class, message, new Runnable() {
+            public void run() {
+                dummyCreator.createDouble(AFinalClass.class, "aFinalClass");
             }
         });
-        expect.that(dummyCreator.createDouble(type, "doesNotMatter")).sameInstanceAs(proxy);
+    }
+
+    public void testWillNotCreateDummiesForEnums() {
+        final String message = "Unable to create a dummy " + AnEnum.class.getName() +
+                " (with role name 'anEnum'). Dummy types cannot be primitives, final classes or enums, use a stub for these.";
+        expectException(SpecificationDoubleCreationException.class, message, new Runnable() {
+            public void run() {
+                dummyCreator.createDouble(AnEnum.class, "anEnum");
+            }
+        });
+    }
+
+    public void testWillNotCreateDummiesForPrimitives() {
+        final String message = "Unable to create a dummy " + int.class.getName() +
+                " (with role name 'int'). Dummy types cannot be primitives, final classes or enums, use a stub for these.";
+        expectException(SpecificationDoubleCreationException.class, message, new Runnable() {
+            public void run() {
+                dummyCreator.createDouble(int.class, "int");
+            }
+        });
+    }
+
+    public void testCreatesDummiesForArraysByFillingTheArrayWithDummiesOfTheComponentType() {
+        final Iterable[] iterables = {};
+        Iterable[] dummyIterables = dummyCreator.createDouble(iterables.getClass(), "iterables");
+        expect.that(dummyIterables).isOfSize(NUMBER_OF_DOUBLES_IN_AN_ARRAY);
+    }
+
+    public void testWillNotCreateADummyArrayWhenTheComponentTypeCannotBeDummied() {
+        final String[] strings = {};
+        final String message = "Unable to create a dummy " + String.class.getName() + "[] (with role name 'strings') as the component " +
+                "type is not itself dummiable. The component type cannot be a primitive, final class or enum, use a stub for these.";
+        expectException(SpecificationDoubleCreationException.class, message, new Runnable() {
+            public void run() {
+                dummyCreator.createDouble(strings.getClass(), "strings");
+            }
+        });
+    }
+
+    public void testCanDummyAbstractClasses() {
+        dummyCreator.createDouble(AnAbstractClass.class, "anAbstractClass");
+    }
+
+    public void testCreatesDummiesForNonFinalClasses() {
+        final List<?> list = dummyCreator.createDouble(ArrayList.class, "list");
+        expect.that(list).isNotNull();
+    }
+
+    public void testCreatesDummiesForAnnotations() {
+        final AnAnnotation list = dummyCreator.createDouble(AnAnnotation.class, "list");
+        expect.that(list).isNotNull();
+    }
+
+    public void testCreatesDummiesForInterfaces() {
+        final Iterable<?> iterable = dummyCreator.createDouble(Iterable.class, "iterable");
+        expect.that(iterable).isNotNull();
+    }
+
+    public void testDummiesCreatedForInterfacesWillThrowExceptions() {
+        final Iterable<?> iterable = dummyCreator.createDouble(Iterable.class, "iterable");
+        expectException(IllegalInvocationException.class, new Runnable() {
+            public void run() {
+                iterable.iterator();
+            }
+        });
+    }
+
+    // Note. Exposes a closed bug in proxy generation.
+    public void testCanDummyFiles() {
+        dummyCreator.createDouble(File.class, "file");
+    }
+
+    @SuppressWarnings({"ALL"})
+    private static enum AnEnum {
+    }
+
+    @SuppressWarnings({"ALL"})
+    private static final class AFinalClass {
+    }
+
+    @SuppressWarnings({"ALL"})
+    private static abstract class AnAbstractClass {
+    }
+
+    @SuppressWarnings({"ALL"})
+    private static @interface AnAnnotation {
     }
 }

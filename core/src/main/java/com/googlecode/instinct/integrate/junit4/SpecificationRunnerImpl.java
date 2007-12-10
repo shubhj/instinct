@@ -15,7 +15,6 @@
  */
 package com.googlecode.instinct.integrate.junit4;
 
-import java.util.Collection;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdge;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdgeImpl;
@@ -28,6 +27,7 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.marker.annotate.Specification.NO_REASON;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
+import java.util.Collection;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;

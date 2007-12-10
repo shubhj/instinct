@@ -1,3 +1,9 @@
+* Instinct Release 0.1.6 *
+
+o Misc
+  o Removed reliance on Boost, transferred all Boost classes locally.
+
+
 * Instinct Release 0.1.5 *
 
 o Features

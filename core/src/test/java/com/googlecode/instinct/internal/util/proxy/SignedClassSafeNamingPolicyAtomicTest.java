@@ -19,6 +19,7 @@ package com.googlecode.instinct.internal.util.proxy;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
@@ -29,12 +30,12 @@ import org.jmock.Expectations;
 
 public final class SignedClassSafeNamingPolicyAtomicTest extends InstinctTestCase {
     @Subject(auto = false) private NamingPolicy signedClassNamingPolicy;
-    @Dummy private String prefix;
-    @Dummy private String source;
+    @Mock private NamingPolicy defaultNamingPolicy;
+    @Stub private String prefix;
+    @Stub private String source;
+    @Stub private String defaultClassName;
     @Dummy private Object key;
     @Dummy private Predicate names;
-    @Dummy private String defaultClassName;
-    @Mock private NamingPolicy defaultNamingPolicy;
 
     @Override
     public void setUpSubject() {
@@ -48,7 +49,8 @@ public final class SignedClassSafeNamingPolicyAtomicTest extends InstinctTestCas
     public void testReturnsClassNameWithinInstinctPackageHeirarchy() {
         expect.that(new Expectations() {
             {
-                one(defaultNamingPolicy).getClassName(prefix, source, key, names); will(returnValue(defaultClassName));
+                one(defaultNamingPolicy).getClassName(prefix, source, key, names);
+                will(returnValue(defaultClassName));
             }
         });
         final String signedClassSafeName = signedClassNamingPolicy.getClassName(prefix, source, key, names);

@@ -23,23 +23,23 @@ import org.w3c.dom.Node;
 
 @Fix("Test this")
 public class NodeCheckerImpl<T extends Node> extends ObjectCheckerImpl<T> implements NodeChecker<T> {
-    public NodeCheckerImpl(T subject) {
+    public NodeCheckerImpl(final T subject) {
         super(subject);
     }
 
-    public final void hasXPath(String path, Matcher<String> matcher) {
+    public final void hasXPath(final String path, final Matcher<String> matcher) {
         getAsserter().expectThat(subject, Matchers.hasXPath(path, matcher));
     }
 
-    public final void hasXPath(String path) {
+    public final void hasXPath(final String path) {
         getAsserter().expectThat(subject, Matchers.hasXPath(path));
     }
 
-    public final void notHaveXPath(String path, Matcher<String> matcher) {
+    public final void notHaveXPath(final String path, final Matcher<String> matcher) {
         getAsserter().expectNotThat(subject, Matchers.hasXPath(path, matcher));
     }
 
-    public final void notHaveXPath(String path) {
+    public final void notHaveXPath(final String path) {
         getAsserter().expectNotThat(subject, Matchers.hasXPath(path));
     }
 }

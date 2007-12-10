@@ -16,8 +16,9 @@
 
 package com.googlecode.instinct.internal.actor;
 
-import java.lang.reflect.Method;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import java.lang.reflect.Method;
+import java.lang.reflect.Member;
 import static net.sf.cglib.proxy.Enhancer.isEnhanced;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
@@ -33,7 +34,7 @@ public final class DummyMethodInterceptor implements MethodInterceptor {
         }
     }
 
-    private Object rejectAllNonObjectMethodCalls(final Object obj, final Method method) {
+    private Object rejectAllNonObjectMethodCalls(final Object obj, final Member method) {
         final String message = "Method " + method.getName() + "() was called on a dummy instance of " + getDummyClassName(obj) + ". "
                 + "If you expect methods to be called on this specification double you should make it a mock or stub.";
         throw new IllegalInvocationException(message);
@@ -47,7 +48,7 @@ public final class DummyMethodInterceptor implements MethodInterceptor {
         }
     }
 
-    private boolean isMethodInheritedFromObject(final Method method) {
+    private boolean isMethodInheritedFromObject(final Member method) {
         return method.getDeclaringClass().equals(Object.class);
     }
 
@@ -55,7 +56,7 @@ public final class DummyMethodInterceptor implements MethodInterceptor {
         return objectNoArgsMethod(method) || isObjectEqualsMethod(method);
     }
 
-    private boolean objectNoArgsMethod(final Method method) {
+    private boolean objectNoArgsMethod(final Member method) {
         final String methodName = method.getName();
         return methodName.equals("clone") || methodName.equals("finalize") || methodName.equals("hashCode") || methodName.equals("toString");
     }

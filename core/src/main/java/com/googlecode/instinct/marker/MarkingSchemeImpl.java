@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.marker;
 
-import au.net.netstorm.boost.primordial.Primordial;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.lang.Primordial;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import java.lang.annotation.Annotation;
 

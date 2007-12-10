@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.internal.locate;
 
-import au.net.netstorm.boost.edge.EdgeException;
+import com.googlecode.instinct.internal.edge.EdgeException;
 import com.googlecode.instinct.internal.util.ClassInstantiator;
 import com.googlecode.instinct.internal.util.ClassInstantiatorFactory;
 import com.googlecode.instinct.internal.util.ClassInstantiatorFactoryImpl;

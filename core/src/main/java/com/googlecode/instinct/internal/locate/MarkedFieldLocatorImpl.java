@@ -16,10 +16,10 @@
 
 package com.googlecode.instinct.internal.locate;
 
-import java.lang.reflect.Field;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.MarkingScheme;
+import java.lang.reflect.Field;
 
 @Suggest("Add other locators here, see MarkedMethodLocator")
 public final class MarkedFieldLocatorImpl implements MarkedFieldLocator {

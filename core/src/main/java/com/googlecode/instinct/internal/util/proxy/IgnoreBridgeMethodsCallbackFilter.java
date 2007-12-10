@@ -21,8 +21,12 @@ import java.lang.reflect.Method;
 import net.sf.cglib.proxy.CallbackFilter;
 
 public final class IgnoreBridgeMethodsCallbackFilter implements CallbackFilter {
+    // Note. The index here corresponds to the index of the NoOp callback in CgLibProxyGenerator.
+    private static final int INDEX_OF_NO_OP_CALLBACK = 1;
+    private static final int INDEX_OF_PROXY_CALLBACK = 0;
+
     public int accept(final Method method) {
         checkNotNull(method);
-        return method.isBridge() ? 1 : 0;
+        return method.isBridge() ? INDEX_OF_NO_OP_CALLBACK : INDEX_OF_PROXY_CALLBACK;
     }
 }

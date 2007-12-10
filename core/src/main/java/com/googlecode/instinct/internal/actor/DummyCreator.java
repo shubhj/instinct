@@ -16,43 +16,64 @@
 
 package com.googlecode.instinct.internal.actor;
 
-import static java.lang.reflect.Modifier.isFinal;
-import au.net.netstorm.boost.nursery.instance.InstanceProvider;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.internal.util.instance.ConcreteInstanceProvider;
 import com.googlecode.instinct.internal.util.proxy.CgLibProxyGenerator;
 import com.googlecode.instinct.internal.util.proxy.ProxyGenerator;
+import java.lang.reflect.Array;
+import static java.lang.reflect.Modifier.isFinal;
 import net.sf.cglib.proxy.MethodInterceptor;
 
 public final class DummyCreator implements SpecificationDoubleCreator {
-    private final InstanceProvider concreteInstanceProvider = new ConcreteInstanceProvider();
     private final ProxyGenerator proxyGenerator = new CgLibProxyGenerator();
     private final ObjectFactory objectFactory = new ObjectFactoryImpl();
 
-    @Suggest("Fill dummy arrays with dummies ala mock creator.")
     public <T> T createDouble(final Class<T> doubleType, final String roleName) {
         checkNotNull(doubleType, roleName);
-        if (isFinalClass(doubleType)) {
-            return createInstanceForType(doubleType);
+        if (doubleType.isArray()) {
+            checkComponentTypeIsDummiable(doubleType, roleName);
+            return createArrayFilledWithDummies(doubleType);
         } else {
-            return createProxyForType(doubleType);
+            checkTypeIsDummiable(doubleType, roleName);
+            return createDummy(doubleType);
         }
     }
 
     @SuppressWarnings({"unchecked"})
-    private <T> T createInstanceForType(final Class<T> doubleType) {
-        return (T) concreteInstanceProvider.newInstance(doubleType);
+    private <T> T createArrayFilledWithDummies(final Class<T> doubleType) {
+        final Class<?> componentType = doubleType.getComponentType();
+        final Object arrayOfDummies = Array.newInstance(componentType, NUMBER_OF_DOUBLES_IN_AN_ARRAY);
+        for (int i = 0; i < NUMBER_OF_DOUBLES_IN_AN_ARRAY; i++) {
+            Array.set(arrayOfDummies, i, createDummy(componentType));
+        }
+        return (T) arrayOfDummies;
     }
 
-    private <T> T createProxyForType(final Class<T> doubleType) {
+    private <T> T createDummy(final Class<T> doubleType) {
         final MethodInterceptor methodInterceptor = objectFactory.create(DummyMethodInterceptor.class);
         return proxyGenerator.newProxy(doubleType, methodInterceptor);
     }
 
-    private <T> boolean isFinalClass(final Class<T> doubleType) {
-        return isFinal(doubleType.getModifiers());
+    private <T> void checkTypeIsDummiable(final Class<T> doubleType, final String roleName) {
+        if (isNotDummiable(doubleType)) {
+            final String message = "Unable to create a dummy " + doubleType.getName() + " (with role name '" + roleName +
+                    "'). Dummy types cannot be primitives, final classes or enums, use a stub for these.";
+            throw new SpecificationDoubleCreationException(message);
+        }
+    }
+
+    private <T> void checkComponentTypeIsDummiable(final Class<T> doubleType, final String roleName) {
+        final Class<?> componentType = doubleType.getComponentType();
+        if (isNotDummiable(componentType)) {
+            final String message = "Unable to create a dummy " + componentType.getName() + "[] (with role name '" + roleName +
+                    "') as the component type is not itself dummiable. The component type cannot be a primitive, final class or " +
+                    "enum, use a stub for these.";
+            throw new SpecificationDoubleCreationException(message);
+        }
+    }
+
+    private <T> boolean isNotDummiable(final Class<T> doubleType) {
+        return doubleType.isEnum() || doubleType.isPrimitive() || isFinal(doubleType.getModifiers());
     }
 }

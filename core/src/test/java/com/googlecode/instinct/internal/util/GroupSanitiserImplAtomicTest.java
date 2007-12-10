@@ -17,9 +17,9 @@
 package com.googlecode.instinct.internal.util;
 
 import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.marker.AnnotationAttribute;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.annotate.Subject;
-import com.googlecode.instinct.marker.AnnotationAttribute;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 

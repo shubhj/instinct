@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.marker;
 
-import java.lang.annotation.Annotation;
 import com.googlecode.instinct.marker.naming.NamingConvention;
+import java.lang.annotation.Annotation;
 
 @SuppressWarnings({"MethodReturnOfConcreteClass"})
 public interface MarkingScheme {

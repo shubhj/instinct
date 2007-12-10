@@ -26,7 +26,7 @@ public final class ExpectAtomicTest extends InstinctTestCase {
     }
 
     public void testThatExpectStaticFieldIsOfCorrectType() {
-        assertSame(ExpectThatImpl.class, expect.getClass());
+        expect.that(expect.getClass() == ExpectThatImpl.class).isTrue();
     }
 }
 

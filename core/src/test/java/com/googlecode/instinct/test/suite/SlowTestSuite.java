@@ -16,12 +16,12 @@
 
 package com.googlecode.instinct.test.suite;
 
-import au.net.netstorm.boost.test.aggregator.DefaultTestAggregator;
-import au.net.netstorm.boost.test.aggregator.TestAggregator;
+import com.googlecode.instinct.internal.util.boost.TestAggregator;
+import com.googlecode.instinct.internal.util.boost.TestAggregatorImpl;
 import junit.framework.Test;
 
 public final class SlowTestSuite {
-    private static final TestAggregator AGGREGATOR = new DefaultTestAggregator(SlowTestSuite.class);
+    private static final TestAggregator AGGREGATOR = new TestAggregatorImpl(SlowTestSuite.class);
 
     private SlowTestSuite() {
         throw new UnsupportedOperationException();

@@ -60,7 +60,11 @@
         <module name="MethodParamPad"/>
         <module name="NoWhitespaceAfter"/>
         <module name="NoWhitespaceBefore"/>
-        <module name="OperatorWrap"/>
+        <module name="OperatorWrap">
+            <property name="tokens"
+                    value="BAND, BAND_ASSIGN, BOR, BOR_ASSIGN, BSR, BSR_ASSIGN, BXOR, BXOR_ASSIGN, COLON, DIV, DIV_ASSIGN, EQUAL, GE, GT, LAND, LE, LITERAL_INSTANCEOF, LOR, LT, MINUS, MINUS_ASSIGN, MOD, MOD_ASSIGN, NOT_EQUAL, PLUS_ASSIGN, QUESTION, SL, SL_ASSIGN, SR, SR_ASSIGN, STAR, STAR_ASSIGN"/>
+            <property name="option" value="nl"/>
+        </module>
         <module name="ParenPad"/>
         <module name="TypecastParenPad"/>
         <module name="TabCharacter"/>
@@ -82,10 +86,11 @@
         <module name="EqualsHashCode"/>
         <module name="IllegalInstantiation">
             <property name="classes"
-                      value="java.lang.Boolean,java.lang.Byte,java.lang.Short,java.lang.Character,java.lang.Integer,java.lang.Long,java.lang.Float,java.lang.Double"/>
+                    value="java.lang.Boolean,java.lang.Byte,java.lang.Short,java.lang.Character,java.lang.Integer,java.lang.Long,java.lang.Float,java.lang.Double"/>
         </module>
         <module name="IllegalToken">
-            <property name="tokens" value="LITERAL_PROTECTED,ABSTRACT,LITERAL_SWITCH,LITERAL_CASE,LITERAL_ASSERT"/>
+            <property name="tokens"
+                    value="LITERAL_PROTECTED,ABSTRACT,LITERAL_SWITCH,LITERAL_CASE,LITERAL_BREAK,LITERAL_CONTINUE,LITERAL_ASSERT"/>
         </module>
         <module name="InnerAssignment">
             <property name="tokens" value="ASSIGN,PLUS_ASSIGN,MINUS_ASSIGN"/>
@@ -140,7 +145,7 @@
         <!-- Miscellaneous -->
         <module name="GenericIllegalRegexp">
             <property name="format"
-                      value="System\w*\.\w*out|System\w*\.\w*err|\.\w*printStackTrace\w*(\w*)|\.\w*finalize\w*(\w*)"/>
+                    value="System\w*\.\w*out|System\w*\.\w*err|\.\w*printStackTrace\w*(\w*)|\.\w*finalize\w*(\w*)"/>
         </module>
         <module name="UpperEll"/>
         <module name="ArrayTypeStyle"/>
@@ -151,13 +156,7 @@
 
         <!-- Strict rules -->
         <module name="FinalLocalVariable"/>
-        <!--module name="FinalParameters"/-->
-
-        <!-- Stricter Rules -->
-        <module name="IllegalToken">
-            <property name="tokens"
-                      value="LITERAL_PROTECTED,ABSTRACT,LITERAL_SWITCH,LITERAL_CASE,LITERAL_BREAK,LITERAL_CONTINUE,LITERAL_ASSERT"/>
-        </module>
+        <module name="FinalParameters"/>
 
     </module>
 </module>

@@ -16,6 +16,8 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
+import java.util.Collection;
+import java.util.HashSet;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdge;
@@ -25,11 +27,11 @@ import com.googlecode.instinct.internal.util.ExceptionFinder;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.marker.annotate.Mock;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
+import com.googlecode.instinct.marker.annotate.Stub;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubjectWithConstructorArgs;
-import java.util.Collection;
-import java.util.HashSet;
 import org.jmock.Expectations;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
@@ -37,9 +39,8 @@ import org.junit.runner.notification.RunNotifier;
 
 @SuppressWarnings({"UnusedDeclaration", "unchecked"})
 public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
-    private SpecificationRunner specificationRunner;
+    @Subject(auto = false) private SpecificationRunner specificationRunner;
     @Mock private Collection<SpecificationMethod> specificationMethods;
-    private Description description;
     @Mock private DescriptionEdge descriptionEdge;
     @Mock private SpecificationMethod specificationMethod;
     @Mock private SpecificationResult specificationResult;
@@ -51,6 +52,7 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     @Mock private Throwable rootCause;
     @Mock private RunNotifier notifier;
     @Mock private SpecificationRunStatus pendingRunStatus;
+    @Stub(auto = false) private Description description;
 
     @SuppressWarnings({"serial", "ClassExtendsConcreteCollection", "CloneableClassWithoutClone"})
     @Override
@@ -65,7 +67,8 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     @Override
     public void setUpSubject() {
         description = Description.createTestDescription(String.class, "dontCare");
-        specificationRunner = createSubjectWithConstructorArgs(SpecificationRunnerImpl.class, new Object[]{notifier}, descriptionEdge, exceptionFinder, objectFactory);
+        specificationRunner = createSubjectWithConstructorArgs(SpecificationRunnerImpl.class, new Object[]{notifier}, descriptionEdge,
+                exceptionFinder, objectFactory);
     }
 
     public void testConformsToClassTraits() {

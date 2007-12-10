@@ -51,15 +51,13 @@
     </patternset>
 
     <patternset id="main.classpath.pattern">
-        <include name="${lib.dir}/boost/boost-982.jar"/>
-        <include name="${lib.dir}/cglib/cglib-nodep-2.2_beta1.jar"/>
-        <include name="${lib.dir}/junit/junit-4.4.jar"/>
-        <include name="${lib.dir}/jmock/jmock-2.2.0.jar"/>
-        <include name="${lib.dir}/jmock/jmock-legacy-2.2.0.jar"/>
-        <include name="${lib.dir}/objenesis/objenesis-1.0.jar"/>
+        <include name="${lib.dir}/cglib/cglib-*.jar"/>
+        <include name="${lib.dir}/junit/junit-*.jar"/>
+        <include name="${lib.dir}/jmock/jmock-*.jar"/>
+        <include name="${lib.dir}/objenesis/objenesis-*.jar"/>
         <include name="${lib.dir}/ant/ant-1.7.0.jar"/>
-        <include name="${lib.dir}/hamcrest/hamcrest-all-1.1.jar"/>
-        <include name="${lib.dir}/clover/clover-1.3.13.jar"/>
+        <include name="${lib.dir}/hamcrest/hamcrest-*.jar"/>
+        <include name="${lib.dir}/clover/clover-*.jar"/>
     </patternset>
 
     <patternset id="test.classpath.pattern">

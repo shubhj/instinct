@@ -18,7 +18,6 @@ package com.googlecode.instinct.internal.util;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
-import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
@@ -30,12 +29,12 @@ import org.jmock.Expectations;
 
 public final class ClassInstantiatorImplAtomicTest extends InstinctTestCase {
     @Subject(auto = false) private ClassInstantiator instantiator;
-    @Dummy private String fullyQualifiedClassName;
     @Mock private File packageRoot;
     @Mock private File classFile;
     @Mock private ClassEdge classEdge;
     @Mock private JavaClassNameFactory classNameFactory;
     @Mock private JavaClassName className;
+    @Stub private String fullyQualifiedClassName;
     @Stub private Class<?> cls;
 
     @Override
@@ -50,9 +49,12 @@ public final class ClassInstantiatorImplAtomicTest extends InstinctTestCase {
     public void testInstantiatesClassFromClassFiles() {
         expect.that(new Expectations() {
             {
-                atLeast(1).of(classNameFactory).create(packageRoot, classFile); will(returnValue(className));
-                atLeast(1).of(className).getFullyQualifiedName(); will(returnValue(fullyQualifiedClassName));
-                atLeast(1).of(classEdge).forName(fullyQualifiedClassName); will(returnValue(cls));
+                atLeast(1).of(classNameFactory).create(packageRoot, classFile);
+                will(returnValue(className));
+                atLeast(1).of(className).getFullyQualifiedName();
+                will(returnValue(fullyQualifiedClassName));
+                atLeast(1).of(classEdge).forName(fullyQualifiedClassName);
+                will(returnValue(cls));
             }
         });
         final Class<?> actualClass = instantiator.instantiateClass(classFile, packageRoot);
@@ -62,7 +64,8 @@ public final class ClassInstantiatorImplAtomicTest extends InstinctTestCase {
     public void testInstantiatesClassesFromClassNames() {
         expect.that(new Expectations() {
             {
-                atLeast(1).of(classEdge).forName(cls.getName()); will(returnValue(cls));
+                atLeast(1).of(classEdge).forName(cls.getName());
+                will(returnValue(cls));
             }
         });
         final Class<?> actualClass = instantiator.instantiateClass(cls.getName());

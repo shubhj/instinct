@@ -38,6 +38,9 @@ public final class BehaviourExpectationsExample {
         // Option 1 - jMock 1 fallback
 //        expect.that(stringList, once()).method("add").with(eq("abc")).will(returnValue(true));
 //        expect.that(stringList).method("clear");
+          // see ... insert URL to email here.       
+//        expect.that().method("add").isCalledOn(stringList).andReturns(true);
+//        expect.that().method("clear").isCalledOn(stringList);
 
         // Option 2 - DSL w/ method completion
 //        expect.that(one(stringList).add("abc")).will(returnValue(true));

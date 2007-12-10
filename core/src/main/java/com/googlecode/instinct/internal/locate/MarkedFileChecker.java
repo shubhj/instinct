@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.internal.locate;
 
+import com.googlecode.instinct.marker.MarkingScheme;
 import java.io.File;
 import java.lang.annotation.Annotation;
-import com.googlecode.instinct.marker.MarkingScheme;
 
 public interface MarkedFileChecker {
     <A extends Annotation> boolean isMarked(final File classFile, final MarkingScheme markingScheme);

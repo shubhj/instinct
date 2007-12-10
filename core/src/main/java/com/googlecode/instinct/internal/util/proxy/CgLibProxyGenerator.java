@@ -23,6 +23,7 @@ import static java.lang.reflect.Modifier.isFinal;
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.Factory;
 import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.NoOp;
 import org.objenesis.Objenesis;
 import org.objenesis.ObjenesisStd;
 
@@ -42,7 +43,8 @@ public final class CgLibProxyGenerator implements ProxyGenerator {
     @SuppressWarnings({"unchecked"})
     private <T> Class<T> createProxiedClass(final Class<T> typeToProxy, final MethodInterceptor methodInterceptor) {
         final CgLibEnhancer enhancer = createEnhancer(typeToProxy);
-        enhancer.setCallbackType(methodInterceptor.getClass());
+        // Note. The NoOp class *must* be second in the list, as it's index corresponds to the index in IgnoreBridgeMethodsCallbackFilter.
+        enhancer.setCallbackTypes(methodInterceptor.getClass(), NoOp.class);
         return (Class<T>) enhancer.createClass();
     }
 
@@ -51,7 +53,8 @@ public final class CgLibProxyGenerator implements ProxyGenerator {
     }
 
     private void registerMethodInterceptor(final Object proxyInstance, final MethodInterceptor methodInterceptor) {
-        ((Factory) proxyInstance).setCallbacks(new Callback[]{methodInterceptor});
+        // Note. The NoOp class *must* be second in the list, as it's index corresponds to the index in IgnoreBridgeMethodsCallbackFilter.
+        ((Factory) proxyInstance).setCallbacks(new Callback[]{methodInterceptor, NoOp.INSTANCE});
     }
 
     private <T> CgLibEnhancer createEnhancer(final Class<T> typeToProxy) {
@@ -73,14 +76,14 @@ public final class CgLibProxyGenerator implements ProxyGenerator {
         }
     }
 
+    private <T> void checkArguments(final Class<T> typeToProxy, final MethodInterceptor methodInterceptor) {
+        checkNotNull(typeToProxy, methodInterceptor);
+        checkNotFinal(typeToProxy);
+    }
+
     private <T> void checkNotFinal(final Class<T> typeToProxy) {
         if (isFinal(typeToProxy.getModifiers())) {
             throw new IllegalArgumentException("Cannot proxy final class " + typeToProxy.getName());
         }
-    }
-
-    private <T> void checkArguments(final Class<T> typeToProxy, final MethodInterceptor methodInterceptor) {
-        checkNotNull(typeToProxy, methodInterceptor);
-        checkNotFinal(typeToProxy);
     }
 }

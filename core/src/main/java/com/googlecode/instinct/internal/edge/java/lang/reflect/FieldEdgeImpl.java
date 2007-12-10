@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.internal.edge.java.lang.reflect;
 
+import com.googlecode.instinct.internal.edge.EdgeException;
 import java.lang.reflect.Field;
-import au.net.netstorm.boost.edge.EdgeException;
 
 public final class FieldEdgeImpl implements FieldEdge {
     public Object get(final Field field, final Object obj) {

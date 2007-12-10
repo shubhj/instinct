@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.internal.edge.java.lang.reflect;
 
-import au.net.netstorm.boost.edge.EdgeException;
+import com.googlecode.instinct.internal.edge.EdgeException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 

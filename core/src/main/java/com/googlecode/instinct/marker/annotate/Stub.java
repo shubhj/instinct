@@ -16,12 +16,12 @@
 
 package com.googlecode.instinct.marker.annotate;
 
+import com.googlecode.instinct.internal.util.Suggest;
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import com.googlecode.instinct.internal.util.Suggest;
 
 /**
  * Stubs respond to method calls made during a test by providing canned answers.

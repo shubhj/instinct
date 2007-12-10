@@ -16,11 +16,11 @@
 
 package com.googlecode.instinct.internal.util;
 
-import au.net.netstorm.boost.edge.EdgeException;
-import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
-import au.net.netstorm.boost.edge.java.lang.EdgeClass;
-import au.net.netstorm.boost.edge.java.lang.reflect.DefaultEdgeConstructor;
-import au.net.netstorm.boost.edge.java.lang.reflect.EdgeConstructor;
+import com.googlecode.instinct.internal.edge.EdgeException;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ConstructorEdge;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ConstructorEdgeImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkIsConcreteClass;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.lang.reflect.Constructor;
@@ -29,8 +29,8 @@ import java.util.Iterator;
 
 @SuppressWarnings({"unchecked"})
 public final class ObjectFactoryImpl implements ObjectFactory {
-    private final EdgeClass edgeClass = new DefaultEdgeClass();
-    private final EdgeConstructor edgeConstructor = new DefaultEdgeConstructor();
+    private final ClassEdge edgeClass = new ClassEdgeImpl();
+    private final ConstructorEdge edgeConstructor = new ConstructorEdgeImpl();
     private final PrimitiveTypeBoxer primitiveTypeBoxer = new PrimitiveTypeBoxerImpl();
 
     public <T> T create(final Class<T> concreteClass, final Object... constructorArgumentValues) {

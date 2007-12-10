@@ -16,12 +16,12 @@
 
 package com.googlecode.instinct.marker;
 
-import au.net.netstorm.boost.primordial.Primordial;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.lang.Primordial;
 
 @SuppressWarnings({"StaticVariableOfConcreteClass"})
 public final class AnnotationAttribute extends Primordial {
-    public static final AnnotationAttribute IGNORE = new AnnotationAttribute("IGNORE", "IGNORE");
+    public static final AnnotationAttribute IGNORE = new AnnotationAttribute("AnyAttributeName", "IGNORE");
     private final String attributeName;
     private final Object attributeValue;
 

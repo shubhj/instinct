@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import au.net.netstorm.boost.primordial.Primordial;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.util.lang.Primordial;
 
 public final class SpecificationRunFailureStatus extends Primordial implements SpecificationRunStatus {
     private final Throwable error;

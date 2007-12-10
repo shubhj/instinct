@@ -17,14 +17,14 @@
 package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.Stub;
 import org.jmock.Expectations;
 
 public final class ContextWithAutoWiredFields {
     @Mock private CharSequence charSequence;
-    @Dummy private Character character;
+    @Stub private Character character;
 
     @Specification
     public void doSomethingWithAutoWiredDoubles() {

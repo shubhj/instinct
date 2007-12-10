@@ -16,11 +16,11 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import java.util.ArrayList;
-import java.util.List;
-import au.net.netstorm.boost.primordial.Primordial;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
+import com.googlecode.instinct.internal.util.lang.Primordial;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class ContextResultImpl extends Primordial implements ContextResult {
     private final List<SpecificationResult> specificationResults = new ArrayList<SpecificationResult>();

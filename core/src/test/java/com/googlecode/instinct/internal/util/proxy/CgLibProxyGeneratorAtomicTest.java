@@ -27,6 +27,7 @@ import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
 import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.NoOp;
 import org.jmock.Expectations;
 import org.objenesis.Objenesis;
 
@@ -37,7 +38,7 @@ public final class CgLibProxyGeneratorAtomicTest extends InstinctTestCase {
     @Mock private CgLibEnhancer enhancer;
     @Stub private Class<?> classToProxy;
     @Stub private Class<?> interfaceToProxy;
-    @Dummy private Class<?> enhancedProxyType;
+    @Stub private Class<?> enhancedProxyType;
     @Dummy private Object proxy;
     @Dummy private MethodInterceptor methodInterceptor;
 
@@ -64,8 +65,10 @@ public final class CgLibProxyGeneratorAtomicTest extends InstinctTestCase {
         expectEnhancerCreated(typeToProxy);
         expect.that(new Expectations() {
             {
-                one(enhancer).createClass(); will(returnValue(enhancedProxyType));
-                one(objenesis).newInstance(enhancedProxyType); will(returnValue(proxy));
+                one(enhancer).createClass();
+                will(returnValue(enhancedProxyType));
+                one(objenesis).newInstance(enhancedProxyType);
+                will(returnValue(proxy));
             }
         });
         final Object createdProxy = proxyGenerator.newProxy(typeToProxy, methodInterceptor);
@@ -83,7 +86,7 @@ public final class CgLibProxyGeneratorAtomicTest extends InstinctTestCase {
                 } else {
                     one(enhancer).setSuperclass(typeToProxy);
                 }
-                one(enhancer).setCallbackType(methodInterceptor.getClass());
+                one(enhancer).setCallbackTypes(methodInterceptor.getClass(), NoOp.class);
                 one(enhancer).setCallbackFilter(with(any(IgnoreBridgeMethodsCallbackFilter.class)));
                 allowing(enhancer).setNamingPolicy(with(any(SignedClassSafeNamingPolicy.class)));
             }

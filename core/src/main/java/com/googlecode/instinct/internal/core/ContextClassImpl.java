@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.internal.core;
 
-import au.net.netstorm.boost.primordial.Primordial;
 import com.googlecode.instinct.internal.locate.MarkedMethodLocator;
 import com.googlecode.instinct.internal.locate.MarkedMethodLocatorImpl;
 import com.googlecode.instinct.internal.runner.ContextResult;
@@ -24,6 +23,7 @@ import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.util.lang.Primordial;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;

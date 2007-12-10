@@ -22,8 +22,8 @@ import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.MethodInvoker;
-import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
@@ -38,7 +38,7 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     @Mock private MethodInvokerFactory methodInvokerFactory;
     @Mock private MethodInvoker invoker;
     @Mock private LifeCycleMethodValidator methodValidator;
-    @Dummy private Class<?> exceptionClass;
+    @Stub private Class<?> exceptionClass;
 
     @Override
     public void setUpSubject() {

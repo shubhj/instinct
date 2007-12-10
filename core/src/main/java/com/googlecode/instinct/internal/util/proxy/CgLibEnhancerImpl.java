@@ -26,9 +26,9 @@ import net.sf.cglib.proxy.Enhancer;
 public final class CgLibEnhancerImpl implements CgLibEnhancer {
     private final Enhancer enhancer = new AllConstructorsEnhancer();
 
-    public <T extends Callback> void setCallbackType(final Class<T> callbackType) {
-        checkNotNull(callbackType);
-        enhancer.setCallbackType(callbackType);
+    public void setCallbackTypes(final Class<? extends Callback>... callbackTypes) {
+        checkNotNull((Object[]) callbackTypes);
+        enhancer.setCallbackTypes(callbackTypes);
     }
 
     public void setCallbackFilter(final CallbackFilter filter) {

@@ -16,14 +16,15 @@
 
 package com.googlecode.instinct.internal.util.proxy;
 
-import java.util.ArrayList;
-import java.util.List;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.actor.DummyMethodInterceptor;
 import com.googlecode.instinct.internal.actor.IllegalInvocationException;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class CgLibProxyGeneratorSlowTest extends InstinctTestCase {
     @Subject(implementation = CgLibProxyGenerator.class) private ProxyGenerator proxyGenerator;
@@ -54,6 +55,10 @@ public final class CgLibProxyGeneratorSlowTest extends InstinctTestCase {
 
     public void testProxiesNonStaticInnerClasses() {
         proxyGenerator.newProxy(NonStaticInnerClass.class, new DummyMethodInterceptor());
+    }
+
+    public void testProxiesFilesWithBridgeMethods() {
+        proxyGenerator.newProxy(File.class, new DummyMethodInterceptor());
     }
 
     @SuppressWarnings({"ClassMayBeInterface", "InnerClassMayBeStatic"})

@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.runner;
 
 import java.lang.reflect.InvocationTargetException;
-import au.net.netstorm.boost.edge.EdgeException;
+import com.googlecode.instinct.internal.edge.EdgeException;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 

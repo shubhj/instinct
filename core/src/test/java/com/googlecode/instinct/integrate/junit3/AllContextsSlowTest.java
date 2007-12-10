@@ -16,12 +16,13 @@
 
 package com.googlecode.instinct.integrate.junit3;
 
-import au.net.netstorm.boost.edge.EdgeException;
-import au.net.netstorm.boost.edge.java.lang.DefaultEdgeClass;
-import au.net.netstorm.boost.edge.java.lang.EdgeClass;
+import java.lang.reflect.InvocationTargetException;
+import com.googlecode.instinct.internal.core.ContextClassImpl;
+import com.googlecode.instinct.internal.edge.EdgeException;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
 import com.googlecode.instinct.internal.locate.ContextFinder;
 import com.googlecode.instinct.internal.locate.ContextFinderImpl;
-import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import com.googlecode.instinct.internal.util.Fix;
@@ -30,11 +31,10 @@ import com.googlecode.instinct.marker.ContextConfigurationException;
 import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
 import static com.googlecode.instinct.marker.annotate.Specification.ALL_GROUPS;
 import com.googlecode.instinct.test.InstinctTestCase;
-import java.lang.reflect.InvocationTargetException;
 
 @SuppressWarnings({"ProhibitedExceptionThrown"})
 public final class AllContextsSlowTest extends InstinctTestCase {
-    private final EdgeClass edgeClass = new DefaultEdgeClass();
+    private final ClassEdge edgeClass = new ClassEdgeImpl();
     private final ContextRunner contextRunner = new StandardContextRunner();
 
     public void testFoo() {

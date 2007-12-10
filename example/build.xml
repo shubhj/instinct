@@ -22,7 +22,6 @@
     <path id="spec.class.path">
         <path refid="main.class.path"/>
         <fileset dir="${basedir}">
-            <include name="${lib.dir}/boost-*.jar"/>
             <include name="${lib.dir}/cglib-nodep-*.jar"/>
             <include name="${lib.dir}/jmock-*.jar"/>
             <include name="${lib.dir}/objenesis-*.jar"/>

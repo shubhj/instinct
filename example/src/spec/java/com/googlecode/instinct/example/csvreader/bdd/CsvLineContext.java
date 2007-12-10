@@ -20,11 +20,7 @@ import com.googlecode.instinct.example.csvreader.CsvLine;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.marker.annotate.BeforeSpecification;
-import com.googlecode.instinct.marker.annotate.Context;
-import com.googlecode.instinct.marker.annotate.Dummy;
-import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.marker.annotate.Subject;
+import com.googlecode.instinct.marker.annotate.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 import org.junit.runner.RunWith;
 
@@ -32,9 +28,9 @@ import org.junit.runner.RunWith;
 @Context(groups = {"osdc"})
 public final class CsvLineContext {
     @Subject private CsvLine csvLine;
-    @Dummy private String column1;
-    @Dummy private String column2;
-    @Dummy private String column3;
+    @Stub private String column1;
+    @Stub private String column2;
+    @Stub private String column3;
 
     @Suggest("Split this up, no columns, with columns")
     @BeforeSpecification

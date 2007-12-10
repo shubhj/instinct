@@ -16,12 +16,12 @@
 
 package com.googlecode.instinct.test.suite;
 
-import au.net.netstorm.boost.test.aggregator.DefaultTestAggregator;
-import au.net.netstorm.boost.test.aggregator.TestAggregator;
+import com.googlecode.instinct.internal.util.boost.TestAggregator;
+import com.googlecode.instinct.internal.util.boost.TestAggregatorImpl;
 import junit.framework.Test;
 
 public final class AtomicTestSuite {
-    private static final TestAggregator AGGREGATOR = new DefaultTestAggregator(AtomicTestSuite.class);
+    private static final TestAggregator AGGREGATOR = new TestAggregatorImpl(AtomicTestSuite.class);
 
     private AtomicTestSuite() {
         throw new UnsupportedOperationException();

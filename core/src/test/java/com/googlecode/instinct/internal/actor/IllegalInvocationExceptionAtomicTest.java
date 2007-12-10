@@ -19,12 +19,13 @@ package com.googlecode.instinct.internal.actor;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Subject;
+import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
 
 public final class IllegalInvocationExceptionAtomicTest extends InstinctTestCase {
     @Subject(auto = false) private Exception exception;
-    @Dummy private String message;
+    @Stub private String message;
 
     @Override
     public void setUpSubject() {

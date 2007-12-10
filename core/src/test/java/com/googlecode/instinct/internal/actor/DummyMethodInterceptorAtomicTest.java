@@ -37,9 +37,9 @@ public final class DummyMethodInterceptorAtomicTest extends InstinctTestCase {
     @Mock private MethodProxy methodProxy;
     @Stub private Object obj;
     @Stub private OveriddenObjectMethods overiddenObjectMethods;
-    @Dummy private Method method;
+    @Stub private Method method;
     @Dummy private Object[] args;
-
+    
     public void testConformsToClassTraits() {
         checkClass(DummyMethodInterceptor.class, MethodInterceptor.class);
     }
