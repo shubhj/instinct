@@ -1,5 +1,3 @@
-* Instinct IDEA Release 0.1.4 *
+* Instinct IDEA Release 0.1.7 *
 
-o Initial public release - uses Instinct 0.1.4.
-  o Basic functionality stolen wholesale from JBehave (thanks!).
-  o Run entire contexts and individual specification methods.
+o Initial public release - uses Instinct 0.1.7.
