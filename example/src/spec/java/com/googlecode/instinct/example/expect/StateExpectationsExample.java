@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import org.hamcrest.Matchers;
@@ -66,8 +65,8 @@ public final class StateExpectationsExample {
         expect.that(people).isEmpty();
         people.add("fred");
         people.add("wilma");
-        expect.that(people).notEmpty();
-        expect.that(people).hasSize(2);
+        expect.that(people).isNotEmpty();
+        expect.that(people).isOfSize(2);
         expect.that(people).containsItems("fred", "wilma");
         expect.that(people).containsItem("fred");
         expect.that(people).notContainItems("barney", "betty");
@@ -76,7 +75,7 @@ public final class StateExpectationsExample {
     @Specification
     public void providesMatchersForMakingAssertionsAboutArrays() {
         final String[] greetings = {"hi", "there"};
-        expect.that(greetings).hasSize(2);
+        expect.that(greetings).isOfSize(2);
         expect.that(greetings).containsItem("hi");
         expect.that(greetings).doesNotContainItem("bye");
         expect.that(greetings).doesNotContainItem(Matchers.greaterThan("zip"));
