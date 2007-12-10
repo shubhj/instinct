@@ -29,6 +29,6 @@ public final class SpecificationFailureMessageBuilderImplSlowTest extends Instin
 
     public void testCreatesStackTracesFromSpecificationFailures() {
         final String stack = failureMessageBuilder.buildMessage(new SpecificationRunFailureStatus(new RuntimeException()));
-        expect.that(stack).notEmpty();
+        expect.that(stack).isNotEmpty();
     }
 }

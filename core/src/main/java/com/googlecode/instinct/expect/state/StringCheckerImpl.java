@@ -25,23 +25,23 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
         super(subject);
     }
 
-    public final void equalToIgnoringCase(final String string) {
-        nullCheckString(string, "equalToIgnoringCase");
+    public final void isEqualToIgnoringCase(final String string) {
+        nullCheckString(string, "isEqualToIgnoringCase");
         getAsserter().expectThat(subject, Matchers.equalToIgnoringCase(string));
     }
 
-    public final void equalToIgnoringWhiteSpace(final String string) {
-        nullCheckString(string, "equalToIgnoringWhiteSpace");
+    public final void isEqualToIgnoringWhiteSpace(final String string) {
+        nullCheckString(string, "isEqualToIgnoringWhiteSpace");
         getAsserter().expectThat(subject, Matchers.equalToIgnoringWhiteSpace(string));
     }
 
-    public final void notEqualToIgnoringCase(final String string) {
-        nullCheckString(string, "notEqualToIgnoringCase");
+    public final void isNotEqualToIgnoringCase(final String string) {
+        nullCheckString(string, "isNotEqualToIgnoringCase");
         getAsserter().expectNotThat(subject, Matchers.equalToIgnoringCase(string));
     }
 
-    public final void notEqualToIgnoringWhiteSpace(final String string) {
-        nullCheckString(string, "notEqualToIgnoringWhiteSpace");
+    public final void isNotEqualToIgnoringWhiteSpace(final String string) {
+        nullCheckString(string, "isNotEqualToIgnoringWhiteSpace");
         getAsserter().expectNotThat(subject, Matchers.equalToIgnoringWhiteSpace(string));
     }
 
@@ -79,28 +79,16 @@ public class StringCheckerImpl extends ComparableCheckerImpl<String> implements 
         getAsserter().expectThat(subject, StringLengthMatcher.hasLength(0));
     }
 
-    public final void notEmpty() {
+    public final void isNotEmpty() {
         getAsserter().expectThat(subject, Matchers.not(StringLengthMatcher.hasLength(0)));
     }
 
-    public final void isNotEmpty() {
-        notEmpty();
-    }
-
-    public final void hasLength(final int length) {
+    public final void isOfLength(final int length) {
         getAsserter().expectThat(subject, StringLengthMatcher.hasLength(length));
     }
 
-    public final void hasSize(final int length) {
-        hasLength(length);
-    }
-
-    public final void isOfLength(final int length) {
-        hasLength(length);
-    }
-
-    public final void isOfSize(final int length) {
-        hasLength(length);
+    public final void isOfSize(final int size) {
+        getAsserter().expectThat(subject, StringLengthMatcher.hasLength(size));
     }
 
     public final void matchesRegex(final String regularExpression) {

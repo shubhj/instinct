@@ -16,14 +16,14 @@
 
 package com.googlecode.instinct.expect.state;
 
-public interface StringChecker extends ComparableChecker<String> {
-    void equalToIgnoringCase(String string);
+public interface StringChecker extends ComparableChecker<String>, SizeChecker {
+    void isEqualToIgnoringCase(String string);
 
-    void equalToIgnoringWhiteSpace(String string);
+    void isEqualToIgnoringWhiteSpace(String string);
 
-    void notEqualToIgnoringCase(String string);
+    void isNotEqualToIgnoringCase(String string);
 
-    void notEqualToIgnoringWhiteSpace(String string);
+    void isNotEqualToIgnoringWhiteSpace(String string);
 
     void containsString(String string);
 
@@ -37,19 +37,7 @@ public interface StringChecker extends ComparableChecker<String> {
 
     void doesNotStartWith(String string);
 
-    void isEmpty();
-
-    void notEmpty();
-
-    void isNotEmpty();
-
-    void hasLength(int length);
-
-    void hasSize(int length);
-
     void isOfLength(int length);
-
-    void isOfSize(int length);
 
     void matchesRegex(String regularExpression);
 

@@ -22,12 +22,11 @@ import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;
 import static com.googlecode.instinct.test.triangulate.Triangulation.getInstance;
 
 public final class StringCheckerImplAtomicTest extends InstinctTestCase {
-    private static final String SUBJECT_STRING = getInstance(String.class);
     private StringChecker checker;
 
     @Override
     public void setUpSubject() {
-        checker = new StringCheckerImpl(SUBJECT_STRING);
+        checker = new StringCheckerImpl(getInstance(String.class));
     }
 
     public void testConformsToClassTraits() {
@@ -70,33 +69,33 @@ public final class StringCheckerImplAtomicTest extends InstinctTestCase {
     }
 
     public void testShowsHumanReadableStringWhenEqualsIgnoringCaseIsPassedNull() {
-        expectNullRejected("equalToIgnoringCase", new Runnable() {
+        expectNullRejected("isEqualToIgnoringCase", new Runnable() {
             public void run() {
-                checker.equalToIgnoringCase(null);
+                checker.isEqualToIgnoringCase(null);
             }
         });
     }
 
     public void testShowsHumanReadableStringWhenEqualsIgnoringWhiteSpaceIsPassedNull() {
-        expectNullRejected("equalToIgnoringWhiteSpace", new Runnable() {
+        expectNullRejected("isEqualToIgnoringWhiteSpace", new Runnable() {
             public void run() {
-                checker.equalToIgnoringWhiteSpace(null);
+                checker.isEqualToIgnoringWhiteSpace(null);
             }
         });
     }
 
     public void testShowHumanReadableStringWhenNotEqualIgnoringCaseIsPassedNull() {
-        expectNullRejected("notEqualToIgnoringCase", new Runnable() {
+        expectNullRejected("isNotEqualToIgnoringCase", new Runnable() {
             public void run() {
-                checker.notEqualToIgnoringCase(null);
+                checker.isNotEqualToIgnoringCase(null);
             }
         });
     }
 
     public void testShowsHumanReadableStringWhenNotEqualToIgnoringWhiteSpaceIsPassedNull() {
-        expectNullRejected("notEqualToIgnoringWhiteSpace", new Runnable() {
+        expectNullRejected("isNotEqualToIgnoringWhiteSpace", new Runnable() {
             public void run() {
-                checker.notEqualToIgnoringWhiteSpace(null);
+                checker.isNotEqualToIgnoringWhiteSpace(null);
             }
         });
     }
