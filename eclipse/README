@@ -1,0 +1,34 @@
+                                  ************
+*********************************** Instinct ***********************************
+                                  ************
+
+                      <http://code.google.com/p/instinct/>
+
+
+* What is Instinct? *
+
+Instinct is a Behaviour Driven Development (BDD) framework for Java. Inspired
+by RSpec, Instinct provides flexible annotation of contexts, specifications,
+test actors, etc. (via Java 1.5 annotations, marker interfaces or naming
+conventions); automatic creation of test doubles (dummies, mocks & stubs) &
+test subjects; state and behavioural (mocks) expectation API; JUnit test runner
+integration & Ant tasks.
+
+
+* Distribution Contents *
+
+The distribution contains the following contents:
+
+o README                            - This readme file.
+o LICENCE                           - Instinct licence file.
+o NOTICE                            - Licence notices for libraries used in Instinct.
+o RELEASE-NOTES                     - Release notes for this & previous releases.
+o lib/                              - Libraries required by Instinct at runtime (including
+                                      licences).
+
+* IntelliJ IDEA Plugin *
+
+
+Thanks to the JBehave authors whose plugin this was originally based.
+
+
