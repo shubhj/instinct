@@ -27,19 +27,19 @@ public class ComparableCheckerImpl<T extends Comparable<T>> extends ObjectChecke
         super(subject);
     }
 
-    public final void greaterThan(final T comparable) {
+    public final void isGreaterThan(final T comparable) {
         getAsserter().expectThat(subject, Matchers.greaterThan(comparable));
     }
 
-    public final void greaterThanOrEqualTo(final T comparable) {
+    public final void isGreaterThanOrEqualTo(final T comparable) {
         getAsserter().expectThat(subject, Matchers.greaterThanOrEqualTo(comparable));
     }
 
-    public final void lessThan(final T comparable) {
+    public final void isLessThan(final T comparable) {
         getAsserter().expectThat(subject, Matchers.lessThan(comparable));
     }
 
-    public final void lessThanOrEqualTo(final T comparable) {
+    public final void isLessThanOrEqualTo(final T comparable) {
         getAsserter().expectThat(subject, Matchers.lessThanOrEqualTo(comparable));
     }
 }

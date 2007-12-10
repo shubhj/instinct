@@ -25,11 +25,11 @@ public class DoubleCheckerImpl extends ComparableCheckerImpl<Double> implements 
         super(subject);
     }
 
-    public final void closeTo(final double value, final double delta) {
+    public final void isCloseTo(final double value, final double delta) {
         getAsserter().expectThat(subject, Matchers.closeTo(value, delta));
     }
 
-    public final void notCloseTo(final double value, final double delta) {
+    public final void isNotCloseTo(final double value, final double delta) {
         getAsserter().expectNotThat(subject, Matchers.closeTo(value, delta));
     }
 }

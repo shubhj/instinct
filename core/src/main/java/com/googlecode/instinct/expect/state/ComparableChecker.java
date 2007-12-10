@@ -17,11 +17,11 @@
 package com.googlecode.instinct.expect.state;
 
 public interface ComparableChecker<T extends Comparable<T>> extends ObjectChecker<T> {
-    void greaterThan(T comparable);
+    void isGreaterThan(T comparable);
 
-    void greaterThanOrEqualTo(T comparable);
+    void isGreaterThanOrEqualTo(T comparable);
 
-    void lessThan(T comparable);
+    void isLessThan(T comparable);
 
-    void lessThanOrEqualTo(T comparable);
+    void isLessThanOrEqualTo(T comparable);
 }

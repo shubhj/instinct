@@ -107,4 +107,25 @@ public class CommonAPIContext {
         expect.that(emptyMap).doesNotContainEntry("two", 2);
         expect.that(emptyMap).doesNotContainValue(1);
     }
+
+    @SuppressWarnings({"MagicNumber"})
+    @Specification
+    public void shouldHaveAStandardAPIForComparable() {
+        final int value1 = 100;
+        final int value2 = 200;
+
+        expect.that(value1).isLessThan(value2);
+        expect.that(value2).isGreaterThan(value1);
+        expect.that(value1).isGreaterThanOrEqualTo(value1 - 1);
+        expect.that(value2).isLessThanOrEqualTo(value2 + 1);
+    }
+
+    @SuppressWarnings({"MagicNumber"})
+    @Specification
+    public void shouldHaveAStandardAPIForDouble() {
+        final double doubleValue = 2.0d;
+
+        expect.that(doubleValue).isNotCloseTo(-3.1d, 5.0);
+        expect.that(doubleValue).isCloseTo(-2.0d, 5.0);
+    }
 }
