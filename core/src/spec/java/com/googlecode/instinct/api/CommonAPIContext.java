@@ -23,6 +23,8 @@ import com.googlecode.instinct.marker.annotate.Specification;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
@@ -31,57 +33,78 @@ public class CommonAPIContext {
 
     @Specification
     public void shouldHaveAStandardAPIForArrays() {
-        final String[] values = {"one", "two", "three"};
-        final String[] empty = {};
+        final String[] stringArray = {"one", "two", "three"};
+        final String[] emptyStringArray = {};
 
-        expect.that(values).isNotEmpty();
-        expect.that(empty).isEmpty();
+        expect.that(stringArray).isNotEmpty();
+        expect.that(emptyStringArray).isEmpty();
 
-        expect.that(values).containsItem("two");
-        expect.that(values).doesNotContainItem("four");
+        expect.that(stringArray).containsItem("two");
+        expect.that(stringArray).doesNotContainItem("four");
 
-        expect.that(values).isOfSize(3);
-        expect.that(empty).isOfSize(0);
+        expect.that(stringArray).isOfSize(3);
+        expect.that(emptyStringArray).isOfSize(0);
     }
 
     @Specification
     public void shouldHaveAStandardAPIForCollections() {
-        final Collection<Integer> numbers = new ArrayList<Integer>(asList(1, 2, 3, 4));
-        final Collection<String> empty = new ArrayList<String>();
+        final Collection<Integer> numbersList = new ArrayList<Integer>(asList(1, 2, 3, 4));
+        final Collection<String> emptyList = new ArrayList<String>();
 
-        expect.that(numbers).isNotEmpty();
-        expect.that(empty).isEmpty();
+        expect.that(numbersList).isNotEmpty();
+        expect.that(emptyList).isEmpty();
 
-        expect.that(numbers).containsItem(2);
-        expect.that(numbers).containsItems(2, 3);
-        expect.that(numbers).doesNotContainItem(6);
-        expect.that(numbers).doesNotContainItems(5, 6);
+        expect.that(numbersList).containsItem(2);
+        expect.that(numbersList).containsItems(2, 3);
+        expect.that(numbersList).doesNotContainItem(6);
+        expect.that(numbersList).doesNotContainItems(5, 6);
 
-        expect.that(numbers).isOfSize(4);
-        expect.that(empty).isOfSize(0);
+        expect.that(numbersList).isOfSize(4);
+        expect.that(emptyList).isOfSize(0);
 
-        expect.that(numbers).hasTheSameContentAs(asList(1, 2, 3, 4));
-        expect.that(numbers).hasTheSameContentAs(1, 2, 3, 4);
+        expect.that(numbersList).hasTheSameContentAs(asList(1, 2, 3, 4));
+        expect.that(numbersList).hasTheSameContentAs(1, 2, 3, 4);
     }
 
     @SuppressWarnings({"TooBroadScope"})
     @Specification
     public void shouldHaveAStandardAPIForStrings() {
-        final String value = "A test String";
-        final String empty = "";
+        final String stringValue = "A test String";
+        final String emptyString = "";
 
-        expect.that(value).isNotEmpty();
-        expect.that(empty).isEmpty();
+        expect.that(stringValue).isNotEmpty();
+        expect.that(emptyString).isEmpty();
 
-        expect.that(value).isOfSize(value.length());
-        expect.that(value).isOfLength(value.length());
-        expect.that(empty).isOfSize(0);
-        expect.that(empty).isOfLength(0);
+        expect.that(stringValue).isOfSize(stringValue.length());
+        expect.that(stringValue).isOfLength(stringValue.length());
+        expect.that(emptyString).isOfSize(0);
+        expect.that(emptyString).isOfLength(0);
 
-        expect.that(value).isEqualToIgnoringCase("a test string");
-        expect.that(value).isEqualToIgnoringWhiteSpace("    A test String");
+        expect.that(stringValue).isEqualToIgnoringCase("a test string");
+        expect.that(stringValue).isEqualToIgnoringWhiteSpace("    A test String");
 
-        expect.that(value).isNotEqualToIgnoringCase("another test string");
-        expect.that(value).isNotEqualToIgnoringWhiteSpace("    another test String");
+        expect.that(stringValue).isNotEqualToIgnoringCase("another test string");
+        expect.that(stringValue).isNotEqualToIgnoringWhiteSpace("    another test String");
+    }
+
+    @Specification
+    public void shouldHaveAStandardAPIForMaps() {
+        final Map<String, Integer> numbersMap = new HashMap<String, Integer>();
+        final Map<String, Integer> emptyMap = new HashMap<String, Integer>();
+
+        numbersMap.put("one", 1);
+        numbersMap.put("two", 2);
+        numbersMap.put("three", 3);
+
+        expect.that(numbersMap).isNotEmpty();
+        expect.that(emptyMap).isEmpty();
+
+        expect.that(numbersMap).containsKey("one");
+        expect.that(numbersMap).containsEntry("three", 3);
+        expect.that(numbersMap).containsValue(1);
+
+        expect.that(emptyMap).doesNotContainKey("one");
+        expect.that(emptyMap).doesNotContainEntry("two", 2);
+        expect.that(emptyMap).doesNotContainValue(1);
     }
 }

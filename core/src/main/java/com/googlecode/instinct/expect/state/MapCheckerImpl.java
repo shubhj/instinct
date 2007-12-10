@@ -38,11 +38,11 @@ public class MapCheckerImpl<K, V> extends ObjectCheckerImpl<Map<K, V>> implement
         getAsserter().expectThat(subject, Matchers.hasEntry(k, v));
     }
 
-    public final void notContainEntry(final Matcher<K> matcher, final Matcher<V> matcher1) {
+    public final void doesNotContainEntry(final Matcher<K> matcher, final Matcher<V> matcher1) {
         getAsserter().expectNotThat(subject, Matchers.hasEntry(matcher, matcher1));
     }
 
-    public final void notContainEntry(final K k, final V v) {
+    public final void doesNotContainEntry(final K k, final V v) {
         getAsserter().expectNotThat(subject, Matchers.hasEntry(k, v));
     }
 
@@ -54,11 +54,11 @@ public class MapCheckerImpl<K, V> extends ObjectCheckerImpl<Map<K, V>> implement
         getAsserter().expectThat((Map<K, Object>) subject, Matchers.hasKey(k));
     }
 
-    public final void notContainKey(final Matcher<K> matcher) {
+    public final void doesNotContainKey(final Matcher<K> matcher) {
         getAsserter().expectNotThat((Map<K, Object>) subject, Matchers.hasKey(matcher));
     }
 
-    public final void notContainKey(final K k) {
+    public final void doesNotContainKey(final K k) {
         getAsserter().expectNotThat((Map<K, Object>) subject, Matchers.hasKey(k));
     }
 
@@ -70,12 +70,16 @@ public class MapCheckerImpl<K, V> extends ObjectCheckerImpl<Map<K, V>> implement
         getAsserter().expectThat((Map<Object, V>) subject, Matchers.hasValue(v));
     }
 
-    public final void notContainValue(final Matcher<V> matcher) {
+    public final void doesNotContainValue(final Matcher<V> matcher) {
         getAsserter().expectNotThat((Map<Object, V>) subject, Matchers.hasValue(matcher));
     }
 
-    public final void notContainValue(final V v) {
+    public final void doesNotContainValue(final V v) {
         getAsserter().expectNotThat((Map<Object, V>) subject, Matchers.hasValue(v));
+    }
+
+    public final void isOfSize(final int size) {
+        getAsserter().expectThat(subject.size(), Matchers.equalTo(size));
     }
 
     public final void isEmpty() {
@@ -83,12 +87,8 @@ public class MapCheckerImpl<K, V> extends ObjectCheckerImpl<Map<K, V>> implement
                 Matchers.describedAs("isEmpty() = <true>", Matchers.equalTo(true)));
     }
 
-    public final void notEmpty() {
+    public final void isNotEmpty() {
         getAsserter().expectThat(subject.isEmpty(),
                 Matchers.describedAs("isEmpty() = <false>", Matchers.equalTo(false)));
-    }
-
-    public final void hasSize(final int size) {
-        getAsserter().expectThat(subject.size(), Matchers.equalTo(size));
     }
 }
