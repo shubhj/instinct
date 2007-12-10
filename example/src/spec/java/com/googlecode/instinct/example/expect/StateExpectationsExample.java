@@ -69,7 +69,7 @@ public final class StateExpectationsExample {
         expect.that(people).isOfSize(2);
         expect.that(people).containsItems("fred", "wilma");
         expect.that(people).containsItem("fred");
-        expect.that(people).notContainItems("barney", "betty");
+        expect.that(people).doesNotContainItems("barney", "betty");
     }
 
     @Specification
