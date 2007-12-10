@@ -39,7 +39,7 @@ public final class DummyMethodInterceptorAtomicTest extends InstinctTestCase {
     @Stub private OveriddenObjectMethods overiddenObjectMethods;
     @Stub private Method method;
     @Dummy private Object[] args;
-    
+
     public void testConformsToClassTraits() {
         checkClass(DummyMethodInterceptor.class, MethodInterceptor.class);
     }
@@ -86,8 +86,8 @@ public final class DummyMethodInterceptorAtomicTest extends InstinctTestCase {
             methodInterceptor.intercept(instanceToIntercept, method, args, methodProxy);
             fail("Expected IllegalInvocationException to be thrown");
         } catch (Throwable t) {
-            expect.that(t).instanceOf(IllegalInvocationException.class);
-            expect.that(t.getMessage()).equalTo("Method " + method.getName() + "() was called on a dummy instance of " + expectedClassName + ". " +
+            expect.that(t).isAnInstanceOf(IllegalInvocationException.class);
+            expect.that(t.getMessage()).isEqualTo("Method " + method.getName() + "() was called on a dummy instance of " + expectedClassName + ". " +
                     "If you expect methods to be called on this specification double you should make it a mock or stub.");
         }
     }

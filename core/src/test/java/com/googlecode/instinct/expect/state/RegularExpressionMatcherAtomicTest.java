@@ -61,7 +61,7 @@ public final class RegularExpressionMatcherAtomicTest extends InstinctTestCase {
     private void match(final String regularExpression, final String stringToMatch, final boolean expectMatch) {
         final Matcher<String> matcher = RegularExpressionMatcher.matchesRegex(regularExpression);
         final Boolean matches = matcher.matches(stringToMatch);
-        expect.that(matches).equalTo(expectMatch);
+        expect.that(matches).isEqualTo(expectMatch);
     }
 
     private void checkDescribesErrorsByAppendingTheExpectedRegularExpression(final String regularExpression) {

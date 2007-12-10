@@ -43,26 +43,26 @@ public final class LifecycleMethodImplAtomicTest extends InstinctTestCase {
     }
 
     public void testReturnNameOfMethodPassedInConstructor() {
-        expect.that(lifecycleMethod.getName()).equalTo(method.getName());
+        expect.that(lifecycleMethod.getName()).isEqualTo(method.getName());
     }
 
     public void testReturnsUnderlyingMethod() {
-        expect.that(lifecycleMethod.getMethod()).sameInstanceAs(method);
+        expect.that(lifecycleMethod.getMethod()).isTheSameInstanceAs(method);
     }
 
     public void testReturnsDeclaringClassOfUnderlyingMethod() {
-        expect.that((Object) lifecycleMethod.getContextClass()).sameInstanceAs((Object) CLASS_TO_TEST);
+        expect.that((Object) lifecycleMethod.getContextClass()).isTheSameInstanceAs((Object) CLASS_TO_TEST);
     }
 
     public void testReturnsParametersAnnotations() {
         final Annotation[][] parameterAnnotations = lifecycleMethod.getParameterAnnotations();
-        expect.that(parameterAnnotations).equalTo(method.getParameterAnnotations());
+        expect.that(parameterAnnotations).isEqualTo(method.getParameterAnnotations());
         expect.that(parameterAnnotations).isOfSize(1);
         expect.that(parameterAnnotations[0]).isOfSize(1);
         expect.that(parameterAnnotations[0][0].annotationType().getClass().equals(ForAll.class));
     }
 
     public void testReturnsAnnotationsFromUnderlyingMethod() {
-        expect.that(lifecycleMethod.getAnnotations()).equalTo(method.getAnnotations());
+        expect.that(lifecycleMethod.getAnnotations()).isEqualTo(method.getAnnotations());
     }
 }

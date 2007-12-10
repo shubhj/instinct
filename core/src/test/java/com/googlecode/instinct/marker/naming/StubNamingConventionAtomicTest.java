@@ -29,6 +29,6 @@ public final class StubNamingConventionAtomicTest extends InstinctTestCase {
     }
 
     public void testGetPattern() {
-        expect.that(namingConvention.getPattern()).equalTo("^stub");
+        expect.that(namingConvention.getPattern()).isEqualTo("^stub");
     }
 }

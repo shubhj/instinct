@@ -65,7 +65,7 @@ public final class MethodInvokerFactoryImplAtomicTest extends InstinctTestCase {
             }
         });
         final MethodInvoker methodInvoker = methodInvokerFactory.create(specificationMethod);
-        expect.that(methodInvoker).instanceOf(MethodInvokerImpl.class);
+        expect.that(methodInvoker).isAnInstanceOf(MethodInvokerImpl.class);
     }
 
     public void testWillReturnTheoryMethodInvokerForAMethodWithForAllAnnotation() {
@@ -78,6 +78,6 @@ public final class MethodInvokerFactoryImplAtomicTest extends InstinctTestCase {
             }
         });
         final MethodInvoker methodInvoker = methodInvokerFactory.create(specificationMethod);
-        expect.that(methodInvoker).instanceOf(TheoryMethodInvokerImpl.class);
+        expect.that(methodInvoker).isAnInstanceOf(TheoryMethodInvokerImpl.class);
     }
 }

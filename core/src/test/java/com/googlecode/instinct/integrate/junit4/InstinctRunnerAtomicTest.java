@@ -69,6 +69,6 @@ public final class InstinctRunnerAtomicTest extends InstinctTestCase {
     }
 
     public void testCreatesASuiteDescription() {
-        expect.that(runner.getDescription()).equalTo(Description.createSuiteDescription(CLASS_TO_RUN));
+        expect.that(runner.getDescription()).isEqualTo(Description.createSuiteDescription(CLASS_TO_RUN));
     }
 }

@@ -27,6 +27,6 @@ public final class SpecificationRunSuccessStatusAtomicTest extends InstinctTestC
 
     public void testGetDetailedStatusReturnsSuccessMessage() {
         final SpecificationRunStatus runStatus = new SpecificationRunSuccessStatus();
-        expect.that(runStatus.getDetailedStatus()).equalTo("Specification of behaviour verified correctly");
+        expect.that(runStatus.getDetailedStatus()).isEqualTo("Specification of behaviour verified correctly");
     }
 }

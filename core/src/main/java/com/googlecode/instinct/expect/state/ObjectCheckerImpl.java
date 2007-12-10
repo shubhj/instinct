@@ -37,37 +37,26 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         return asserter;
     }
 
-    public final void equalTo(final T t) {
+    public final void isEqualTo(final T t) {
         getAsserter().expectThat(subject, Matchers.equalTo(t));
+
     }
 
-    public final void isEqualTo(final T t) {
-        equalTo(t);
+    public final void isNotEqualTo(final T t) {
+        getAsserter().expectNotThat(subject, Matchers.equalTo(t));
     }
 
     @Override
     public final boolean equals(final Object obj) {
-        throw new UnsupportedOperationException("Equality on checkers is not supported, you probably want equalTo() instead.");
-    }
-
-    public final void notEqualTo(final T t) {
-        getAsserter().expectNotThat(subject, Matchers.equalTo(t));
-    }
-
-    public final void instanceOf(final Class<? extends T> cls) {
-        getAsserter().expectThat(subject, Matchers.instanceOf(cls));
+        throw new UnsupportedOperationException("Equality on checkers is not supported, you probably want isEqualTo() instead.");
     }
 
     public final void isAnInstanceOf(final Class<? extends T> cls) {
-        instanceOf(cls);
+        getAsserter().expectThat(subject, Matchers.instanceOf(cls));
     }
 
     public final void isOfType(final Class<? extends T> cls) {
-        instanceOf(cls);
-    }
-
-    public final void ofType(final Class<? extends T> cls) {
-        instanceOf(cls);
+        isAnInstanceOf(cls);
     }
 
     public final void notInstanceOf(final Class<T> cls) {
@@ -82,15 +71,11 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         notInstanceOf(cls);
     }
 
-    public final void notOfType(final Class<T> cls) {
-        notInstanceOf(cls);
-    }
-
-    public final void sameInstanceAs(final T t) {
+    public final void isTheSameInstanceAs(final T t) {
         getAsserter().expectThat(subject, Matchers.sameInstance(t));
     }
 
-    public final void notSameInstanceAs(final T t) {
+    public final void isNotTheSameInstanceAs(final T t) {
         getAsserter().expectNotThat(subject, Matchers.sameInstance(t));
     }
 
@@ -114,11 +99,11 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectThat(subject, Matchers.allOf(iterable));
     }
 
-    public final void notMatchAllOf(final Matcher<T>... matchers) {
+    public final void doesNotMatchAllOf(final Matcher<T>... matchers) {
         getAsserter().expectNotThat(subject, Matchers.allOf(matchers));
     }
 
-    public final void notMatchAllOf(final Iterable<Matcher<? extends T>> iterable) {
+    public final void doesNotMatchAllOf(final Iterable<Matcher<? extends T>> iterable) {
         getAsserter().expectNotThat(subject, Matchers.allOf(iterable));
     }
 
@@ -130,11 +115,11 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectThat(subject, Matchers.anyOf(iterable));
     }
 
-    public final void notMatchAnyOf(final Matcher<T>... matchers) {
+    public final void doesNotMatchAnyOf(final Matcher<T>... matchers) {
         getAsserter().expectNotThat(subject, Matchers.anyOf(matchers));
     }
 
-    public final void notMatchAnyOf(final Iterable<Matcher<? extends T>> iterable) {
+    public final void doesNotMatchAnyOf(final Iterable<Matcher<? extends T>> iterable) {
         getAsserter().expectNotThat(subject, Matchers.anyOf(iterable));
     }
 

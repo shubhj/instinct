@@ -17,7 +17,6 @@
 package com.googlecode.instinct.internal.actor;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.test.InstinctTestCase;
@@ -37,6 +36,6 @@ public final class IllegalInvocationExceptionAtomicTest extends InstinctTestCase
     }
 
     public void testPassesMessageStringToSuperClass() {
-        expect.that(exception.getMessage()).equalTo(message);
+        expect.that(exception.getMessage()).isEqualTo(message);
     }
 }

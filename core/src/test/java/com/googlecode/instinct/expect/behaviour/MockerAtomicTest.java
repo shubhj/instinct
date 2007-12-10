@@ -34,7 +34,7 @@ public final class MockerAtomicTest extends InstinctTestCase {
     }
 
     public void testHoldsTheSingleJMock2MockeryInstance() {
-        expect.that(getJMock2Mockery()).sameInstanceAs(getJMock2Mockery());
+        expect.that(getJMock2Mockery()).isTheSameInstanceAs(getJMock2Mockery());
         expect.that(getJMock2Mockery()).isNotNull();
     }
 

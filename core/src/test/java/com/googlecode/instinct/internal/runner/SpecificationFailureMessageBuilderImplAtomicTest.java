@@ -64,7 +64,7 @@ public final class SpecificationFailureMessageBuilderImplAtomicTest extends Inst
         });
         final String failureMessage = failureMessageBuilder.buildMessage(failureStatus);
         final String rootCauseStackTrace = getRootCauseStackTrace();
-        expect.that(failureMessage).equalTo(rootCauseStackTrace);
+        expect.that(failureMessage).isEqualTo(rootCauseStackTrace);
     }
 
     @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})

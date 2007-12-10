@@ -74,16 +74,16 @@ public final class BriefResultMessageBuilderAtomicTest extends InstinctTestCase 
                 + formatFailureCause() + NEW_LINE
                 + "- runs" + NEW_LINE
                 + "- soDoesThis";
-        expect.that(briefResultMessageBuilder.buildMessage(contextResult)).equalTo(expectedContextMessage);
+        expect.that(briefResultMessageBuilder.buildMessage(contextResult)).isEqualTo(expectedContextMessage);
     }
 
     public void testCreatesBriefSpecificationSuccessResultMessages() {
-        expect.that(briefResultMessageBuilder.buildMessage(succeedingSpec1)).equalTo("runs");
+        expect.that(briefResultMessageBuilder.buildMessage(succeedingSpec1)).isEqualTo("runs");
     }
 
     public void testCreatesBriefSpecificationFailuresResultMessages() {
         final String expected = "fails (FAILED)" + NEW_LINE + NEW_LINE + formatFailureCause();
-        expect.that(briefResultMessageBuilder.buildMessage(failingSpec)).equalTo(expected);
+        expect.that(briefResultMessageBuilder.buildMessage(failingSpec)).isEqualTo(expected);
     }
 
     private String formatFailureCause() {

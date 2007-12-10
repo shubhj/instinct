@@ -44,14 +44,14 @@ public class AFixedDefect8WithAnAnnotationMethodLocator {
     public void shouldReturnABeforeSpecificationDefinedInABaseClass() {
         final Collection<Method> methods = locator.locate(AContext.class, BeforeSpecification.class);
         expect.that(methods).isOfSize(1);
-        expect.that(methods.iterator().next().getName()).equalTo("setup");
+        expect.that(methods.iterator().next().getName()).isEqualTo("setup");
     }
 
     @Specification
     public void shouldReturnAnAfterSpecificationDefinedInABaseClass() {
         final Collection<Method> methods = locator.locate(AContext.class, AfterSpecification.class);
         expect.that(methods).isOfSize(1);
-        expect.that(methods.iterator().next().getName()).equalTo("tearDown");
+        expect.that(methods.iterator().next().getName()).isEqualTo("tearDown");
     }
 
     @Specification

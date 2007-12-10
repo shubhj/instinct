@@ -54,6 +54,6 @@ public final class PrimitiveTypeBoxerImplAtomicTest extends InstinctTestCase {
 
     private <T> void checkBoxPrimitive(final Class<T> toBox, final Class<T> expectedBoxed) {
         final Class<T> boxedType = primitiveTypeBoxer.boxPrimitiveType(toBox);
-        expect.that(boxedType).equalTo(expectedBoxed);
+        expect.that(boxedType).isEqualTo(expectedBoxed);
     }
 }

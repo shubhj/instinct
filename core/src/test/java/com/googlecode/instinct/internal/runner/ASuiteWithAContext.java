@@ -27,6 +27,6 @@ import org.junit.runner.RunWith;
 public class ASuiteWithAContext {
     @Specification
     public void toCheckVerification() {
-        expect.that(true).equalTo(true);
+        expect.that(true).isEqualTo(true);
     }
 }

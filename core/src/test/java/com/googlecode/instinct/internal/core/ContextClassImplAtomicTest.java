@@ -70,11 +70,11 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
     }
 
     public void testReturnsTypePassedInConstructorFromGetType() {
-        expect.that((Object) contextType).sameInstanceAs(contextClass.getType());
+        expect.that((Object) contextType).isTheSameInstanceAs(contextClass.getType());
     }
 
     public void testReturnsContextTypeNameSimpleName() {
-        expect.that(contextType.getSimpleName()).equalTo(contextClass.getName());
+        expect.that(contextType.getSimpleName()).isEqualTo(contextClass.getName());
     }
 
     public void testRunsUsingContextRunner() {
@@ -83,7 +83,7 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
                 one(contextRunner).run(contextClass); will(returnValue(contextResult));
             }
         });
-        expect.that(contextResult).sameInstanceAs(contextClass.run());
+        expect.that(contextResult).isTheSameInstanceAs(contextClass.run());
     }
 
     public void testPassesContextListenersToContextRunner() {
@@ -147,7 +147,7 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
         });
         final Collection<SpecificationMethod> methods = contextClass.buildSpecificationMethods();
         expect.that(methods).containsItem(specification("toCheckVerification"));
-        expect.that(methods.size()).equalTo(1);
+        expect.that(methods.size()).isEqualTo(1);
     }
 
     private Matcher<SpecificationMethod> specification(final String methodName) {

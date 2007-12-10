@@ -72,7 +72,7 @@ public final class CgLibProxyGeneratorAtomicTest extends InstinctTestCase {
             }
         });
         final Object createdProxy = proxyGenerator.newProxy(typeToProxy, methodInterceptor);
-        expect.that(createdProxy).sameInstanceAs(proxy);
+        expect.that(createdProxy).isTheSameInstanceAs(proxy);
     }
 
     private <T> void expectEnhancerCreated(final Class<T> typeToProxy) {

@@ -31,33 +31,33 @@ public final class ArrayFlattenerImplAtomicTest extends InstinctTestCase {
     public void testFlattenNoOp() {
         final Object[] expectedFlattening1 = new Object[]{"1", "2"};
         final Object[] unflattened1 = new Object[]{"1", "2"};
-        expect.that(flattener.flatten(unflattened1)).equalTo(expectedFlattening1);
+        expect.that(flattener.flatten(unflattened1)).isEqualTo(expectedFlattening1);
         final Object[] expectedFlattening = new String[]{"1", "2"};
         final Object[] unflattened = new String[]{"1", "2"};
-        expect.that(flattener.flatten(unflattened)).equalTo(expectedFlattening);
+        expect.that(flattener.flatten(unflattened)).isEqualTo(expectedFlattening);
     }
 
     public void testNestedOneLevelFlatten() {
         final Object[] unflattened = {"1", "2", new Object[]{"3", "4"}};
         final Object[] expected = {"1", "2", "3", "4"};
-        expect.that(flattener.flatten(unflattened)).equalTo(expected);
+        expect.that(flattener.flatten(unflattened)).isEqualTo(expected);
     }
 
     public void testNestedTwoLevelFlatten() {
         final Object[] unflattened = {"1", "2", new Object[]{"3", "4", new Object[]{"5", "6"}}};
         final Object[] expected = {"1", "2", "3", "4", "5", "6"};
-        expect.that(flattener.flatten(unflattened)).equalTo(expected);
+        expect.that(flattener.flatten(unflattened)).isEqualTo(expected);
     }
 
     public void testNestedThreeLevelFlatten() {
         final Object[] unflattened = {"1", "2", new Object[]{"3", "4", new Object[]{"5", "6", new Object[]{"7", "8"}}}};
         final Object[] expected = {"1", "2", "3", "4", "5", "6", "7", "8"};
-        expect.that(flattener.flatten(unflattened)).equalTo(expected);
+        expect.that(flattener.flatten(unflattened)).isEqualTo(expected);
     }
 
     public void testMixedTypeFlatten() {
         final Object[] unflattened = {getClass(), this, new Number[]{(long) 1, 3}, new Class[]{Object.class}};
         final Object[] expected = {getClass(), this, (long) 1, 3, Object.class};
-        expect.that(flattener.flatten(unflattened)).equalTo(expected);
+        expect.that(flattener.flatten(unflattened)).isEqualTo(expected);
     }
 }

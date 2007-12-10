@@ -73,7 +73,7 @@ public final class ContextFinderImplAtomicTest extends InstinctTestCase {
         finder = createSubjectWithConstructorArgs(
                 ContextFinderImpl.class, new Object[]{CLASS_IN_SPEC_TREE}, packageRootFinder, classLocator, objectFactory);
     }
-    
+
     public void testNothing() {
 
     }
@@ -110,6 +110,6 @@ public final class ContextFinderImplAtomicTest extends InstinctTestCase {
             }
         });
         final JavaClassName[] names = finder.getContextNames(ALL_GROUPS);
-        expect.that(names).equalTo(classNames.toArray(new JavaClassName[classNames.size()]));
+        expect.that(names).isEqualTo(classNames.toArray(new JavaClassName[classNames.size()]));
     }
 }

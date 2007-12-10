@@ -31,31 +31,31 @@ public final class GroupSanitiserImplAtomicTest extends InstinctTestCase {
     }
 
     public void testConvertsEmptyStringsIntoIgnoreAttribute() {
-        expect.that(sanitiser.sanitise("")).equalTo(IGNORE);
-        expect.that(sanitiser.sanitise("  ")).equalTo(IGNORE);
+        expect.that(sanitiser.sanitise("")).isEqualTo(IGNORE);
+        expect.that(sanitiser.sanitise("  ")).isEqualTo(IGNORE);
     }
 
     public void testConvertsCommaSeperatedGroupsToAnnotationAttributes() {
-        expect.that(sanitiser.sanitise("one")).equalTo(new AnnotationAttribute("group", new String[]{"one"}));
-        expect.that(sanitiser.sanitise("one,two")).equalTo(new AnnotationAttribute("group", new String[]{"one", "two"}));
-        expect.that(sanitiser.sanitise(" one,two")).equalTo(new AnnotationAttribute("group", new String[]{"one", "two"}));
-        expect.that(sanitiser.sanitise("one,two ")).equalTo(new AnnotationAttribute("group", new String[]{"one", "two"}));
-        expect.that(sanitiser.sanitise("one, two ")).equalTo(new AnnotationAttribute("group", new String[]{"one", "two"}));
-        expect.that(sanitiser.sanitise("one, two , three")).equalTo(new AnnotationAttribute("group", new String[]{"one", "two", "three"}));
+        expect.that(sanitiser.sanitise("one")).isEqualTo(new AnnotationAttribute("group", new String[]{"one"}));
+        expect.that(sanitiser.sanitise("one,two")).isEqualTo(new AnnotationAttribute("group", new String[]{"one", "two"}));
+        expect.that(sanitiser.sanitise(" one,two")).isEqualTo(new AnnotationAttribute("group", new String[]{"one", "two"}));
+        expect.that(sanitiser.sanitise("one,two ")).isEqualTo(new AnnotationAttribute("group", new String[]{"one", "two"}));
+        expect.that(sanitiser.sanitise("one, two ")).isEqualTo(new AnnotationAttribute("group", new String[]{"one", "two"}));
+        expect.that(sanitiser.sanitise("one, two , three")).isEqualTo(new AnnotationAttribute("group", new String[]{"one", "two", "three"}));
     }
 
     public void testDoesNotReturnEmptyGroupsWhenLeadingComma() {
-        expect.that(sanitiser.sanitise(",one")).equalTo(new AnnotationAttribute("group", new String[]{"one"}));
-        expect.that(sanitiser.sanitise(",one,two")).equalTo(new AnnotationAttribute("group", new String[]{"one", "two"}));
+        expect.that(sanitiser.sanitise(",one")).isEqualTo(new AnnotationAttribute("group", new String[]{"one"}));
+        expect.that(sanitiser.sanitise(",one,two")).isEqualTo(new AnnotationAttribute("group", new String[]{"one", "two"}));
     }
 
     public void testDoesNotReturnEmptyGroupsWhenTrailingComma() {
-        expect.that(sanitiser.sanitise("one,")).equalTo(new AnnotationAttribute("group", new String[]{"one"}));
-        expect.that(sanitiser.sanitise("one,two,")).equalTo(new AnnotationAttribute("group", new String[]{"one", "two"}));
+        expect.that(sanitiser.sanitise("one,")).isEqualTo(new AnnotationAttribute("group", new String[]{"one"}));
+        expect.that(sanitiser.sanitise("one,two,")).isEqualTo(new AnnotationAttribute("group", new String[]{"one", "two"}));
     }
 
     public void testDoesNotReturnEmptyGroupsWhenLeadingAndTrailingComma() {
-        expect.that(sanitiser.sanitise(",one,")).equalTo(new AnnotationAttribute("group", new String[]{"one"}));
-        expect.that(sanitiser.sanitise(",one,two,")).equalTo(new AnnotationAttribute("group", new String[]{"one", "two"}));
+        expect.that(sanitiser.sanitise(",one,")).isEqualTo(new AnnotationAttribute("group", new String[]{"one"}));
+        expect.that(sanitiser.sanitise(",one,two,")).isEqualTo(new AnnotationAttribute("group", new String[]{"one", "two"}));
     }
 }

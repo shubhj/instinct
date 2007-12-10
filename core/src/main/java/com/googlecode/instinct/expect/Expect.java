@@ -21,7 +21,7 @@ package com.googlecode.instinct.expect;
  * <pre>
  * import static com.googlecode.instinct.expect.Expect.expect;
  * ...
- * expect.that("instinct").equalTo("instinct");
+ * expect.that("instinct").isEqualTo("instinct");
  * </pre>
  * If you prefer not to statically import, create an instance of an {@link com.googlecode.instinct.expect.ExpectThat} implementation directly.
  */

@@ -72,6 +72,6 @@ public final class ClassWithContextAnnotationFileFilterAtomicTest extends Instin
             }
         });
         final boolean accept = filter.accept(pathname);
-        expect.that(accept).equalTo(isAnnotated);
+        expect.that(accept).isEqualTo(isAnnotated);
     }
 }

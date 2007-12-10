@@ -17,7 +17,6 @@
 package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.marker.annotate.Stub;
@@ -43,7 +42,7 @@ public final class ContextResultImplAtomicTest extends InstinctTestCase {
 
     public void testGetterReturnsContextNamePassedInConstructor() {
         final ContextResult result = new ContextResultImpl(contextName);
-        expect.that(result.getContextName()).equalTo(contextName);
+        expect.that(result.getContextName()).isEqualTo(contextName);
     }
 
     public void testResultAddedAppearsInListReturnedFromGetResults() {
@@ -72,7 +71,7 @@ public final class ContextResultImplAtomicTest extends InstinctTestCase {
         contextResult.addSpecificationResult(specificationResult1);
         contextResult.addSpecificationResult(specificationResult2);
         expect.that(contextResult.completedSuccessfully()).isFalse();
-        expect.that(contextResult.getNumberOfFailures()).equalTo(1);
-        expect.that(contextResult.getNumberOfSuccesses()).equalTo(1);
+        expect.that(contextResult.getNumberOfFailures()).isEqualTo(1);
+        expect.that(contextResult.getNumberOfSuccesses()).isEqualTo(1);
     }
 }

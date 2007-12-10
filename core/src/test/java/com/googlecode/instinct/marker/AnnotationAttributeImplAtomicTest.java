@@ -27,6 +27,6 @@ public final class AnnotationAttributeImplAtomicTest extends InstinctTestCase {
     }
 
     public void testIgnoreAttributeIsEqualToItself() {
-        expect.that(IGNORE).equalTo(IGNORE);
+        expect.that(IGNORE).isEqualTo(IGNORE);
     }
 }

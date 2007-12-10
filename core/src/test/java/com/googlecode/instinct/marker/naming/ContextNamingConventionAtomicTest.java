@@ -29,6 +29,6 @@ public final class ContextNamingConventionAtomicTest extends InstinctTestCase {
     }
 
     public void testGetPattern() {
-        expect.that(namingConvention.getPattern()).equalTo(".*Context$");
+        expect.that(namingConvention.getPattern()).isEqualTo(".*Context$");
     }
 }

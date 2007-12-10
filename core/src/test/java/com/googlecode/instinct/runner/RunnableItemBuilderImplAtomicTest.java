@@ -55,7 +55,7 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
     }
 
     public void testContainsMethodSeparatorConstant() {
-        expect.that(METHOD_SEPARATOR).equalTo("#");
+        expect.that(METHOD_SEPARATOR).isEqualTo("#");
     }
 
     public void testBuildsSingleContextNameIntoARunnableItem() {
@@ -157,6 +157,6 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
 
     private void expectRunnableItemIsASpecificationMethod(final RunnableItem runnableItem, final String specificationMethod) {
         expect.that(runnableItem.getClass()).typeCompatibleWith(SpecificationMethod.class);
-        expect.that(((SpecificationMethod) runnableItem).getName()).equalTo(specificationMethod);
+        expect.that(((SpecificationMethod) runnableItem).getName()).isEqualTo(specificationMethod);
     }
 }

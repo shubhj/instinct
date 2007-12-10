@@ -43,12 +43,12 @@ public final class IgnoreBridgeMethodsCallbackFilterAtomicTest extends InstinctT
     }
 
     public void testReturnsZeroForNonBridgeMethods() {
-        expect.that(callbackFilter.accept(toStringMethod)).equalTo(0);
-        expect.that(callbackFilter.accept(nonBridgeMethod)).equalTo(0);
+        expect.that(callbackFilter.accept(toStringMethod)).isEqualTo(0);
+        expect.that(callbackFilter.accept(nonBridgeMethod)).isEqualTo(0);
     }
 
     public void testReturnsOneForBridgeMethods() {
-        expect.that(callbackFilter.accept(bridgeMethod)).equalTo(1);
+        expect.that(callbackFilter.accept(bridgeMethod)).isEqualTo(1);
     }
 
     private static class SuperClassWithGenericMethods<T> {

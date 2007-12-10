@@ -35,7 +35,7 @@ public final class CommandLineUsageImplAtomicTest extends InstinctTestCase {
     }
 
     public void testReturnsCommandLineUsage() {
-        expect.that(commandLineUsage.getUsage()).equalTo(expectedUsage());
+        expect.that(commandLineUsage.getUsage()).isEqualTo(expectedUsage());
     }
 
     private String expectedUsage() {

@@ -46,10 +46,10 @@ public final class InterfaceComposerAtomicTest extends InstinctTestCase {
     }
 
     public void testDelgatesToMethodWithMostSpecificReturnType() {
-        expect.that(oneAndTwo.returnANumber()).equalTo(one.returnANumber());
-        expect.that(oneAndTwo.returnAnotherNumber()).equalTo(two.returnAnotherNumber());
-        expect.that(oneAndTwo.getObject()).equalTo(two.getObject());
-        expect.that(oneTwoAndThree.getObject()).equalTo(three.getObject());
+        expect.that(oneAndTwo.returnANumber()).isEqualTo(one.returnANumber());
+        expect.that(oneAndTwo.returnAnotherNumber()).isEqualTo(two.returnAnotherNumber());
+        expect.that(oneAndTwo.getObject()).isEqualTo(two.getObject());
+        expect.that(oneTwoAndThree.getObject()).isEqualTo(three.getObject());
     }
 
     public void testThrowsNoSuchMethodExceptionWhenMethodNotFound() {
@@ -80,7 +80,7 @@ public final class InterfaceComposerAtomicTest extends InstinctTestCase {
             backedByMockImplementation.throwSomething();
         } catch (Throwable actualThrowable) {
             expect.that(actualThrowable).isOfType(RuntimeException.class);
-            expect.that(actualThrowable.getCause()).sameInstanceAs(throwable);
+            expect.that(actualThrowable.getCause()).isTheSameInstanceAs(throwable);
         }
     }
 
@@ -96,7 +96,7 @@ public final class InterfaceComposerAtomicTest extends InstinctTestCase {
                 composedInterface.returnANumber();
             }
         });
-        expect.that(actualThrowable).sameInstanceAs(expectedThrowable);
+        expect.that(actualThrowable).isTheSameInstanceAs(expectedThrowable);
     }
 
     private static class One {

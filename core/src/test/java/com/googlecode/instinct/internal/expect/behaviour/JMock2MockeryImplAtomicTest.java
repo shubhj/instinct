@@ -17,7 +17,6 @@
 package com.googlecode.instinct.internal.expect.behaviour;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.test.InstinctTestCase;
@@ -73,7 +72,7 @@ public final class JMock2MockeryImplAtomicTest extends InstinctTestCase {
                 will(returnValue(returnedMock));
             }
         });
-        expect.that(jMock2Mockery.mock(typeToMock)).sameInstanceAs(returnedMock);
+        expect.that(jMock2Mockery.mock(typeToMock)).isTheSameInstanceAs(returnedMock);
     }
 
     public void testDelegatesMockWithRoleNameCallsToUnderlyingMockery() {
@@ -83,7 +82,7 @@ public final class JMock2MockeryImplAtomicTest extends InstinctTestCase {
                 will(returnValue(returnedMock));
             }
         });
-        expect.that(jMock2Mockery.mock(typeToMock, roleName)).sameInstanceAs(returnedMock);
+        expect.that(jMock2Mockery.mock(typeToMock, roleName)).isTheSameInstanceAs(returnedMock);
     }
 
     public void testDelegatesCheckingToUnderlyingMockery() {
@@ -110,6 +109,6 @@ public final class JMock2MockeryImplAtomicTest extends InstinctTestCase {
                 one(mockery).sequence("Sequence-0"); will(returnValue(sequence));
             }
         });
-        expect.that(jMock2Mockery.sequence()).sameInstanceAs(sequence);
+        expect.that(jMock2Mockery.sequence()).isTheSameInstanceAs(sequence);
     }
 }

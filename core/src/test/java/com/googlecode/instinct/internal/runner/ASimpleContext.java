@@ -34,7 +34,7 @@ public final class ASimpleContext {
 
     @Specification
     public void toCheckVerification() {
-        expect.that(true).equalTo(true);
+        expect.that(true).isEqualTo(true);
     }
 
     @AfterSpecification

@@ -75,7 +75,7 @@ public final class QuietResultMessageBuilderAtomicTest extends InstinctTestCase 
         final String expectedContextMessage = "FailingContextName" + NEW_LINE
                 + "- fails (FAILED)" + NEW_LINE + NEW_LINE
                 + formatFailureCause();
-        expect.that(quietResultMessageBuilder.buildMessage(failingContextResult)).equalTo(expectedContextMessage);
+        expect.that(quietResultMessageBuilder.buildMessage(failingContextResult)).isEqualTo(expectedContextMessage);
     }
 
     public void testShowsNoMessagesForContextResultWithNoFails() {
@@ -83,12 +83,12 @@ public final class QuietResultMessageBuilderAtomicTest extends InstinctTestCase 
     }
 
     public void testCreatesQuietSpecificationSuccessResultMessages() {
-        expect.that(quietResultMessageBuilder.buildMessage(succeedingSpec1)).equalTo("");
+        expect.that(quietResultMessageBuilder.buildMessage(succeedingSpec1)).isEqualTo("");
     }
 
     public void testCreatesQuietSpecificationFailuresResultMessages() {
         final String expected = "fails (FAILED)" + NEW_LINE + NEW_LINE + formatFailureCause();
-        expect.that(quietResultMessageBuilder.buildMessage(failingSpec)).equalTo(expected);
+        expect.that(quietResultMessageBuilder.buildMessage(failingSpec)).isEqualTo(expected);
     }
 
     private String formatFailureCause() {

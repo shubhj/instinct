@@ -43,7 +43,7 @@ public final class JMock2MockeryImplSlowTest extends InstinctTestCase {
                 will(returnValue('2'));
             }
         });
-        expect.that(sequence.charAt(0)).equalTo('2');
+        expect.that(sequence.charAt(0)).isEqualTo('2');
     }
 
     public void testMocksConcreteClasses() {
@@ -54,6 +54,6 @@ public final class JMock2MockeryImplSlowTest extends InstinctTestCase {
                 will(returnValue(false));
             }
         });
-        expect.that(reader.markSupported()).equalTo(false);
+        expect.that(reader.markSupported()).isEqualTo(false);
     }
 }

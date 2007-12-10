@@ -29,6 +29,6 @@ public final class BeforeSpecificationNamingConventionAtomicTest extends Instinc
     }
 
     public void testGetPattern() {
-        expect.that(namingConvention.getPattern()).equalTo("^set[uU]p|^given.*|^before");
+        expect.that(namingConvention.getPattern()).isEqualTo("^set[uU]p|^given.*|^before");
     }
 }

@@ -44,6 +44,6 @@ public final class DirectoryFilterAtomicTest extends InstinctTestCase {
                 one(pathname).isDirectory(); will(returnValue(isADirectory));
             }
         });
-        expect.that(filter.accept(pathname)).equalTo(isADirectory);
+        expect.that(filter.accept(pathname)).isEqualTo(isADirectory);
     }
 }

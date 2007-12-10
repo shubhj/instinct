@@ -54,6 +54,6 @@ public final class MarkedFieldLocatorImplAtomicTest extends InstinctTestCase {
             }
         });
         final Field[] fields = fieldLocator.locateAll(WithRuntimeAnnotations.class, markingScheme);
-        expect.that(fields).equalTo(annotatedFields);
+        expect.that(fields).isEqualTo(annotatedFields);
     }
 }

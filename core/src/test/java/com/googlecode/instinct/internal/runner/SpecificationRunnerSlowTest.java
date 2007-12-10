@@ -111,9 +111,9 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
         Mocker.reset();
         expect.that(result.completedSuccessfully()).isFalse();
         final Object detailedStatus = result.getStatus().getDetailedStatus();
-        expect.that(detailedStatus).instanceOf(SpecificationFailureException.class);
+        expect.that(detailedStatus).isAnInstanceOf(SpecificationFailureException.class);
         final Throwable failureCause = ((Throwable) detailedStatus).getCause();
-        expect.that(failureCause).instanceOf(ExpectationError.class);
+        expect.that(failureCause).isAnInstanceOf(ExpectationError.class);
         expect.that(failureCause.getMessage()).matchesRegex("not all expectations were satisfied");
     }
 

@@ -29,6 +29,6 @@ public final class DummyNamingConventionAtomicTest extends InstinctTestCase {
     }
 
     public void testGetPattern() {
-        expect.that(namingConvention.getPattern()).equalTo("^dummy");
+        expect.that(namingConvention.getPattern()).isEqualTo("^dummy");
     }
 }

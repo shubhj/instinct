@@ -19,31 +19,21 @@ package com.googlecode.instinct.expect.state;
 import org.hamcrest.Matcher;
 
 public interface ObjectChecker<T> {
-    void equalTo(T t);
-
     void isEqualTo(T t);
 
-    void notEqualTo(T t);
-
-    void instanceOf(Class<? extends T> cls);
+    void isNotEqualTo(T t);
 
     void isAnInstanceOf(Class<? extends T> cls);
 
-    void isOfType(Class<? extends T> cls);
-
-    void ofType(Class<? extends T> cls);
-
-    void notInstanceOf(Class<T> cls);
-
     void isNotAnInstanceOf(Class<T> cls);
+
+    void isOfType(Class<? extends T> cls);
 
     void isNotOfType(Class<T> cls);
 
-    void notOfType(Class<T> cls);
+    void isTheSameInstanceAs(T t);
 
-    void sameInstanceAs(T t);
-
-    void notSameInstanceAs(T t);
+    void isNotTheSameInstanceAs(T t);
 
     void isNull();
 
@@ -55,17 +45,17 @@ public interface ObjectChecker<T> {
 
     void matchesAllOf(Iterable<Matcher<? extends T>> iterable);
 
-    void notMatchAllOf(Matcher<T>... matchers);
+    void doesNotMatchAllOf(Matcher<T>... matchers);
 
-    void notMatchAllOf(Iterable<Matcher<? extends T>> iterable);
+    void doesNotMatchAllOf(Iterable<Matcher<? extends T>> iterable);
 
     void matchesAnyOf(Matcher<T>... matchers);
 
     void matchesAnyOf(Iterable<Matcher<? extends T>> iterable);
 
-    void notMatchAnyOf(Matcher<T>... matchers);
+    void doesNotMatchAnyOf(Matcher<T>... matchers);
 
-    void notMatchAnyOf(Iterable<Matcher<? extends T>> iterable);
+    void doesNotMatchAnyOf(Iterable<Matcher<? extends T>> iterable);
 
     void hasBeanProperty(String string);
 

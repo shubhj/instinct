@@ -54,6 +54,6 @@ public final class SignedClassSafeNamingPolicyAtomicTest extends InstinctTestCas
             }
         });
         final String signedClassSafeName = signedClassNamingPolicy.getClassName(prefix, source, key, names);
-        expect.that(signedClassSafeName).equalTo("com.googlecode.instinct.gen." + defaultClassName);
+        expect.that(signedClassSafeName).isEqualTo("com.googlecode.instinct.gen." + defaultClassName);
     }
 }

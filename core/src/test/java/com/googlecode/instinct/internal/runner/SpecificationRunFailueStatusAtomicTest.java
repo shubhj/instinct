@@ -30,6 +30,6 @@ public final class SpecificationRunFailueStatusAtomicTest extends InstinctTestCa
 
     public void testGetDetailedStatusReturnsError() {
         final SpecificationRunStatus runStatus = new SpecificationRunFailureStatus(error);
-        expect.that(runStatus.getDetailedStatus()).sameInstanceAs(error);
+        expect.that(runStatus.getDetailedStatus()).isTheSameInstanceAs(error);
     }
 }

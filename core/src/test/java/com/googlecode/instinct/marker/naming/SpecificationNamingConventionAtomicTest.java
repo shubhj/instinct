@@ -29,6 +29,6 @@ public final class SpecificationNamingConventionAtomicTest extends InstinctTestC
     }
 
     public void testGetPattern() {
-        expect.that(namingConvention.getPattern()).equalTo("^must.*|^should.*");
+        expect.that(namingConvention.getPattern()).isEqualTo("^must.*|^should.*");
     }
 }

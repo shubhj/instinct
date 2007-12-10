@@ -90,22 +90,22 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
             }
         });
         final SpecificationResult result = specificationMethod.run();
-        expect.that(result).sameInstanceAs(specificationResult);
+        expect.that(result).isTheSameInstanceAs(specificationResult);
     }
 
     public void testReturnsUnderlyingSpecificationMethod() {
         final LifecycleMethod returnedSpecMethod = specificationMethod.getSpecificationMethod();
-        expect.that(returnedSpecMethod).sameInstanceAs(specMethod);
+        expect.that(returnedSpecMethod).isTheSameInstanceAs(specMethod);
     }
 
     public void testReturnsUnderlyingBeforeSpecMethods() {
         final Collection<LifecycleMethod> returnedBeforeSpecMethods = specificationMethod.getBeforeSpecificationMethods();
-        expect.that(returnedBeforeSpecMethods).sameInstanceAs(beforeSpecMethods);
+        expect.that(returnedBeforeSpecMethods).isTheSameInstanceAs(beforeSpecMethods);
     }
 
     public void testReturnsUnderlyingAfterSpecMethods() {
         final Collection<LifecycleMethod> returnedAfterSpecMethods = specificationMethod.getAfterSpecificationMethods();
-        expect.that(returnedAfterSpecMethods).sameInstanceAs(afterSpecMethods);
+        expect.that(returnedAfterSpecMethods).isTheSameInstanceAs(afterSpecMethods);
     }
 
     public void testReturnsDeclaringClassOfLifecycleMethod() {
@@ -125,7 +125,7 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
                 will(returnValue(methodName));
             }
         });
-        expect.that(specificationMethod.getName()).equalTo(methodName);
+        expect.that(specificationMethod.getName()).isEqualTo(methodName);
     }
 
     public void testReturnsParameterAnnotationsFromUnderlyingLifecycleMethod() {
@@ -136,7 +136,7 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
                 will(returnValue(fakeAnnotations));
             }
         });
-        expect.that(specificationMethod.getParameterAnnotations()).sameInstanceAs(fakeAnnotations);
+        expect.that(specificationMethod.getParameterAnnotations()).isTheSameInstanceAs(fakeAnnotations);
     }
 
     public void testReturnsNoExpectedExceptionClassForASpecThatIsAnnotated() {
@@ -147,7 +147,7 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
             }
         });
         expect.that(specificationMethod.getExpectedException() == Specification.NoExpectedException.class).isTrue();
-        expect.that(specificationMethod.getExpectedExceptionMessage()).equalTo(Specification.NO_MESSAGE);
+        expect.that(specificationMethod.getExpectedExceptionMessage()).isEqualTo(Specification.NO_MESSAGE);
     }
 
     public void testReturnsExpectedExceptionClassForASpecThatIsAnnotatedAsFailing() {
@@ -158,7 +158,7 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
             }
         });
         expect.that(specificationMethod.getExpectedException() == RuntimeException.class).isTrue();
-        expect.that(specificationMethod.getExpectedExceptionMessage()).equalTo(Specification.NO_MESSAGE);
+        expect.that(specificationMethod.getExpectedExceptionMessage()).isEqualTo(Specification.NO_MESSAGE);
     }
 
     public void testReturnsNoExpectedExceptionClassForASpecThatIsNotAnnotated() {
@@ -169,7 +169,7 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
             }
         });
         expect.that(specificationMethod.getExpectedException() == Specification.NoExpectedException.class).isTrue();
-        expect.that(specificationMethod.getExpectedExceptionMessage()).equalTo(Specification.NO_MESSAGE);
+        expect.that(specificationMethod.getExpectedExceptionMessage()).isEqualTo(Specification.NO_MESSAGE);
     }
 
     public void testReturnsNoExpectedExceptionClassForANonSpecMethod() {
@@ -180,7 +180,7 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
             }
         });
         expect.that(specificationMethod.getExpectedException() == Specification.NoExpectedException.class).isTrue();
-        expect.that(specificationMethod.getExpectedExceptionMessage()).equalTo(Specification.NO_MESSAGE);
+        expect.that(specificationMethod.getExpectedExceptionMessage()).isEqualTo(Specification.NO_MESSAGE);
     }
 
     public void testReturnsExpectedExceptionMessageClassForASpecThatIsAnnotatedAsFailing() {
@@ -191,7 +191,7 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
             }
         });
         expect.that(specificationMethod.getExpectedException() == RuntimeException.class).isTrue();
-        expect.that(specificationMethod.getExpectedExceptionMessage()).equalTo("Arrrgghh...!");
+        expect.that(specificationMethod.getExpectedExceptionMessage()).isEqualTo("Arrrgghh...!");
     }
 
     public void testReturnsPendingReasonForPendingSpecifications() {
@@ -201,8 +201,8 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
                 will(returnValue(pendingSpec));
             }
         });
-        expect.that(specificationMethod.isPending()).equalTo(true);
-        expect.that(specificationMethod.getPendingReason()).equalTo("It's pending, who needs a reason?");
+        expect.that(specificationMethod.isPending()).isEqualTo(true);
+        expect.that(specificationMethod.getPendingReason()).isEqualTo("It's pending, who needs a reason?");
     }
 
     private static final class ContextWithSpecificationsMarkedInDifferentWays {

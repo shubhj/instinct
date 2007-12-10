@@ -25,9 +25,9 @@ import junit.framework.TestSuite;
 public final class ContextTestSuiteSlowTest extends InstinctTestCase {
     public void testRunsTheTestsInASimpleContextClass() {
         final TestSuite testSuite = new ContextTestSuite(ASimpleContext.class);
-        expect.that(testSuite.testCount()).equalTo(1);
+        expect.that(testSuite.testCount()).isEqualTo(1);
         final TestResult result = new TestResult();
         testSuite.runTest(testSuite.testAt(0), result);
-        expect.that(result.failureCount()).equalTo(0);
+        expect.that(result.failureCount()).isEqualTo(0);
     }
 }
