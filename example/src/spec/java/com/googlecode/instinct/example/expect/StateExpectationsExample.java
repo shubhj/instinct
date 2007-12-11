@@ -104,9 +104,9 @@ public final class StateExpectationsExample {
     public void providesMatchersForMakingAssertionsAboutEvents() {
         final Object object = new Object();
         final EventObject myEventObject = new MyEventObject(object);
-        expect.that(myEventObject).eventFrom(MyEventObject.class, object);
-        expect.that(myEventObject).eventFrom(object);
-        expect.that(myEventObject).notEventFrom(new Object());
+        expect.that(myEventObject).isAnEventFrom(MyEventObject.class, object);
+        expect.that(myEventObject).isAnEventFrom(object);
+        expect.that(myEventObject).isNotAnEventFrom(new Object());
     }
 
     private static class MyEventObject extends EventObject {

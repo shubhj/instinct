@@ -21,11 +21,11 @@ import java.util.EventObject;
 
 @Suggest("Remove the wildcard.")
 public interface EventObjectChecker<T extends EventObject> extends ObjectChecker<T> {
-    void eventFrom(Class<? extends EventObject> cls, Object object);
+    void isAnEventFrom(Class<? extends EventObject> cls, Object object);
 
-    void eventFrom(Object object);
+    void isAnEventFrom(Object source);
 
-    void notEventFrom(Class<? extends EventObject> aClass, Object object);
+    void isNotAnEventFrom(Class<? extends EventObject> aClass, Object object);
 
-    void notEventFrom(Object object);
+    void isNotAnEventFrom(Object object);
 }
