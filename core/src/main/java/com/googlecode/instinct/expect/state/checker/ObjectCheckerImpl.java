@@ -91,22 +91,26 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectThat(subject, Matchers.hasToString(matcher));
     }
 
-    public final void matchesAllOf(final Matcher<T>... matchers) {
+    /**
+     * Checks whether the subject matches all of the given <var>matchers</var>.
+     * @param matchers The matchers to check the subject against.
+     */
+    public final void matches(final Matcher<T>... matchers) {
         getAsserter().expectThat(subject, Matchers.allOf(matchers));
     }
 
-    public final void matchesAllOf(final Iterable<Matcher<? extends T>> iterable) {
+    /**
+     * Checks whether the subject matches all of the given <var>matchers</var>.
+     * @param iterable The matchers to check the subject against.
+     */
+    public final void matches(final Iterable<Matcher<? extends T>> iterable) {
         getAsserter().expectThat(subject, Matchers.allOf(iterable));
     }
 
-    public final void doesNotMatchAllOf(final Matcher<T>... matchers) {
-        getAsserter().expectNotThat(subject, Matchers.allOf(matchers));
-    }
-
-    public final void doesNotMatchAllOf(final Iterable<Matcher<? extends T>> iterable) {
-        getAsserter().expectNotThat(subject, Matchers.allOf(iterable));
-    }
-
+    /**
+     * Checks whether the subject matches any of the given <var>matchers</var>.
+     * @param matchers The matchers to check the subject against.
+     */
     public final void matchesAnyOf(final Matcher<T>... matchers) {
         getAsserter().expectThat(subject, Matchers.anyOf(matchers));
     }
@@ -115,12 +119,12 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectThat(subject, Matchers.anyOf(iterable));
     }
 
-    public final void doesNotMatchAnyOf(final Matcher<T>... matchers) {
-        getAsserter().expectNotThat(subject, Matchers.anyOf(matchers));
+    public final void doesNotMatch(final Matcher<T>... matchers) {
+        getAsserter().expectNotThat(subject, Matchers.allOf(matchers));
     }
 
-    public final void doesNotMatchAnyOf(final Iterable<Matcher<? extends T>> iterable) {
-        getAsserter().expectNotThat(subject, Matchers.anyOf(iterable));
+    public final void doesNotMatch(final Iterable<Matcher<? extends T>> iterable) {
+        getAsserter().expectNotThat(subject, Matchers.allOf(iterable));
     }
 
     public final void hasBeanProperty(final String string) {

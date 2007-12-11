@@ -13,14 +13,13 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Clover" level="project" />
-    <orderEntry type="library" name="CGLib" level="project" />
-    <orderEntry type="library" name="JUnit" level="project" />
     <orderEntry type="library" name="Hamcrest" level="project" />
+    <orderEntry type="library" name="CGLib" level="project" />
     <orderEntry type="library" name="JMock" level="project" />
     <orderEntry type="library" name="Objenesis" level="project" />
     <orderEntry type="library" name="Ant" level="project" />
     <orderEntry type="library" name="Clover" level="project" />
+    <orderEntry type="library" name="JUnit" level="project" />
     <orderEntryProperties />
   </component>
   <component name="copyright">
