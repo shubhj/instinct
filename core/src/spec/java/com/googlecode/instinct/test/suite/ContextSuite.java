@@ -22,6 +22,8 @@ import com.googlecode.instinct.defect.defect8.AFixedDefect8WithANamingConvention
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithAnAnnotationMethodLocator;
 import com.googlecode.instinct.internal.locate.AHierarchicalMethodLocatorContext;
 import com.googlecode.instinct.internal.locate.AnAnnotatedMethodLocatorContext;
+import com.googlecode.instinct.api.CommonAPIContext;
+import com.googlecode.instinct.api.AnObjectCheckerContext;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -32,7 +34,9 @@ import org.junit.runners.Suite;
                      AFixedDefect8WithAnAnnotationMethodLocator.class,
                      AFixedDefect8WithANamingConventionLocator.class,
                      AFixedDefect23.class,
-                     AFixedDefect3.class})
+                     AFixedDefect3.class,
+                     CommonAPIContext.class,
+                     AnObjectCheckerContext.class})
 public final class ContextSuite {
     //Suite classs.
 }

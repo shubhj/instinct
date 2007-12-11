@@ -31,7 +31,7 @@ public final class StateExpectationsExample {
         expect.that(this).isOfType(StateExpectationsExample.class);
         expect.that(this).isNotNull();
         // Mixing with standard Hamcrest matchers
-        expect.that("fred").matchesAllOf(Matchers.startsWith("fr"), Matchers.containsString("ed"));
+        expect.that("fred").matches(Matchers.startsWith("fr"), Matchers.containsString("ed"));
         expect.that("fred", Matchers.equalTo("fred"));
     }
 

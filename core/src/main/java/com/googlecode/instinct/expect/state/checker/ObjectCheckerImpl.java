@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
+import static com.googlecode.instinct.expect.state.checker.NoneOf.noneOf;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdgeImpl;
 import com.googlecode.instinct.internal.util.Fix;
@@ -119,12 +120,12 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectThat(subject, Matchers.anyOf(iterable));
     }
 
-    public final void doesNotMatch(final Matcher<T>... matchers) {
-        getAsserter().expectNotThat(subject, Matchers.allOf(matchers));
+    public final void doesNotMatchOn(final Matcher<T>... matchers) {
+        getAsserter().expectThat(subject, noneOf(matchers));
     }
 
-    public final void doesNotMatch(final Iterable<Matcher<? extends T>> iterable) {
-        getAsserter().expectNotThat(subject, Matchers.allOf(iterable));
+    public final void doesNotMatchOn(final Iterable<Matcher<? extends T>> matchers) {
+        getAsserter().expectThat(subject, noneOf(matchers));
     }
 
     public final void hasBeanProperty(final String string) {

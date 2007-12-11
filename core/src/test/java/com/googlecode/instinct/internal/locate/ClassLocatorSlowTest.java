@@ -18,7 +18,7 @@ package com.googlecode.instinct.internal.locate;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.util.JavaClassName;
-import static com.googlecode.instinct.internal.locate.ContextAggregatorSlowTest.EXPECTED_CONTEXTS;
+import static com.googlecode.instinct.internal.locate.ContextFinderSlowTest.EXPECTED_CONTEXTS;
 import com.googlecode.instinct.marker.AnnotationAttribute;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Context;
