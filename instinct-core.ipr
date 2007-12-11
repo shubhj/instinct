@@ -226,6 +226,23 @@
         <inspection_tool class="SuspiciousIndentAfterControlStatement" level="WARNING" enabled="true" />
         <inspection_tool class="TransientFieldNotInitialized" level="WARNING" enabled="true" />
         <inspection_tool class="ThrowableInstanceNeverThrown" level="WARNING" enabled="false" />
+        <inspection_tool class="ComparatorNotSerializable" level="WARNING" enabled="true" />
+        <inspection_tool class="ExternalizableWithSerializationMethods" level="WARNING" enabled="true" />
+        <inspection_tool class="NonSerializableWithSerializationMethods" level="WARNING" enabled="true" />
+        <inspection_tool class="NonSerializableWithSerialVersionUIDField" level="WARNING" enabled="true" />
+        <inspection_tool class="NonSerializableFieldInSerializableClass" level="WARNING" enabled="true">
+          <option name="superClassString" value="java.awt.Component" />
+        </inspection_tool>
+        <inspection_tool class="NonSerializableObjectPassedToObjectStream" level="WARNING" enabled="true" />
+        <inspection_tool class="ReadObjectAndWriteObjectPrivate" level="WARNING" enabled="true" />
+        <inspection_tool class="SerializableWithUnconstructableAncestor" level="WARNING" enabled="true" />
+        <inspection_tool class="SerializableHasSerialVersionUIDField" level="WARNING" enabled="true">
+          <option name="superClassString" value="java.awt.Component" />
+        </inspection_tool>
+        <inspection_tool class="SerializableInnerClassHasSerialVersionUIDField" level="WARNING" enabled="true">
+          <option name="superClassString" value="java.awt.Component" />
+        </inspection_tool>
+        <inspection_tool class="TransientFieldInNonSerializableClass" level="WARNING" enabled="true" />
       </profile>
       <profile version="1.0" is_locked="false">
         <option name="myName" value="Project Default" />
@@ -471,7 +488,7 @@
     <option name="myRelativeRootDirectory" />
   </component>
   <component name="VcsDirectoryMappings">
-    <mapping directory="" vcs="" />
+    <mapping directory="" vcs="svn" />
     <mapping directory="$PROJECT_DIR$/core" vcs="svn" />
     <mapping directory="$PROJECT_DIR$/example" vcs="svn" />
   </component>
