@@ -151,12 +151,12 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
     }
 
     private <T> void expectRunnableItemIsAContextClass(final RunnableItem runnableItem, final Class<T> expectedWrappedClass) {
-        expect.that(runnableItem.getClass()).typeCompatibleWith(ContextClass.class);
-        expect.that(((ContextClass) runnableItem).getType()).typeCompatibleWith(expectedWrappedClass);
+        expect.that(runnableItem.getClass()).isTypeCompatibleWith(ContextClass.class);
+        expect.that(((ContextClass) runnableItem).getType()).isTypeCompatibleWith(expectedWrappedClass);
     }
 
     private void expectRunnableItemIsASpecificationMethod(final RunnableItem runnableItem, final String specificationMethod) {
-        expect.that(runnableItem.getClass()).typeCompatibleWith(SpecificationMethod.class);
+        expect.that(runnableItem.getClass()).isTypeCompatibleWith(SpecificationMethod.class);
         expect.that(((SpecificationMethod) runnableItem).getName()).isEqualTo(specificationMethod);
     }
 }

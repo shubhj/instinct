@@ -37,8 +37,8 @@ public final class StateExpectationsExample {
 
     @Specification
     public void providesMatchersForMakingAssertionsAboutClasses() {
-        expect.that(String.class).typeCompatibleWith(Comparable.class);
-        expect.that(Comparable.class).notTypeCompatibleWith(String.class);
+        expect.that(String.class).isTypeCompatibleWith(Comparable.class);
+        expect.that(Comparable.class).isNotTypeCompatibleWith(String.class);
     }
 
     @Specification

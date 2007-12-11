@@ -25,11 +25,11 @@ public class ClassCheckerImpl<T> extends ObjectCheckerImpl<Class<T>> implements 
         super(subject);
     }
 
-    public final <U> void typeCompatibleWith(final Class<U> cls) {
+    public final <U> void isTypeCompatibleWith(final Class<U> cls) {
         getAsserter().expectThat(subject, Matchers.typeCompatibleWith(cls));
     }
 
-    public final <U> void notTypeCompatibleWith(final Class<U> cls) {
+    public final <U> void isNotTypeCompatibleWith(final Class<U> cls) {
         getAsserter().expectNotThat(subject, Matchers.typeCompatibleWith(cls));
     }
 }

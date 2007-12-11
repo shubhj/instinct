@@ -24,7 +24,7 @@ public interface NodeChecker<T extends Node> extends ObjectChecker<T> {
 
     void hasXPath(String path);
 
-    void notHaveXPath(String path, Matcher<String> matcher);
+    void doesNotHaveXPath(String path, Matcher<String> matcher);
 
-    void notHaveXPath(String path);
+    void doesNotHaveXPath(String path);
 }

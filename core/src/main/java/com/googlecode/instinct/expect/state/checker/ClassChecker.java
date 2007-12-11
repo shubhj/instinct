@@ -17,7 +17,7 @@
 package com.googlecode.instinct.expect.state.checker;
 
 public interface ClassChecker<T> extends ObjectChecker<Class<T>> {
-    <U> void typeCompatibleWith(Class<U> cls);
+    <U> void isTypeCompatibleWith(Class<U> cls);
 
-    <U> void notTypeCompatibleWith(Class<U> cls);
+    <U> void isNotTypeCompatibleWith(Class<U> cls);
 }

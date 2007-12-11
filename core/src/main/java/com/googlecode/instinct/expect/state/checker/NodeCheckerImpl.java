@@ -35,11 +35,11 @@ public class NodeCheckerImpl<T extends Node> extends ObjectCheckerImpl<T> implem
         getAsserter().expectThat(subject, Matchers.hasXPath(path));
     }
 
-    public final void notHaveXPath(final String path, final Matcher<String> matcher) {
+    public final void doesNotHaveXPath(final String path, final Matcher<String> matcher) {
         getAsserter().expectNotThat(subject, Matchers.hasXPath(path, matcher));
     }
 
-    public final void notHaveXPath(final String path) {
+    public final void doesNotHaveXPath(final String path) {
         getAsserter().expectNotThat(subject, Matchers.hasXPath(path));
     }
 }

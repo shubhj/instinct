@@ -26,6 +26,6 @@ public class AShoppingCartImplementation {
 
     @Specification
     public void shouldImplementTheShoppingCartInterface() {
-        expect.that(ShoppingCartImpl.class).typeCompatibleWith(ShoppingCart.class);
+        expect.that(ShoppingCartImpl.class).isTypeCompatibleWith(ShoppingCart.class);
     }
 }
