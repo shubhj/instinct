@@ -17,158 +17,131 @@
 package com.googlecode.instinct.example.shoppingcart;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.expect.behaviour.Mocker;
+import static com.googlecode.instinct.expect.behaviour.Mocker.reset;
+import static com.googlecode.instinct.expect.behaviour.Mocker.verify;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.Subject;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
 public final class AShoppingCartWithItemsInIt {
-
-    private ShoppingCart cart;
-    private Item mockItem1;
-    private Item mockItem2;
-    private Item mockItem3;
+    @Subject private ShoppingCart cart;
+    @Mock private Item initialItem1;
+    @Mock private Item initialItem2;
+    @Mock private Item initialItem3;
+    @Dummy private Item addedItem1;
+    @Dummy private Item addedItem2;
 
     @BeforeSpecification
-    public void setup() {
+    public void addInitialItemsToCart() {
+        reset();
         cart = new ShoppingCartImpl();
-        mockItem1 = createMockItem();
-        mockItem2 = createMockItem();
-        mockItem3 = createMockItem();
+        cart.addItem(initialItem1);
+        cart.addItem(initialItem2);
+        cart.addItem(initialItem3);
+    }
+
+    @AfterSpecification
+    public void after() {
+        verify();
     }
 
     @Specification
     public void mustNotBeEmpty() {
-        createCartWithThreeItems();
         expect.that(cart.isEmpty()).isFalse();
     }
 
     @Specification
     public void canHaveAnItemAddedToIt() {
-        createCartWithThreeItems();
-        final Item item = createMockItem();
-
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).isEqualTo(3);
-        expect.that(cart.contains(mockItem1)).isTrue();
-        expect.that(cart.contains(mockItem2)).isTrue();
-        expect.that(cart.contains(mockItem3)).isTrue();
-        expect.that(cart.contains(item)).isFalse();
-
-        cart.addItem(item);
-
+        expect.that(cart.contains(initialItem1)).isTrue();
+        expect.that(cart.contains(initialItem2)).isTrue();
+        expect.that(cart.contains(initialItem3)).isTrue();
+        expect.that(cart.contains(addedItem1)).isFalse();
+        cart.addItem(addedItem1);
         expect.that(cart.size()).isEqualTo(4);
-        expect.that(cart.contains(item)).isTrue();
-        expect.that(cart.contains(mockItem1)).isTrue();
-        expect.that(cart.contains(mockItem2)).isTrue();
-        expect.that(cart.contains(mockItem3)).isTrue();
+        expect.that(cart.contains(addedItem1)).isTrue();
+        expect.that(cart.contains(initialItem1)).isTrue();
+        expect.that(cart.contains(initialItem2)).isTrue();
+        expect.that(cart.contains(initialItem3)).isTrue();
     }
 
     @Specification
     public void canHaveMultipleItemsAddedToIt() {
-        createCartWithThreeItems();
-        final Item item1 = createMockItem();
-        final Item item2 = createMockItem();
-
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).isEqualTo(3);
-        expect.that(cart.contains(mockItem1)).isTrue();
-        expect.that(cart.contains(mockItem2)).isTrue();
-        expect.that(cart.contains(mockItem3)).isTrue();
-
-        cart.addItem(item1);
-
+        expect.that(cart.contains(initialItem1)).isTrue();
+        expect.that(cart.contains(initialItem2)).isTrue();
+        expect.that(cart.contains(initialItem3)).isTrue();
+        cart.addItem(addedItem1);
         expect.that(cart.size()).isEqualTo(4);
-        expect.that(cart.contains(item1));
-        expect.that(cart.contains(mockItem1)).isTrue();
-        expect.that(cart.contains(mockItem2)).isTrue();
-        expect.that(cart.contains(mockItem3)).isTrue();
-
-        cart.addItem(item2);
-
+        expect.that(cart.contains(addedItem1));
+        expect.that(cart.contains(initialItem1)).isTrue();
+        expect.that(cart.contains(initialItem2)).isTrue();
+        expect.that(cart.contains(initialItem3)).isTrue();
+        cart.addItem(addedItem2);
         expect.that(cart.size()).isEqualTo(5);
-        expect.that(cart.contains(item2)).isTrue();
-        expect.that(cart.contains(item1)).isTrue();
-        expect.that(cart.contains(mockItem1)).isTrue();
-        expect.that(cart.contains(mockItem2)).isTrue();
-        expect.that(cart.contains(mockItem3)).isTrue();
+        expect.that(cart.contains(addedItem1)).isTrue();
+        expect.that(cart.contains(addedItem2)).isTrue();
+        expect.that(cart.contains(initialItem1)).isTrue();
+        expect.that(cart.contains(initialItem2)).isTrue();
+        expect.that(cart.contains(initialItem3)).isTrue();
     }
 
     @Specification
     public void canHaveAnExistingItemRemovedFromIt() {
-        createCartWithThreeItems();
-
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).isEqualTo(3);
-        expect.that(cart.contains(mockItem1)).isTrue();
-        expect.that(cart.contains(mockItem2)).isTrue();
-        expect.that(cart.contains(mockItem3)).isTrue();
-
-        cart.remove(mockItem1);
-
+        expect.that(cart.contains(initialItem1)).isTrue();
+        expect.that(cart.contains(initialItem2)).isTrue();
+        expect.that(cart.contains(initialItem3)).isTrue();
+        cart.remove(initialItem1);
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).isEqualTo(2);
-        expect.that(cart.contains(mockItem1)).isFalse();
-        expect.that(cart.contains(mockItem2)).isTrue();
-        expect.that(cart.contains(mockItem3)).isTrue();
+        expect.that(cart.contains(initialItem1)).isFalse();
+        expect.that(cart.contains(initialItem2)).isTrue();
+        expect.that(cart.contains(initialItem3)).isTrue();
     }
 
     @Specification
     public void canHaveMultipleExistingItemsRemovedFromIt() {
-        createCartWithThreeItems();
-
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).isEqualTo(3);
-        expect.that(cart.contains(mockItem1)).isTrue();
-        expect.that(cart.contains(mockItem2)).isTrue();
-        expect.that(cart.contains(mockItem3)).isTrue();
-
-        cart.remove(mockItem2);
-
+        expect.that(cart.contains(initialItem1)).isTrue();
+        expect.that(cart.contains(initialItem2)).isTrue();
+        expect.that(cart.contains(initialItem3)).isTrue();
+        cart.remove(initialItem2);
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).isEqualTo(2);
-        expect.that(cart.contains(mockItem2)).isFalse();
-        expect.that(cart.contains(mockItem1)).isTrue();
-        expect.that(cart.contains(mockItem3)).isTrue();
-
-        cart.remove(mockItem3);
-
+        expect.that(cart.contains(initialItem2)).isFalse();
+        expect.that(cart.contains(initialItem1)).isTrue();
+        expect.that(cart.contains(initialItem3)).isTrue();
+        cart.remove(initialItem3);
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).isEqualTo(1);
-        expect.that(cart.contains(mockItem2)).isFalse();
-        expect.that(cart.contains(mockItem3)).isFalse();
-        expect.that(cart.contains(mockItem1)).isTrue();
+        expect.that(cart.contains(initialItem2)).isFalse();
+        expect.that(cart.contains(initialItem3)).isFalse();
+        expect.that(cart.contains(initialItem1)).isTrue();
     }
 
     @Specification
     public void shouldNotRemoveAnItemThatIsNotInIt() {
-        createCartWithThreeItems();
-        final Item item = createMockItem();
-
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).isEqualTo(3);
-        expect.that(cart.contains(mockItem1)).isTrue();
-        expect.that(cart.contains(mockItem2)).isTrue();
-        expect.that(cart.contains(mockItem3)).isTrue();
-
-        cart.remove(item);
-
+        expect.that(cart.contains(initialItem1)).isTrue();
+        expect.that(cart.contains(initialItem2)).isTrue();
+        expect.that(cart.contains(initialItem3)).isTrue();
+        cart.remove(addedItem1);
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).isEqualTo(3);
-        expect.that(cart.contains(mockItem1)).isTrue();
-        expect.that(cart.contains(mockItem2)).isTrue();
-        expect.that(cart.contains(mockItem3)).isTrue();
-    }
-
-    private void createCartWithThreeItems() {
-        cart.addItem(mockItem1);
-        cart.addItem(mockItem2);
-        cart.addItem(mockItem3);
-    }
-
-    private Item createMockItem() {
-        return Mocker.mock(Item.class);
+        expect.that(cart.contains(initialItem1)).isTrue();
+        expect.that(cart.contains(initialItem2)).isTrue();
+        expect.that(cart.contains(initialItem3)).isTrue();
     }
 }

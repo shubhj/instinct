@@ -22,10 +22,11 @@ import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.internal.runner.NotAValidTheoryMethodException;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
-public class DollarMultiplication {
+public final class DollarMultiplication {
     private static final int INITIAL_AMOUNT = 10;
     private Dollar dollar;
 
@@ -34,7 +35,7 @@ public class DollarMultiplication {
         dollar = new DollarImpl(INITIAL_AMOUNT);
     }
 
-    @Specification
+    @Specification(expectedException = NotAValidTheoryMethodException.class)
     public void mustBeTheInverseOfDivide(@ForAll final int x) {
         expect.that(dollar.multiplyBy(x).divideBy(x).getAmount()).isEqualTo(dollar.getAmount());
     }

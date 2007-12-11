@@ -17,25 +17,31 @@
 package com.googlecode.instinct.example.shoppingcart;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.expect.behaviour.Mocker;
+import static com.googlecode.instinct.expect.behaviour.Mocker.reset;
+import static com.googlecode.instinct.expect.behaviour.Mocker.verify;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
+import com.googlecode.instinct.marker.annotate.BeforeSpecification;
+import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
 public final class AnEmptyShoppingCart {
     @Subject private ShoppingCart cart;
-    @Mock private Item mockItem1;
-    @Mock private Item mockItem2;
+    @Mock private Item item1;
+    @Mock private Item item2;
 
     @BeforeSpecification
-    public void setup() {
+    public void addInitialItemsToCart() {
+        reset();
         cart = new ShoppingCartImpl();
-        mockItem1 = createMockItem();
-        mockItem2 = createMockItem();
+    }
+
+    @AfterSpecification
+    public void after() {
+        verify();
     }
 
     @Specification
@@ -46,35 +52,30 @@ public final class AnEmptyShoppingCart {
     @Specification
     public void canHaveAnItemAddedToIt() {
         expect.that(cart.isEmpty()).isTrue();
-        cart.addItem(mockItem1);
+        cart.addItem(item1);
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).isEqualTo(1);
-        expect.that(cart.contains(mockItem1)).isTrue();
+        expect.that(cart.contains(item1)).isTrue();
     }
 
     @Specification
     public void canHaveMultipleItemsAddedToIt() {
         expect.that(cart.isEmpty()).isTrue();
-        cart.addItem(mockItem1);
+        cart.addItem(item1);
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).isEqualTo(1);
-        expect.that(cart.contains(mockItem1)).isTrue();
-        cart.addItem(mockItem2);
+        expect.that(cart.contains(item1)).isTrue();
+        cart.addItem(item2);
         expect.that(cart.isEmpty()).isFalse();
         expect.that(cart.size()).isEqualTo(2);
-        expect.that(cart.contains(mockItem2)).isTrue();
-        expect.that(cart.contains(mockItem1)).isTrue();
+        expect.that(cart.contains(item2)).isTrue();
+        expect.that(cart.contains(item1)).isTrue();
     }
 
     @Specification
     public void doesNotFailWhenAnItemIsRemovedFromIt() {
-        final Item item = createMockItem();
         expect.that(cart.isEmpty()).isTrue();
-        cart.remove(item);
+        cart.remove(item1);
         expect.that(cart.isEmpty()).isTrue();
-    }
-
-    private Item createMockItem() {
-        return Mocker.mock(Item.class);
     }
 }

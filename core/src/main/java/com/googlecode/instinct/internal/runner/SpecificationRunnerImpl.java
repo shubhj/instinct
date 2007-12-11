@@ -23,6 +23,8 @@ import com.googlecode.instinct.internal.core.SpecificationMethod;
 import static com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus.SPECIFICATION_SUCCESS;
 import com.googlecode.instinct.internal.util.Clock;
 import com.googlecode.instinct.internal.util.ClockImpl;
+import com.googlecode.instinct.internal.util.ExceptionFinder;
+import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
@@ -44,10 +46,11 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
     private final ActorAutoWirer actorAutoWirer = new ActorAutoWirerImpl();
     private final Clock clock = new ClockImpl();
-    private MethodInvoker methodInvoker = new MethodInvokerImpl();
-    private LifeCycleMethodValidator methodValidator = new LifeCycleMethodValidatorImpl();
+    private final ExceptionFinder exceptionFinder = new ExceptionFinderImpl();
+    private final MethodInvoker methodInvoker = new MethodInvokerImpl();
+    private final LifeCycleMethodValidator methodValidator = new LifeCycleMethodValidatorImpl();
     //    private final MockVerifier mockVerifier = new MockVerifierImpl();
-    private MethodInvokerFactory methodInvokerFactory = new MethodInvokerFactoryImpl();
+    private final MethodInvokerFactory methodInvokerFactory = new MethodInvokerFactoryImpl();
 
     public void addSpecificationListener(final SpecificationListener specificationListener) {
         checkNotNull(specificationListener);
@@ -93,9 +96,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
                 final SpecificationRunStatus status = new SpecificationRunFailureStatus(wrapCommonExceptions(exceptionThrown));
                 return createSpecResult(specificationMethod, status, startTime);
             } else {
-//                System.out.println("exceptionThrown = " + exceptionThrown);
-//                System.out.println("exceptionThrown.getCause() = " + exceptionThrown.getCause());
-                final Throwable exceptionThrownBySpec = exceptionThrown.getCause().getCause();
+                final Throwable exceptionThrownBySpec = exceptionFinder.getRootCause(exceptionThrown);
                 return processExpectedFailure(specificationMethod, startTime, expectedException, exceptionThrownBySpec);
             }
         }
@@ -112,16 +113,16 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
                 if (expectedMessage.equals(thrownException.getMessage())) {
                     return createSpecResult(specificationMethod, SPECIFICATION_SUCCESS, startTime);
                 } else {
-                    final String message = "Expected exception message was incorrect\nExpected: "
-                            + expectedMessage + "\n     got: " + thrownException.getMessage();
+                    final String message =
+                            "Expected exception message was incorrect\nExpected: " + expectedMessage + "\n     got: " + thrownException.getMessage();
                     final Throwable failure = new AssertionError(message);
                     final SpecificationRunStatus status = new SpecificationRunFailureStatus(failure);
                     return createSpecResult(specificationMethod, status, startTime);
                 }
             }
         } else {
-            final String message = "Expected exception was not thrown\nExpected: "
-                    + expectedExceptionClass + "\n     got: " + thrownException.getClass();
+            final String message =
+                    "Expected exception was not thrown\nExpected: " + expectedExceptionClass + "\n     got: " + thrownException.getClass();
             final Throwable failure = new SpecificationFailureException(message, thrownException);
             final SpecificationRunStatus status = new SpecificationRunFailureStatus(failure);
             return createSpecResult(specificationMethod, status, startTime);
@@ -130,11 +131,11 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
 
     @Fix({"Test the wrapping of jMock exceptions here."})
     @Suggest({"Wrap 'unexpected ...' jMock cardinality exception if you a mock is used in a test without expectations being set on it",
-            "Call this thing an ExceptionSanitiser"})
+            "Call this thing an ExceptionSanitiser", "May help fix Paul's bug: defect-11"})
     private Throwable wrapCommonExceptions(final Throwable throwable) {
         if (throwable instanceof ExpectationError) {
-            final String message = "Unexpected invocation. You may need to wrap the code in your new Expections(){{}} block with cardinality "
-                    + "constraints, one(), atLeast(), etc.\n";
+            final String message = "Unexpected invocation. You may need to wrap the code in your new Expections(){{}} block with cardinality " +
+                    "constraints, one(), atLeast(), etc.\n";
             return new SpecificationFailureException(message + throwable.toString(), throwable);
         }
         return throwable;
@@ -177,7 +178,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         }
     }
 
-    private void runMethods(final Object instance, final Collection<LifecycleMethod> methods) {
+    private void runMethods(final Object instance, final Iterable<LifecycleMethod> methods) {
         for (final LifecycleMethod method : methods) {
             runMethod(instance, method);
         }

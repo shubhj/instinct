@@ -4,8 +4,8 @@ import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
-import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import org.junit.runner.RunWith;
 
@@ -13,8 +13,8 @@ import org.junit.runner.RunWith;
 public final class ANonEmptyStack {
     private static final int STACK_SIZE = 10;
     @Subject private Stack<Integer> stack;
-    @Dummy private Integer number1;
-    @Dummy private Integer number2;
+    @Stub private Integer number1;
+    @Stub private Integer number2;
 
     @BeforeSpecification
     void fillUpStack() {
