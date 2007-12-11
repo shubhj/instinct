@@ -120,11 +120,11 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectThat(subject, Matchers.anyOf(iterable));
     }
 
-    public final void doesNotMatchOn(final Matcher<T>... matchers) {
+    public final void doesNotMatchOnAllOf(final Matcher<T>... matchers) {
         getAsserter().expectThat(subject, noneOf(matchers));
     }
 
-    public final void doesNotMatchOn(final Iterable<Matcher<? extends T>> matchers) {
+    public final void doesNotMatchOnAllOf(final Iterable<Matcher<? extends T>> matchers) {
         getAsserter().expectThat(subject, noneOf(matchers));
     }
 

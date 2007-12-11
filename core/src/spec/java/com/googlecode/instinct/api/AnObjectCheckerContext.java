@@ -8,6 +8,7 @@ import com.googlecode.instinct.marker.annotate.Specification;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.hamcrest.Matcher;
+import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import org.hamcrest.core.IsNull;
 import static org.hamcrest.core.IsSame.sameInstance;
@@ -32,9 +33,11 @@ import org.junit.runner.RunWith;
 @RunWith(InstinctRunner.class)
 @Context
 public class AnObjectCheckerContext {
+    private static final String GREETING = "greeting";
+    private static final String BYTES = "bytes";
 
     @Specification
-    public void shouldImplementDoesNotMatchOn() {
+    public void shouldImplementDoesNotMatchOnAllOf() {
         final int one = 1;
         final ObjectChecker<Integer> objectChecker = new ObjectCheckerImpl<Integer>(one);
 
@@ -43,7 +46,61 @@ public class AnObjectCheckerContext {
         matcherList.add(IsNull.<Integer>nullValue());
 
         objectChecker.matches(equalTo(1), sameInstance(one));
-        objectChecker.doesNotMatchOn(equalTo(2), equalTo(3));
-        objectChecker.doesNotMatchOn(matcherList);
+        objectChecker.doesNotMatchOnAllOf(equalTo(2), equalTo(3));
+        objectChecker.doesNotMatchOnAllOf(matcherList);
+    }
+
+    @Specification
+    public void shouldImplementHasBeanProperty() {
+        final String greeting = GREETING;
+        final ObjectChecker<String> objectChecker = new ObjectCheckerImpl<String>(greeting);
+
+        objectChecker.hasBeanProperty(BYTES);
+        final byte[] expectedBytes = greeting.getBytes();
+        objectChecker.hasBeanProperty(BYTES, equalTo(expectedBytes));
+    }
+
+    @Specification
+    public void shouldImplementHasToString() {
+        final String greeting = GREETING;
+        final ObjectChecker<String> objectChecker = new ObjectCheckerImpl<String>(greeting);
+
+        objectChecker.hasToString(equalTo(GREETING));
+    }
+
+    @Specification
+    public void shouldImplementTypeChecking() {
+        final String greeting = GREETING;
+        final String goodbye = "au revoir";
+        final ObjectChecker<String> objectChecker = new ObjectCheckerImpl<String>(greeting);
+
+        objectChecker.isAnInstanceOf(String.class);
+        objectChecker.isOfType(String.class);
+        objectChecker.isNotTheSameInstanceAs(goodbye);
+    }
+
+    @Specification
+    public void shouldImplementEquality() {
+        final String greeting = GREETING;
+        final ObjectChecker<String> objectChecker = new ObjectCheckerImpl<String>(greeting);
+
+        objectChecker.isNotNull();
+        objectChecker.isEqualTo(GREETING);
+        objectChecker.isNotEqualTo("foobar");
+    }
+
+    @Specification
+    public void shouldImplementMatches() {
+        final double doubleValue = 2.5d;
+        final ObjectChecker<Double> objectChecker = new ObjectCheckerImpl<Double>(doubleValue);
+
+        final Collection<Matcher<? extends Double>> matcherList = new ArrayList<Matcher<? extends Double>>();
+        matcherList.add(IsNull.<Double>notNullValue());
+        matcherList.add(is(doubleValue));
+
+        objectChecker.matches(equalTo(2.5d), IsNull.<Double>notNullValue());
+        objectChecker.matches(matcherList);
+
+        objectChecker.matchesAnyOf(equalTo(2.4d), equalTo(2.5d), IsNull.<Double>nullValue(), IsNull.<Double>notNullValue());
     }
 }

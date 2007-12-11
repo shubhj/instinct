@@ -45,9 +45,9 @@ public interface ObjectChecker<T> {
 
     void matches(Iterable<Matcher<? extends T>> iterable);
 
-    void doesNotMatchOn(Matcher<T>... matchers);
+    void doesNotMatchOnAllOf(Matcher<T>... matchers);
 
-    void doesNotMatchOn(Iterable<Matcher<? extends T>> iterable);
+    void doesNotMatchOnAllOf(Iterable<Matcher<? extends T>> iterable);
 
     void matchesAnyOf(Matcher<T>... matchers);
 
