@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.expect.state;
+package com.googlecode.instinct.expect.state.checker;
 
-import java.io.File;
-import java.io.IOException;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;
+import java.io.File;
+import java.io.IOException;
 
 public final class FileCheckerImplAtomicTest extends InstinctTestCase {
     private FileChecker checkerWithExistingFile;

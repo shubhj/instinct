@@ -16,6 +16,32 @@
 
 package com.googlecode.instinct.expect.state;
 
+import com.googlecode.instinct.expect.state.checker.ArrayChecker;
+import com.googlecode.instinct.expect.state.checker.ArrayCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.BooleanChecker;
+import com.googlecode.instinct.expect.state.checker.BooleanCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.ClassChecker;
+import com.googlecode.instinct.expect.state.checker.ClassCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.CollectionChecker;
+import com.googlecode.instinct.expect.state.checker.CollectionCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.ComparableChecker;
+import com.googlecode.instinct.expect.state.checker.ComparableCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.DoubleChecker;
+import com.googlecode.instinct.expect.state.checker.DoubleCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.EventObjectChecker;
+import com.googlecode.instinct.expect.state.checker.EventObjectCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.FileChecker;
+import com.googlecode.instinct.expect.state.checker.FileCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.IterableChecker;
+import com.googlecode.instinct.expect.state.checker.IterableCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.MapChecker;
+import com.googlecode.instinct.expect.state.checker.MapCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.NodeChecker;
+import com.googlecode.instinct.expect.state.checker.NodeCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.ObjectChecker;
+import com.googlecode.instinct.expect.state.checker.ObjectCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.StringChecker;
+import com.googlecode.instinct.expect.state.checker.StringCheckerImpl;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdgeImpl;
 import com.googlecode.instinct.internal.util.ObjectFactory;

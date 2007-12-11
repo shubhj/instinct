@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.expect.state;
+package com.googlecode.instinct.expect.state.checker;
 
 import org.hamcrest.Matcher;
 

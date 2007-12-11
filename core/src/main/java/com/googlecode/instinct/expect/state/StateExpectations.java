@@ -16,6 +16,19 @@
 
 package com.googlecode.instinct.expect.state;
 
+import com.googlecode.instinct.expect.state.checker.ArrayChecker;
+import com.googlecode.instinct.expect.state.checker.BooleanChecker;
+import com.googlecode.instinct.expect.state.checker.ClassChecker;
+import com.googlecode.instinct.expect.state.checker.CollectionChecker;
+import com.googlecode.instinct.expect.state.checker.ComparableChecker;
+import com.googlecode.instinct.expect.state.checker.DoubleChecker;
+import com.googlecode.instinct.expect.state.checker.EventObjectChecker;
+import com.googlecode.instinct.expect.state.checker.FileChecker;
+import com.googlecode.instinct.expect.state.checker.IterableChecker;
+import com.googlecode.instinct.expect.state.checker.MapChecker;
+import com.googlecode.instinct.expect.state.checker.NodeChecker;
+import com.googlecode.instinct.expect.state.checker.ObjectChecker;
+import com.googlecode.instinct.expect.state.checker.StringChecker;
 import com.googlecode.instinct.internal.util.Fix;
 import java.io.File;
 import java.util.Collection;

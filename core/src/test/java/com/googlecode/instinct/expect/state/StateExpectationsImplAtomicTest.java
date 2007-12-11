@@ -16,22 +16,42 @@
 
 package com.googlecode.instinct.expect.state;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EventObject;
-import java.util.HashMap;
-import java.util.Map;
 import static com.googlecode.instinct.expect.Expect.expect;
 import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
+import com.googlecode.instinct.expect.state.checker.ArrayChecker;
+import com.googlecode.instinct.expect.state.checker.ArrayCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.ClassChecker;
+import com.googlecode.instinct.expect.state.checker.ClassCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.CollectionChecker;
+import com.googlecode.instinct.expect.state.checker.CollectionCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.ComparableChecker;
+import com.googlecode.instinct.expect.state.checker.ComparableCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.DoubleChecker;
+import com.googlecode.instinct.expect.state.checker.DoubleCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.EventObjectChecker;
+import com.googlecode.instinct.expect.state.checker.EventObjectCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.IterableChecker;
+import com.googlecode.instinct.expect.state.checker.IterableCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.MapChecker;
+import com.googlecode.instinct.expect.state.checker.MapCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.ObjectChecker;
+import com.googlecode.instinct.expect.state.checker.ObjectCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.StringChecker;
+import com.googlecode.instinct.expect.state.checker.StringCheckerImpl;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
 import com.googlecode.instinct.internal.util.ObjectFactory;
+import static com.googlecode.instinct.internal.util.Reflector.insertFieldValue;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
-import static com.googlecode.instinct.internal.util.Reflector.insertFieldValue;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.EventObject;
+import java.util.HashMap;
+import java.util.Map;
 import org.hamcrest.Matcher;
 import org.jmock.Expectations;
 

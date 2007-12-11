@@ -14,10 +14,17 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.expect.state;
+package com.googlecode.instinct.expect.state.checker;
 
-public interface SizeChecker {
-    void isOfSize(int size);
-    void isEmpty();
-    void isNotEmpty();
+import org.hamcrest.Matcher;
+
+public interface ContainerChecker<T> {
+
+    void containsItem(Matcher<T> matcher);
+
+    void containsItem(T item);
+
+    void doesNotContainItem(Matcher<T> matcher);
+
+    void doesNotContainItem(T item);
 }

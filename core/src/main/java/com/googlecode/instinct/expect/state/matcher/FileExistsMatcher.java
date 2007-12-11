@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Workingmouse
+ * Copyright 2006-2007 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,27 +14,29 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.test.matcher;
+package com.googlecode.instinct.expect.state.matcher;
 
-import com.googlecode.instinct.expect.state.matcher.RegularExpressionMatcher;
-import java.lang.reflect.Method;
+import java.io.File;
 import org.hamcrest.Description;
+import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-public final class MethodNameMatcher extends TypeSafeMatcher<Method> {
-    private Matcher<String> regexMatcher;
-
-    public MethodNameMatcher(final String methodNameRegex) {
-        regexMatcher = RegularExpressionMatcher.matchesRegex(methodNameRegex);
+public final class FileExistsMatcher extends TypeSafeMatcher<File> {
+    private FileExistsMatcher() {
     }
 
     @Override
-    public boolean matchesSafely(final Method item) {
-        return regexMatcher.matches(item);
+    public boolean matchesSafely(final File item) {
+        return item.exists();
     }
 
     public void describeTo(final Description description) {
-        regexMatcher.describeTo(description);
+        description.appendText("exists");
+    }
+
+    @Factory
+    public static Matcher<File> exists() {
+        return new FileExistsMatcher();
     }
 }

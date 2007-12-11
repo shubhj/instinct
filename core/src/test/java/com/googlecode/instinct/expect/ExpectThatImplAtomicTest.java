@@ -19,7 +19,7 @@ package com.googlecode.instinct.expect;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.expect.behaviour.BehaviourExpectations;
 import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
-import com.googlecode.instinct.expect.state.ObjectChecker;
+import com.googlecode.instinct.expect.state.checker.ObjectChecker;
 import com.googlecode.instinct.expect.state.StateExpectations;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.test.InstinctTestCase;

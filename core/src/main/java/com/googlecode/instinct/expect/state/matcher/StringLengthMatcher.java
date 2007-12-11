@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Workingmouse
+ * Copyright 2006-2007 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,27 +14,32 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.test.matcher;
+package com.googlecode.instinct.expect.state.matcher;
 
-import com.googlecode.instinct.expect.state.matcher.RegularExpressionMatcher;
-import java.lang.reflect.Method;
 import org.hamcrest.Description;
+import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-public final class MethodNameMatcher extends TypeSafeMatcher<Method> {
-    private Matcher<String> regexMatcher;
+public final class StringLengthMatcher extends TypeSafeMatcher<String> {
+    private final int expectedLength;
 
-    public MethodNameMatcher(final String methodNameRegex) {
-        regexMatcher = RegularExpressionMatcher.matchesRegex(methodNameRegex);
+    private StringLengthMatcher(final int expectedLength) {
+        this.expectedLength = expectedLength;
     }
 
     @Override
-    public boolean matchesSafely(final Method item) {
-        return regexMatcher.matches(item);
+    public boolean matchesSafely(final String item) {
+        return item.length() == expectedLength;
     }
 
     public void describeTo(final Description description) {
-        regexMatcher.describeTo(description);
+        description.appendText("a string of length ")
+                .appendValue(expectedLength);
+    }
+
+    @Factory
+    public static Matcher<String> hasLength(final int expectedLength) {
+        return new StringLengthMatcher(expectedLength);
     }
 }

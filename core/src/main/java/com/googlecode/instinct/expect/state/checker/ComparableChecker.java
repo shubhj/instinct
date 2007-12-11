@@ -14,17 +14,14 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.expect.state;
+package com.googlecode.instinct.expect.state.checker;
 
-import org.hamcrest.Matcher;
+public interface ComparableChecker<T extends Comparable<T>> extends ObjectChecker<T> {
+    void isGreaterThan(T comparable);
 
-public interface ContainerChecker<T> {
+    void isGreaterThanOrEqualTo(T comparable);
 
-    void containsItem(Matcher<T> matcher);
+    void isLessThan(T comparable);
 
-    void containsItem(T item);
-
-    void doesNotContainItem(Matcher<T> matcher);
-
-    void doesNotContainItem(T item);
+    void isLessThanOrEqualTo(T comparable);
 }
