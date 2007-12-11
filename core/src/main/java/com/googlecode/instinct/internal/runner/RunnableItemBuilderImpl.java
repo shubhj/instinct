@@ -20,8 +20,8 @@ import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.LifecycleMethodImpl;
 import com.googlecode.instinct.internal.core.RunnableItem;
-import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethodImpl;
+import com.googlecode.instinct.internal.core.AbstractContextClass;
 import com.googlecode.instinct.internal.edge.EdgeException;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
@@ -29,9 +29,9 @@ import com.googlecode.instinct.internal.util.ClassInstantiator;
 import com.googlecode.instinct.internal.util.ClassInstantiatorImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.lang.reflect.Method;
+import static java.lang.reflect.Modifier.isAbstract;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 public final class RunnableItemBuilderImpl implements RunnableItemBuilder {
     private ClassInstantiator classInstantiator = new ClassInstantiatorImpl();
@@ -39,12 +39,12 @@ public final class RunnableItemBuilderImpl implements RunnableItemBuilder {
 
     public Collection<RunnableItem> build(final String itemsToRun) {
         checkNotNull(itemsToRun);
-        final List<RunnableItem> builtItems = new ArrayList<RunnableItem>();
+        final Collection<RunnableItem> builtItems = new ArrayList<RunnableItem>();
         buildItems(itemsToRun, builtItems);
         return builtItems;
     }
 
-    private void buildItems(final String itemsToRun, final List<RunnableItem> builtItems) {
+    private void buildItems(final String itemsToRun, final Collection<RunnableItem> builtItems) {
         final String[] items = itemsToRun.split(ITEM_SEPARATOR);
         for (final String item : items) {
             builtItems.add(buildItem(item));
@@ -61,7 +61,11 @@ public final class RunnableItemBuilderImpl implements RunnableItemBuilder {
 
     private RunnableItem buildContextClass(final String contextToRun) {
         final Class<?> contextClass = classInstantiator.instantiateClass(contextToRun);
-        return new ContextClassImpl(contextClass);
+        if (isAbstract(contextClass.getModifiers())) {
+            return new AbstractContextClass(contextClass);
+        } else {
+            return new ContextClassImpl(contextClass);
+        }
     }
 
     private RunnableItem buildSpecificationMethod(final String specToRun) {
@@ -81,14 +85,14 @@ public final class RunnableItemBuilderImpl implements RunnableItemBuilder {
         }
     }
 
-    private SpecificationMethod createSpecificationMethod(final ContextClass contextClass, final Method specMethod) {
+    private RunnableItem createSpecificationMethod(final ContextClass contextClass, final Method specMethod) {
         return new SpecificationMethodImpl(
                 new LifecycleMethodImpl(specMethod), contextClass.getBeforeSpecificationMethods(), contextClass.getAfterSpecificationMethods());
     }
 
     private void checkOnlyOneSpecMethod(final String[] items) {
         if (items.length != 2) {
-            throw new IllegalArgumentException("Specifications to run cannot contain more than one " + METHOD_SEPARATOR);
+            throw new IllegalArgumentException("Specification to run cannot contain more than one " + METHOD_SEPARATOR);
         }
     }
 }

@@ -18,20 +18,18 @@ package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
+import com.googlecode.instinct.internal.core.RunnableItem;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethodImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Suggest({"Make a runner that runs all contexts in a class (embedded anon inner)"})
 public final class StandardContextRunner implements ContextRunner {
     private final Collection<ContextListener> contextListeners = new ArrayList<ContextListener>();
     private final Collection<SpecificationListener> specificationListeners = new ArrayList<SpecificationListener>();
-    private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
 
     public void addContextListener(final ContextListener contextListener) {
         checkNotNull(contextListener);
@@ -76,7 +74,7 @@ public final class StandardContextRunner implements ContextRunner {
         return new SpecificationMethodImpl(specificationMethod, beforeSpecificationMethods, afterSpecificationMethods);
     }
 
-    private void addSpecificationListeners(final SpecificationMethod specificationMethod) {
+    private void addSpecificationListeners(final RunnableItem specificationMethod) {
         for (final SpecificationListener specificationListener : specificationListeners) {
             specificationMethod.addSpecificationListener(specificationListener);
         }

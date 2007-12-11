@@ -22,7 +22,7 @@ import static com.googlecode.instinct.test.mock.ActorAutoWirer.autoWireMockField
 import static com.googlecode.instinct.test.mock.ActorAutoWirer.autoWireSubjectFields;
 import junit.framework.TestCase;
 
-@SuppressWarnings({"NoopMethodInAbstractClass", "CatchGenericClass"})
+@SuppressWarnings({"NoopMethodInAbstractClass", "CatchGenericClass", "DesignForExtension"})
 public abstract class InstinctTestCase extends TestCase {
 
     @Override

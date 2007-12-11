@@ -114,7 +114,7 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
 
     public void testRejectsSpecsMarkedWithTwoMethods() {
         expectException(IllegalArgumentException.class,
-                "Specifications to run cannot contain more than one " + METHOD_SEPARATOR, new Runnable() {
+                "Specification to run cannot contain more than one " + METHOD_SEPARATOR, new Runnable() {
             public void run() {
                 runnableItemBuilder.build("ClassName" + METHOD_SEPARATOR + "specName" + METHOD_SEPARATOR + "anotherSpec");
             }

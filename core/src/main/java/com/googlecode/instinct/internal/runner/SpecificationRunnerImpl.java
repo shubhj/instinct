@@ -147,16 +147,20 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         return new SpecificationResultImpl(specificationMethod.getName(), runStatus, executionTime);
     }
 
-    @Suggest({"Expose this lifecycle?"})
+    @Suggest({"How do we expose this lifecycle?"})
     private void runSpecificationLifecycle(final Object contextInstance, final SpecificationMethod specificationMethod) {
+        Mocker.reset();
         actorAutoWirer.autoWireFields(contextInstance);
         try {
             runMethods(contextInstance, specificationMethod.getBeforeSpecificationMethods());
             runSpecificationMethod(contextInstance, specificationMethod.getSpecificationMethod());
         } finally {
-            // Note. What order do we run this in? Does it need to go in the finally?
-            runMethods(contextInstance, specificationMethod.getAfterSpecificationMethods());
-            Mocker.verify();
+            try {
+                runMethods(contextInstance, specificationMethod.getAfterSpecificationMethods());
+            } finally {
+                // Note. We need to make sure we capture all errors correctly.
+                Mocker.verify();
+            }
         }
     }
 

@@ -24,6 +24,7 @@ import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
+import static com.googlecode.instinct.internal.util.io.ResourceUtil.getResourceAsFilePath;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
@@ -33,7 +34,7 @@ public final class ACsvFileWithNoContent {
 
     @BeforeSpecification
     public void before() {
-        csvFile = new CsvFileImpl("example/src/spec/resources/no_lines.csv");
+        csvFile = new CsvFileImpl(getResourceAsFilePath("no_lines.csv"));
     }
 
     @Specification

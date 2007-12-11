@@ -45,7 +45,7 @@ public final class ContextResultImpl extends Primordial implements ContextResult
     }
 
     public boolean completedSuccessfully() {
-        for (final SpecificationResult specificationResult : specificationResults) {
+        for (final ItemResult specificationResult : specificationResults) {
             if (!specificationResult.completedSuccessfully()) {
                 return false;
             }
@@ -67,7 +67,7 @@ public final class ContextResultImpl extends Primordial implements ContextResult
 
     public long getExecutionTime() {
         long executionTime = 0L;
-        for (final SpecificationResult specificationResult : specificationResults) {
+        for (final ItemResult specificationResult : specificationResults) {
             executionTime += specificationResult.getExecutionTime();
         }
         return executionTime;
@@ -75,7 +75,7 @@ public final class ContextResultImpl extends Primordial implements ContextResult
 
     private int countStatus(final boolean succeeded) {
         int number = 0;
-        for (final SpecificationResult specificationResult : specificationResults) {
+        for (final ItemResult specificationResult : specificationResults) {
             if (specificationResult.completedSuccessfully() == succeeded) {
                 number++;
             }

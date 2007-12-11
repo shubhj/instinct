@@ -42,6 +42,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @SuppressWarnings({"OverlyCoupledClass"})
+@Suggest("The interface should be typed?")
 public final class ContextClassImpl extends Primordial implements ContextClass {
     private ContextRunner contextRunner = new StandardContextRunner();
     private MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();

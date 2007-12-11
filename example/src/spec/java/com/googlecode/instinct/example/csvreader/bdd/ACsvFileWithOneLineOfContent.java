@@ -20,6 +20,7 @@ import com.googlecode.instinct.example.csvreader.CsvFile;
 import com.googlecode.instinct.example.csvreader.CsvFileImpl;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import static com.googlecode.instinct.internal.util.io.ResourceUtil.getResourceAsFilePath;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
@@ -33,7 +34,7 @@ public final class ACsvFileWithOneLineOfContent {
 
     @BeforeSpecification
     public void before() {
-        csvFile = new CsvFileImpl("example/src/spec/resources/one_line.csv");
+        csvFile = new CsvFileImpl(getResourceAsFilePath("one_line.csv"));
     }
 
     @Specification

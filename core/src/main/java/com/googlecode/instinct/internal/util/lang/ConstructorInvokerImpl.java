@@ -16,19 +16,37 @@
 
 package com.googlecode.instinct.internal.util.lang;
 
+import com.googlecode.instinct.internal.edge.EdgeException;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ConstructorEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ConstructorEdgeImpl;
 import java.lang.reflect.Constructor;
+import static java.lang.reflect.Modifier.isAbstract;
 
 public final class ConstructorInvokerImpl implements ConstructorInvoker {
     private final ClassEdge classEdge = new ClassEdgeImpl();
     private final ConstructorEdge edgeConstructor = new ConstructorEdgeImpl();
 
     public <T> Object invokeNullaryConstructor(final Class<T> cls) {
-        final Constructor<T> constructor = classEdge.getDeclaredConstructor(cls);
-        constructor.setAccessible(true);
+        checkClassIsNotAbstract(cls);
+        final Constructor<T> constructor = getNullaryConstructor(cls);
         return edgeConstructor.newInstance(constructor, new Object[]{});
+    }
+
+    private <T> Constructor<T> getNullaryConstructor(final Class<T> cls) {
+        try {
+            final Constructor<T> constructor = classEdge.getDeclaredConstructor(cls);
+            constructor.setAccessible(true);
+            return constructor;
+        } catch (EdgeException e) {
+            throw new RuntimeException("Unable to instantiate " + cls.getName() + " as it does not have a nullary (no-args) constructor", e);
+        }
+    }
+
+    private <T> void checkClassIsNotAbstract(final Class<T> cls) {
+        if (isAbstract(cls.getModifiers())) {
+            throw new RuntimeException("Cannot instantiate the constructor of an abstract class: " + cls.getName());
+        }
     }
 }

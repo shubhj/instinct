@@ -22,10 +22,22 @@ import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
 import java.util.ArrayList;
 
+@SuppressWarnings({"AssignmentToNull", "NullArgumentToVariableArgMethod"})
 public abstract class AbstractEventCalendarContext {
-
     private Event event1;
     private Event event2;
+
+    @BeforeSpecification
+    public void before() {
+        event1 = createEvent("Event1");
+        event2 = createEvent("Event2");
+    }
+
+    @AfterSpecification
+    public void after() {
+        event1 = null;
+        event2 = null;
+    }
 
     protected abstract EventCalendar getSubject();
 
@@ -45,27 +57,13 @@ public abstract class AbstractEventCalendarContext {
 
     @Specification
     public void shouldHaveTheCorrectInitialSize() {
-        //will be run for each subclass with values from the getNumberOfEvents() and getDefaultSize() methods.
+        // Will be run for each subclass with values from the getNumberOfEvents() and getDefaultSize() methods.
         expect.that(getSubject().getNumberOfEvents()).isEqualTo(getDefaultSize());
     }
 
-    @SuppressWarnings({"NullArgumentToVariableArgMethod"})
     @Specification(expectedException = IllegalArgumentException.class)
     public void shouldThrowAnIllegalArumentExceptionIfAnAddedEventIsNull() {
-        //will be run for each subclass.
+        // Will be run for each subclass.
         getSubject().addEvents((Event[]) null);
-    }
-
-    @BeforeSpecification
-    public void setup() {
-        event1 = createEvent("Event1");
-        event2 = createEvent("Event2");
-    }
-
-    @SuppressWarnings({"AssignmentToNull"})
-    @AfterSpecification
-    public void tearDown() {
-        event1 = null;
-        event2 = null;
     }
 }

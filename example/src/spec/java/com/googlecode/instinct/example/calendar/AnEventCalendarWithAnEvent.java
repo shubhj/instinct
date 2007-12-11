@@ -19,37 +19,34 @@ package com.googlecode.instinct.example.calendar;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
-import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
-@Context
 public final class AnEventCalendarWithAnEvent extends AbstractEventCalendarContext {
-
     @Subject private EventCalendar calendar = new EventCalendarImpl();
 
     @Override
-    protected EventCalendar getSubject() {
+    @BeforeSpecification
+    public void before() {
+        try {
+            calendar = calendar.addEvents(getEvent1());
+        } catch (IllegalArgumentException e) {
+            // Shows that we have successfully overridden the setup method of the base class. (which will not be called).
+            super.before();
+            calendar = calendar.addEvents(getEvent1());
+        }
+    }
+
+    @Override
+    public EventCalendar getSubject() {
         return calendar;
     }
 
     @Override
-    protected int getDefaultSize() {
+    public int getDefaultSize() {
         return 1;
-    }
-
-    @Override
-    @BeforeSpecification
-    public void setup() {
-        try {
-            calendar = calendar.addEvents(getEvent1());
-        } catch (IllegalArgumentException e) {
-            //shows that we have successfully overridden the setup method of the base class. (which will not be called).
-            super.setup();
-            calendar = calendar.addEvents(getEvent1());
-        }
     }
 
     @Specification
@@ -62,7 +59,6 @@ public final class AnEventCalendarWithAnEvent extends AbstractEventCalendarConte
     public void shouldBeAbleToRemoveTheAddedEvent() {
         expect.that(calendar.getEvents()).isOfSize(1);
         calendar = calendar.removeEvents(getEvent1());
-
         expect.that(calendar.getEvents()).isEmpty();
     }
 
@@ -70,7 +66,6 @@ public final class AnEventCalendarWithAnEvent extends AbstractEventCalendarConte
     public void shouldBeAbleToAddAnotherEvent() {
         expect.that(calendar.getEvents()).isOfSize(1);
         calendar = calendar.addEvents(getEvent2());
-
         expect.that(calendar.getEvents()).isOfSize(2);
         expect.that(calendar.getEvents()).containsItems(getEvent1(), getEvent2());
     }

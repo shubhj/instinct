@@ -4,10 +4,11 @@
     <property name="build.dir" value="build"/>
     <property name="lib.dir" value="lib"/>
     <property name="src.dir" value="src"/>
-
-    <property name="main.src.dir" value="${src.dir}/main/java"/>
-    <property name="spec.src.dir" value="${src.dir}/spec/java"/>
-
+    <property name="main.dir" value="${src.dir}/main"/>
+    <property name="spec.dir" value="${src.dir}/spec"/>
+    <property name="main.src.dir" value="${main.dir}/java"/>
+    <property name="spec.src.dir" value="${spec.dir}/java"/>
+    <property name="spec.resources.dir" value="${spec.dir}/resources"/>
     <property name="main.classes.dir" value="${build.dir}/main-classes"/>
     <property name="spec.classes.dir" value="${build.dir}/spec-classes"/>
 
@@ -30,6 +31,7 @@
             <include name="${lib.dir}/junit-*.jar"/>
         </fileset>
         <pathelement location="${spec.classes.dir}"/>
+        <pathelement location="${spec.resources.dir}"/>
     </path>
 
     <target name="clean" depends="-clean"/>
@@ -37,6 +39,12 @@
 
     <target name="-clean">
         <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="-generate">
+        <copy todir="${spec.classes.dir}">
+            <fileset dir="${spec.resources.dir}" includes="**/*"/>
+        </copy>
     </target>
 
     <macrodef name="compile.macro">
@@ -47,7 +55,7 @@
         <sequential>
             <mkdir dir="@{output.dir}"/>
             <javac source="1.5" srcdir="@{src.dir}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="true"
-                   debuglevel="source,lines,vars" deprecation="false" optimize="true">
+                    debuglevel="source,lines,vars" deprecation="false" optimize="true">
                 <src>
                     <path path="@{src.path}"/>
                 </src>
@@ -57,11 +65,11 @@
         </sequential>
     </macrodef>
 
-    <target name="-compile">
+    <target name="-compile" depends="-generate">
         <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}"
-                       src.path="${main.src.dir}"/>
+                src.path="${main.src.dir}"/>
         <compile.macro src.dir="${spec.src.dir}" classpath.ref="spec.class.path" output.dir="${spec.classes.dir}"
-                       src.path="${spec.src.dir}"/>
+                src.path="${spec.src.dir}"/>
     </target>
 
     <target name="-run-specs" depends="-compile">

@@ -23,7 +23,6 @@ import java.util.Collection;
 import java.util.List;
 
 public final class EventCalendarImpl implements EventCalendar {
-
     private final List<Event> events = new ArrayList<Event>();
 
     public EventCalendarImpl(final Event... someEvents) {

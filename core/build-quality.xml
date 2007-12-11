@@ -8,7 +8,7 @@
 
     <property name="coverage.flush.interval" value="1000"/>
     <property name="coverage.atomic.target" value="60%"/>
-    <property name="coverage.slow.target" value="58%"/>
+    <property name="coverage.slow.target" value="50%"/>
 
     <fileset id="covered.code.fileset" dir="${main.src.dir}">
         <include name="**/*.java"/>

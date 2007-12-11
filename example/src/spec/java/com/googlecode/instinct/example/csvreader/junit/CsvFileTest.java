@@ -18,6 +18,7 @@ package com.googlecode.instinct.example.csvreader.junit;
 
 import com.googlecode.instinct.example.csvreader.CsvFile;
 import com.googlecode.instinct.example.csvreader.CsvFileImpl;
+import static com.googlecode.instinct.internal.util.io.ResourceUtil.getResourceAsFilePath;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
@@ -30,9 +31,9 @@ public final class CsvFileTest {
 
     @Before
     public void setup() {
-        noLineFile = new CsvFileImpl("example/src/spec/resources/no_lines.csv");
-        oneLineFile = new CsvFileImpl("example/src/spec/resources/one_line.csv");
-        twoLineFile = new CsvFileImpl("example/src/spec/resources/two_lines.csv");
+        noLineFile = new CsvFileImpl(getResourceAsFilePath("no_lines.csv"));
+        oneLineFile = new CsvFileImpl(getResourceAsFilePath("one_line.csv"));
+        twoLineFile = new CsvFileImpl(getResourceAsFilePath("two_lines.csv"));
     }
 
     @Test

@@ -18,24 +18,22 @@ package com.googlecode.instinct.example.calendar;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
 import org.junit.runner.RunWith;
 
+@SuppressWarnings({"AssignmentToNull"})
 @RunWith(InstinctRunner.class)
-@Context
 public final class AnEmptyEventCalendar extends AbstractEventCalendarContext {
-
     @Subject private EventCalendar calendar = new EventCalendarImpl();
 
     @Override
-    protected EventCalendar getSubject() {
+    public EventCalendar getSubject() {
         return calendar;
     }
 
     @Override
-    protected int getDefaultSize() {
+    public int getDefaultSize() {
         return 0;
     }
 
@@ -53,10 +51,9 @@ public final class AnEmptyEventCalendar extends AbstractEventCalendarContext {
         expect.that(calendar.getEvents()).containsItems(getEvent1());
     }
 
-    @SuppressWarnings({"AssignmentToNull"})
-    private void after() {
-        //since there are 2 after specification methods; after() and tearDown() (in the base class), each will be run, but their order
-        // is indeterminate
+    private void localAfter() {
+        // As there are 2 after specification methods; localAfter() and after() (in the base class), each will be run, but their order
+        // is indeterminate.
         calendar.clear();
         calendar = null;
     }
