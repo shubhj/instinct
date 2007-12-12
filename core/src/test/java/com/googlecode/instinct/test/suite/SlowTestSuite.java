@@ -16,9 +16,13 @@
 
 package com.googlecode.instinct.test.suite;
 
+import com.googlecode.instinct.integrate.junit4.JUnit4InstinctRunnerSlowTest;
 import com.googlecode.instinct.internal.util.boost.TestAggregator;
 import com.googlecode.instinct.internal.util.boost.TestAggregatorImpl;
+import static java.util.Arrays.asList;
+import java.util.Enumeration;
 import junit.framework.Test;
+import junit.framework.TestSuite;
 
 public final class SlowTestSuite {
     private static final TestAggregator AGGREGATOR = new TestAggregatorImpl(SlowTestSuite.class);
@@ -28,6 +32,25 @@ public final class SlowTestSuite {
     }
 
     public static Test suite() {
-        return AGGREGATOR.aggregate("Slow", ".*SlowTest");
+        final TestSuite testsFound = (TestSuite) AGGREGATOR.aggregate("Slow", ".*SlowTest");
+        return filterOutExcludedTests(testsFound);
+    }
+
+    private static Test filterOutExcludedTests(final TestSuite testSuite) {
+        final Enumeration<Test> enumeration = testSuite.tests();
+        final TestSuite newTestSuite = new TestSuite("Slow");
+        while (enumeration.hasMoreElements()) {
+            final TestSuite suite = (TestSuite) enumeration.nextElement();
+            if (!isExcluded(suite)) {
+                newTestSuite.addTest(suite);
+            }
+        }
+        return newTestSuite;
+    }
+
+    // Note. JUnit4InstinctRunnerSlowTest fails when run from IntelliJ, but runs in the Ant build fine.
+    private static boolean isExcluded(final TestSuite testSuite) {
+        final String[] excluded = {JUnit4InstinctRunnerSlowTest.class.getName()};
+        return asList(excluded).contains(testSuite.getName());
     }
 }
