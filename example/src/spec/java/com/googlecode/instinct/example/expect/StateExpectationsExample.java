@@ -10,7 +10,10 @@ import java.util.EventObject;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.hamcrest.Matchers;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.startsWith;
 import org.junit.runner.RunWith;
 
 /**
@@ -31,8 +34,8 @@ public final class StateExpectationsExample {
         expect.that(this).isOfType(StateExpectationsExample.class);
         expect.that(this).isNotNull();
         // Mixing with standard Hamcrest matchers
-        expect.that("fred").matches(Matchers.startsWith("fr"), Matchers.containsString("ed"));
-        expect.that("fred", Matchers.equalTo("fred"));
+        expect.that("fred").matches(startsWith("fr"), containsString("ed"));
+        expect.that("fred", equalTo("fred"));
     }
 
     @Specification
@@ -79,7 +82,7 @@ public final class StateExpectationsExample {
         expect.that(greetings).isOfSize(2);
         expect.that(greetings).containsItem("hi");
         expect.that(greetings).doesNotContainItem("bye");
-        expect.that(greetings).doesNotContainItem(Matchers.greaterThan("zip"));
+        expect.that(greetings).doesNotContainItem(greaterThan("zip"));
     }
 
     @Specification
@@ -92,6 +95,14 @@ public final class StateExpectationsExample {
         expect.that(map).containsKey("key");
         expect.that(map).containsValue("value");
         expect.that(map).containsEntry("key", "value");
+    }
+
+    @Specification
+    public void providesMatchersForMakingAssertionsAboutBooleans() {
+        expect.that(true).isTrue();
+        expect.that(false).isFalse();
+        expect.that(true).isGreaterThan(false);
+        expect.that(false).isLessThanOrEqualTo(false);
     }
 
     @Specification

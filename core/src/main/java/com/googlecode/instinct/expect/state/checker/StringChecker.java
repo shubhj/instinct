@@ -16,6 +16,9 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
+import com.googlecode.instinct.internal.util.Suggest;
+
+@Suggest("Pull out the CharSequence stuff")
 public interface StringChecker extends ComparableChecker<String>, SizeChecker {
     void isEqualToIgnoringCase(String string);
 

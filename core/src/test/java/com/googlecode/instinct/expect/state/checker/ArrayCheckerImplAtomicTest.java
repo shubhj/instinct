@@ -44,7 +44,7 @@ public final class ArrayCheckerImplAtomicTest extends InstinctTestCase {
 
     public void testDoesNotThrowExceptionWhenNullIsContainedWithSubjectArray() {
         final String[] subjectArrayThatContainsNull = {null, "bar"};
-        final ArrayChecker<String> nullChecker = new ArrayCheckerImpl<String>(subjectArrayThatContainsNull);
+        final ContainerChecker<String> nullChecker = new ArrayCheckerImpl<String>(subjectArrayThatContainsNull);
         nullChecker.containsItem((String) null);
     }
 
