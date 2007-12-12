@@ -28,4 +28,10 @@ public interface AssertException {
     void checkExceptionClass(Class expectedExceptionClass, Throwable actual);
 
     void checkExceptionMessage(String expectedMessage, Throwable actual);
+
+    Throwable assertThrows(Class expectedException, String message, Runnable block);
+
+    Throwable assertThrows(Class expectedException, Runnable block);
+
+    void assertMessageContains(Throwable t, String fragment);
 }

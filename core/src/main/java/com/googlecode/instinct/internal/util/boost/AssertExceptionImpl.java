@@ -19,6 +19,7 @@ package com.googlecode.instinct.internal.util.boost;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import junit.framework.Assert;
+import junit.framework.AssertionFailedError;
 
 public final class AssertExceptionImpl implements AssertException {
 
@@ -35,7 +36,7 @@ public final class AssertExceptionImpl implements AssertException {
         return checkWraps(expectedExceptionClass, wrapperException, realDepth);
     }
 
-    public Throwable assertWraps(final Class expectedExceptionClass, 
+    public Throwable assertWraps(final Class expectedExceptionClass,
             final String expectedMessage, final Throwable wrapperException, final int depthExceptionShouldAppearAt) {
         final Throwable cause = assertWraps(expectedExceptionClass, wrapperException, depthExceptionShouldAppearAt);
         checkExceptionMessage(expectedMessage, cause);
@@ -62,6 +63,34 @@ public final class AssertExceptionImpl implements AssertException {
         final Throwable cause = getCauseAtDepth(wrapperException, depth);
         checkExceptionClass(expectedExceptionClass, cause);
         return cause;
+    }
+
+    public Throwable assertThrows(final Class expectedException, final String message, final Runnable block) {
+        final Throwable result = assertThrows(expectedException, block);
+        checkExceptionMessage(message, result);
+        return result;
+    }
+
+    // SUPPRESS IllegalCatch {
+    public Throwable assertThrows(final Class expectedException, final Runnable block) {
+        Throwable result = null;
+        try {
+            block.run();
+            Assert.fail("Failed to throw exception: " + expectedException);
+        } catch (AssertionFailedError e) {
+            throw e;
+        } catch (Throwable t) {
+            checkExceptionClass(expectedException, t);
+            result = t;
+        }
+        return result;
+    }
+
+    // } SUPPRESS IllegalCatch
+
+    public void assertMessageContains(final Throwable t, final String fragment) {
+        final String message = "Fragment '" + fragment + "' not found in message '" + t.getMessage() + "' ";
+        Assert.assertTrue(message, t.getMessage().indexOf(fragment) > -1);
     }
 
     // SUPPRESS JavaNCSS {

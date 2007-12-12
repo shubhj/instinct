@@ -16,25 +16,25 @@
 
 package com.googlecode.instinct.test.checker;
 
-import com.googlecode.instinct.internal.util.boost.AssertThrows;
-import com.googlecode.instinct.internal.util.boost.AssertThrowsImpl;
+import com.googlecode.instinct.internal.util.boost.AssertException;
+import com.googlecode.instinct.internal.util.boost.AssertExceptionImpl;
 
 public final class ExceptionTestChecker {
-    private static final AssertThrows ASSERT_THROWS = new AssertThrowsImpl();
+    private static final AssertException ASSERT_EXCEPTION = new AssertExceptionImpl();
 
     private ExceptionTestChecker() {
         throw new UnsupportedOperationException();
     }
 
     public static <T extends Throwable> Throwable expectException(final Class<T> expectedException, final String message, final Runnable block) {
-        return ASSERT_THROWS.assertThrows(expectedException, message, block);
+        return ASSERT_EXCEPTION.assertThrows(expectedException, message, block);
     }
 
     public static <T extends Throwable> Throwable expectException(final Class<T> expectedException, final Runnable block) {
-        return ASSERT_THROWS.assertThrows(expectedException, block);
+        return ASSERT_EXCEPTION.assertThrows(expectedException, block);
     }
 
     public static void expectMessageContains(final Throwable t, final String fragment) {
-        ASSERT_THROWS.assertMessageContains(t, fragment);
+        ASSERT_EXCEPTION.assertMessageContains(t, fragment);
     }
 }

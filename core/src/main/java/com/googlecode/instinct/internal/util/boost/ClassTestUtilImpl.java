@@ -16,18 +16,7 @@
 
 package com.googlecode.instinct.internal.util.boost;
 
-import com.googlecode.instinct.internal.edge.java.lang.reflect.ConstructorEdge;
-import com.googlecode.instinct.internal.edge.java.lang.reflect.ConstructorEdgeImpl;
-import com.googlecode.instinct.internal.util.lang.ReflectMasterImpl;
-import com.googlecode.instinct.internal.util.lang.ReflectObjectMaster;
-import java.lang.reflect.Constructor;
-
 public final class ClassTestUtilImpl implements ClassTestUtil {
-    private static final Object[] NO_PARAMETERS = {};
-    private final ReflectObjectMaster reflector = new ReflectMasterImpl();
-    private final ConstructorEdge edgeConstructor = new ConstructorEdgeImpl();
-
-    // FIX SC509 Reorder parameters?
     public boolean isImplementationOf(final Interface targetInterface, final Class cls) {
         final Class type = targetInterface.getType();
         return isAssignable(type, cls);
@@ -35,18 +24,6 @@ public final class ClassTestUtilImpl implements ClassTestUtil {
 
     public boolean isSubclassOf(final Class superClass, final Class subClass) {
         return isAssignable(superClass, subClass);
-    }
-
-    public boolean isSubInterfaceOf(final Interface superInterface, final Interface subInterface) {
-        final Class superType = superInterface.getType();
-        final Class subType = subInterface.getType();
-        return isAssignable(superType, subType);
-    }
-
-    public Object newInstance(final Class type) {
-        final Constructor constructor = reflector.getConstructor(type);
-        constructor.setAccessible(true);
-        return edgeConstructor.newInstance(constructor, NO_PARAMETERS);
     }
 
     private boolean isAssignable(final Class superType, final Class subType) {

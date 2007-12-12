@@ -17,15 +17,7 @@
 package com.googlecode.instinct.internal.util.boost;
 
 public interface ClassTestChecker {
-    <U, T extends U> void checkImplementsAndFinal(final Interface<U> expectedInterface, final Class<T> implementationClass);
-
     <U, T extends U> void checkImplementsAndFinal(Class<U> expectedInterface, Class<T> implementationClass);
 
-    void checkSubInterfaceOf(Interface subInterface, Interface superInterface);
-
     <U, T extends U> void checkSubclassOf(Class<T> subClass, Class<U> superClass);
-
-    <T> void checkSubclassOfRef(Class<T> expectedImpl, Object ref);
-
-    <T> void checkSynchronized(Class<T> cls);
 }

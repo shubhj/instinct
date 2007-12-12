@@ -25,7 +25,6 @@ import org.junit.runner.RunWith;
 @RunWith(InstinctRunner.class)
 @Context
 public class AContext extends SuperContext {
-
     @Specification(expectedException = RuntimeException.class, withMessage = "Indicates that @AfterSpecification was invoked.")
     public void shouldFailIfBeforeSpecificationAndAfterSpecificationAreNotCalled() {
         expect.that(isFlag()).isTrue();
