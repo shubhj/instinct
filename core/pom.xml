@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.googlecode.instinct</groupId>
+        <artifactId>instinct-parent</artifactId>
+        <version>0.1.5</version>
+    </parent>
+    <artifactId>instinct-core</artifactId>
+    <packaging>jar</packaging>
+    <name>Instinct Core</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+        <!-- FIX KEF Remove this dependency once the referenced Boost code is pulled into Instinct. -->
+        <dependency>
+            <groupId>au.net.netstorm.boost</groupId>
+            <artifactId>boost</artifactId>
+            <version>982</version>
+            <scope>system</scope>
+            <systemPath>/Users/kef/Documents/work/instinct/core/lib/boost/boost-982.jar</systemPath>
+        </dependency>
+        <!-- FIX KEF We want 2.2 beta 1 to match what the Ant build uses, but its not in the Maven repository. -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib-nodep</artifactId>
+            <version>2.1_3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.1</version>
+        </dependency>
+        <!-- FIX KEF Upgrade to 2.4.0 at the same time as the Ant build. -->
+        <dependency>
+            <groupId>org.jmock</groupId>
+            <artifactId>jmock</artifactId>
+            <version>2.2.0</version>
+        </dependency>
+        <!-- FIX KEF Add jmock-legacy. -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.objenesis</groupId>
+            <artifactId>objenesis</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cenqua.clover</groupId>
+            <artifactId>clover</artifactId>
+            <version>1.3.13</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <!-- FIX KEF Zip up the javadoc and publish it. -->
+    <!-- FIX KEF Publish -sources.jar as well. Should fix the Ant build to do this too. -->
+    <!-- FIX KEF How do we publish LICENCE, NOTICE, README and RELEASE-NOTES? When people suck
+                 down the Maven library, do they get these files? Or do we just include them in
+                 the assembly zip file? -->
+    <!-- FIX KEF How are licence text files handled for libraries we depend on? -->
+</project>

@@ -135,6 +135,7 @@
         -->
         <jar destfile="${build.dir}/${project.jar}">
             <fileset dir="${main.classes.dir}"/>
+            <!-- FIX KEF Move these sources to a separate -sources.jar file a la Maven repository. -->
             <fileset dir="${main.src.dir}"/>
             <fileset dir="${properties.src.dir}"/>
         </jar>
