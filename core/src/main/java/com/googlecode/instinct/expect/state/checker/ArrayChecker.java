@@ -16,9 +16,5 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
-import com.googlecode.instinct.internal.util.Suggest;
-
-@Suggest("Put hasSizeGreaterThan, etc. & also on collections & strings")
 public interface ArrayChecker<T> extends ObjectChecker<T[]>, ContainerChecker<T>, SizeChecker {
-
 }

@@ -19,7 +19,6 @@ package com.googlecode.instinct.expect.state.checker;
 import org.hamcrest.Matcher;
 
 public interface ContainerChecker<T> {
-
     void containsItem(Matcher<T> matcher);
 
     void containsItem(T item);

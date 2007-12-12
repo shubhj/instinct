@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
-import static com.googlecode.instinct.expect.state.checker.NoneOf.noneOf;
+import static com.googlecode.instinct.expect.state.matcher.NoneOf.noneOf;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdgeImpl;
 import org.hamcrest.Matcher;

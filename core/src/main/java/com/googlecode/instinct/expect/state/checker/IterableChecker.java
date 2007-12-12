@@ -20,7 +20,6 @@ import java.util.Collection;
 import org.hamcrest.Matcher;
 
 public interface IterableChecker<E, T extends Iterable<E>> extends ObjectChecker<T>, ContainerChecker<E> {
-
     void containsItems(Matcher<E>... matchers);
 
     void containsItems(E... items);

@@ -20,7 +20,7 @@ import com.googlecode.instinct.internal.core.SpecificationMethod;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 
-public class SpecificationMatcher extends BaseMatcher<SpecificationMethod> {
+public final class SpecificationMatcher extends BaseMatcher<SpecificationMethod> {
     private final String methodName;
 
     public SpecificationMatcher(final String methodName) {
