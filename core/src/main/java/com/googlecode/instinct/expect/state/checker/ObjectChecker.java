@@ -23,13 +23,31 @@ public interface ObjectChecker<T> {
 
     void isNotEqualTo(T t);
 
-    void isAnInstanceOf(Class<? extends T> cls);
+    /**
+     * Checks whether the argument of the check is an instance of the given <var>type</var>. Note that this method is not compile time type-safe and
+     * will accept any <var>type</var>.
+     * @param type The type that the argument of the check should be a type of.
+     */
+    void isAnInstanceOf(Class<?> type);
 
-    void isNotAnInstanceOf(Class<T> cls);
+    /**
+     * Checks whether the argument of the check is of the given Note that this method is not compile time type-safe and will accept any
+     * <var>type</var>.
+     * @param type The type that the argument of the check should not be a type of.
+     */
+    void isNotAnInstanceOf(Class<?> type);
 
-    void isOfType(Class<? extends T> cls);
+    /**
+     * Synonym for {@link #isAnInstanceOf(Class)}.
+     * @param type The type that the argument of the check should be a type of.
+     */
+    void isOfType(Class<?> type);
 
-    void isNotOfType(Class<T> cls);
+    /**
+     * Synonym for {@link #isNotAnInstanceOf(Class)}.
+     * @param type The type that the argument of the check should not be a type of.
+     */
+    void isNotOfType(Class<?> type);
 
     void isTheSameInstanceAs(T t);
 
@@ -41,14 +59,26 @@ public interface ObjectChecker<T> {
 
     void hasToString(Matcher<String> matcher);
 
+    /**
+     * Checks whether the argument of the check all of the given <var>matchers</var>.
+     * @param matchers The matchers to check the subject against.
+     */
     void matches(Matcher<T>... matchers);
 
+    /**
+     * Checks whether the argument of the check matches all of the given <var>matchers</var>.
+     * @param iterable The matchers to check the subject against.
+     */
     void matches(Iterable<Matcher<? extends T>> iterable);
 
     void doesNotMatchOnAllOf(Matcher<T>... matchers);
 
-    void doesNotMatchOnAllOf(Iterable<Matcher<? extends T>> iterable);
+    void doesNotMatchOnAllOf(Iterable<Matcher<? extends T>> matchers);
 
+    /**
+     * Checks whether the argument of the check matches any of the given <var>matchers</var>.
+     * @param matchers The matchers to check the argument of the check against.
+     */
     void matchesAnyOf(Matcher<T>... matchers);
 
     void matchesAnyOf(Iterable<Matcher<? extends T>> iterable);

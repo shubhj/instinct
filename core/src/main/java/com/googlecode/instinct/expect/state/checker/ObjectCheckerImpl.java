@@ -19,12 +19,10 @@ package com.googlecode.instinct.expect.state.checker;
 import static com.googlecode.instinct.expect.state.checker.NoneOf.noneOf;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdgeImpl;
-import com.googlecode.instinct.internal.util.Fix;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 // SUPPRESS VisibilityModifier|IllegalToken {
-@Fix("Test this.")
 public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
     @SuppressWarnings({"ProtectedField"})
     protected final T subject;
@@ -40,36 +38,26 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
 
     public final void isEqualTo(final T t) {
         getAsserter().expectThat(subject, Matchers.equalTo(t));
-
     }
 
     public final void isNotEqualTo(final T t) {
         getAsserter().expectNotThat(subject, Matchers.equalTo(t));
     }
 
-    @Override
-    public final boolean equals(final Object obj) {
-        throw new UnsupportedOperationException("Equality on checkers is not supported, you probably want isEqualTo() instead.");
+    public final void isAnInstanceOf(final Class<?> type) {
+        getAsserter().expectThat(subject, Matchers.instanceOf(type));
     }
 
-    public final void isAnInstanceOf(final Class<? extends T> cls) {
-        getAsserter().expectThat(subject, Matchers.instanceOf(cls));
+    public final void isNotAnInstanceOf(final Class<?> type) {
+        getAsserter().expectNotThat(subject, Matchers.instanceOf(type));
     }
 
-    public final void isOfType(final Class<? extends T> cls) {
-        isAnInstanceOf(cls);
+    public final void isOfType(final Class<?> type) {
+        isAnInstanceOf(type);
     }
 
-    public final void notInstanceOf(final Class<T> cls) {
-        getAsserter().expectNotThat(subject, Matchers.instanceOf(cls));
-    }
-
-    public final void isNotAnInstanceOf(final Class<T> cls) {
-        notInstanceOf(cls);
-    }
-
-    public final void isNotOfType(final Class<T> cls) {
-        notInstanceOf(cls);
+    public final void isNotOfType(final Class<?> type) {
+        isNotAnInstanceOf(type);
     }
 
     public final void isTheSameInstanceAs(final T t) {
@@ -92,26 +80,14 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectThat(subject, Matchers.hasToString(matcher));
     }
 
-    /**
-     * Checks whether the subject matches all of the given <var>matchers</var>.
-     * @param matchers The matchers to check the subject against.
-     */
     public final void matches(final Matcher<T>... matchers) {
         getAsserter().expectThat(subject, Matchers.allOf(matchers));
     }
 
-    /**
-     * Checks whether the subject matches all of the given <var>matchers</var>.
-     * @param iterable The matchers to check the subject against.
-     */
     public final void matches(final Iterable<Matcher<? extends T>> iterable) {
         getAsserter().expectThat(subject, Matchers.allOf(iterable));
     }
 
-    /**
-     * Checks whether the subject matches any of the given <var>matchers</var>.
-     * @param matchers The matchers to check the subject against.
-     */
     public final void matchesAnyOf(final Matcher<T>... matchers) {
         getAsserter().expectThat(subject, Matchers.anyOf(matchers));
     }
@@ -134,6 +110,12 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
 
     public final void hasBeanProperty(final String string, final Matcher<?> matcher) {
         getAsserter().expectThat(subject, Matchers.hasProperty(string, matcher));
+    }
+
+    @SuppressWarnings({"EqualsWhichDoesntCheckParameterClass"})
+    @Override
+    public final boolean equals(final Object obj) {
+        throw new UnsupportedOperationException("Equality on checkers is not supported, you probably want isEqualTo() instead.");
     }
 }
 // } SUPPRESS VisibilityModifier|IllegalToken
