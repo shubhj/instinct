@@ -22,6 +22,8 @@ import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import static com.googlecode.instinct.expect.behaviour.Mocker.reset;
 import static com.googlecode.instinct.expect.behaviour.Mocker.sequence;
 import static com.googlecode.instinct.expect.behaviour.Mocker.verify;
+import static com.googlecode.instinct.expect.behaviour.Mocker.states;
+import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
@@ -29,6 +31,8 @@ import org.jmock.Expectations;
 import org.jmock.api.ExpectationError;
 
 public final class MockerAtomicTest extends InstinctTestCase {
+    @Stub private String stateName;
+
     public void testConformsToClassTraits() {
         checkClass(Mocker.class);
     }
@@ -65,5 +69,9 @@ public final class MockerAtomicTest extends InstinctTestCase {
 
     public void testCreatesSequences() {
         expect.that(sequence()).isNotNull();
+    }
+
+    public void testCreatesStates() {
+        expect.that(states(stateName)).isNotNull();
     }
 }

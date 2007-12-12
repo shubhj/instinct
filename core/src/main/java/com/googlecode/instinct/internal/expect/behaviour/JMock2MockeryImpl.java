@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Set;
 import org.jmock.Mockery;
 import org.jmock.Sequence;
+import org.jmock.States;
 import org.jmock.api.Expectation;
 import org.jmock.internal.ExpectationBuilder;
 import org.jmock.internal.InvocationDispatcher;
@@ -58,6 +59,10 @@ public final class JMock2MockeryImpl implements JMock2Mockery {
 
     public Sequence sequence() {
         return mockery.sequence("Sequence-" + sequenceNumber++);
+    }
+
+    public States states(final String stateName) {
+        return mockery.states(stateName);
     }
 
     public void verify() {

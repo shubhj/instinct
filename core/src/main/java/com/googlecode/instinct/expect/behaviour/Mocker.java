@@ -19,7 +19,13 @@ package com.googlecode.instinct.expect.behaviour;
 import com.googlecode.instinct.internal.expect.behaviour.JMock2Mockery;
 import com.googlecode.instinct.internal.expect.behaviour.JMock2MockeryImpl;
 import org.jmock.Sequence;
+import org.jmock.States;
 
+/**
+ * The Mocker is a static entry point into the Instinct mocking support. It is intended to be statically imported in specifications. It maintains a
+ * single mockery so that mocks can be created automatically or inline (manually) in specifications and be bound by the same lifecycle, so they are
+ * automatically reset and verified.
+ */
 public final class Mocker {
     private static final JMock2Mockery J_MOCK2_MOCKERY = new JMock2MockeryImpl();
 
@@ -49,5 +55,9 @@ public final class Mocker {
 
     public static void reset() {
         J_MOCK2_MOCKERY.reset();
+    }
+
+    public static States states(final String stateName) {
+        return J_MOCK2_MOCKERY.states(stateName);
     }
 }

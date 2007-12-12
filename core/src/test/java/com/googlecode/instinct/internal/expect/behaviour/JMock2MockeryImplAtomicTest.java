@@ -17,14 +17,16 @@
 package com.googlecode.instinct.internal.expect.behaviour;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.marker.annotate.Subject;
+import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Stub;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.Sequence;
+import org.jmock.States;
 import org.jmock.internal.ExpectationBuilder;
 import org.jmock.lib.legacy.ClassImposteriser;
 
@@ -39,16 +41,16 @@ public final class JMock2MockeryImplAtomicTest extends InstinctTestCase {
     @Stub private Class<CharSequence> typeToMock;
     @Stub private String returnedMock;
     @Stub private String roleName;
+    @Stub private String stateName;
+    @Dummy private States state;
+    @Dummy private Sequence sequence;
+    @Dummy private ExpectationBuilder expectations;
     // Note. We can't use automocking here as we're testing the mocking infrastructure. Need to use raw jMock instead.
-    private ExpectationBuilder expectations;
-    private Sequence sequence;
     private Mockery mockery;
 
     @Override
     public void setUpTestDoubles() {
         mockery = context.mock(Mockery.class);
-        expectations = context.mock(Expectations.class);
-        sequence = context.mock(Sequence.class);
     }
 
     @Override
@@ -110,5 +112,14 @@ public final class JMock2MockeryImplAtomicTest extends InstinctTestCase {
             }
         });
         expect.that(jMock2Mockery.sequence()).isTheSameInstanceAs(sequence);
+    }
+
+    public void testDelegatesStatesCallToUnderlyingMockery() {
+        context.checking(new Expectations() {
+            {
+                one(mockery).states(stateName); will(returnValue(state));
+            }
+        });
+        expect.that(jMock2Mockery.states(stateName)).isTheSameInstanceAs(state);
     }
 }

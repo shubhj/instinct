@@ -17,10 +17,13 @@
 package com.googlecode.instinct.internal.expect.behaviour;
 
 import org.jmock.Sequence;
+import org.jmock.States;
 import org.jmock.internal.ExpectationBuilder;
 
 public interface JMock2Mockery extends Mockery {
     void checking(ExpectationBuilder expectations);
 
     Sequence sequence();
+
+    States states(String stateName);
 }
