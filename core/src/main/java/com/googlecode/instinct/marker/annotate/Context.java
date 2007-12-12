@@ -38,7 +38,7 @@ public @interface Context {
      * attribute is a shorthand method of marking every individual specification.
      *
      * @return The group(s) the specifications in this context belong to.
-     * @See Specification#groups()
+     * @see Specification#groups()
      */
     String[] groups() default "ALL";
 }
