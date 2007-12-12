@@ -16,17 +16,21 @@
 
 package com.googlecode.instinct.test.suite;
 
+import com.googlecode.instinct.api.AnObjectCheckerContext;
+import com.googlecode.instinct.api.AnObjectCheckerFailure;
+import com.googlecode.instinct.api.CommonAPIContext;
 import com.googlecode.instinct.defect.defect23.AFixedDefect23;
 import com.googlecode.instinct.defect.defect3.AFixedDefect3;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithANamingConventionLocator;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithAnAnnotationMethodLocator;
+import com.googlecode.instinct.internal.edge.org.hamcrest.AMatcherDescriberContext;
 import com.googlecode.instinct.internal.locate.AHierarchicalMethodLocatorContext;
 import com.googlecode.instinct.internal.locate.AnAnnotatedMethodLocatorContext;
-import com.googlecode.instinct.api.CommonAPIContext;
-import com.googlecode.instinct.api.AnObjectCheckerContext;
+import com.googlecode.instinct.internal.util.Suggest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+@Suggest("Automate how these contexts are pickedup")
 @SuppressWarnings({"ClassMayBeInterface"})
 @RunWith(Suite.class)
 @Suite.SuiteClasses({AnAnnotatedMethodLocatorContext.class,
@@ -36,7 +40,9 @@ import org.junit.runners.Suite;
                      AFixedDefect23.class,
                      AFixedDefect3.class,
                      CommonAPIContext.class,
-                     AnObjectCheckerContext.class})
+                     AnObjectCheckerContext.class,
+                     AnObjectCheckerFailure.class,
+                     AMatcherDescriberContext.class})
 public final class ContextSuite {
     //Suite classs.
 }

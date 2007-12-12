@@ -21,11 +21,22 @@ import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 
 public final class MatcherAssertEdgeImpl implements MatcherAssertEdge {
+
+    private final MatcherVerifier matcherVerifier = new MatcherVerifierImpl();
+
     public <T> void expectThat(final T t, final Matcher<T> matcher) {
         MatcherAssert.assertThat(t, matcher);
     }
 
     public <T> void expectNotThat(final T t, final Matcher<T> matcher) {
         MatcherAssert.assertThat(t, Matchers.not(matcher));
+    }
+
+    public <T> void expectThat(final T t, final Matcher<T> matcher, final MatcherDescriber describing) {
+        matcherVerifier.assertThat(t, matcher, describing);
+    }
+
+    public <T> void expectNotThat(final T t, final Matcher<T> matcher, final MatcherDescriber describing) {
+        matcherVerifier.assertThat(t, Matchers.not(matcher), describing);
     }
 }
