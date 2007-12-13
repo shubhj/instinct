@@ -3,7 +3,6 @@ package com.googlecode.instinct.example.expect;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.expect.state.StateExpectations;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
@@ -23,7 +22,6 @@ import org.junit.runner.RunWith;
  */
 @SuppressWarnings({"MagicNumber", "unchecked"})
 @RunWith(InstinctRunner.class)
-@Context
 public final class StateExpectationsExample {
 
     @Specification
@@ -59,7 +57,7 @@ public final class StateExpectationsExample {
     public void providesMatchersForMakingAssertionsAboutComparables() {
         expect.that(1).isEqualTo(1);
         expect.that(1).isGreaterThan(0);
-        expect.that(1).isGreaterThanOrEqualTo(0);
+        expect.that(1).isGreaterThanOrEqualTo(1);
         expect.that(1).isLessThan(2);
         expect.that(1).isLessThanOrEqualTo(2);
     }
