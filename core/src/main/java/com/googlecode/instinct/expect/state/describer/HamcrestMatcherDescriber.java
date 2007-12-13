@@ -4,8 +4,6 @@
 
 package com.googlecode.instinct.expect.state.describer;
 
-import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherDescriberBuilder;
-import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherDescriberImpl;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherDescriber;
 import com.googlecode.instinct.internal.util.Suggest;
 import org.hamcrest.Matcher;
@@ -13,7 +11,7 @@ import org.hamcrest.Matcher;
 @Suggest("Remove the dependency on the Hamcrest StringDescription class.")
 public final class HamcrestMatcherDescriber<T> implements MatcherDescriber {
 
-    private final CommonMatcherDescriber<T> matcherDescriber = new CommonMatcherDescriberImpl<T>();
+    private final CommonMatcherUtil<T> matcherUtil = new CommonMatcherUtilImpl<T>();
     private final T actual;
     private final Matcher<T> matcher;
 
@@ -23,12 +21,28 @@ public final class HamcrestMatcherDescriber<T> implements MatcherDescriber {
     }
 
     public String describe() {
-        final MatcherDescriberBuilder builder = new MatcherDescriberImpl().
-                addNewLine().
-                setExpectedLabelName("Expected").addColon().addSpace().setExpectedValue(matcherDescriber.describeExpectation(matcher)).
-                addNewLine().
-                addSpace(5).setReturnedLabelName("got").addColon().addSpace().setReturnedValue(matcherDescriber.describeValue(actual)).
-                addNewLine();
-        return builder.describe();
+        final StringBuilder builder = new StringBuilder();
+        builder.append(newLine()).
+                    append("Expected: ").append(getExpectation()).
+                append(newLine()).
+                    append(createFiveSpaces()).append("got: ").append(getValue()).
+                append(newLine());
+        return builder.toString();
+    }
+
+    private String createFiveSpaces() {
+        return matcherUtil.space(5);
+    }
+
+    private String newLine() {
+        return matcherUtil.newLine();
+    }
+
+    private String getValue() {
+        return matcherUtil.describeValue(actual);
+    }
+
+    private String getExpectation() {
+        return matcherUtil.describeExpectation(matcher);
     }
 }

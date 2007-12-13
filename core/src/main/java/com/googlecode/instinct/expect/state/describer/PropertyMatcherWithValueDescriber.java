@@ -5,15 +5,13 @@
 package com.googlecode.instinct.expect.state.describer;
 
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherDescriber;
-import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherDescriberBuilder;
-import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherDescriberImpl;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
 
 public class PropertyMatcherWithValueDescriber<T> implements MatcherDescriber {
 
-    private final CommonMatcherDescriber matcherDescriber = new CommonMatcherDescriberImpl();
+    private final CommonMatcherUtil matcherUtil = new CommonMatcherUtilImpl();
     private final T subject;
     private final String propertyName;
     private final Class<?> propertyType;
@@ -27,19 +25,28 @@ public class PropertyMatcherWithValueDescriber<T> implements MatcherDescriber {
     }
 
     public final String describe() {
-        final String expectedProperty = new StringBuilder().append(getSimplClassName(subject)).append(".").
-                append(matcherDescriber.getGetterFor(propertyName,propertyType)).toString();
-        final String matcherValue = getMatcherValue();
+        final String expectedProperty = new StringBuilder().append(getSimplClassName(subject)).append(".").append(getGetter()).toString();
+        final StringBuilder builder = new StringBuilder();
+        builder.append(newLine()).
+                    append("Expected: ").append(expectedProperty).append(" should exist and it should return a value of ").
+                    append(getMatcherValue()).append(".").
+                append(newLine()).
+                    append(createFiveSpaces()).append("got: ").append(expectedProperty).append(" does not exist and/or does not return a value of ").
+                    append(getMatcherValue()).append(".").
+                append(newLine());
+        return builder.toString();
+    }
 
-        final MatcherDescriberBuilder builder = new MatcherDescriberImpl().
-                addNewLine().
-                addValue("Expected: ").addValue(expectedProperty).addValue(" should exist and it should return a value of ").
-                    addValue(matcherValue).addValue(".").
-                addNewLine().
-                addSpace(5).addValue("got: ").addValue(expectedProperty).addValue(" does not exist and/or does not return a value of ").
-                    addValue(matcherValue).addValue(".").
-                addNewLine();
-        return builder.describe();
+    private String getGetter() {
+        return matcherUtil.getGetterFor(propertyName,propertyType);
+    }
+
+    private String createFiveSpaces() {
+        return matcherUtil.space(5);
+    }
+
+    private String newLine() {
+        return matcherUtil.newLine();
     }
 
     private String getMatcherValue() {
@@ -48,7 +55,7 @@ public class PropertyMatcherWithValueDescriber<T> implements MatcherDescriber {
         return description.toString();
     }
 
-    private <S> String getSimplClassName(final S instance) {
+    private String getSimplClassName(final Object instance) {
         return instance.getClass().getSimpleName();
     }
 }

@@ -9,10 +9,13 @@ import org.hamcrest.StringDescription;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.ClassUtil;
 import com.googlecode.instinct.internal.util.ClassUtilImpl;
+import com.googlecode.instinct.internal.edge.org.hamcrest.StringFactory;
+import com.googlecode.instinct.internal.edge.org.hamcrest.StringFactoryImpl;
 
-public final class CommonMatcherDescriberImpl<T> implements CommonMatcherDescriber<T> {
+public final class CommonMatcherUtilImpl<T> implements CommonMatcherUtil<T> {
 
     private final ClassUtil classUtil = new ClassUtilImpl();
+    private final StringFactory stringFactory = new StringFactoryImpl();
 
     public String describeValue(final T value) {
         final StringDescription description = new StringDescription();
@@ -42,5 +45,13 @@ public final class CommonMatcherDescriberImpl<T> implements CommonMatcherDescrib
 
     public String getSimplClassName(final Object instance) {
         return instance.getClass().getSimpleName();
+    }
+
+    public String newLine() {
+        return stringFactory.newLine();
+    }
+
+    public String space(final int spaces) {
+        return stringFactory.space(5);
     }
 }

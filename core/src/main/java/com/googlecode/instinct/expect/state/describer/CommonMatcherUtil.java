@@ -6,7 +6,7 @@ package com.googlecode.instinct.expect.state.describer;
 
 import org.hamcrest.Matcher;
 
-public interface CommonMatcherDescriber<T> {
+public interface CommonMatcherUtil<T> {
     String describeValue(T value);
 
     String describeExpectation(Matcher<T> matcher);
@@ -16,4 +16,8 @@ public interface CommonMatcherDescriber<T> {
     String getSetterFor(String propertyName, Class<?> propertyType);
 
     String getSimplClassName(Object instance);
+
+    String newLine();
+
+    String space(int i);
 }

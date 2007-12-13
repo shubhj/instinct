@@ -23,7 +23,7 @@ import com.googlecode.instinct.defect.defect23.AFixedDefect23;
 import com.googlecode.instinct.defect.defect3.AFixedDefect3;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithANamingConventionLocator;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithAnAnnotationMethodLocator;
-import com.googlecode.instinct.internal.edge.org.hamcrest.AMatcherDescriberContext;
+import com.googlecode.instinct.internal.edge.org.hamcrest.AStringFactoryImplContext;
 import com.googlecode.instinct.internal.locate.AHierarchicalMethodLocatorContext;
 import com.googlecode.instinct.internal.locate.AnAnnotatedMethodLocatorContext;
 import com.googlecode.instinct.internal.util.Suggest;
@@ -42,7 +42,7 @@ import org.junit.runners.Suite;
                      CommonAPIContext.class,
                      AnObjectCheckerContext.class,
                      AnObjectCheckerFailure.class,
-                     AMatcherDescriberContext.class})
+                     AStringFactoryImplContext.class})
 public final class ContextSuite {
     //Suite classs.
 }
