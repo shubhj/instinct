@@ -16,16 +16,14 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
-import com.googlecode.instinct.internal.util.Suggest;
 import java.util.EventObject;
 
-@Suggest("Remove the wildcard.")
 public interface EventObjectChecker<T extends EventObject> extends ObjectChecker<T> {
-    void isAnEventFrom(Class<? extends EventObject> cls, Object object);
+    <U extends EventObject> void isAnEventFrom(Class<U> cls, Object object);
 
     void isAnEventFrom(Object source);
 
-    void isNotAnEventFrom(Class<? extends EventObject> aClass, Object object);
+    <U extends EventObject> void isNotAnEventFrom(Class<U> aClass, Object object);
 
     void isNotAnEventFrom(Object object);
 }

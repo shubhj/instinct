@@ -20,11 +20,11 @@ import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 
 public interface NodeChecker<T extends Node> extends ObjectChecker<T> {
-    void hasXPath(String path, Matcher<String> matcher);
+    void matchesXPath(String xPath, Matcher<String> valueMatcher);
 
-    void hasXPath(String path);
+    void matchesXPath(String path);
 
-    void doesNotHaveXPath(String path, Matcher<String> matcher);
+    void doesNotMatchXPath(String path, Matcher<String> matcher);
 
-    void doesNotHaveXPath(String path);
+    void doesNotMatchXPath(String path);
 }

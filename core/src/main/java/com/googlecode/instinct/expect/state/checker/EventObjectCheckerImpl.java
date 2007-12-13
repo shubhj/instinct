@@ -16,19 +16,15 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
-import com.googlecode.instinct.internal.util.Fix;
 import java.util.EventObject;
 import org.hamcrest.Matchers;
 
-@Fix("Test this")
-public class EventObjectCheckerImpl<T extends EventObject>
-        extends ObjectCheckerImpl<T> implements EventObjectChecker<T> {
-
+public class EventObjectCheckerImpl<T extends EventObject> extends ObjectCheckerImpl<T> implements EventObjectChecker<T> {
     public EventObjectCheckerImpl(final T subject) {
         super(subject);
     }
 
-    public final void isAnEventFrom(final Class<? extends EventObject> cls, final Object object) {
+    public final <U extends EventObject> void isAnEventFrom(final Class<U> cls, final Object object) {
         getAsserter().expectThat(subject, Matchers.eventFrom(cls, object));
     }
 
@@ -36,7 +32,7 @@ public class EventObjectCheckerImpl<T extends EventObject>
         getAsserter().expectThat(subject, Matchers.eventFrom(source));
     }
 
-    public final void isNotAnEventFrom(final Class<? extends EventObject> aClass, final Object object) {
+    public final <U extends EventObject> void isNotAnEventFrom(final Class<U> aClass, final Object object) {
         getAsserter().expectNotThat(subject, Matchers.eventFrom(aClass, object));
     }
 

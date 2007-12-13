@@ -4,6 +4,8 @@ import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.expect.state.StateExpectations;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.Specification;
+import java.io.File;
+import static java.lang.System.getProperty;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import java.util.EventObject;
@@ -32,7 +34,6 @@ public final class StateExpectationsExample {
         expect.that("fred").isNotTheSameInstanceAs("barney");
         expect.that(this).isOfType(StateExpectationsExample.class);
         expect.that(this).isNotNull();
-        // Mixing with standard Hamcrest matchers
         expect.that("fred").matches(startsWith("fr"), containsString("ed"));
         expect.that("fred", equalTo("fred"));
     }
@@ -129,13 +130,29 @@ public final class StateExpectationsExample {
         expect.that(myEventObject).isNotAnEventFrom(new Object());
     }
 
-    private static class MyEventObject extends EventObject {
+    @Specification
+    public void providesMatchersForMakingAssertionsAboutFiles() {
+        final File javaHomeDirectory = new File(getProperty("java.home"));
+        expect.that(javaHomeDirectory).exists();
+        final File nonExistentDirectory = new File("foo/bar/baz");
+        expect.that(nonExistentDirectory).doesNotExist();
+    }
+
+    // TODO This needs some work, they're not sensible in what they do currently...
+    @Specification
+    public void providesMatchersForMakingAssertionsAboutNodes() {
+//        final Node fooNode = getRootNode("<foo><bar baz=\"qux\"/></foo>");
+//        expect.that(fooNode).matchesXPath("//foo");
+//        expect.that(fooNode).matchesXPath("//foo", equalTo(""));
+//        expect.that(fooNode).doesNotMatchXPath("//foo/bar/baz");
+//        expect.that(fooNode).matchesXPath("//foo/bar['baz']", equalTo("qux"));
+    }
+
+    private static final class MyEventObject extends EventObject {
         private static final long serialVersionUID = -2001716596031438536L;
 
         private MyEventObject(final Object o) {
             super(o);
         }
     }
-
-    // Xpath stuff from Hamcrest too, but you get the gist ;-)
 }

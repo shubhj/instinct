@@ -27,19 +27,21 @@ public class NodeCheckerImpl<T extends Node> extends ObjectCheckerImpl<T> implem
         super(subject);
     }
 
-    public final void hasXPath(final String path, final Matcher<String> matcher) {
-        getAsserter().expectThat(subject, Matchers.hasXPath(path, matcher));
+    // Rename the last argument, it's the "value matcher".
+    public final void matchesXPath(final String xPath, final Matcher<String> valueMatcher) {
+        getAsserter().expectThat(subject, Matchers.hasXPath(xPath, valueMatcher));
     }
 
-    public final void hasXPath(final String path) {
+    public final void matchesXPath(final String path) {
         getAsserter().expectThat(subject, Matchers.hasXPath(path));
     }
 
-    public final void doesNotHaveXPath(final String path, final Matcher<String> matcher) {
+    // Rename the last argument, it's the "value matcher".
+    public final void doesNotMatchXPath(final String path, final Matcher<String> matcher) {
         getAsserter().expectNotThat(subject, Matchers.hasXPath(path, matcher));
     }
 
-    public final void doesNotHaveXPath(final String path) {
+    public final void doesNotMatchXPath(final String path) {
         getAsserter().expectNotThat(subject, Matchers.hasXPath(path));
     }
 }
