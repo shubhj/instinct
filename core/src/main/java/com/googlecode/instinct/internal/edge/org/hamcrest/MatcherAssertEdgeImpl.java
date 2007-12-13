@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,12 @@
 
 package com.googlecode.instinct.internal.edge.org.hamcrest;
 
+import com.googlecode.instinct.internal.util.Fix;
 import org.hamcrest.Matcher;
 import static org.hamcrest.Matchers.not;
 
+@Fix("Move this out of the edge package. And rename it.")
 public final class MatcherAssertEdgeImpl implements MatcherAssertEdge {
-
     private final MatcherVerifier matcherVerifier = new MatcherVerifierImpl();
 
     public <T> void expectThat(final T t, final Matcher<T> matcher) {
