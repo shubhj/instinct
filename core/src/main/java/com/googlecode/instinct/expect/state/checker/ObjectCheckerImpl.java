@@ -17,6 +17,8 @@
 package com.googlecode.instinct.expect.state.checker;
 
 import static com.googlecode.instinct.expect.state.matcher.NoneOf.noneOf;
+import com.googlecode.instinct.expect.state.describer.PropertyMatcherDescriber;
+import com.googlecode.instinct.expect.state.describer.PropertyMatcherWithValueDescriber;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdgeImpl;
 import org.hamcrest.Matcher;
@@ -104,12 +106,13 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         getAsserter().expectThat(subject, noneOf(matchers));
     }
 
-    public final void hasBeanProperty(final String string) {
-        getAsserter().expectThat(subject, Matchers.hasProperty(string));
+    public final void hasBeanProperty(final String propertyName, final Class<?> propertyType) {
+        getAsserter().expectThat(subject, Matchers.hasProperty(propertyName), new PropertyMatcherDescriber<T>(subject, propertyName, propertyType));
     }
 
-    public final void hasBeanProperty(final String string, final Matcher<?> matcher) {
-        getAsserter().expectThat(subject, Matchers.hasProperty(string, matcher));
+    public final void hasBeanPropertyWithValue(final String propertyName, final Class<?> propertyType, final Matcher<?> matcher) {
+        getAsserter().expectThat(subject, Matchers.hasProperty(propertyName, matcher),
+                new PropertyMatcherWithValueDescriber<T>(subject, propertyName, propertyType, matcher));
     }
 
     @SuppressWarnings({"EqualsWhichDoesntCheckParameterClass"})

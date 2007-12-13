@@ -8,4 +8,5 @@ import org.hamcrest.Matcher;
 
 public interface MatcherVerifier {
     <T> void assertThat(T actual, Matcher<T> matcher, MatcherDescriber describing);
+    <T> void assertThat(T actual, Matcher<T> matcher);
 }

@@ -9,38 +9,37 @@ import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
-import static org.hamcrest.core.IsEqual.equalTo;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
 @Context
 public class AMatcherDescriberContext {
 
-    @Subject MatcherDescriber describing = new MatcherDescriberImpl();
+    @Subject MatcherDescriberBuilder describing = new MatcherDescriberImpl();
     private static final String EMPTY_STRING = "";
     private static final String NL = System.getProperty("line.separator");
 
     @Specification
     public void shouldReturnAnEmptyStringByDefault() {
-        expect.that(describing.toString()).isEqualTo(EMPTY_STRING);
+        expect.that(describing.describe()).isEqualTo(EMPTY_STRING);
     }
 
     @Specification
     public void shouldAcceptAReason() {
         describing.setReason("Failed to locate method.");
-        expect.that(describing).hasToString(equalTo("Failed to locate method."));
+        expect.that(describing.describe()).isEqualTo("Failed to locate method.");
     }
 
     @Specification
     public void shouldAcceptAnExpectLabelName() {
         describing.setExpectedLabelName("Expected").addColon().addSpace();
-        expect.that(describing).hasToString(equalTo("Expected: "));
+        expect.that(describing.describe()).isEqualTo("Expected: ");
     }
 
     @Specification
     public void shouldAcceptAnExpectedValue() {
         describing.setExpectedLabelName("Expected").addColon().addSpace().setExpectedValue("not <1>");
-        expect.that(describing).hasToString(equalTo("Expected: not <1>"));
+        expect.that(describing.describe()).isEqualTo("Expected: not <1>");
     }
 
     @Specification
@@ -49,7 +48,7 @@ public class AMatcherDescriberContext {
                 setExpectedLabelName("Expected").addColon().addSpace().setExpectedValue("not <1>").
                 addNewLine().
                 addSpace(5).setReturnedLabelName("got").addColon().addSpace();
-        expect.that(describing).hasToString(equalTo("Expected: not <1>" + NL + "     got: "));
+        expect.that(describing.describe()).isEqualTo("Expected: not <1>" + NL + "     got: ");
     }
 
     @Specification
@@ -60,7 +59,7 @@ public class AMatcherDescriberContext {
                 addNewLine().addSpace(5).
                 setReturnedLabelName("got").addColon().addSpace().setReturnedValue("<1>").
                 addNewLine();
-        expect.that(describing).hasToString(equalTo("Could not find property." + NL + "Expected: not <1>" + NL + "     got: <1>" + NL));
+        expect.that(describing.describe()).isEqualTo("Could not find property." + NL + "Expected: not <1>" + NL + "     got: <1>" + NL);
     }
 
     @Specification
@@ -71,8 +70,8 @@ public class AMatcherDescriberContext {
                 addNewLine().
                 setReturnedLabelName("Result").addColon().addSpace(2).setReturnedValue("Could not find property byte1 on String.").
                 addNewLine();
-        expect.that(describing).hasToString(equalTo("The specified property could not be found." + NL +
-                "Expected: To find property byte1 on String." + NL + "Result:  Could not find property byte1 on String." + NL));
+        expect.that(describing.describe()).isEqualTo("The specified property could not be found." + NL +
+                "Expected: To find property byte1 on String." + NL + "Result:  Could not find property byte1 on String." + NL);
     }
 
     @Specification
@@ -84,7 +83,7 @@ public class AMatcherDescriberContext {
                 addNewLine().
                 addValue("got: <2> equal to <1>").
                 addNewLine();
-        expect.that(describing)
-                .hasToString(equalTo("Equality check failed." + NL + "Expected: <1> equal to <1>" + NL + "got: <2> equal to <1>" + NL));
+        expect.that(describing.describe())
+                .isEqualTo("Equality check failed." + NL + "Expected: <1> equal to <1>" + NL + "got: <2> equal to <1>" + NL);
     }
 }

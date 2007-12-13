@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.api;
 
+import com.googlecode.instinct.data.Person;
 import com.googlecode.instinct.expect.state.checker.ObjectChecker;
 import com.googlecode.instinct.expect.state.checker.ObjectCheckerImpl;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
@@ -34,7 +35,6 @@ import org.junit.runner.RunWith;
 @Context
 public class AnObjectCheckerContext {
     private static final String GREETING = "greeting";
-    private static final String BYTES = "bytes";
 
     @Specification
     public void shouldImplementDoesNotMatchOnAllOf() {
@@ -52,12 +52,11 @@ public class AnObjectCheckerContext {
 
     @Specification
     public void shouldImplementHasBeanProperty() {
-        final String greeting = GREETING;
-        final ObjectChecker<String> objectChecker = new ObjectCheckerImpl<String>(greeting);
+        final Person person = new Person("Perry");
+        final ObjectChecker<Person> objectChecker = new ObjectCheckerImpl<Person>(person);
 
-        objectChecker.hasBeanProperty(BYTES);
-        final byte[] expectedBytes = greeting.getBytes();
-        objectChecker.hasBeanProperty(BYTES, equalTo(expectedBytes));
+        objectChecker.hasBeanProperty("name", String.class);
+        objectChecker.hasBeanPropertyWithValue("name", String.class, equalTo("Perry"));
     }
 
     @Specification

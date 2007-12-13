@@ -22,4 +22,15 @@ public final class ClassUtilImpl implements ClassUtil {
         final String packageName = cls.getPackage().getName();
         return packageName.startsWith("java.") || packageName.startsWith("javax.");
     }
+
+    public boolean isBooleanType(final Class<?> classy) {
+        return Boolean.class.isAssignableFrom(classy) || boolean.class.isAssignableFrom(classy);
+    }
+
+    public String capitalizeFirstCharacter(final String name) {
+        if (name == null || name.length() == 0) {
+            return name;
+        }
+        return name.substring(0, 1).toUpperCase() + name.substring(1);
+    }
 }

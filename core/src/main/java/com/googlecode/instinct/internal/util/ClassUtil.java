@@ -19,4 +19,8 @@ package com.googlecode.instinct.internal.util;
 public interface ClassUtil {
 
     boolean isJavaLibraryClass(Class<?> cls);
+
+    boolean isBooleanType(Class<?> classy);
+
+    String capitalizeFirstCharacter(String name);
 }

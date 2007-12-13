@@ -83,7 +83,7 @@ public interface ObjectChecker<T> {
 
     void matchesAnyOf(Iterable<Matcher<? extends T>> iterable);
 
-    void hasBeanProperty(String string);
+    void hasBeanProperty(String propertyName, Class<?> propertyType);
 
-    void hasBeanProperty(String string, Matcher<?> matcher);
+    void hasBeanPropertyWithValue(String propertyName, Class<?> propertyType, Matcher<?> matcher);
 }
