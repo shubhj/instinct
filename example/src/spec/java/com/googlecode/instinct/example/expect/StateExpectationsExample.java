@@ -6,6 +6,7 @@ import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import java.util.ArrayList;
+import static java.util.Arrays.asList;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.List;
@@ -64,13 +65,23 @@ public final class StateExpectationsExample {
     }
 
     @Specification
-    public void providesMatchersForMakingAssertionsAboutCollectionsAndIterables() {
+    public void providesMatchersForMakingAssertionsAboutCollections() {
         final List<String> people = new ArrayList<String>();
         expect.that(people).isEmpty();
         people.add("fred");
         people.add("wilma");
         expect.that(people).isNotEmpty();
         expect.that(people).isOfSize(2);
+        expect.that(people).containsItems("fred", "wilma");
+        expect.that(people).containsItem("fred");
+        expect.that(people).doesNotContainItems("barney", "betty");
+        expect.that(people).hasTheSameContentAs("fred", "wilma");
+        expect.that(people).hasTheSameContentAs(asList("fred", "wilma"));
+    }
+
+    @Specification
+    public void providesMatchersForMakingAssertionsAboutIterables() {
+        final Iterable<String> people = asList("fred", "wilma");
         expect.that(people).containsItems("fred", "wilma");
         expect.that(people).containsItem("fred");
         expect.that(people).doesNotContainItems("barney", "betty");
