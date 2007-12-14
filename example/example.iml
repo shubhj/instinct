@@ -19,24 +19,6 @@
     <orderEntry type="library" name="Objenesis" level="project" />
     <orderEntry type="library" name="JMock" level="project" />
     <orderEntry type="library" name="JUnit" level="project" />
-    <orderEntry type="module-library">
-      <library name="Example">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/hamcrest-all-1.1.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/junit-4.4.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/ant-launcher-1.7.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/ant-junit-1.7.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/ant-1.7.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/cglib-nodep-2.1_3.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/jmock-2.4.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/jmock-legacy-2.4.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/objenesis-1.0.jar!/" />
-          <root url="jar://$MODULE_DIR$/lib/instinct-0.1.6.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntryProperties />
   </component>
   <component name="copyright">
@@ -56,7 +38,7 @@
           <option name="filler" value=" " />
         </value>
       </option>
-      <option name="notice" value="Copyright 2006-2007 Workingmouse&#10;&#10;Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);&#10;you may not use this file except in compliance with the License.&#10;You may obtain a copy of the License at&#10;&#10;     http://www.apache.org/licenses/LICENSE-2.0&#10;&#10;Unless required by applicable law or agreed to in writing, software&#10;distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#10;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#10;See the License for the specific language governing permissions and&#10;limitations under the License." />
+      <option name="notice" value="Copyright (c) &amp;#36;today.year, Your Corporation. All Rights Reserved." />
       <option name="keyword" value="Copyright" />
       <option name="fileTypeOverride" value="4" />
       <option name="relativeBefore" value="true" />
