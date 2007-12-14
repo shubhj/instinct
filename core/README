@@ -60,6 +60,9 @@ will change from release to release.
 
 Published packages
 
+com.googlecode.instinct.actor
+  Utilities for creating specification actors; dummies, stubs and mocks.
+
 com.googlecode.instinct.expect
   Expectation API -Includes support for setting state & behaviour expectations.
 

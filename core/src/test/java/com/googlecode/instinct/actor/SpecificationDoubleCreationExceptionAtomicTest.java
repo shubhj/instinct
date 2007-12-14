@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.actor;
+package com.googlecode.instinct.actor;
 
-import com.googlecode.instinct.marker.annotate.Dummy;
-import com.googlecode.instinct.marker.annotate.Mock;
-import com.googlecode.instinct.marker.annotate.Stub;
-import com.googlecode.instinct.marker.annotate.Subject;
+import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ExceptionChecker.checkException;
 
-public final class AClassWithMarkedFieldsToAutoWire {
-    @Subject private String subject;
-    @Mock private CharSequence mock;
-    @Stub private String stub;
-    @Dummy private CharSequence dummy;
+public final class SpecificationDoubleCreationExceptionAtomicTest extends InstinctTestCase {
+    public void testConformsToClassTraits() {
+        checkException(SpecificationDoubleCreationException.class);
+    }
 }

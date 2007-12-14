@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.internal.util.instance;
 
-import com.googlecode.instinct.internal.actor.DummyCreator;
-import com.googlecode.instinct.internal.actor.SpecificationDoubleCreator;
-import com.googlecode.instinct.internal.actor.StubCreator;
+import com.googlecode.instinct.actor.DummyCreator;
+import com.googlecode.instinct.actor.SpecificationDoubleCreator;
+import com.googlecode.instinct.actor.StubCreator;
 import com.googlecode.instinct.internal.util.Suggest;
 import java.io.File;
 import static java.lang.reflect.Modifier.isFinal;

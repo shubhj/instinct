@@ -18,14 +18,14 @@ package com.googlecode.instinct.test.mock;
 
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
-import com.googlecode.instinct.internal.actor.ActorAutoWirerImpl;
+import com.googlecode.instinct.actor.ActorAutoWirerImpl;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.TestingException;
 
 @SuppressWarnings({"CatchGenericClass"})
 public final class ActorAutoWirer {
     private static final SubjectCreator SUBJECT_CREATOR = new SubjectCreatorImpl();
-    private static final com.googlecode.instinct.internal.actor.ActorAutoWirer actorAutoWirer = new ActorAutoWirerImpl();
+    private static final com.googlecode.instinct.actor.ActorAutoWirer actorAutoWirer = new ActorAutoWirerImpl();
 
     private ActorAutoWirer() {
         throw new UnsupportedOperationException();

@@ -17,8 +17,8 @@
 package com.googlecode.instinct.internal.util.proxy;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.actor.DummyMethodInterceptor;
-import com.googlecode.instinct.internal.actor.IllegalInvocationException;
+import com.googlecode.instinct.actor.DummyMethodInterceptor;
+import com.googlecode.instinct.actor.IllegalInvocationException;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;

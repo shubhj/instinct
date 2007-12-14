@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,12 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.actor;
+package com.googlecode.instinct.actor;
 
-import com.googlecode.instinct.marker.annotate.Dummy;
-import com.googlecode.instinct.marker.annotate.Mock;
-import com.googlecode.instinct.marker.annotate.Stub;
-import com.googlecode.instinct.marker.annotate.Subject;
+public final class IllegalInvocationException extends RuntimeException {
+    private static final long serialVersionUID = -3020616634147454073L;
 
-final class AClassWithMarkedFieldsToNotAutowire {
-    @Subject(auto = false) private String subject;
-    @Mock(auto = false) private CharSequence mock;
-    @Stub(auto = false) private String stub;
-    @Dummy(auto = false) private CharSequence dummy;
+    public IllegalInvocationException(final String message) {
+        super(message);
+    }
 }

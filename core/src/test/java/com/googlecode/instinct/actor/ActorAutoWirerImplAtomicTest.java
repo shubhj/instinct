@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.actor;
+package com.googlecode.instinct.actor;
 
-public final class AutoWireException extends RuntimeException {
-    private static final long serialVersionUID = 3542387970454974034L;
+import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
-    public AutoWireException(final String message, final Throwable cause) {
-        super(message, cause);
+public final class ActorAutoWirerImplAtomicTest extends InstinctTestCase {
+    public void testConformsToClassTraits() {
+        checkClass(ActorAutoWirerImpl.class, ActorAutoWirer.class);
     }
 }

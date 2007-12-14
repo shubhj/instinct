@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.actor;
+package com.googlecode.instinct.actor;
 
 public final class SpecificationDoubleCreationException extends RuntimeException {
     private static final long serialVersionUID = 6203427732185963427L;

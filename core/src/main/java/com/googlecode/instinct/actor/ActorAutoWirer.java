@@ -14,13 +14,8 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.actor;
+package com.googlecode.instinct.actor;
 
-import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.ExceptionChecker.checkException;
-
-public final class SpecificationDoubleCreationExceptionAtomicTest extends InstinctTestCase {
-    public void testConformsToClassTraits() {
-        checkException(SpecificationDoubleCreationException.class);
-    }
+public interface ActorAutoWirer {
+    void autoWireFields(Object instanceToAutoWire);
 }

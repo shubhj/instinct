@@ -14,8 +14,16 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.actor;
+package com.googlecode.instinct.actor;
 
-public interface ActorAutoWirer {
-    void autoWireFields(Object instanceToAutoWire);
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Stub;
+import com.googlecode.instinct.marker.annotate.Subject;
+
+public final class AClassWithMarkedFieldsToAutoWire {
+    @Subject private String subject;
+    @Mock private CharSequence mock;
+    @Stub private String stub;
+    @Dummy private CharSequence dummy;
 }

@@ -16,8 +16,8 @@
 package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.expect.behaviour.Mocker;
-import com.googlecode.instinct.internal.actor.ActorAutoWirer;
-import com.googlecode.instinct.internal.actor.ActorAutoWirerImpl;
+import com.googlecode.instinct.actor.ActorAutoWirer;
+import com.googlecode.instinct.actor.ActorAutoWirerImpl;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import static com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus.SPECIFICATION_SUCCESS;

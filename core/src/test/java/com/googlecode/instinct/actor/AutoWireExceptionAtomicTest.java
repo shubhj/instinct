@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.actor;
+package com.googlecode.instinct.actor;
 
 import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import static com.googlecode.instinct.test.checker.ExceptionChecker.checkException;
 
-public final class ActorAutoWirerImplAtomicTest extends InstinctTestCase {
+public final class AutoWireExceptionAtomicTest extends InstinctTestCase {
     public void testConformsToClassTraits() {
-        checkClass(ActorAutoWirerImpl.class, ActorAutoWirer.class);
+        checkException(AutoWireException.class);
     }
 }

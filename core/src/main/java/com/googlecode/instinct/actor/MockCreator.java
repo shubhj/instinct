@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.actor;
+package com.googlecode.instinct.actor;
 
 import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;

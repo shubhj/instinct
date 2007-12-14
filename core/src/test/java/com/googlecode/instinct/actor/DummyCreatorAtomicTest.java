@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.actor;
+package com.googlecode.instinct.actor;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
-import static com.googlecode.instinct.internal.actor.SpecificationDoubleCreator.NUMBER_OF_DOUBLES_IN_AN_ARRAY;
+import static com.googlecode.instinct.actor.SpecificationDoubleCreator.NUMBER_OF_DOUBLES_IN_AN_ARRAY;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

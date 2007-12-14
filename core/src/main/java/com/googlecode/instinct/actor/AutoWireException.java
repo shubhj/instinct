@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Workingmouse
+ * Copyright 2006-2007 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.actor;
+package com.googlecode.instinct.actor;
 
-public final class IllegalInvocationException extends RuntimeException {
-    private static final long serialVersionUID = -3020616634147454073L;
+public final class AutoWireException extends RuntimeException {
+    private static final long serialVersionUID = 3542387970454974034L;
 
-    public IllegalInvocationException(final String message) {
-        super(message);
+    public AutoWireException(final String message, final Throwable cause) {
+        super(message, cause);
     }
 }
