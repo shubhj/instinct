@@ -17,9 +17,13 @@
 package com.googlecode.instinct.integrate.junit4;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.Stub;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubjectWithConstructorArgs;
@@ -31,44 +35,47 @@ import org.junit.runner.notification.RunNotifier;
 
 @SuppressWarnings({"unchecked"})
 public final class InstinctRunnerAtomicTest extends InstinctTestCase {
-    private static final Class<?> CLASS_TO_RUN = String.class;
-    private Runner runner;
-    private RunNotifier runNotifier;
-    private SpecificationMethodBuilder specificationMethodBuilder;
-    private Collection<SpecificationMethod> specificationMethods;
-    private SpecificationRunner specificationRunner;
-    private ObjectFactory objectFactory;
-
-    @Override
-    public void setUpTestDoubles() {
-        runNotifier = mock(RunNotifier.class);
-        specificationMethodBuilder = mock(SpecificationMethodBuilder.class);
-        specificationMethods = mock(Collection.class);
-        specificationRunner = mock(SpecificationRunner.class);
-        objectFactory = mock(ObjectFactory.class);
-    }
+    @Subject(auto = false) private Runner runner;
+    @Mock private SpecificationRunner specificationRunner;
+    @Mock private ObjectFactory objectFactory;
+    @Stub(auto = false) private Collection<SpecificationMethod> specificationMethods;
+    @Dummy RunNotifier runNotifier;
 
     @Override
     public void setUpSubject() {
-        runner = createSubjectWithConstructorArgs(InstinctRunner.class, new Object[]{CLASS_TO_RUN}, specificationMethodBuilder, objectFactory);
+        runner = createSubjectWithConstructorArgs(InstinctRunner.class, new Object[]{ContextToRun.class}, objectFactory);
     }
 
     public void testConformsToClassTraits() {
         checkClass(InstinctRunner.class);
     }
 
+    public void testCreatesASuiteDescription() {
+        final Description expectedDescription = createDescription();
+        expect.that(runner.getDescription()).isEqualTo(expectedDescription);
+    }
+
     public void testRunsSuitesContainingContextClasses() {
         expect.that(new Expectations() {
             {
-                one(specificationMethodBuilder).build(CLASS_TO_RUN); will(returnValue(specificationMethods));
-                one(objectFactory).create(SpecificationRunnerImpl.class, runNotifier); will(returnValue(specificationRunner));
-                one(specificationRunner).run(specificationMethods);
+                one(objectFactory).create(with(same(SpecificationRunnerImpl.class)), with(any(RunNotifier.class)));
+                will(returnValue(specificationRunner));
+                one(specificationRunner).run(with(any(Collection.class)));
             }
         });
         runner.run(runNotifier);
     }
 
-    public void testCreatesASuiteDescription() {
-        expect.that(runner.getDescription()).isEqualTo(Description.createSuiteDescription(CLASS_TO_RUN));
+    private Description createDescription() {
+        final Description description = Description.createSuiteDescription(ContextToRun.class);
+        description.addChild(Description.createTestDescription(ContextToRun.class, "doSomething"));
+        return description;
+    }
+
+    @SuppressWarnings({"ALL"})
+    private static final class ContextToRun {
+        @Specification
+        public void doSomething() {
+        }
     }
 }

@@ -16,20 +16,25 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static org.junit.runner.Description.createTestDescription;
+import static org.junit.runner.Description.*;
+
+import java.util.Collection;
+
+import org.junit.runner.Description;
+import org.junit.runner.Runner;
+import org.junit.runner.notification.RunNotifier;
+
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import java.util.Collection;
-import org.junit.runner.Description;
-import static org.junit.runner.Description.createSuiteDescription;
-import org.junit.runner.Runner;
-import org.junit.runner.notification.RunNotifier;
 
 public final class InstinctRunner extends Runner {
     private final SpecificationMethodBuilder specificationMethodBuilder = new SpecificationMethodBuilderImpl();
     private final ObjectFactory objectFactory = new ObjectFactoryImpl();
     private final Class<?> classToRun;
+    private Collection<SpecificationMethod> specificationMethods;
 
     public InstinctRunner(final Class<?> classToRun) {
         checkNotNull(classToRun);
@@ -38,13 +43,20 @@ public final class InstinctRunner extends Runner {
 
     @Override
     public Description getDescription() {
-        return createSuiteDescription(classToRun);
+        final Description description = createSuiteDescription(classToRun);
+        specificationMethods = specificationMethodBuilder.build(classToRun);
+        for (final SpecificationMethod method : specificationMethods) {
+            description.addChild(createTestDescription(classToRun, method.getName()));
+        }
+        return description;
     }
 
     @Override
     public void run(final RunNotifier notifier) {
         checkNotNull(notifier);
-        final Collection<SpecificationMethod> specificationMethods = specificationMethodBuilder.build(classToRun);
+        if (specificationMethods == null) {
+            specificationMethods = specificationMethodBuilder.build(classToRun);
+        }
         final SpecificationRunner specificationRunner = objectFactory.create(SpecificationRunnerImpl.class, notifier);
         specificationRunner.run(specificationMethods);
     }
