@@ -1,10 +1,39 @@
 * Instinct Release 0.1.6 *
 
-
-
-
-o Misc
-  o Removed reliance on Boost, transferred all Boost classes locally.
+o Core Features
+  o Remove the need for @Context annotation.
+  o Automatic creation of specification doubles: mocks, stubs and dummies.
+  o Automatic reset and verification of mocks.
+  o @BeforeSpecification?, @AfterSpecification?, @Specifications (and naming convention
+    equivalents) can be used across base and subclasses.
+  o Better error messages for hasBeanProperty and hasBeanPropertyWithValue.
+o Expectation API
+  o Make expectations more like natural language. eg. isEqualTo(), doesNotEqual(), etc.
+    Existing code using equalTo(), etc. will need to be updated.
+  o Collection checkers: hasTheSameContentAs(Collection<E>) and hasTheSameContentAs(E...).
+    These only check content and not the order of elements.
+  o Ensure all "collection" classes (Array, Map, Set, List, String, SharSequence?) have
+    similar size checkers available.
+  o Added file checker,
+o JUnit integration
+  o Fix Eclipse unrooted context.
+o Ant integration
+  o Support for custom classpath.
+  o Quiet specification result formatting (only shows errors and pending specs).
+  o Use correct project logging level for errors, etc.
+o jMock integration
+  o Support states: Mockery.states(String).
+o Infrastructure
+  o Removed reliance on Boost, transferred all relevant Boost classes locally.
+  o jMock 2.4.
+  o Downgraded to CGLib 2.1.3 (for Maven integration).
+o Bugs
+  o Miscellaneous NullPointerExceptions? and null related problems in state expectation API.
+  o (defect-3) IterableChecker? should have a containsOnly method or something.
+  o (defect-8) @BeforeSpecification? does not run if implemented in an abstract base class.
+  o (defect-20) CEclipse Junit4 InstinctRunner? shows tests under the "Unrooted Tests" node.
+  o (defect-22) Context treeview shows baseclass and subclass when only subclass is run
+  o (defect-23) Overridden specifications run twice.
 
 
 * Instinct Release 0.1.5 *
