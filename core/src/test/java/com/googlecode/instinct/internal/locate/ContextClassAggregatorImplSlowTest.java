@@ -33,7 +33,7 @@ public final class ContextClassAggregatorImplSlowTest extends InstinctTestCase {
         finder = new ContextFinderImpl(CLASS_IN_SPEC_TREE);
     }
 
-    @Fix("Breadcrumb: COme back and fix this.")
+    @Fix("Group: Come back and fix this.")
     public void nsoTestFindsCorrectContextClasses() {
         final JavaClassName[] classNames = finder.getContextNames("_custom_specification_group_");
         expect.that(classNames).isOfSize(1);

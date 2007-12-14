@@ -17,11 +17,9 @@
 package com.googlecode.instinct.integrate.junit4;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.annotate.Specification;
 import org.junit.runner.RunWith;
 
-@Suggest("Invoke JUnit programmatically to do this test so that the suites work.")
 @RunWith(InstinctRunner.class)
 public class JUnit4InstinctRunnerSlowTest {
 

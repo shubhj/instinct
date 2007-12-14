@@ -34,7 +34,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.Set;
 
-@Suggest("Move to public API.")
+@Suggest({"Move to public API.", "Expose a package root dir also, keep it as a field."})
 @SuppressWarnings({"OverlyCoupledClass"})
 public final class ContextFinderImpl implements ContextFinder {
     private PackageRootFinder packageRootFinder = new PackageRootFinderImpl();

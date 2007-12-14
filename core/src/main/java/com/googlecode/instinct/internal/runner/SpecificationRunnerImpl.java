@@ -103,8 +103,8 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     }
 
     @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
-    private SpecificationResult processExpectedFailure(final SpecificationMethod specificationMethod, final long startTime,
-            final Class<? extends Throwable> expectedExceptionClass, final Throwable thrownException) {
+    private <T extends Throwable> SpecificationResult processExpectedFailure(final SpecificationMethod specificationMethod, final long startTime,
+            final Class<T> expectedExceptionClass, final Throwable thrownException) {
         if (thrownException.getClass().equals(expectedExceptionClass)) {
             final String expectedMessage = specificationMethod.getExpectedExceptionMessage();
             if (expectedMessage.equals(Specification.NO_MESSAGE)) {
@@ -158,7 +158,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
             try {
                 runMethods(contextInstance, specificationMethod.getAfterSpecificationMethods());
             } finally {
-                // Note. We need to make sure we capture all errors correctly.
+                // Note. We need to make sure we capture and report all errors correctly.
                 Mocker.verify();
             }
         }

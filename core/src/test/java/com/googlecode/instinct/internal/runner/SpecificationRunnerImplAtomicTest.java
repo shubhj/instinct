@@ -16,11 +16,9 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import java.util.ArrayList;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
-import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Stub;
@@ -28,6 +26,7 @@ import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
+import java.util.ArrayList;
 import org.jmock.Expectations;
 
 @SuppressWarnings({"UnusedDeclaration"})
@@ -39,6 +38,7 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     @Mock private MethodInvoker invoker;
     @Mock private LifeCycleMethodValidator methodValidator;
     @Stub private Class<?> exceptionClass;
+    @Stub private String specificationName;
 
     @Override
     public void setUpSubject() {
@@ -49,31 +49,22 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
         checkClass(SpecificationRunnerImpl.class, SpecificationRunner.class);
     }
 
-    @Fix("Test double: Re-enable this.")
+    // Note. This will be refactored
     public void nsoTestWillRunASpecificationMethod() {
         expect.that(new Expectations() {
             {
                 one(methodValidator).checkContextConstructor(String.class);
-                exactly(2).of(specificationMethod).getSpecificationMethod();
-                will(returnValue(underlyingSpecMethod));
-                one(specificationMethod).getBeforeSpecificationMethods();
-                will(returnValue(new ArrayList()));
-                one(underlyingSpecMethod).getContextClass();
-                will(returnValue(String.class));
-                one(specificationMethod).isPending();
-                will(returnValue(false));
-                one(underlyingSpecMethod).getMethod();
-                will(returnValue(null));
-                one(specificationMethod).getAfterSpecificationMethods();
-                will(returnValue(new ArrayList()));
-                one(specificationMethod).getName();
-                will(returnValue("someName"));
-                one(specificationMethod).getExpectedException();
-                will(returnValue(exceptionClass));
+                exactly(2).of(specificationMethod).getSpecificationMethod(); will(returnValue(underlyingSpecMethod));
+                one(specificationMethod).getBeforeSpecificationMethods(); will(returnValue(new ArrayList()));
+                one(underlyingSpecMethod).getContextClass(); will(returnValue(String.class));
+                one(specificationMethod).isPending(); will(returnValue(false));
+                one(underlyingSpecMethod).getMethod(); will(returnValue(null));
+                one(specificationMethod).getAfterSpecificationMethods(); will(returnValue(new ArrayList()));
+                atLeast(1).of(specificationMethod).getName(); will(returnValue(specificationName));
+                one(specificationMethod).getExpectedException(); will(returnValue(exceptionClass));
                 one(methodValidator).checkMethodHasNoParameters(underlyingSpecMethod);
                 one(methodInvokerFactory).create(underlyingSpecMethod);
-                will(returnValue(invoker));
-                one(invoker).invokeMethod("", null);
+                will(returnValue(invoker)); one(invoker).invokeMethod("", null);
             }
         });
         specificationRunner.run(specificationMethod);
