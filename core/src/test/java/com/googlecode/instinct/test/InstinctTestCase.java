@@ -18,7 +18,7 @@ package com.googlecode.instinct.test;
 
 import static com.googlecode.instinct.expect.behaviour.Mocker.reset;
 import static com.googlecode.instinct.expect.behaviour.Mocker.verify;
-import static com.googlecode.instinct.test.mock.ActorAutoWirer.autoWireMockFields;
+import static com.googlecode.instinct.test.mock.ActorAutoWirer.autoWireDoubleFields;
 import static com.googlecode.instinct.test.mock.ActorAutoWirer.autoWireSubjectFields;
 import junit.framework.TestCase;
 
@@ -28,7 +28,7 @@ public abstract class InstinctTestCase extends TestCase {
     @Override
     public final void runBare() throws Throwable {
         reset();
-        autoWireMockFields(this);
+        autoWireDoubleFields(this);
         setUpTestDoubles();
         autoWireSubjectFields(this);
         setUpSubject();
@@ -44,7 +44,7 @@ public abstract class InstinctTestCase extends TestCase {
             }
         } finally {
             // Note. Resetting the mocker here causes jMock error messages to loose their state.
-//            reset();
+            //            reset();
             tearDown();
         }
         if (message != null) {

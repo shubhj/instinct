@@ -16,11 +16,11 @@
 
 package com.googlecode.instinct.test.mock;
 
-import java.lang.reflect.AnnotatedElement;
-import java.lang.reflect.Field;
 import com.googlecode.instinct.actor.ActorAutoWirerImpl;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.TestingException;
+import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Field;
 
 @SuppressWarnings({"CatchGenericClass"})
 public final class ActorAutoWirer {
@@ -31,35 +31,32 @@ public final class ActorAutoWirer {
         throw new UnsupportedOperationException();
     }
 
-    public static void autoWireMockFields(final Object instanceToAutoWire) {
+    public static void autoWireDoubleFields(final Object instanceToAutoWire) {
         actorAutoWirer.autoWireFields(instanceToAutoWire);
     }
 
     public static void autoWireSubjectFields(final Object instanceToAutoWire) {
         final Field[] fields = instanceToAutoWire.getClass().getDeclaredFields();
         for (final Field field : fields) {
-            if (field.isAnnotationPresent(Subject.class) && autoWireSubject(field)) {
+            if (field.isAnnotationPresent(Subject.class) && askedToAutoWireSubject(field)) {
                 injectSubject(instanceToAutoWire, field);
             }
         }
     }
 
+    @SuppressWarnings({"OverlyBroadCatchBlock"})
     private static void injectSubject(final Object instanceToAutoWire, final Field field) {
-        injectFieldValue(instanceToAutoWire, field, SUBJECT_CREATOR.create(field), "subject");
-    }
-
-    private static void injectFieldValue(final Object instanceToAutoWire, final Field field, final Object fieldValue, final String testDoubleType) {
         field.setAccessible(true);
         try {
-            field.set(instanceToAutoWire, fieldValue);
+            field.set(instanceToAutoWire, SUBJECT_CREATOR.create(field));
         } catch (Throwable throwable) {
-            final String message = "Unable to autowire a " + testDoubleType + " value into field '" + field.getName() + "' of type " +
-                    field.getType().getSimpleName();
+            final String message =
+                    "Unable to autowire a " + "subject" + " value into field '" + field.getName() + "' of type " + field.getType().getSimpleName();
             throw new TestingException(message, throwable);
         }
     }
 
-    private static boolean autoWireSubject(final AnnotatedElement subjectField) {
+    private static boolean askedToAutoWireSubject(final AnnotatedElement subjectField) {
         final Subject annotation = subjectField.getAnnotation(Subject.class);
         return annotation.auto();
     }

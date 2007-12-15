@@ -41,7 +41,7 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
     private final SpecificationDoubleCreator stubCreator = new StubCreator();
     private final SpecificationDoubleCreator mockCreator = new MockCreator();
 
-    @Suggest("Add in subject auto-wiring.")
+    @Suggest("Add in subject auto-wiring. Do it last, as it may require doubles.")
     public void autoWireFields(final Object instanceToAutoWire) {
         checkNotNull(instanceToAutoWire);
         autoWireDummies(instanceToAutoWire);
@@ -51,21 +51,21 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
 
     private void autoWireDummies(final Object instanceToAutoWire) {
         final MarkingScheme dummyMarkingScheme = new MarkingSchemeImpl(Dummy.class, new DummyNamingConvention(), IGNORE);
-        autoWireMarkedFields(dummyCreator, instanceToAutoWire, dummyMarkingScheme, new DummyAutoWireDeterminator());
+        autoWireMarkedFields(instanceToAutoWire, dummyCreator, new DummyAutoWireDeterminator(), dummyMarkingScheme);
     }
 
     private void autoWireStubs(final Object instanceToAutoWire) {
         final MarkingScheme stubMarkingScheme = new MarkingSchemeImpl(Stub.class, new StubNamingConvention(), IGNORE);
-        autoWireMarkedFields(stubCreator, instanceToAutoWire, stubMarkingScheme, new StubAutoWireDeterminator());
+        autoWireMarkedFields(instanceToAutoWire, stubCreator, new StubAutoWireDeterminator(), stubMarkingScheme);
     }
 
     private void autoWireMocks(final Object instanceToAutoWire) {
         final MarkingScheme mockMarkingScheme = new MarkingSchemeImpl(Mock.class, new MockNamingConvention(), IGNORE);
-        autoWireMarkedFields(mockCreator, instanceToAutoWire, mockMarkingScheme, new MockAutoWireDeterminator());
+        autoWireMarkedFields(instanceToAutoWire, mockCreator, new MockAutoWireDeterminator(), mockMarkingScheme);
     }
 
-    private void autoWireMarkedFields(final SpecificationDoubleCreator doubleCreator, final Object instanceToAutoWire,
-            final MarkingScheme markingScheme, final AutoWireDeterminator autoWireDeterminator) {
+    private void autoWireMarkedFields(final Object instanceToAutoWire, final SpecificationDoubleCreator doubleCreator,
+            final AutoWireDeterminator autoWireDeterminator, final MarkingScheme markingScheme) {
         final Field[] fields = markedFieldLocator.locateAll(instanceToAutoWire.getClass(), markingScheme);
         for (final Field field : fields) {
             if (autoWireDeterminator.autoWire(field)) {
@@ -74,7 +74,7 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
         }
     }
 
-    @SuppressWarnings({"CatchGenericClass"})
+    @SuppressWarnings({"CatchGenericClass", "OverlyBroadCatchBlock"})
     // SUPPRESS IllegalCatch {
     private void autoWireField(final Object instanceToAutoWire, final Field field, final SpecificationDoubleCreator doubleCreator) {
         try {
@@ -82,13 +82,13 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
             field.setAccessible(true);
             fieldEdge.set(field, instanceToAutoWire, createdDouble);
         } catch (Throwable throwable) {
-            final String message = "Unable to autowire a specification double value into field '" + field.getName() + "' (type "
-                    + field.getType().getSimpleName() + ") in class " + instanceToAutoWire.getClass().getSimpleName();
+            final String message = "Unable to autowire a specification double value into field '" + field.getName() + "' (type " +
+                    field.getType().getSimpleName() + ") in class " + instanceToAutoWire.getClass().getSimpleName();
             throw new AutoWireException(message, throwable);
         }
     }
-    // } SUPPRESS IllegalCatch
 
+    // } SUPPRESS IllegalCatch
     // Note. This stuff below is bollocks, as we cannot specify a shared type between annotations!
 
     private interface AutoWireDeterminator {

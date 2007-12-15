@@ -66,18 +66,29 @@ public final class ActorAutoWirerImplAtomicTest extends InstinctTestCase {
         });
     }
 
-    public void testAutoWiresFieldsByNamingConvention() {
+    // TODO: TestDouble
+    public void testAutoWiresSubjectsByNamingConvention() {
     }
 
     // TODO: TestDouble
-    public void testAutoWiresSubjectsIntoClasses() {
+    public void testAutoWiresSubjectsByAnnotation() {
     }
 
     // TODO: TestDouble
     public void testWillWireMoreThanOneSubject() {
     }
 
-    public void testAutoWiresDummiesIntoClasses() throws Exception {
+    // TODO: TestDouble Come back here after writing a namin convention field locator.
+    public void nsoTestAutoWiresDummiesByNamingConvention() {
+        final Object value = autoWireAndGetFieldValue(instanceWithFieldsMarkedUsingANamingConvention, "dummySequence");
+        expectException(IllegalInvocationException.class, new Runnable() {
+            public void run() {
+                ((CharSequence) value).charAt(0);
+            }
+        });
+    }
+
+    public void testAutoWiresDummiesByAnnotation() throws Exception {
         final Object value = autoWireAndGetFieldValue(instanceWithFieldsToWire, "dummy");
         expectException(IllegalInvocationException.class, new Runnable() {
             public void run() {
@@ -91,7 +102,13 @@ public final class ActorAutoWirerImplAtomicTest extends InstinctTestCase {
         expect.that(value).isNull();
     }
 
-    public void testAutoWiresStubsIntoClasses() throws Exception {
+    // TODO: TestDouble Come back here after writing a namin convention field locator.
+    public void nsoTestAutoWiresStubsByNamingConvention() {
+        final Object value = autoWireAndGetFieldValue(instanceWithFieldsMarkedUsingANamingConvention, "stubString");
+        expect.that(value).isNotNull();
+    }
+
+    public void testAutoWiresStubsByAnnotation() throws Exception {
         final Object value = autoWireAndGetFieldValue(instanceWithFieldsToWire, "stub");
         expect.that(value).isNotNull();
     }
@@ -101,7 +118,17 @@ public final class ActorAutoWirerImplAtomicTest extends InstinctTestCase {
         expect.that(value).isNull();
     }
 
-    public void testAutoWiresMocksIntoClasses() throws Exception {
+    // TODO: TestDouble Come back here after writing a namin convention field locator.
+    public void nsoTestAutoWiresMocksByNamingConvention() {
+        final Object value = autoWireAndGetFieldValue(instanceWithFieldsMarkedUsingANamingConvention, "mockSequence");
+        expectException(ExpectationError.class, new Runnable() {
+            public void run() {
+                ((CharSequence) value).charAt(0);
+            }
+        });
+    }
+
+    public void testAutoWiresMocksByAnnotation() throws Exception {
         final Object value = autoWireAndGetFieldValue(instanceWithFieldsToWire, "mock");
         expectException(ExpectationError.class, new Runnable() {
             public void run() {
@@ -146,8 +173,8 @@ public final class ActorAutoWirerImplAtomicTest extends InstinctTestCase {
     private Object autoWireAndGetFieldValue(final Object instance, final String fieldName) {
         actorAutoWirer.autoWireFields(instance);
         try {
-            final Field stubField = getField(instance, fieldName);
-            return stubField.get(instance);
+            final Field field = getField(instance, fieldName);
+            return field.get(instance);
         } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
@@ -188,7 +215,7 @@ public final class ActorAutoWirerImplAtomicTest extends InstinctTestCase {
     @SuppressWarnings({"ALL"})
     private static final class AClassWithFieldsMarkedUsingANamingConvention {
         private String subject;
-        private CharSequence mockSequenct;
+        private CharSequence mockSequence;
         private String stubString;
         private CharSequence dummySequence;
     }

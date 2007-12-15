@@ -25,12 +25,13 @@ import java.lang.annotation.Annotation;
 @SuppressWarnings({"MethodParameterOfConcreteClass", "InstanceVariableOfConcreteClass", "MethodReturnOfConcreteClass"})
 @Fix({"Test drive."})
 public final class MarkingSchemeImpl extends Primordial implements MarkingScheme {
-    private final Class<?> annotationType;
+    private final Class<? extends Annotation> annotationType;
     private final NamingConvention namingConvention;
     private final AnnotationAttribute attributeConstraint;
 
-    public <A extends Annotation> MarkingSchemeImpl(
-            final Class<A> annotationType, final NamingConvention namingConvention, final AnnotationAttribute attributeConstraint) {
+    // TODO: Groups, remove the attributeConstraint
+    public <A extends Annotation> MarkingSchemeImpl(final Class<A> annotationType, final NamingConvention namingConvention,
+            final AnnotationAttribute attributeConstraint) {
         checkNotNull(annotationType, namingConvention, attributeConstraint);
         this.annotationType = annotationType;
         this.namingConvention = namingConvention;

@@ -32,11 +32,9 @@ public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
     @Suggest("Return an unmodifiable collection.")
     public <T> Collection<Method> locateAll(final Class<T> cls, final MarkingScheme markingScheme) {
         checkNotNull(cls, markingScheme);
-        final Collection<Method> annotatedMethods = findMethodsByAnnotation(cls, markingScheme.getAnnotationType());
-        final Collection<Method> namedMethods = findMethodsByNamingConvention(cls, markingScheme.getNamingConvention());
         final Collection<Method> methods = new HashSet<Method>();
-        methods.addAll(annotatedMethods);
-        methods.addAll(namedMethods);
+        methods.addAll(findMethodsByAnnotation(cls, markingScheme.getAnnotationType()));
+        methods.addAll(findMethodsByNamingConvention(cls, markingScheme.getNamingConvention()));
         return methods;
     }
 
