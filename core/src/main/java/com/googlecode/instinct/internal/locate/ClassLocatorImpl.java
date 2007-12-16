@@ -18,7 +18,7 @@ package com.googlecode.instinct.internal.locate;
 
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.JavaClassNameImpl;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;

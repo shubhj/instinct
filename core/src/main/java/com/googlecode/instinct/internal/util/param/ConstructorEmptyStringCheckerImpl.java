@@ -1,7 +1,9 @@
-package com.googlecode.instinct.internal.util.boost;
+package com.googlecode.instinct.internal.util.param;
 
 import com.googlecode.instinct.internal.util.NullMaster;
 import com.googlecode.instinct.internal.util.NullMasterImpl;
+import com.googlecode.instinct.internal.util.boost.ParameterCheckerTestUtil;
+import com.googlecode.instinct.internal.util.boost.ParameterCheckerTestUtilImpl;
 import com.googlecode.instinct.internal.util.instance.InstanceProvider;
 
 public final class ConstructorEmptyStringCheckerImpl implements ConstructorEmptyStringChecker {

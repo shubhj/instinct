@@ -1,8 +1,10 @@
-package com.googlecode.instinct.internal.util.boost;
+package com.googlecode.instinct.internal.util.param;
 
 import com.googlecode.instinct.internal.util.NullMaster;
 import com.googlecode.instinct.internal.util.NullMasterImpl;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.boost.ParameterCheckerTestUtil;
+import com.googlecode.instinct.internal.util.boost.ParameterCheckerTestUtilImpl;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.InstanceProvider;
 
 public final class ConstructorNullParameterTestCheckerImpl implements ConstructorNullParameterTestChecker {

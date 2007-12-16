@@ -18,8 +18,9 @@ package com.googlecode.instinct.test.checker;
 
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.util.param.ConstructorNullParameterTestChecker;
 import com.googlecode.instinct.internal.util.boost.ClassTestChecker;
-import com.googlecode.instinct.internal.util.boost.ConstructorNullParameterTestChecker;
+import com.googlecode.instinct.internal.util.param.ConstructorNullParameterTestCheckerImpl;
 import com.googlecode.instinct.internal.util.boost.MehodNullParameterTestChecker;
 import com.googlecode.instinct.internal.util.boost.MehodNullParameterTestCheckerImpl;
 import com.googlecode.instinct.internal.util.instance.InstanceProvider;
@@ -31,7 +32,7 @@ public final class ClassChecker {
     private static final ClassTestChecker CLASS_CHECKER = new com.googlecode.instinct.internal.util.boost.ClassTestCheckerImpl();
     @Fix("This returns mocks - which aint much use when testing a specific implementation see StateExpectationsImplAtomicTest.")
     private static final InstanceProvider INSTANCE_PROVIDER = new GenericInstanceProvider();
-    private static final ConstructorNullParameterTestChecker CONSTRUCTOR_NULL_CHECKER = new com.googlecode.instinct.internal.util.boost.ConstructorNullParameterTestCheckerImpl(
+    private static final ConstructorNullParameterTestChecker CONSTRUCTOR_NULL_CHECKER = new ConstructorNullParameterTestCheckerImpl(
             INSTANCE_PROVIDER);
     private static final MehodNullParameterTestChecker METHOD_NULL_CHECKER = new MehodNullParameterTestCheckerImpl(INSTANCE_PROVIDER);
 

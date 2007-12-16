@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.internal.locate;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

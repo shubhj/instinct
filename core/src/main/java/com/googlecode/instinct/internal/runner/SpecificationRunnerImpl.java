@@ -28,7 +28,7 @@ import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.lang.ConstructorInvoker;
 import com.googlecode.instinct.internal.util.lang.ConstructorInvokerImpl;

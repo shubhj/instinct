@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.util;
 
 import com.googlecode.instinct.internal.edge.EdgeException;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import java.lang.reflect.InvocationTargetException;
 
 @Suggest("May need to put smarts in to detect InvocationTargetException & EdgeExceptions")

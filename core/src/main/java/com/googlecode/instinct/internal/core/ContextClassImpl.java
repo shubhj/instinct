@@ -21,7 +21,7 @@ import com.googlecode.instinct.internal.locate.MarkedMethodLocatorImpl;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.lang.Primordial;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;

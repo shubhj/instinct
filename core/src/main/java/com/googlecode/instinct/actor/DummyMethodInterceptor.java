@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.actor;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import java.lang.reflect.Method;
 import java.lang.reflect.Member;
 import static net.sf.cglib.proxy.Enhancer.isEnhanced;

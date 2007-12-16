@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.marker;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.lang.Primordial;
 
 @SuppressWarnings({"StaticVariableOfConcreteClass"})

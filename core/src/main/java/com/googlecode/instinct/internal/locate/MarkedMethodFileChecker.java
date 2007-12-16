@@ -20,7 +20,7 @@ import com.googlecode.instinct.internal.edge.EdgeException;
 import com.googlecode.instinct.internal.util.ClassInstantiator;
 import com.googlecode.instinct.internal.util.ClassInstantiatorImpl;
 import com.googlecode.instinct.internal.util.Fix;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.MarkingScheme;
 import java.io.File;
 import java.lang.reflect.Method;

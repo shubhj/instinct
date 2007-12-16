@@ -34,7 +34,7 @@ import com.googlecode.instinct.expect.state.StateExpectations;
 import com.googlecode.instinct.expect.state.StateExpectationsImpl;
 import com.googlecode.instinct.expect.state.checker.StringChecker;
 import com.googlecode.instinct.internal.util.Fix;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import java.io.File;
 import java.util.Collection;
 import java.util.EventObject;

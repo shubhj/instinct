@@ -17,7 +17,7 @@
 package com.googlecode.instinct.actor;
 
 import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import java.lang.reflect.Array;
 
 public final class MockCreator implements SpecificationDoubleCreator {

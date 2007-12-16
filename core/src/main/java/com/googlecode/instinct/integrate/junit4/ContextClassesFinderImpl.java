@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.annotate.ContextClasses;
 import java.util.Arrays;
 import java.util.Collection;

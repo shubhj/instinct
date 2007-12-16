@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.internal.util;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.AnnotationAttribute;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import java.util.ArrayList;

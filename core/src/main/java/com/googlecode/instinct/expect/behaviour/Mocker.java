@@ -49,12 +49,12 @@ public final class Mocker {
         return J_MOCK2_MOCKERY.sequence();
     }
 
-    public static void verify() {
-        J_MOCK2_MOCKERY.verify();
-    }
-
     public static void reset() {
         J_MOCK2_MOCKERY.reset();
+    }
+
+    public static void verify() {
+        J_MOCK2_MOCKERY.verify();
     }
 
     public static States states(final String stateName) {

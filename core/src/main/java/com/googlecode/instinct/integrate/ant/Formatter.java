@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotWhitespace;
 import com.googlecode.instinct.report.ResultFormat;
 import static com.googlecode.instinct.report.ResultFormat.valueOf;
 import com.googlecode.instinct.report.ResultMessageBuilder;

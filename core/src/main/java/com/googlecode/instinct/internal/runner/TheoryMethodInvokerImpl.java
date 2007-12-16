@@ -21,7 +21,7 @@ import com.googlecode.instinct.internal.edge.java.lang.reflect.MethodEdgeImpl;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
-import com.googlecode.instinct.internal.util.ParamChecker;
+import com.googlecode.instinct.internal.util.param.ParamChecker;
 import com.googlecode.instinct.internal.util.Suggest;
 import java.lang.reflect.Method;
 

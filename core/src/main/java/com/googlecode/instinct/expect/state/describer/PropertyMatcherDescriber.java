@@ -17,7 +17,7 @@
 package com.googlecode.instinct.expect.state.describer;
 
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherDescriber;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 
 public class PropertyMatcherDescriber<T> implements MatcherDescriber {
 

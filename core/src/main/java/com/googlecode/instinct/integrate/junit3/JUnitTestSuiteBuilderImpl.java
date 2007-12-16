@@ -21,7 +21,7 @@ import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
 import com.googlecode.instinct.internal.locate.ContextFinder;
 import com.googlecode.instinct.internal.locate.ContextFinderImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import junit.framework.Test;
 import junit.framework.TestSuite;

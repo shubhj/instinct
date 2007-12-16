@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import java.lang.annotation.Annotation;
 
 public final class ParameterAnnotationFinderImpl implements ParameterAnnotationFinder {

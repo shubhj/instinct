@@ -18,7 +18,7 @@ package com.googlecode.instinct.test.reflect;
 
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.internal.util.Reflector.insertFieldValueUsingInferredType;
 

@@ -21,7 +21,7 @@ import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
-import com.googlecode.instinct.internal.util.ParamChecker;
+import com.googlecode.instinct.internal.util.param.ParamChecker;
 import java.util.Collection;
 import java.util.HashSet;
 

@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.example.calendar;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import java.util.Collection;

@@ -18,7 +18,7 @@ package com.googlecode.instinct.internal.util.proxy;
 
 import com.googlecode.instinct.internal.util.ObjectFactory;
 import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import static java.lang.reflect.Modifier.isFinal;
 import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.Factory;

@@ -18,7 +18,7 @@ package com.googlecode.instinct.internal.util.boost;
 
 import com.googlecode.instinct.internal.util.NullMaster;
 import com.googlecode.instinct.internal.util.NullMasterImpl;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.InstanceProvider;
 
 public final class MehodNullParameterTestCheckerImpl implements MehodNullParameterTestChecker {

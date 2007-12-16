@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.internal.util.lang;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import java.lang.reflect.Method;
 
 public final class ReflectMethodMasterImpl implements ReflectMethodMaster {

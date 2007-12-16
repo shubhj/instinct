@@ -28,7 +28,7 @@ import static com.googlecode.instinct.internal.runner.RunnableItemBuilder.ITEM_S
 import com.googlecode.instinct.internal.runner.RunnableItemBuilderImpl;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.util.Fix;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import com.googlecode.instinct.report.ResultMessageBuilder;

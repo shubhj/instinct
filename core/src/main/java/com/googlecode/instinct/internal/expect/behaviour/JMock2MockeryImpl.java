@@ -20,7 +20,7 @@ import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdgeImpl;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Set;
@@ -65,15 +65,15 @@ public final class JMock2MockeryImpl implements JMock2Mockery {
         return mockery.states(stateName);
     }
 
-    public void verify() {
-        mockery.assertIsSatisfied();
-    }
-
     // Note. This is really horrible. As jMock lifecycle does not support (by design) the sharing of contexts across test invocations.
     public void reset() {
         clearMockNames();
         clearDispatcherListField("expectations");
         clearDispatcherListField("stateMachines");
+    }
+
+    public void verify() {
+        mockery.assertIsSatisfied();
     }
 
     private void clearMockNames() {

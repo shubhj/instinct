@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import static org.junit.runner.Description.createTestDescription;
 import static org.junit.runner.Description.*;
 
