@@ -18,15 +18,15 @@ package com.googlecode.instinct.integrate.junit4;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
-import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubjectWithConstructorArgs;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubjectWithConstructorArgs;
 import java.util.Collection;
 import org.jmock.Expectations;
 import org.junit.runner.Description;

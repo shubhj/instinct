@@ -18,20 +18,20 @@ package com.googlecode.instinct.internal.core;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import static com.googlecode.instinct.expect.behaviour.Mocker.sequence;
-import com.googlecode.instinct.internal.locate.MarkedMethodLocator;
+import com.googlecode.instinct.internal.locate.method.MarkedMethodLocator;
 import com.googlecode.instinct.internal.matcher.SpecificationMatcher;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
+import static com.googlecode.instinct.internal.util.Reflector.getMethod;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubjectWithConstructorArgs;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.internal.util.Reflector.getMethod;
-import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubjectWithConstructorArgs;
 import java.lang.reflect.Method;
 import static java.util.Arrays.asList;
 import java.util.Collection;
@@ -80,7 +80,8 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
     public void testRunsUsingContextRunner() {
         expect.that(new Expectations() {
             {
-                one(contextRunner).run(contextClass); will(returnValue(contextResult));
+                one(contextRunner).run(contextClass);
+                will(returnValue(contextResult));
             }
         });
         expect.that(contextResult).isTheSameInstanceAs(contextClass.run());
@@ -107,7 +108,8 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
     public void testReturnsSpecificationsToRun() {
         expect.that(new Expectations() {
             {
-                atLeast(1).of(methodLocator).locateAll(with(same(contextType)), with(any(MarkingScheme.class))); will(returnValue(specMethods));
+                atLeast(1).of(methodLocator).locateAll(with(same(contextType)), with(any(MarkingScheme.class)));
+                will(returnValue(specMethods));
             }
         });
         final Collection<LifecycleMethod> methods = contextClass.getSpecificationMethods();
@@ -117,7 +119,8 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
     public void testReturnsBeforeSpecificationMethods() {
         expect.that(new Expectations() {
             {
-                atLeast(1).of(methodLocator).locateAll(with(same(contextType)), with(any(MarkingScheme.class))); will(returnValue(beforeSpecMethods));
+                atLeast(1).of(methodLocator).locateAll(with(same(contextType)), with(any(MarkingScheme.class)));
+                will(returnValue(beforeSpecMethods));
             }
         });
         final Collection<LifecycleMethod> methods = contextClass.getBeforeSpecificationMethods();
@@ -128,7 +131,8 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
     public void testReturnsAfterSpecificationMethods() {
         expect.that(new Expectations() {
             {
-                atLeast(1).of(methodLocator).locateAll(with(same(contextType)), with(any(MarkingScheme.class))); will(returnValue(afterSpecMethods));
+                atLeast(1).of(methodLocator).locateAll(with(same(contextType)), with(any(MarkingScheme.class)));
+                will(returnValue(afterSpecMethods));
             }
         });
         final Collection<LifecycleMethod> methods = contextClass.getAfterSpecificationMethods();
@@ -140,9 +144,15 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
         expect.that(new Expectations() {
             {
                 final Sequence sequence = sequence();
-                one(methodLocator).locateAll(with(same(contextType)), with(any(MarkingScheme.class))); will(returnValue(specMethods)); inSequence(sequence);
-                one(methodLocator).locateAll(with(same(contextType)), with(any(MarkingScheme.class))); will(returnValue(beforeSpecMethods)); inSequence(sequence);
-                one(methodLocator).locateAll(with(same(contextType)), with(any(MarkingScheme.class))); will(returnValue(afterSpecMethods)); inSequence(sequence);
+                one(methodLocator).locateAll(with(same(contextType)), with(any(MarkingScheme.class)));
+                will(returnValue(specMethods));
+                inSequence(sequence);
+                one(methodLocator).locateAll(with(same(contextType)), with(any(MarkingScheme.class)));
+                will(returnValue(beforeSpecMethods));
+                inSequence(sequence);
+                one(methodLocator).locateAll(with(same(contextType)), with(any(MarkingScheme.class)));
+                will(returnValue(afterSpecMethods));
+                inSequence(sequence);
             }
         });
         final Collection<SpecificationMethod> methods = contextClass.buildSpecificationMethods();

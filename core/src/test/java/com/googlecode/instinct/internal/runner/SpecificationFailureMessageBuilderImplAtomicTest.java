@@ -22,8 +22,8 @@ import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 import org.jmock.Expectations;
@@ -59,7 +59,8 @@ public final class SpecificationFailureMessageBuilderImplAtomicTest extends Inst
     public void testBuildsMessagesFromFailedSpecResults() {
         expect.that(new Expectations() {
             {
-                atLeast(1).of(exceptionFinder).getRootCause(failureCause); will(returnValue(rootCause));
+                atLeast(1).of(exceptionFinder).getRootCause(failureCause);
+                will(returnValue(rootCause));
             }
         });
         final String failureMessage = failureMessageBuilder.buildMessage(failureStatus);

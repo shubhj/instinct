@@ -17,6 +17,9 @@
 package com.googlecode.instinct.internal.locate;
 
 import static com.googlecode.instinct.expect.Expect.expect;
+import static com.googlecode.instinct.internal.util.Reflector.getDeclaredMethod;
+import static com.googlecode.instinct.internal.util.Reflector.getFieldByName;
+import static com.googlecode.instinct.internal.util.Reflector.getMethod;
 import com.googlecode.instinct.marker.AnnotationAttribute;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.annotate.Context;
@@ -25,9 +28,6 @@ import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.internal.util.Reflector.getDeclaredMethod;
-import static com.googlecode.instinct.internal.util.Reflector.getFieldByName;
-import static com.googlecode.instinct.internal.util.Reflector.getMethod;
 import java.lang.reflect.Method;
 
 @SuppressWarnings({"MethodReturnOfConcreteClass"})
@@ -89,8 +89,7 @@ public final class AnnotationCheckerImplAtomicTest extends InstinctTestCase {
     public void testFindsAnnotatedElementsWithEmptyAttributes() {
         final Method annotatedMethod = getAnnotatedMethod("withEmptyGroupAnnonation");
         final Object[] attributeValue = new String[]{};
-        final boolean isAnnotated = annotationChecker.isAnnotated(annotatedMethod, Specification.class,
-                groupAttribute("groups", attributeValue));
+        final boolean isAnnotated = annotationChecker.isAnnotated(annotatedMethod, Specification.class, groupAttribute("groups", attributeValue));
         expect.that(isAnnotated).isTrue();
     }
 

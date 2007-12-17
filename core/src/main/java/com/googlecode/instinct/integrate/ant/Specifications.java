@@ -16,15 +16,15 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import com.googlecode.instinct.internal.locate.ClassLocator;
-import com.googlecode.instinct.internal.locate.ClassLocatorImpl;
-import com.googlecode.instinct.internal.locate.ClassWithContextAnnotationFileFilter;
-import com.googlecode.instinct.internal.locate.ClassWithMarkedMethodsFileFilter;
+import com.googlecode.instinct.internal.locate.cls.ClassLocator;
+import com.googlecode.instinct.internal.locate.cls.ClassLocatorImpl;
+import com.googlecode.instinct.internal.locate.cls.ClassWithContextAnnotationFileFilter;
+import com.googlecode.instinct.internal.locate.cls.ClassWithMarkedMethodsFileFilter;
 import com.googlecode.instinct.internal.util.GroupSanitiser;
 import com.googlecode.instinct.internal.util.GroupSanitiserImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.AnnotationAttribute;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.MarkingScheme;
@@ -67,9 +67,8 @@ public final class Specifications {
         specificationGroupsConstraint = groupSanitiser.sanitise(groups);
     }
 
-    @Suggest({"This should return ContextClass's, that way we don't need to instantiate them.",
-            "The filters already instantiate them, do so here and re-use",
-            "Don't return an array, use an ordered set."})
+    @Suggest(
+            {"This should return ContextClass's, that way we don't need to instantiate them.", "The filters already instantiate them, do so here and re-use", "Don't return an array, use an ordered set."})
     public JavaClassName[] getContextClasses() {
         checkPreconditions();
         ensureSpecificationGroupIsSet();

@@ -17,15 +17,15 @@
 package com.googlecode.instinct.internal.util.proxy;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
-import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.NoOp;
 import org.jmock.Expectations;

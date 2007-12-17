@@ -21,8 +21,8 @@ import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
 import org.jmock.Sequence;
@@ -108,7 +108,8 @@ public final class JMock2MockeryImplAtomicTest extends InstinctTestCase {
     public void testDelegatesSequenceCallToUnderlyingMockery() {
         context.checking(new Expectations() {
             {
-                one(mockery).sequence("Sequence-0"); will(returnValue(sequence));
+                one(mockery).sequence("Sequence-0");
+                will(returnValue(sequence));
             }
         });
         expect.that(jMock2Mockery.sequence()).isTheSameInstanceAs(sequence);
@@ -117,7 +118,8 @@ public final class JMock2MockeryImplAtomicTest extends InstinctTestCase {
     public void testDelegatesStatesCallToUnderlyingMockery() {
         context.checking(new Expectations() {
             {
-                one(mockery).states(stateName); will(returnValue(state));
+                one(mockery).states(stateName);
+                will(returnValue(state));
             }
         });
         expect.that(jMock2Mockery.states(stateName)).isTheSameInstanceAs(state);

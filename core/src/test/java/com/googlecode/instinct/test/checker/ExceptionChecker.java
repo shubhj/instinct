@@ -16,17 +16,15 @@
 
 package com.googlecode.instinct.test.checker;
 
-import java.lang.reflect.Constructor;
 import com.googlecode.instinct.internal.edge.EdgeException;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ConstructorEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ConstructorEdgeImpl;
-import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.internal.util.instance.InstanceProvider;
 import com.googlecode.instinct.internal.util.instance.GenericInstanceProvider;
-import com.googlecode.instinct.test.TestingException;
+import com.googlecode.instinct.internal.util.instance.InstanceProvider;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
+import java.lang.reflect.Constructor;
 
 @SuppressWarnings({"ExceptionClassNameDoesntEndWithException"})
 public final class ExceptionChecker {
@@ -43,7 +41,6 @@ public final class ExceptionChecker {
         checkSuperClassMethods(exceptionClass);
     }
 
-    @Suggest("Bit smelly.")
     private static <T extends RuntimeException> void checkSuperClassMethods(final Class<T> cls) {
         try {
             checkMessage(cls);
@@ -64,7 +61,7 @@ public final class ExceptionChecker {
         final Object message = instanceProvider.newInstance(String.class);
         final Exception instance = edgeConstructor.newInstance(constructor, new Object[]{message});
         if (!message.equals(instance.getMessage())) {
-            throw new TestingException("Constructor " + cls.getSimpleName() + "(String) must call super(String)");
+            throw new AssertionError("Constructor " + cls.getSimpleName() + "(String) must call super(String)");
         }
     }
 
@@ -73,7 +70,7 @@ public final class ExceptionChecker {
         final Object cause = instanceProvider.newInstance(Throwable.class);
         final Exception instance = edgeConstructor.newInstance(constructor, new Object[]{cause});
         if (!cause.equals(instance.getCause())) {
-            throw new TestingException("Constructor " + cls.getSimpleName() + "(Throwable) must call super(Throwable)");
+            throw new AssertionError("Constructor " + cls.getSimpleName() + "(Throwable) must call super(Throwable)");
         }
     }
 
@@ -83,10 +80,10 @@ public final class ExceptionChecker {
         final Object cause = instanceProvider.newInstance(Throwable.class);
         final Exception instance = edgeConstructor.newInstance(constructor, new Object[]{message, cause});
         if (!message.equals(instance.getMessage())) {
-            throw new TestingException("Constructor " + cls.getSimpleName() + "(String,Throwable) must call super(String,Throwable)");
+            throw new AssertionError("Constructor " + cls.getSimpleName() + "(String,Throwable) must call super(String,Throwable)");
         }
         if (!cause.equals(instance.getCause())) {
-            throw new TestingException("Constructor " + cls.getSimpleName() + "(String,Throwable) must call super(String,Throwable)");
+            throw new AssertionError("Constructor " + cls.getSimpleName() + "(String,Throwable) must call super(String,Throwable)");
         }
     }
 

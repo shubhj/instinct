@@ -18,11 +18,11 @@ package com.googlecode.instinct.integrate.junit3;
 
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
-import com.googlecode.instinct.internal.locate.ContextFinder;
-import com.googlecode.instinct.internal.locate.ContextFinderImpl;
+import com.googlecode.instinct.internal.locate.cls.ContextFinder;
+import com.googlecode.instinct.internal.locate.cls.ContextFinderImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 

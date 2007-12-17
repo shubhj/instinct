@@ -16,19 +16,16 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
+import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.util.instance.ObjectFactory;
+import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
 import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
-import static org.junit.runner.Description.createTestDescription;
-import static org.junit.runner.Description.*;
-
 import java.util.Collection;
-
 import org.junit.runner.Description;
+import static org.junit.runner.Description.createSuiteDescription;
+import static org.junit.runner.Description.createTestDescription;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
-
-import com.googlecode.instinct.internal.core.SpecificationMethod;
-import com.googlecode.instinct.internal.util.ObjectFactory;
-import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
 
 public final class InstinctRunner extends Runner {
     private final SpecificationMethodBuilder specificationMethodBuilder = new SpecificationMethodBuilderImpl();

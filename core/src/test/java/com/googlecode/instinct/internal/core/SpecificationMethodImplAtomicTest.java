@@ -16,21 +16,25 @@
 
 package com.googlecode.instinct.internal.core;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.util.Collection;
 import static com.googlecode.instinct.expect.Expect.expect;
 import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
+import static com.googlecode.instinct.internal.util.Reflector.getMethod;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
-import com.googlecode.instinct.marker.annotate.*;
+import com.googlecode.instinct.marker.annotate.Stub;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.runner.SpecificationListener;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubjectWithConstructorArgs;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.internal.util.Reflector.getMethod;
-import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubjectWithConstructorArgs;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.util.Collection;
 import org.jmock.Expectations;
 
 @SuppressWarnings({"unchecked"})

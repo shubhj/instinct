@@ -17,12 +17,12 @@
 package com.googlecode.instinct.defect.defect8;
 
 import com.googlecode.instinct.defect.defect8.data.naming.ASubContext;
-import com.googlecode.instinct.defect.defect8.data.naming.StaticSubContext;
 import com.googlecode.instinct.defect.defect8.data.naming.ASubContextOfAnAccessRestrictedContext;
+import com.googlecode.instinct.defect.defect8.data.naming.StaticSubContext;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.internal.locate.NamingConventionMethodLocator;
-import com.googlecode.instinct.internal.locate.NamingConventionMethodLocatorImpl;
+import com.googlecode.instinct.internal.locate.method.NamingConventionMethodLocator;
+import com.googlecode.instinct.internal.locate.method.NamingConventionMethodLocatorImpl;
 import com.googlecode.instinct.internal.util.TechNote;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.naming.AfterSpecificationNamingConvention;
@@ -86,11 +86,9 @@ public class AFixedDefect8WithANamingConventionLocator {
                 specList);
     }
 
-    private void expectNamingConventionIsFollowed(final Class<?> targetClass, final NamingConvention namingConvention,
-            final int numOfExpectedMethods, final List<String> expectedMethodNames) {
-        final Collection<Method> locatedMethods =
-                locator.locate(targetClass, namingConvention);
-
+    private void expectNamingConventionIsFollowed(final Class<?> targetClass, final NamingConvention namingConvention, final int numOfExpectedMethods,
+            final List<String> expectedMethodNames) {
+        final Collection<Method> locatedMethods = locator.locate(targetClass, namingConvention);
         expect.that(locatedMethods).isOfSize(numOfExpectedMethods);
         for (final Method aLocatedMethod : locatedMethods) {
             expect.that(expectedMethodNames).containsItem(aLocatedMethod.getName());

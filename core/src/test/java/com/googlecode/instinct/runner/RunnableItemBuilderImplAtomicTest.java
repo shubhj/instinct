@@ -16,25 +16,25 @@
 
 package com.googlecode.instinct.runner;
 
-import java.util.Collection;
-import java.util.Iterator;
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.locate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.RunnableItem;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.locate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
 import static com.googlecode.instinct.internal.runner.RunnableItemBuilder.ITEM_SEPARATOR;
 import static com.googlecode.instinct.internal.runner.RunnableItemBuilder.METHOD_SEPARATOR;
 import com.googlecode.instinct.internal.runner.RunnableItemBuilderImpl;
-import com.googlecode.instinct.internal.util.ClassInstantiator;
+import com.googlecode.instinct.internal.util.instance.ClassInstantiator;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
-import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
+import java.util.Collection;
+import java.util.Iterator;
 import org.jmock.Expectations;
 
 @SuppressWarnings({"InnerClassTooDeeplyNested", "InnerClassTooDeeplyNested"})
@@ -113,8 +113,7 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
     }
 
     public void testRejectsSpecsMarkedWithTwoMethods() {
-        expectException(IllegalArgumentException.class,
-                "Specification to run cannot contain more than one " + METHOD_SEPARATOR, new Runnable() {
+        expectException(IllegalArgumentException.class, "Specification to run cannot contain more than one " + METHOD_SEPARATOR, new Runnable() {
             public void run() {
                 runnableItemBuilder.build("ClassName" + METHOD_SEPARATOR + "specName" + METHOD_SEPARATOR + "anotherSpec");
             }

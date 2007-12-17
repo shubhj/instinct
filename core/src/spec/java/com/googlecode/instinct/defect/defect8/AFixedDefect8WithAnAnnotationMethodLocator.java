@@ -22,8 +22,8 @@ import com.googlecode.instinct.defect.defect8.data.annotation.AnotherContext;
 import com.googlecode.instinct.defect.defect8.data.annotation.StaticSubContext;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.internal.locate.AnnotatedMethodLocator;
-import com.googlecode.instinct.internal.locate.AnnotatedMethodLocatorImpl;
+import com.googlecode.instinct.internal.locate.field.AnnotatedMethodLocator;
+import com.googlecode.instinct.internal.locate.field.AnnotatedMethodLocatorImpl;
 import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
@@ -58,11 +58,9 @@ public class AFixedDefect8WithAnAnnotationMethodLocator {
     public void shouldReturnSpecificationsInAContextAndItsBaseClasses() {
         final Collection<Method> methods = locator.locate(AnotherContext.class, Specification.class);
         expect.that(methods).isOfSize(2);
-
         final List<String> expectList = new ArrayList<String>();
         expectList.add("shouldEquateTrueToTrue");
         expectList.add("shouldEquateFalseToFalse");
-
         final Iterator<Method> methodIterator = methods.iterator();
         expect.that(expectList).containsItem(methodIterator.next().getName());
         expect.that(expectList).containsItem(methodIterator.next().getName());

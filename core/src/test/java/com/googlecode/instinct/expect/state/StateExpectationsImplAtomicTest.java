@@ -39,8 +39,8 @@ import com.googlecode.instinct.expect.state.checker.ObjectCheckerImpl;
 import com.googlecode.instinct.expect.state.checker.StringChecker;
 import com.googlecode.instinct.expect.state.checker.StringCheckerImpl;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
-import com.googlecode.instinct.internal.util.ObjectFactory;
 import static com.googlecode.instinct.internal.util.Reflector.insertFieldValue;
+import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Stub;
@@ -63,7 +63,7 @@ public final class StateExpectationsImplAtomicTest extends InstinctTestCase {
     @Mock private Matcher hamcrestMatcher;
     @Stub(auto = false) private Collection<String> collection;
     @Dummy private Object object;
-    
+
     @Override
     public void setUpTestDoubles() {
         collection = new ArrayList<String>();
@@ -95,8 +95,7 @@ public final class StateExpectationsImplAtomicTest extends InstinctTestCase {
 
     public void testCalledWithComparableReturnsComparableChecker() {
         final Integer integer = 1;
-        final ObjectChecker expectedChecker =
-                expectCheckerCreated(ComparableChecker.class, ComparableCheckerImpl.class, integer);
+        final ObjectChecker expectedChecker = expectCheckerCreated(ComparableChecker.class, ComparableCheckerImpl.class, integer);
         ComparableChecker<Integer> checker = stateExpectations.that(integer);
         assertSame(expectedChecker, checker);
     }
@@ -166,12 +165,13 @@ public final class StateExpectationsImplAtomicTest extends InstinctTestCase {
         stateExpectations.notThat(object, hamcrestMatcher);
     }
 
-    private <T, I extends ObjectChecker<T>, C extends ObjectCheckerImpl<T>> I expectCheckerCreated(
-            final Class<I> checkerInterfaceClass, final Class<C> checkerImplClass, final T checkerSubject) {
+    private <T, I extends ObjectChecker<T>, C extends ObjectCheckerImpl<T>> I expectCheckerCreated(final Class<I> checkerInterfaceClass,
+            final Class<C> checkerImplClass, final T checkerSubject) {
         final I expectedChecker = mock(checkerInterfaceClass);
         expect.that(new Expectations() {
             {
-                one(objectFactory).create(checkerImplClass, checkerSubject); will(returnValue(expectedChecker));
+                one(objectFactory).create(checkerImplClass, checkerSubject);
+                will(returnValue(expectedChecker));
             }
         });
         return expectedChecker;

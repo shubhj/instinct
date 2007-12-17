@@ -16,14 +16,14 @@
 
 package com.googlecode.instinct.internal.core;
 
-import com.googlecode.instinct.internal.locate.MarkedMethodLocator;
-import com.googlecode.instinct.internal.locate.MarkedMethodLocatorImpl;
+import com.googlecode.instinct.internal.locate.method.MarkedMethodLocator;
+import com.googlecode.instinct.internal.locate.method.MarkedMethodLocatorImpl;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.lang.Primordial;
+import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
@@ -92,8 +92,8 @@ public final class ContextClassImpl extends Primordial implements ContextClass {
     public Collection<SpecificationMethod> buildSpecificationMethods() {
         final Collection<SpecificationMethod> specificationMethodResults = new ArrayList<SpecificationMethod>();
         for (final LifecycleMethod lifecycleSpecificationMethod : getSpecificationMethods()) {
-            specificationMethodResults.add(new SpecificationMethodImpl(lifecycleSpecificationMethod,
-                    getBeforeSpecificationMethods(), getAfterSpecificationMethods()));
+            specificationMethodResults
+                    .add(new SpecificationMethodImpl(lifecycleSpecificationMethod, getBeforeSpecificationMethods(), getAfterSpecificationMethods()));
         }
         return specificationMethodResults;
     }

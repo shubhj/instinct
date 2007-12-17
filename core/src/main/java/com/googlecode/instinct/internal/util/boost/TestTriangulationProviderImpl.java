@@ -18,8 +18,8 @@ package com.googlecode.instinct.internal.util.boost;
 
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ProxyEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ProxyEdgeImpl;
-import com.googlecode.instinct.internal.util.PrimitiveTypeBoxer;
-import com.googlecode.instinct.internal.util.PrimitiveTypeBoxerImpl;
+import com.googlecode.instinct.internal.util.instance.PrimitiveTypeBoxer;
+import com.googlecode.instinct.internal.util.instance.PrimitiveTypeBoxerImpl;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationHandler;
 

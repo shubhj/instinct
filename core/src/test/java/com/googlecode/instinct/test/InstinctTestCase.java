@@ -18,8 +18,8 @@ package com.googlecode.instinct.test;
 
 import static com.googlecode.instinct.expect.behaviour.Mocker.reset;
 import static com.googlecode.instinct.expect.behaviour.Mocker.verify;
-import static com.googlecode.instinct.test.mock.ActorAutoWirer.autoWireDoubleFields;
-import static com.googlecode.instinct.test.mock.ActorAutoWirer.autoWireSubjectFields;
+import static com.googlecode.instinct.test.actor.ActorAutoWirer.autoWireDoubleFields;
+import static com.googlecode.instinct.test.actor.ActorAutoWirer.autoWireSubjectFields;
 import junit.framework.TestCase;
 
 @SuppressWarnings({"NoopMethodInAbstractClass", "CatchGenericClass", "DesignForExtension"})
@@ -48,7 +48,7 @@ public abstract class InstinctTestCase extends TestCase {
             tearDown();
         }
         if (message != null) {
-            throw new TestingException(message);
+            throw new AssertionError(message);
         }
     }
 

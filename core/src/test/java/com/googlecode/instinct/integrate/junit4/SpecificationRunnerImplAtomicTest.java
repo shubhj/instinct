@@ -16,22 +16,22 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
-import java.util.Collection;
-import java.util.HashSet;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdge;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
 import com.googlecode.instinct.internal.util.ExceptionFinder;
-import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.marker.annotate.Mock;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubjectWithConstructorArgs;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubjectWithConstructorArgs;
+import java.util.Collection;
+import java.util.HashSet;
 import org.jmock.Expectations;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
@@ -79,7 +79,8 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
         setUpCommonExpectations();
         expect.that(new Expectations() {
             {
-                one(specificationResult).completedSuccessfully(); will(returnValue(true));
+                one(specificationResult).completedSuccessfully();
+                will(returnValue(true));
                 ignoring(specificationResult).getStatus();
                 one(notifier).fireTestFinished(description);
             }
@@ -91,9 +92,12 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
         setUpCommonExpectations();
         expect.that(new Expectations() {
             {
-                one(specificationResult).completedSuccessfully(); will(returnValue(true));
-                one(specificationResult).getStatus(); will(returnValue(pendingRunStatus));
-                one(pendingRunStatus).getDetailedStatus(); will(returnValue(PENDING));
+                one(specificationResult).completedSuccessfully();
+                will(returnValue(true));
+                one(specificationResult).getStatus();
+                will(returnValue(pendingRunStatus));
+                one(pendingRunStatus).getDetailedStatus();
+                will(returnValue(PENDING));
                 one(notifier).fireTestIgnored(description);
             }
         });
@@ -104,11 +108,16 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
         setUpCommonExpectations();
         expect.that(new Expectations() {
             {
-                one(specificationResult).completedSuccessfully(); will(returnValue(false));
-                one(specificationResult).getStatus(); will(returnValue(specificationRunStatus));
-                one(specificationRunStatus).getDetailedStatus(); will(returnValue(exception));
-                one(exceptionFinder).getRootCause(with(any(Throwable.class))); will(returnValue(rootCause));
-                one(objectFactory).create(with(same(Failure.class)), with(equal(new Object[]{description, rootCause}))); will(returnValue(failure));
+                one(specificationResult).completedSuccessfully();
+                will(returnValue(false));
+                one(specificationResult).getStatus();
+                will(returnValue(specificationRunStatus));
+                one(specificationRunStatus).getDetailedStatus();
+                will(returnValue(exception));
+                one(exceptionFinder).getRootCause(with(any(Throwable.class)));
+                will(returnValue(rootCause));
+                one(objectFactory).create(with(same(Failure.class)), with(equal(new Object[]{description, rootCause})));
+                will(returnValue(failure));
                 one(notifier).fireTestFailure(failure);
             }
         });
@@ -118,12 +127,17 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     private void setUpCommonExpectations() {
         expect.that(new Expectations() {
             {
-                one(specificationMethod).getName(); will(returnValue("dontCare"));
-                one(specificationMethod).getContextClass(); will(returnValue(String.class));
-                atLeast(1).of(specificationMethod).isPending(); will(returnValue(false));
-                one(descriptionEdge).createTestDescription(String.class, "dontCare"); will(returnValue(description));
+                one(specificationMethod).getName();
+                will(returnValue("dontCare"));
+                one(specificationMethod).getContextClass();
+                will(returnValue(String.class));
+                atLeast(1).of(specificationMethod).isPending();
+                will(returnValue(false));
+                one(descriptionEdge).createTestDescription(String.class, "dontCare");
+                will(returnValue(description));
                 one(notifier).fireTestStarted(description);
-                one(specificationMethod).run(); will(returnValue(specificationResult));
+                one(specificationMethod).run();
+                will(returnValue(specificationResult));
             }
         });
     }

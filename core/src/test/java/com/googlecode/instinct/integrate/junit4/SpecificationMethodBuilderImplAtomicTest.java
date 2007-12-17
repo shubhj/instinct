@@ -23,10 +23,10 @@ import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.JUnit4SuiteWithContextAnnotation;
-import com.googlecode.instinct.internal.util.ObjectFactory;
+import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
 import java.util.Collection;
 import java.util.HashSet;
 import org.jmock.Expectations;
@@ -71,9 +71,12 @@ public final class SpecificationMethodBuilderImplAtomicTest extends InstinctTest
     public void testFindsSpecificationsOnWithContextClassAnnotation() {
         expect.that(new Expectations() {
             {
-                one(finder).getContextClasses(JUnit4SuiteWithContextAnnotation.class); will(returnValue(contextClasses));
-                one(objectFactory).create(ContextClassImpl.class, ASimpleContext.class); will(returnValue(contextClass));
-                one(contextClass).buildSpecificationMethods(); will(returnValue(specificationMethods));
+                one(finder).getContextClasses(JUnit4SuiteWithContextAnnotation.class);
+                will(returnValue(contextClasses));
+                one(objectFactory).create(ContextClassImpl.class, ASimpleContext.class);
+                will(returnValue(contextClass));
+                one(contextClass).buildSpecificationMethods();
+                will(returnValue(specificationMethods));
             }
         });
         final Collection<SpecificationMethod> methods = builder.build(JUnit4SuiteWithContextAnnotation.class);

@@ -17,8 +17,6 @@
 package com.googlecode.instinct.test.suite;
 
 import com.googlecode.instinct.integrate.junit4.JUnit4InstinctRunnerSlowTest;
-import com.googlecode.instinct.internal.util.boost.TestAggregator;
-import com.googlecode.instinct.internal.util.boost.TestAggregatorImpl;
 import static java.util.Arrays.asList;
 import java.util.Enumeration;
 import junit.framework.Test;

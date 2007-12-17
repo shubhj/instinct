@@ -16,6 +16,16 @@
 
 package com.googlecode.instinct.runner;
 
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.internal.locate.ContextWithSpecsWithDifferentAccessModifiers;
+import com.googlecode.instinct.internal.locate.cls.PackageRootFinder;
+import com.googlecode.instinct.internal.locate.cls.PackageRootFinderImpl;
+import com.googlecode.instinct.internal.runner.ASimpleContext;
+import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
+import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.util.io.InputStreamConvertorImpl;
+import com.googlecode.instinct.test.InstinctTestCase;
+import com_cenqua_clover.Clover;
 import java.io.File;
 import static java.io.File.pathSeparatorChar;
 import static java.io.File.separatorChar;
@@ -25,17 +35,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.locate.ContextWithSpecsWithDifferentAccessModifiers;
-import com.googlecode.instinct.internal.locate.PackageRootFinder;
-import com.googlecode.instinct.internal.locate.PackageRootFinderImpl;
-import com.googlecode.instinct.internal.runner.ASimpleContext;
-import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
-import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.internal.util.io.InputStreamConvertorImpl;
-import com.googlecode.instinct.test.InstinctTestCase;
-import com.googlecode.instinct.test.TestingException;
-import com_cenqua_clover.Clover;
 import net.sf.cglib.proxy.CallbackFilter;
 import org.hamcrest.Matchers;
 import org.jmock.api.ExpectationError;
@@ -92,7 +91,7 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
         try {
             return processBuilder.start();
         } catch (IOException e) {
-            throw new TestingException(e);
+            throw new AssertionError(e);
         }
     }
 
@@ -100,8 +99,7 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
         return createProcessBuilder(createCommand(classesToRun));
     }
 
-    private <T> ProcessBuilder createProcessBuilder(final Class<T> contextClassToRun,
-            final String specificationMethod) {
+    private <T> ProcessBuilder createProcessBuilder(final Class<T> contextClassToRun, final String specificationMethod) {
         return createProcessBuilder(createCommand(contextClassToRun, specificationMethod));
     }
 
@@ -149,11 +147,8 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
         final String jMock = getJarFilePath(ExpectationError.class);
         final String objenesis = getJarFilePath(Objenesis.class);
         final String cgLib = getJarFilePath(CallbackFilter.class);
-        return getSourceRoot() + pathSeparatorChar + getTestRoot() + pathSeparatorChar + hamcrest + pathSeparatorChar
-                + clover + pathSeparatorChar
-                + jMock + pathSeparatorChar
-                + objenesis + pathSeparatorChar
-                + cgLib + pathSeparatorChar;
+        return getSourceRoot() + pathSeparatorChar + getTestRoot() + pathSeparatorChar + hamcrest + pathSeparatorChar + clover + pathSeparatorChar +
+                jMock + pathSeparatorChar + objenesis + pathSeparatorChar + cgLib + pathSeparatorChar;
     }
 
     private String getSourceRoot() {
@@ -168,8 +163,7 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
         expect.that(new String(processError).trim()).isEmpty();
     }
 
-    private void expectThatRunnerSendsSpeciciationResultsToOutput(final byte[] processOutput,
-            final String specificationName,
+    private void expectThatRunnerSendsSpeciciationResultsToOutput(final byte[] processOutput, final String specificationName,
             final Class<?>... contextClasses) {
         final String runnerOutput = new String(processOutput);
         for (final Class<?> contextClass : contextClasses) {
@@ -183,7 +177,7 @@ public final class CommandLineRunnerSlowTest extends InstinctTestCase {
             final String jarFile = new URL(getPackageRoot(classInJarFile)).getFile();
             return jarFile.substring(0, jarFile.length() - 2);
         } catch (MalformedURLException e) {
-            throw new TestingException(e);
+            throw new AssertionError(e);
         }
     }
 

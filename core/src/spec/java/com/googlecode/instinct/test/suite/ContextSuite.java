@@ -24,8 +24,8 @@ import com.googlecode.instinct.defect.defect3.AFixedDefect3;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithANamingConventionLocator;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithAnAnnotationMethodLocator;
 import com.googlecode.instinct.internal.edge.org.hamcrest.AStringFactoryImplContext;
-import com.googlecode.instinct.internal.locate.AHierarchicalMethodLocatorContext;
-import com.googlecode.instinct.internal.locate.AnAnnotatedMethodLocatorContext;
+import com.googlecode.instinct.internal.locate.method.AHierarchicalMethodLocatorContext;
+import com.googlecode.instinct.internal.locate.method.AnAnnotatedMethodLocatorContext;
 import com.googlecode.instinct.internal.util.Suggest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -33,16 +33,8 @@ import org.junit.runners.Suite;
 @Suggest("Automate how these contexts are pickedup")
 @SuppressWarnings({"ClassMayBeInterface"})
 @RunWith(Suite.class)
-@Suite.SuiteClasses({AnAnnotatedMethodLocatorContext.class,
-                     AHierarchicalMethodLocatorContext.class,
-                     AFixedDefect8WithAnAnnotationMethodLocator.class,
-                     AFixedDefect8WithANamingConventionLocator.class,
-                     AFixedDefect23.class,
-                     AFixedDefect3.class,
-                     CommonAPIContext.class,
-                     AnObjectCheckerContext.class,
-                     AnObjectCheckerFailure.class,
-                     AStringFactoryImplContext.class})
+@Suite.SuiteClasses(
+        {AnAnnotatedMethodLocatorContext.class, AHierarchicalMethodLocatorContext.class, AFixedDefect8WithAnAnnotationMethodLocator.class, AFixedDefect8WithANamingConventionLocator.class, AFixedDefect23.class, AFixedDefect3.class, CommonAPIContext.class, AnObjectCheckerContext.class, AnObjectCheckerFailure.class, AStringFactoryImplContext.class})
 public final class ContextSuite {
     //Suite classs.
 }

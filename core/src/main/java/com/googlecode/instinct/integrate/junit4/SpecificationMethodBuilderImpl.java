@@ -19,8 +19,8 @@ package com.googlecode.instinct.integrate.junit4;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
-import com.googlecode.instinct.internal.util.ObjectFactory;
-import com.googlecode.instinct.internal.util.ObjectFactoryImpl;
+import com.googlecode.instinct.internal.util.instance.ObjectFactory;
+import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
 import com.googlecode.instinct.internal.util.param.ParamChecker;
 import java.util.Collection;
 import java.util.HashSet;
@@ -37,9 +37,8 @@ public final class SpecificationMethodBuilderImpl implements SpecificationMethod
             final ContextClass contextClass = objectFactory.create(ContextClassImpl.class, classWithContext);
             specificationMethods.addAll(contextClass.buildSpecificationMethods());
         }
-
-//        final ContextClasses annotation = cls.getAnnotation(ContextClasses.class);
-//        final Class<?>[] classes = annotation.value();
+        //        final ContextClasses annotation = cls.getAnnotation(ContextClasses.class);
+        //        final Class<?>[] classes = annotation.value();
         return specificationMethods;
     }
 }

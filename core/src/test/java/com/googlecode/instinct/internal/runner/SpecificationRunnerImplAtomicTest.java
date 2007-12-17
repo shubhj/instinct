@@ -24,8 +24,8 @@ import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
 import java.util.ArrayList;
 import org.jmock.Expectations;
 
@@ -54,17 +54,26 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
         expect.that(new Expectations() {
             {
                 one(methodValidator).checkContextConstructor(String.class);
-                exactly(2).of(specificationMethod).getSpecificationMethod(); will(returnValue(underlyingSpecMethod));
-                one(specificationMethod).getBeforeSpecificationMethods(); will(returnValue(new ArrayList()));
-                one(underlyingSpecMethod).getContextClass(); will(returnValue(String.class));
-                one(specificationMethod).isPending(); will(returnValue(false));
-                one(underlyingSpecMethod).getMethod(); will(returnValue(null));
-                one(specificationMethod).getAfterSpecificationMethods(); will(returnValue(new ArrayList()));
-                atLeast(1).of(specificationMethod).getName(); will(returnValue(specificationName));
-                one(specificationMethod).getExpectedException(); will(returnValue(exceptionClass));
+                exactly(2).of(specificationMethod).getSpecificationMethod();
+                will(returnValue(underlyingSpecMethod));
+                one(specificationMethod).getBeforeSpecificationMethods();
+                will(returnValue(new ArrayList()));
+                one(underlyingSpecMethod).getContextClass();
+                will(returnValue(String.class));
+                one(specificationMethod).isPending();
+                will(returnValue(false));
+                one(underlyingSpecMethod).getMethod();
+                will(returnValue(null));
+                one(specificationMethod).getAfterSpecificationMethods();
+                will(returnValue(new ArrayList()));
+                atLeast(1).of(specificationMethod).getName();
+                will(returnValue(specificationName));
+                one(specificationMethod).getExpectedException();
+                will(returnValue(exceptionClass));
                 one(methodValidator).checkMethodHasNoParameters(underlyingSpecMethod);
                 one(methodInvokerFactory).create(underlyingSpecMethod);
-                will(returnValue(invoker)); one(invoker).invokeMethod("", null);
+                will(returnValue(invoker));
+                one(invoker).invokeMethod("", null);
             }
         });
         specificationRunner.run(specificationMethod);

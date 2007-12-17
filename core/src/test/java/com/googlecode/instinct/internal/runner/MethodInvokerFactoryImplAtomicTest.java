@@ -25,8 +25,8 @@ import com.googlecode.instinct.internal.util.MethodInvokerImpl;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.sandbox.ForAll;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.reflect.TestSubjectCreator.createSubject;
 import java.lang.annotation.Annotation;
 import org.jmock.Expectations;
 

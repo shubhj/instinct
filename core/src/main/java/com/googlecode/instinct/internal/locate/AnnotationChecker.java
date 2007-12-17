@@ -22,5 +22,5 @@ import java.lang.reflect.AnnotatedElement;
 
 @SuppressWarnings({"MethodParameterOfConcreteClass"})
 public interface AnnotationChecker {
-    <A extends Annotation> boolean isAnnotated(AnnotatedElement annotatedElement, Class<A> annotationType, AnnotationAttribute annotationAttribute);
+    <A extends Annotation> boolean isAnnotated(AnnotatedElement annotatedElement, Class<A> annotationType, AnnotationAttribute attributeConstraint);
 }

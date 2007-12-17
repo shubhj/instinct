@@ -31,15 +31,15 @@ import java.util.Arrays;
 public final class AnnotationCheckerImpl implements AnnotationChecker {
     private final ClassEdge classEdge = new ClassEdgeImpl();
 
-    public <A extends Annotation> boolean isAnnotated(
-            final AnnotatedElement annotatedElement, final Class<A> annotationType, final AnnotationAttribute attributeConstraint) {
+    public <A extends Annotation> boolean isAnnotated(final AnnotatedElement annotatedElement, final Class<A> annotationType,
+            final AnnotationAttribute attributeConstraint) {
         checkNotNull(annotatedElement, annotationType, attributeConstraint);
         final boolean annotationPresent = annotatedElement.isAnnotationPresent(annotationType);
         return annotationPresent && annotationValueMatchesRequestedValue(annotatedElement, annotationType, attributeConstraint);
     }
 
-    private <A extends Annotation> boolean annotationValueMatchesRequestedValue(
-            final AnnotatedElement annotatedElement, final Class<A> annotationType, final AnnotationAttribute attributeConstraint) {
+    private <A extends Annotation> boolean annotationValueMatchesRequestedValue(final AnnotatedElement annotatedElement,
+            final Class<A> annotationType, final AnnotationAttribute attributeConstraint) {
         if (attributeConstraint.equals(IGNORE)) {
             return true;
         } else {
@@ -53,8 +53,8 @@ public final class AnnotationCheckerImpl implements AnnotationChecker {
         }
     }
 
-    private <A extends Annotation> Object getActualAttributeValue(
-            final Class<A> annotationType, final AnnotationAttribute annotationAttribute, final AnnotatedElement attributeConstraint) {
+    private <A extends Annotation> Object getActualAttributeValue(final Class<A> annotationType, final AnnotationAttribute annotationAttribute,
+            final AnnotatedElement attributeConstraint) {
         final Method attributeMethod = classEdge.getDeclaredMethod(annotationType, annotationAttribute.getAttributeName());
         return new MethodEdgeImpl(attributeMethod).invoke(attributeConstraint.getAnnotation(annotationType));
     }

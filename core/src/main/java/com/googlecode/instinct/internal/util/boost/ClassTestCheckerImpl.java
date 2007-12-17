@@ -16,36 +16,23 @@
 
 package com.googlecode.instinct.internal.util.boost;
 
-import junit.framework.Assert;
-
 public final class ClassTestCheckerImpl implements ClassTestChecker {
     private final ModifierTestChecker modifier = new ModifierTestCheckerImpl();
-    private final ClassTestUtil classes = new ClassTestUtilImpl();
 
-    private <U, T extends U> void checkImplementsAndFinal(final Interface<U> expectedInterface, final Class<T> implementationClass) {
+    public <U, T extends U> void checkImplementsAndFinal(final Class<U> expectedInterface, final Class<T> implementationClass) {
         modifier.checkFinal(implementationClass);
         checkImplementsInterface(expectedInterface, implementationClass);
     }
 
-    public <U, T extends U> void checkImplementsAndFinal(final Class<U> expectedInterface, final Class<T> implementationClass) {
-        final Interface<U> iface = new InterfaceImpl<U>(expectedInterface);
-        checkImplementsAndFinal(iface, implementationClass);
-    }
-
     public <U, T extends U> void checkSubclassOf(final Class<T> subClass, final Class<U> superClass) {
-        final boolean isSubclass = classes.isSubclassOf(superClass, subClass);
-        checkSubclassOf(isSubclass, superClass, subClass);
+        if (!superClass.isAssignableFrom(subClass)) {
+            throw new AssertionError(subClass.getSimpleName() + " must be a sub-class of " + superClass.getSimpleName());
+        }
     }
 
-    private <U, T extends U> void checkSubclassOf(final boolean isSubclass, final Class<U> superClass, final Class<T> subClass) {
-        final String superClassName = superClass.getSimpleName();
-        final String subClassName = subClass.getSimpleName();
-        Assert.assertTrue(subClassName + " is not a subclass of " + superClassName + ".", isSubclass);
-    }
-
-    private <T> void checkImplementsInterface(final Interface iface, final Class<T> cls) {
-        if (!classes.isImplementationOf(iface, cls)) {
-            throw new AssertionError(cls.getSimpleName() + " must be an implementation of " + iface.getType().getSimpleName());
+    private <U, T extends U> void checkImplementsInterface(final Class<U> expectedInterface, final Class<T> cls) {
+        if (!expectedInterface.isAssignableFrom(cls)) {
+            throw new AssertionError(cls.getSimpleName() + " must be an implementation of " + expectedInterface.getSimpleName());
         }
     }
 }

@@ -16,8 +16,6 @@
 
 package com.googlecode.instinct.test.suite;
 
-import com.googlecode.instinct.internal.util.boost.TestAggregator;
-import com.googlecode.instinct.internal.util.boost.TestAggregatorImpl;
 import junit.framework.Test;
 
 public final class AtomicTestSuite {

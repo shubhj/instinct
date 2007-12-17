@@ -23,7 +23,6 @@ import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotW
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-@Fix("Move this into the prod tree")
 public final class Reflector {
     private static final MethodInvoker METHOD_INVOKER = new MethodInvokerImpl();
     private static final FieldEdge FIELD_EDGE = new FieldEdgeImpl();
@@ -52,7 +51,7 @@ public final class Reflector {
     }
 
     @SuppressWarnings({"unchecked"})
-    @Fix("Refactor this sucker.")
+    @Fix("Refactor this sucker. Improve it so that we go more than one level up to find matching types.")
     public static void insertFieldValueUsingInferredType(final Object instance, final Object value) {
         checkNotNull(instance, value);
         if (containsFieldOfType(instance.getClass(), value.getClass())) {
