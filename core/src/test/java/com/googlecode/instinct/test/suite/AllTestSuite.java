@@ -16,6 +16,8 @@
 
 package com.googlecode.instinct.test.suite;
 
+import java.util.Enumeration;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -26,8 +28,10 @@ public final class AllTestSuite {
 
     public static Test suite() {
         final TestSuite suite = new TestSuite("All");
-        suite.addTest(AtomicTestSuite.suite());
-        suite.addTest(SlowTestSuite.suite());
+        suite.addTest(AtomicTestSuite.suite());        
+		suite.addTest(SlowTestSuite.suite());
+       
+        
         return suite;
     }
 }

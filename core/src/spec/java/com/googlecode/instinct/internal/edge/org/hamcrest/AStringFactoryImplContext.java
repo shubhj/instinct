@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
 @Context
-public class AStringFactoryImplContext {
+public final class AStringFactoryImplContext {
 
     @Subject StringFactory characterFactory = new StringFactoryImpl();
     private static final String NL = System.getProperty("line.separator");

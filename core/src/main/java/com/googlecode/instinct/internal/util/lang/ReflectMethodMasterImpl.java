@@ -49,7 +49,7 @@ public final class ReflectMethodMasterImpl implements ReflectMethodMaster {
         return methodName.equals(targetMethodName);
     }
 
-    private <T> boolean paramsMatch(final Method sourceMethod, final Class<T>[] parameterTypes) {
+    private <T> boolean paramsMatch(final Method sourceMethod, final Class<?>[] parameterTypes) {
         final Class<?>[] params = sourceMethod.getParameterTypes();
         if (parameterTypes.length != params.length) {
             return false;

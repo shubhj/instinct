@@ -63,7 +63,7 @@ public final class StateExpectationsImplAtomicTest extends InstinctTestCase {
     @Mock private Matcher hamcrestMatcher;
     @Stub(auto = false) private Collection<String> collection;
     @Dummy private Object object;
-
+    
     @Override
     public void setUpTestDoubles() {
         collection = new ArrayList<String>();
@@ -82,7 +82,7 @@ public final class StateExpectationsImplAtomicTest extends InstinctTestCase {
 
     public void testCalledWithObjectReturnsObjectChecker() {
         final ObjectChecker expectedChecker = expectCheckerCreated(ObjectChecker.class, ObjectCheckerImpl.class, object);
-        final ObjectChecker objectChecker = stateExpectations.that(object);
+        ObjectChecker<Object> objectChecker = stateExpectations.that(object);
         assertSame(expectedChecker, objectChecker);
     }
 
@@ -97,13 +97,13 @@ public final class StateExpectationsImplAtomicTest extends InstinctTestCase {
         final Integer integer = 1;
         final ObjectChecker expectedChecker =
                 expectCheckerCreated(ComparableChecker.class, ComparableCheckerImpl.class, integer);
-        final ObjectChecker checker = stateExpectations.that(integer);
+        ComparableChecker<Integer> checker = stateExpectations.that(integer);
         assertSame(expectedChecker, checker);
     }
 
     public void testCalledWithIterableReturnsIterableChecker() {
         final ObjectChecker expectedChecker = expectCheckerCreated(IterableChecker.class, IterableCheckerImpl.class, collection);
-        final ObjectChecker checker = stateExpectations.that((Iterable<String>) collection);
+        IterableChecker<String, Iterable<String>> checker = stateExpectations.that((Iterable<String>) collection);
         assertSame(expectedChecker, checker);
     }
 
@@ -116,7 +116,7 @@ public final class StateExpectationsImplAtomicTest extends InstinctTestCase {
     public void testCalledWithArrayReturnsArrayChecker() {
         final String[] array = {"hi again!"};
         final ObjectChecker expectedChecker = expectCheckerCreated(ArrayChecker.class, ArrayCheckerImpl.class, array);
-        final ObjectChecker checker = stateExpectations.that(array);
+        ArrayChecker<String> checker = stateExpectations.that(array);
         assertSame(expectedChecker, checker);
     }
 

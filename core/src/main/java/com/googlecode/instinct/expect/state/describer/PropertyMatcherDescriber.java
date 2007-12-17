@@ -21,7 +21,7 @@ import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotN
 
 public class PropertyMatcherDescriber<T> implements MatcherDescriber {
 
-    private final CommonMatcherUtil matcherUtil = new CommonMatcherUtilImpl();
+    private final CommonMatcherUtil<T> matcherUtil = new CommonMatcherUtilImpl<T>();
 
     private final T actual;
     private final String propertyName;

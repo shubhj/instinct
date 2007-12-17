@@ -43,7 +43,7 @@ import org.w3c.dom.Node;
  * The instinct state-based expectation API is built on top of the Hamcrest Matcher API. The Instinct wrapper methods enable:
  * <ol>
  * <li>IDE code completion reduced to the methods that apply to the type object being checked.</li>
- * <li>A more english like (and longer) flow. </li>
+ * <li>A more English like (and longer) flow. </li>
  * <li>The standard Hamcrest Matchers or custom Matcher implementations to be passed in as well.</li>
  * </ol>
  */

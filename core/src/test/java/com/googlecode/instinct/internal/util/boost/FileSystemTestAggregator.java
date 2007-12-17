@@ -75,8 +75,13 @@ final class FileSystemTestAggregator implements TestAggregator {
                 return false;
             } else {
                 final String absolutePath = pathname.getAbsolutePath();
-                final String s = absolutePath.substring(0, absolutePath.lastIndexOf(".class"));
-                return pattern.matcher(s).matches();
+                //.svn files are also passed in here. If you can get around that then remove the check for ".class".
+                if (absolutePath.lastIndexOf(".class") != -1) {
+	                final String s = absolutePath.substring(0, absolutePath.lastIndexOf(".class"));
+	                return pattern.matcher(s).matches();
+                }
+                
+                return false;
             }
         }
     }
