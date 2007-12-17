@@ -32,6 +32,7 @@ import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import java.io.File;
 import org.jmock.Expectations;
 
+@SuppressWarnings({"UnusedDeclaration"})
 public final class ClassMarkedClassFileCheckerAtomicTest extends InstinctTestCase {
     @Subject(auto = false) private MarkedFileChecker checker;
     @Mock private File packageRoot;

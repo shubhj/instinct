@@ -6,9 +6,13 @@
     <property name="checkstyle.lib.dir" value="${lib.dir}/checkstyle"/>
     <property name="checkstyle.results.dir" value="${build.dir}/checkstyle"/>
 
+    <taskdef resource="cloverlib.xml" classpathref="test.class.path"/>
+
+    <property name="coverage.dir" value="${build.dir}/coverage"/>
+    <property name="coverage.database" value="${coverage.dir}/coverage.db"/>
+
     <property name="coverage.flush.interval" value="1000"/>
-    <property name="coverage.atomic.target" value="60%"/>
-    <property name="coverage.slow.target" value="50%"/>
+    <property name="coverage.target" value="60%"/>
 
     <fileset id="covered.code.fileset" dir="${main.src.dir}">
         <include name="**/*.java"/>
@@ -40,86 +44,38 @@
     </macrodef>
 
     <target name="-check-coverage">
-        <clovercheck.macro test.type="atomic"/>
-        <fail if="coverage.atomic.failure" message="Atomic test coverage did not meet the target of ${coverage.atomic.target}."/>
-        <clovercheck.macro test.type="slow"/>
-        <fail if="coverage.slow.failure" message="Slow test coverage did not meet the target of ${coverage.slow.target}."/>
-    </target>
-
-    <target name="-merge-coverage">
-        <clovercommon.macro test.type="atomic"/>
-        <clovercommon.macro test.type="slow"/>
-        <property name="coverage.merged.dir" value="${build.dir}/coverage/merged"/>
-        <mkdir dir="${coverage.merged.dir}"/>
-        <clover-merge initString="${coverage.merged.dir}/coverage.db">
-            <cloverDb initString="${coverage.atomic.dir}/coverage.db"/>
-            <cloverDb initString="${coverage.slow.dir}/coverage.db"/>
-        </clover-merge>
-        <cloverreport.macro test.type="merged"/>
+        <clover-check initString="${coverage.database}" target="${coverage.target}" haltOnFailure="false" failureProperty="coverage.failure"/>
+        <fail if="coverage.failure" message="Spec/test coverage did not meet the target of ${coverage.target}."/>
     </target>
 
     <target name="-disable-coverage">
-        <cloverdisable.macro test.type="atomic"/>
-        <cloverdisable.macro test.type="slow"/>
+        <clover-setup initString="${coverage.database}" enabled="false"/>
     </target>
 
-    <macrodef name="clovercommon.macro">
-        <attribute name="test.type"/>
-        <sequential>
-            <taskdef resource="clovertasks" classpathref="test.class.path"/>
-            <property name="coverage.@{test.type}.dir" value="${build.dir}/coverage/@{test.type}"/>
-        </sequential>
-    </macrodef>
-
     <macrodef name="cloverenable.macro">
-        <attribute name="test.type"/>
         <sequential>
-            <clovercommon.macro test.type="@{test.type}"/>
-            <mkdir dir="${coverage.@{test.type}.dir}"/>
-            <clover-setup initString="${coverage.@{test.type}.dir}/coverage.db" tmpdir="${coverage.@{test.type}.dir}" flushpolicy="interval"
+            <mkdir dir="${coverage.dir}"/>
+            <clover-setup initString="${coverage.database}" tmpdir="${coverage.dir}" flushpolicy="interval"
                     flushinterval="${coverage.flush.interval}">
                 <fileset refid="covered.code.fileset"/>
             </clover-setup>
         </sequential>
     </macrodef>
 
-    <macrodef name="cloverdisable.macro">
-        <attribute name="test.type"/>
-        <sequential>
-            <clovercommon.macro test.type="@{test.type}"/>
-            <clover-setup initString="${coverage.@{test.type}.dir}/coverage.db" enabled="false"/>
-        </sequential>
-    </macrodef>
-
-    <macrodef name="cloverclean.macro">
-        <attribute name="test.type"/>
-        <sequential>
-            <taskdef resource="clovertasks" classpathref="test.class.path"/>
-            <clover-clean initString="${coverage.@{test.type}.dir}/coverage.db" keepdb="true" verbose="true"/>
-        </sequential>
-    </macrodef>
+    <target name="-clover-clean">
+        <clover-clean initString="${coverage.database}" keepdb="true" verbose="true"/>
+    </target>
 
     <macrodef name="cloverreport.macro">
-        <attribute name="test.type"/>
         <sequential>
             <!-- Allow 2 x flush interval for any final coverage flushes. -->
             <sleep milliseconds="${coverage.flush.interval}"/>
             <sleep milliseconds="${coverage.flush.interval}"/>
-            <clovercommon.macro test.type="@{test.type}"/>
-            <clover-report initString="${coverage.@{test.type}.dir}/coverage.db">
-                <current outfile="${coverage.@{test.type}.dir}" title="${project.shortname} @{test.type} test code coverage">
+            <clover-report initString="${coverage.database}">
+                <current outfile="${coverage.dir}" title="${project.shortname} spec/test code coverage">
                     <format type="html"/>
                 </current>
             </clover-report>
-        </sequential>
-    </macrodef>
-
-    <macrodef name="clovercheck.macro">
-        <attribute name="test.type"/>
-        <sequential>
-            <clovercommon.macro test.type="@{test.type}"/>
-            <clover-check initString="${coverage.@{test.type}.dir}/coverage.db" target="${coverage.@{test.type}.target}" haltOnFailure="false"
-                    failureProperty="coverage.@{test.type}.failure"/>
         </sequential>
     </macrodef>
 

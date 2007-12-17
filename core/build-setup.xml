@@ -37,14 +37,10 @@
     <property name="compile.deprecation" value="false"/>
     <property name="compile.optimize" value="true"/>
     <property name="java.src.version" value="1.5"/>
-    <property name="atomic.test.src.dir" value="${test.src.dir}"/>
-    <property name="atomic.test.classes.dir" value="${test.classes.dir}"/>
-    <property name="atomic.test.results.dir" value="${build.dir}/atomic-test-results"/>
-    <property name="atomic.test.results" value="${atomic.test.results.dir}/Atomic-Tests.xml"/>
-    <property name="slow.test.src.dir" value="${test.src.dir}"/>
-    <property name="slow.test.classes.dir" value="${test.classes.dir}"/>
-    <property name="slow.test.results.dir" value="${build.dir}/slow-test-results"/>
-    <property name="slow.test.results" value="${slow.test.results.dir}/Slow-Tests.xml"/>
+    <property name="test.src.dir" value="${test.src.dir}"/>
+    <property name="test.classes.dir" value="${test.classes.dir}"/>
+    <property name="test.results.dir" value="${build.dir}/test-results"/>
+    <property name="test.results" value="${test.results.dir}/Tests.xml"/>
 
     <patternset id="all.code.pattern">
         <include name="**/*.java"/>
@@ -67,10 +63,8 @@
     <fileset id="main.code.fileset" dir="${main.src.dir}">
         <patternset refid="all.code.pattern"/>
     </fileset>
-    <fileset id="atomic.test.code.fileset" dir="${atomic.test.src.dir}">
+    <fileset id="test.code.fileset" dir="${test.src.dir}">
         <include name="**/*AtomicTest.java"/>
-    </fileset>
-    <fileset id="slow.test.code.fileset" dir="${slow.test.src.dir}">
         <include name="**/*SlowTest.java"/>
     </fileset>
 
@@ -97,12 +91,6 @@
         <fileset dir="${basedir}">
             <patternset refid="test.classpath.pattern"/>
         </fileset>
-    </path>
-    <path id="atomic.test.class.path">
-        <path refid="test.class.path"/>
-    </path>
-    <path id="slow.test.class.path">
-        <path refid="test.class.path"/>
     </path>
 
     <target name="default">

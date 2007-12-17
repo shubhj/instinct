@@ -19,10 +19,11 @@ package com.googlecode.instinct.internal.util.lang;
 class TestPreformattedTwoFields extends TestTwoFields {
     private static final String LINE = System.getProperty("line.separator");
 
-    public TestPreformattedTwoFields(int x, int y) {
+    public TestPreformattedTwoFields(final int x, final int y) {
         super(x, y);
     }
 
+    @Override
     public String toString() {
         return "TestTwoFields[" + LINE + "    x=2" + LINE + "    y=4" + LINE + "]";
     }

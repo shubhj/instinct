@@ -17,6 +17,7 @@
 package com.googlecode.instinct.internal.util.lang;
 
 class TestFixed {
+    @Override
     public String toString() {
         return "FIXED";
     }
