@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,18 +23,34 @@ import com.googlecode.instinct.defect.defect23.AFixedDefect23;
 import com.googlecode.instinct.defect.defect3.AFixedDefect3;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithANamingConventionLocator;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithAnAnnotationMethodLocator;
+import com.googlecode.instinct.integrate.junit3.ContextTestSuite;
 import com.googlecode.instinct.internal.edge.org.hamcrest.AStringFactoryImplContext;
 import com.googlecode.instinct.internal.locate.method.AHierarchicalMethodLocatorContext;
 import com.googlecode.instinct.internal.locate.method.AnAnnotatedMethodLocatorContext;
 import com.googlecode.instinct.internal.util.Suggest;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite;
+import junit.framework.Test;
+import junit.framework.TestSuite;
 
-@Suggest("Automate how these contexts are pickedup")
-@SuppressWarnings({"ClassMayBeInterface"})
-@RunWith(Suite.class)
-@Suite.SuiteClasses(
-        {AnAnnotatedMethodLocatorContext.class, AHierarchicalMethodLocatorContext.class, AFixedDefect8WithAnAnnotationMethodLocator.class, AFixedDefect8WithANamingConventionLocator.class, AFixedDefect23.class, AFixedDefect3.class, CommonAPIContext.class, AnObjectCheckerContext.class, AnObjectCheckerFailure.class, AStringFactoryImplContext.class})
 public final class ContextSuite {
+    private ContextSuite() {
+        throw new UnsupportedOperationException();
+    }
+
     //Suite classs.
+
+    public static Test suite() {
+        final TestSuite suite = new TestSuite("Specifications");
+        for (final Class<?> cls : getContexts()) {
+            suite.addTest(new ContextTestSuite(cls));
+        }
+        return suite;
+    }
+
+    @Suggest("We should be able to automatically find these. Maybe add a group to all 'testdata' specs so they don't run.")
+    private static Class<?>[] getContexts() {
+        return new Class<?>[]{AnAnnotatedMethodLocatorContext.class, AHierarchicalMethodLocatorContext.class,
+                AFixedDefect8WithAnAnnotationMethodLocator.class, AFixedDefect8WithANamingConventionLocator.class, AFixedDefect23.class,
+                AFixedDefect3.class, CommonAPIContext.class, AnObjectCheckerContext.class, AnObjectCheckerFailure.class,
+                AStringFactoryImplContext.class};
+    }
 }
