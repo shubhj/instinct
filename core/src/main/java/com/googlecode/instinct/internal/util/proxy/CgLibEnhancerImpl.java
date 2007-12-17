@@ -55,7 +55,7 @@ public final class CgLibEnhancerImpl implements CgLibEnhancer {
         return enhancer.createClass();
     }
 
-    private static class AllConstructorsEnhancer extends Enhancer {
+    private static final class AllConstructorsEnhancer extends Enhancer {
         @SuppressWarnings({"RawUseOfParameterizedType"})
         @Override
         public void filterConstructors(final Class sc, final List constructors) {

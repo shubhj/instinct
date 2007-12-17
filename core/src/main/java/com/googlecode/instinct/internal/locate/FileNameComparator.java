@@ -17,9 +17,12 @@
 package com.googlecode.instinct.internal.locate;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.Comparator;
 
-final class FileNameComparator implements Comparator<File> {
+final class FileNameComparator implements Comparator<File>, Serializable {
+    private static final long serialVersionUID = -1339989577262145782L;
+
     public int compare(final File o1, final File o2) {
         return o1.getName().compareTo(o2.getName());
     }

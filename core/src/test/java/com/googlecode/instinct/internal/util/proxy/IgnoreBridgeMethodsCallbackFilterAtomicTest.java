@@ -51,12 +51,13 @@ public final class IgnoreBridgeMethodsCallbackFilterAtomicTest extends InstinctT
         expect.that(callbackFilter.accept(bridgeMethod)).isEqualTo(1);
     }
 
+    @SuppressWarnings({"DesignForExtension"})
     private static class SuperClassWithGenericMethods<T> {
         public void bridgeMethod(final T t) {
         }
     }
 
-    private static class SubClassWithBridgeMethods extends SuperClassWithGenericMethods<String> {
+    private static final class SubClassWithBridgeMethods extends SuperClassWithGenericMethods<String> {
         // Note. This method has a different erasure than the superclass bridgeMethod, so the compiler will generate a bridge method.
         @Override
         public void bridgeMethod(final String t) {

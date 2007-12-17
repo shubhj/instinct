@@ -51,7 +51,7 @@ public final class LifecycleMethodImplAtomicTest extends InstinctTestCase {
     }
 
     public void testReturnsDeclaringClassOfUnderlyingMethod() {
-        expect.that((Object) lifecycleMethod.getContextClass()).isTheSameInstanceAs((Object) CLASS_TO_TEST);
+        expect.that((Object) lifecycleMethod.getContextClass()).isTheSameInstanceAs(CLASS_TO_TEST);
     }
 
     public void testReturnsParametersAnnotations() {

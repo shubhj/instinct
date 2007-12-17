@@ -60,7 +60,7 @@ public final class ObjectFactoryImpl implements ObjectFactory {
 
     private <T> T instantiate(final Constructor<T> constructor, final Object... values) {
         try {
-            return (T) edgeConstructor.newInstance(constructor, values);
+            return edgeConstructor.newInstance(constructor, values);
         } catch (EdgeException e) {
             throw new ObjectCreationException("Factory does not have permission to access constructor: " + constructor, e);
         }
