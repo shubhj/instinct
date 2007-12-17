@@ -16,8 +16,6 @@
 
 package com.googlecode.instinct.test.suite;
 
-import java.util.Enumeration;
-
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
