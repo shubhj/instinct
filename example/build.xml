@@ -12,7 +12,7 @@
     <property name="main.classes.dir" value="${build.dir}/main-classes"/>
     <property name="spec.classes.dir" value="${build.dir}/spec-classes"/>
 
-    <property name="instinct.jar" value="${lib.dir}/instinct-0.1.6.jar"/>
+    <property name="instinct.jar" value="${lib.dir}/instinct-0.1.7.jar"/>
 
     <path id="main.class.path">
         <fileset dir="${basedir}">
