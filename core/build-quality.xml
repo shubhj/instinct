@@ -58,6 +58,7 @@
             <clover-setup initString="${coverage.database}" tmpdir="${coverage.dir}" flushpolicy="interval"
                     flushinterval="${coverage.flush.interval}">
                 <fileset refid="covered.code.fileset"/>
+                <testsources dir="${test.src.dir}"/>
             </clover-setup>
         </sequential>
     </macrodef>
@@ -74,6 +75,9 @@
             <clover-report initString="${coverage.database}">
                 <current outfile="${coverage.dir}" title="${project.shortname} spec/test code coverage">
                     <format type="html"/>
+                    <testsources dir="${test.src.dir}" includes="**/*"/>
+                    <testsources dir="${spec.src.dir}" includes="**/*"/>
+                    <testresults dir="${test.results.dir}" includes="TEST-*.xml"/>
                 </current>
             </clover-report>
         </sequential>

@@ -30,7 +30,6 @@
     <property name="release.dir" value="${build.dir}/release"/>
     <property name="javadoc.dir" value="${build.dir}/javadoc"/>
     <property name="test.results.dir" value="${build.dir}/test-results"/>
-
     <property name="test.results" value="${test.results.dir}/All-Tests.xml"/>
     <property name="compile.debug" value="true"/>
     <property name="compile.debuglevel" value="source,lines,vars"/>
@@ -40,7 +39,6 @@
     <property name="test.src.dir" value="${test.src.dir}"/>
     <property name="test.classes.dir" value="${test.classes.dir}"/>
     <property name="test.results.dir" value="${build.dir}/test-results"/>
-    <property name="test.results" value="${test.results.dir}/Tests.xml"/>
 
     <patternset id="all.code.pattern">
         <include name="**/*.java"/>
