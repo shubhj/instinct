@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="instinct-example" default="run-specs" basedir=".">
+<project name="instinct-example" default="all" basedir=".">
+
+    <property name="project.longname" value="Instinct Behaviour Driven Development (BDD) Framework"/>
+    <property name="project.shortname" value="instinct"/>
+    <property name="project.version.major" value="0"/>
+    <property name="project.version.minor" value="1.7"/>
+    <property name="version-status" value=""/>
+    <property name="project.version.full" value="${project.version.major}.${project.version.minor}${version-status}"/>
 
     <property name="build.dir" value="build"/>
     <property name="lib.dir" value="lib"/>
@@ -11,8 +18,10 @@
     <property name="spec.resources.dir" value="${spec.dir}/resources"/>
     <property name="main.classes.dir" value="${build.dir}/main-classes"/>
     <property name="spec.classes.dir" value="${build.dir}/spec-classes"/>
+    <property name="release.dir" value="${build.dir}/release"/>
 
-    <property name="instinct.jar" value="${lib.dir}/instinct-0.1.7.jar"/>
+    <property name="project.zip" value="${project.shortname}-${project.version.full}.zip"/>
+    <property name="instinct.jar" value="${lib.dir}/${project.shortname}-${project.version.full}.jar"/>
 
     <path id="main.class.path">
         <fileset dir="${basedir}">
@@ -34,8 +43,10 @@
         <pathelement location="${spec.resources.dir}"/>
     </path>
 
+    <target name="all" depends="clean,release"/>
     <target name="clean" depends="-clean"/>
     <target name="run-specs" depends="clean,-run-specs,-run-junit3-integration,-run-junit4-integration"/>
+    <target name="release" depends="clean,run-specs,-release-zip"/>
 
     <target name="-clean">
         <delete dir="${build.dir}"/>
@@ -45,6 +56,13 @@
         <copy todir="${spec.classes.dir}">
             <fileset dir="${spec.resources.dir}" includes="**/*"/>
         </copy>
+    </target>
+
+    <target name="-release-zip">
+        <mkdir dir="${release.dir}"/>
+        <zip destfile="${release.dir}/${project.zip}" filesonly="true">
+            <fileset dir="${basedir}" includes="**/*" excludes="**/*.svn,${build.dir}/**/*,i-build/**/*"/>
+        </zip>
     </target>
 
     <macrodef name="compile.macro">

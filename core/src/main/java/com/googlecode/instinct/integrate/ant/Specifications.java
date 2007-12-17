@@ -20,6 +20,7 @@ import com.googlecode.instinct.internal.locate.cls.ClassLocator;
 import com.googlecode.instinct.internal.locate.cls.ClassLocatorImpl;
 import com.googlecode.instinct.internal.locate.cls.ClassWithContextAnnotationFileFilter;
 import com.googlecode.instinct.internal.locate.cls.ClassWithMarkedMethodsFileFilter;
+import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.GroupSanitiser;
 import com.googlecode.instinct.internal.util.GroupSanitiserImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
@@ -67,8 +68,8 @@ public final class Specifications {
         specificationGroupsConstraint = groupSanitiser.sanitise(groups);
     }
 
-    @Suggest(
-            {"This should return ContextClass's, that way we don't need to instantiate them.", "The filters already instantiate them, do so here and re-use", "Don't return an array, use an ordered set."})
+    @Suggest({"This should return ContextClass's, that way we don't need to instantiate them.", "Don't return an array, use an ordered set."})
+    @Fix({"The filters already instantiate them, do so here and re-use"})
     public JavaClassName[] getContextClasses() {
         checkPreconditions();
         ensureSpecificationGroupIsSet();

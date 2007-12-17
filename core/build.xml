@@ -16,65 +16,6 @@
     <target name="quality" depends="clean,-quality"/>
     <target name="release" depends="clean,-release-zip"/>
 
-    <macrodef name="compile.macro">
-        <attribute name="src.dir"/>
-        <attribute name="output.dir"/>
-        <attribute name="classpath.ref"/>
-        <attribute name="src.path"/>
-        <attribute name="src.pattern"/>
-        <attribute name="compiler.args" default="-Xlint"/>
-        <sequential>
-            <mkdir dir="@{output.dir}"/>
-            <javac source="${java.src.version}" srcdir="@{src.dir}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="${compile.debug}"
-                    debuglevel="${compile.debuglevel}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
-                <src>
-                    <path refid="@{src.path}"/>
-                </src>
-                <patternset refid="@{src.pattern}"/>
-                <compilerarg value="@{compiler.args}"/>
-            </javac>
-        </sequential>
-    </macrodef>
-
-    <macrodef name="compile.all.macro">
-        <sequential>
-            <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}" src.path="main.code.path"
-                    src.pattern="all.code.pattern"/>
-            <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}" src.path="test.code.path"
-                    src.pattern="all.code.pattern"/>
-            <compile.macro src.dir="${spec.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}" src.path="spec.code.path"
-                    src.pattern="all.code.pattern"/>
-        </sequential>
-    </macrodef>
-
-    <macrodef name="test.macro">
-        <attribute name="type"/>
-        <sequential>
-            <mkdir dir="${@{type}.test.results.dir}"/>
-            <junit failureproperty="@{type}.test.failed" fork="true" forkmode="perBatch">
-                <classpath refid="@{type}.test.class.path"/>
-                <batchtest todir="${@{type}.test.results.dir}">
-                    <fileset refid="@{type}.test.code.fileset"/>
-                </batchtest>
-                <formatter type="xml"/>
-                <formatter type="brief" usefile="false"/>
-            </junit>
-            <fail if="@{type}.test.failed" message="@{type} tests failed."/>
-        </sequential>
-    </macrodef>
-
-    <macrodef name="runtests.macro">
-        <attribute name="test.type"/>
-        <sequential>
-            <delete dir="${main.classes.dir}"/>
-            <delete dir="${test.classes.dir}"/>
-            <cloverenable.macro test.type="@{test.type}"/>
-            <compile.all.macro/>
-            <test.macro type="@{test.type}"/>
-            <cloverreport.macro test.type="@{test.type}"/>
-        </sequential>
-    </macrodef>
-
     <target name="-atomic-test">
         <runtests.macro test.type="atomic"/>
     </target>
@@ -99,6 +40,16 @@
     </target>
 
     <target name="-test" depends="-atomic-test,-slow-test,-merge-coverage"/>
+
+    <!--<target name="-run-specs" depends="-compile">-->
+    <!--<taskdef resource="instincttask.properties" classpathref="spec.class.path"/>-->
+    <!--<instinct failureproperty="specs-failed">-->
+    <!--<classpath refid="spec.class.path"/>-->
+    <!--<specifications dir="${spec.classes.dir}" groups="osdc"/>-->
+    <!--<formatter type="brief"/>-->
+    <!--</instinct>-->
+    <!--<fail if="specs-failed" message="Specifications failed."/>-->
+    <!--</target>-->
 
     <target name="-javadoc" depends="-compile">
         <mkdir dir="${javadoc.dir}"/>
@@ -160,5 +111,64 @@
             <zipfileset dir="${lib.dir}/objenesis" prefix="lib"/>
         </zip>
     </target>
+
+    <macrodef name="compile.macro">
+        <attribute name="src.dir"/>
+        <attribute name="output.dir"/>
+        <attribute name="classpath.ref"/>
+        <attribute name="src.path"/>
+        <attribute name="src.pattern"/>
+        <attribute name="compiler.args" default="-Xlint"/>
+        <sequential>
+            <mkdir dir="@{output.dir}"/>
+            <javac source="${java.src.version}" srcdir="@{src.dir}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="${compile.debug}"
+                    debuglevel="${compile.debuglevel}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
+                <src>
+                    <path refid="@{src.path}"/>
+                </src>
+                <patternset refid="@{src.pattern}"/>
+                <compilerarg value="@{compiler.args}"/>
+            </javac>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="compile.all.macro">
+        <sequential>
+            <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}" src.path="main.code.path"
+                    src.pattern="all.code.pattern"/>
+            <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}" src.path="test.code.path"
+                    src.pattern="all.code.pattern"/>
+            <compile.macro src.dir="${spec.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}" src.path="spec.code.path"
+                    src.pattern="all.code.pattern"/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="test.macro">
+        <attribute name="type"/>
+        <sequential>
+            <mkdir dir="${@{type}.test.results.dir}"/>
+            <junit failureproperty="@{type}.test.failed" fork="true" forkmode="perBatch">
+                <classpath refid="@{type}.test.class.path"/>
+                <batchtest todir="${@{type}.test.results.dir}">
+                    <fileset refid="@{type}.test.code.fileset"/>
+                </batchtest>
+                <formatter type="xml"/>
+                <formatter type="brief" usefile="false"/>
+            </junit>
+            <fail if="@{type}.test.failed" message="@{type} tests failed."/>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="runtests.macro">
+        <attribute name="test.type"/>
+        <sequential>
+            <delete dir="${main.classes.dir}"/>
+            <delete dir="${test.classes.dir}"/>
+            <cloverenable.macro test.type="@{test.type}"/>
+            <compile.all.macro/>
+            <test.macro type="@{test.type}"/>
+            <cloverreport.macro test.type="@{test.type}"/>
+        </sequential>
+    </macrodef>
 
 </project>
