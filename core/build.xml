@@ -59,16 +59,8 @@
     </target>
 
     <target name="-clean-classes">
-        <delete dir="${main.classes.dir}"/>
-        <delete dir="${spec.classes.dir}"/>
+        <clean.classes.macro/>
     </target>
-
-    <macrodef name="clean.classes.macro">
-        <sequential>
-            <delete dir="${main.classes.dir}"/>
-            <delete dir="${spec.classes.dir}"/>
-        </sequential>
-    </macrodef>
 
     <target name="-clover-safe-jar">
         <ant antfile="build.xml" target="-jar" inheritall="false" inheritrefs="false"/>
@@ -108,6 +100,13 @@
             <zipfileset dir="${lib.dir}/objenesis" prefix="lib"/>
         </zip>
     </target>
+
+    <macrodef name="clean.classes.macro">
+        <sequential>
+            <delete dir="${main.classes.dir}"/>
+            <delete dir="${spec.classes.dir}"/>
+        </sequential>
+    </macrodef>
 
     <macrodef name="compile.all.macro">
         <sequential>

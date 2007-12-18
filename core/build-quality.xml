@@ -54,16 +54,17 @@
     <macrodef name="cloverenable.macro">
         <sequential>
             <mkdir dir="${coverage.dir}"/>
-            <clover-setup initString="${coverage.database}" tmpdir="${coverage.dir}" flushpolicy="interval"
+            <clover-setup initString="${coverage.database}" tmpdir="${coverage.dir}" flushpolicy="threaded"
                     flushinterval="${coverage.flush.interval}">
                 <fileset refid="covered.code.fileset"/>
                 <testsources dir="${test.src.dir}"/>
+                <testsources dir="${spec.src.dir}"/>
             </clover-setup>
         </sequential>
     </macrodef>
 
     <target name="-clover-clean">
-        <clover-clean initString="${coverage.database}" keepdb="true"/>
+        <clover-clean initString="${coverage.database}" keepdb="false"/>
     </target>
 
     <macrodef name="cloverreport.macro">
@@ -76,7 +77,7 @@
                     <format type="html"/>
                     <testsources dir="${test.src.dir}" includes="**/*"/>
                     <testsources dir="${spec.src.dir}" includes="**/*"/>
-                    <testresults dir="${spec.results.dir}" includes="TEST-*.xml"/>
+                    <!--<testresults dir="${spec.results.dir}" includes="TEST-*.xml"/>-->
                 </current>
             </clover-report>
         </sequential>
