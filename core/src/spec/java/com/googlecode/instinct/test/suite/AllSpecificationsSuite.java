@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Workingmouse
+ * Copyright 2006-2007 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import com.googlecode.instinct.defect.defect8.AFixedDefect8WithANamingConvention
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithAnAnnotationMethodLocator;
 import com.googlecode.instinct.integrate.junit3.ContextTestSuite;
 import com.googlecode.instinct.internal.edge.org.hamcrest.AStringFactoryImplContext;
+import com.googlecode.instinct.internal.locate.field.ANamedFieldLocatorWithNothingNoFieldsToFind;
 import com.googlecode.instinct.internal.locate.method.AHierarchicalMethodLocatorContext;
 import com.googlecode.instinct.internal.locate.method.AnAnnotatedMethodLocatorContext;
 import com.googlecode.instinct.internal.util.Suggest;
@@ -36,8 +37,7 @@ public final class AllSpecificationsSuite {
         throw new UnsupportedOperationException();
     }
 
-    //Suite classs.
-
+    @Suggest("Turn this into a JUnit 4 suite.")
     public static Test suite() {
         final TestSuite suite = new TestSuite("Specifications");
         for (final Class<?> cls : getContexts()) {
@@ -51,6 +51,6 @@ public final class AllSpecificationsSuite {
         return new Class<?>[]{AnAnnotatedMethodLocatorContext.class, AHierarchicalMethodLocatorContext.class,
                 AFixedDefect8WithAnAnnotationMethodLocator.class, AFixedDefect8WithANamingConventionLocator.class, AFixedDefect23.class,
                 AFixedDefect3.class, CommonAPIContext.class, AnObjectCheckerContext.class, AnObjectCheckerFailure.class,
-                AStringFactoryImplContext.class};
+                AStringFactoryImplContext.class, ANamedFieldLocatorWithNothingNoFieldsToFind.class};
     }
 }

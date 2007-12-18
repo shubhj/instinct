@@ -17,9 +17,11 @@
 package com.googlecode.instinct.actor;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.instance.ConcreteInstanceProvider;
 import com.googlecode.instinct.internal.util.instance.InstanceProvider;
 
+@Suggest("Should be able to pass in a class to the mock that checks for valid values - Discriminator?")
 public final class StubCreator implements SpecificationDoubleCreator {
     private final InstanceProvider instanceProvider = new ConcreteInstanceProvider();
 

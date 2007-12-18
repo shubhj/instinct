@@ -16,6 +16,14 @@
 
 package com.googlecode.instinct.internal.locate.field;
 
-public final class NamedFieldLocatorImpl implements NamedFieldLocator {
+import com.googlecode.instinct.marker.naming.NamingConvention;
+import java.lang.reflect.Field;
+import java.util.Collections;
+import static java.util.Collections.unmodifiableSet;
+import java.util.Set;
 
+public final class NamedFieldLocatorImpl implements NamedFieldLocator {
+    public <T> Set<Field> locate(final Class<T> cls, final NamingConvention namingConvention) {
+        return unmodifiableSet(Collections.<Field>emptySet());
+    }
 }
