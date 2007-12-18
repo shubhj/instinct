@@ -14,10 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.param;
-
-import com.googlecode.instinct.internal.util.NullMaster;
-import com.googlecode.instinct.internal.util.NullMasterImpl;
+package com.googlecode.instinct.internal.util;
 
 public final class ParamChecker {
     private static final NullMaster NULL_MASTER = new NullMasterImpl();

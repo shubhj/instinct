@@ -14,10 +14,28 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.boost;
+package com.googlecode.instinct.internal.trait.modifier;
 
-public interface ClassTestChecker {
-    <U, T extends U> void checkImplementsAndFinal(Class<U> expectedInterface, Class<T> implementationClass);
+import java.lang.reflect.Member;
 
-    <U, T extends U> void checkSubclassOf(Class<T> subClass, Class<U> superClass);
+public interface ModifierTestChecker {
+    void checkPublic(Member member);
+
+    void checkPrivate(Member member);
+
+    void checkFinal(Member member);
+
+    void checkSynchronized(Member member);
+
+    void checkStatic(Member member);
+
+    void checkInstance(Member member);
+
+    void checkPrivateFinalInstance(Member member);
+
+    <T> void checkPublic(Class<T> cls);
+
+    <T> void checkFinal(Class<T> cls);
+
+    <T> void checkConcrete(Class<T> cls);
 }

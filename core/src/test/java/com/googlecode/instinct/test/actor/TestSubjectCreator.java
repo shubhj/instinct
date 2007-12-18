@@ -16,10 +16,10 @@
 
 package com.googlecode.instinct.test.actor;
 
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.Reflector.insertFieldValueUsingInferredType;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 
 // TODO: Test Double Merge this with the subject creator
 public final class TestSubjectCreator {

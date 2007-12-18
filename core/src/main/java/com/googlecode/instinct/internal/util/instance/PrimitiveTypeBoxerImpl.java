@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.internal.util.instance;
 
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 
 public final class PrimitiveTypeBoxerImpl implements PrimitiveTypeBoxer {
     public <T> Class<T> boxPrimitiveType(final Class<T> type) {

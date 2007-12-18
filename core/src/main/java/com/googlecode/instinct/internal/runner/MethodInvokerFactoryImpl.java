@@ -19,7 +19,7 @@ package com.googlecode.instinct.internal.runner;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.sandbox.ForAll;
 
 public final class MethodInvokerFactoryImpl implements MethodInvokerFactory {

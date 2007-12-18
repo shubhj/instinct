@@ -19,9 +19,9 @@ package com.googlecode.instinct.integrate.junit4;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.util.ParamChecker;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
-import com.googlecode.instinct.internal.util.param.ParamChecker;
 import java.util.Collection;
 import java.util.HashSet;
 

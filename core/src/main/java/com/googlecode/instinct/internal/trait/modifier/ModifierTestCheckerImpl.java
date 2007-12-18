@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.boost;
+package com.googlecode.instinct.internal.trait.modifier;
 
 import java.lang.reflect.Member;
-import junit.framework.Assert;
 
 public final class ModifierTestCheckerImpl implements ModifierTestChecker {
     private static final String NOT_PUBLIC = "is not public";
@@ -65,17 +64,17 @@ public final class ModifierTestCheckerImpl implements ModifierTestChecker {
         checkInstance(member);
     }
 
-    public void checkPublic(final Class cls) {
+    public <T> void checkPublic(final Class<T> cls) {
         final boolean isPublic = modifier.isPublic(cls);
         check(cls, NOT_PUBLIC, isPublic);
     }
 
-    public void checkFinal(final Class cls) {
+    public <T> void checkFinal(final Class<T> cls) {
         final boolean isFinal = modifier.isFinal(cls);
         check(cls, NOT_FINAL, isFinal);
     }
 
-    public void checkConcrete(final Class cls) {
+    public <T> void checkConcrete(final Class<T> cls) {
         final boolean isConcrete = modifier.isConcrete(cls);
         check(cls, NOT_CONCRETE, isConcrete);
     }
@@ -85,13 +84,14 @@ public final class ModifierTestCheckerImpl implements ModifierTestChecker {
         check(name, comment, ok);
     }
 
-    private void check(final Class cls, final String comment, final boolean ok) {
+    private <T> void check(final Class<T> cls, final String comment, final boolean ok) {
         final String name = cls.getSimpleName();
         check(name, comment, ok);
     }
 
     private void check(final String name, final String comment, final boolean ok) {
-        final String message = name + " " + comment;
-        Assert.assertTrue(message, ok);
+        if (!ok) {
+            throw new AssertionError(name + " " + comment);
+        }
     }
 }

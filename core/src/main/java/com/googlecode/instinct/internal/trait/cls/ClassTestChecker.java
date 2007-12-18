@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.boost;
+package com.googlecode.instinct.internal.trait.cls;
 
-import java.lang.reflect.Method;
+public interface ClassTestChecker {
+    <U, T extends U> void checkImplementsAndFinal(Class<U> expectedInterface, Class<T> implementationClass);
 
-public interface MethodTestUtil {
-    Object invoke(Object invokee, String methodName, Object[] parameters);
-
-    Class getThrowsType(Method method);
+    <U, T extends U> void checkSubclassOf(Class<T> subClass, Class<U> superClass);
 }

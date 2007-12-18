@@ -17,7 +17,7 @@
 package com.googlecode.instinct.actor;
 
 import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.lang.reflect.Array;
 
 public final class MockCreator implements SpecificationDoubleCreator {
@@ -27,8 +27,8 @@ public final class MockCreator implements SpecificationDoubleCreator {
         try {
             return doCreateDouble(doubleType, roleName);
         } catch (Throwable e) {
-            final String message = "Unable to create a mock " + doubleType.getName() + " (with role name '" + roleName
-                    + "'). Mock types cannot be final, you may want to use a dummy or a stub.";
+            final String message = "Unable to create a mock " + doubleType.getName() + " (with role name '" + roleName +
+                    "'). Mock types cannot be final, you may want to use a dummy or a stub.";
             throw new SpecificationDoubleCreationException(message, e);
         }
     }

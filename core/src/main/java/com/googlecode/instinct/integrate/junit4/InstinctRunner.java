@@ -17,9 +17,9 @@
 package com.googlecode.instinct.integrate.junit4;
 
 import com.googlecode.instinct.internal.core.SpecificationMethod;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import java.util.Collection;
 import org.junit.runner.Description;
 import static org.junit.runner.Description.createSuiteDescription;

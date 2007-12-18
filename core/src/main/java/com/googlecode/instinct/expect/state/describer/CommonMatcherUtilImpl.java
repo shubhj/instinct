@@ -16,13 +16,13 @@
 
 package com.googlecode.instinct.expect.state.describer;
 
-import org.hamcrest.Matcher;
-import org.hamcrest.StringDescription;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.ClassUtil;
-import com.googlecode.instinct.internal.util.ClassUtilImpl;
 import com.googlecode.instinct.internal.edge.org.hamcrest.StringFactory;
 import com.googlecode.instinct.internal.edge.org.hamcrest.StringFactoryImpl;
+import com.googlecode.instinct.internal.util.ClassUtil;
+import com.googlecode.instinct.internal.util.ClassUtilImpl;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import org.hamcrest.Matcher;
+import org.hamcrest.StringDescription;
 
 public final class CommonMatcherUtilImpl<T> implements CommonMatcherUtil<T> {
 

@@ -14,14 +14,17 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.boost;
+package com.googlecode.instinct.internal.trait.param;
 
 import com.googlecode.instinct.internal.edge.EdgeException;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ConstructorEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ConstructorEdgeImpl;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.MethodEdgeImpl;
-import com.googlecode.instinct.internal.util.NullMaster;
-import com.googlecode.instinct.internal.util.NullMasterImpl;
+import com.googlecode.instinct.internal.trait.modifier.ModifierTestUtil;
+import com.googlecode.instinct.internal.trait.modifier.ModifierTestUtilImpl;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.boost.AssertException;
+import com.googlecode.instinct.internal.util.boost.AssertExceptionImpl;
 import com.googlecode.instinct.internal.util.instance.InstanceProvider;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -34,55 +37,56 @@ public final class ParameterCheckerTestUtilImpl implements ParameterCheckerTestU
     private final ConstructorEdge edgeConstructor = new ConstructorEdgeImpl();
     private final AssertException assertException = new AssertExceptionImpl();
     private final ModifierTestUtil modifierUtil = new ModifierTestUtilImpl();
-    private final NullMaster nullMaster = new NullMasterImpl();
     private final InstanceProvider instanceProvider;
 
     public ParameterCheckerTestUtilImpl(final InstanceProvider instanceProvider) {
-        nullMaster.check(instanceProvider);
+        checkNotNull(instanceProvider);
         this.instanceProvider = instanceProvider;
     }
 
-    public void checkConstructorsRejectsNull(final Class classToCheck) {
-        nullMaster.check(classToCheck);
-        final Constructor[] constructors = classToCheck.getConstructors();
-        for (final Constructor constructor : constructors) {
+    @SuppressWarnings({"unchecked"})
+    public <T> void checkConstructorsRejectsNull(final Class<T> classToCheck) {
+        checkNotNull(classToCheck);
+        final Constructor<T>[] constructors = classToCheck.getConstructors();
+        for (final Constructor<?> constructor : constructors) {
             checkConstructorRejectsNull(constructor);
         }
     }
 
-    public void checkConstructorsRejectEmptyString(final Class classToCheck) {
-        nullMaster.check(classToCheck);
-        final Constructor[] constructors = classToCheck.getConstructors();
-        for (final Constructor constructor : constructors) {
+    @SuppressWarnings({"unchecked"})
+    public <T> void checkConstructorsRejectEmptyString(final Class<T> classToCheck) {
+        checkNotNull(classToCheck);
+        final Constructor<T>[] constructors = classToCheck.getConstructors();
+        for (final Constructor<T> constructor : constructors) {
             checkConstructorRejectsEmptyString(constructor);
         }
     }
 
     public void checkMethodsRejectsNull(final Object instance) {
-        nullMaster.check(instance);
-        final List methods = getPublicMethods(instance.getClass());
+        checkNotNull(instance);
+        final List<Method> methods = getPublicMethods(instance.getClass());
         for (final Object method : methods) {
             checkMethodRejectsNull(instance, (Method) method);
         }
     }
 
     public void checkMethodsRejectEmptyString(final Object instance) {
-        nullMaster.check(instance);
-        final List methods = getPublicMethods(instance.getClass());
+        checkNotNull(instance);
+        final List<Method> methods = getPublicMethods(instance.getClass());
         for (final Object method : methods) {
             checkMethodsRejectsEmptyString(instance, (Method) method);
         }
     }
 
     private void checkMethodsRejectsEmptyString(final Object instance, final Method method) {
-        final Class[] paramTypes = method.getParameterTypes();
+        final Class<?>[] paramTypes = method.getParameterTypes();
         for (int paramToCheck = 0; paramToCheck < paramTypes.length; paramToCheck++) {
             emptyStringCheckParameters(instance, method, paramTypes, paramToCheck);
         }
     }
 
     private void checkMethodRejectsNull(final Object instance, final Method method) {
-        final Class[] paramTypes = method.getParameterTypes();
+        final Class<?>[] paramTypes = method.getParameterTypes();
         for (int paramToCheck = 0; paramToCheck < paramTypes.length; paramToCheck++) {
             // Note. We don't need to check primitives for null.
             if (!paramTypes[paramToCheck].isPrimitive()) {
@@ -91,15 +95,15 @@ public final class ParameterCheckerTestUtilImpl implements ParameterCheckerTestU
         }
     }
 
-    private void emptyStringCheckParameters(final Object instance, final Method method, final Class[] paramTypes, final int paramToCheck) {
+    private void emptyStringCheckParameters(final Object instance, final Method method, final Class<?>[] paramTypes, final int paramToCheck) {
         if (isAString(paramTypes[paramToCheck])) {
             checkParameter(instance, method, paramTypes, paramToCheck, "", "empty string");
             checkParameter(instance, method, paramTypes, paramToCheck, " ", "empty string");
         }
     }
 
-    private List getPublicMethods(final Class cls) {
-        final List publicMethods = new ArrayList();
+    private <T> List<Method> getPublicMethods(final Class<T> cls) {
+        final List<Method> publicMethods = new ArrayList<Method>();
         final Method[] methods = cls.getDeclaredMethods();
         for (final Method method : methods) {
             if (modifierUtil.isPublic(method)) {
@@ -109,8 +113,8 @@ public final class ParameterCheckerTestUtilImpl implements ParameterCheckerTestU
         return publicMethods;
     }
 
-    private void checkConstructorRejectsNull(final Constructor constructor) {
-        final Class[] paramTypes = constructor.getParameterTypes();
+    private <T> void checkConstructorRejectsNull(final Constructor<T> constructor) {
+        final Class<?>[] paramTypes = constructor.getParameterTypes();
         for (int paramToCheck = 0; paramToCheck < paramTypes.length; paramToCheck++) {
             // Note. We don't need to check primitives for null.
             if (!paramTypes[paramToCheck].isPrimitive()) {
@@ -119,34 +123,34 @@ public final class ParameterCheckerTestUtilImpl implements ParameterCheckerTestU
         }
     }
 
-    private void checkConstructorRejectsEmptyString(final Constructor constructor) {
-        final Class[] paramTypes = constructor.getParameterTypes();
+    private <T> void checkConstructorRejectsEmptyString(final Constructor<T> constructor) {
+        final Class<?>[] paramTypes = constructor.getParameterTypes();
         for (int paramToCheck = 0; paramToCheck < paramTypes.length; paramToCheck++) {
             emptyStringCheckParameters(constructor, paramTypes, paramToCheck);
         }
     }
 
-    private void emptyStringCheckParameters(final Constructor constructor, final Class[] paramTypes, final int paramToCheck) {
+    private <T> void emptyStringCheckParameters(final Constructor<T> constructor, final Class<?>[] paramTypes, final int paramToCheck) {
         if (isAString(paramTypes[paramToCheck])) {
             checkParameter(constructor, paramTypes, paramToCheck, "", "empty string");
             checkParameter(constructor, paramTypes, paramToCheck, " ", "empty string");
         }
     }
 
-    private void checkParameter(final Constructor constructor, final Class[] paramTypes, final int paramToCheck,
-            final Object badParamValue, final String typeThatShouldHaveBeedRejected) {
+    private <T> void checkParameter(final Constructor<T> constructor, final Class<?>[] paramTypes, final int paramToCheck, final Object badParamValue,
+            final String typeThatShouldHaveBeedRejected) {
         final Object[] parameterValues = createBadParamValues(instanceProvider, paramTypes, paramToCheck, badParamValue);
         checkFailsWithInvalidValues(constructor, paramToCheck, parameterValues, typeThatShouldHaveBeedRejected);
     }
 
-    private void checkParameter(final Object instance, final Method method, final Class[] paramTypes, final int paramToCheck,
+    private void checkParameter(final Object instance, final Method method, final Class<?>[] paramTypes, final int paramToCheck,
             final Object badParamValue, final String typeThatShouldHaveBeedRejected) {
         final Object[] parameterValues = createBadParamValues(instanceProvider, paramTypes, paramToCheck, badParamValue);
         checkFailsWithInvalidValues(instance, method, paramToCheck, parameterValues, typeThatShouldHaveBeedRejected);
     }
 
-    private Object[] createBadParamValues(final InstanceProvider instanceProvider, final Class[] paramTypes,
-            final int indexOfParamToMakeBad, final Object badValue) {
+    private <T> Object[] createBadParamValues(final InstanceProvider instanceProvider, final Class<T>[] paramTypes, final int indexOfParamToMakeBad,
+            final Object badValue) {
         final Object[] paramValues = new Object[paramTypes.length];
         for (int i = 0; i < paramTypes.length; i++) {
             paramValues[i] = instanceProvider.newInstance(paramTypes[i]);
@@ -163,7 +167,7 @@ public final class ParameterCheckerTestUtilImpl implements ParameterCheckerTestU
         }
     }
 
-    private void checkFailsWithInvalidValues(final Constructor constructor, final int currentParameter, final Object[] paramValues,
+    private <T> void checkFailsWithInvalidValues(final Constructor<T> constructor, final int currentParameter, final Object[] paramValues,
             final String badParamTypeName) {
         try {
             invoke(constructor, paramValues);
@@ -173,8 +177,8 @@ public final class ParameterCheckerTestUtilImpl implements ParameterCheckerTestU
         }
     }
 
-    private void checkFailsWithInvalidValues(final Object instance, final Method method, final int currentParameter,
-            final Object[] parameterValues, final String typeThatShouldHaveBeedRejected) {
+    private void checkFailsWithInvalidValues(final Object instance, final Method method, final int currentParameter, final Object[] parameterValues,
+            final String typeThatShouldHaveBeedRejected) {
         try {
             invoke(instance, method, parameterValues);
             failMethod(currentParameter, method, typeThatShouldHaveBeedRejected);
@@ -183,7 +187,7 @@ public final class ParameterCheckerTestUtilImpl implements ParameterCheckerTestU
         }
     }
 
-    private boolean isAString(final Class type) {
+    private <T> boolean isAString(final Class<T> type) {
         return String.class.isAssignableFrom(type);
     }
 
@@ -196,7 +200,7 @@ public final class ParameterCheckerTestUtilImpl implements ParameterCheckerTestU
         }
     }
 
-    private void invoke(final Constructor constructor, final Object[] paramValues) {
+    private <T> void invoke(final Constructor<T> constructor, final Object[] paramValues) {
         constructor.setAccessible(true);
         try {
             edgeConstructor.newInstance(constructor, paramValues);
@@ -211,7 +215,7 @@ public final class ParameterCheckerTestUtilImpl implements ParameterCheckerTestU
         fail(currentParameter, methodName, paramTypeClassName, typeThatShouldHaveBeedRejected);
     }
 
-    private void failConstructor(final int currentParameter, final Constructor constructor, final String badParamTypeName) {
+    private <T> void failConstructor(final int currentParameter, final Constructor<T> constructor, final String badParamTypeName) {
         final String paramTypeClassName = constructor.getParameterTypes()[currentParameter].getSimpleName();
         final String methodName = constructor.getDeclaringClass().getSimpleName();
         fail(currentParameter, methodName, paramTypeClassName, badParamTypeName);
@@ -219,19 +223,18 @@ public final class ParameterCheckerTestUtilImpl implements ParameterCheckerTestU
 
     private void fail(final int currentParameter, final String methodName, final String paramTypeClassName,
             final String typeThatShouldHaveBeedRejected) {
-        final String message = "Argument " + (currentParameter + 1) + " of " + methodName + "(..." + paramTypeClassName
-                + "...) must be " + typeThatShouldHaveBeedRejected + " checked";
+        final String message = "Argument " + (currentParameter + 1) + " of " + methodName + "(..." + paramTypeClassName + "...) must be " +
+                typeThatShouldHaveBeedRejected + " checked";
         Assert.fail(message);
     }
 
-    private void setBadParam(final Object[] paramValues, final Class[] paramTypes, final int indexOfParamToMakeBad, final Object badValue) {
+    private void setBadParam(final Object[] paramValues, final Class<?>[] paramTypes, final int indexOfParamToMakeBad, final Object badValue) {
         if (badValue == null) {
             paramValues[indexOfParamToMakeBad] = badValue;
         } else if (badValue.getClass().isAssignableFrom(paramTypes[indexOfParamToMakeBad])) {
             paramValues[indexOfParamToMakeBad] = badValue;
         } else {
-            throw new RuntimeException("Expected value '" + badValue + "' to be of type " +
-                    paramTypes[indexOfParamToMakeBad].getSimpleName());
+            throw new RuntimeException("Expected value '" + badValue + "' to be of type " + paramTypes[indexOfParamToMakeBad].getSimpleName());
         }
     }
 

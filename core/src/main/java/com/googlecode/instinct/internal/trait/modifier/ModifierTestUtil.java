@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.boost;
+package com.googlecode.instinct.internal.trait.modifier;
 
 import java.lang.reflect.Member;
 
@@ -34,9 +34,6 @@ public interface ModifierTestUtil {
     boolean isFinal(Member member);
 
     boolean isSynchronized(Member member);
-
-    // Why the hell doesn't j.l.Class implement j.l.r.Member?
-    // Then we would not need to double up like this!
 
     <T> boolean isPublic(Class<T> cls);
 

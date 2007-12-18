@@ -8,9 +8,9 @@
         <delete dir="${build.dir}"/>
     </target>
 
-    <target name="all" depends="clean,test,-check-coverage,release,-artifacts"/>
+    <target name="all" depends="clean,spec,-check-coverage,release,-artifacts"/>
     <target name="compile" depends="clean,-compile"/>
-    <target name="test" depends="clean,-test"/>
+    <target name="spec" depends="clean,-spec"/>
     <target name="javadoc" depends="clean,-javadoc"/>
     <target name="jar" depends="clean,-clover-safe-jar"/>
     <target name="quality" depends="clean,-quality"/>
@@ -31,11 +31,11 @@
         </copy>
     </target>
 
-    <target name="-test">
+    <target name="-spec">
         <clean.classes.macro/>
         <cloverenable.macro/>
         <compile.all.macro/>
-        <test.macro/>
+        <spec.macro/>
         <cloverreport.macro/>
     </target>
 
@@ -139,7 +139,7 @@
         </sequential>
     </macrodef>
 
-    <macrodef name="test.macro">
+    <macrodef name="spec.macro">
         <sequential>
             <mkdir dir="${spec.results.dir}"/>
             <junit failureproperty="specs.failed" fork="true" forkmode="perBatch">

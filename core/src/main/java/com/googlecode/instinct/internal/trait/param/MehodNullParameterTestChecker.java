@@ -14,14 +14,8 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.boost;
+package com.googlecode.instinct.internal.trait.param;
 
-public interface ParameterCheckerTestUtil {
-    <T> void checkConstructorsRejectsNull(Class<T> classToCheck);
-
-    <T> void checkConstructorsRejectEmptyString(Class<T> classToCheck);
-
-    void checkMethodsRejectsNull(Object instance);
-
-    void checkMethodsRejectEmptyString(Object instance);
+public interface MehodNullParameterTestChecker {
+    void checkPublicMethodsRejectNull(Object instance);
 }

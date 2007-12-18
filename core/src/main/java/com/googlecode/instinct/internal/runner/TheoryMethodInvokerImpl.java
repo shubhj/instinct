@@ -19,10 +19,10 @@ package com.googlecode.instinct.internal.runner;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.MethodEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.MethodEdgeImpl;
 import com.googlecode.instinct.internal.util.MethodInvoker;
+import com.googlecode.instinct.internal.util.ParamChecker;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
-import com.googlecode.instinct.internal.util.param.ParamChecker;
 import java.lang.reflect.Method;
 
 @Suggest("Test drive this.")

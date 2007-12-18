@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.boost;
+package com.googlecode.instinct.internal.trait.param;
 
-import com.googlecode.instinct.internal.util.NullMaster;
-import com.googlecode.instinct.internal.util.NullMasterImpl;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.InstanceProvider;
 
 public final class MehodNullParameterTestCheckerImpl implements MehodNullParameterTestChecker {
-    private final NullMaster nullMaster = new NullMasterImpl();
     private final ParameterCheckerTestUtil parameterUtil;
 
     public MehodNullParameterTestCheckerImpl(final InstanceProvider instanceProvider) {

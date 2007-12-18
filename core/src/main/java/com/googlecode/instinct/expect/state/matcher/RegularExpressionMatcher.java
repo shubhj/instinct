@@ -16,16 +16,14 @@
 
 package com.googlecode.instinct.expect.state.matcher;
 
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.util.regex.Pattern;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-/**
- * Performs matches of a string against a regular expression.
- */
+/** Performs matches of a string against a regular expression. */
 public final class RegularExpressionMatcher extends TypeSafeMatcher<String> {
     private final Pattern pattern;
 
@@ -38,8 +36,8 @@ public final class RegularExpressionMatcher extends TypeSafeMatcher<String> {
     }
 
     /**
-     * Returns true if the <code>item</code> matches the regular expression given in the constructor.
-     * This method is invoked by Hamcrest after preliminary null and type checking.
+     * Returns true if the <code>item</code> matches the regular expression given in the constructor. This method is invoked by Hamcrest after
+     * preliminary null and type checking.
      * @param item The item to check against the regular expression given in the constructor.
      * @return <code>true</code> if the <code>item</code> matches the regular expression given in the constructor.
      */

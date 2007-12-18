@@ -10,10 +10,8 @@
 
     <property name="coverage.dir" value="${build.dir}/coverage"/>
     <property name="coverage.database" value="${coverage.dir}/coverage.db"/>
-
     <property name="coverage.flush.interval" value="1000"/>
-    <property name="coverage.target" value="60%"/>
-
+    <property name="coverage.target" value="75%"/>
     <fileset id="covered.code.fileset" dir="${main.src.dir}">
         <include name="**/*.java"/>
         <exclude name="**/sandbox/**"/>
@@ -31,6 +29,7 @@
     <target name="-checkstyle">
         <checkstyle.macro code.type="main"/>
         <!--<checkstyle.macro code.type="test"/>-->
+        <!--<checkstyle.macro code.type="spec"/>-->
     </target>
 
     <macrodef name="checkstyle.macro">
@@ -45,7 +44,7 @@
 
     <target name="-check-coverage">
         <clover-check initString="${coverage.database}" target="${coverage.target}" haltOnFailure="false" failureProperty="coverage.failure"/>
-        <fail if="coverage.failure" message="Spec/test coverage did not meet the target of ${coverage.target}."/>
+        <fail if="coverage.failure" message="Specification/test code coverage did not meet the target of ${coverage.target}."/>
     </target>
 
     <target name="-disable-coverage">
@@ -64,7 +63,7 @@
     </macrodef>
 
     <target name="-clover-clean">
-        <clover-clean initString="${coverage.database}" keepdb="true" verbose="true"/>
+        <clover-clean initString="${coverage.database}" keepdb="true"/>
     </target>
 
     <macrodef name="cloverreport.macro">
@@ -73,7 +72,7 @@
             <sleep milliseconds="${coverage.flush.interval}"/>
             <sleep milliseconds="${coverage.flush.interval}"/>
             <clover-report initString="${coverage.database}">
-                <current outfile="${coverage.dir}" title="${project.shortname} spec/test code coverage">
+                <current outfile="${coverage.dir}" title="${project.shortname} Specification/Test Code Coverage">
                     <format type="html"/>
                     <testsources dir="${test.src.dir}" includes="**/*"/>
                     <testsources dir="${spec.src.dir}" includes="**/*"/>

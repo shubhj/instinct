@@ -15,9 +15,9 @@
  */
 package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.expect.behaviour.Mocker;
 import com.googlecode.instinct.actor.ActorAutoWirer;
 import com.googlecode.instinct.actor.ActorAutoWirerImpl;
+import com.googlecode.instinct.expect.behaviour.Mocker;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import static com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus.SPECIFICATION_SUCCESS;
@@ -28,7 +28,7 @@ import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.lang.ConstructorInvoker;
 import com.googlecode.instinct.internal.util.lang.ConstructorInvokerImpl;
@@ -130,8 +130,8 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     }
 
     @Fix({"Test the wrapping of jMock exceptions here."})
-    @Suggest({"Wrap 'unexpected ...' jMock cardinality exception if you a mock is used in a test without expectations being set on it",
-            "Call this thing an ExceptionSanitiser", "May help fix Paul's bug: defect-11"})
+    @Suggest(
+            {"Wrap 'unexpected ...' jMock cardinality exception if you a mock is used in a test without expectations being set on it", "Call this thing an ExceptionSanitiser", "May help fix Paul's bug: defect-11"})
     private Throwable wrapCommonExceptions(final Throwable throwable) {
         if (throwable instanceof ExpectationError) {
             final String message = "Unexpected invocation. You may need to wrap the code in your new Expections(){{}} block with cardinality " +

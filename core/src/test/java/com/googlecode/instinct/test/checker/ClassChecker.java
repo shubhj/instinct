@@ -16,16 +16,16 @@
 
 package com.googlecode.instinct.test.checker;
 
+import com.googlecode.instinct.internal.trait.cls.ClassTestChecker;
+import com.googlecode.instinct.internal.trait.cls.ClassTestCheckerImpl;
+import com.googlecode.instinct.internal.trait.param.ConstructorNullParameterTestChecker;
+import com.googlecode.instinct.internal.trait.param.ConstructorNullParameterTestCheckerImpl;
+import com.googlecode.instinct.internal.trait.param.MehodNullParameterTestChecker;
+import com.googlecode.instinct.internal.trait.param.MehodNullParameterTestCheckerImpl;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.internal.util.boost.ClassTestChecker;
-import com.googlecode.instinct.internal.util.boost.ClassTestCheckerImpl;
-import com.googlecode.instinct.internal.util.boost.MehodNullParameterTestChecker;
-import com.googlecode.instinct.internal.util.boost.MehodNullParameterTestCheckerImpl;
 import com.googlecode.instinct.internal.util.instance.GenericInstanceProvider;
 import com.googlecode.instinct.internal.util.instance.InstanceProvider;
-import com.googlecode.instinct.internal.util.param.ConstructorNullParameterTestChecker;
-import com.googlecode.instinct.internal.util.param.ConstructorNullParameterTestCheckerImpl;
 import static com.googlecode.instinct.test.checker.ModifierChecker.checkFinal;
 import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;
 

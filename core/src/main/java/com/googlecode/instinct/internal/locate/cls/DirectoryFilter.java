@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.internal.locate.cls;
 
-import com.googlecode.instinct.internal.util.param.ParamChecker;
+import com.googlecode.instinct.internal.util.ParamChecker;
 import java.io.File;
 import java.io.FileFilter;
 

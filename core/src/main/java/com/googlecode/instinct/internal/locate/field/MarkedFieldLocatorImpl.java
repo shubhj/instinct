@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.internal.locate.field;
 
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.MarkingScheme;
 import java.lang.reflect.Field;
 

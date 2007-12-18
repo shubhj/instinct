@@ -14,28 +14,14 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.boost;
+package com.googlecode.instinct.internal.trait.param;
 
-import java.lang.reflect.Member;
+public interface ParameterCheckerTestUtil {
+    <T> void checkConstructorsRejectsNull(Class<T> classToCheck);
 
-public interface ModifierTestChecker {
-    void checkPublic(Member member);
+    <T> void checkConstructorsRejectEmptyString(Class<T> classToCheck);
 
-    void checkPrivate(Member member);
+    void checkMethodsRejectsNull(Object instance);
 
-    void checkFinal(Member member);
-
-    void checkSynchronized(Member member);
-
-    void checkStatic(Member member);
-
-    void checkInstance(Member member);
-
-    void checkPrivateFinalInstance(Member member);
-
-    <T> void checkPublic(Class<T> cls);
-
-    <T> void checkFinal(Class<T> cls);
-
-    <T> void checkConcrete(Class<T> cls);
+    void checkMethodsRejectEmptyString(Object instance);
 }

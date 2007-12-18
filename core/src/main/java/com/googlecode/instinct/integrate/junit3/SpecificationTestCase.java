@@ -22,12 +22,12 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
 import com.googlecode.instinct.internal.util.ExceptionFinder;
 import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import junit.framework.TestCase;
 import junit.framework.TestResult;
 
-@SuppressWarnings({"JUnitTestCaseInProductSource", "UnconstructableJUnitTestCase", "JUnitTestCaseWithNoTests",
-        "JUnitTestCaseWithNonTrivialConstructors"})
+@SuppressWarnings(
+        {"JUnitTestCaseInProductSource", "UnconstructableJUnitTestCase", "JUnitTestCaseWithNoTests", "JUnitTestCaseWithNonTrivialConstructors"})
 public final class SpecificationTestCase extends TestCase {
     private final ExceptionFinder exceptionFinder = new ExceptionFinderImpl();
     private TestResult result;
@@ -68,6 +68,7 @@ public final class SpecificationTestCase extends TestCase {
             result.addError(this, e);
         }
     }
+
     // } SUPPRESS IllegalCatch
 
     private void processSpecificationResult(final SpecificationResult specificationResult) {

@@ -20,7 +20,7 @@ import com.googlecode.instinct.internal.locate.AnnotationChecker;
 import com.googlecode.instinct.internal.locate.AnnotationCheckerImpl;
 import com.googlecode.instinct.internal.locate.method.HierarchicalMethodLocator;
 import com.googlecode.instinct.internal.locate.method.HierarchicalMethodLocatorImpl;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

@@ -16,10 +16,11 @@
 
 package com.googlecode.instinct.test.checker;
 
-import com.googlecode.instinct.internal.util.boost.ModifierTestChecker;
+import com.googlecode.instinct.internal.trait.modifier.ModifierTestChecker;
+import com.googlecode.instinct.internal.trait.modifier.ModifierTestCheckerImpl;
 
 public final class ModifierChecker {
-    private static final ModifierTestChecker MODIFIER_CHECKER = new com.googlecode.instinct.internal.util.boost.ModifierTestCheckerImpl();
+    private static final ModifierTestChecker MODIFIER_CHECKER = new ModifierTestCheckerImpl();
 
     private ModifierChecker() {
         throw new UnsupportedOperationException();

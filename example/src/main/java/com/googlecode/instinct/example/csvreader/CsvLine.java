@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.example.csvreader;
 
-import java.util.Arrays;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import java.util.Arrays;
 
 public final class CsvLine {
     private final String[] columns;

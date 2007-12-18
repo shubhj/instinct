@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.internal.util.lang;
 
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class MethodSpecImpl extends Primordial implements MethodSpec {
     private final String name;

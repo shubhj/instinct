@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.actor;
 
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
-import java.lang.reflect.Method;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.lang.reflect.Member;
+import java.lang.reflect.Method;
 import static net.sf.cglib.proxy.Enhancer.isEnhanced;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
@@ -35,8 +35,8 @@ public final class DummyMethodInterceptor implements MethodInterceptor {
     }
 
     private Object rejectAllNonObjectMethodCalls(final Object obj, final Member method) {
-        final String message = "Method " + method.getName() + "() was called on a dummy instance of " + getDummyClassName(obj) + ". "
-                + "If you expect methods to be called on this specification double you should make it a mock or stub.";
+        final String message = "Method " + method.getName() + "() was called on a dummy instance of " + getDummyClassName(obj) + ". " +
+                "If you expect methods to be called on this specification double you should make it a mock or stub.";
         throw new IllegalInvocationException(message);
     }
 

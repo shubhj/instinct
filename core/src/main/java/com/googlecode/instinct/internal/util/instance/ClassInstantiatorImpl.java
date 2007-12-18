@@ -21,7 +21,7 @@ import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.JavaClassNameFactory;
 import com.googlecode.instinct.internal.util.JavaClassNameFactoryImpl;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.io.File;
 
 public final class ClassInstantiatorImpl implements ClassInstantiator {

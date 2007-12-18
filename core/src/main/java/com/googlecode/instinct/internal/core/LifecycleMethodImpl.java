@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.core;
 
 import com.googlecode.instinct.internal.util.Fix;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.TechNote;
 import com.googlecode.instinct.internal.util.lang.Primordial;
 import java.lang.annotation.Annotation;

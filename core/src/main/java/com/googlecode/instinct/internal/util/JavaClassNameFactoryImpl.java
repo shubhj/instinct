@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.internal.util;
 
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.io.File;
 
 public final class JavaClassNameFactoryImpl implements JavaClassNameFactory {

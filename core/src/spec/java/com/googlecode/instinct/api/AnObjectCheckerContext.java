@@ -31,6 +31,7 @@ import org.hamcrest.core.IsNull;
 import static org.hamcrest.core.IsSame.sameInstance;
 import org.junit.runner.RunWith;
 
+@SuppressWarnings({"unchecked"})
 @RunWith(InstinctRunner.class)
 @Context
 public class AnObjectCheckerContext {
@@ -40,11 +41,9 @@ public class AnObjectCheckerContext {
     public void shouldImplementDoesNotMatchOnAllOf() {
         final int one = 1;
         final ObjectChecker<Integer> objectChecker = new ObjectCheckerImpl<Integer>(one);
-
         final Collection<Matcher<? extends Integer>> matcherList = new ArrayList<Matcher<? extends Integer>>();
         matcherList.add(equalTo(5));
         matcherList.add(IsNull.<Integer>nullValue());
-
         objectChecker.matches(equalTo(1), sameInstance(one));
         objectChecker.doesNotMatchOnAllOf(equalTo(2), equalTo(3));
         objectChecker.doesNotMatchOnAllOf(matcherList);
@@ -54,7 +53,6 @@ public class AnObjectCheckerContext {
     public void shouldImplementHasBeanProperty() {
         final Person person = new Person("Perry");
         final ObjectChecker<Person> objectChecker = new ObjectCheckerImpl<Person>(person);
-
         objectChecker.hasBeanProperty("name", String.class);
         objectChecker.hasBeanPropertyWithValue("name", String.class, equalTo("Perry"));
     }
@@ -63,7 +61,6 @@ public class AnObjectCheckerContext {
     public void shouldImplementHasToString() {
         final String greeting = GREETING;
         final ObjectChecker<String> objectChecker = new ObjectCheckerImpl<String>(greeting);
-
         objectChecker.hasToString(equalTo(GREETING));
     }
 
@@ -72,7 +69,6 @@ public class AnObjectCheckerContext {
         final String greeting = GREETING;
         final String goodbye = "au revoir";
         final ObjectChecker<String> objectChecker = new ObjectCheckerImpl<String>(greeting);
-
         objectChecker.isAnInstanceOf(String.class);
         objectChecker.isOfType(String.class);
         objectChecker.isNotTheSameInstanceAs(goodbye);
@@ -82,7 +78,6 @@ public class AnObjectCheckerContext {
     public void shouldImplementEquality() {
         final String greeting = GREETING;
         final ObjectChecker<String> objectChecker = new ObjectCheckerImpl<String>(greeting);
-
         objectChecker.isNotNull();
         objectChecker.isEqualTo(GREETING);
         objectChecker.isNotEqualTo("foobar");
@@ -92,14 +87,11 @@ public class AnObjectCheckerContext {
     public void shouldImplementMatches() {
         final double doubleValue = 2.5d;
         final ObjectChecker<Double> objectChecker = new ObjectCheckerImpl<Double>(doubleValue);
-
         final Collection<Matcher<? extends Double>> matcherList = new ArrayList<Matcher<? extends Double>>();
         matcherList.add(IsNull.<Double>notNullValue());
         matcherList.add(is(doubleValue));
-
         objectChecker.matches(equalTo(2.5d), IsNull.<Double>notNullValue());
         objectChecker.matches(matcherList);
-
         objectChecker.matchesAnyOf(equalTo(2.4d), equalTo(2.5d), IsNull.<Double>nullValue(), IsNull.<Double>notNullValue());
     }
 }

@@ -28,7 +28,7 @@ import static com.googlecode.instinct.internal.runner.RunnableItemBuilder.ITEM_S
 import com.googlecode.instinct.internal.runner.RunnableItemBuilderImpl;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.util.Fix;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import com.googlecode.instinct.report.ResultMessageBuilder;
@@ -39,20 +39,18 @@ import static java.lang.System.out;
 import java.util.Collection;
 
 /**
- * Command line specification runner. Runs a context or specification method sending the results to standard out.
- * The format of the arguments are as follows:
+ * Command line specification runner. Runs a context or specification method sending the results to standard out. The format of the arguments are as
+ * follows:
  * <pre>
  * $ java CommandLineRunner com.googlecode.instinct.example.stack.AnEmptyStack
  * $ java CommandLineRunner com.googlecode.instinct.example.stackAnEmptyStack#mustBeEmpty
  * $ java CommandLineRunner com.googlecode.instinct.example.stack.AnEmptyStack#mustBeEmpty com.googlecode.instinct.example.stack.AnEmptyMagazineRack
  * </pre>
- *
  * @see CommandLineUsage
  */
 @Fix({"Write atomic test for this."})
-@Suggest({"Add formatter/message builder as command line argument.",
-        "Can the formatting be moved into the BriefResultMessageBuilder?", "Make this not implement spec listener",
-        "Why is there this & the commane line runner? This should use text runner"})
+@Suggest(
+        {"Add formatter/message builder as command line argument.", "Can the formatting be moved into the BriefResultMessageBuilder?", "Make this not implement spec listener", "Why is there this & the commane line runner? This should use text runner"})
 @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed", "UseOfSystemOutOrSystemErr"})
 public final class CommandLineRunner implements ContextListener, SpecificationListener {
     private static final CommandLineUsage USAGE = new CommandLineUsageImpl();
@@ -116,7 +114,6 @@ public final class CommandLineRunner implements ContextListener, SpecificationLi
 
     /**
      * Runs a context or specification method sending the results to standard out.
-     *
      * @param args Command line arguments (see above).
      */
     @SuppressWarnings({"LocalVariableOfConcreteClass"})

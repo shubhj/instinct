@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.internal.util.proxy;
 
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.util.List;
 import net.sf.cglib.core.NamingPolicy;
 import net.sf.cglib.proxy.Callback;

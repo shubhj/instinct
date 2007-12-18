@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.internal.locate.cls;
 
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import java.net.URL;
 
 @SuppressWarnings({"HardcodedFileSeparator"})

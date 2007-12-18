@@ -42,7 +42,11 @@ o ant-1.7.0.jar
 
 In addition, to use the JUnit 3/4 runners, you'll need:
 
-o junit-4.4.jar
+o junit-dep-4.4.jar
+
+Note. As JUnit 4.4 bundles Hamcrest, you can choose to either take Hamcrest from JUnit
+or as a seperate Jar. If you choose to take the JUnit version you will need the full
+JUnit Jar 'junit-4.4.jar' instead of the no dependencies version listed here.
 
 
 * Documentation *

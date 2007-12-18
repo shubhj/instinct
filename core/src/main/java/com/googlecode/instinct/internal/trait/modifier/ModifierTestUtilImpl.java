@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.boost;
+package com.googlecode.instinct.internal.trait.modifier;
 
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
@@ -65,7 +65,7 @@ public final class ModifierTestUtilImpl implements ModifierTestUtil {
         return isPublic(modifiers);
     }
 
-    public <T>boolean isFinal(final Class<T> cls) {
+    public <T> boolean isFinal(final Class<T> cls) {
         final int modifiers = cls.getModifiers();
         return isFinal(modifiers);
     }
@@ -75,16 +75,16 @@ public final class ModifierTestUtilImpl implements ModifierTestUtil {
         return isAbstract(modifiers);
     }
 
-    public <T>boolean isConcrete(final Class<T> cls) {
+    public <T> boolean isConcrete(final Class<T> cls) {
         return !isAbstract(cls);
     }
 
-    public <T>boolean isInterface(final Class<T> cls) {
+    public <T> boolean isInterface(final Class<T> cls) {
         final int modifiers = cls.getModifiers();
         return isInterface(modifiers);
     }
 
-    public <T>boolean isSynchronized(final Class<T> cls) {
+    public <T> boolean isSynchronized(final Class<T> cls) {
         final Method[] methods = cls.getMethods();
         for (final Member method : methods) {
             if (!isSynchronized(method)) {

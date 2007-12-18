@@ -31,6 +31,7 @@ import net.sf.cglib.proxy.NoOp;
 import org.jmock.Expectations;
 import org.objenesis.Objenesis;
 
+@SuppressWarnings({"unchecked"})
 public final class CgLibProxyGeneratorAtomicTest extends InstinctTestCase {
     @Subject(auto = false) private ProxyGenerator proxyGenerator;
     @Mock private ObjectFactory objectFactory;

@@ -17,7 +17,7 @@
 package com.googlecode.instinct.expect.behaviour;
 
 import static com.googlecode.instinct.expect.behaviour.Mocker.getJMock2Mockery;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import org.jmock.internal.ExpectationBuilder;
 
 public final class BehaviourExpectationsImpl implements BehaviourExpectations {

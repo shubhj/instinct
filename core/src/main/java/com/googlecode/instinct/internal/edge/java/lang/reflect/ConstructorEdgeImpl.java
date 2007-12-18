@@ -20,7 +20,7 @@ import com.googlecode.instinct.internal.edge.EdgeException;
 import java.lang.reflect.Constructor;
 
 public final class ConstructorEdgeImpl implements ConstructorEdge {
-    @SuppressWarnings({"CatchGenericClass"})
+    @SuppressWarnings({"CatchGenericClass", "OverlyBroadCatchBlock"})
     public <T> T newInstance(final Constructor<T> constructor, final Object[] parameters) {
         try {
             return constructor.newInstance(parameters);

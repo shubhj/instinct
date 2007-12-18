@@ -1,14 +1,9 @@
-package com.googlecode.instinct.internal.util.param;
+package com.googlecode.instinct.internal.trait.param;
 
-import com.googlecode.instinct.internal.util.NullMaster;
-import com.googlecode.instinct.internal.util.NullMasterImpl;
-import com.googlecode.instinct.internal.util.boost.ParameterCheckerTestUtil;
-import com.googlecode.instinct.internal.util.boost.ParameterCheckerTestUtilImpl;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.InstanceProvider;
 
 public final class ConstructorNullParameterTestCheckerImpl implements ConstructorNullParameterTestChecker {
-    private final NullMaster nullMaster = new NullMasterImpl();
     private final ParameterCheckerTestUtil parameterUtil;
 
     public ConstructorNullParameterTestCheckerImpl(final InstanceProvider instanceProvider) {
@@ -16,7 +11,7 @@ public final class ConstructorNullParameterTestCheckerImpl implements Constructo
         parameterUtil = new ParameterCheckerTestUtilImpl(instanceProvider);
     }
 
-    public void checkPublicConstructorsRejectNull(final Class classToCheck) {
+    public <T> void checkPublicConstructorsRejectNull(final Class<T> classToCheck) {
         checkNotNull(classToCheck);
         parameterUtil.checkConstructorsRejectsNull(classToCheck);
     }

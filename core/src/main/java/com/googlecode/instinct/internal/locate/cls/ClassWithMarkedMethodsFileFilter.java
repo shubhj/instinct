@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.locate.cls;
 
 import com.googlecode.instinct.internal.locate.method.MarkedMethodFileChecker;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.MarkingScheme;
 import java.io.File;
 import java.io.FileFilter;

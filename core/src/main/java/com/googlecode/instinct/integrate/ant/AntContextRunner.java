@@ -19,7 +19,7 @@ package com.googlecode.instinct.integrate.ant;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import com.googlecode.instinct.runner.ContextListener;
@@ -35,8 +35,7 @@ public final class AntContextRunner implements ContextRunner {
     private final ResultMessageBuilder messageBuilder;
     private final StatusLogger statusLogger;
 
-    public AntContextRunner(final ContextRunner delegate, final ResultMessageBuilder messageBuilder,
-            final StatusLogger statusLogger) {
+    public AntContextRunner(final ContextRunner delegate, final ResultMessageBuilder messageBuilder, final StatusLogger statusLogger) {
         checkNotNull(delegate, messageBuilder, statusLogger);
         this.delegate = delegate;
         this.messageBuilder = messageBuilder;

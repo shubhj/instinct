@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.internal.locate.cls;
 
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.MarkingScheme;
 import java.io.File;
 import java.io.FileFilter;

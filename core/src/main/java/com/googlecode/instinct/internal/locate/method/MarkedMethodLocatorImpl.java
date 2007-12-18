@@ -18,8 +18,8 @@ package com.googlecode.instinct.internal.locate.method;
 
 import com.googlecode.instinct.internal.locate.field.AnnotatedMethodLocator;
 import com.googlecode.instinct.internal.locate.field.AnnotatedMethodLocatorImpl;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import java.lang.annotation.Annotation;

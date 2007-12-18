@@ -14,7 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.boost;
+package com.googlecode.instinct.internal.trait.cls;
+
+import com.googlecode.instinct.internal.trait.modifier.ModifierTestChecker;
+import com.googlecode.instinct.internal.trait.modifier.ModifierTestCheckerImpl;
 
 public final class ClassTestCheckerImpl implements ClassTestChecker {
     private final ModifierTestChecker modifier = new ModifierTestCheckerImpl();

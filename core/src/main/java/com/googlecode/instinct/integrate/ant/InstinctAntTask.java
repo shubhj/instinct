@@ -19,8 +19,8 @@ package com.googlecode.instinct.integrate.ant;
 import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.JavaClassName;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotNull;
-import static com.googlecode.instinct.internal.util.param.ParamChecker.checkNotWhitespace;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import com.googlecode.instinct.runner.CommandLineRunner;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,6 +31,7 @@ import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.taskdefs.Execute;
+import static org.apache.tools.ant.taskdefs.Execute.isFailure;
 import org.apache.tools.ant.taskdefs.LogStreamHandler;
 import org.apache.tools.ant.types.CommandlineJava;
 import org.apache.tools.ant.types.Path;
@@ -112,43 +113,27 @@ public final class InstinctAntTask extends Task implements StatusLogger {
             throw new BuildException(t);
         }
     }
+
     // } SUPPRESS IllegalCatch
 
     @Fix("Register as a runner, so that we recieve results as it happens.")
     // TODO The runners also need to be passed a group, so they don't run the wrong thing.
     private void runContexts() {
         final CommandlineJava commandLine = createCommandLine();
-        executeAsForked(commandLine);
+        final int exitCode = executeAsForked(commandLine);
+        if (isFailure(exitCode)) {
+            // getProject().setNewProperty(failureProperty, "true");
+            throw new BuildException("Forked VM failed with exit code: " + exitCode);
+        }
     }
 
     private CommandlineJava createCommandLine() {
-//        addInstinctClassesToClasspath();
         final CommandlineJava commandLine = getJavaCommandLine();
         commandLine.setClassname(CommandLineRunner.class.getName());
         final String contexts = getContextNamesToRun();
         commandLine.createArgument().setValue(contexts);
         return commandLine;
     }
-
-//    private void addInstinctClassesToClasspath() {
-////        addClassToClassPath(CommandLineRunner.class);
-////        addClassToClassPath(EdgeException.class);
-//    }
-
-//    private <T> void addClassToClassPath(final Class<T> cls) {
-//        final Path path = new Path(getProject());
-//        path.setLocation(findClass(cls));
-//        createClasspath().add(path);
-//    }
-
-//    private <T> File findClass(final Class<T> cls) {
-//        final String pathName = cls.getName().replace(".", "/") + ".class";
-//        final File source = LoaderUtils.getResourceSource(getClass().getClassLoader(), pathName);
-//        if (source == null) {
-//            throw new BuildException("Unable");
-//        }
-//        return source;
-//    }
 
     private String getContextNamesToRun() {
         final List<JavaClassName> contextClasses = findContextsFromAllAggregators();
