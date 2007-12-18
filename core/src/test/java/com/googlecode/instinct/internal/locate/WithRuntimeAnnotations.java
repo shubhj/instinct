@@ -17,29 +17,17 @@
 package com.googlecode.instinct.internal.locate;
 
 import com.googlecode.instinct.marker.annotate.Context;
-import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.Stub;
 
 @SuppressWarnings({"UnusedDeclaration", "PackageVisibleField", "FieldCanBeLocal", "ProtectedField", "EqualsAndHashcode"})
 @Context
 public class WithRuntimeAnnotations {
-    @Dummy
-    protected final String string1;
-    @Dummy
-    public final String string2;
-    public final String string3;
-    @Dummy
-    final String string4;
-    @Dummy
-    private final String string5;
-
-    public WithRuntimeAnnotations(final String string1, final String string2, final String string3, final String string4, final String string5) {
-        this.string1 = string1;
-        this.string2 = string2;
-        this.string3 = string3;
-        this.string4 = string4;
-        this.string5 = string5;
-    }
+    @Stub protected String string1;
+    @Stub public String string2;
+    @Stub public String string3;
+    @Stub String string4;
+    @Stub private String string5;
 
     @Override
     @Specification
@@ -47,6 +35,7 @@ public class WithRuntimeAnnotations {
         return super.toString();
     }
 
+    @SuppressWarnings({"EqualsWhichDoesntCheckParameterClass"})
     @Override
     @Specification
     public boolean equals(final Object obj) {

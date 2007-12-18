@@ -20,6 +20,5 @@ import java.lang.reflect.Method;
 import java.util.Set;
 
 public interface HierarchicalMethodLocator {
-
-    Set<Method> locate(Class<?> cls);
+    <T> Set<Method> locate(Class<T> cls);
 }

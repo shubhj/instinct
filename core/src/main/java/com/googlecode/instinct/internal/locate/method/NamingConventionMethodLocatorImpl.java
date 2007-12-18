@@ -17,17 +17,14 @@
 package com.googlecode.instinct.internal.locate.method;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
 
 public final class NamingConventionMethodLocatorImpl implements NamingConventionMethodLocator {
     private final HierarchicalMethodLocator methodLocator = new HierarchicalMethodLocatorImpl();
 
-    @Suggest("Why are we using T here, when it's not really used? Consider using Class<?> and remove T since we support for all Classes.")
     public <T> Collection<Method> locate(final Class<T> cls, final NamingConvention namingConvention) {
         checkNotNull(cls, namingConvention);
         final Collection<Method> locatedMethods = new ArrayList<Method>();
@@ -39,7 +36,7 @@ public final class NamingConventionMethodLocatorImpl implements NamingConvention
         return locatedMethods;
     }
 
-    private Set<Method> findMethods(final Class<?> cls) {
+    private <T> Iterable<Method> findMethods(final Class<T> cls) {
         return methodLocator.locate(cls);
     }
 }

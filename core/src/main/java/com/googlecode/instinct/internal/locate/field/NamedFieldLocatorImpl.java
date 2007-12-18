@@ -14,12 +14,8 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.locate.method;
+package com.googlecode.instinct.internal.locate.field;
 
-import com.googlecode.instinct.marker.naming.NamingConvention;
-import java.lang.reflect.Method;
-import java.util.Collection;
+public final class NamedFieldLocatorImpl implements NamedFieldLocator {
 
-public interface NamingConventionMethodLocator {
-    <T> Collection<Method> locate(Class<T> cls, NamingConvention namingConvention);
 }

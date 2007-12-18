@@ -18,8 +18,6 @@ package com.googlecode.instinct.internal.locate.method;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.internal.locate.WithRuntimeAnnotations;
-import com.googlecode.instinct.internal.locate.WithoutRuntimeAnnotations;
 import com.googlecode.instinct.internal.locate.field.AnnotatedMethodLocator;
 import com.googlecode.instinct.internal.locate.field.AnnotatedMethodLocatorImpl;
 import com.googlecode.instinct.marker.annotate.Context;
@@ -40,14 +38,27 @@ public final class AnAnnotatedMethodLocatorContext {
     }
 
     @Specification
-    public void shouldNotReturnMethodsThatDoNotMatchTheSuppliedCriteria() {
-        final Collection<Method> methods = locator.locate(WithoutRuntimeAnnotations.class, Specification.class);
-        expect.that(methods).isOfSize(0);
+    public void shouldReturnMethodsThatMatchTheSuppliedCriteria() {
+        final Collection<Method> methods = locator.locate(WithAnnotatedMethods.class, Specification.class);
+        expect.that(methods).isOfSize(1);
     }
 
     @Specification
-    public void shouldReturnMethodsThatMatchTheSuppliedCriteria() {
-        final Collection<Method> methods = locator.locate(WithRuntimeAnnotations.class, Specification.class);
-        expect.that(methods).isOfSize(2);
+    public void shouldNotReturnMethodsThatDoNotMatchTheSuppliedCriteria() {
+        final Collection<Method> methods = locator.locate(WithoutAnnotatedMethods.class, Specification.class);
+        expect.that(methods).isOfSize(0);
+    }
+
+    @SuppressWarnings({"ALL"})
+    private static final class WithAnnotatedMethods {
+        @Specification
+        public void aMethodThatIsAnnotated() {
+        }
+    }
+
+    @SuppressWarnings({"ALL"})
+    private static final class WithoutAnnotatedMethods {
+        public void aMethodThatIsNotAnnotated() {
+        }
     }
 }

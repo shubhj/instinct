@@ -16,15 +16,16 @@
 
 package com.googlecode.instinct.internal.locate.method;
 
+import com.googlecode.instinct.internal.util.Suggest;
 import java.lang.reflect.Method;
 import static java.util.Arrays.asList;
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public final class HierarchicalMethodLocatorImpl implements HierarchicalMethodLocator {
-
-    public Set<Method> locate(final Class<?> cls) {
+    @Suggest("Make this immutable, all vars final")
+    public <T> Set<Method> locate(final Class<T> cls) {
         final Set<Method> methods = new HashSet<Method>();
         methods.addAll(getAllMethodsForClass(cls));
         Class<?> superClass = cls.getSuperclass();
@@ -35,7 +36,7 @@ public final class HierarchicalMethodLocatorImpl implements HierarchicalMethodLo
         return methods;
     }
 
-    private List<Method> getAllMethodsForClass(final Class<?> cls) {
+    private <T> Collection<Method> getAllMethodsForClass(final Class<T> cls) {
         return asList(cls.getDeclaredMethods());
     }
 }

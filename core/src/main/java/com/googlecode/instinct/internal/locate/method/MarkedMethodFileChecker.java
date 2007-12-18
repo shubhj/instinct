@@ -40,10 +40,10 @@ public final class MarkedMethodFileChecker implements MarkedFileChecker {
 
     public boolean isMarked(final File classFile, final MarkingScheme markingScheme) {
         checkNotNull(classFile, markingScheme);
-        return classFile.getName().endsWith(".class") && checkClass(classFile, markingScheme);
+        return classFile.getName().endsWith(".class") && classContainsMarkedMethods(classFile, markingScheme);
     }
 
-    private boolean checkClass(final File classFile, final MarkingScheme markingScheme) {
+    private boolean classContainsMarkedMethods(final File classFile, final MarkingScheme markingScheme) {
         try {
             final Class<?> candidateClass = classInstantiator.instantiateClass(classFile, packageRoot);
             final Collection<Method> methods = markedMethodLocator.locateAll(candidateClass, markingScheme);

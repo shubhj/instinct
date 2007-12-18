@@ -23,9 +23,9 @@ import static com.googlecode.instinct.internal.util.Reflector.getMethod;
 import com.googlecode.instinct.marker.AnnotationAttribute;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.annotate.Context;
-import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
+import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import java.lang.reflect.Method;
@@ -54,8 +54,8 @@ public final class AnnotationCheckerImplAtomicTest extends InstinctTestCase {
     }
 
     public void testFieldIsAnnotated() {
-        expect.that(annotationChecker.isAnnotated(getFieldByName(WithRuntimeAnnotations.class, "string1"), Dummy.class, IGNORE)).isTrue();
-        expect.that(annotationChecker.isAnnotated(getFieldByName(WithoutRuntimeAnnotations.class, "string1"), Dummy.class, IGNORE)).isFalse();
+        expect.that(annotationChecker.isAnnotated(getFieldByName(WithRuntimeAnnotations.class, "string1"), Stub.class, IGNORE)).isTrue();
+        expect.that(annotationChecker.isAnnotated(getFieldByName(WithoutRuntimeAnnotations.class, "string1"), Stub.class, IGNORE)).isFalse();
     }
 
     public void testFindsAnnotatedElementsWithSingleAttribute() {
