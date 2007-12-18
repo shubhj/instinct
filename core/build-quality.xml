@@ -3,10 +3,10 @@
 
     <import file="build-setup.xml"/>
 
+    <taskdef resource="cloverlib.xml" classpathref="spec.class.path"/>
+
     <property name="checkstyle.lib.dir" value="${lib.dir}/checkstyle"/>
     <property name="checkstyle.results.dir" value="${build.dir}/checkstyle"/>
-
-    <taskdef resource="cloverlib.xml" classpathref="test.class.path"/>
 
     <property name="coverage.dir" value="${build.dir}/coverage"/>
     <property name="coverage.database" value="${coverage.dir}/coverage.db"/>
@@ -77,7 +77,7 @@
                     <format type="html"/>
                     <testsources dir="${test.src.dir}" includes="**/*"/>
                     <testsources dir="${spec.src.dir}" includes="**/*"/>
-                    <testresults dir="${test.results.dir}" includes="TEST-*.xml"/>
+                    <testresults dir="${spec.results.dir}" includes="TEST-*.xml"/>
                 </current>
             </clover-report>
         </sequential>

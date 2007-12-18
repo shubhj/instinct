@@ -25,20 +25,17 @@
     <property name="spec.src.dir" value="${spec.dir}/java"/>
     <property name="properties.src.dir" value="${src.dir}/properties"/>
     <property name="main.classes.dir" value="${build.dir}/main-classes"/>
-    <property name="test.classes.dir" value="${build.dir}/test-classes"/>
     <property name="spec.classes.dir" value="${build.dir}/spec-classes"/>
     <property name="release.dir" value="${build.dir}/release"/>
     <property name="javadoc.dir" value="${build.dir}/javadoc"/>
-    <property name="test.results.dir" value="${build.dir}/test-results"/>
-    <property name="test.results" value="${test.results.dir}/All-Tests.xml"/>
+    <property name="spec.results.dir" value="${build.dir}/spec-results"/>
+    <property name="spec.results" value="${spec.results.dir}/All-Specs.xml"/>
     <property name="compile.debug" value="true"/>
     <property name="compile.debuglevel" value="source,lines,vars"/>
     <property name="compile.deprecation" value="false"/>
     <property name="compile.optimize" value="true"/>
     <property name="java.src.version" value="1.5"/>
-    <property name="test.src.dir" value="${test.src.dir}"/>
-    <property name="test.classes.dir" value="${test.classes.dir}"/>
-    <property name="test.results.dir" value="${build.dir}/test-results"/>
+    <property name="spec.results.dir" value="${build.dir}/spec-results"/>
 
     <patternset id="all.code.pattern">
         <include name="**/*.java"/>
@@ -53,27 +50,23 @@
         <include name="${lib.dir}/hamcrest/hamcrest-*.jar"/>
         <include name="${lib.dir}/clover/clover-*.jar"/>
     </patternset>
-
-    <patternset id="test.classpath.pattern">
+    <patternset id="spec.classpath.pattern">
         <patternset refid="main.classpath.pattern"/>
     </patternset>
 
     <fileset id="main.code.fileset" dir="${main.src.dir}">
         <patternset refid="all.code.pattern"/>
     </fileset>
-    <fileset id="test.code.fileset" dir="${test.src.dir}">
-        <include name="**/*AtomicTest.java"/>
-        <include name="**/*SlowTest.java"/>
+    <fileset id="spec.code.fileset" dir="${spec.src.dir}">
+        <patternset refid="all.code.pattern"/>
     </fileset>
 
     <path id="main.code.path">
         <pathelement location="${main.src.dir}"/>
     </path>
-    <path id="test.code.path">
-        <pathelement location="${test.src.dir}"/>
-    </path>
     <path id="spec.code.path">
         <pathelement location="${spec.src.dir}"/>
+        <pathelement location="${test.src.dir}"/>
     </path>
 
     <path id="main.class.path">
@@ -82,12 +75,11 @@
             <patternset refid="main.classpath.pattern"/>
         </fileset>
     </path>
-    <path id="test.class.path">
-        <!--<pathelement location="${coverage.instrumented.dir}"/>-->
+    <path id="spec.class.path">
         <path refid="main.class.path"/>
-        <pathelement location="${test.classes.dir}"/>
+        <pathelement location="${spec.classes.dir}"/>
         <fileset dir="${basedir}">
-            <patternset refid="test.classpath.pattern"/>
+            <patternset refid="spec.classpath.pattern"/>
         </fileset>
     </path>
 

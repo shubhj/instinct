@@ -37,23 +37,18 @@ public final class PrimitiveTypeBoxerImplAtomicTest extends InstinctTestCase {
     }
 
     public void testBoxesPrimitiveClassesIntoTheirNonPrimitiveCounterparts() {
-        checkBoxPrimitive(Boolean.TYPE, Boolean.class);
-        checkBoxPrimitive(Byte.TYPE, Byte.class);
-        checkBoxPrimitive(Character.TYPE, Character.class);
-        checkBoxPrimitive(Short.TYPE, Short.class);
-        checkBoxPrimitive(Integer.TYPE, Integer.class);
-        checkBoxPrimitive(Long.TYPE, Long.class);
-        checkBoxPrimitive(Float.TYPE, Float.class);
-        checkBoxPrimitive(Double.TYPE, Double.class);
+        expect.that(primitiveTypeBoxer.boxPrimitiveType(Boolean.TYPE)).isEqualTo(Boolean.class);
+        expect.that(primitiveTypeBoxer.boxPrimitiveType(Byte.TYPE)).isEqualTo(Byte.class);
+        expect.that(primitiveTypeBoxer.boxPrimitiveType(Character.TYPE)).isEqualTo(Character.class);
+        expect.that(primitiveTypeBoxer.boxPrimitiveType(Short.TYPE)).isEqualTo(Short.class);
+        expect.that(primitiveTypeBoxer.boxPrimitiveType(Integer.TYPE)).isEqualTo(Integer.class);
+        expect.that(primitiveTypeBoxer.boxPrimitiveType(Long.TYPE)).isEqualTo(Long.class);
+        expect.that(primitiveTypeBoxer.boxPrimitiveType(Float.TYPE)).isEqualTo(Float.class);
+        expect.that(primitiveTypeBoxer.boxPrimitiveType(Double.TYPE)).isEqualTo(Double.class);
     }
 
     public void testDoesNotBoxNonPrimitiveTypes() {
-        checkBoxPrimitive(String.class, String.class);
-        checkBoxPrimitive(Class.class, Class.class);
-    }
-
-    private <T> void checkBoxPrimitive(final Class<T> toBox, final Class<T> expectedBoxed) {
-        final Class<T> boxedType = primitiveTypeBoxer.boxPrimitiveType(toBox);
-        expect.that(boxedType).isEqualTo(expectedBoxed);
+        expect.that(primitiveTypeBoxer.boxPrimitiveType(String.class)).isEqualTo(String.class);
+        expect.that(primitiveTypeBoxer.boxPrimitiveType(Class.class)).isEqualTo(Class.class);
     }
 }

@@ -31,8 +31,8 @@ import com.googlecode.instinct.internal.util.Suggest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-public final class ContextSuite {
-    private ContextSuite() {
+public final class AllSpecificationsSuite {
+    private AllSpecificationsSuite() {
         throw new UnsupportedOperationException();
     }
 

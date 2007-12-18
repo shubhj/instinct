@@ -16,30 +16,29 @@
 
 package com.googlecode.instinct.internal.util.boost;
 
-import com.googlecode.instinct.internal.edge.java.lang.reflect.ProxyEdge;
-import com.googlecode.instinct.internal.edge.java.lang.reflect.ProxyEdgeImpl;
 import com.googlecode.instinct.internal.util.instance.PrimitiveTypeBoxer;
 import com.googlecode.instinct.internal.util.instance.PrimitiveTypeBoxerImpl;
+import com.googlecode.instinct.internal.util.proxy.CgLibProxyGenerator;
 import java.lang.reflect.Array;
-import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import net.sf.cglib.proxy.MethodInterceptor;
+import net.sf.cglib.proxy.MethodProxy;
 
+@SuppressWarnings({"unchecked"})
 public final class TestTriangulationProviderImpl implements TestTriangulationProvider {
-    private static final InvocationHandler NO_OP_INVOCATION_HANDLER = new NoOpInvocationHandler();
     private static final int ARRAY_LENGTH = 5;
-    private ProxyEdge edgeProxy = new ProxyEdgeImpl();
-    private ProxyFactory proxyFactory = new ProxyFactoryImpl(edgeProxy);
-    private PrimitiveBoxer primitiveBoxer = new PrimitiveBoxerImpl();
     private RandomProvider randomProvider = new RandomProviderImpl();
     private final PrimitiveTypeBoxer primitiveTypeBoxer = new PrimitiveTypeBoxerImpl();
+    private final CgLibProxyGenerator proxyGenerator = new CgLibProxyGenerator();
 
-    public Object getInstance(final Class type) {
+    public <T> T getInstance(final Class<T> type) {
         if (type.isInterface()) {
             return randomInterface(type);
         }
         if (type.isArray()) {
             return randomArray(type);
         }
-        if (isPrimitive(type)) {
+        if (type.isPrimitive()) {
             return randomPrimitiveType(type);
         }
         return randomJavaType(type);
@@ -53,35 +52,36 @@ public final class TestTriangulationProviderImpl implements TestTriangulationPro
         return params;
     }
 
-    private Object randomPrimitiveType(final Class type) {
-        final Class boxed = primitiveTypeBoxer.boxPrimitiveType(type);
+    private <T> T randomPrimitiveType(final Class<T> type) {
+        final Class<T> boxed = primitiveTypeBoxer.boxPrimitiveType(type);
         return randomJavaType(boxed);
     }
 
-    private Object randomInterface(final Class type) {
-        final Interface iface = new InterfaceImpl(type);
-        return proxyFactory.newProxy(iface, NO_OP_INVOCATION_HANDLER);
+    private <T> T randomInterface(final Class<T> type) {
+        return proxyGenerator.newProxy(type, new NoOpMethodInterceptor());
     }
 
-    private Object randomArray(final Class type) {
-        final Class componentType = type.getComponentType();
+    private <T> T randomArray(final Class<T> type) {
+        final Class<?> componentType = type.getComponentType();
         final Object array = Array.newInstance(componentType, ARRAY_LENGTH);
         populate(array, componentType);
-        return array;
+        return (T) array;
     }
 
-    private boolean isPrimitive(final Class type) {
-        return primitiveBoxer.isPrimitive(type);
+    private <T> T randomJavaType(final Class<T> type) {
+        return (T) randomProvider.getRandom(type);
     }
 
-    private Object randomJavaType(final Class type) {
-        return randomProvider.getRandom(type);
-    }
-
-    private void populate(final Object array, final Class type) {
+    private <T> void populate(final Object array, final Class<T> type) {
         for (int i = 0; i < ARRAY_LENGTH; i++) {
             final Object instance = getInstance(type);
             Array.set(array, i, instance);
+        }
+    }
+
+    private static final class NoOpMethodInterceptor implements MethodInterceptor {
+        public Object intercept(final Object obj, final Method method, final Object[] args, final MethodProxy proxy) {
+            return null;
         }
     }
 }

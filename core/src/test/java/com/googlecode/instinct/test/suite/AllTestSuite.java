@@ -28,6 +28,7 @@ public final class AllTestSuite {
         final TestSuite suite = new TestSuite("All");
         suite.addTest(AtomicTestSuite.suite());
         suite.addTest(SlowTestSuite.suite());
+        suite.addTest(AllSpecificationsSuite.suite());
         return suite;
     }
 }

@@ -32,23 +32,12 @@
     </target>
 
     <target name="-test">
-        <delete dir="${main.classes.dir}"/>
-        <delete dir="${test.classes.dir}"/>
+        <clean.classes.macro/>
         <cloverenable.macro/>
         <compile.all.macro/>
         <test.macro/>
         <cloverreport.macro/>
     </target>
-
-    <!--<target name="-run-specs" depends="-compile">-->
-    <!--<taskdef resource="instincttask.properties" classpathref="spec.class.path"/>-->
-    <!--<instinct failureproperty="specs-failed">-->
-    <!--<classpath refid="spec.class.path"/>-->
-    <!--<specifications dir="${spec.classes.dir}" groups="osdc"/>-->
-    <!--<formatter type="brief"/>-->
-    <!--</instinct>-->
-    <!--<fail if="specs-failed" message="Specifications failed."/>-->
-    <!--</target>-->
 
     <target name="-javadoc" depends="-compile">
         <mkdir dir="${javadoc.dir}"/>
@@ -71,8 +60,15 @@
 
     <target name="-clean-classes">
         <delete dir="${main.classes.dir}"/>
-        <delete dir="${test.classes.dir}"/>
+        <delete dir="${spec.classes.dir}"/>
     </target>
+
+    <macrodef name="clean.classes.macro">
+        <sequential>
+            <delete dir="${main.classes.dir}"/>
+            <delete dir="${spec.classes.dir}"/>
+        </sequential>
+    </macrodef>
 
     <target name="-clover-safe-jar">
         <ant antfile="build.xml" target="-jar" inheritall="false" inheritrefs="false"/>
@@ -113,19 +109,29 @@
         </zip>
     </target>
 
+    <macrodef name="compile.all.macro">
+        <sequential>
+            <compile.macro classpath.ref="main.class.path" output.dir="${main.classes.dir}" src.path.ref="main.code.path"
+                    src.pattern="all.code.pattern"/>
+            <compile.macro classpath.ref="spec.class.path" output.dir="${spec.classes.dir}" src.path.ref="spec.code.path"
+                    src.pattern="all.code.pattern"/>
+            <compile.macro classpath.ref="spec.class.path" output.dir="${spec.classes.dir}" src.path.ref="spec.code.path"
+                    src.pattern="all.code.pattern"/>
+        </sequential>
+    </macrodef>
+
     <macrodef name="compile.macro">
-        <attribute name="src.dir"/>
         <attribute name="output.dir"/>
         <attribute name="classpath.ref"/>
-        <attribute name="src.path"/>
+        <attribute name="src.path.ref"/>
         <attribute name="src.pattern"/>
         <attribute name="compiler.args" default="-Xlint"/>
         <sequential>
             <mkdir dir="@{output.dir}"/>
-            <javac source="${java.src.version}" srcdir="@{src.dir}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="${compile.debug}"
+            <javac source="${java.src.version}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="${compile.debug}"
                     debuglevel="${compile.debuglevel}" deprecation="${compile.deprecation}" optimize="${compile.optimize}">
                 <src>
-                    <path refid="@{src.path}"/>
+                    <path refid="@{src.path.ref}"/>
                 </src>
                 <patternset refid="@{src.pattern}"/>
                 <compilerarg value="@{compiler.args}"/>
@@ -133,29 +139,18 @@
         </sequential>
     </macrodef>
 
-    <macrodef name="compile.all.macro">
-        <sequential>
-            <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}" src.path="main.code.path"
-                    src.pattern="all.code.pattern"/>
-            <compile.macro src.dir="${test.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}" src.path="test.code.path"
-                    src.pattern="all.code.pattern"/>
-            <compile.macro src.dir="${spec.src.dir}" classpath.ref="test.class.path" output.dir="${test.classes.dir}" src.path="spec.code.path"
-                    src.pattern="all.code.pattern"/>
-        </sequential>
-    </macrodef>
-
     <macrodef name="test.macro">
         <sequential>
-            <mkdir dir="${test.results.dir}"/>
-            <junit failureproperty="tests.failed" fork="true" forkmode="perBatch">
-                <classpath refid="test.class.path"/>
-                <batchtest todir="${test.results.dir}">
-                    <fileset refid="test.code.fileset"/>
-                </batchtest>
+            <mkdir dir="${spec.results.dir}"/>
+            <junit failureproperty="specs.failed" fork="true" forkmode="perBatch">
+                <classpath refid="spec.class.path"/>
+                <test todir="${spec.results.dir}" name="com.googlecode.instinct.test.suite.AtomicTestSuite"/>
+                <test todir="${spec.results.dir}" name="com.googlecode.instinct.test.suite.SlowTestSuite"/>
+                <test todir="${spec.results.dir}" name="com.googlecode.instinct.test.suite.AllSpecificationsSuite"/>
                 <formatter type="xml"/>
                 <formatter type="brief" usefile="false"/>
             </junit>
-            <fail if="tests.failed" message="Tests failed."/>
+            <fail if="specs.failed" message="Specifications and/or tests failed."/>
         </sequential>
     </macrodef>
 

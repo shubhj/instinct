@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.util.boost;
 
 public interface TestTriangulationProvider {
-    Object getInstance(Class type);
+    <T> T getInstance(final Class<T> type);
 
     Object[] getInstances(Class[] types);
 }

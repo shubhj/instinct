@@ -16,8 +16,10 @@
 
 package com.googlecode.instinct.internal.util.boost;
 
+import com.googlecode.instinct.internal.util.Suggest;
 import java.util.Random;
 
+@Suggest("Test double: Merge this with stub creator.")
 public final class RandomProviderImpl implements RandomProvider {
     private Random random = new Random();
 
@@ -53,6 +55,7 @@ public final class RandomProviderImpl implements RandomProvider {
         throw new UnsupportedOperationException("Hmm.  I cannot provide an instance of '" + type + "'.  " +
                 "Might be worth edgifying (hiding behind an interface) this type or talking to the boosters!");
     }
+
     // } SUPPRESS CyclomaticComplexity|NPathComplexity|MethodLength
 
     private Object randomClass() {
