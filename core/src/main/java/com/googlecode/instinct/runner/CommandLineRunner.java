@@ -48,9 +48,8 @@ import java.util.Collection;
  * </pre>
  * @see CommandLineUsage
  */
-@Fix({"Write atomic test for this."})
-@Suggest(
-        {"Add formatter/message builder as command line argument.", "Can the formatting be moved into the BriefResultMessageBuilder?", "Make this not implement spec listener", "Why is there this & the commane line runner? This should use text runner"})
+@Fix({"Why is there this & the commane line runner? This should use text runner", "Make this not implement spec listener"})
+@Suggest({"Add formatter/message builder as command line argument.", "Can the formatting be moved into the BriefResultMessageBuilder?"})
 @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed", "UseOfSystemOutOrSystemErr"})
 public final class CommandLineRunner implements ContextListener, SpecificationListener {
     private static final CommandLineUsage USAGE = new CommandLineUsageImpl();

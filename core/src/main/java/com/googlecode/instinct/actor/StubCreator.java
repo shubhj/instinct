@@ -17,12 +17,9 @@
 package com.googlecode.instinct.actor;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.instance.ConcreteInstanceProvider;
 import com.googlecode.instinct.internal.util.instance.InstanceProvider;
 
-@Suggest(
-        {"Fill stub arrays with stubs ala mock creator.", "We should be able to stub out interfaces as well, ", "by wrapping in a proxy that returns a stub value (the type is the method return type) from an instance provider call"})
 public final class StubCreator implements SpecificationDoubleCreator {
     private final InstanceProvider instanceProvider = new ConcreteInstanceProvider();
 

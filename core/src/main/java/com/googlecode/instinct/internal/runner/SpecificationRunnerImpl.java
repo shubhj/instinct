@@ -129,9 +129,8 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         }
     }
 
-    @Fix({"Test the wrapping of jMock exceptions here."})
-    @Suggest(
-            {"Wrap 'unexpected ...' jMock cardinality exception if you a mock is used in a test without expectations being set on it", "Call this thing an ExceptionSanitiser", "May help fix Paul's bug: defect-11"})
+    @Fix({"Test the wrapping of jMock exceptions here.", "May help fix Paul's bug: defect-11", "Call this thing an ExceptionSanitiser"})
+    @Suggest({"Wrap 'unexpected ...' jMock cardinality exception if you a mock is used in a test without expectations being set on it"})
     private Throwable wrapCommonExceptions(final Throwable throwable) {
         if (throwable instanceof ExpectationError) {
             final String message = "Unexpected invocation. You may need to wrap the code in your new Expections(){{}} block with cardinality " +
