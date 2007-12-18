@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.boost;
+package com.googlecode.instinct.internal.actor;
 
-public interface Interface<T> {
-    Class<T> getType();
+public interface RandomProvider {
+    <T> T randomValue(Class<T> type);
+
+    int randomIntInRange(int min, int max);
 }

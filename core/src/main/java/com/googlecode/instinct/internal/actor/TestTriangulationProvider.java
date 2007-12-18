@@ -14,26 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.boost;
+package com.googlecode.instinct.internal.actor;
 
-public final class InterfaceImpl<T> implements Interface<T> {
-    private final Class<T> type;
+public interface TestTriangulationProvider {
+    <T> T getInstance(final Class<T> type);
 
-    public InterfaceImpl(final Class<T> type) {
-        this.type = type;
-        validate();
-    }
-
-    public Class<T> getType() {
-        return type;
-    }
-
-    private void validate() {
-        if (type == null) {
-            throw new IllegalArgumentException();
-        }
-        if (!type.isInterface()) {
-            throw new IllegalArgumentException();
-        }
-    }
+    Object[] getInstances(Class<?>[] types);
 }

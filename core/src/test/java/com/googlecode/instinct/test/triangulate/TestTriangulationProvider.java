@@ -22,7 +22,7 @@ import java.util.Map;
 public interface TestTriangulationProvider {
     <T> T getInstance(Class<T> type);
 
-    Object[] getInstances(Class[] types);
+    Object[] getInstances(Class<?>[] types);
 
     <T> List<T> getListInstance(Class<T> elementType);
 

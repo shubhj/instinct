@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.boost;
+package com.googlecode.instinct.internal.actor;
 
 import com.googlecode.instinct.internal.util.Suggest;
 import java.util.Random;
@@ -24,36 +24,47 @@ public final class RandomProviderImpl implements RandomProvider {
     private Random random = new Random();
 
     // SUPPRESS CyclomaticComplexity|NPathComplexity|MethodLength {
-    public Object getRandom(final Class type) {
+    @SuppressWarnings({"unchecked"})
+    public <T> T randomValue(final Class<T> type) {
         if (type == Boolean.class) {
-            return randomBoolean();
+            return (T) randomBoolean();
         }
         if (type == Integer.class) {
-            return randomInteger();
+            return (T) randomInteger();
         }
         if (type == Long.class) {
-            return randomLong();
+            return (T) randomLong();
         }
         if (type == Float.class) {
-            return randomFloat();
+            return (T) randomFloat();
         }
         if (type == Double.class) {
-            return randomDouble();
+            return (T) randomDouble();
         }
         if (type == Byte.class) {
-            return randomByte();
+            return (T) randomByte();
         }
         if (type == String.class) {
-            return randomString();
+            return (T) randomString();
         }
         if (type == Class.class) {
-            return randomClass();
+            return (T) randomClass();
         }
         if (type == Object.class) {
-            return randomObject();
+            return (T) randomObject();
         }
         throw new UnsupportedOperationException("Hmm.  I cannot provide an instance of '" + type + "'.  " +
                 "Might be worth edgifying (hiding behind an interface) this type or talking to the boosters!");
+    }
+
+    public int randomIntInRange(final int min, final int max) {
+        if (min >= max) {
+            throw new IllegalArgumentException("min of range must be less than max");
+        }
+        // Add one as nextInt(high) is exclusive
+        final int partitionSize = (max - min) + 1;
+        final int intInPartition = random.nextInt(partitionSize);
+        return intInPartition + min;
     }
 
     // } SUPPRESS CyclomaticComplexity|NPathComplexity|MethodLength

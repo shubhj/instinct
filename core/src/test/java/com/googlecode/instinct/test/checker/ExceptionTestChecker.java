@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.test.checker;
 
-import com.googlecode.instinct.internal.util.boost.AssertException;
-import com.googlecode.instinct.internal.util.boost.AssertExceptionImpl;
+import com.googlecode.instinct.internal.expect.state.matcher.AssertException;
+import com.googlecode.instinct.internal.expect.state.matcher.AssertExceptionImpl;
 
 public final class ExceptionTestChecker {
     private static final AssertException ASSERT_EXCEPTION = new AssertExceptionImpl();

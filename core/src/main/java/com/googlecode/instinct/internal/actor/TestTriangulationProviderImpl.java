@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.boost;
+package com.googlecode.instinct.internal.actor;
 
+import static com.googlecode.instinct.actor.SpecificationDoubleCreator.NUMBER_OF_DOUBLES_IN_AN_ARRAY;
 import com.googlecode.instinct.internal.util.instance.PrimitiveTypeBoxer;
 import com.googlecode.instinct.internal.util.instance.PrimitiveTypeBoxerImpl;
 import com.googlecode.instinct.internal.util.proxy.CgLibProxyGenerator;
@@ -26,7 +27,6 @@ import net.sf.cglib.proxy.MethodProxy;
 
 @SuppressWarnings({"unchecked"})
 public final class TestTriangulationProviderImpl implements TestTriangulationProvider {
-    private static final int ARRAY_LENGTH = 5;
     private RandomProvider randomProvider = new RandomProviderImpl();
     private final PrimitiveTypeBoxer primitiveTypeBoxer = new PrimitiveTypeBoxerImpl();
     private final CgLibProxyGenerator proxyGenerator = new CgLibProxyGenerator();
@@ -44,7 +44,7 @@ public final class TestTriangulationProviderImpl implements TestTriangulationPro
         return randomJavaType(type);
     }
 
-    public Object[] getInstances(final Class[] types) {
+    public Object[] getInstances(final Class<?>[] types) {
         final Object[] params = new Object[types.length];
         for (int i = 0; i < types.length; i++) {
             params[i] = getInstance(types[i]);
@@ -63,17 +63,17 @@ public final class TestTriangulationProviderImpl implements TestTriangulationPro
 
     private <T> T randomArray(final Class<T> type) {
         final Class<?> componentType = type.getComponentType();
-        final Object array = Array.newInstance(componentType, ARRAY_LENGTH);
+        final Object array = Array.newInstance(componentType, NUMBER_OF_DOUBLES_IN_AN_ARRAY);
         populate(array, componentType);
         return (T) array;
     }
 
     private <T> T randomJavaType(final Class<T> type) {
-        return (T) randomProvider.getRandom(type);
+        return randomProvider.randomValue(type);
     }
 
     private <T> void populate(final Object array, final Class<T> type) {
-        for (int i = 0; i < ARRAY_LENGTH; i++) {
+        for (int i = 0; i < NUMBER_OF_DOUBLES_IN_AN_ARRAY; i++) {
             final Object instance = getInstance(type);
             Array.set(array, i, instance);
         }

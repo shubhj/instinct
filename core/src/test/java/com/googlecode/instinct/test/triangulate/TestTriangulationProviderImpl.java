@@ -16,6 +16,8 @@
 
 package com.googlecode.instinct.test.triangulate;
 
+import com.googlecode.instinct.internal.actor.RandomProvider;
+import com.googlecode.instinct.internal.actor.RandomProviderImpl;
 import static java.lang.reflect.Array.newInstance;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,8 +26,8 @@ import java.util.Map;
 
 @SuppressWarnings({"unchecked"})
 public final class TestTriangulationProviderImpl implements TestTriangulationProvider {
-    private final com.googlecode.instinct.internal.util.boost.TestTriangulationProvider delegate =
-            new com.googlecode.instinct.internal.util.boost.TestTriangulationProviderImpl();
+    private final com.googlecode.instinct.internal.actor.TestTriangulationProvider delegate =
+            new com.googlecode.instinct.internal.actor.TestTriangulationProviderImpl();
     private final RandomProvider randomProvider = new RandomProviderImpl();
 
     public <T> List<T> getListInstance(final Class<T> elementType) {
@@ -53,14 +55,14 @@ public final class TestTriangulationProviderImpl implements TestTriangulationPro
     }
 
     public <T> T getInstance(final Class<T> type) {
-        return (T) delegate.getInstance(type);
+        return delegate.getInstance(type);
     }
 
-    public Object[] getInstances(final Class[] types) {
+    public Object[] getInstances(final Class<?>[] types) {
         return delegate.getInstances(types);
     }
 
     public int intInRange(final int min, final int max) {
-        return randomProvider.intInRange(min, max);
+        return randomProvider.randomIntInRange(min, max);
     }
 }
