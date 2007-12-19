@@ -16,8 +16,21 @@
 
 package com.googlecode.instinct.internal.actor;
 
+import com.googlecode.instinct.internal.util.Suggest;
+import java.util.List;
+import java.util.Map;
+
+@Suggest("Test double: Merge this with stub creator.")
 public interface TestTriangulationProvider {
     <T> T getInstance(final Class<T> type);
 
     Object[] getInstances(Class<?>[] types);
+
+    <T> List<T> getListInstance(Class<T> elementType);
+
+    <K, V> Map<K, V> getMapInstance(Class<K> keyType, Class<V> valueType);
+
+    <T> T[] getArrayInstance(Class<T> elementType);
+
+    int intInRange(int min, int max);
 }

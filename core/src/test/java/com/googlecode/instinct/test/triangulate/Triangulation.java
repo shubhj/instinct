@@ -16,6 +16,8 @@
 
 package com.googlecode.instinct.test.triangulate;
 
+import com.googlecode.instinct.internal.actor.TestTriangulationProvider;
+import com.googlecode.instinct.internal.actor.TestTriangulationProviderImpl;
 import java.util.List;
 import java.util.Map;
 
