@@ -19,6 +19,8 @@
     <property name="src.dir" value="src/main"/>
     <property name="test.dir" value="src/test"/>
     <property name="spec.dir" value="src/spec"/>
+    <property name="checkstyle.main.eclipse" value="${etc.dir}/checkstyle/checkstyle-main-eclipse.xml"/>
+    <property name="checkstyle.suppression.file" value="etc/checkstyle/suppressions-main.xml"/>
 
     <property name="main.src.dir" value="${src.dir}/java"/>
     <property name="test.src.dir" value="${test.dir}/java"/>
@@ -87,4 +89,12 @@
         <echo message="Nothing to see here..."/>
     </target>
 
+    <!-- Added to overcome Eclipse-cs plugin problem where it can only pick up the checkstyle suppression file if it has an
+    absolute file path. Sucky for eclipse users. -->
+    <target name="setup-eclipse" description="creates configuration files for eclipse">
+        <copy file="${etc.dir}/checkstyle/checkstyle-main.xml" tofile="${checkstyle.main.eclipse}" />
+        <replace file="${checkstyle.main.eclipse}"
+                 token="${checkstyle.suppression.file}"
+                 value="${basedir}/${checkstyle.main.eclipse}"/>
+    </target>
 </project>
