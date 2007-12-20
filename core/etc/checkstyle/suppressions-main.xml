@@ -12,4 +12,5 @@
     <suppress checks="IllegalCatch" files="MockCreator.java"/>
     <suppress checks="IllegalCatch" files="SpecificationRunnerImpl.java"/>
     <suppress checks="AbstractClassName|IllegalToken|DesignForExtension" files="Primordial.java"/>
+    <suppress checks="DesignForExtension" files="IterableCheckerImpl.java"/>
 </suppressions>

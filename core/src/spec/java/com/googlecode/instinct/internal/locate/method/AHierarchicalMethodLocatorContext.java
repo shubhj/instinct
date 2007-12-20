@@ -27,8 +27,8 @@ import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import java.lang.reflect.Method;
 import static java.util.Arrays.asList;
+import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import junit.framework.Assert;
 import junit.framework.TestCase;
@@ -73,7 +73,7 @@ public class AHierarchicalMethodLocatorContext {
         return methods;
     }
 
-    private List<Method> getDeclaredMethods(final Class<?> cls) {
+    private Collection<Method> getDeclaredMethods(final Class<?> cls) {
         return asList(cls.getDeclaredMethods());
     }
 }

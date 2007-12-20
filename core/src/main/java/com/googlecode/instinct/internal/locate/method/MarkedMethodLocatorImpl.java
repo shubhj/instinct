@@ -29,7 +29,7 @@ import java.util.HashSet;
 
 public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
     private final AnnotatedMethodLocator annotatedMethodLocator = new AnnotatedMethodLocatorImpl();
-    private final NamingConventionMethodLocator namingConventionMethodLocator = new NamingConventionMethodLocatorImpl();
+    private final NamedMethodLocator namedMethodLocator = new NamedMethodLocatorImpl();
 
     @Suggest("Return an unmodifiable collection.")
     public <T> Collection<Method> locateAll(final Class<T> cls, final MarkingScheme markingScheme) {
@@ -41,7 +41,7 @@ public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
     }
 
     private <T> Collection<Method> findMethodsByNamingConvention(final Class<T> cls, final NamingConvention namingConvention) {
-        return namingConventionMethodLocator.locate(cls, namingConvention);
+        return namedMethodLocator.locate(cls, namingConvention);
     }
 
     private <A extends Annotation, T> Collection<Method> findMethodsByAnnotation(final Class<T> cls, final Class<A> annotationType) {

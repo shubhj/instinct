@@ -21,8 +21,8 @@ import com.googlecode.instinct.defect.defect8.data.naming.ASubContextOfAnAccessR
 import com.googlecode.instinct.defect.defect8.data.naming.StaticSubContext;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.internal.locate.method.NamingConventionMethodLocator;
-import com.googlecode.instinct.internal.locate.method.NamingConventionMethodLocatorImpl;
+import com.googlecode.instinct.internal.locate.method.NamedMethodLocator;
+import com.googlecode.instinct.internal.locate.method.NamedMethodLocatorImpl;
 import com.googlecode.instinct.internal.util.TechNote;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.naming.AfterSpecificationNamingConvention;
@@ -39,7 +39,7 @@ import org.junit.runner.RunWith;
 @RunWith(InstinctRunner.class)
 @TechNote("This spec proves that more than one Before/After specification method will be invoked should they exist.")
 public class AFixedDefect8WithANamingConventionLocator {
-    private final NamingConventionMethodLocator locator = new NamingConventionMethodLocatorImpl();
+    private final NamedMethodLocator locator = new NamedMethodLocatorImpl();
 
     @Specification
     public void shouldReturnBeforeSpecificationsDefinedInABaseClass() {

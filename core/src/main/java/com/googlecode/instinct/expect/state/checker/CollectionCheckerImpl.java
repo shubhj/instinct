@@ -23,15 +23,16 @@ import org.hamcrest.Matchers;
 
 @Fix("Test this especially desc strings or make custom matchers?")
 public class CollectionCheckerImpl<E, T extends Collection<E>> extends IterableCheckerImpl<E, T> implements CollectionChecker<E, T> {
-
     public CollectionCheckerImpl(final T subject) {
         super(subject);
     }
 
+    @Override
     public final void isEmpty() {
         getAsserter().expectThat(subject.isEmpty(), Matchers.describedAs("isEmpty() = <true>", Matchers.equalTo(true)));
     }
 
+    @Override
     public final void isNotEmpty() {
         getAsserter().expectThat(subject.isEmpty(), Matchers.describedAs("isEmpty() = <false>", Matchers.equalTo(false)));
     }

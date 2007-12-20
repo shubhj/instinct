@@ -16,10 +16,10 @@
 
 package com.googlecode.instinct.internal.expect.state.matcher;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-import junit.framework.Assert;
-import junit.framework.AssertionFailedError;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.instanceOf;
 
 public final class AssertExceptionImpl implements AssertException {
     public <T> Throwable assertWraps(final Class<T> expectedException, final Throwable wrapperException) {
@@ -43,20 +43,12 @@ public final class AssertExceptionImpl implements AssertException {
         return cause;
     }
 
-    // SUPPRESS GenericIllegalRegex {
     public <T> void checkExceptionClass(final Class<T> expectedExceptionClass, final Throwable actual) {
-        // SUGGEST Use something else.  Delegate.
-        // SUGGEST How about a stacktrace object?
-        final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        actual.printStackTrace(new PrintStream(out));
-        final String message = "Expected " + expectedExceptionClass + " but was " + actual.getClass() + ", stack trace:\n";
-        Assert.assertEquals(message + out, expectedExceptionClass, actual.getClass());
+        assertThat(actual, instanceOf(expectedExceptionClass));
     }
 
-    // } SUPPRESS GenericIllegalRegex
-
     public void checkExceptionMessage(final String expectedMessage, final Throwable actual) {
-        Assert.assertEquals("Exception message doesn't match", expectedMessage, actual.getMessage());
+        assertThat(actual.getMessage(), equalTo(expectedMessage));
     }
 
     public <T> Throwable assertThrows(final Class<T> expectedException, final String message, final Runnable block) {
@@ -66,18 +58,15 @@ public final class AssertExceptionImpl implements AssertException {
     }
 
     // SUPPRESS IllegalCatch {
+    @SuppressWarnings({"OverlyBroadCatchBlock"})
     public <T> Throwable assertThrows(final Class<T> expectedException, final Runnable block) {
-        Throwable result = null;
         try {
             block.run();
-            Assert.fail("Failed to throw exception: " + expectedException);
-        } catch (AssertionFailedError e) {
-            throw e;
+            throw new AssertionError("Failed to throw exception: " + expectedException);
         } catch (Throwable t) {
             checkExceptionClass(expectedException, t);
-            result = t;
+            return t;
         }
-        return result;
     }
 
     // } SUPPRESS IllegalCatch
@@ -89,8 +78,7 @@ public final class AssertExceptionImpl implements AssertException {
     }
 
     public void assertMessageContains(final Throwable t, final String fragment) {
-        final String message = "Fragment '" + fragment + "' not found in message '" + t.getMessage() + "' ";
-        Assert.assertTrue(message, t.getMessage().contains(fragment));
+        assertThat(t.getMessage(), containsString(fragment));
     }
 
     // SUPPRESS JavaNCSS {
@@ -105,7 +93,9 @@ public final class AssertExceptionImpl implements AssertException {
             currentDepth++;
         }
         if (depth != Integer.MAX_VALUE) {
-            Assert.assertEquals("Wrapped exception not found at correct depth ", depth, currentDepth);
+            if (currentDepth != depth) {
+                throw new AssertionError("Wrapped exception not found at expected depth of " + depth);
+            }
         }
         return cause;
     }

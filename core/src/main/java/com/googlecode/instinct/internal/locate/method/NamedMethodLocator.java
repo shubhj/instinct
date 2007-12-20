@@ -14,22 +14,12 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.locate.field;
+package com.googlecode.instinct.internal.locate.method;
 
 import com.googlecode.instinct.marker.naming.NamingConvention;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.lang.reflect.Method;
 import java.util.Collection;
-import static java.util.Collections.unmodifiableCollection;
 
-public final class NamedFieldLocatorImpl implements NamedFieldLocator {
-    public <T> Iterable<Field> locate(final Class<T> cls, final NamingConvention namingConvention) {
-        final Collection<Field> fields = new ArrayList<Field>();
-        for (final Field field : cls.getDeclaredFields()) {
-            if (field.getName().matches(namingConvention.getPattern())) {
-                fields.add(field);
-            }
-        }
-        return unmodifiableCollection(fields);
-    }
+public interface NamedMethodLocator {
+    <T> Collection<Method> locate(Class<T> cls, NamingConvention namingConvention);
 }

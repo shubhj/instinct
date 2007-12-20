@@ -20,7 +20,6 @@ import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
 public class ArrayCheckerImpl<T> extends ObjectCheckerImpl<T[]> implements ArrayChecker<T> {
-
     public ArrayCheckerImpl(final T[] subject) {
         super(subject);
     }
@@ -31,6 +30,10 @@ public class ArrayCheckerImpl<T> extends ObjectCheckerImpl<T[]> implements Array
 
     public final void isNotEmpty() {
         getAsserter().expectThat(subject.length != 0, Matchers.describedAs("length != 0", Matchers.equalTo(true)));
+    }
+
+    public final void isOfSize(final int size) {
+        getAsserter().expectThat(subject.length, Matchers.equalTo(size));
     }
 
     public final void containsItem(final Matcher<T> matcher) {
@@ -47,9 +50,5 @@ public class ArrayCheckerImpl<T> extends ObjectCheckerImpl<T[]> implements Array
 
     public final void doesNotContainItem(final T t) {
         getAsserter().expectNotThat(subject, Matchers.hasItemInArray(t));
-    }
-
-    public final void isOfSize(final int size) {
-        getAsserter().expectThat(subject.length, Matchers.equalTo(size));
     }
 }

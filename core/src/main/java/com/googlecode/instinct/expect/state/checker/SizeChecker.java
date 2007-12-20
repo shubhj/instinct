@@ -16,8 +16,6 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
-public interface SizeChecker {
+public interface SizeChecker extends EmptyChecker {
     void isOfSize(int size);
-    void isEmpty();
-    void isNotEmpty();
 }

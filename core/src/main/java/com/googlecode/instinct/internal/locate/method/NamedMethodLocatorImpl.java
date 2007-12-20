@@ -22,7 +22,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public final class NamingConventionMethodLocatorImpl implements NamingConventionMethodLocator {
+public final class NamedMethodLocatorImpl implements NamedMethodLocator {
     private final HierarchicalMethodLocator methodLocator = new HierarchicalMethodLocatorImpl();
 
     public <T> Collection<Method> locate(final Class<T> cls, final NamingConvention namingConvention) {

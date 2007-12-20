@@ -29,12 +29,12 @@ import org.hamcrest.Matcher;
 import org.jmock.Expectations;
 import org.jmock.internal.matcher.MethodNameMatcher;
 
-public final class NamingConventionMethodLocatorImplAtomicTest extends InstinctTestCase {
-    @Subject(implementation = NamingConventionMethodLocatorImpl.class) private NamingConventionMethodLocator methodLocator;
+public final class NamedMethodLocatorImplAtomicTest extends InstinctTestCase {
+    @Subject(implementation = NamedMethodLocatorImpl.class) private NamedMethodLocator methodLocator;
     @Mock private NamingConvention namingConvention;
 
     public void testConformsToClassTraits() {
-        checkClass(NamingConventionMethodLocatorImpl.class, NamingConventionMethodLocator.class);
+        checkClass(NamedMethodLocatorImpl.class, NamedMethodLocator.class);
     }
 
     public void testFindsMethodsConformingToTheNamingConvention() {

@@ -20,12 +20,20 @@ import com.googlecode.instinct.internal.util.Fix;
 import java.util.Collection;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
+import static org.hamcrest.Matchers.describedAs;
 
 @Fix("Test this")
 public class IterableCheckerImpl<E, T extends Iterable<E>> extends ObjectCheckerImpl<T> implements IterableChecker<E, T> {
-
     public IterableCheckerImpl(final T subject) {
         super(subject);
+    }
+
+    public void isEmpty() {
+        getAsserter().expectThat(subject.iterator().hasNext(), describedAs("iterator().hasNext() = <true>", Matchers.equalTo(true)));
+    }
+
+    public void isNotEmpty() {
+        getAsserter().expectThat(subject.iterator().hasNext(), describedAs("iterator().hasNext() = <false>", Matchers.equalTo(false)));
     }
 
     public final void containsItem(final E item) {

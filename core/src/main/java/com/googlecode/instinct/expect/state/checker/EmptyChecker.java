@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.locate.method;
+package com.googlecode.instinct.expect.state.checker;
 
-import com.googlecode.instinct.marker.naming.NamingConvention;
-import java.lang.reflect.Method;
-import java.util.Collection;
+public interface EmptyChecker {
+    void isEmpty();
 
-public interface NamingConventionMethodLocator {
-    <T> Collection<Method> locate(Class<T> cls, NamingConvention namingConvention);
+    void isNotEmpty();
 }

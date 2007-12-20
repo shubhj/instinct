@@ -19,7 +19,7 @@ package com.googlecode.instinct.expect.state.checker;
 import java.util.Collection;
 import org.hamcrest.Matcher;
 
-public interface IterableChecker<E, T extends Iterable<E>> extends ObjectChecker<T>, ContainerChecker<E> {
+public interface IterableChecker<E, T extends Iterable<E>> extends ObjectChecker<T>, ContainerChecker<E>, EmptyChecker {
     void containsItems(Matcher<E>... matchers);
 
     void containsItems(E... items);
