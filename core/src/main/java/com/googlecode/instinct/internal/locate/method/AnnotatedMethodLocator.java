@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.locate.field;
+package com.googlecode.instinct.internal.locate.method;
 
-import com.googlecode.instinct.marker.MarkingScheme;
-import java.lang.reflect.Field;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 import java.util.Collection;
 
-public interface MarkedFieldLocator {
-    <T> Collection<Field> locateAll(Class<T> cls, MarkingScheme markingScheme);
+public interface AnnotatedMethodLocator {
+    <A extends Annotation, T> Collection<Method> locate(Class<T> cls, Class<A> runtimeAnnotationType);
 }

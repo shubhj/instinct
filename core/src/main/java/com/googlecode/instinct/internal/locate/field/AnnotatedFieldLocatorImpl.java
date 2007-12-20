@@ -23,23 +23,25 @@ import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import static java.util.Collections.unmodifiableCollection;
 
 public final class AnnotatedFieldLocatorImpl implements AnnotatedFieldLocator {
     private AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
 
-    public <A extends Annotation, T> Field[] locate(final Class<T> cls, final Class<A> runtimeAnnotationType) {
+    public <A extends Annotation, T> Collection<Field> locate(final Class<T> cls, final Class<A> runtimeAnnotationType) {
         checkNotNull(cls, runtimeAnnotationType);
-        return findAnnotatedFields(cls.getDeclaredFields(), runtimeAnnotationType);
+        final Collection<Field> fields = findAnnotatedFields(cls.getDeclaredFields(), runtimeAnnotationType);
+        return unmodifiableCollection(fields);
     }
 
-    private <A extends Annotation> Field[] findAnnotatedFields(final Field[] declaredFields, final Class<A> runtimeAnnotationType) {
-        final List<Field> annotatedFields = new ArrayList<Field>();
+    private <A extends Annotation> Collection<Field> findAnnotatedFields(final Field[] declaredFields, final Class<A> runtimeAnnotationType) {
+        final Collection<Field> annotatedFields = new ArrayList<Field>();
         for (final Field field : declaredFields) {
             if (annotationChecker.isAnnotated(field, runtimeAnnotationType, IGNORE)) {
                 annotatedFields.add(field);
             }
         }
-        return annotatedFields.toArray(new Field[annotatedFields.size()]);
+        return annotatedFields;
     }
 }

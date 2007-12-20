@@ -21,22 +21,24 @@ import com.googlecode.instinct.marker.naming.NamingConvention;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import static java.util.Collections.unmodifiableCollection;
 
 public final class NamedMethodLocatorImpl implements NamedMethodLocator {
     private final HierarchicalMethodLocator methodLocator = new HierarchicalMethodLocatorImpl();
 
     public <T> Collection<Method> locate(final Class<T> cls, final NamingConvention namingConvention) {
         checkNotNull(cls, namingConvention);
+        final Collection<Method> locatedMethods = findNamedMethods(cls, namingConvention);
+        return unmodifiableCollection(locatedMethods);
+    }
+
+    private <T> Collection<Method> findNamedMethods(final Class<T> cls, final NamingConvention namingConvention) {
         final Collection<Method> locatedMethods = new ArrayList<Method>();
-        for (final Method method : findMethods(cls)) {
+        for (final Method method : methodLocator.locate(cls)) {
             if (method.getName().matches(namingConvention.getPattern())) {
                 locatedMethods.add(method);
             }
         }
         return locatedMethods;
-    }
-
-    private <T> Iterable<Method> findMethods(final Class<T> cls) {
-        return methodLocator.locate(cls);
     }
 }

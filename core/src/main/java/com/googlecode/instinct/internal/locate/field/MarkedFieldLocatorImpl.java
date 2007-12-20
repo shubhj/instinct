@@ -20,17 +20,22 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.MarkingScheme;
 import java.lang.reflect.Field;
+import java.util.Collection;
+import static java.util.Collections.unmodifiableCollection;
+import java.util.HashSet;
 
 @Suggest("Add other locators here, see MarkedMethodLocator")
 public final class MarkedFieldLocatorImpl implements MarkedFieldLocator {
     private AnnotatedFieldLocator annotatedFieldLocator = new AnnotatedFieldLocatorImpl();
 
-    public <T> Field[] locateAll(final Class<T> cls, final MarkingScheme markingScheme) {
+    public <T> Collection<Field> locateAll(final Class<T> cls, final MarkingScheme markingScheme) {
         checkNotNull(cls, markingScheme);
-        return findFieldsByAnnotation(cls, markingScheme);
+        final Collection<Field> fields = new HashSet<Field>();
+        fields.addAll(findFieldsByAnnotation(cls, markingScheme));
+        return unmodifiableCollection(fields);
     }
 
-    private <T> Field[] findFieldsByAnnotation(final Class<T> cls, final MarkingScheme markingScheme) {
+    private <T> Collection<Field> findFieldsByAnnotation(final Class<T> cls, final MarkingScheme markingScheme) {
         return annotatedFieldLocator.locate(cls, markingScheme.getAnnotationType());
     }
 }

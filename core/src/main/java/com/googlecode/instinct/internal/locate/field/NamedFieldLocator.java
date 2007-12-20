@@ -18,7 +18,8 @@ package com.googlecode.instinct.internal.locate.field;
 
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import java.lang.reflect.Field;
+import java.util.Collection;
 
 public interface NamedFieldLocator {
-    <T> Iterable<Field> locate(Class<T> cls, NamingConvention namingConvention);
+    <T> Collection<Field> locate(Class<T> cls, NamingConvention namingConvention);
 }

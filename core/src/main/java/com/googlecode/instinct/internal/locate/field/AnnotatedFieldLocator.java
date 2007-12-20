@@ -18,7 +18,8 @@ package com.googlecode.instinct.internal.locate.field;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.Collection;
 
 public interface AnnotatedFieldLocator {
-    <A extends Annotation, T> Field[] locate(Class<T> cls, Class<A> runtimeAnnotationType);
+    <A extends Annotation, T> Collection<Field> locate(Class<T> cls, Class<A> runtimeAnnotationType);
 }

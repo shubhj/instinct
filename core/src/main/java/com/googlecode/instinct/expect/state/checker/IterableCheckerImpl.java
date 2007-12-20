@@ -29,11 +29,11 @@ public class IterableCheckerImpl<E, T extends Iterable<E>> extends ObjectChecker
     }
 
     public void isEmpty() {
-        getAsserter().expectThat(subject.iterator().hasNext(), describedAs("iterator().hasNext() = <true>", Matchers.equalTo(true)));
+        getAsserter().expectThat(subject.iterator().hasNext(), describedAs("iterator().hasNext() = <false>", Matchers.equalTo(false)));
     }
 
     public void isNotEmpty() {
-        getAsserter().expectThat(subject.iterator().hasNext(), describedAs("iterator().hasNext() = <false>", Matchers.equalTo(false)));
+        getAsserter().expectThat(subject.iterator().hasNext(), describedAs("iterator().hasNext() = <true>", Matchers.equalTo(true)));
     }
 
     public final void containsItem(final E item) {

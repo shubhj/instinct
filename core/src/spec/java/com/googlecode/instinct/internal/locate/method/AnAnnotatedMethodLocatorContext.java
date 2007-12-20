@@ -18,8 +18,6 @@ package com.googlecode.instinct.internal.locate.method;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.internal.locate.field.AnnotatedMethodLocator;
-import com.googlecode.instinct.internal.locate.field.AnnotatedMethodLocatorImpl;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;

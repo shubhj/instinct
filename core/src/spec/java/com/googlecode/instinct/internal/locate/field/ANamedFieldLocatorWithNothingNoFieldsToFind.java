@@ -42,7 +42,7 @@ public final class ANamedFieldLocatorWithNothingNoFieldsToFind {
     @Specification
     public void doesNotFindAnyFields() {
         final Iterable<Field> fields = locator.locate(WithoutNamedFields.class, namingConvention);
-        expect.that(fields).isNotEmpty();
+        expect.that(fields).isEmpty();
     }
 
     @SuppressWarnings({"ALL"})

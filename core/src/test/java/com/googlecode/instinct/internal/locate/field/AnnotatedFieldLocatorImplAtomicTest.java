@@ -28,8 +28,10 @@ import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
+import java.util.Collection;
 import org.jmock.Expectations;
 
 public final class AnnotatedFieldLocatorImplAtomicTest extends InstinctTestCase {
@@ -45,6 +47,15 @@ public final class AnnotatedFieldLocatorImplAtomicTest extends InstinctTestCase 
         checkClass(AnnotatedFieldLocatorImpl.class, AnnotatedFieldLocator.class);
     }
 
+    public void testReturnsAnUnModifiableCollection() {
+        expectException(UnsupportedOperationException.class, new Runnable() {
+            public void run() {
+                final Collection<Field> fields = new AnnotatedFieldLocatorImpl().locate(WithoutRuntimeAnnotations.class, Dummy.class);
+                fields.clear();
+            }
+        });
+    }
+
     public void testLocateOnAClassWithNoAnnotationsReturnsNoFields() {
         expect.that(new Expectations() {
             {
@@ -52,8 +63,7 @@ public final class AnnotatedFieldLocatorImplAtomicTest extends InstinctTestCase 
                 will(returnValue(false));
             }
         });
-        final Field[] fields = locator.locate(WithoutRuntimeAnnotations.class, Dummy.class);
-        expect.that(fields).isNotNull();
+        final Collection<Field> fields = locator.locate(WithoutRuntimeAnnotations.class, Dummy.class);
         expect.that(fields).isEmpty();
     }
 
@@ -77,13 +87,12 @@ public final class AnnotatedFieldLocatorImplAtomicTest extends InstinctTestCase 
                 will(returnValue(false));
             }
         });
-        final Field[] fields = locator.locate(WithRuntimeAnnotations.class, Dummy.class);
+        final Iterable<Field> fields = locator.locate(WithRuntimeAnnotations.class, Dummy.class);
         expect.that(fields).isNotNull();
-        expect.that(fields).isOfSize(4);
-        expect.that(fields[0]).isEqualTo(field1);
-        expect.that(fields[1]).isEqualTo(field2);
-        expect.that(fields[2]).isEqualTo(field3);
-        expect.that(fields[3]).isEqualTo(field4);
+        expect.that(fields).containsItem(field1);
+        expect.that(fields).containsItem(field2);
+        expect.that(fields).containsItem(field3);
+        expect.that(fields).containsItem(field4);
     }
 
     private Field getField(final String fieldName) {

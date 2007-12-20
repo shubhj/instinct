@@ -17,8 +17,6 @@
 package com.googlecode.instinct.internal.locate.method;
 
 import com.googlecode.instinct.internal.locate.ContextWithSpecsWithDifferentAccessModifiers;
-import com.googlecode.instinct.internal.locate.field.AnnotatedMethodLocator;
-import com.googlecode.instinct.internal.locate.field.AnnotatedMethodLocatorImpl;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.test.InstinctTestCase;
 import java.lang.reflect.Method;

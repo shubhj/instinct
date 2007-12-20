@@ -20,9 +20,11 @@ import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.runner.ASimpleNamingConventionContext;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Subject;
+import com.googlecode.instinct.marker.naming.BeforeSpecificationNamingConvention;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import org.hamcrest.Matcher;
@@ -47,5 +49,15 @@ public final class NamedMethodLocatorImplAtomicTest extends InstinctTestCase {
         final Collection<Method> methods = methodLocator.locate(ASimpleNamingConventionContext.class, namingConvention);
         final Matcher<Method> aMethodNamedMustAlwaysReturnTrue = new MethodNameMatcher("^mustAlwaysReturnTrue$");
         expect.that(methods).containsItem(aMethodNamedMustAlwaysReturnTrue);
+    }
+
+    public void testReturnsAnUnmodifiableCollection() {
+        expectException(UnsupportedOperationException.class, new Runnable() {
+            public void run() {
+                final Collection<Method> methods =
+                        new NamedMethodLocatorImpl().locate(ASimpleNamingConventionContext.class, new BeforeSpecificationNamingConvention());
+                methods.clear();
+            }
+        });
     }
 }

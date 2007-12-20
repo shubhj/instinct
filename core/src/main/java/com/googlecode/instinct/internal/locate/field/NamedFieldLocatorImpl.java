@@ -23,7 +23,7 @@ import java.util.Collection;
 import static java.util.Collections.unmodifiableCollection;
 
 public final class NamedFieldLocatorImpl implements NamedFieldLocator {
-    public <T> Iterable<Field> locate(final Class<T> cls, final NamingConvention namingConvention) {
+    public <T> Collection<Field> locate(final Class<T> cls, final NamingConvention namingConvention) {
         final Collection<Field> fields = new ArrayList<Field>();
         for (final Field field : cls.getDeclaredFields()) {
             if (field.getName().matches(namingConvention.getPattern())) {

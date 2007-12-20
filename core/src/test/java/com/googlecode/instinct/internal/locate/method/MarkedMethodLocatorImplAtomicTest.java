@@ -29,9 +29,11 @@ import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
+import com.googlecode.instinct.marker.naming.BeforeSpecificationNamingConvention;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import org.hamcrest.Matcher;
@@ -45,6 +47,16 @@ public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
 
     public void testConformsToClassTraits() {
         checkClass(MarkedMethodLocatorImpl.class, MarkedMethodLocator.class);
+    }
+
+    public void testReturnsAnUnModifiableCollection() {
+        expectException(UnsupportedOperationException.class, new Runnable() {
+            public void run() {
+                final Collection<Method> methods = locator.locateAll(ASimpleContext.class,
+                        new MarkingSchemeImpl(BeforeSpecification.class, new BeforeSpecificationNamingConvention(), IGNORE));
+                methods.clear();
+            }
+        });
     }
 
     public void testFindsAnnotatedSpecificationMethodsInASimpleContext() {
@@ -90,7 +102,7 @@ public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
         return new MethodMatcher(methodName);
     }
 
-    private <T> Collection<Method> getBeforeSpecificationMethodsFromContextClass(final Class<T> cls, final String namingPattern) {
+    private <T> Collection<Method> getBeforeSpecificationMethodsFromContextClass(final Class<T> cls, final Object namingPattern) {
         expect.that(new Expectations() {
             {
                 atLeast(1).of(namingConvention).getPattern();

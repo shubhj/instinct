@@ -18,7 +18,7 @@ package com.googlecode.instinct.internal.util;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.internal.locate.field.AnnotatedMethodLocatorImpl;
+import com.googlecode.instinct.internal.locate.method.AnnotatedMethodLocatorImpl;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
@@ -29,7 +29,6 @@ import org.junit.runner.RunWith;
 @RunWith(InstinctRunner.class)
 @Context
 public final class ClassUtilContext {
-
     @Subject private final ClassUtil subject = new ClassUtilImpl();
 
     @Specification

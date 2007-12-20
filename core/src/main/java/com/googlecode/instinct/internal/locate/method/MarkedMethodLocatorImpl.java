@@ -16,28 +16,25 @@
 
 package com.googlecode.instinct.internal.locate.method;
 
-import com.googlecode.instinct.internal.locate.field.AnnotatedMethodLocator;
-import com.googlecode.instinct.internal.locate.field.AnnotatedMethodLocatorImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Collection;
+import static java.util.Collections.unmodifiableCollection;
 import java.util.HashSet;
 
 public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
     private final AnnotatedMethodLocator annotatedMethodLocator = new AnnotatedMethodLocatorImpl();
     private final NamedMethodLocator namedMethodLocator = new NamedMethodLocatorImpl();
 
-    @Suggest("Return an unmodifiable collection.")
     public <T> Collection<Method> locateAll(final Class<T> cls, final MarkingScheme markingScheme) {
         checkNotNull(cls, markingScheme);
         final Collection<Method> methods = new HashSet<Method>();
         methods.addAll(findMethodsByAnnotation(cls, markingScheme.getAnnotationType()));
         methods.addAll(findMethodsByNamingConvention(cls, markingScheme.getNamingConvention()));
-        return methods;
+        return unmodifiableCollection(methods);
     }
 
     private <T> Collection<Method> findMethodsByNamingConvention(final Class<T> cls, final NamingConvention namingConvention) {
