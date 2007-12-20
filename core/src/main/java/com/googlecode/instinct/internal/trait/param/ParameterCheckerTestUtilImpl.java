@@ -31,7 +31,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-import junit.framework.Assert;
 
 public final class ParameterCheckerTestUtilImpl implements ParameterCheckerTestUtil {
     private final ConstructorEdge edgeConstructor = new ConstructorEdgeImpl();
@@ -47,7 +46,7 @@ public final class ParameterCheckerTestUtilImpl implements ParameterCheckerTestU
     @SuppressWarnings({"unchecked"})
     public <T> void checkConstructorsRejectsNull(final Class<T> classToCheck) {
         checkNotNull(classToCheck);
-        final Constructor<T>[] constructors = classToCheck.getConstructors();
+        final Constructor<T>[] constructors = (Constructor<T>[]) classToCheck.getConstructors();
         for (final Constructor<?> constructor : constructors) {
             checkConstructorRejectsNull(constructor);
         }
@@ -56,7 +55,7 @@ public final class ParameterCheckerTestUtilImpl implements ParameterCheckerTestU
     @SuppressWarnings({"unchecked"})
     public <T> void checkConstructorsRejectEmptyString(final Class<T> classToCheck) {
         checkNotNull(classToCheck);
-        final Constructor<T>[] constructors = classToCheck.getConstructors();
+        final Constructor<T>[] constructors = (Constructor<T>[]) classToCheck.getConstructors();
         for (final Constructor<T> constructor : constructors) {
             checkConstructorRejectsEmptyString(constructor);
         }
@@ -149,7 +148,7 @@ public final class ParameterCheckerTestUtilImpl implements ParameterCheckerTestU
         checkFailsWithInvalidValues(instance, method, paramToCheck, parameterValues, typeThatShouldHaveBeedRejected);
     }
 
-    private <T> Object[] createBadParamValues(final InstanceProvider instanceProvider, final Class<T>[] paramTypes, final int indexOfParamToMakeBad,
+    private Object[] createBadParamValues(final InstanceProvider instanceProvider, final Class<?>[] paramTypes, final int indexOfParamToMakeBad,
             final Object badValue) {
         final Object[] paramValues = new Object[paramTypes.length];
         for (int i = 0; i < paramTypes.length; i++) {
@@ -225,7 +224,7 @@ public final class ParameterCheckerTestUtilImpl implements ParameterCheckerTestU
             final String typeThatShouldHaveBeedRejected) {
         final String message = "Argument " + (currentParameter + 1) + " of " + methodName + "(..." + paramTypeClassName + "...) must be " +
                 typeThatShouldHaveBeedRejected + " checked";
-        Assert.fail(message);
+        throw new AssertionError(message);
     }
 
     private void setBadParam(final Object[] paramValues, final Class<?>[] paramTypes, final int indexOfParamToMakeBad, final Object badValue) {
