@@ -16,19 +16,21 @@
 
 package com.googlecode.instinct.example.csvreader.junit;
 
+import static org.hamcrest.core.IsEqual.equalTo;
+import static org.junit.Assert.assertThat;
+
+import org.jmock.Expectations;
+import org.jmock.Mockery;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
 import com.googlecode.instinct.example.csvreader.CsvFile;
 import com.googlecode.instinct.example.csvreader.CsvFileReader;
 import com.googlecode.instinct.example.csvreader.CsvFileReaderImpl;
 import com.googlecode.instinct.example.csvreader.CsvLine;
 import com.googlecode.instinct.example.csvreader.CsvLineSplitter;
 import com.googlecode.instinct.internal.util.Reflector;
-import static org.hamcrest.core.IsEqual.equalTo;
-import org.jmock.Expectations;
-import org.jmock.Mockery;
-import org.junit.After;
-import static org.junit.Assert.assertThat;
-import org.junit.Before;
-import org.junit.Test;
 
 public final class CsvFileReaderTest {
     private final Mockery mockery = new Mockery();

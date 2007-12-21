@@ -17,7 +17,7 @@
 package com.googlecode.instinct.example.money;
 
 @SuppressWarnings({"ReturnOfThis"})
-public class DollarImpl implements Dollar {
+public final class DollarImpl implements Dollar {
     private int amount;
 
     public DollarImpl(final int amount) {
