@@ -25,6 +25,7 @@ import com.googlecode.instinct.internal.util.instance.InstanceProvider;
 public final class StubCreator implements SpecificationDoubleCreator {
     private final InstanceProvider instanceProvider = new ConcreteInstanceProvider();
 
+    //SUPPRESS IllegalCatch {
     @SuppressWarnings({"unchecked", "CatchGenericClass"})
     public <T> T createDouble(final Class<T> doubleType, final String roleName) {
         checkNotNull(doubleType, roleName);
@@ -37,5 +38,6 @@ public final class StubCreator implements SpecificationDoubleCreator {
             throw new SpecificationDoubleCreationException(message, e);
         }
     }
+    // } SUPPRESS IllegalCatch
 }
 

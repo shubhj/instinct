@@ -21,6 +21,7 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.lang.reflect.Array;
 
 public final class MockCreator implements SpecificationDoubleCreator {
+    //SUPPRESS IllegalCatch {
     @SuppressWarnings({"CatchGenericClass"})
     public <T> T createDouble(final Class<T> doubleType, final String roleName) {
         checkNotNull(doubleType, roleName);
@@ -32,6 +33,7 @@ public final class MockCreator implements SpecificationDoubleCreator {
             throw new SpecificationDoubleCreationException(message, e);
         }
     }
+    // } SUPPRESS IllegalCatch
 
     @SuppressWarnings({"unchecked"})
     private <T> T doCreateDouble(final Class<T> doubleType, final String roleName) {

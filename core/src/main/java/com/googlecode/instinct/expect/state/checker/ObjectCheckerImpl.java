@@ -26,6 +26,7 @@ import org.hamcrest.Matchers;
 
 // SUPPRESS VisibilityModifier|IllegalToken {
 public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
+
     @SuppressWarnings({"ProtectedField"})
     protected final T subject;
     private MatcherAssertEdge asserter = new MatcherAssertEdgeImpl();
