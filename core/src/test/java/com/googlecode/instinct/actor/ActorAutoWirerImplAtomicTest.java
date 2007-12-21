@@ -101,8 +101,7 @@ public final class ActorAutoWirerImplAtomicTest extends InstinctTestCase {
         expect.that(value).isNull();
     }
 
-    // TODO: TestDouble Come back here after writing a namin convention field locator.
-    public void nsoTestAutoWiresStubsByNamingConvention() {
+    public void testAutoWiresStubsByNamingConvention() {
         final Object value = autoWireAndGetFieldValue(instanceWithFieldsMarkedUsingANamingConvention, "stubString");
         expect.that(value).isNotNull();
     }
@@ -117,8 +116,7 @@ public final class ActorAutoWirerImplAtomicTest extends InstinctTestCase {
         expect.that(value).isNull();
     }
 
-    // TODO: TestDouble Come back here after writing a namin convention field locator.
-    public void nsoTestAutoWiresMocksByNamingConvention() {
+    public void testAutoWiresMocksByNamingConvention() {
         final Object value = autoWireAndGetFieldValue(instanceWithFieldsMarkedUsingANamingConvention, "mockSequence");
         expectException(ExpectationError.class, new Runnable() {
             public void run() {

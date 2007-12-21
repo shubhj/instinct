@@ -27,7 +27,7 @@ import java.lang.reflect.Field;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
-public final class ADummyAutoWireDeterminatorWithAnAnnoatedFieldNotToAutoWire {
+public final class ADummyAutoWireDeterminatorWithAnAnnotatedFieldNotToAutoWire {
     @Subject(implementation = DummyAutoWireDeterminator.class) private AutoWireDeterminator autoWireDeterminator;
 
     @BeforeSpecification
