@@ -16,6 +16,10 @@
 
 package com.googlecode.instinct.test.suite;
 
+import com.googlecode.instinct.actor.ADummyAutoWireDeterminatorWithANamedFieldToAutoWire;
+import com.googlecode.instinct.actor.ADummyAutoWireDeterminatorWithAnAnnoatedFieldNotToAutoWire;
+import com.googlecode.instinct.actor.ADummyAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire;
+import com.googlecode.instinct.actor.ADummyAutoWireDeterminatorWithNoMarkedFields;
 import com.googlecode.instinct.api.AnObjectCheckerContext;
 import com.googlecode.instinct.api.AnObjectCheckerFailure;
 import com.googlecode.instinct.api.CommonAPIContext;
@@ -52,6 +56,8 @@ public final class AllSpecificationsSuite {
         return new Class<?>[]{AnAnnotatedMethodLocatorContext.class, AHierarchicalMethodLocatorContext.class,
                 AFixedDefect8WithAnAnnotationMethodLocator.class, AFixedDefect8WithANamingConventionLocator.class, AFixedDefect23.class,
                 AFixedDefect3.class, CommonAPIContext.class, AnObjectCheckerContext.class, AnObjectCheckerFailure.class,
-                AStringFactoryImplContext.class, ANamedFieldLocatorWithNothingNoFieldsToFind.class, ANamedFieldLocatorWithFieldsToFind.class};
+                AStringFactoryImplContext.class, ANamedFieldLocatorWithNothingNoFieldsToFind.class, ANamedFieldLocatorWithFieldsToFind.class,
+                ADummyAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire.class, ADummyAutoWireDeterminatorWithAnAnnoatedFieldNotToAutoWire.class,
+                ADummyAutoWireDeterminatorWithANamedFieldToAutoWire.class, ADummyAutoWireDeterminatorWithNoMarkedFields.class};
     }
 }

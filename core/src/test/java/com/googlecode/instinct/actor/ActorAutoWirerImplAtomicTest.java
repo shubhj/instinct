@@ -78,8 +78,7 @@ public final class ActorAutoWirerImplAtomicTest extends InstinctTestCase {
     public void testWillWireMoreThanOneSubject() {
     }
 
-    // TODO: TestDouble Come back here after writing a namin convention field locator.
-    public void nsoTestAutoWiresDummiesByNamingConvention() {
+    public void testAutoWiresDummiesByNamingConvention() {
         final Object value = autoWireAndGetFieldValue(instanceWithFieldsMarkedUsingANamingConvention, "dummySequence");
         expectException(IllegalInvocationException.class, new Runnable() {
             public void run() {

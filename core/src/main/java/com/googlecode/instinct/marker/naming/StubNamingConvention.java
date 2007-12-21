@@ -18,6 +18,6 @@ package com.googlecode.instinct.marker.naming;
 
 public final class StubNamingConvention implements NamingConvention {
     public String getPattern() {
-        return "^stub";
+        return "^stub.*";
     }
 }

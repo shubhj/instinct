@@ -16,10 +16,10 @@
 
 package com.googlecode.instinct.marker.naming;
 
+import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import com.googlecode.instinct.marker.annotate.Subject;
-import static com.googlecode.instinct.expect.Expect.expect;
 
 public final class StubNamingConventionAtomicTest extends InstinctTestCase {
     @Subject(implementation = StubNamingConvention.class) private NamingConvention namingConvention;
@@ -29,6 +29,6 @@ public final class StubNamingConventionAtomicTest extends InstinctTestCase {
     }
 
     public void testGetPattern() {
-        expect.that(namingConvention.getPattern()).isEqualTo("^stub");
+        expect.that(namingConvention.getPattern()).isEqualTo("^stub.*");
     }
 }

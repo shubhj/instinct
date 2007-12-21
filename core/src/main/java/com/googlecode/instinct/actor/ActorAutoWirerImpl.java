@@ -87,31 +87,4 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
             throw new AutoWireException(message, throwable);
         }
     }
-
-    // Note. This stuff below is bollocks, as we cannot specify a shared type between annotations!
-
-    private interface AutoWireDeterminator {
-        boolean autoWire(Field field);
-    }
-
-    private static class DummyAutoWireDeterminator implements AutoWireDeterminator {
-        public boolean autoWire(final Field field) {
-            final Dummy annotation = field.getAnnotation(Dummy.class);
-            return annotation != null && annotation.auto();
-        }
-    }
-
-    private static class StubAutoWireDeterminator implements AutoWireDeterminator {
-        public boolean autoWire(final Field field) {
-            final Stub annotation = field.getAnnotation(Stub.class);
-            return annotation != null && annotation.auto();
-        }
-    }
-
-    private static class MockAutoWireDeterminator implements AutoWireDeterminator {
-        public boolean autoWire(final Field field) {
-            final Mock annotation = field.getAnnotation(Mock.class);
-            return annotation != null && annotation.auto();
-        }
-    }
 }

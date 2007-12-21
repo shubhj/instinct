@@ -18,6 +18,6 @@ package com.googlecode.instinct.marker.naming;
 
 public final class DummyNamingConvention implements NamingConvention {
     public String getPattern() {
-        return "^dummy";
+        return "^dummy.*";
     }
 }

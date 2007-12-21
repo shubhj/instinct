@@ -29,6 +29,6 @@ public final class MockNamingConventionAtomicTest extends InstinctTestCase {
     }
 
     public void testGetPattern() {
-        expect.that(namingConvention.getPattern()).isEqualTo("^mock");
+        expect.that(namingConvention.getPattern()).isEqualTo("^mock.*");
     }
 }

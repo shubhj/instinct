@@ -16,76 +16,50 @@
 
 package com.googlecode.instinct.internal.locate.field;
 
-import com.googlecode.instinct.expect.Expect;
 import static com.googlecode.instinct.expect.Expect.expect;
+import static com.googlecode.instinct.internal.util.Reflector.getFieldByName;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
-import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
-import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.marker.naming.MockNamingConvention;
-import com.googlecode.instinct.marker.naming.NamingConvention;
-import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
-import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import com.googlecode.instinct.test.checker.ExceptionTestChecker;
 import java.lang.reflect.Field;
 import java.util.Collection;
-import static java.util.Collections.emptyList;
-import org.jmock.Expectations;
 
 public final class MarkedFieldLocatorImplAtomicTest extends InstinctTestCase {
     @Subject private MarkedFieldLocator fieldLocator;
-    @Mock private AnnotatedFieldLocator annotatedFieldLocator;
-    @Mock private NamedFieldLocator namedFieldLocator;
-    @Mock private MarkingScheme markingScheme;
-    @Stub(auto = false) private Collection<Field> annotatedFields;
-    @Stub(auto = false) private Collection<Field> namedFields;
-    @Dummy private Dummy annotationType;
-    @Dummy private NamingConvention namingConvention;
+    @Stub(auto = false) private MarkingScheme markingScheme;
 
     @Override
     public void setUpTestDoubles() {
-        annotatedFields = emptyList();
-        namedFields = emptyList();
+        markingScheme = new MarkingSchemeImpl(Mock.class, new MockNamingConvention(), IGNORE);
     }
 
     @Override
     public void setUpSubject() {
-        fieldLocator = createSubject(MarkedFieldLocatorImpl.class, annotatedFieldLocator, namedFieldLocator);
+        fieldLocator = new MarkedFieldLocatorImpl();
     }
 
     public void testConformsToClassTraits() {
         checkClass(MarkedFieldLocatorImpl.class, MarkedFieldLocator.class);
     }
 
-    public void testUsesAnnotatedLocatorAndNamedLocatorToFindMarkedFields() {
-        expect.that(new Expectations() {
-            {
-                one(markingScheme).getAnnotationType();
-                will(returnValue(annotationType.getClass()));
-                one(annotatedFieldLocator).locate(WithAnnotatedAndNamedFields.class, annotationType.getClass());
-                will(returnValue(annotatedFields));
-                one(markingScheme).getNamingConvention();
-                will(returnValue(namingConvention));
-                one(namedFieldLocator).locate(WithAnnotatedAndNamedFields.class, namingConvention);
-                will(returnValue(namedFields));
-            }
-        });
+    public void testFindsAnnotatedAndNamedFields() {
         final Iterable<Field> fields = fieldLocator.locateAll(WithAnnotatedAndNamedFields.class, markingScheme);
-        expect.that(fields).containsItems(annotatedFields);
-        expect.that(fields).containsItems(namedFields);
+        expect.that(fields).isNotEmpty();
+        expect.that(fields).containsItem(field("mockCharSequence"));
+        expect.that(fields).containsItem(field("mockAnotherCharSequence"));
     }
 
     public void testReturnsAnUnmodifiableCollection() {
         ExceptionTestChecker.expectException(UnsupportedOperationException.class, new Runnable() {
             public void run() {
-                final MarkingScheme scheme = new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention(), IGNORE);
-                final Collection<Field> fields = new MarkedFieldLocatorImpl().locateAll(WithAnnotatedAndNamedFields.class, scheme);
+                final Collection<Field> fields = fieldLocator.locateAll(WithAnnotatedAndNamedFields.class, markingScheme);
                 fields.clear();
             }
         });
@@ -94,11 +68,16 @@ public final class MarkedFieldLocatorImplAtomicTest extends InstinctTestCase {
     public void testDoesNotReturnTheSameFieldTwice() {
         final MarkingScheme scheme = new MarkingSchemeImpl(Mock.class, new MockNamingConvention(), IGNORE);
         final Collection<Field> fields = new MarkedFieldLocatorImpl().locateAll(WithAnnotatedAndNamedFields.class, scheme);
-        Expect.expect.that(fields).isOfSize(1);
+        expect.that(fields).isOfSize(2);
+    }
+
+    private Field field(final String fieldName) {
+        return getFieldByName(WithAnnotatedAndNamedFields.class, fieldName);
     }
 
     @SuppressWarnings({"ALL"})
     private static final class WithAnnotatedAndNamedFields {
         @Mock CharSequence mockCharSequence;
+        CharSequence mockAnotherCharSequence;
     }
 }

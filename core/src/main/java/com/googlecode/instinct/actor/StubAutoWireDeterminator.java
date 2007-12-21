@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2007 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.marker.naming;
+package com.googlecode.instinct.actor;
 
-public final class MockNamingConvention implements NamingConvention {
-    public String getPattern() {
-        return "^mock.*";
+import com.googlecode.instinct.marker.annotate.Stub;
+import java.lang.reflect.Field;
+
+public final class StubAutoWireDeterminator implements AutoWireDeterminator {
+    public boolean autoWire(final Field field) {
+        final Stub annotation = field.getAnnotation(Stub.class);
+        return annotation != null && annotation.auto();
     }
 }
