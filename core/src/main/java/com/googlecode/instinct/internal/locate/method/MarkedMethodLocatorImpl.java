@@ -18,8 +18,6 @@ package com.googlecode.instinct.internal.locate.method;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.MarkingScheme;
-import com.googlecode.instinct.marker.naming.NamingConvention;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import static java.util.Collections.unmodifiableCollection;
@@ -32,16 +30,16 @@ public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
     public <T> Collection<Method> locateAll(final Class<T> cls, final MarkingScheme markingScheme) {
         checkNotNull(cls, markingScheme);
         final Collection<Method> methods = new HashSet<Method>();
-        methods.addAll(findMethodsByAnnotation(cls, markingScheme.getAnnotationType()));
-        methods.addAll(findMethodsByNamingConvention(cls, markingScheme.getNamingConvention()));
+        methods.addAll(findMethodsByAnnotation(cls, markingScheme));
+        methods.addAll(findMethodsByNamingConvention(cls, markingScheme));
         return unmodifiableCollection(methods);
     }
 
-    private <T> Collection<Method> findMethodsByNamingConvention(final Class<T> cls, final NamingConvention namingConvention) {
-        return namedMethodLocator.locate(cls, namingConvention);
+    private <T> Collection<Method> findMethodsByAnnotation(final Class<T> cls, final MarkingScheme markingScheme) {
+        return annotatedMethodLocator.locate(cls, markingScheme.getAnnotationType());
     }
 
-    private <A extends Annotation, T> Collection<Method> findMethodsByAnnotation(final Class<T> cls, final Class<A> annotationType) {
-        return annotatedMethodLocator.locate(cls, annotationType);
+    private <T> Collection<Method> findMethodsByNamingConvention(final Class<T> cls, final MarkingScheme markingScheme) {
+        return namedMethodLocator.locate(cls, markingScheme.getNamingConvention());
     }
 }

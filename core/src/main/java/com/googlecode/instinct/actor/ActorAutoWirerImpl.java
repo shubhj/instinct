@@ -76,7 +76,6 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
     }
 
     @SuppressWarnings({"CatchGenericClass", "OverlyBroadCatchBlock"})
-    // SUPPRESS IllegalCatch {
     private void autoWireField(final Object instanceToAutoWire, final Field field, final SpecificationDoubleCreator doubleCreator) {
         try {
             final Object createdDouble = doubleCreator.createDouble(field.getType(), field.getName());
@@ -89,7 +88,6 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
         }
     }
 
-    // } SUPPRESS IllegalCatch
     // Note. This stuff below is bollocks, as we cannot specify a shared type between annotations!
 
     private interface AutoWireDeterminator {
