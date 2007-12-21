@@ -21,7 +21,7 @@ import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.instance.ConcreteInstanceProvider;
 import com.googlecode.instinct.internal.util.instance.InstanceProvider;
 
-@Suggest("Should be able to pass in a class to the mock that checks for valid values - Discriminator?")
+@Suggest({"Pass in a class that checks for valid values - Discriminator? ", "Or maybe a generator, let something else generate the values?"})
 public final class StubCreator implements SpecificationDoubleCreator {
     private final InstanceProvider instanceProvider = new ConcreteInstanceProvider();
 
@@ -32,12 +32,12 @@ public final class StubCreator implements SpecificationDoubleCreator {
         try {
             return instanceProvider.newInstance(doubleType);
         } catch (Throwable e) {
-            // TODO This needs to change, should be able to stub this stuff out.
-            final String message =
-                    "Unable to create stub " + doubleType.getName() + " (with role name '" + roleName + "'). Stub types cannot be abstract classes.";
+            final String message = "Unable to create stub " + doubleType.getName() + " (with role name '" + roleName +
+                    "'). Stub types cannot be interfaces or abstract classes.";
             throw new SpecificationDoubleCreationException(message, e);
         }
     }
+
     // } SUPPRESS IllegalCatch
 }
 

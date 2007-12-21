@@ -17,11 +17,19 @@
 package com.googlecode.instinct.actor;
 
 import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.naming.MockNamingConvention;
+import com.googlecode.instinct.marker.naming.NamingConvention;
 import java.lang.reflect.Field;
 
 public final class MockAutoWireDeterminator implements AutoWireDeterminator {
+    private final NamingConvention namingConvention = new MockNamingConvention();
+
     public boolean autoWire(final Field field) {
         final Mock annotation = field.getAnnotation(Mock.class);
-        return annotation != null && annotation.auto();
+        if (annotation == null) {
+            return field.getName().matches(namingConvention.getPattern());
+        } else {
+            return annotation.auto();
+        }
     }
 }

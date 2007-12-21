@@ -20,6 +20,7 @@ import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdgeImpl;
 import com.googlecode.instinct.internal.locate.field.MarkedFieldLocator;
 import com.googlecode.instinct.internal.locate.field.MarkedFieldLocatorImpl;
+import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
@@ -43,6 +44,7 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
     private final SpecificationDoubleCreator mockCreator = new MockCreator();
 
     @Suggest("Add in subject auto-wiring. Do it last, as it may require doubles.")
+    @Fix("This needs to make sue we don't wire fields twice, say marked with @Mock but named stubFoo. See StubCreatorAtomicTest.")
     public void autoWireFields(final Object instanceToAutoWire) {
         checkNotNull(instanceToAutoWire);
         autoWireDummies(instanceToAutoWire);

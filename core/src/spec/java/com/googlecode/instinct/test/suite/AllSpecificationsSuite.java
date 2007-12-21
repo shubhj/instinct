@@ -16,10 +16,21 @@
 
 package com.googlecode.instinct.test.suite;
 
+import com.googlecode.instinct.actor.ADummyAutoWireDeterminatorWithANamedFieldNotToAutoWire;
 import com.googlecode.instinct.actor.ADummyAutoWireDeterminatorWithANamedFieldToAutoWire;
-import com.googlecode.instinct.actor.ADummyAutoWireDeterminatorWithAnAnnoatedFieldNotToAutoWire;
 import com.googlecode.instinct.actor.ADummyAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire;
+import com.googlecode.instinct.actor.ADummyAutoWireDeterminatorWithAnAnnotatedFieldNotToAutoWire;
 import com.googlecode.instinct.actor.ADummyAutoWireDeterminatorWithNoMarkedFields;
+import com.googlecode.instinct.actor.AMockAutoWireDeterminatorWithANamedFieldNotToAutoWire;
+import com.googlecode.instinct.actor.AMockAutoWireDeterminatorWithANamedFieldToAutoWire;
+import com.googlecode.instinct.actor.AMockAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire;
+import com.googlecode.instinct.actor.AMockAutoWireDeterminatorWithAnAnnotatedFieldNotToAutoWire;
+import com.googlecode.instinct.actor.AMockAutoWireDeterminatorWithNoMarkedFields;
+import com.googlecode.instinct.actor.AStubAutoWireDeterminatorWithANamedFieldNotToAutoWire;
+import com.googlecode.instinct.actor.AStubAutoWireDeterminatorWithANamedFieldToAutoWire;
+import com.googlecode.instinct.actor.AStubAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire;
+import com.googlecode.instinct.actor.AStubAutoWireDeterminatorWithAnAnnotatedFieldNotToAutoWire;
+import com.googlecode.instinct.actor.AStubAutoWireDeterminatorWithNoMarkedFields;
 import com.googlecode.instinct.api.AnObjectCheckerContext;
 import com.googlecode.instinct.api.AnObjectCheckerFailure;
 import com.googlecode.instinct.api.CommonAPIContext;
@@ -57,7 +68,13 @@ public final class AllSpecificationsSuite {
                 AFixedDefect8WithAnAnnotationMethodLocator.class, AFixedDefect8WithANamingConventionLocator.class, AFixedDefect23.class,
                 AFixedDefect3.class, CommonAPIContext.class, AnObjectCheckerContext.class, AnObjectCheckerFailure.class,
                 AStringFactoryImplContext.class, ANamedFieldLocatorWithNothingNoFieldsToFind.class, ANamedFieldLocatorWithFieldsToFind.class,
-                ADummyAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire.class, ADummyAutoWireDeterminatorWithAnAnnoatedFieldNotToAutoWire.class,
-                ADummyAutoWireDeterminatorWithANamedFieldToAutoWire.class, ADummyAutoWireDeterminatorWithNoMarkedFields.class};
+                AMockAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire.class, AMockAutoWireDeterminatorWithAnAnnotatedFieldNotToAutoWire.class,
+                AMockAutoWireDeterminatorWithANamedFieldToAutoWire.class, AMockAutoWireDeterminatorWithANamedFieldNotToAutoWire.class,
+                AMockAutoWireDeterminatorWithNoMarkedFields.class, AStubAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire.class,
+                AStubAutoWireDeterminatorWithAnAnnotatedFieldNotToAutoWire.class, AStubAutoWireDeterminatorWithANamedFieldToAutoWire.class,
+                AStubAutoWireDeterminatorWithANamedFieldNotToAutoWire.class, AStubAutoWireDeterminatorWithNoMarkedFields.class,
+                ADummyAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire.class, ADummyAutoWireDeterminatorWithAnAnnotatedFieldNotToAutoWire.class,
+                ADummyAutoWireDeterminatorWithANamedFieldToAutoWire.class, ADummyAutoWireDeterminatorWithANamedFieldNotToAutoWire.class,
+                ADummyAutoWireDeterminatorWithNoMarkedFields.class};
     }
 }

@@ -77,7 +77,7 @@
                     <format type="html"/>
                     <testsources dir="${test.src.dir}" includes="**/*"/>
                     <testsources dir="${spec.src.dir}" includes="**/*"/>
-                    <!--<testresults dir="${spec.results.dir}" includes="TEST-*.xml"/>-->
+                    <testresults dir="${spec.results.dir}" includes="TEST-*.xml"/>
                 </current>
             </clover-report>
         </sequential>

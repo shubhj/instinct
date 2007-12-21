@@ -21,7 +21,8 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
 public final class StubCreatorAtomicTest extends InstinctTestCase {
-    @Subject(implementation = StubCreator.class) private SpecificationDoubleCreator stubCreator;
+    // Note. Don't rename this field to start with stub, or it'll get wired as a stub.
+    @Subject(implementation = StubCreator.class) private SpecificationDoubleCreator creator;
 
     public void testConformsToClassTraits() {
         checkClass(StubCreator.class, SpecificationDoubleCreator.class);
@@ -29,8 +30,8 @@ public final class StubCreatorAtomicTest extends InstinctTestCase {
 
     // TODO Create a proxy that returns stubs for all method calls.
     public void testCreatesStubsForInterfaces() {
-//        final Object specDouble = stubCreator.createDouble(AnInterface.class, "anInterface");
-//        expect.that(specDouble).isNotNull();
+        //        final Object specDouble = creator.createDouble(AnInterface.class, "anInterface");
+        //        expect.that(specDouble).isNotNull();
     }
 
     public void testCreatesStubsForAbstractClasses() {

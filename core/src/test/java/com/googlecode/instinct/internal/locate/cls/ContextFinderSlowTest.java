@@ -26,7 +26,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 @Fix("This is a very brittle spec. Everytime we add a new Spec this breaks!")
 @Suggest("Could we have a sample directory of some sort that contains a known number of specs?")
 public final class ContextFinderSlowTest extends InstinctTestCase {
-    public static final int EXPECTED_CONTEXTS = 66;
+    public static final int EXPECTED_CONTEXTS = 76;
     private ContextFinder finder;
 
     @Override

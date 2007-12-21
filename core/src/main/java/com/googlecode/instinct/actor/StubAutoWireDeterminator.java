@@ -17,11 +17,19 @@
 package com.googlecode.instinct.actor;
 
 import com.googlecode.instinct.marker.annotate.Stub;
+import com.googlecode.instinct.marker.naming.NamingConvention;
+import com.googlecode.instinct.marker.naming.StubNamingConvention;
 import java.lang.reflect.Field;
 
 public final class StubAutoWireDeterminator implements AutoWireDeterminator {
+    private final NamingConvention namingConvention = new StubNamingConvention();
+
     public boolean autoWire(final Field field) {
         final Stub annotation = field.getAnnotation(Stub.class);
-        return annotation != null && annotation.auto();
+        if (annotation == null) {
+            return field.getName().matches(namingConvention.getPattern());
+        } else {
+            return annotation.auto();
+        }
     }
 }
