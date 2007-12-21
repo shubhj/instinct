@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fileset-config file-format-version="1.2.0" simple-config="false">
+    <fileset name="Instinct Example Checks" enabled="true" check-config-name="Instinct Checks" local="false">
+        <file-match-pattern match-pattern=".java$" include-pattern="true"/>
+        <file-match-pattern match-pattern=".properties$" include-pattern="true"/>
+        <file-match-pattern match-pattern="src/spec" include-pattern="false"/>
+        <file-match-pattern match-pattern="src/test" include-pattern="false"/>
+    </fileset>
+</fileset-config>
