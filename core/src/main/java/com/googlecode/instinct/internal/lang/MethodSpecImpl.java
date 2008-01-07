@@ -14,26 +14,25 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.runner;
+package com.googlecode.instinct.internal.lang;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.internal.lang.Primordial;
 
-public final class SpecificationRunFailureStatus extends Primordial implements SpecificationRunStatus {
-    private final Throwable error;
+public final class MethodSpecImpl extends Primordial implements MethodSpec {
+    private final String name;
+    private final Class<?>[] params;
 
-    public SpecificationRunFailureStatus(final Throwable error) {
-        checkNotNull(error);
-        this.error = error;
+    public MethodSpecImpl(final String name, final Class<?>[] params) {
+        checkNotNull(name, params);
+        this.name = name;
+        this.params = params.clone();
     }
 
-    @Suggest("Should this return Throwable?")
-    public Object getDetailedStatus() {
-        return error;
+    public String getName() {
+        return name;
     }
 
-    public boolean runSuccessful() {
-        return false;
+    public Class<?>[] getParams() {
+        return params.clone();
     }
 }

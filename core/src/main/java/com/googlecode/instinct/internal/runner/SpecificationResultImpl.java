@@ -18,7 +18,7 @@ package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
-import com.googlecode.instinct.internal.util.lang.Primordial;
+import com.googlecode.instinct.internal.lang.Primordial;
 
 public final class SpecificationResultImpl extends Primordial implements SpecificationResult {
     private final String specificationName;

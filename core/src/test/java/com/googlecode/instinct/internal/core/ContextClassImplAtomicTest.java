@@ -19,7 +19,7 @@ package com.googlecode.instinct.internal.core;
 import static com.googlecode.instinct.expect.Expect.expect;
 import static com.googlecode.instinct.expect.behaviour.Mocker.sequence;
 import com.googlecode.instinct.internal.locate.method.MarkedMethodLocator;
-import com.googlecode.instinct.internal.matcher.SpecificationMatcher;
+import com.googlecode.instinct.test.matcher.SpecificationMatcher;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;

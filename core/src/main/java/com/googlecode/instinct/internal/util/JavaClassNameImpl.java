@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.util;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.lang.Primordial;
+import com.googlecode.instinct.internal.lang.Primordial;
 import java.io.File;
 
 public final class JavaClassNameImpl extends Primordial implements JavaClassName {

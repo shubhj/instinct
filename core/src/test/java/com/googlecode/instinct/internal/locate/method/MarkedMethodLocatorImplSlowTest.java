@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.locate.method;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.matcher.MethodMatcher;
+import com.googlecode.instinct.test.matcher.MethodMatcher;
 import com.googlecode.instinct.internal.runner.AContextWithAnnotationsAndNamingConventions;
 import com.googlecode.instinct.internal.runner.ASimpleNamingConventionContext;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;

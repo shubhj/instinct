@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.internal.util.lang.Primordial;
+import com.googlecode.instinct.internal.lang.Primordial;
 
 @Suggest({"Implement readObject() & writeObject() to ensure only ever one VERIFICATION_SUCCESS",
         "Can this be implemented as an enum? Perhaps this becomes an enum & the methods go into the SpecificationResult."})

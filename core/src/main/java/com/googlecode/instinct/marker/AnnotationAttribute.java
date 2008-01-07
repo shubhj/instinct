@@ -17,7 +17,7 @@
 package com.googlecode.instinct.marker;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.lang.Primordial;
+import com.googlecode.instinct.internal.lang.Primordial;
 
 @SuppressWarnings({"StaticVariableOfConcreteClass"})
 public final class AnnotationAttribute extends Primordial {
