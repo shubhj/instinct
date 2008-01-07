@@ -44,15 +44,15 @@ public final class AnEmptyEventCalendar extends AbstractEventCalendarContext {
 
     @Specification
     public void shouldBeAbleToAddAnEvent() {
-        //the setup method the base class has been called before each specification, which is why getEvent1() doesn't return null.
+        //the setup method in the base class has been called before each specification, which is why getEvent1() doesn't return null.
         expect.that(calendar.getEvents()).isEmpty();
         calendar = calendar.addEvents(getEvent1());
         expect.that(calendar.getEvents()).isOfSize(1);
         expect.that(calendar.getEvents()).containsItems(getEvent1());
     }
 
-    private void localAfter() {
-        // As there are 2 after specification methods; localAfter() and after() (in the base class), each will be run, but their order
+    private void tearDown() {
+        // As there are 2 after specification methods; tearDown() and after() (in the base class), each will be run, but their order
         // is indeterminate.
         calendar.clear();
         calendar = null;
