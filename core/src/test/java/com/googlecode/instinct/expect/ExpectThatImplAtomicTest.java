@@ -27,8 +27,7 @@ import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubjec
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
 import org.jmock.Expectations;
 
-@Suggest(
-        {"Behaviour expectations plan.", "1. Drive out that(Expectations) to support jMock 2", "2. Move Mocker12 & JMock12Mockery infrastructure over to jMock2. Fix tests as required.", "3. Use that() to drive out facade on top of ObjectChecker that delegates to either a state or", "mock aware checker depending on object status (i.e. is it a testdouble?)."})
+@SuppressWarnings({"unchecked"})
 public final class ExpectThatImplAtomicTest extends InstinctTestCase {
     private ExpectThat expectThat;
     private StateExpectations stateExpectations;
@@ -61,6 +60,6 @@ public final class ExpectThatImplAtomicTest extends InstinctTestCase {
                 will(returnValue(objectChecker));
             }
         });
-        assertSame(objectChecker, expectThat.that(object));
+        expect.that(expectThat.that(object)).isTheSameInstanceAs((ObjectChecker<Object>) objectChecker);
     }
 }

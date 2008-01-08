@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.test.checker;
 
-import com.googlecode.instinct.internal.trait.cls.ClassTestChecker;
-import com.googlecode.instinct.internal.trait.cls.ClassTestCheckerImpl;
+import com.googlecode.instinct.internal.trait.cls.ClassTraitChecker;
+import com.googlecode.instinct.internal.trait.cls.ClassTraitCheckerImpl;
 import com.googlecode.instinct.internal.trait.param.ConstructorNullParameterTestChecker;
 import com.googlecode.instinct.internal.trait.param.ConstructorNullParameterTestCheckerImpl;
 import com.googlecode.instinct.internal.trait.param.MehodNullParameterTestChecker;
@@ -30,7 +30,7 @@ import static com.googlecode.instinct.test.checker.ModifierChecker.checkFinal;
 import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;
 
 public final class ClassChecker {
-    private static final ClassTestChecker CLASS_CHECKER = new ClassTestCheckerImpl();
+    private static final ClassTraitChecker CLASS_CHECKER = new ClassTraitCheckerImpl();
     @Fix("This returns mocks - which aint much use when testing a specific implementation see StateExpectationsImplAtomicTest.")
     private static final InstanceProvider INSTANCE_PROVIDER = new GenericInstanceProvider();
     private static final ConstructorNullParameterTestChecker CONSTRUCTOR_NULL_CHECKER =

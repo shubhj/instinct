@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.lang;
+package com.googlecode.instinct.internal.trait.cls;
 
-import java.lang.reflect.Constructor;
+public interface ClassTraitChecker {
+    <U, T extends U> void checkImplementsAndFinal(Class<U> expectedInterface, Class<T> implementationClass);
 
-public interface ReflectObjectMaster {
-    <T> Constructor<T> getConstructor(Class<T> cls);
+    <U, T extends U> void checkSubclassOf(Class<T> subClass, Class<U> superClass);
 }

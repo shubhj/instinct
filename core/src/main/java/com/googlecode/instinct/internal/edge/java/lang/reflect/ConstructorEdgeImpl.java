@@ -21,7 +21,7 @@ import java.lang.reflect.Constructor;
 
 public final class ConstructorEdgeImpl implements ConstructorEdge {
     @SuppressWarnings({"CatchGenericClass", "OverlyBroadCatchBlock"})
-    public <T> T newInstance(final Constructor<T> constructor, final Object[] parameters) {
+    public <T> T newInstance(final Constructor<T> constructor, final Object... parameters) {
         try {
             return constructor.newInstance(parameters);
         } catch (Exception e) {

@@ -14,7 +14,14 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.lang;
+package com.googlecode.instinct.internal.trait.param;
 
-public interface ReflectMaster extends ReflectObjectMaster, ReflectMethodMaster, ReflectFieldMaster {
+public interface ParameterTraitChecker {
+    <T> void checkConstructorsRejectsNull(Class<T> classToCheck);
+
+    <T> void checkConstructorsRejectEmptyString(Class<T> classToCheck);
+
+    void checkMethodsRejectsNull(Object instance);
+
+    void checkMethodsRejectEmptyString(Object instance);
 }

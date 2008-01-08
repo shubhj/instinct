@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.lang;
+package com.googlecode.instinct.internal.reflect;
 
 import com.googlecode.instinct.internal.edge.EdgeException;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;

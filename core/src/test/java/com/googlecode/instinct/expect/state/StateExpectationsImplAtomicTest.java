@@ -82,69 +82,69 @@ public final class StateExpectationsImplAtomicTest extends InstinctTestCase {
 
     public void testCalledWithObjectReturnsObjectChecker() {
         final ObjectChecker expectedChecker = expectCheckerCreated(ObjectChecker.class, ObjectCheckerImpl.class, object);
-        ObjectChecker<Object> objectChecker = stateExpectations.that(object);
-        assertSame(expectedChecker, objectChecker);
+        final ObjectChecker<Object> objectChecker = stateExpectations.that(object);
+        expect.that(objectChecker).isTheSameInstanceAs(expectedChecker);
     }
 
     public void testCalledWithStringReturnsStringChecker() {
         final String string = "hi!";
         final ObjectChecker expectedChecker = expectCheckerCreated(StringChecker.class, StringCheckerImpl.class, string);
         final ObjectChecker checker = stateExpectations.that(string);
-        assertSame(expectedChecker, checker);
+        expect.that(checker).isTheSameInstanceAs(expectedChecker);
     }
 
     public void testCalledWithComparableReturnsComparableChecker() {
         final Integer integer = 1;
         final ObjectChecker expectedChecker = expectCheckerCreated(ComparableChecker.class, ComparableCheckerImpl.class, integer);
-        ComparableChecker<Integer> checker = stateExpectations.that(integer);
-        assertSame(expectedChecker, checker);
+        final ComparableChecker<Integer> checker = stateExpectations.that(integer);
+        expect.that(checker).isTheSameInstanceAs((ComparableChecker<Integer>) expectedChecker);
     }
 
     public void testCalledWithIterableReturnsIterableChecker() {
         final ObjectChecker expectedChecker = expectCheckerCreated(IterableChecker.class, IterableCheckerImpl.class, collection);
-        IterableChecker<String, Iterable<String>> checker = stateExpectations.that((Iterable<String>) collection);
-        assertSame(expectedChecker, checker);
+        final IterableChecker<String, Iterable<String>> checker = stateExpectations.that((Iterable<String>) collection);
+        expect.that(checker).isTheSameInstanceAs((IterableChecker<String, Iterable<String>>) expectedChecker);
     }
 
     public void testCalledWithCollectionReturnsCollectionChecker() {
         final ObjectChecker expectedChecker = expectCheckerCreated(CollectionChecker.class, CollectionCheckerImpl.class, collection);
         final ObjectChecker checker = stateExpectations.that(collection);
-        assertSame(expectedChecker, checker);
+        expect.that(checker).isTheSameInstanceAs(expectedChecker);
     }
 
     public void testCalledWithArrayReturnsArrayChecker() {
         final String[] array = {"hi again!"};
         final ObjectChecker expectedChecker = expectCheckerCreated(ArrayChecker.class, ArrayCheckerImpl.class, array);
-        ArrayChecker<String> checker = stateExpectations.that(array);
-        assertSame(expectedChecker, checker);
+        final ArrayChecker<String> checker = stateExpectations.that(array);
+        expect.that(checker).isTheSameInstanceAs((ArrayChecker<String>) expectedChecker);
     }
 
     public void testCalledWithMapReturnsMapChecker() {
         final Map<String, String> map = new HashMap<String, String>();
         final ObjectChecker expectedChecker = expectCheckerCreated(MapChecker.class, MapCheckerImpl.class, map);
         final ObjectChecker checker = stateExpectations.that(map);
-        assertSame(expectedChecker, checker);
+        expect.that(checker).isTheSameInstanceAs(expectedChecker);
     }
 
     public void testCalledWithDoubleReturnsDoubleChecker() {
         final Double dubble = 0.0;
         final ObjectChecker expectedChecker = expectCheckerCreated(DoubleChecker.class, DoubleCheckerImpl.class, dubble);
         final ObjectChecker checker = stateExpectations.that(dubble);
-        assertSame(expectedChecker, checker);
+        expect.that(checker).isTheSameInstanceAs(expectedChecker);
     }
 
     public void testCalledClassWithReturnsClassChecker() {
         final Class<?> type = String.class;
         final ObjectChecker expectedChecker = expectCheckerCreated(ClassChecker.class, ClassCheckerImpl.class, type);
         final ObjectChecker checker = stateExpectations.that(type);
-        assertSame(expectedChecker, checker);
+        expect.that(checker).isTheSameInstanceAs(expectedChecker);
     }
 
     public void testCalledWithEventObjectReturnsEventObjectChecker() {
         final EventObject eventObject = new EventObject(object);
         final ObjectChecker expectedChecker = expectCheckerCreated(EventObjectChecker.class, EventObjectCheckerImpl.class, eventObject);
         final ObjectChecker checker = stateExpectations.that(eventObject);
-        assertSame(expectedChecker, checker);
+        expect.that(checker).isTheSameInstanceAs(expectedChecker);
     }
 
     public void testMethodThatDelegatesToMatcherCorrectly() {
@@ -165,7 +165,7 @@ public final class StateExpectationsImplAtomicTest extends InstinctTestCase {
         stateExpectations.notThat(object, hamcrestMatcher);
     }
 
-    private <T, I extends ObjectChecker<T>, C extends ObjectCheckerImpl<T>> I expectCheckerCreated(final Class<I> checkerInterfaceClass,
+    private <T, I extends ObjectChecker<T>, C extends ObjectCheckerImpl<T>> ObjectChecker expectCheckerCreated(final Class<I> checkerInterfaceClass,
             final Class<C> checkerImplClass, final T checkerSubject) {
         final I expectedChecker = mock(checkerInterfaceClass);
         expect.that(new Expectations() {

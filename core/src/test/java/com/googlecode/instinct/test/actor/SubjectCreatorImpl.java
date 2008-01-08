@@ -18,15 +18,19 @@ package com.googlecode.instinct.test.actor;
 
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ConstructorEdge;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ConstructorEdgeImpl;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.annotate.Subject;
 import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
 @SuppressWarnings({"CatchGenericClass"})
 public final class SubjectCreatorImpl implements SubjectCreator {
     private final ClassEdge classEdge = new ClassEdgeImpl();
+    private final ConstructorEdge edge = new ConstructorEdgeImpl();
 
     @Suggest("Support subjects that use constructor, setter or field DI.")
     public Object create(final Field field) {
@@ -97,7 +101,9 @@ public final class SubjectCreatorImpl implements SubjectCreator {
 
     @Suggest("Add support for DI, etc.")
     private <T> Object instantiateClass(final Class<T> typeToInstantiate) {
-        return classEdge.newInstance(typeToInstantiate);
+        final Constructor<T> constructor = classEdge.getDeclaredConstructor(typeToInstantiate);
+        constructor.setAccessible(true);
+        return edge.newInstance(constructor);
     }
 
     private <T> boolean isAbstract(final Class<T> cls) {

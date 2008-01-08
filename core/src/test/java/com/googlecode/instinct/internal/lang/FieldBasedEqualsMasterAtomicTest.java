@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.internal.lang;
 
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.test.InstinctTestCase;
 import java.util.Arrays;
 
@@ -76,7 +77,7 @@ public final class FieldBasedEqualsMasterAtomicTest extends InstinctTestCase {
     }
 
     public void testIntArraysEqual() {
-        final int[] intArray = new int[]{1};
+        final int[] intArray = {1};
         final Object o1 = new IntArrayTestObject(intArray);
         final Object o2 = new IntArrayTestObject(intArray);
         checkEquals(true, o1, o2);
@@ -95,8 +96,8 @@ public final class FieldBasedEqualsMasterAtomicTest extends InstinctTestCase {
     }
 
     private void checkEquals(final boolean expected, final Object o1, final Object o2) {
-        assertEquals(expected, master.equals(o1, o2));
-        assertEquals(expected, master.equals(o2, o1));
+        expect.that(master.equals(o1, o2)).isEqualTo(expected);
+        expect.that(master.equals(o2, o1)).isEqualTo(expected);
     }
 
     private static class TestObject {
@@ -133,7 +134,7 @@ public final class FieldBasedEqualsMasterAtomicTest extends InstinctTestCase {
         }
     }
 
-    private static  class ObjectArrayTestObject {
+    private static class ObjectArrayTestObject {
         private Object[] buffer;
 
         public ObjectArrayTestObject(final Object[] buffer) {

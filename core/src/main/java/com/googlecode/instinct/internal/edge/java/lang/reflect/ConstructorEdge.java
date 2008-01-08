@@ -19,5 +19,5 @@ package com.googlecode.instinct.internal.edge.java.lang.reflect;
 import java.lang.reflect.Constructor;
 
 public interface ConstructorEdge {
-    <T> T newInstance(Constructor<T> constructor, Object[] parameters);
+    <T> T newInstance(Constructor<T> constructor, Object... parameters);
 }

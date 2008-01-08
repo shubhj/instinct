@@ -4,15 +4,15 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.InstanceProvider;
 
 public final class ConstructorEmptyStringCheckerImpl implements ConstructorEmptyStringChecker {
-    private final ParameterCheckerTestUtil parameterUtil;
+    private final ParameterTraitChecker parameterTraitChecker;
 
     public ConstructorEmptyStringCheckerImpl(final InstanceProvider instanceProvider) {
         checkNotNull(instanceProvider);
-        parameterUtil = new ParameterCheckerTestUtilImpl(instanceProvider);
+        parameterTraitChecker = new ParameterTraitCheckerImpl(instanceProvider);
     }
 
     public <T> void checkPublicConstructorsRejectEmptyString(final Class<T> classToCheck) {
         checkNotNull(classToCheck);
-        parameterUtil.checkConstructorsRejectEmptyString(classToCheck);
+        parameterTraitChecker.checkConstructorsRejectEmptyString(classToCheck);
     }
 }

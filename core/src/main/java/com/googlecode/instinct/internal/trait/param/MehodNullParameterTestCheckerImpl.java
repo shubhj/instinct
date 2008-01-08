@@ -20,15 +20,15 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.InstanceProvider;
 
 public final class MehodNullParameterTestCheckerImpl implements MehodNullParameterTestChecker {
-    private final ParameterCheckerTestUtil parameterUtil;
+    private final ParameterTraitChecker parameterTraitChecker;
 
     public MehodNullParameterTestCheckerImpl(final InstanceProvider instanceProvider) {
         checkNotNull(instanceProvider);
-        parameterUtil = new ParameterCheckerTestUtilImpl(instanceProvider);
+        parameterTraitChecker = new ParameterTraitCheckerImpl(instanceProvider);
     }
 
     public void checkPublicMethodsRejectNull(final Object instance) {
         checkNotNull(instance);
-        parameterUtil.checkMethodsRejectsNull(instance);
+        parameterTraitChecker.checkMethodsRejectsNull(instance);
     }
 }

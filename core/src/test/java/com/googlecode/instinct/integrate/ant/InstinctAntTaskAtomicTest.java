@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.integrate.ant;
 
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import org.apache.tools.ant.Task;
@@ -35,8 +36,8 @@ public final class InstinctAntTaskAtomicTest extends InstinctTestCase {
     }
 
     public void testContainsASinngleNoArgumentConstructor() {
-        assertEquals(1, InstinctAntTask.class.getConstructors().length);
-        assertEquals(0, InstinctAntTask.class.getConstructors()[0].getParameterTypes().length);
+        expect.that(InstinctAntTask.class.getConstructors()).isOfSize(1);
+        expect.that(InstinctAntTask.class.getConstructors()[0].getParameterTypes()).isOfSize(0);
     }
 
     public void testSetFailureProperty() {

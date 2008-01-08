@@ -22,8 +22,8 @@ import com.googlecode.instinct.internal.edge.java.lang.reflect.ConstructorEdgeIm
 import com.googlecode.instinct.internal.edge.java.lang.reflect.MethodEdgeImpl;
 import com.googlecode.instinct.internal.expect.state.matcher.AssertException;
 import com.googlecode.instinct.internal.expect.state.matcher.AssertExceptionImpl;
-import com.googlecode.instinct.internal.trait.modifier.ModifierTestUtil;
-import com.googlecode.instinct.internal.trait.modifier.ModifierTestUtilImpl;
+import com.googlecode.instinct.internal.trait.modifier.ModifierUtil;
+import com.googlecode.instinct.internal.trait.modifier.ModifierUtilImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.InstanceProvider;
 import java.lang.reflect.Constructor;
@@ -32,13 +32,13 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class ParameterCheckerTestUtilImpl implements ParameterCheckerTestUtil {
+public final class ParameterTraitCheckerImpl implements ParameterTraitChecker {
     private final ConstructorEdge edgeConstructor = new ConstructorEdgeImpl();
     private final AssertException assertException = new AssertExceptionImpl();
-    private final ModifierTestUtil modifierUtil = new ModifierTestUtilImpl();
+    private final ModifierUtil modifierUtil = new ModifierUtilImpl();
     private final InstanceProvider instanceProvider;
 
-    public ParameterCheckerTestUtilImpl(final InstanceProvider instanceProvider) {
+    public ParameterTraitCheckerImpl(final InstanceProvider instanceProvider) {
         checkNotNull(instanceProvider);
         this.instanceProvider = instanceProvider;
     }

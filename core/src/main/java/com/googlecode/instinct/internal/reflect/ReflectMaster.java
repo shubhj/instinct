@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.lang;
+package com.googlecode.instinct.internal.reflect;
 
-public interface ReflectFieldMaster {
-    FieldValueSpec[] getInstanceFields(Object ref);
+public interface ReflectMaster extends ReflectObjectMaster, ReflectMethodMaster, ReflectFieldMaster {
 }

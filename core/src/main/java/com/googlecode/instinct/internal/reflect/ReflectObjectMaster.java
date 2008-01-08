@@ -14,28 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.trait.modifier;
+package com.googlecode.instinct.internal.reflect;
 
-import java.lang.reflect.Member;
+import java.lang.reflect.Constructor;
 
-public interface ModifierTestChecker {
-    void checkPublic(Member member);
-
-    void checkPrivate(Member member);
-
-    void checkFinal(Member member);
-
-    void checkSynchronized(Member member);
-
-    void checkStatic(Member member);
-
-    void checkInstance(Member member);
-
-    void checkPrivateFinalInstance(Member member);
-
-    <T> void checkPublic(Class<T> cls);
-
-    <T> void checkFinal(Class<T> cls);
-
-    <T> void checkConcrete(Class<T> cls);
+public interface ReflectObjectMaster {
+    <T> Constructor<T> getConstructor(Class<T> cls);
 }

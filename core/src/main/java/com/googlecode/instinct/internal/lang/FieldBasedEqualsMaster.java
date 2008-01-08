@@ -16,6 +16,9 @@
 
 package com.googlecode.instinct.internal.lang;
 
+import com.googlecode.instinct.internal.reflect.ReflectMaster;
+import com.googlecode.instinct.internal.reflect.ReflectMasterImpl;
+
 public final class FieldBasedEqualsMaster implements EqualsMaster {
     private final ReflectMaster master = new ReflectMasterImpl();
 

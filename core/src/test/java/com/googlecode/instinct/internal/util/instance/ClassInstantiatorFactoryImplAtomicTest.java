@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.internal.util.instance;
 
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 
@@ -26,7 +27,7 @@ public final class ClassInstantiatorFactoryImplAtomicTest extends InstinctTestCa
 
     public void testCreate() {
         final ClassInstantiator instantiator = new ClassInstantiatorFactoryImpl().create();
-        assertNotNull(instantiator);
-        assertEquals(ClassInstantiatorImpl.class, instantiator.getClass());
+        expect.that(instantiator).isNotNull();
+        expect.that(instantiator.getClass()).isTypeCompatibleWith(ClassInstantiatorImpl.class);
     }
 }

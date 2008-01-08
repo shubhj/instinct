@@ -119,7 +119,7 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
                 will(returnValue(declaringClass));
             }
         });
-        assertEquals(declaringClass, specificationMethod.getContextClass());
+        expect.that(specificationMethod.getContextClass()).isTypeCompatibleWith(declaringClass);
     }
 
     public void testReturnsNameFromUnderlyingLifecycleMethod() {

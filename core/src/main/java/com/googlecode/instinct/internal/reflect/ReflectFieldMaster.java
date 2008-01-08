@@ -14,8 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.lang;
+package com.googlecode.instinct.internal.reflect;
 
-public interface ConstructorInvoker {
-    <T> Object invokeNullaryConstructor(Class<T> cls);
+import com.googlecode.instinct.internal.lang.FieldValueSpec;
+
+public interface ReflectFieldMaster {
+    FieldValueSpec[] getInstanceFields(Object ref);
 }

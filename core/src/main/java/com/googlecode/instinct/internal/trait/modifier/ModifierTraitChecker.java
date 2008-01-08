@@ -14,22 +14,30 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.lang;
+package com.googlecode.instinct.internal.trait.modifier;
 
-public final class MockToStringMaster implements ToStringMaster {
-    private String result;
-    private Object ref;
+import java.lang.reflect.Member;
 
-    public void prepare(String result) {
-        this.result = result;
-    }
+public interface ModifierTraitChecker {
+    void checkPublic(Member member);
 
-    public String getString(Object ref) {
-        this.ref = ref;
-        return result;
-    }
+    void checkPrivate(Member member);
 
-    public Object getRef() {
-        return ref;
-    }
+    void checkFinal(Member member);
+
+    void checkSynchronized(Member member);
+
+    void checkStatic(Member member);
+
+    void checkInstance(Member member);
+
+    void checkPrivateFinalInstance(Member member);
+
+    <T> void checkPublic(Class<T> cls);
+
+    <T> void checkFinal(Class<T> cls);
+
+    <T> void checkAbstract(Class<T> cls);
+
+    <T> void checkConcrete(Class<T> cls);
 }

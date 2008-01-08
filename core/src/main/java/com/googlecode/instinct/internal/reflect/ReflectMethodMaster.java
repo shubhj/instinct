@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.lang;
+package com.googlecode.instinct.internal.reflect;
 
+import com.googlecode.instinct.internal.lang.MethodSpec;
 import java.lang.reflect.Method;
 
 public interface ReflectMethodMaster {

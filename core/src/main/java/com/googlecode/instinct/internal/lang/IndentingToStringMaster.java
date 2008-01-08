@@ -16,13 +16,15 @@
 
 package com.googlecode.instinct.internal.lang;
 
+import com.googlecode.instinct.internal.reflect.ReflectFieldMaster;
+import com.googlecode.instinct.internal.reflect.ReflectMasterImpl;
 import java.lang.reflect.Array;
 
 public final class IndentingToStringMaster implements ToStringMaster {
+    private static final ReflectFieldMaster REFLECT_MASTER = new ReflectMasterImpl();
     private static final String COMMA = ",";
     private static final String LF = System.getProperty("line.separator");
     private static final String INDENT = "    ";
-    private final ReflectMaster reflect = new ReflectMasterImpl();
 
     public String getString(final Object ref) {
         return ref.getClass().getSimpleName() + formatFields(formatFields(ref));
@@ -47,7 +49,7 @@ public final class IndentingToStringMaster implements ToStringMaster {
     }
 
     private String[] formatFields(final Object ref) {
-        final FieldValueSpec[] fields = reflect.getInstanceFields(ref);
+        final FieldValueSpec[] fields = REFLECT_MASTER.getInstanceFields(ref);
         final String[] result = new String[fields.length];
         for (int i = 0; i < result.length; i++) {
             result[i] = formatField(fields[i]);

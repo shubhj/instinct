@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.internal.util;
 
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import java.io.File;
@@ -39,6 +40,6 @@ public final class JavaClassNameImplAtomicTest extends InstinctTestCase {
     private void checkGetFullyQualifiedClassName(final String classesRootPath, final String classFilePath,
             final String expectedFullyQualifiedClassName) {
         final JavaClassName className = new JavaClassNameImpl(new File(classesRootPath), new File(classFilePath));
-        assertEquals(expectedFullyQualifiedClassName, className.getFullyQualifiedName());
+        expect.that(className.getFullyQualifiedName()).isEqualTo(expectedFullyQualifiedClassName);
     }
 }

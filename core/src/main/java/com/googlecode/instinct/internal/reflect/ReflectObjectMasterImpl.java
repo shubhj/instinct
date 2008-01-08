@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.lang;
+package com.googlecode.instinct.internal.reflect;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.lang.reflect.Constructor;

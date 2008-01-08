@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.lang;
+package com.googlecode.instinct.internal.reflect;
 
 import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.FieldEdgeImpl;
+import com.googlecode.instinct.internal.lang.FieldValueSpec;
+import com.googlecode.instinct.internal.lang.FieldValueSpecImpl;
 import java.lang.reflect.Field;
 import static java.lang.reflect.Modifier.isStatic;
 import java.util.ArrayList;

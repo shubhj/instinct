@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.internal.locate.method;
 
+import com.googlecode.instinct.expect.Expect;
 import com.googlecode.instinct.internal.locate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.test.InstinctTestCase;
@@ -32,6 +33,6 @@ public final class AnnotatedMethodLocatorSlowTest extends InstinctTestCase {
 
     public void testFindsCorrectNumberOfSpecificationsWhenGivenSpecsWithDifferentAccessModifiers() {
         final Collection<Method> methods = locator.locate(ContextWithSpecsWithDifferentAccessModifiers.class, Specification.class);
-        assertEquals(5, methods.size());
+        Expect.expect.that(methods).isOfSize(5);
     }
 }

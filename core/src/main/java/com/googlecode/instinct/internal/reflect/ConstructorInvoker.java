@@ -14,14 +14,8 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.trait.param;
+package com.googlecode.instinct.internal.reflect;
 
-public interface ParameterCheckerTestUtil {
-    <T> void checkConstructorsRejectsNull(Class<T> classToCheck);
-
-    <T> void checkConstructorsRejectEmptyString(Class<T> classToCheck);
-
-    void checkMethodsRejectsNull(Object instance);
-
-    void checkMethodsRejectEmptyString(Object instance);
+public interface ConstructorInvoker {
+    <T> Object invokeNullaryConstructor(Class<T> cls);
 }

@@ -77,7 +77,8 @@
                     <format type="html"/>
                     <testsources dir="${test.src.dir}" includes="**/*"/>
                     <testsources dir="${spec.src.dir}" includes="**/*"/>
-                    <testresults dir="${spec.results.dir}" includes="TEST-*.xml"/>
+                    <!-- Note. This line will caue Clover to fail, see bug: http://jira.atlassian.com/browse/CLOV-130 -->
+                    <!--<testresults dir="${spec.results.dir}" includes="TEST-*.xml"/>-->
                 </current>
             </clover-report>
         </sequential>
