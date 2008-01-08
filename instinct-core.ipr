@@ -5,7 +5,7 @@
     <buildFile url="file://$PROJECT_DIR$/core/build.xml">
       <additionalClassPath>
         <entry path="file://$PROJECT_DIR$/core/lib/clover/clover-2.0.3.jar" />
-        <entry path="file://$PROJECT_DIR$/core/lib/junit/junit-4.4.jar" />
+        <entry path="file://$PROJECT_DIR$/core/lib/junit/junit-dep-4.4.jar" />
       </additionalClassPath>
       <antReference bundledAnt="true" />
       <customJdkName value="" />
@@ -525,6 +525,10 @@
   </component>
   <component name="TeamCityRootDirectoryHolder">
     <option name="myRelativeRootDirectory" />
+  </component>
+  <component name="ToggleTest">
+    <toggle from="*" to="*UnitTest" />
+    <toggle from="*" to="*AtomicTest" />
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="svn" />

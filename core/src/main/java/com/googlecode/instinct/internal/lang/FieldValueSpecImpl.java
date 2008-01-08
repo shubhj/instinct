@@ -16,14 +16,16 @@
 
 package com.googlecode.instinct.internal.lang;
 
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.lang.reflect.Array;
 
 public final class FieldValueSpecImpl implements FieldValueSpec {
     private final String name;
     private final Object value;
 
-    // Note. We cannot reject nulls here as fields may be null.
+    // Note. We cannot reject null values here as fields may be null.
     public FieldValueSpecImpl(final String name, final Object value) {
+        checkNotNull(name);
         this.name = name;
         this.value = value;
     }

@@ -19,10 +19,15 @@ package com.googlecode.instinct.internal.lang;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 
 public final class ConstructorInvokerImplAtomicTest extends InstinctTestCase {
     @Subject(implementation = ConstructorInvokerImpl.class) ConstructorInvoker invoker;
+
+    public void testConformsToClassTraits() {
+        checkClass(ConstructorInvokerImpl.class, ConstructorInvoker.class);
+    }
 
     public void testWillNotInvokeTheConstructorOfAnAbstractClass() {
         final String message = "Cannot instantiate the constructor of an abstract class: " + AnAbstractClass.class.getName();
