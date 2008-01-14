@@ -17,7 +17,7 @@
 package com.googlecode.instinct.integrate.junit4;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
@@ -38,7 +38,7 @@ public final class InstinctRunnerAtomicTest extends InstinctTestCase {
     @Subject(auto = false) private Runner runner;
     @Mock private SpecificationRunner specificationRunner;
     @Mock private ObjectFactory objectFactory;
-    @Stub(auto = false) private Collection<SpecificationMethod> specificationMethods;
+    @Stub(auto = false) private Collection<OldDodgySpecificationMethod> specificationMethods;
     @Dummy RunNotifier runNotifier;
 
     @Override

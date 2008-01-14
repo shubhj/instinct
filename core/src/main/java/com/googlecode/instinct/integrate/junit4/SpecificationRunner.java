@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
-import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
 import java.util.Collection;
 
 public interface SpecificationRunner {
-    void run(Collection<SpecificationMethod> specificationMethods);
+    void run(Collection<OldDodgySpecificationMethod> specificationMethods);
 }

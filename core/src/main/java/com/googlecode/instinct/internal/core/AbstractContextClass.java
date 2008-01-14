@@ -66,7 +66,7 @@ public final class AbstractContextClass implements ContextClass {
         return emptyList();
     }
 
-    public Collection<SpecificationMethod> buildSpecificationMethods() {
+    public Collection<OldDodgySpecificationMethod> buildSpecificationMethods() {
         return emptyList();
     }
 

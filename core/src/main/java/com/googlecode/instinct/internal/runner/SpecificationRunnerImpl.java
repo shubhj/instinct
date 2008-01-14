@@ -19,7 +19,7 @@ import com.googlecode.instinct.actor.ActorAutoWirer;
 import com.googlecode.instinct.actor.ActorAutoWirerImpl;
 import com.googlecode.instinct.expect.behaviour.Mocker;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
-import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
 import com.googlecode.instinct.internal.reflect.ConstructorInvoker;
 import com.googlecode.instinct.internal.reflect.ConstructorInvokerImpl;
 import static com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus.SPECIFICATION_SUCCESS;
@@ -57,7 +57,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         specificationListeners.add(specificationListener);
     }
 
-    public SpecificationResult run(final SpecificationMethod specificationMethod) {
+    public SpecificationResult run(final OldDodgySpecificationMethod specificationMethod) {
         checkNotNull(specificationMethod);
         notifyListenersOfPreSpecification(specificationMethod);
         final SpecificationResult specificationResult = doRun(specificationMethod);
@@ -66,7 +66,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     }
 
     @Suggest({"Make a clock wrapper that looks like org.jbehave.core.util.Timer."})
-    private SpecificationResult doRun(final SpecificationMethod specificationMethod) {
+    private SpecificationResult doRun(final OldDodgySpecificationMethod specificationMethod) {
         final long startTime = clock.getCurrentTime();
         if (specificationMethod.isPending()) {
             return createSpecResult(specificationMethod, new SpecificationRunPendingStatus(), startTime);
@@ -76,7 +76,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     }
 
     @SuppressWarnings({"CatchGenericClass"})
-    private SpecificationResult doNonPendingRun(final SpecificationMethod specificationMethod, final long startTime) {
+    private SpecificationResult doNonPendingRun(final OldDodgySpecificationMethod specificationMethod, final long startTime) {
         final Class<? extends Throwable> expectedException = specificationMethod.getExpectedException();
         try {
             // expose the context class, rather than getting the method
@@ -103,8 +103,8 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     }
 
     @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
-    private <T extends Throwable> SpecificationResult processExpectedFailure(final SpecificationMethod specificationMethod, final long startTime,
-            final Class<T> expectedExceptionClass, final Throwable thrownException) {
+    private <T extends Throwable> SpecificationResult processExpectedFailure(final OldDodgySpecificationMethod specificationMethod,
+            final long startTime, final Class<T> expectedExceptionClass, final Throwable thrownException) {
         if (thrownException.getClass().equals(expectedExceptionClass)) {
             final String expectedMessage = specificationMethod.getExpectedExceptionMessage();
             if (expectedMessage.equals(Specification.NO_MESSAGE)) {
@@ -140,14 +140,14 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         return throwable;
     }
 
-    private SpecificationResult createSpecResult(final SpecificationMethod specificationMethod, final SpecificationRunStatus runStatus,
+    private SpecificationResult createSpecResult(final OldDodgySpecificationMethod specificationMethod, final SpecificationRunStatus runStatus,
             final long startTime) {
         final long executionTime = clock.getElapsedTime(startTime);
         return new SpecificationResultImpl(specificationMethod.getName(), runStatus, executionTime);
     }
 
     @Suggest({"How do we expose this lifecycle?"})
-    private void runSpecificationLifecycle(final Object contextInstance, final SpecificationMethod specificationMethod) {
+    private void runSpecificationLifecycle(final Object contextInstance, final OldDodgySpecificationMethod specificationMethod) {
         Mocker.reset();
         actorAutoWirer.autoWireFields(contextInstance);
         try {
@@ -169,13 +169,14 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         specMethodInvoker.invokeMethod(contextInstance, specificationMethod.getMethod());
     }
 
-    private void notifyListenersOfPreSpecification(final SpecificationMethod specificationMethod) {
+    private void notifyListenersOfPreSpecification(final OldDodgySpecificationMethod specificationMethod) {
         for (final SpecificationListener specificationListener : specificationListeners) {
             specificationListener.preSpecificationMethod(specificationMethod);
         }
     }
 
-    private void notifyListenersOfPostSpecification(final SpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
+    private void notifyListenersOfPostSpecification(final OldDodgySpecificationMethod specificationMethod,
+            final SpecificationResult specificationResult) {
         for (final SpecificationListener specificationListener : specificationListeners) {
             specificationListener.postSpecificationMethod(specificationMethod, specificationResult);
         }

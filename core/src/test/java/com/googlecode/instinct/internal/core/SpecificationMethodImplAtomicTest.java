@@ -40,7 +40,7 @@ import org.jmock.Expectations;
 @SuppressWarnings({"unchecked"})
 @Suggest({"Todo:", "Add a run method, pass a spec runner as a dependency, pass in other methods required for runners."})
 public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
-    @Subject(auto = false) private SpecificationMethod specificationMethod;
+    @Subject(auto = false) private OldDodgySpecificationMethod specificationMethod;
     @Mock private SpecificationRunner specificationRunner;
     @Mock private LifecycleMethod specMethod;
     @Mock private SpecificationResult specificationResult;
@@ -69,11 +69,11 @@ public final class SpecificationMethodImplAtomicTest extends InstinctTestCase {
     @Override
     public void setUpSubject() {
         final Object[] constructorArgs = {specMethod, beforeSpecMethods, afterSpecMethods};
-        specificationMethod = createSubjectWithConstructorArgs(SpecificationMethodImpl.class, constructorArgs, specificationRunner);
+        specificationMethod = createSubjectWithConstructorArgs(OldDodgySpecificationMethodImpl.class, constructorArgs, specificationRunner);
     }
 
     public void testConformsToClassTraits() {
-        checkClass(SpecificationMethodImpl.class, SpecificationMethod.class);
+        checkClass(OldDodgySpecificationMethodImpl.class, OldDodgySpecificationMethod.class);
     }
 
     public void testPassesSpecificationListenersToSpecificationRunner() {

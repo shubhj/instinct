@@ -17,8 +17,8 @@
 package com.googlecode.instinct.runner;
 
 import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
 import com.googlecode.instinct.internal.core.RunnableItem;
-import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.runner.CommandLineUsage;
 import com.googlecode.instinct.internal.runner.CommandLineUsageImpl;
 import com.googlecode.instinct.internal.runner.ContextResult;
@@ -68,11 +68,11 @@ public final class CommandLineRunner implements ContextListener, SpecificationLi
         checkNotNull(contextClass, contextResult);
     }
 
-    public void preSpecificationMethod(final SpecificationMethod specificationMethod) {
+    public void preSpecificationMethod(final OldDodgySpecificationMethod specificationMethod) {
         checkNotNull(specificationMethod);
     }
 
-    public void postSpecificationMethod(final SpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
+    public void postSpecificationMethod(final OldDodgySpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
         checkNotNull(specificationMethod, specificationResult);
         final String message = messageBuilder.buildMessage(specificationResult);
         if (message.trim().length() != 0) {

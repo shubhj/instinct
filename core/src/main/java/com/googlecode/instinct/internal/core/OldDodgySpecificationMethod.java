@@ -22,7 +22,7 @@ import java.lang.annotation.Annotation;
 import java.util.Collection;
 
 @Suggest({"Breadcrumb - Add a getDeclaringClass() that returns ContextClass or raw class?"})
-public interface SpecificationMethod extends RunnableItem {
+public interface OldDodgySpecificationMethod extends RunnableItem {
     SpecificationResult run();
 
     @Suggest("Something is misnamed here. This returns a LifecycleMethod and not a SpecMethod, which is this class.")

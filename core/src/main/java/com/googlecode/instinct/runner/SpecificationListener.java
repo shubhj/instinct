@@ -16,11 +16,11 @@
 
 package com.googlecode.instinct.runner;
 
-import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 
 public interface SpecificationListener {
-    void preSpecificationMethod(SpecificationMethod specificationMethod);
+    void preSpecificationMethod(OldDodgySpecificationMethod specificationMethod);
 
-    void postSpecificationMethod(SpecificationMethod specificationMethod, SpecificationResult specificationResult);
+    void postSpecificationMethod(OldDodgySpecificationMethod specificationMethod, SpecificationResult specificationResult);
 }

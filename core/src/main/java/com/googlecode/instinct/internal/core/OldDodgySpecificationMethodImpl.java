@@ -15,12 +15,12 @@
  */
 package com.googlecode.instinct.internal.core;
 
+import com.googlecode.instinct.internal.lang.Primordial;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.internal.lang.Primordial;
 import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.marker.annotate.Specification.NO_REASON;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
@@ -30,13 +30,13 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Collection;
 
-public final class SpecificationMethodImpl extends Primordial implements SpecificationMethod {
+public final class OldDodgySpecificationMethodImpl extends Primordial implements OldDodgySpecificationMethod {
     private SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
     private final LifecycleMethod specificationMethod;
     private Collection<LifecycleMethod> beforeSpecificationMethods;
     private Collection<LifecycleMethod> afterSpecificationMethods;
 
-    public SpecificationMethodImpl(final LifecycleMethod specificationMethod, final Collection<LifecycleMethod> beforeSpecificationMethods,
+    public OldDodgySpecificationMethodImpl(final LifecycleMethod specificationMethod, final Collection<LifecycleMethod> beforeSpecificationMethods,
             final Collection<LifecycleMethod> afterSpecificationMethods) {
         checkNotNull(specificationMethod, beforeSpecificationMethods, afterSpecificationMethods);
         this.specificationMethod = specificationMethod;

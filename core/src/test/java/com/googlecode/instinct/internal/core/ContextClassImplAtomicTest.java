@@ -19,7 +19,6 @@ package com.googlecode.instinct.internal.core;
 import static com.googlecode.instinct.expect.Expect.expect;
 import static com.googlecode.instinct.expect.behaviour.Mocker.sequence;
 import com.googlecode.instinct.internal.locate.method.MarkedMethodLocator;
-import com.googlecode.instinct.test.matcher.SpecificationMatcher;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
@@ -32,6 +31,7 @@ import com.googlecode.instinct.runner.SpecificationListener;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubjectWithConstructorArgs;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import com.googlecode.instinct.test.matcher.SpecificationMatcher;
 import java.lang.reflect.Method;
 import static java.util.Arrays.asList;
 import java.util.Collection;
@@ -155,12 +155,12 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
                 inSequence(sequence);
             }
         });
-        final Collection<SpecificationMethod> methods = contextClass.buildSpecificationMethods();
+        final Collection<OldDodgySpecificationMethod> methods = contextClass.buildSpecificationMethods();
         expect.that(methods).containsItem(specification("toCheckVerification"));
         expect.that(methods.size()).isEqualTo(1);
     }
 
-    private Matcher<SpecificationMethod> specification(final String methodName) {
+    private Matcher<OldDodgySpecificationMethod> specification(final String methodName) {
         return new SpecificationMatcher(methodName);
     }
 

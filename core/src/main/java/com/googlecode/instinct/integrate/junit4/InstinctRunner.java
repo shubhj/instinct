@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
-import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
@@ -31,7 +31,7 @@ public final class InstinctRunner extends Runner {
     private final SpecificationMethodBuilder specificationMethodBuilder = new SpecificationMethodBuilderImpl();
     private final ObjectFactory objectFactory = new ObjectFactoryImpl();
     private final Class<?> classToRun;
-    private Collection<SpecificationMethod> specificationMethods;
+    private Collection<OldDodgySpecificationMethod> specificationMethods;
 
     public InstinctRunner(final Class<?> classToRun) {
         checkNotNull(classToRun);
@@ -42,7 +42,7 @@ public final class InstinctRunner extends Runner {
     public Description getDescription() {
         final Description description = createSuiteDescription(classToRun);
         specificationMethods = specificationMethodBuilder.build(classToRun);
-        for (final SpecificationMethod method : specificationMethods) {
+        for (final OldDodgySpecificationMethod method : specificationMethods) {
             description.addChild(createTestDescription(classToRun, method.getName()));
         }
         return description;

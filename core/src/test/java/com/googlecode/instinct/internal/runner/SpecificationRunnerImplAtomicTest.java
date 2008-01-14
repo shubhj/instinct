@@ -18,7 +18,7 @@ package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
-import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Stub;
@@ -32,7 +32,7 @@ import org.jmock.Expectations;
 @SuppressWarnings({"UnusedDeclaration"})
 public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     @Subject(auto = false) private SpecificationRunner specificationRunner;
-    @Mock private SpecificationMethod specificationMethod;
+    @Mock private OldDodgySpecificationMethod specificationMethod;
     @Mock private LifecycleMethod underlyingSpecMethod;
     @Mock private MethodInvokerFactory methodInvokerFactory;
     @Mock private MethodInvoker invoker;

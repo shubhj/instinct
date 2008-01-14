@@ -20,7 +20,7 @@ import static com.googlecode.instinct.expect.Expect.expect;
 import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
-import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.JUnit4SuiteWithContextAnnotation;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
@@ -38,8 +38,8 @@ public final class SpecificationMethodBuilderImplAtomicTest extends InstinctTest
     private Collection<Class<?>> contextClasses;
     private ObjectFactory objectFactory;
     private ContextClass contextClass;
-    private SpecificationMethod specificationMethod;
-    private Collection<SpecificationMethod> specificationMethods;
+    private OldDodgySpecificationMethod specificationMethod;
+    private Collection<OldDodgySpecificationMethod> specificationMethods;
 
     public void testConformsToClassTraits() {
         checkClass(SpecificationMethodBuilderImpl.class, SpecificationMethodBuilder.class);
@@ -55,8 +55,8 @@ public final class SpecificationMethodBuilderImplAtomicTest extends InstinctTest
         };
         objectFactory = mock(ObjectFactory.class);
         contextClass = mock(ContextClass.class);
-        specificationMethod = mock(SpecificationMethod.class);
-        specificationMethods = new HashSet<SpecificationMethod>() {
+        specificationMethod = mock(OldDodgySpecificationMethod.class);
+        specificationMethods = new HashSet<OldDodgySpecificationMethod>() {
             {
                 add(specificationMethod);
             }
@@ -79,7 +79,7 @@ public final class SpecificationMethodBuilderImplAtomicTest extends InstinctTest
                 will(returnValue(specificationMethods));
             }
         });
-        final Collection<SpecificationMethod> methods = builder.build(JUnit4SuiteWithContextAnnotation.class);
+        final Collection<OldDodgySpecificationMethod> methods = builder.build(JUnit4SuiteWithContextAnnotation.class);
         expect.that(methods).isOfSize(1);
         expect.that(methods).containsItem(specificationMethod);
     }

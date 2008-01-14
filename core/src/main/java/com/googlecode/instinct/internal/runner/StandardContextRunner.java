@@ -18,9 +18,9 @@ package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
+import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
+import com.googlecode.instinct.internal.core.OldDodgySpecificationMethodImpl;
 import com.googlecode.instinct.internal.core.RunnableItem;
-import com.googlecode.instinct.internal.core.SpecificationMethod;
-import com.googlecode.instinct.internal.core.SpecificationMethodImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
@@ -57,21 +57,21 @@ public final class StandardContextRunner implements ContextRunner {
 
     private void runSpecifications(final ContextClass contextClass, final ContextResult contextResult) {
         for (final LifecycleMethod specificationMethod : contextClass.getSpecificationMethods()) {
-            final SpecificationMethod spec = createSpecificationMethod(contextClass, specificationMethod);
+            final OldDodgySpecificationMethod spec = createSpecificationMethod(contextClass, specificationMethod);
             final SpecificationResult specificationResult = runSpecification(spec);
             contextResult.addSpecificationResult(specificationResult);
         }
     }
 
-    private SpecificationResult runSpecification(final SpecificationMethod specificationMethod) {
+    private SpecificationResult runSpecification(final OldDodgySpecificationMethod specificationMethod) {
         addSpecificationListeners(specificationMethod);
         return specificationMethod.run();
     }
 
-    private SpecificationMethod createSpecificationMethod(final ContextClass contextClass, final LifecycleMethod specificationMethod) {
+    private OldDodgySpecificationMethod createSpecificationMethod(final ContextClass contextClass, final LifecycleMethod specificationMethod) {
         final Collection<LifecycleMethod> beforeSpecificationMethods = contextClass.getBeforeSpecificationMethods();
         final Collection<LifecycleMethod> afterSpecificationMethods = contextClass.getAfterSpecificationMethods();
-        return new SpecificationMethodImpl(specificationMethod, beforeSpecificationMethods, afterSpecificationMethods);
+        return new OldDodgySpecificationMethodImpl(specificationMethod, beforeSpecificationMethods, afterSpecificationMethods);
     }
 
     private void addSpecificationListeners(final RunnableItem specificationMethod) {

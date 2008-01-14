@@ -17,7 +17,7 @@
 package com.googlecode.instinct.integrate.junit4;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdge;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
@@ -40,9 +40,9 @@ import org.junit.runner.notification.RunNotifier;
 @SuppressWarnings({"UnusedDeclaration", "unchecked"})
 public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     @Subject(auto = false) private SpecificationRunner specificationRunner;
-    @Mock private Collection<SpecificationMethod> specificationMethods;
+    @Mock private Collection<OldDodgySpecificationMethod> specificationMethods;
     @Mock private DescriptionEdge descriptionEdge;
-    @Mock private SpecificationMethod specificationMethod;
+    @Mock private OldDodgySpecificationMethod specificationMethod;
     @Mock private SpecificationResult specificationResult;
     @Mock private ExceptionFinder exceptionFinder;
     @Mock private Failure failure;
@@ -57,7 +57,7 @@ public final class SpecificationRunnerImplAtomicTest extends InstinctTestCase {
     @SuppressWarnings({"serial", "ClassExtendsConcreteCollection", "CloneableClassWithoutClone"})
     @Override
     public void setUpTestDoubles() {
-        specificationMethods = new HashSet<SpecificationMethod>() {
+        specificationMethods = new HashSet<OldDodgySpecificationMethod>() {
             {
                 add(specificationMethod);
             }

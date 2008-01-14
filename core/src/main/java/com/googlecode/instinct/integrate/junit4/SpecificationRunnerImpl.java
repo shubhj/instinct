@@ -15,7 +15,7 @@
  */
 package com.googlecode.instinct.integrate.junit4;
 
-import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdge;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdgeImpl;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
@@ -43,14 +43,14 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         this.notifier = notifier;
     }
 
-    public void run(final Collection<SpecificationMethod> specificationMethods) {
+    public void run(final Collection<OldDodgySpecificationMethod> specificationMethods) {
         checkNotNull(specificationMethods);
-        for (final SpecificationMethod specificationMethod : specificationMethods) {
+        for (final OldDodgySpecificationMethod specificationMethod : specificationMethods) {
             runSpecification(specificationMethod);
         }
     }
 
-    private void runSpecification(final SpecificationMethod specificationMethod) {
+    private void runSpecification(final OldDodgySpecificationMethod specificationMethod) {
         final Description description = createDescription(specificationMethod);
         notifier.fireTestStarted(description);
         final SpecificationResult specificationResult = specificationMethod.run();
@@ -65,13 +65,13 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         }
     }
 
-    private Description createDescription(final SpecificationMethod specificationMethod) {
+    private Description createDescription(final OldDodgySpecificationMethod specificationMethod) {
         final String name = createSpecificationName(specificationMethod);
         return descriptionEdge.createTestDescription(specificationMethod.getContextClass(), name);
     }
 
     @Suggest("Push this into the pending specification stuff.")
-    private String createSpecificationName(final SpecificationMethod specificationMethod) {
+    private String createSpecificationName(final OldDodgySpecificationMethod specificationMethod) {
         if (specificationMethod.isPending()) {
             return createPendingName(specificationMethod);
         } else {
@@ -79,13 +79,13 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         }
     }
 
-    private String createPendingName(final SpecificationMethod specificationMethod) {
+    private String createPendingName(final OldDodgySpecificationMethod specificationMethod) {
         final String name = specificationMethod.getName() + " [PENDING";
         final String reason = getPendingReason(specificationMethod);
         return name + reason + "]";
     }
 
-    private String getPendingReason(final SpecificationMethod specificationMethod) {
+    private String getPendingReason(final OldDodgySpecificationMethod specificationMethod) {
         final String reason = specificationMethod.getPendingReason();
         return reason.equals(NO_REASON) ? "" : "  - " + reason;
     }

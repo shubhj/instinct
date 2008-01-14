@@ -18,8 +18,8 @@ package com.googlecode.instinct.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
 import com.googlecode.instinct.internal.core.RunnableItem;
-import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.locate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
@@ -155,7 +155,7 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
     }
 
     private void expectRunnableItemIsASpecificationMethod(final RunnableItem runnableItem, final String specificationMethod) {
-        expect.that(runnableItem.getClass()).isTypeCompatibleWith(SpecificationMethod.class);
-        expect.that(((SpecificationMethod) runnableItem).getName()).isEqualTo(specificationMethod);
+        expect.that(runnableItem.getClass()).isTypeCompatibleWith(OldDodgySpecificationMethod.class);
+        expect.that(((OldDodgySpecificationMethod) runnableItem).getName()).isEqualTo(specificationMethod);
     }
 }

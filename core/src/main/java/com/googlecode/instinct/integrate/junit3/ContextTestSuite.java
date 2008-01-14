@@ -18,7 +18,7 @@ package com.googlecode.instinct.integrate.junit3;
 
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
-import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
@@ -44,18 +44,18 @@ public final class ContextTestSuite extends TestSuite implements SpecificationLi
         return contextClass.getName();
     }
 
-    public void preSpecificationMethod(final SpecificationMethod specificationMethod) {
+    public void preSpecificationMethod(final OldDodgySpecificationMethod specificationMethod) {
         checkNotNull(specificationMethod);
         addTest(new SpecificationTestCase(specificationMethod));
     }
 
-    public void postSpecificationMethod(final SpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
+    public void postSpecificationMethod(final OldDodgySpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
         checkNotNull(specificationMethod, specificationResult);
         // ignored
     }
 
-    private void addSpecificationsToSuite(final Collection<SpecificationMethod> specificationMethods) {
-        for (final SpecificationMethod specificationMethod : specificationMethods) {
+    private void addSpecificationsToSuite(final Collection<OldDodgySpecificationMethod> specificationMethods) {
+        for (final OldDodgySpecificationMethod specificationMethod : specificationMethods) {
             addTest(new SpecificationTestCase(specificationMethod));
         }
     }

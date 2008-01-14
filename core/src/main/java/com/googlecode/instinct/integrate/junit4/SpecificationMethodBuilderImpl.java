@@ -18,7 +18,7 @@ package com.googlecode.instinct.integrate.junit4;
 
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
-import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
 import com.googlecode.instinct.internal.util.ParamChecker;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
@@ -29,9 +29,9 @@ public final class SpecificationMethodBuilderImpl implements SpecificationMethod
     private ContextClassesFinder finder = new ContextClassesFinderImpl();
     private ObjectFactory objectFactory = new ObjectFactoryImpl();
 
-    public <T> Collection<SpecificationMethod> build(final Class<T> cls) {
+    public <T> Collection<OldDodgySpecificationMethod> build(final Class<T> cls) {
         ParamChecker.checkNotNull(cls);
-        final Collection<SpecificationMethod> specificationMethods = new HashSet<SpecificationMethod>();
+        final Collection<OldDodgySpecificationMethod> specificationMethods = new HashSet<OldDodgySpecificationMethod>();
         final Collection<Class<?>> classes = finder.getContextClasses(cls);
         for (final Class<?> classWithContext : classes) {
             final ContextClass contextClass = objectFactory.create(ContextClassImpl.class, classWithContext);
