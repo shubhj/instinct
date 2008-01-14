@@ -18,10 +18,8 @@ package com.googlecode.instinct.test.checker;
 
 import com.googlecode.instinct.internal.trait.cls.ClassTraitChecker;
 import com.googlecode.instinct.internal.trait.cls.ClassTraitCheckerImpl;
-import com.googlecode.instinct.internal.trait.param.ConstructorNullParameterTestChecker;
-import com.googlecode.instinct.internal.trait.param.ConstructorNullParameterTestCheckerImpl;
-import com.googlecode.instinct.internal.trait.param.MehodNullParameterTestChecker;
-import com.googlecode.instinct.internal.trait.param.MehodNullParameterTestCheckerImpl;
+import com.googlecode.instinct.internal.trait.param.ParameterTraitChecker;
+import com.googlecode.instinct.internal.trait.param.ParameterTraitCheckerImpl;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.instance.GenericInstanceProvider;
@@ -33,9 +31,7 @@ public final class ClassChecker {
     private static final ClassTraitChecker CLASS_CHECKER = new ClassTraitCheckerImpl();
     @Fix("This returns mocks - which aint much use when testing a specific implementation see StateExpectationsImplAtomicTest.")
     private static final InstanceProvider INSTANCE_PROVIDER = new GenericInstanceProvider();
-    private static final ConstructorNullParameterTestChecker CONSTRUCTOR_NULL_CHECKER =
-            new ConstructorNullParameterTestCheckerImpl(INSTANCE_PROVIDER);
-    private static final MehodNullParameterTestChecker METHOD_NULL_CHECKER = new MehodNullParameterTestCheckerImpl(INSTANCE_PROVIDER);
+    private static final ParameterTraitChecker PARAMETER_TRAIT_CHECKER = new ParameterTraitCheckerImpl(INSTANCE_PROVIDER);
 
     private ClassChecker() {
         throw new UnsupportedOperationException();
@@ -68,11 +64,11 @@ public final class ClassChecker {
     }
 
     public static <T> void checkPublicConstructorsRejectNull(final Class<T> classToCheck) {
-        CONSTRUCTOR_NULL_CHECKER.checkPublicConstructorsRejectNull(classToCheck);
+        PARAMETER_TRAIT_CHECKER.checkPublicConstructorsRejectsNull(classToCheck);
     }
 
     public static void checkPublicMethodsRejectNull(final Object instance) {
-        METHOD_NULL_CHECKER.checkPublicMethodsRejectNull(instance);
+        PARAMETER_TRAIT_CHECKER.checkPublicMethodsRejectsNull(instance);
     }
 
     private static <U, T extends U> void checkClassProperties(final Class<T> implementationClass, final Class<U> parentType) {

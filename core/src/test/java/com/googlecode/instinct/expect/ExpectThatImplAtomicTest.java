@@ -18,10 +18,12 @@ package com.googlecode.instinct.expect;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.expect.behaviour.BehaviourExpectations;
-import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import com.googlecode.instinct.expect.state.StateExpectations;
 import com.googlecode.instinct.expect.state.checker.ObjectChecker;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.marker.annotate.Dummy;
+import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
@@ -29,19 +31,11 @@ import org.jmock.Expectations;
 
 @SuppressWarnings({"unchecked"})
 public final class ExpectThatImplAtomicTest extends InstinctTestCase {
-    private ExpectThat expectThat;
-    private StateExpectations stateExpectations;
-    private BehaviourExpectations behaviourExpectations;
-    private Object object;
-    private ObjectChecker<?> objectChecker;
-
-    @Override
-    public void setUpTestDoubles() {
-        stateExpectations = mock(StateExpectations.class);
-        behaviourExpectations = mock(BehaviourExpectations.class);
-        object = mock(Object.class);
-        objectChecker = mock(ObjectChecker.class);
-    }
+    @Subject(auto = false) private StateExpectations expectThat;
+    @Mock private StateExpectations stateExpectations;
+    @Mock private BehaviourExpectations behaviourExpectations;
+    @Dummy private Object object;
+    @Dummy private Object objectChecker;
 
     @Override
     public void setUpSubject() {

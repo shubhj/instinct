@@ -22,18 +22,15 @@ import java.lang.reflect.Modifier;
 
 public final class ModifierUtilImpl implements ModifierUtil {
     public boolean isPublic(final Member member) {
-        final int modifiers = getModifiers(member);
-        return Modifier.isPublic(modifiers);
+        return Modifier.isPublic(member.getModifiers());
     }
 
     public boolean isProtected(final Member member) {
-        final int modifiers = getModifiers(member);
-        return Modifier.isProtected(modifiers);
+        return Modifier.isProtected(member.getModifiers());
     }
 
     public boolean isPrivate(final Member member) {
-        final int modifiers = getModifiers(member);
-        return Modifier.isPrivate(modifiers);
+        return Modifier.isPrivate(member.getModifiers());
     }
 
     public boolean isPublicInstance(final Member member) {
@@ -42,13 +39,11 @@ public final class ModifierUtilImpl implements ModifierUtil {
     }
 
     public boolean isFinal(final Member member) {
-        final int modifiers = getModifiers(member);
-        return isFinal(modifiers);
+        return Modifier.isFinal(member.getModifiers());
     }
 
     public boolean isStatic(final Member member) {
-        final int modifiers = getModifiers(member);
-        return isStatic(modifiers);
+        return Modifier.isStatic(member.getModifiers());
     }
 
     public boolean isInstance(final Member member) {
@@ -56,23 +51,19 @@ public final class ModifierUtilImpl implements ModifierUtil {
     }
 
     public boolean isSynchronized(final Member member) {
-        final int modifiers = getModifiers(member);
-        return isSynchronized(modifiers);
+        return Modifier.isSynchronized(member.getModifiers());
     }
 
     public <T> boolean isPublic(final Class<T> cls) {
-        final int modifiers = cls.getModifiers();
-        return isPublic(modifiers);
+        return Modifier.isPublic(cls.getModifiers());
     }
 
     public <T> boolean isFinal(final Class<T> cls) {
-        final int modifiers = cls.getModifiers();
-        return isFinal(modifiers);
+        return Modifier.isFinal(cls.getModifiers());
     }
 
     public <T> boolean isAbstract(final Class<T> cls) {
-        final int modifiers = cls.getModifiers();
-        return isAbstract(modifiers);
+        return Modifier.isAbstract(cls.getModifiers());
     }
 
     public <T> boolean isConcrete(final Class<T> cls) {
@@ -80,8 +71,7 @@ public final class ModifierUtilImpl implements ModifierUtil {
     }
 
     public <T> boolean isInterface(final Class<T> cls) {
-        final int modifiers = cls.getModifiers();
-        return isInterface(modifiers);
+        return Modifier.isInterface(cls.getModifiers());
     }
 
     public <T> boolean isSynchronized(final Class<T> cls) {
@@ -92,33 +82,5 @@ public final class ModifierUtilImpl implements ModifierUtil {
             }
         }
         return true;
-    }
-
-    private boolean isPublic(final int modifiers) {
-        return Modifier.isPublic(modifiers);
-    }
-
-    private boolean isFinal(final int modifiers) {
-        return Modifier.isFinal(modifiers);
-    }
-
-    private boolean isStatic(final int modifiers) {
-        return Modifier.isStatic(modifiers);
-    }
-
-    private boolean isAbstract(final int modifiers) {
-        return Modifier.isAbstract(modifiers);
-    }
-
-    private boolean isInterface(final int modifiers) {
-        return Modifier.isInterface(modifiers);
-    }
-
-    private boolean isSynchronized(final int modifiers) {
-        return Modifier.isSynchronized(modifiers);
-    }
-
-    private int getModifiers(final Member member) {
-        return member.getModifiers();
     }
 }

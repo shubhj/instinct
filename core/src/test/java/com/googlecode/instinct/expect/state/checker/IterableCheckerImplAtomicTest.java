@@ -18,23 +18,23 @@ package com.googlecode.instinct.expect.state.checker;
 
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;
-import java.util.Arrays;
+import static java.util.Arrays.asList;
 import java.util.Collection;
 
 public final class IterableCheckerImplAtomicTest extends InstinctTestCase {
     private IterableChecker<String, Iterable<String>> checker;
 
+    @Override
+    public void setUpSubject() {
+        final Collection<String> subjectCollection = asList("one", "two");
+        checker = new IterableCheckerImpl<String, Iterable<String>>(subjectCollection);
+    }
+
     public void testConformsToClassTraits() {
         checkPublic(IterableCheckerImpl.class);
     }
 
-    @Override
-    public void setUpSubject() {
-        final Collection<String> subjectCollection = Arrays.asList("one", "two");
-        checker = new IterableCheckerImpl<String, Iterable<String>>(subjectCollection);
-    }
-
     public void testFindsAllItemsThatAreInSuppliedCollection() {
-        checker.containsItems(Arrays.asList("one","two"));
+        checker.containsItems(asList("one", "two"));
     }
 }

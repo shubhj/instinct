@@ -57,8 +57,7 @@ public class IterableCheckerImpl<E, T extends Iterable<E>> extends ObjectChecker
     }
 
     public final void containsItems(final E... items) {
-        final Matcher<Iterable<E>> iterableMatcher = Matchers.hasItems(items);
-        getAsserter().expectThat(subject, iterableMatcher);
+        getAsserter().expectThat(subject, Matchers.hasItems(items));
     }
 
     @SuppressWarnings({"unchecked"})

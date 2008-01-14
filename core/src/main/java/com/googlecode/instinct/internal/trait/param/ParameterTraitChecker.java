@@ -17,11 +17,11 @@
 package com.googlecode.instinct.internal.trait.param;
 
 public interface ParameterTraitChecker {
-    <T> void checkConstructorsRejectsNull(Class<T> classToCheck);
+    <T> void checkPublicConstructorsRejectsNull(Class<T> classToCheck);
 
-    <T> void checkConstructorsRejectEmptyString(Class<T> classToCheck);
+    <T> void checkPublicConstructorsRejectEmptyString(Class<T> classToCheck);
 
-    void checkMethodsRejectsNull(Object instance);
+    void checkPublicMethodsRejectsNull(Object instance);
 
-    void checkMethodsRejectEmptyString(Object instance);
+    void checkPublicMethodsRejectEmptyString(Object instance);
 }

@@ -44,7 +44,7 @@ public final class ParameterTraitCheckerImpl implements ParameterTraitChecker {
     }
 
     @SuppressWarnings({"unchecked"})
-    public <T> void checkConstructorsRejectsNull(final Class<T> classToCheck) {
+    public <T> void checkPublicConstructorsRejectsNull(final Class<T> classToCheck) {
         checkNotNull(classToCheck);
         final Constructor<T>[] constructors = (Constructor<T>[]) classToCheck.getConstructors();
         for (final Constructor<?> constructor : constructors) {
@@ -53,7 +53,7 @@ public final class ParameterTraitCheckerImpl implements ParameterTraitChecker {
     }
 
     @SuppressWarnings({"unchecked"})
-    public <T> void checkConstructorsRejectEmptyString(final Class<T> classToCheck) {
+    public <T> void checkPublicConstructorsRejectEmptyString(final Class<T> classToCheck) {
         checkNotNull(classToCheck);
         final Constructor<T>[] constructors = (Constructor<T>[]) classToCheck.getConstructors();
         for (final Constructor<T> constructor : constructors) {
@@ -61,7 +61,7 @@ public final class ParameterTraitCheckerImpl implements ParameterTraitChecker {
         }
     }
 
-    public void checkMethodsRejectsNull(final Object instance) {
+    public void checkPublicMethodsRejectsNull(final Object instance) {
         checkNotNull(instance);
         final List<Method> methods = getPublicMethods(instance.getClass());
         for (final Object method : methods) {
@@ -69,7 +69,7 @@ public final class ParameterTraitCheckerImpl implements ParameterTraitChecker {
         }
     }
 
-    public void checkMethodsRejectEmptyString(final Object instance) {
+    public void checkPublicMethodsRejectEmptyString(final Object instance) {
         checkNotNull(instance);
         final List<Method> methods = getPublicMethods(instance.getClass());
         for (final Object method : methods) {
