@@ -35,7 +35,7 @@ public final class ExpectThatImplAtomicTest extends InstinctTestCase {
     @Mock private StateExpectations stateExpectations;
     @Mock private BehaviourExpectations behaviourExpectations;
     @Dummy private Object object;
-    @Dummy private Object objectChecker;
+    @Dummy private ObjectChecker<?> objectChecker;
 
     @Override
     public void setUpSubject() {
