@@ -20,7 +20,7 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationResultImpl;
 import com.googlecode.instinct.internal.runner.SpecificationRunPendingStatus;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import static com.googlecode.instinct.marker.annotate.Specification.NO_REASON;
+import com.googlecode.instinct.marker.annotate.Specification;
 import java.lang.reflect.Method;
 
 public final class PendingSpecificationMethod implements SpecificationMethod {
@@ -32,7 +32,7 @@ public final class PendingSpecificationMethod implements SpecificationMethod {
     }
 
     public String getPendingReason() {
-        return NO_REASON;
+        return method.getAnnotation(Specification.class).reason();
     }
 
     public SpecificationResult run() {

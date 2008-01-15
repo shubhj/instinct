@@ -18,56 +18,31 @@ package com.googlecode.instinct.internal.core;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.internal.runner.SpecificationResult;
-import com.googlecode.instinct.internal.runner.SpecificationRunPendingStatus;
 import static com.googlecode.instinct.internal.util.Reflector.getDeclaredMethod;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
-import static com.googlecode.instinct.marker.annotate.Specification.NO_REASON;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
-import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
-import java.lang.reflect.Method;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
-public final class APendingSpecificationMethodWithoutAReason {
+public final class APendingSpecificationMethodWithAReason {
     @Subject(auto = false) private PendingSpecificationMethod pendingSpecification;
-    @Stub(auto = false) private Method underlyingMethod;
 
     @BeforeSpecification
     public void before() {
-        underlyingMethod = getDeclaredMethod(WithPendingSpecification.class, "aPendingMethod");
-        pendingSpecification = new PendingSpecificationMethod(underlyingMethod);
+        pendingSpecification = new PendingSpecificationMethod(getDeclaredMethod(PendingSpecificationWithReason.class, "aPendingMethod"));
     }
 
     @Specification
-    public void hasANameThatComesFromTheUnderlyingMethod() {
-        expect.that(pendingSpecification.getName()).isEqualTo(underlyingMethod.getName());
-    }
-
-    @Specification
-    public void hasNoPendingReason() {
+    public void pullsThePendingReasonOffTheAnnotation() {
         final String reason = pendingSpecification.getPendingReason();
-        expect.that(reason).isEqualTo(NO_REASON);
-    }
-
-    @Specification
-    public void returnsAPendingRunStatus() {
-        final SpecificationResult result = pendingSpecification.run();
-        expect.that(result.getSpecificationName()).isEqualTo(underlyingMethod.getName());
-        expect.that(result.getStatus()).isAnInstanceOf(SpecificationRunPendingStatus.class);
-    }
-
-    @Specification
-    public void takesNoTimeToRun() {
-        final SpecificationResult result = pendingSpecification.run();
-        expect.that(result.getExecutionTime()).isEqualTo(0L);
+        expect.that(reason).isEqualTo("Haven't done it yet");
     }
 
     @SuppressWarnings({"ALL"})
-    private static final class WithPendingSpecification {
-        @Specification(state = PENDING)
+    private static final class PendingSpecificationWithReason {
+        @Specification(state = PENDING, reason = "Haven't done it yet")
         public void aPendingMethod() {
         }
     }

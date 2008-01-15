@@ -26,7 +26,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 @Fix("This is a very brittle spec. Everytime we add a new Spec this breaks!")
 @Suggest("Could we have a sample directory of some sort that contains a known number of specs?")
 public final class ContextFinderSlowTest extends InstinctTestCase {
-    public static final int EXPECTED_CONTEXTS = 78;
+    public static final int EXPECTED_MINIMUM_NOMBER_OF_CONTEXTS = 70;
     private ContextFinder finder;
 
     @Override
@@ -36,6 +36,6 @@ public final class ContextFinderSlowTest extends InstinctTestCase {
 
     public void testFindsCorrectNumberOfContexts() {
         final JavaClassName[] contexts = finder.getContextNames(ALL_GROUPS);
-        expect.that(contexts).isOfSize(EXPECTED_CONTEXTS);
+        expect.that(contexts.length).isGreaterThan(EXPECTED_MINIMUM_NOMBER_OF_CONTEXTS);
     }
 }
