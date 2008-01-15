@@ -39,6 +39,7 @@ import com.googlecode.instinct.defect.defect3.AFixedDefect3;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithANamingConventionLocator;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithAnAnnotationMethodLocator;
 import com.googlecode.instinct.integrate.junit3.ContextTestSuite;
+import com.googlecode.instinct.internal.core.APendingSpecificationMethodWithoutAReason;
 import com.googlecode.instinct.internal.edge.org.hamcrest.AStringFactoryImplContext;
 import com.googlecode.instinct.internal.locate.field.ANamedFieldLocatorWithFieldsToFind;
 import com.googlecode.instinct.internal.locate.field.ANamedFieldLocatorWithNothingNoFieldsToFind;
@@ -75,6 +76,6 @@ public final class AllSpecificationsSuite {
                 AStubAutoWireDeterminatorWithANamedFieldNotToAutoWire.class, AStubAutoWireDeterminatorWithNoMarkedFields.class,
                 ADummyAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire.class, ADummyAutoWireDeterminatorWithAnAnnotatedFieldNotToAutoWire.class,
                 ADummyAutoWireDeterminatorWithANamedFieldToAutoWire.class, ADummyAutoWireDeterminatorWithANamedFieldNotToAutoWire.class,
-                ADummyAutoWireDeterminatorWithNoMarkedFields.class};
+                ADummyAutoWireDeterminatorWithNoMarkedFields.class, APendingSpecificationMethodWithoutAReason.class};
     }
 }
