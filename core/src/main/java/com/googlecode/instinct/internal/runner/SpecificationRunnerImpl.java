@@ -20,6 +20,7 @@ import com.googlecode.instinct.actor.ActorAutoWirerImpl;
 import com.googlecode.instinct.expect.behaviour.Mocker;
 import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
+import com.googlecode.instinct.internal.core.PendingSpecificationMethod;
 import com.googlecode.instinct.internal.reflect.ConstructorInvoker;
 import com.googlecode.instinct.internal.reflect.ConstructorInvokerImpl;
 import static com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus.SPECIFICATION_SUCCESS;
@@ -69,7 +70,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     private SpecificationResult doRun(final OldDodgySpecificationMethod specificationMethod) {
         final long startTime = clock.getCurrentTime();
         if (specificationMethod.isPending()) {
-            return createSpecResult(specificationMethod, new SpecificationRunPendingStatus(), startTime);
+            return new PendingSpecificationMethod(specificationMethod.getSpecificationMethod().getMethod()).run();
         } else {
             return doNonPendingRun(specificationMethod, startTime);
         }
