@@ -49,7 +49,7 @@
         <include name="${lib.dir}/junit/junit-*.jar"/>
         <include name="${lib.dir}/jmock/jmock-*.jar"/>
         <include name="${lib.dir}/objenesis/objenesis-*.jar"/>
-        <include name="${lib.dir}/ant/ant-1.7*.jar"/>
+        <include name="${lib.dir}/ant/ant-1.*.jar"/>
         <include name="${lib.dir}/hamcrest/hamcrest-*.jar"/>
         <include name="${lib.dir}/clover/clover-*.jar"/>
     </patternset>

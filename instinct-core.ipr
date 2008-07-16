@@ -659,11 +659,13 @@
   <component name="libraryTable">
     <library name="CGLib">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/core/lib/cglib/cglib-nodep-2.1_3.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/cglib/cglib-nodep-2.2.jar!/" />
       </CLASSES>
-      <JAVADOC />
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/core/etc/lib-doc/cglib-docs-2.2.jar!/" />
+      </JAVADOC>
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/core/etc/lib-src/cglib-2.1_3-src.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/etc/lib-src/cglib-src-2.2.jar!/src/proxy" />
       </SOURCES>
     </library>
     <library name="JUnit">
@@ -698,7 +700,9 @@
       </SOURCES>
     </library>
     <library name="Ant">
-      <CLASSES />
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/core/lib/ant/ant-1.7.1.jar!/" />
+      </CLASSES>
       <JAVADOC />
       <SOURCES>
         <root url="jar://$PROJECT_DIR$/core/etc/lib-src/ant-1.7.0-src.zip!/main" />

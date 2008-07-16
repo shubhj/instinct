@@ -42,10 +42,10 @@ set ANT_HOME=%PROJECTDIR%
 goto buildpath
 
 :buildpath
-set LOCALPATH=%LOCALPATH%;%LIBDIR%\ant-1.7.0.jar
-set LOCALPATH=%LOCALPATH%;%LIBDIR%\ant-launcher-1.7.0.jar
-set LOCALPATH=%LOCALPATH%;%LIBDIR%\ant-junit-1.7.0.jar
-set LOCALPATH=%LOCALPATH%;%LIBDIR%\junit-4.3.1.jar
+set LOCALPATH=%LOCALPATH%;%LIBDIR%\ant-1.7.1.jar
+set LOCALPATH=%LOCALPATH%;%LIBDIR%\ant-launcher-1.7.1.jar
+set LOCALPATH=%LOCALPATH%;%LIBDIR%\ant-junit-1.7.1.jar
+set LOCALPATH=%LOCALPATH%;%LIBDIR%\junit-4.4.jar
 
 :testjavahome
 if "%JAVA_HOME%" == "" goto setjavahome
