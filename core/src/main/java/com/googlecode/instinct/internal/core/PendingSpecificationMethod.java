@@ -21,10 +21,11 @@ import com.googlecode.instinct.internal.runner.SpecificationResultImpl;
 import com.googlecode.instinct.internal.runner.SpecificationRunPendingStatus;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.annotate.Specification;
+import static com.googlecode.instinct.marker.annotate.Specification.NO_REASON;
 import java.lang.reflect.Method;
 
 public final class PendingSpecificationMethod implements SpecificationMethod {
-    private Method method;
+    private final Method method;
 
     public PendingSpecificationMethod(final Method method) {
         checkNotNull(method);
@@ -35,11 +36,15 @@ public final class PendingSpecificationMethod implements SpecificationMethod {
         return method.getAnnotation(Specification.class).reason();
     }
 
-    public SpecificationResult run() {
-        return new SpecificationResultImpl(getName(), new SpecificationRunPendingStatus(), 0L);
-    }
-
     public String getName() {
         return method.getName();
+    }
+
+    public SpecificationResult run() {
+        return new SpecificationResultImpl(name(), new SpecificationRunPendingStatus(), 0L);
+    }
+
+    private String name() {
+        return method.getName() + " [PENDING" + (getPendingReason().equals(NO_REASON) ? "" : " - " + getPendingReason()) + "]";
     }
 }

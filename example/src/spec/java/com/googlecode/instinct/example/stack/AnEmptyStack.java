@@ -35,7 +35,7 @@ public final class AnEmptyStack {
         stack.pop();
     }
 
-    @Specification(state = PENDING)
+    @Specification(state = PENDING, reason = "No idea what we're going to do")
     void hasSomeNewFeatureWeHaveNotThoughtOfYet() {
         expect.that(true).isFalse();
     }

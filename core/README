@@ -81,7 +81,7 @@ Internal packages
 
 com.googlecode.instinct.internal
   All classes in this package are internal Instinct APIs. Relying on them is not
-  recommended.
+  recommended, they will change.
 
 com.googlecode.instinct.sandbox
   New ideas, not ready for production usage. You are strongly advised not to
@@ -95,7 +95,7 @@ com.googlecode.instinct.report
 
 com.googlecode.instinct.runner
   Context runners for running Instinct contexts outside of the provided Ant,
-  JUnit or IDE runners.
+  JUnit or IDE runners. e.g. For integration with Spring integration tests.
 
 
 * Source *
@@ -110,19 +110,21 @@ Developer instructions can be found at:
 
 * Contributions *
 
-Developers
+Current Developers
 o Tom Adams
-o Sanjiv Sahayam
-o Ben Warren
 o Chris Myers
 
-Contributions
+Past Developers & Contributors
+o Ben Warren
+o Sanjiv Sahayam
 o Lyall Ward
 o Nicholas Partridge
 
 Thanks to the work done on RSpec, jMock, EasyMock, Boost & JRDF. These libraries
 inspired Instinct. Thanks also to the EasyDoc team, past & present, your work is
 inspirational.
+
+Some of the work in Instinct is inspired by the research of Tony Morris.
 
 Instinct development and research is supported by Workingmouse: http://workingmouse.com/.
 Code coverage provided by Atlassian Clover: http://www.atlassian.com/software/clover/.

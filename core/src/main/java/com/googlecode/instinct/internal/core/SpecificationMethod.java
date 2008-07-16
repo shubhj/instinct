@@ -19,7 +19,7 @@ package com.googlecode.instinct.internal.core;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.util.Suggest;
 
-@Suggest("Add: InProgress, Complete, ExceptionExpecting")
+@Suggest("Add: Complete, ExceptionExpecting")
 public interface SpecificationMethod {
     SpecificationResult run();
 

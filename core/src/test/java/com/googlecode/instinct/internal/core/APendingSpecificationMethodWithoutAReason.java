@@ -43,7 +43,7 @@ public final class APendingSpecificationMethodWithoutAReason {
 
     @Specification
     public void hasANameThatComesFromTheUnderlyingMethod() {
-        expect.that(pendingMethod.getName()).isEqualTo(underlyingMethod.getName());
+        expect.that(pendingMethod.getName()).isEqualTo("aPendingMethod");
     }
 
     @Specification
@@ -53,10 +53,14 @@ public final class APendingSpecificationMethodWithoutAReason {
     }
 
     @Specification
+    public void includesThePendingDescriptionInTheNameOfTheResult() {
+        expect.that(pendingMethod.run().getSpecificationName()).isEqualTo("aPendingMethod [PENDING]");
+    }
+
+    @Specification
     public void returnsAPendingRunStatus() {
         final SpecificationResult result = pendingMethod.run();
-        expect.that(result.getSpecificationName()).isEqualTo(underlyingMethod.getName());
-        expect.that(result.getStatus()).isAnInstanceOf(SpecificationRunPendingStatus.class);
+        expect.that(result.getStatus()).isOfType(SpecificationRunPendingStatus.class);
     }
 
     @Specification

@@ -1,12 +1,18 @@
 * Instinct Release 0.1.7 *
 
+o Core Features
+  o Removed in progress specification state, use pending instead.
+  o Ant and command line runners now emit pending specification reason.
 o Reductio Integration
-  o Integrated Reductio, a tool for automated specification testing.
+  o Integrated Reductio, a tool for automated specification testing. See
+    http://reductiotest.org/ for more information
 o Infrastructure
   o Cleaned up specification running code.
-  o Upgraded to: jMock 2.5.0, Objenesis 1.1, CGLib 2.2, Ant 1.7.1, .
+  o Upgraded to: Ant 1.7.1, CGLib 2.2, jMock 2.5.0 and Objenesis 1.1.
 o Bugs
-  o (defect-11) It would be nice not to have to depend on jmock when writing a BDD-style test involving no mocks.
+  o (defect-11) It would be nice not to have to depend on jmock when writing a BDD-style
+    test involving no mocks.
+
 
 * Instinct Release 0.1.6 *
 
@@ -14,7 +20,7 @@ o Core Features
   o Remove the need for @Context annotation.
   o Automatic creation of specification doubles: mocks, stubs and dummies.
   o Automatic reset and verification of mocks.
-  o @BeforeSpecification?, @AfterSpecification?, @Specifications (and naming convention
+  o @BeforeSpecification, @AfterSpecification and @Specification (and naming convention
     equivalents) can be used across base and subclasses.
   o Better error messages for hasBeanProperty and hasBeanPropertyWithValue.
 o Expectation API
@@ -22,7 +28,7 @@ o Expectation API
     Existing code using equalTo(), etc. will need to be updated.
   o Collection checkers: hasTheSameContentAs(Collection<E>) and hasTheSameContentAs(E...).
     These only check content and not the order of elements.
-  o Ensure all "collection" classes (Array, Map, Set, List, String, SharSequence?) have
+  o Ensure all "collection" classes (Array, Map, Set, List, String, SharSequence) have
     similar size checkers available.
   o Added file checker,
 o JUnit integration
@@ -38,10 +44,10 @@ o Infrastructure
   o jMock 2.4.
   o Downgraded to CGLib 2.1.3 (for Maven integration).
 o Bugs
-  o Miscellaneous NullPointerExceptions? and null related problems in state expectation API.
-  o (defect-3) IterableChecker? should have a containsOnly method or something.
-  o (defect-8) @BeforeSpecification? does not run if implemented in an abstract base class.
-  o (defect-20) CEclipse Junit4 InstinctRunner? shows tests under the "Unrooted Tests" node.
+  o Miscellaneous NullPointerExceptions and null related problems in state expectation API.
+  o (defect-3) IterableChecker should have a containsOnly method or something.
+  o (defect-8) @BeforeSpecification does not run if implemented in an abstract base class.
+  o (defect-20) Eclipse Junit4 InstinctRunner shows tests under the "Unrooted Tests" node.
   o (defect-22) Context treeview shows baseclass and subclass when only subclass is run.
   o (defect-23) Overridden specifications run twice.
 
