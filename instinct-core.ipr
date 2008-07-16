@@ -688,15 +688,15 @@
     </library>
     <library name="JMock">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-2.4.0.jar!/" />
-        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-legacy-2.4.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-legacy-2.5.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-2.5.0.jar!/" />
       </CLASSES>
       <JAVADOC>
-        <root url="jar://$PROJECT_DIR$/core/etc/lib-doc/jmock-2.4.0-javadoc.zip!/jmock-2.4.0/doc" />
+        <root url="jar://$PROJECT_DIR$/core/etc/lib-doc/jmock-2.5.0-javadoc.zip!/jmock-2.5.0/doc" />
       </JAVADOC>
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-2.4.0.jar!/" />
-        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-legacy-2.4.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-legacy-2.5.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/jmock/jmock-2.5.0.jar!/" />
       </SOURCES>
     </library>
     <library name="Ant">
