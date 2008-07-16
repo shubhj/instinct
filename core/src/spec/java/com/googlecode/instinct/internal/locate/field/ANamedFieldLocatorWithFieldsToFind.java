@@ -12,7 +12,7 @@ import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.marker.naming.NamingConvention;
-import com.googlecode.instinct.test.actor.TestSubjectCreator;
+import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import java.lang.reflect.Field;
 import org.junit.runner.RunWith;
@@ -24,7 +24,7 @@ public final class ANamedFieldLocatorWithFieldsToFind {
 
     @BeforeSpecification
     public void before() {
-        locator = TestSubjectCreator.createSubject(NamedFieldLocatorImpl.class);
+        locator = createSubject(NamedFieldLocatorImpl.class);
         namingConvention = new FooNamingConvention();
     }
 

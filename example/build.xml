@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="instinct-example" default="all" basedir=".">
-
-    <property name="project.longname" value="Instinct Behaviour Driven Development (BDD) Framework"/>
-    <property name="project.shortname" value="instinct"/>
+    <property name="project.longname" value="Instinct Behaviour Driven Development (BDD) Framework Examples"/>
+    <property name="project.shortname" value="instinct-example"/>
     <property name="project.version.major" value="0"/>
     <property name="project.version.minor" value="1.7"/>
     <property name="version-status" value=""/>
@@ -21,7 +20,7 @@
     <property name="release.dir" value="${build.dir}/release"/>
 
     <property name="project.zip" value="${project.shortname}-${project.version.full}.zip"/>
-    <property name="instinct.jar" value="${lib.dir}/${project.shortname}-${project.version.full}.jar"/>
+    <property name="instinct.jar" value="${lib.dir}/instinct-${project.version.full}.jar"/>
 
     <path id="main.class.path">
         <fileset dir="${basedir}">

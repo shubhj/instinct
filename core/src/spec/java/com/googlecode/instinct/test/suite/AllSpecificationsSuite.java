@@ -46,6 +46,8 @@ import com.googlecode.instinct.internal.locate.field.ANamedFieldLocatorWithField
 import com.googlecode.instinct.internal.locate.field.ANamedFieldLocatorWithNothingNoFieldsToFind;
 import com.googlecode.instinct.internal.locate.method.AHierarchicalMethodLocatorContext;
 import com.googlecode.instinct.internal.locate.method.AnAnnotatedMethodLocatorContext;
+import com.googlecode.instinct.internal.util.ExceptionSanitiserWithKnownException;
+import com.googlecode.instinct.internal.util.ExceptionSanitiserWithUnknownException;
 import com.googlecode.instinct.internal.util.Suggest;
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -66,10 +68,11 @@ public final class AllSpecificationsSuite {
 
     @Suggest("We should be able to automatically find these. Maybe add a group to all 'testdata' specs so they don't run.")
     private static Class<?>[] getContexts() {
-        return new Class<?>[]{AnAnnotatedMethodLocatorContext.class, AHierarchicalMethodLocatorContext.class,
-                AFixedDefect8WithAnAnnotationMethodLocator.class, AFixedDefect8WithANamingConventionLocator.class, AFixedDefect23.class,
-                AFixedDefect3.class, CommonAPIContext.class, AnObjectCheckerContext.class, AnObjectCheckerFailure.class,
-                AStringFactoryImplContext.class, ANamedFieldLocatorWithNothingNoFieldsToFind.class, ANamedFieldLocatorWithFieldsToFind.class,
+        return new Class<?>[]{ExceptionSanitiserWithKnownException.class, ExceptionSanitiserWithUnknownException.class,
+                AnAnnotatedMethodLocatorContext.class, AHierarchicalMethodLocatorContext.class, AFixedDefect8WithAnAnnotationMethodLocator.class,
+                AFixedDefect8WithANamingConventionLocator.class, AFixedDefect23.class, AFixedDefect3.class, CommonAPIContext.class,
+                AnObjectCheckerContext.class, AnObjectCheckerFailure.class, AStringFactoryImplContext.class,
+                ANamedFieldLocatorWithNothingNoFieldsToFind.class, ANamedFieldLocatorWithFieldsToFind.class,
                 AMockAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire.class, AMockAutoWireDeterminatorWithAnAnnotatedFieldNotToAutoWire.class,
                 AMockAutoWireDeterminatorWithANamedFieldToAutoWire.class, AMockAutoWireDeterminatorWithANamedFieldNotToAutoWire.class,
                 AMockAutoWireDeterminatorWithNoMarkedFields.class, AStubAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire.class,

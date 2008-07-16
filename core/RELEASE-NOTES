@@ -1,3 +1,13 @@
+* Instinct Release 0.1.7 *
+
+o Reductio Integration
+  o Integrated Reductio, a tool for automated specification testing.
+o Infrastructure
+  o Cleaned up specification running code.
+  o Upgraded to: jMock 2.5.0, Objenesis 1.1, CGLib 2.2, Ant 1.7.1, .
+o Bugs
+  o (defect-11) It would be nice not to have to depend on jmock when writing a BDD-style test involving no mocks.
+
 * Instinct Release 0.1.6 *
 
 o Core Features
@@ -32,7 +42,7 @@ o Bugs
   o (defect-3) IterableChecker? should have a containsOnly method or something.
   o (defect-8) @BeforeSpecification? does not run if implemented in an abstract base class.
   o (defect-20) CEclipse Junit4 InstinctRunner? shows tests under the "Unrooted Tests" node.
-  o (defect-22) Context treeview shows baseclass and subclass when only subclass is run
+  o (defect-22) Context treeview shows baseclass and subclass when only subclass is run.
   o (defect-23) Overridden specifications run twice.
 
 

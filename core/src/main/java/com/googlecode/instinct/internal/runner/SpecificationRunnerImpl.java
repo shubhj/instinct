@@ -28,6 +28,8 @@ import com.googlecode.instinct.internal.util.Clock;
 import com.googlecode.instinct.internal.util.ClockImpl;
 import com.googlecode.instinct.internal.util.ExceptionFinder;
 import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
+import com.googlecode.instinct.internal.util.ExceptionSanitiser;
+import com.googlecode.instinct.internal.util.ExceptionSanitiserImpl;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
@@ -37,7 +39,6 @@ import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.runner.SpecificationListener;
 import java.util.ArrayList;
 import java.util.Collection;
-import org.jmock.api.ExpectationError;
 
 // SUPPRESS GenericIllegalRegex|MethodLength {
 @Fix("This class is huge. Split it!")
@@ -52,6 +53,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final LifeCycleMethodValidator methodValidator = new LifeCycleMethodValidatorImpl();
     //    private final MockVerifier mockVerifier = new MockVerifierImpl();
     private final MethodInvokerFactory methodInvokerFactory = new MethodInvokerFactoryImpl();
+    private final ExceptionSanitiser exceptionSanitiser = new ExceptionSanitiserImpl();
 
     public void addSpecificationListener(final SpecificationListener specificationListener) {
         checkNotNull(specificationListener);
@@ -94,7 +96,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
             }
         } catch (Throwable exceptionThrown) {
             if (expectedException.equals(Specification.NoExpectedException.class)) {
-                final SpecificationRunStatus status = new SpecificationRunFailureStatus(wrapCommonExceptions(exceptionThrown));
+                final SpecificationRunStatus status = new SpecificationRunFailureStatus(exceptionSanitiser.sanitise(exceptionThrown));
                 return createSpecResult(specificationMethod, status, startTime);
             } else {
                 final Throwable exceptionThrownBySpec = exceptionFinder.getRootCause(exceptionThrown);
@@ -128,17 +130,6 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
             final SpecificationRunStatus status = new SpecificationRunFailureStatus(failure);
             return createSpecResult(specificationMethod, status, startTime);
         }
-    }
-
-    @Fix({"Test the wrapping of jMock exceptions here.", "May help fix Paul's bug: defect-11", "Call this thing an ExceptionSanitiser"})
-    @Suggest({"Wrap 'unexpected ...' jMock cardinality exception if you a mock is used in a test without expectations being set on it"})
-    private Throwable wrapCommonExceptions(final Throwable throwable) {
-        if (throwable instanceof ExpectationError) {
-            final String message = "Unexpected invocation. You may need to wrap the code in your new Expections(){{}} block with cardinality " +
-                    "constraints, one(), atLeast(), etc.\n";
-            return new SpecificationFailureException(message + throwable.toString(), throwable);
-        }
-        return throwable;
     }
 
     private SpecificationResult createSpecResult(final OldDodgySpecificationMethod specificationMethod, final SpecificationRunStatus runStatus,

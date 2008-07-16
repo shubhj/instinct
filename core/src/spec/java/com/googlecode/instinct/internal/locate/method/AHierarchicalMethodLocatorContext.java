@@ -21,7 +21,6 @@ import com.googlecode.instinct.defect.defect8.data.annotation.SuperContext;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.expect.ExpectAtomicTest;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
@@ -35,9 +34,7 @@ import junit.framework.TestCase;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
-@Context
 public class AHierarchicalMethodLocatorContext {
-
     @Subject private final HierarchicalMethodLocator locator = new HierarchicalMethodLocatorImpl();
 
     public void shouldRetunAllMethodsForAGivenClass() {

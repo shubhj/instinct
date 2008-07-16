@@ -32,36 +32,36 @@ import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
 public final class APendingSpecificationMethodWithoutAReason {
-    @Subject(auto = false) private PendingSpecificationMethod pendingSpecification;
+    @Subject(auto = false) private PendingSpecificationMethod pendingMethod;
     @Stub(auto = false) private Method underlyingMethod;
 
     @BeforeSpecification
     public void before() {
         underlyingMethod = getDeclaredMethod(WithPendingSpecification.class, "aPendingMethod");
-        pendingSpecification = new PendingSpecificationMethod(underlyingMethod);
+        pendingMethod = new PendingSpecificationMethod(underlyingMethod);
     }
 
     @Specification
     public void hasANameThatComesFromTheUnderlyingMethod() {
-        expect.that(pendingSpecification.getName()).isEqualTo(underlyingMethod.getName());
+        expect.that(pendingMethod.getName()).isEqualTo(underlyingMethod.getName());
     }
 
     @Specification
     public void hasNoPendingReason() {
-        final String reason = pendingSpecification.getPendingReason();
+        final String reason = pendingMethod.getPendingReason();
         expect.that(reason).isEqualTo(NO_REASON);
     }
 
     @Specification
     public void returnsAPendingRunStatus() {
-        final SpecificationResult result = pendingSpecification.run();
+        final SpecificationResult result = pendingMethod.run();
         expect.that(result.getSpecificationName()).isEqualTo(underlyingMethod.getName());
         expect.that(result.getStatus()).isAnInstanceOf(SpecificationRunPendingStatus.class);
     }
 
     @Specification
     public void takesNoTimeToRun() {
-        final SpecificationResult result = pendingSpecification.run();
+        final SpecificationResult result = pendingMethod.run();
         expect.that(result.getExecutionTime()).isEqualTo(0L);
     }
 

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.googlecode.instinct.internal.core;
 
 import com.googlecode.instinct.internal.lang.Primordial;

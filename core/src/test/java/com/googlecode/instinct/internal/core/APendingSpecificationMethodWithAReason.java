@@ -27,16 +27,21 @@ import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
 public final class APendingSpecificationMethodWithAReason {
-    @Subject(auto = false) private PendingSpecificationMethod pendingSpecification;
+    @Subject(auto = false) private PendingSpecificationMethod pendingMethod;
 
     @BeforeSpecification
     public void before() {
-        pendingSpecification = new PendingSpecificationMethod(getDeclaredMethod(PendingSpecificationWithReason.class, "aPendingMethod"));
+        pendingMethod = new PendingSpecificationMethod(getDeclaredMethod(PendingSpecificationWithReason.class, "aPendingMethod"));
+    }
+
+    @Specification
+    public void hasANameThatComesFromTheUnderlyingMethod() {
+        expect.that(pendingMethod.getName()).isEqualTo("aPendingMethod");
     }
 
     @Specification
     public void pullsThePendingReasonOffTheAnnotation() {
-        final String reason = pendingSpecification.getPendingReason();
+        final String reason = pendingMethod.getPendingReason();
         expect.that(reason).isEqualTo("Haven't done it yet");
     }
 
