@@ -705,21 +705,23 @@
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/core/etc/lib-src/ant-1.7.0-src.zip!/main" />
+        <root url="jar://$PROJECT_DIR$/core/etc/lib-src/apache-ant-1.7.1-src.zip!/apache-ant-1.7.1/src/main" />
       </SOURCES>
     </library>
     <library name="Objenesis">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/core/lib/objenesis/objenesis-1.0.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/objenesis/objenesis-1.1.jar!/" />
       </CLASSES>
-      <JAVADOC />
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/core/etc/lib-doc/objenesis-1.1-javadoc.jar!/" />
+      </JAVADOC>
       <SOURCES>
-        <root url="jar://$PROJECT_DIR$/core/etc/lib-src/objenesis-1.0-sources.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/etc/lib-src/objenesis-1.1-sources.jar!/" />
       </SOURCES>
     </library>
     <library name="Clover">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/core/lib/clover/clover-2.0.3.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/clover/clover-2.3.1.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
