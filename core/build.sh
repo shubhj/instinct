@@ -46,11 +46,11 @@ fi
 JAVA_BIN=${JAVA_HOME}/bin/java
 
 # Add the ant libraries to the classpath
-CLASSPATH=${CLASSPATH}:${LIBDIR}/ant/ant-1.7.0.jar
-CLASSPATH=${CLASSPATH}:${LIBDIR}/ant/ant-launcher-1.7.0.jar
-CLASSPATH=${CLASSPATH}:${LIBDIR}/ant/ant-junit-1.7.0.jar
+CLASSPATH=${CLASSPATH}:${LIBDIR}/ant/ant-1.7.1.jar
+CLASSPATH=${CLASSPATH}:${LIBDIR}/ant/ant-launcher-1.7.1.jar
+CLASSPATH=${CLASSPATH}:${LIBDIR}/ant/ant-junit-1.7.1.jar
 CLASSPATH=${CLASSPATH}:${LIBDIR}/junit-4.4.jar
-CLASSPATH=${CLASSPATH}:${LIBDIR}/clover/clover-1.3.13.jar
+CLASSPATH=${CLASSPATH}:${LIBDIR}/clover/clover-2.3.1.jar
 
 # Try to include tools.jar for compilation
 if test -f ${JAVA_HOME}/lib/tools.jar ; then

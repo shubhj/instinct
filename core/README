@@ -38,7 +38,7 @@ o objenesis-1.0.jar
 
 In addition, to use the Instinct Ant task, you'll need:
 
-o ant-1.7.0.jar
+o ant-1.7.1.jar
 
 In addition, to use the JUnit 3/4 runners, you'll need:
 
