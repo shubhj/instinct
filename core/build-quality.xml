@@ -19,8 +19,6 @@
         <!-- FIX Test then remove Ant & JUnit packages. -->
         <exclude name="**/integrate/junit3/**"/>
         <exclude name="**/integrate/ant/**"/>
-        <!-- FIX Don't exclude boost. -->
-        <exclude name="**/internal/util/boost/**"/>
     </fileset>
 
     <target name="-quality" depends="-checkstyle"/>
@@ -35,7 +33,7 @@
     <macrodef name="checkstyle.macro">
         <attribute name="code.type"/>
         <sequential>
-            <taskdef resource="checkstyletask.properties" classpath="${lib.dir}/checkstyle/checkstyle-all-4.2.jar"/>
+            <taskdef resource="checkstyletask.properties" classpathref="spec.class.path"/>
             <checkstyle config="${etc.dir}/checkstyle/checkstyle-@{code.type}.xml">
                 <fileset dir="${@{code.type}.src.dir}"/>
             </checkstyle>
