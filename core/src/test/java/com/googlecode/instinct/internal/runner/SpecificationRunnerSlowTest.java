@@ -32,9 +32,9 @@ import java.util.Collection;
 import java.util.Collections;
 import org.jmock.api.ExpectationError;
 
-@SuppressWarnings({"StringContatenationInLoop", "OverlyCoupledClass"})
+@SuppressWarnings({"StringContatenationInLoop", "OverlyCoupledClass", "UnusedDeclaration"})
 public final class SpecificationRunnerSlowTest extends InstinctTestCase {
-    @Subject(implementation = SpecificationRunnerImpl.class) private SpecificationRunner runner;
+    @Subject(implementation = OldDodgySpecificationRunnerImpl.class) private SpecificationRunner runner;
 
     public void testRunWithSuccess() {
         checkContextsRunWithoutError(ContextContainerWithSetUpAndTearDown.class);

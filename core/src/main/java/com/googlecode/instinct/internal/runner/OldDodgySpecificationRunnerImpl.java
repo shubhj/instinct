@@ -43,7 +43,7 @@ import java.util.Collection;
 // SUPPRESS GenericIllegalRegex|MethodLength {
 @Fix("This class is huge. Split it!")
 @SuppressWarnings({"OverlyCoupledClass"})
-public final class SpecificationRunnerImpl implements SpecificationRunner {
+public final class OldDodgySpecificationRunnerImpl implements SpecificationRunner {
     private final Collection<SpecificationListener> specificationListeners = new ArrayList<SpecificationListener>();
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
     private final ActorAutoWirer actorAutoWirer = new ActorAutoWirerImpl();

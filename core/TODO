@@ -3,7 +3,7 @@ Specification runner refactoring
 2. Create SpecificationRunStatus implementations for all spec methods.
 3. Hook into old specification runner.
 4. Remove OldDodgySpecificationMethodImpl.
-5. Remove com.googlecode.instinct.internal.runner.SpecificationRunnerImpl.
+5. Remove com.googlecode.instinct.internal.runner.OldDodgySpecificationRunnerImpl.
 6. Clean up junit3.SpecificationTestCase and junit4.SpecificationRunnerImpl around failing & pending specs.
 7. Ensure command line, Ant, etc. runners get pending reason emitted.
 

@@ -17,9 +17,9 @@
 package com.googlecode.instinct.internal.core;
 
 import com.googlecode.instinct.internal.lang.Primordial;
+import com.googlecode.instinct.internal.runner.OldDodgySpecificationRunnerImpl;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
-import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.annotate.Specification;
@@ -32,7 +32,7 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 
 public final class OldDodgySpecificationMethodImpl extends Primordial implements OldDodgySpecificationMethod {
-    private SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
+    private SpecificationRunner specificationRunner = new OldDodgySpecificationRunnerImpl();
     private final LifecycleMethod specificationMethod;
     private Collection<LifecycleMethod> beforeSpecificationMethods;
     private Collection<LifecycleMethod> afterSpecificationMethods;

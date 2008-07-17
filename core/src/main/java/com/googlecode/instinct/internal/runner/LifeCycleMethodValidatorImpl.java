@@ -27,7 +27,7 @@ import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
 import com.googlecode.instinct.sandbox.ForAll;
 import java.lang.reflect.Method;
 
-final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
+public final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
     private final ClassEdge edgeClass = new ClassEdgeImpl();
     private final ParameterAnnotationFinder annotationFinder = new ParameterAnnotationFinderImpl();
 

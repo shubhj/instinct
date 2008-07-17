@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2008 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,11 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.internal.core.LifecycleMethod;
-import java.lang.reflect.Method;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 
-public interface LifeCycleMethodValidator {
-    void checkMethodHasNoParameters(LifecycleMethod method);
-
-    <T> void checkContextConstructor(Class<T> cls);
-
-    void checkMethodHasNoReturnType(Method method);
+public final class CompleteSpecificationRunnerImpl implements CompleteSpecificationRunner {
+    public SpecificationResult run(final SpecificationMethod specificationMethod) {
+        //        return new SpecificationResultImpl(getName(), new SpecificationRunPendingStatus(), 0L);
+        throw new UnsupportedOperationException();
+    }
 }
