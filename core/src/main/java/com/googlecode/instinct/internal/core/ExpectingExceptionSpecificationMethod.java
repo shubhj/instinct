@@ -22,7 +22,6 @@ import com.googlecode.instinct.internal.runner.SpecificationFailureException;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationResultImpl;
 import com.googlecode.instinct.internal.runner.SpecificationRunFailureStatus;
-import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
 import static com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus.SPECIFICATION_SUCCESS;
 import com.googlecode.instinct.internal.util.Clock;
 import com.googlecode.instinct.internal.util.ClockImpl;
@@ -62,7 +61,9 @@ public final class ExpectingExceptionSpecificationMethod implements Specificatio
         final long startTime = clock.getCurrentTime();
         try {
             specificationRunner.run(this);
-            return fail(startTime, "Expected exception " + expectedException.getName() + " was not thrown in body of specification");
+            final Throwable failure = new SpecificationFailureException(
+                    "Expected exception " + expectedException.getName() + " was not thrown in body of specification");
+            return fail(startTime, failure);
         } catch (Throwable throwable) {
             return processExpectedFailure(startTime, expectedException, exceptionFinder.getRootCause(throwable));
         }
@@ -78,9 +79,7 @@ public final class ExpectingExceptionSpecificationMethod implements Specificatio
         } else {
             final String message =
                     "Expected exception was not thrown\nExpected: " + expectedExceptionClass + "\n     got: " + thrownException.getClass();
-            final Throwable failure = new SpecificationFailureException(message, thrownException);
-            final SpecificationRunStatus status = new SpecificationRunFailureStatus(failure);
-            return new SpecificationResultImpl(getName(), status, clock.getElapsedTime(startTime));
+            return fail(startTime, new SpecificationFailureException(message, thrownException));
         }
     }
 
@@ -92,12 +91,11 @@ public final class ExpectingExceptionSpecificationMethod implements Specificatio
         } else {
             final String message = "Expected exception message was incorrect\nExpected: " + getExpectedExceptionMessage() + "\n     got: " +
                     exceptionThrown.getMessage();
-            return fail(startTime, message);
+            return fail(startTime, new SpecificationFailureException(message));
         }
     }
 
-    private SpecificationResult fail(final long startTime, final String message) {
-        final SpecificationRunStatus status = new SpecificationRunFailureStatus(new AssertionError(message));
-        return new SpecificationResultImpl(getName(), status, clock.getElapsedTime(startTime));
+    private SpecificationResult fail(final long startTime, final Throwable failure) {
+        return new SpecificationResultImpl(getName(), new SpecificationRunFailureStatus(failure), clock.getElapsedTime(startTime));
     }
 }
