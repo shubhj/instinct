@@ -61,12 +61,8 @@ public final class ExpectingExceptionSpecificationMethod implements Specificatio
         final Class<? extends Throwable> expectedException = method.getAnnotation(Specification.class).expectedException();
         final long startTime = clock.getCurrentTime();
         try {
-            // TODO Make this work proiperly.
-            return specificationRunner.run(this);
-            //            final String message = "Expected exception " + expectedException + " was not thrown in body of specification";
-            //            final Throwable failure = new AssertionError(message);
-            //            final SpecificationRunStatus status = new SpecificationRunFailureStatus(failure);
-            //            return new SpecificationResultImpl(getName(), status, clock.getElapsedTime(startTime));
+            specificationRunner.run(this);
+            return fail(startTime, "Expected exception " + expectedException.getName() + " was not thrown in body of specification");
         } catch (Throwable throwable) {
             return processExpectedFailure(startTime, expectedException, exceptionFinder.getRootCause(throwable));
         }
@@ -96,9 +92,12 @@ public final class ExpectingExceptionSpecificationMethod implements Specificatio
         } else {
             final String message = "Expected exception message was incorrect\nExpected: " + getExpectedExceptionMessage() + "\n     got: " +
                     exceptionThrown.getMessage();
-            final Throwable failure = new AssertionError(message);
-            final SpecificationRunStatus status = new SpecificationRunFailureStatus(failure);
-            return new SpecificationResultImpl(getName(), status, clock.getElapsedTime(startTime));
+            return fail(startTime, message);
         }
+    }
+
+    private SpecificationResult fail(final long startTime, final String message) {
+        final SpecificationRunStatus status = new SpecificationRunFailureStatus(new AssertionError(message));
+        return new SpecificationResultImpl(getName(), status, clock.getElapsedTime(startTime));
     }
 }

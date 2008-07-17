@@ -27,60 +27,39 @@ import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
 import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubjectWithConstructorArgs;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import org.jmock.Expectations;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings({"UnusedDeclaration"})
 @RunWith(InstinctRunner.class)
-public final class ASpecificationThatThrowsAnExpectedException {
+public final class ASpecificationThatExpectsAnExceptionButOneIsNotThrown {
     @Subject(auto = false) private ExpectingExceptionSpecificationMethod expectsExceptionMethod;
     @Mock private CompleteSpecificationRunner specificationRunner;
     @Dummy private SpecificationResult specificationResult;
 
     @BeforeSpecification
     public void before() {
-        final Object[] constructorArgs = {getDeclaredMethod(ContainsExpectedException.class, "expectsExceptionThrown")};
+        final Object[] constructorArgs = {getDeclaredMethod(ContainsExpectedException.class, "throwsNoException")};
         expectsExceptionMethod = createSubjectWithConstructorArgs(ExpectingExceptionSpecificationMethod.class, constructorArgs, specificationRunner);
     }
 
     @Specification
-    public void conformsToClassTraits() {
-        checkClass(ExpectingExceptionSpecificationMethod.class, SpecificationMethod.class);
-    }
-
-    @Specification
-    public void hasANameThatComesFromTheUnderlyingMethod() {
-        expect.that(expectsExceptionMethod.getName()).isEqualTo("expectsExceptionThrown");
-    }
-
-    @Specification
-    public void exposesTheExpectedException() {
-        expect.that(expectsExceptionMethod.getExpectedException().equals(RuntimeException.class)).isTrue();
-    }
-
-    @Specification
-    public void exposesTheExceptionMessage() {
-        expect.that(expectsExceptionMethod.getExpectedExceptionMessage()).isEqualTo("This should fail");
-    }
-
-    @Specification
-    public void runsSpecsUsingTheNormalSpecificationRunner() {
+    public void failsWhenSpecsExpectingExceptionsDoNotThrowExceptions() {
         expect.that(new Expectations() {
             {
                 one(specificationRunner).run(expectsExceptionMethod);
-                will(throwException(new RuntimeException("This should fail")));
+                will(returnValue(specificationResult));
             }
         });
         final SpecificationResult result = expectsExceptionMethod.run();
-        expect.that(result.completedSuccessfully()).isTrue();
+        expect.that(result.completedSuccessfully()).isFalse();
+        expect.that(((Throwable) result.getStatus().getDetailedStatus()).getMessage()).containsString("was not thrown");
     }
 
     @SuppressWarnings({"ALL"})
     private static final class ContainsExpectedException {
-        @Specification(expectedException = RuntimeException.class, withMessage = "This should fail")
-        public void expectsExceptionThrown() {
-            throw new RuntimeException("This should fail");
+        @Specification(expectedException = RuntimeException.class)
+        public void throwsNoException() {
         }
     }
 }

@@ -145,7 +145,7 @@
                 <classpath refid="spec.class.path"/>
                 <test todir="${spec.results.dir}" name="com.googlecode.instinct.test.suite.AtomicTestSuite"/>
                 <test todir="${spec.results.dir}" name="com.googlecode.instinct.test.suite.SlowTestSuite"/>
-                <test todir="${spec.results.dir}" name="com.googlecode.instinct.test.suite.AllSpecificationsSuite"/>
+                <test todir="${spec.results.dir}" name="com.googlecode.instinct.test.suite.SpecificationsSuite"/>
                 <formatter type="xml"/>
                 <formatter type="brief" usefile="false"/>
             </junit>

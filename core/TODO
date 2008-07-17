@@ -4,8 +4,9 @@ Specification runner refactoring
 3. Hook into old specification runner.
 4. Remove OldDodgySpecificationMethodImpl.
 5. Remove com.googlecode.instinct.internal.runner.OldDodgySpecificationRunnerImpl.
-6. Clean up junit3.SpecificationTestCase and junit4.SpecificationRunnerImpl around failing & pending specs.
-7. Ensure command line, Ant, etc. runners get pending reason emitted.
+6. The context class should be built using new spec methods, then they can just be run and aggregated. 
+7. Clean up junit3.SpecificationTestCase and junit4.SpecificationRunnerImpl around failing & pending specs.
+8. Ensure command line, Ant, etc. runners get pending reason emitted.
 
 Reductio integration
 1. Full support for roperties (methods, fields, etc.), should detect & run them.

@@ -27,13 +27,12 @@ import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
 import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubjectWithConstructorArgs;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import org.jmock.Expectations;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings({"UnusedDeclaration"})
 @RunWith(InstinctRunner.class)
-public final class ASpecificationThatThrowsAnExpectedException {
+public final class ASpecificationThatThrowsAnExpectedExceptionThatHasAnUnexpectedMessage {
     @Subject(auto = false) private ExpectingExceptionSpecificationMethod expectsExceptionMethod;
     @Mock private CompleteSpecificationRunner specificationRunner;
     @Dummy private SpecificationResult specificationResult;
@@ -45,35 +44,16 @@ public final class ASpecificationThatThrowsAnExpectedException {
     }
 
     @Specification
-    public void conformsToClassTraits() {
-        checkClass(ExpectingExceptionSpecificationMethod.class, SpecificationMethod.class);
-    }
-
-    @Specification
-    public void hasANameThatComesFromTheUnderlyingMethod() {
-        expect.that(expectsExceptionMethod.getName()).isEqualTo("expectsExceptionThrown");
-    }
-
-    @Specification
-    public void exposesTheExpectedException() {
-        expect.that(expectsExceptionMethod.getExpectedException().equals(RuntimeException.class)).isTrue();
-    }
-
-    @Specification
-    public void exposesTheExceptionMessage() {
-        expect.that(expectsExceptionMethod.getExpectedExceptionMessage()).isEqualTo("This should fail");
-    }
-
-    @Specification
-    public void runsSpecsUsingTheNormalSpecificationRunner() {
+    public void failsAsTheMessageDoesNotMatch() {
         expect.that(new Expectations() {
             {
                 one(specificationRunner).run(expectsExceptionMethod);
-                will(throwException(new RuntimeException("This should fail")));
+                will(throwException(new RuntimeException("This is the wrong message")));
             }
         });
         final SpecificationResult result = expectsExceptionMethod.run();
-        expect.that(result.completedSuccessfully()).isTrue();
+        expect.that(result.completedSuccessfully()).isFalse();
+        expect.that(((Throwable) result.getStatus().getDetailedStatus()).getMessage()).containsString("Expected exception message was incorrect");
     }
 
     @SuppressWarnings({"ALL"})
