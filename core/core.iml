@@ -18,8 +18,21 @@
     <orderEntry type="library" name="JMock" level="project" />
     <orderEntry type="library" name="Objenesis" level="project" />
     <orderEntry type="library" name="Ant" level="project" />
-    <orderEntry type="library" name="Clover" level="project" />
+    <orderEntry type="module-library">
+      <library name="Functional Java">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/functionaljava/functionaljava-20080721.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/etc/lib-doc/functionaljava-20080721-javadoc.zip!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/etc/lib-src/functionaljava-20080721-src.zip!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="JUnit" level="project" />
+    <orderEntry type="library" name="Clover" level="project" />
     <orderEntryProperties />
   </component>
   <component name="copyright">

@@ -35,6 +35,7 @@ o hamcrest-all-1.1.jar
 o jmock-2.5.0.jar
 o jmock-legacy-2.5.0.jar
 o objenesis-1.1.jar
+o functionaljava-2.7.jar
 
 In addition, to use the Instinct Ant task, you'll need:
 

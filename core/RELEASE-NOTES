@@ -13,6 +13,7 @@ o Core Features
   o Removed in progress specification state, use pending instead.
   o All runners now emit pending specification reason.
 o Infrastructure
+  o Added dependency on Functional Java.
   o Continued clean up of specification running code.
   o Upgraded to: Ant 1.7.1, CGLib 2.2, jMock 2.5.0 and Objenesis 1.1.
 o Bugs
