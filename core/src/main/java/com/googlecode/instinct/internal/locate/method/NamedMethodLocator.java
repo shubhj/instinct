@@ -17,9 +17,9 @@
 package com.googlecode.instinct.internal.locate.method;
 
 import com.googlecode.instinct.marker.naming.NamingConvention;
+import fj.data.List;
 import java.lang.reflect.Method;
-import java.util.Collection;
 
 public interface NamedMethodLocator {
-    <T> Collection<Method> locate(Class<T> cls, NamingConvention namingConvention);
+    <T> List<Method> locate(Class<T> cls, NamingConvention namingConvention);
 }

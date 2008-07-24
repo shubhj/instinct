@@ -21,20 +21,20 @@ import com.googlecode.instinct.internal.locate.AnnotationCheckerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import fj.F;
+import fj.data.List;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.Collection;
 
 public final class AnnotatedMethodLocatorImpl implements AnnotatedMethodLocator {
     private final AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
     private final SuperClassTraversingMethodLocator methodLocator = new SuperClassTraversingMethodLocatorImpl();
 
-    public <A extends Annotation, T> Collection<Method> locate(final Class<T> cls, final Class<A> runtimeAnnotationType) {
+    public <A extends Annotation, T> List<Method> locate(final Class<T> cls, final Class<A> runtimeAnnotationType) {
         checkNotNull(cls, runtimeAnnotationType);
         return methodLocator.locate(cls).filter(new F<Method, Boolean>() {
             public Boolean f(final Method method) {
                 return annotationChecker.isAnnotated(method, runtimeAnnotationType, IGNORE);
             }
-        }).toCollection();
+        });
     }
 }

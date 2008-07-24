@@ -78,4 +78,10 @@ public final class PendingSpecificationMethod extends Primordial implements Spec
     public SpecificationResult run() {
         return new SpecificationResultImpl(getName(), new SpecificationRunPendingStatus(), 0L);
     }
+
+    @Override
+    public String toString() {
+        return PendingSpecificationMethod.class.getSimpleName() + "[method=" + method + ";before=" + beforeSpecificationMethods.toCollection() +
+                ";after=" + afterSpecificationMethods.toCollection() + "]";
+    }
 }

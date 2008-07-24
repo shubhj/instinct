@@ -18,15 +18,18 @@ package com.googlecode.instinct.integrate.ant;
 
 import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
 import com.googlecode.instinct.internal.util.Fix;
+import static com.googlecode.instinct.internal.util.Fj.toFjList;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import com.googlecode.instinct.runner.CommandLineRunner;
+import fj.F;
+import fj.data.List;
+import static fj.data.List.asString;
+import static fj.data.List.fromString;
+import static fj.data.List.join;
+import static fj.data.List.nil;
 import java.io.IOException;
-import java.util.ArrayList;
-import static java.util.Arrays.asList;
-import java.util.Iterator;
-import java.util.List;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
@@ -39,7 +42,7 @@ import org.apache.tools.ant.types.Reference;
 
 @SuppressWarnings({"MethodParameterOfConcreteClass", "InstanceVariableOfConcreteClass"})
 public final class InstinctAntTask extends Task implements StatusLogger {
-    private final List<Specifications> specificationLocators = new ArrayList<Specifications>();
+    private List<Specifications> specificationLocators = nil();
     private String failureProperty;
     private Formatter formatter;
     private CommandlineJava javaCommandLine;
@@ -51,7 +54,7 @@ public final class InstinctAntTask extends Task implements StatusLogger {
 
     public void addSpecifications(final Specifications specificationLocator) {
         checkNotNull(specificationLocator);
-        specificationLocators.add(specificationLocator);
+        specificationLocators = specificationLocators.cons(specificationLocator);
     }
 
     public void addFormatter(final Formatter formatter) {
@@ -74,15 +77,40 @@ public final class InstinctAntTask extends Task implements StatusLogger {
         createClasspath().setRefid(classPathRefId);
     }
 
+    // SUPPRESS IllegalCatch {
     @Override
     public void execute() throws BuildException {
         checkExecutePreconditions();
-        doExecute();
+        try {
+            runContexts();
+        } catch (Throwable t) {
+            throw new BuildException(t);
+        }
     }
+
+    // } SUPPRESS IllegalCatch
 
     @Override
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    private CommandlineJava getJavaCommandLine() {
+        if (javaCommandLine == null) {
+            javaCommandLine = new CommandlineJava();
+        }
+        return javaCommandLine;
+    }
+
+    @Fix("Register as a runner, so that we recieve results as it happens.")
+    // TODO The runners also need to be passed a group, so they don't run the wrong thing.
+    private void runContexts() {
+        final CommandlineJava commandLine = createCommandLine();
+        final int exitCode = executeAsForked(commandLine);
+        if (isFailure(exitCode)) {
+            // getProject().setNewProperty(failureProperty, "true");
+            throw new BuildException("Forked VM failed with exit code: " + exitCode);
+        }
     }
 
     private int executeAsForked(final CommandlineJava commandline) {
@@ -97,36 +125,6 @@ public final class InstinctAntTask extends Task implements StatusLogger {
         }
     }
 
-    private CommandlineJava getJavaCommandLine() {
-        if (javaCommandLine == null) {
-            javaCommandLine = new CommandlineJava();
-        }
-        return javaCommandLine;
-    }
-
-    @SuppressWarnings({"CatchGenericClass"})
-    // SUPPRESS IllegalCatch {
-    private void doExecute() {
-        try {
-            runContexts();
-        } catch (Throwable t) {
-            throw new BuildException(t);
-        }
-    }
-
-    // } SUPPRESS IllegalCatch
-
-    @Fix("Register as a runner, so that we recieve results as it happens.")
-    // TODO The runners also need to be passed a group, so they don't run the wrong thing.
-    private void runContexts() {
-        final CommandlineJava commandLine = createCommandLine();
-        final int exitCode = executeAsForked(commandLine);
-        if (isFailure(exitCode)) {
-            // getProject().setNewProperty(failureProperty, "true");
-            throw new BuildException("Forked VM failed with exit code: " + exitCode);
-        }
-    }
-
     private CommandlineJava createCommandLine() {
         final CommandlineJava commandLine = getJavaCommandLine();
         commandLine.setClassname(CommandLineRunner.class.getName());
@@ -136,24 +134,24 @@ public final class InstinctAntTask extends Task implements StatusLogger {
     }
 
     private String getContextNamesToRun() {
-        final List<JavaClassName> contextClasses = findContextsFromAllAggregators();
-        final StringBuilder builder = new StringBuilder();
-        for (final Iterator<JavaClassName> iterator = contextClasses.iterator(); iterator.hasNext();) {
-            final JavaClassName contextClass = iterator.next();
-            builder.append(contextClass.getFullyQualifiedName());
-            if (iterator.hasNext()) {
-                builder.append(RunnableItemBuilder.ITEM_SEPARATOR);
+        final List<List<Character>> contexts = findContextsFromAllAggregators().map(new F<JavaClassName, List<Character>>() {
+            public List<Character> f(final JavaClassName contextClass) {
+                return fromString(contextClass.getFullyQualifiedName());
             }
-        }
-        return builder.toString();
+        });
+        final String s = asString(join(contexts.intersperse(fromString(RunnableItemBuilder.ITEM_SEPARATOR))));
+        // SUPPRESS GenericIllegalRegexp {
+        System.out.println("contexts to run = " + s);
+        // } SUPPRESS GenericIllegalRegexp
+        return s;
     }
 
     private List<JavaClassName> findContextsFromAllAggregators() {
-        final List<JavaClassName> contextClasses = new ArrayList<JavaClassName>();
-        for (final Specifications specificationLocator : specificationLocators) {
-            contextClasses.addAll(asList(specificationLocator.getContextClasses()));
-        }
-        return contextClasses;
+        return join(specificationLocators.map(new F<Specifications, List<JavaClassName>>() {
+            public List<JavaClassName> f(final Specifications locator) {
+                return toFjList(locator.getContextClasses());
+            }
+        }));
     }
 
     private void checkExecutePreconditions() {

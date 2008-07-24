@@ -75,4 +75,10 @@ public final class CompleteSpecificationMethod extends Primordial implements Spe
     public SpecificationResult run() {
         return specificationRunner.run(this);
     }
+
+    @Override
+    public String toString() {
+        return CompleteSpecificationMethod.class.getSimpleName() + "[method=" + method + ";before=" + beforeSpecificationMethods.toCollection() +
+                ";after=" + afterSpecificationMethods.toCollection() + "]";
+    }
 }

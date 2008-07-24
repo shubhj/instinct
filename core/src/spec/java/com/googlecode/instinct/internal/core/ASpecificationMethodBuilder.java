@@ -18,10 +18,12 @@ package com.googlecode.instinct.internal.core;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
 import com.googlecode.instinct.marker.annotate.Subject;
+import fj.Effect;
 import fj.F;
 import fj.data.List;
 import org.junit.runner.RunWith;
@@ -44,6 +46,12 @@ public final class ASpecificationMethodBuilder {
                 return method instanceof PendingSpecificationMethod;
             }
         });
+        specs.foreach(new Effect<SpecificationMethod>() {
+            public void e(final SpecificationMethod method) {
+                expect.that(method.getBeforeSpecificationMethods()).isOfSize(1);
+                expect.that(method.getAfterSpecificationMethods()).isOfSize(1);
+            }
+        });
     }
 
     @Specification
@@ -54,6 +62,12 @@ public final class ASpecificationMethodBuilder {
                 return method instanceof CompleteSpecificationMethod;
             }
         });
+        specs.foreach(new Effect<SpecificationMethod>() {
+            public void e(final SpecificationMethod method) {
+                expect.that(method.getBeforeSpecificationMethods()).isOfSize(1);
+                expect.that(method.getAfterSpecificationMethods()).isOfSize(1);
+            }
+        });
     }
 
     @Specification
@@ -62,6 +76,12 @@ public final class ASpecificationMethodBuilder {
         expect.that(specs).contains(new F<SpecificationMethod, Boolean>() {
             public Boolean f(final SpecificationMethod method) {
                 return method instanceof ExpectingExceptionSpecificationMethod;
+            }
+        });
+        specs.foreach(new Effect<SpecificationMethod>() {
+            public void e(final SpecificationMethod method) {
+                expect.that(method.getBeforeSpecificationMethods()).isOfSize(1);
+                expect.that(method.getAfterSpecificationMethods()).isOfSize(1);
             }
         });
     }
@@ -78,6 +98,14 @@ public final class ASpecificationMethodBuilder {
     }
 
     private static final class Context {
+        @BeforeSpecification
+        public void before() {
+        }
+
+        @AfterSpecification
+        public void after() {
+        }
+
         @Specification(state = PENDING)
         public void pending() {
         }

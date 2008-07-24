@@ -32,8 +32,8 @@ import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import com.googlecode.instinct.test.matcher.MethodMatcher;
+import fj.data.List;
 import java.lang.reflect.Method;
-import java.util.Collection;
 import org.hamcrest.Matcher;
 import org.jmock.Expectations;
 
@@ -52,37 +52,41 @@ public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
     }
 
     public void testFindsSpecificationMethodsConformingToNamingConventionInASimpleNamingConventionContext() {
-        final Collection<Method> specificationMethods = getSpecificationMethodsFromContextClass(ASimpleNamingConventionContext.class);
+        final List<Method> specificationMethods = getSpecificationMethodsFromContextClass(ASimpleNamingConventionContext.class);
         expect.that(specificationMethods).isOfSize(2);
-        expect.that(specificationMethods).containsItems(aMethodNamed("mustAlwaysReturnTrue"), aMethodNamed("shouldAlwaysReturnFalse"));
+        expect.that(specificationMethods).containsItem(aMethodNamed("mustAlwaysReturnTrue"));
+        expect.that(specificationMethods).containsItem(aMethodNamed("shouldAlwaysReturnFalse"));
     }
 
     public void testFindsBothAnnotatedAndNamedSpecificationMethodsInTheSameClass() {
-        final Collection<Method> methods = getSpecificationMethodsFromContextClass(AContextWithAnnotationsAndNamingConventions.class);
+        final List<Method> methods = getSpecificationMethodsFromContextClass(AContextWithAnnotationsAndNamingConventions.class);
         expect.that(methods).isOfSize(3);
-        expect.that(methods).containsItems(aMethodNamed("mustDoSomethingRatherVague"), aMethodNamed("doSomeCrazyRequirement"),
-                aMethodNamed("shouldDoSomethingReallyImportant"));
+        expect.that(methods).containsItem(aMethodNamed("mustDoSomethingRatherVague"));
+        expect.that(methods).containsItem(aMethodNamed("doSomeCrazyRequirement"));
+        expect.that(methods).containsItem(aMethodNamed("shouldDoSomethingReallyImportant"));
     }
 
     public void testFindsAnnotatedBeforeSpecificationMethodsInASimpleContext() {
-        final Collection<Method> methods = getBeforeSpecificationMethodsFromContextClass(ASimpleContext.class, "");
+        final List<Method> methods = getBeforeSpecificationMethodsFromContextClass(ASimpleContext.class, "");
         expect.that(methods).isOfSize(2);
-        expect.that(methods).containsItems(aMethodNamed("setUp"), aMethodNamed("setUpAgain"));
+        expect.that(methods).containsItem(aMethodNamed("setUp"));
+        expect.that(methods).containsItem(aMethodNamed("setUpAgain"));
     }
 
     public void testFindsNamingConventionBeforeSpecificationMethodsInASimpleNamingConventionContext() {
-        final Collection<Method> methods = getBeforeSpecificationMethodsFromContextClass(ASimpleNamingConventionContext.class, "^before.*");
+        final List<Method> methods = getBeforeSpecificationMethodsFromContextClass(ASimpleNamingConventionContext.class, "^before.*");
         expect.that(methods).isOfSize(2);
-        expect.that(methods).containsItems(aMethodNamed("beforeSpecification"), aMethodNamed("beforeWeDoStuff"));
+        expect.that(methods).containsItem(aMethodNamed("beforeSpecification"));
+        expect.that(methods).containsItem(aMethodNamed("beforeWeDoStuff"));
     }
 
     public void testReturnsAUniqueListOfMethodsWhenAMethodHasBothAnnotationAndNamingConvention() {
-        final Collection<Method> methods = getSpecificationMethodsFromContextClass(AContextThatHasAMethodWithAnnotationAndNamingConvention.class);
+        final List<Method> methods = getSpecificationMethodsFromContextClass(AContextThatHasAMethodWithAnnotationAndNamingConvention.class);
         expect.that(methods).isOfSize(1);
         expect.that(methods).containsItem(aMethodNamed("mustDoSomething"));
     }
 
-    private Collection<Method> specificationMethodsInASimpleContextClass() {
+    private List<Method> specificationMethodsInASimpleContextClass() {
         return getSpecificationMethodsFromContextClass(ASimpleContext.class);
     }
 
@@ -90,7 +94,7 @@ public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
         return new MethodMatcher(methodName);
     }
 
-    private <T> Collection<Method> getBeforeSpecificationMethodsFromContextClass(final Class<T> cls, final Object namingPattern) {
+    private <T> List<Method> getBeforeSpecificationMethodsFromContextClass(final Class<T> cls, final Object namingPattern) {
         expect.that(new Expectations() {
             {
                 atLeast(1).of(namingConvention).getPattern();
@@ -100,7 +104,7 @@ public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
         return locator.locateAll(cls, new MarkingSchemeImpl(BeforeSpecification.class, namingConvention, IGNORE));
     }
 
-    private <T> Collection<Method> getSpecificationMethodsFromContextClass(final Class<T> cls) {
+    private <T> List<Method> getSpecificationMethodsFromContextClass(final Class<T> cls) {
         expect.that(new Expectations() {
             {
                 atLeast(1).of(namingConvention).getPattern();

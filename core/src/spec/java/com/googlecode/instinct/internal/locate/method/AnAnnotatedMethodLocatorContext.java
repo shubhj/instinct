@@ -21,8 +21,8 @@ import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import fj.data.List;
 import java.lang.reflect.Method;
-import java.util.Collection;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
@@ -37,13 +37,13 @@ public final class AnAnnotatedMethodLocatorContext {
 
     @Specification
     public void shouldReturnMethodsThatMatchTheSuppliedCriteria() {
-        final Collection<Method> methods = locator.locate(WithAnnotatedMethods.class, Specification.class);
+        final List<Method> methods = locator.locate(WithAnnotatedMethods.class, Specification.class);
         expect.that(methods).isOfSize(1);
     }
 
     @Specification
     public void shouldNotReturnMethodsThatDoNotMatchTheSuppliedCriteria() {
-        final Collection<Method> methods = locator.locate(WithoutAnnotatedMethods.class, Specification.class);
+        final List<Method> methods = locator.locate(WithoutAnnotatedMethods.class, Specification.class);
         expect.that(methods).isOfSize(0);
     }
 

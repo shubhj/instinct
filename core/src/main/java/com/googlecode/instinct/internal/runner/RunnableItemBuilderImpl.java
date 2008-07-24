@@ -21,25 +21,24 @@ import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.RunnableItem;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
-import static com.googlecode.instinct.internal.util.Fj.toFjArray;
+import static com.googlecode.instinct.internal.util.Fj.toFjList;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.ClassInstantiator;
 import com.googlecode.instinct.internal.util.instance.ClassInstantiatorImpl;
 import fj.F;
 import fj.data.List;
 import static java.lang.reflect.Modifier.isAbstract;
-import java.util.Collection;
 
 public final class RunnableItemBuilderImpl implements RunnableItemBuilder {
     private ClassInstantiator classInstantiator = new ClassInstantiatorImpl();
 
-    public Collection<RunnableItem> build(final String itemsToRun) {
+    public List<RunnableItem> build(final String itemsToRun) {
         checkNotNull(itemsToRun);
-        return toFjArray(itemsToRun.split(ITEM_SEPARATOR)).map(new F<String, RunnableItem>() {
+        return toFjList(itemsToRun.split(ITEM_SEPARATOR)).map(new F<String, RunnableItem>() {
             public RunnableItem f(final String item) {
                 return buildItem(item);
             }
-        }).toCollection();
+        });
     }
 
     private RunnableItem buildItem(final String itemToRun) {
@@ -63,11 +62,7 @@ public final class RunnableItemBuilderImpl implements RunnableItemBuilder {
             throw new IllegalArgumentException(
                     "Specification method '" + contextClass.getType().getName() + METHOD_SEPARATOR + items[1] + "' does not exist");
         } else {
-            final SpecificationMethod spec = specs.head();
-            // SUPPRESS GenericIllegalRegexp {
-            //            System.out.println("spec = " + spec);
-            // } SUPPRESS GenericIllegalRegexp
-            return spec;
+            return specs.head();
         }
     }
 

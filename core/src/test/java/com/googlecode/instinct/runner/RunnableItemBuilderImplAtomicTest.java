@@ -33,8 +33,8 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
-import java.util.Collection;
-import java.util.Iterator;
+import fj.F;
+import fj.data.List;
 import org.jmock.Expectations;
 
 @SuppressWarnings({"ALL"})
@@ -65,9 +65,13 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
                 will(returnValue(CONTEXT_CLASS_1));
             }
         });
-        final Collection<RunnableItem> builtItems = runnableItemBuilder.build(CONTEXT_CLASS_1.getName());
+        final List<RunnableItem> builtItems = runnableItemBuilder.build(CONTEXT_CLASS_1.getName());
         expect.that(builtItems).isOfSize(1);
-        expectRunnableItemIsAContextClass(builtItems.iterator().next(), CONTEXT_CLASS_1);
+        expect.that(builtItems).contains(new F<RunnableItem, Boolean>() {
+            public Boolean f(RunnableItem item) {
+                return ContextClass.class.isAssignableFrom(item.getClass()) && CONTEXT_CLASS_1.isAssignableFrom(((ContextClass) item).getType());
+            }
+        });
     }
 
     public void testBuildsASingleSpecificationMethodNameIntoARunnableItem() {
@@ -78,9 +82,14 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
             }
         });
         final String specificationMethod = CONTEXT_CLASS_1.getName() + METHOD_SEPARATOR + "toCheckVerification";
-        final Collection<RunnableItem> builtItems = runnableItemBuilder.build(specificationMethod);
+        final List<RunnableItem> builtItems = runnableItemBuilder.build(specificationMethod);
         expect.that(builtItems).isOfSize(1);
-        expectRunnableItemIsASpecificationMethod(builtItems.iterator().next(), "toCheckVerification");
+        expect.that(builtItems).contains(new F<RunnableItem, Boolean>() {
+            public Boolean f(RunnableItem item) {
+                return SpecificationMethod.class.isAssignableFrom(item.getClass()) &&
+                        ((SpecificationMethod) item).getName().equals("toCheckVerification");
+            }
+        });
     }
 
     public void testBuildsMultipleContextNamesIntoRunnableItems() {
@@ -93,8 +102,18 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
             }
         });
         final String itemsToRun = CONTEXT_CLASS_1.getName() + ITEM_SEPARATOR + CONTEXT_CLASS_2.getName();
-        final Collection<RunnableItem> builtItems = runnableItemBuilder.build(itemsToRun);
-        expectTwoContextsBuilt(builtItems);
+        final List<RunnableItem> builtItems = runnableItemBuilder.build(itemsToRun);
+        expect.that(builtItems).isOfSize(2);
+        expect.that(builtItems).contains(new F<RunnableItem, Boolean>() {
+            public Boolean f(RunnableItem item) {
+                return ContextClass.class.isAssignableFrom(item.getClass()) && CONTEXT_CLASS_1.isAssignableFrom(((ContextClass) item).getType());
+            }
+        });
+        expect.that(builtItems).contains(new F<RunnableItem, Boolean>() {
+            public Boolean f(RunnableItem item) {
+                return ContextClass.class.isAssignableFrom(item.getClass()) && CONTEXT_CLASS_2.isAssignableFrom(((ContextClass) item).getType());
+            }
+        });
     }
 
     public void testBuildsMultipleContextsAndSpecificationsIntoRunnableItems() {
@@ -108,8 +127,22 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
         });
         final String specificationMethod = CONTEXT_CLASS_1.getName() + METHOD_SEPARATOR + "toCheckVerification";
         final String contextClass = CONTEXT_CLASS_2.getName();
-        final Collection<RunnableItem> builtItems = runnableItemBuilder.build(specificationMethod + ITEM_SEPARATOR + contextClass);
-        expectAContextAndASpecificationMethodBuilt(builtItems);
+        final List<RunnableItem> builtItems = runnableItemBuilder.build(specificationMethod + ITEM_SEPARATOR + contextClass);
+        expect.that(builtItems).isOfSize(2);
+        expect.that(builtItems).contains(new F<RunnableItem, Boolean>() {
+            public Boolean f(RunnableItem item) {
+                if (SpecificationMethod.class.isAssignableFrom(item.getClass())) {
+                    return ((SpecificationMethod) item).getName().equals("toCheckVerification");
+                } else {
+                    return true;
+                }
+            }
+        });
+        expect.that(builtItems).contains(new F<RunnableItem, Boolean>() {
+            public Boolean f(RunnableItem item) {
+                return ContextClass.class.isAssignableFrom(item.getClass()) && CONTEXT_CLASS_2.isAssignableFrom(((ContextClass) item).getType());
+            }
+        });
     }
 
     public void testRejectsSpecsMarkedWithTwoMethods() {
@@ -133,29 +166,5 @@ public final class RunnableItemBuilderImplAtomicTest extends InstinctTestCase {
                 runnableItemBuilder.build(specToRun);
             }
         });
-    }
-
-    private void expectTwoContextsBuilt(final Collection<RunnableItem> builtItems) {
-        expect.that(builtItems).isOfSize(2);
-        final Iterator<RunnableItem> iterator = builtItems.iterator();
-        expectRunnableItemIsAContextClass(iterator.next(), CONTEXT_CLASS_1);
-        expectRunnableItemIsAContextClass(iterator.next(), CONTEXT_CLASS_2);
-    }
-
-    private void expectAContextAndASpecificationMethodBuilt(final Collection<RunnableItem> builtItems) {
-        expect.that(builtItems).isOfSize(2);
-        final Iterator<RunnableItem> iterator = builtItems.iterator();
-        expectRunnableItemIsASpecificationMethod(iterator.next(), "toCheckVerification");
-        expectRunnableItemIsAContextClass(iterator.next(), CONTEXT_CLASS_2);
-    }
-
-    private <T> void expectRunnableItemIsAContextClass(final RunnableItem runnableItem, final Class<T> expectedWrappedClass) {
-        expect.that(runnableItem.getClass()).isTypeCompatibleWith(ContextClass.class);
-        expect.that(((ContextClass) runnableItem).getType()).isTypeCompatibleWith(expectedWrappedClass);
-    }
-
-    private void expectRunnableItemIsASpecificationMethod(final RunnableItem runnableItem, final String specificationMethod) {
-        expect.that(runnableItem.getClass()).isTypeCompatibleWith(SpecificationMethod.class);
-        expect.that(((SpecificationMethod) runnableItem).getName()).isEqualTo(specificationMethod);
     }
 }

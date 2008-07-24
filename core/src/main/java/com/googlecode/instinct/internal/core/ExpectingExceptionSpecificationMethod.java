@@ -104,6 +104,12 @@ public final class ExpectingExceptionSpecificationMethod extends Primordial impl
         }
     }
 
+    @Override
+    public String toString() {
+        return ExpectingExceptionSpecificationMethod.class.getSimpleName() + "[method=" + method + ";before=" +
+                beforeSpecificationMethods.toCollection() + ";after=" + afterSpecificationMethods.toCollection() + "]";
+    }
+
     @SuppressWarnings({"TypeMayBeWeakened"})
     private <T extends Throwable> SpecificationResult processExpectedFailure(final long startTime, final Class<T> expectedExceptionClass,
             final Throwable thrownException) {

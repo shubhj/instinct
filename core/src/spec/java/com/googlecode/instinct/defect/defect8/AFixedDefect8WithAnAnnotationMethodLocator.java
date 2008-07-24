@@ -28,11 +28,9 @@ import com.googlecode.instinct.marker.annotate.AfterSpecification;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
+import fj.F;
+import fj.data.List;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
@@ -42,39 +40,43 @@ public class AFixedDefect8WithAnAnnotationMethodLocator {
 
     @Specification
     public void shouldReturnABeforeSpecificationDefinedInABaseClass() {
-        final Collection<Method> methods = locator.locate(AContext.class, BeforeSpecification.class);
+        final List<Method> methods = locator.locate(AContext.class, BeforeSpecification.class);
         expect.that(methods).isOfSize(1);
-        expect.that(methods.iterator().next().getName()).isEqualTo("setup");
+        expect.that(methods.head().getName()).isEqualTo("setup");
     }
 
     @Specification
     public void shouldReturnAnAfterSpecificationDefinedInABaseClass() {
-        final Collection<Method> methods = locator.locate(AContext.class, AfterSpecification.class);
+        final List<Method> methods = locator.locate(AContext.class, AfterSpecification.class);
         expect.that(methods).isOfSize(1);
-        expect.that(methods.iterator().next().getName()).isEqualTo("tearDown");
+        expect.that(methods.head().getName()).isEqualTo("tearDown");
     }
 
     @Specification
     public void shouldReturnSpecificationsInAContextAndItsBaseClasses() {
-        final Collection<Method> methods = locator.locate(AnotherContext.class, Specification.class);
+        final List<Method> methods = locator.locate(AnotherContext.class, Specification.class);
         expect.that(methods).isOfSize(2);
-        final List<String> expectList = new ArrayList<String>();
-        expectList.add("shouldEquateTrueToTrue");
-        expectList.add("shouldEquateFalseToFalse");
-        final Iterator<Method> methodIterator = methods.iterator();
-        expect.that(expectList).containsItem(methodIterator.next().getName());
-        expect.that(expectList).containsItem(methodIterator.next().getName());
+        expect.that(methods).contains(new F<Method, Boolean>() {
+            public Boolean f(final Method method) {
+                return method.getName().equals("shouldEquateTrueToTrue");
+            }
+        });
+        expect.that(methods).contains(new F<Method, Boolean>() {
+            public Boolean f(final Method method) {
+                return method.getName().equals("shouldEquateFalseToFalse");
+            }
+        });
     }
 
     @Specification
     public void shouldReturnStaticSpecificationsInAContextAndItsBasesClasses() {
-        final Collection<Method> methods = locator.locate(StaticSubContext.class, Specification.class);
+        final List<Method> methods = locator.locate(StaticSubContext.class, Specification.class);
         expect.that(methods).isOfSize(2);
     }
 
     @Specification
     public void shouldReturnSpecificationsOfAllVisibilitiesFromAContextAndItsBaseClasses() {
-        final Collection<Method> methods = locator.locate(ASubContextOfAnAccessRestrictedContext.class, Specification.class);
+        final List<Method> methods = locator.locate(ASubContextOfAnAccessRestrictedContext.class, Specification.class);
         expect.that(methods).isOfSize(4);
     }
 }

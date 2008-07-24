@@ -20,8 +20,8 @@ import com.googlecode.instinct.expect.Expect;
 import com.googlecode.instinct.internal.locate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.test.InstinctTestCase;
+import fj.data.List;
 import java.lang.reflect.Method;
-import java.util.Collection;
 
 public final class AnnotatedMethodLocatorSlowTest extends InstinctTestCase {
     private AnnotatedMethodLocator locator;
@@ -32,7 +32,7 @@ public final class AnnotatedMethodLocatorSlowTest extends InstinctTestCase {
     }
 
     public void testFindsCorrectNumberOfSpecificationsWhenGivenSpecsWithDifferentAccessModifiers() {
-        final Collection<Method> methods = locator.locate(ContextWithSpecsWithDifferentAccessModifiers.class, Specification.class);
+        final List<Method> methods = locator.locate(ContextWithSpecsWithDifferentAccessModifiers.class, Specification.class);
         Expect.expect.that(methods).isOfSize(5);
     }
 }

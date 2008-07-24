@@ -16,14 +16,14 @@
 
 package com.googlecode.instinct.runner;
 
-import java.util.Collection;
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.locate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.internal.core.RunnableItem;
+import com.googlecode.instinct.internal.locate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
 import static com.googlecode.instinct.internal.runner.RunnableItemBuilder.METHOD_SEPARATOR;
 import com.googlecode.instinct.internal.runner.RunnableItemBuilderImpl;
 import com.googlecode.instinct.test.InstinctTestCase;
+import fj.data.List;
 
 public final class RunnableItemBuilderImplSlowTest extends InstinctTestCase {
     private RunnableItemBuilder runnableItemBuilder;
@@ -42,7 +42,7 @@ public final class RunnableItemBuilderImplSlowTest extends InstinctTestCase {
     }
 
     private <T> void checkBuildCorrectNumberOfItems(final Class<T> contextClass, final String methodName, final int expectedRunnables) {
-        final Collection<RunnableItem> items = runnableItemBuilder.build(contextClass.getName() + METHOD_SEPARATOR + methodName);
+        final List<RunnableItem> items = runnableItemBuilder.build(contextClass.getName() + METHOD_SEPARATOR + methodName);
         expect.that(items).isOfSize(expectedRunnables);
     }
 }

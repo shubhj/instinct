@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2008 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,10 +28,16 @@ import static com.googlecode.instinct.internal.runner.RunnableItemBuilder.ITEM_S
 import com.googlecode.instinct.internal.runner.RunnableItemBuilderImpl;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.util.Fix;
+import static com.googlecode.instinct.internal.util.Fj.toFjList;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import com.googlecode.instinct.report.ResultMessageBuilder;
+import fj.F;
+import fj.data.List;
+import static fj.data.List.asString;
+import static fj.data.List.fromString;
+import static fj.data.List.join;
 import java.io.BufferedWriter;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -84,7 +90,7 @@ public final class CommandLineRunner implements ContextListener, SpecificationLi
         long totalTime = 0L;
         int numberSuccess = 0;
         int numberFailed = 0;
-        final Collection<RunnableItem> runnableItems = RUNNABLE_ITEM_BUILDER.build(itemsToRun);
+        final Collection<RunnableItem> runnableItems = RUNNABLE_ITEM_BUILDER.build(itemsToRun).toCollection();
         for (final RunnableItem runnableItem : runnableItems) {
             runnableItem.addContextListener(this);
             runnableItem.addSpecificationListener(this);
@@ -128,10 +134,11 @@ public final class CommandLineRunner implements ContextListener, SpecificationLi
     }
 
     private static String mergeCommandLineArguments(final String... args) {
-        final StringBuilder items = new StringBuilder();
-        for (final String arg : args) {
-            items.append(arg).append(ITEM_SEPARATOR);
-        }
-        return items.toString();
+        final List<List<Character>> contexts = toFjList(args).map(new F<String, List<Character>>() {
+            public List<Character> f(final String arg) {
+                return fromString(arg);
+            }
+        });
+        return asString(join(contexts.intersperse(fromString(ITEM_SEPARATOR))));
     }
 }

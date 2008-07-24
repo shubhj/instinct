@@ -49,7 +49,9 @@ import com.googlecode.instinct.internal.core.AnExectingExceptionSpecificationMet
 import com.googlecode.instinct.internal.edge.org.hamcrest.AStringFactoryImplContext;
 import com.googlecode.instinct.internal.locate.field.ANamedFieldLocatorWithFieldsToFind;
 import com.googlecode.instinct.internal.locate.field.ANamedFieldLocatorWithNoFieldsToFind;
+import com.googlecode.instinct.internal.locate.method.ASuperClassTraversingMethodLocator;
 import com.googlecode.instinct.internal.locate.method.AnAnnotatedMethodLocatorContext;
+import com.googlecode.instinct.internal.util.AMethodEqualityUtility;
 import com.googlecode.instinct.internal.util.ExceptionSanitiserWithKnownException;
 import com.googlecode.instinct.internal.util.ExceptionSanitiserWithUnknownException;
 import com.googlecode.instinct.internal.util.Suggest;
@@ -87,6 +89,7 @@ public final class SpecificationsSuite {
                 ADummyAutoWireDeterminatorWithNoMarkedFields.class, APendingSpecificationMethodWithoutAReason.class,
                 APendingSpecificationMethodWithAReason.class, ASpecificationThatThrowsAnExpectedException.class,
                 AnExectingExceptionSpecificationMethod.class, ASpecificationThatExpectsAnExceptionButOneIsNotThrown.class,
-                ASpecificationMethodBuilder.class, AFjItemInListMatcher.class};
+                ASpecificationMethodBuilder.class, AFjItemInListMatcher.class, AMethodEqualityUtility.class,
+                ASuperClassTraversingMethodLocator.class};
     }
 }

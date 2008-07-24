@@ -21,17 +21,12 @@ import com.googlecode.instinct.marker.naming.NamingConvention;
 import fj.F;
 import fj.data.List;
 import java.lang.reflect.Method;
-import java.util.Collection;
 
 public final class NamedMethodLocatorImpl implements NamedMethodLocator {
     private final SuperClassTraversingMethodLocator methodLocator = new SuperClassTraversingMethodLocatorImpl();
 
-    public <T> Collection<Method> locate(final Class<T> cls, final NamingConvention namingConvention) {
+    public <T> List<Method> locate(final Class<T> cls, final NamingConvention namingConvention) {
         checkNotNull(cls, namingConvention);
-        return findNamedMethods(cls, namingConvention).toCollection();
-    }
-
-    private <T> List<Method> findNamedMethods(final Class<T> cls, final NamingConvention namingConvention) {
         return methodLocator.locate(cls).filter(new F<Method, Boolean>() {
             public Boolean f(final Method method) {
                 return method.getName().matches(namingConvention.getPattern());

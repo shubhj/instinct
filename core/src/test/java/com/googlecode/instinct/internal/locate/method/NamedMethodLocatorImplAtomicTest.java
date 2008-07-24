@@ -23,9 +23,8 @@ import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import fj.data.List;
 import java.lang.reflect.Method;
-import java.util.Collection;
-import org.hamcrest.Matcher;
 import org.jmock.Expectations;
 import org.jmock.internal.matcher.MethodNameMatcher;
 
@@ -45,8 +44,7 @@ public final class NamedMethodLocatorImplAtomicTest extends InstinctTestCase {
                 will(returnValue("^must.*"));
             }
         });
-        final Collection<Method> methods = methodLocator.locate(ASimpleNamingConventionContext.class, namingConvention);
-        final Matcher<Method> aMethodNamedMustAlwaysReturnTrue = new MethodNameMatcher("^mustAlwaysReturnTrue$");
-        expect.that(methods).containsItem(aMethodNamedMustAlwaysReturnTrue);
+        final List<Method> methods = methodLocator.locate(ASimpleNamingConventionContext.class, namingConvention);
+        expect.that(methods).containsItem(new MethodNameMatcher("^mustAlwaysReturnTrue$"));
     }
 }

@@ -18,7 +18,6 @@ package com.googlecode.instinct.internal.core;
 
 import com.googlecode.instinct.internal.locate.method.MarkedMethodLocator;
 import com.googlecode.instinct.internal.locate.method.MarkedMethodLocatorImpl;
-import static com.googlecode.instinct.internal.util.Fj.toFjList;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
@@ -44,15 +43,15 @@ public final class SpecificationMethodBuilderImpl implements SpecificationMethod
     private MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
 
     public <T> List<LifecycleMethod> buildBeforeSpecificationMethods(final Class<T> contextType) {
-        return toFjList(methodLocator.locateAll(contextType, BEFORE_SPECIFICATION)).map(lifecycleMethod(contextType));
+        return methodLocator.locateAll(contextType, BEFORE_SPECIFICATION).map(lifecycleMethod(contextType));
     }
 
     public <T> List<LifecycleMethod> buildAfterSpecificationMethods(final Class<T> contextType) {
-        return toFjList(methodLocator.locateAll(contextType, AFTER_SPECIFICATION)).map(lifecycleMethod(contextType));
+        return methodLocator.locateAll(contextType, AFTER_SPECIFICATION).map(lifecycleMethod(contextType));
     }
 
     public <T> List<SpecificationMethod> buildSpecificationMethods(final Class<T> contextType) {
-        return toFjList(methodLocator.locateAll(contextType, SPECIFICATION)).map(specificationMethod(contextType));
+        return methodLocator.locateAll(contextType, SPECIFICATION).map(specificationMethod(contextType));
     }
 
     private <T> F<Method, LifecycleMethod> lifecycleMethod(final Class<T> contextType) {

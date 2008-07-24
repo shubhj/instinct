@@ -29,10 +29,10 @@ import com.googlecode.instinct.marker.naming.AfterSpecificationNamingConvention;
 import com.googlecode.instinct.marker.naming.BeforeSpecificationNamingConvention;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
+import fj.Effect;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
-import java.util.Collection;
 import java.util.List;
 import org.junit.runner.RunWith;
 
@@ -88,11 +88,13 @@ public class AFixedDefect8WithANamingConventionLocator {
 
     private void expectNamingConventionIsFollowed(final Class<?> targetClass, final NamingConvention namingConvention, final int numOfExpectedMethods,
             final List<String> expectedMethodNames) {
-        final Collection<Method> locatedMethods = locator.locate(targetClass, namingConvention);
+        final fj.data.List<Method> locatedMethods = locator.locate(targetClass, namingConvention);
         expect.that(locatedMethods).isOfSize(numOfExpectedMethods);
-        for (final Method aLocatedMethod : locatedMethods) {
-            expect.that(expectedMethodNames).containsItem(aLocatedMethod.getName());
-        }
+        locatedMethods.foreach(new Effect<Method>() {
+            public void e(final Method method) {
+                expect.that(expectedMethodNames).containsItem(method.getName());
+            }
+        });
     }
 
     private List<String> createMethodList(final String... methodNames) {

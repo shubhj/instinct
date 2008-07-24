@@ -23,9 +23,9 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.ClassInstantiator;
 import com.googlecode.instinct.internal.util.instance.ClassInstantiatorImpl;
 import com.googlecode.instinct.marker.MarkingScheme;
+import fj.data.List;
 import java.io.File;
 import java.lang.reflect.Method;
-import java.util.Collection;
 
 @Fix("Remove dupe with MarkedFileChecker.")
 public final class MarkedMethodFileChecker implements MarkedFileChecker {
@@ -46,7 +46,7 @@ public final class MarkedMethodFileChecker implements MarkedFileChecker {
     private boolean classContainsMarkedMethods(final File classFile, final MarkingScheme markingScheme) {
         try {
             final Class<?> candidateClass = classInstantiator.instantiateClass(classFile, packageRoot);
-            final Collection<Method> methods = markedMethodLocator.locateAll(candidateClass, markingScheme);
+            final List<Method> methods = markedMethodLocator.locateAll(candidateClass, markingScheme);
             return !methods.isEmpty();
         } catch (EdgeException e) {
             return false;

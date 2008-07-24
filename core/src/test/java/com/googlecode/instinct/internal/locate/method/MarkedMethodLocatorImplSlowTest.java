@@ -17,7 +17,6 @@
 package com.googlecode.instinct.internal.locate.method;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.test.matcher.MethodMatcher;
 import com.googlecode.instinct.internal.runner.AContextWithAnnotationsAndNamingConventions;
 import com.googlecode.instinct.internal.runner.ASimpleNamingConventionContext;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
@@ -26,8 +25,9 @@ import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
+import com.googlecode.instinct.test.matcher.MethodMatcher;
+import fj.data.List;
 import java.lang.reflect.Method;
-import java.util.Collection;
 import org.hamcrest.Matcher;
 
 @SuppressWarnings({"unchecked"})
@@ -46,19 +46,21 @@ public final class MarkedMethodLocatorImplSlowTest extends InstinctTestCase {
     }
 
     public void testFindsNamingConventionMethodsInASimpleNamingConventionContext() {
-        final Collection<Method> methods = locate(ASimpleNamingConventionContext.class);
+        final List<Method> methods = locate(ASimpleNamingConventionContext.class);
         expect.that(methods).isOfSize(2);
-        expect.that(methods).containsItems(aMethodNamed("mustAlwaysReturnTrue"), aMethodNamed("shouldAlwaysReturnFalse"));
+        expect.that(methods).containsItem(aMethodNamed("mustAlwaysReturnTrue"));
+        expect.that(methods).containsItem(aMethodNamed("shouldAlwaysReturnFalse"));
     }
 
     public void testFindsSpecMethodsInAClassContainingNamedMethodsAndAnnotatedMethods() {
-        final Collection<Method> methods = locate(AContextWithAnnotationsAndNamingConventions.class);
+        final List<Method> methods = locate(AContextWithAnnotationsAndNamingConventions.class);
         expect.that(methods).isOfSize(3);
-        expect.that(methods).containsItems(aMethodNamed("mustDoSomethingRatherVague"), aMethodNamed("doSomeCrazyRequirement"),
-                aMethodNamed("shouldDoSomethingReallyImportant"));
+        expect.that(methods).containsItem(aMethodNamed("mustDoSomethingRatherVague"));
+        expect.that(methods).containsItem(aMethodNamed("doSomeCrazyRequirement"));
+        expect.that(methods).containsItem(aMethodNamed("shouldDoSomethingReallyImportant"));
     }
 
-    private <T> Collection<Method> locate(final Class<T> contextClass) {
+    private <T> List<Method> locate(final Class<T> contextClass) {
         return locator.locateAll(contextClass, markingScheme);
     }
 

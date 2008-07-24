@@ -16,10 +16,10 @@
 
 package com.googlecode.instinct.internal.locate.method;
 
+import fj.data.List;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.Collection;
 
 public interface AnnotatedMethodLocator {
-    <A extends Annotation, T> Collection<Method> locate(Class<T> cls, Class<A> runtimeAnnotationType);
+    <A extends Annotation, T> List<Method> locate(Class<T> cls, Class<A> runtimeAnnotationType);
 }

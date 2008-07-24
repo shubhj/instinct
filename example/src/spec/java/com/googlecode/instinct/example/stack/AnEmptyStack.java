@@ -18,12 +18,10 @@ public final class AnEmptyStack {
     @BeforeSpecification
     void before() {
         stack = new StackImpl<Object>();
-        //        System.out.println("in before = " + stack);
     }
 
     @Specification
     void isEmpty() {
-        //        System.out.println("in isEmpty = " + stack);
         expect.that(stack.isEmpty()).isTrue();
     }
 

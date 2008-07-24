@@ -17,11 +17,11 @@
 package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.core.RunnableItem;
-import java.util.Collection;
+import fj.data.List;
 
 public interface RunnableItemBuilder {
     String METHOD_SEPARATOR = "#";
     String ITEM_SEPARATOR = " ";
 
-    Collection<RunnableItem> build(String itemsToRun);
+    List<RunnableItem> build(String itemsToRun);
 }

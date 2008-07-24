@@ -16,12 +16,10 @@
 
 package com.googlecode.instinct.internal.locate.method;
 
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.MarkingScheme;
+import fj.data.List;
 import java.lang.reflect.Method;
-import java.util.Collection;
 
 public interface MarkedMethodLocator {
-    @Suggest("Use methodedge")
-            <T> Collection<Method> locateAll(Class<T> cls, MarkingScheme markingScheme);
+    <T> List<Method> locateAll(Class<T> cls, MarkingScheme markingScheme);
 }
