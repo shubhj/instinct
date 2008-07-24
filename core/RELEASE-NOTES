@@ -4,11 +4,14 @@ o Reductio Integration
   o Integrated Reductio, a tool for automated specification testing. See
     http://reductiotest.org/ for more information.
 o Bugs
-  o Fixed bug where abstract classes where inadvertently run as a result of specification
-    runner refactoring.
+  o (Issue 36) Abstract classes are being run as a result of specification runner refactoring.
 
 
 * Instinct Release 0.1.7 *
+
+Maintenance release; removed in progress specification state, runners emit pending reason,
+added Functional Java based matchers, upgraded to Ant 1.7.1, CGLib 2.2, jMock 2.5.0 and
+Objenesis 1.1, internal re-write of specification runners.
 
 o Core Features
   o Removed in progress specification state, use pending instead.
@@ -23,7 +26,7 @@ o Infrastructure
   o Continued clean up of specification running code.
   o Upgraded to: Ant 1.7.1, CGLib 2.2, jMock 2.5.0 and Objenesis 1.1.
 o Bugs
-  o (defect-11) It would be nice not to have to depend on jmock when writing a BDD-style
+  o (Issue 11) It would be nice not to have to depend on jmock when writing a BDD-style
     test involving no mocks.
 
 
