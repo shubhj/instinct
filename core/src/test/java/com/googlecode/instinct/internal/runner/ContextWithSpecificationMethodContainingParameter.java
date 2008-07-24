@@ -19,9 +19,10 @@ package com.googlecode.instinct.internal.runner;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 
+@SuppressWarnings({"UnusedDeclaration"})
 @Context
-public class ContextWithSpecificationMethodContainingParameter {
+public final class ContextWithSpecificationMethodContainingParameter {
     @Specification
-    public void specificationTakesAParam(final String param1) {
+    public void specificationTakesAParam(final String param) {
     }
 }

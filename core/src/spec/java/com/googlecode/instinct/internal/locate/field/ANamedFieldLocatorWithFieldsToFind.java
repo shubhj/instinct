@@ -33,12 +33,6 @@ public final class ANamedFieldLocatorWithFieldsToFind {
         checkClass(NamedFieldLocatorImpl.class, NamedFieldLocator.class);
     }
 
-    @Specification(expectedException = UnsupportedOperationException.class)
-    public void returnsAnUnmodifiableSetOfFields() {
-        final Iterable<Field> fields = locator.locate(WithNamedFields.class, namingConvention);
-        fields.iterator().remove();
-    }
-
     @Specification
     public void findFieldsMarkedWithANamingConvention() {
         final Iterable<Field> fields = locator.locate(WithNamedFields.class, namingConvention);

@@ -51,6 +51,7 @@
         <include name="${lib.dir}/objenesis/objenesis-*.jar"/>
         <include name="${lib.dir}/ant/ant-1.*.jar"/>
         <include name="${lib.dir}/hamcrest/hamcrest-*.jar"/>
+        <include name="${lib.dir}/functionaljava/functionaljava-*.jar"/>
         <include name="${lib.dir}/clover/clover-*.jar"/>
     </patternset>
     <patternset id="spec.classpath.pattern">

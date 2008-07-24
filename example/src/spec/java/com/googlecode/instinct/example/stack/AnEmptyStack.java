@@ -9,6 +9,7 @@ import static com.googlecode.instinct.marker.annotate.Specification.Specificatio
 import com.googlecode.instinct.marker.annotate.Subject;
 import org.junit.runner.RunWith;
 
+@SuppressWarnings({"UnusedDeclaration"})
 @RunWith(InstinctRunner.class)
 public final class AnEmptyStack {
     @Subject private Stack<Object> stack;
@@ -17,10 +18,12 @@ public final class AnEmptyStack {
     @BeforeSpecification
     void before() {
         stack = new StackImpl<Object>();
+        //        System.out.println("in before = " + stack);
     }
 
     @Specification
     void isEmpty() {
+        //        System.out.println("in isEmpty = " + stack);
         expect.that(stack.isEmpty()).isTrue();
     }
 

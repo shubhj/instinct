@@ -28,6 +28,7 @@ import com.googlecode.instinct.expect.state.checker.ComparableChecker;
 import com.googlecode.instinct.expect.state.checker.DoubleChecker;
 import com.googlecode.instinct.expect.state.checker.EventObjectChecker;
 import com.googlecode.instinct.expect.state.checker.FileChecker;
+import com.googlecode.instinct.expect.state.checker.FjListChecker;
 import com.googlecode.instinct.expect.state.checker.IterableChecker;
 import com.googlecode.instinct.expect.state.checker.MapChecker;
 import com.googlecode.instinct.expect.state.checker.NodeChecker;
@@ -35,6 +36,7 @@ import com.googlecode.instinct.expect.state.checker.ObjectChecker;
 import com.googlecode.instinct.expect.state.checker.StringChecker;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import fj.data.List;
 import java.io.File;
 import java.util.Collection;
 import java.util.EventObject;
@@ -70,6 +72,10 @@ public final class ExpectThatImpl implements ExpectThat {
 
     public <T> ArrayChecker<T> that(final T[] array) {
         return stateExpectations.that(array);
+    }
+
+    public <T> FjListChecker<T> that(final List<T> list) {
+        return stateExpectations.that(list);
     }
 
     public <K, V> MapChecker<K, V> that(final Map<K, V> map) {

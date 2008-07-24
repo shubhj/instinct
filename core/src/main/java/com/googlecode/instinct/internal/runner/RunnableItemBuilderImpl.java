@@ -19,36 +19,27 @@ package com.googlecode.instinct.internal.runner;
 import com.googlecode.instinct.internal.core.AbstractContextClass;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
-import com.googlecode.instinct.internal.core.LifecycleMethodImpl;
-import com.googlecode.instinct.internal.core.OldDodgySpecificationMethodImpl;
 import com.googlecode.instinct.internal.core.RunnableItem;
-import com.googlecode.instinct.internal.edge.EdgeException;
-import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
-import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
+import static com.googlecode.instinct.internal.util.Fj.toFjArray;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.ClassInstantiator;
 import com.googlecode.instinct.internal.util.instance.ClassInstantiatorImpl;
-import java.lang.reflect.Method;
+import fj.F;
+import fj.data.List;
 import static java.lang.reflect.Modifier.isAbstract;
-import java.util.ArrayList;
 import java.util.Collection;
 
 public final class RunnableItemBuilderImpl implements RunnableItemBuilder {
     private ClassInstantiator classInstantiator = new ClassInstantiatorImpl();
-    private ClassEdge classEdge = new ClassEdgeImpl();
 
     public Collection<RunnableItem> build(final String itemsToRun) {
         checkNotNull(itemsToRun);
-        final Collection<RunnableItem> builtItems = new ArrayList<RunnableItem>();
-        buildItems(itemsToRun, builtItems);
-        return builtItems;
-    }
-
-    private void buildItems(final String itemsToRun, final Collection<RunnableItem> builtItems) {
-        final String[] items = itemsToRun.split(ITEM_SEPARATOR);
-        for (final String item : items) {
-            builtItems.add(buildItem(item));
-        }
+        return toFjArray(itemsToRun.split(ITEM_SEPARATOR)).map(new F<String, RunnableItem>() {
+            public RunnableItem f(final String item) {
+                return buildItem(item);
+            }
+        }).toCollection();
     }
 
     private RunnableItem buildItem(final String itemToRun) {
@@ -59,35 +50,34 @@ public final class RunnableItemBuilderImpl implements RunnableItemBuilder {
         }
     }
 
-    private RunnableItem buildContextClass(final String contextToRun) {
+    private RunnableItem buildSpecificationMethod(final String specToRun) {
+        final String[] items = specToRun.split(METHOD_SEPARATOR);
+        checkOnlyOneSpecMethod(items);
+        final ContextClass contextClass = buildContextClass(items[0]);
+        final List<SpecificationMethod> specs = contextClass.getSpecificationMethods().filter(new F<SpecificationMethod, Boolean>() {
+            public Boolean f(final SpecificationMethod spec) {
+                return spec.getName().equals(items[1]);
+            }
+        });
+        if (specs.isEmpty()) {
+            throw new IllegalArgumentException(
+                    "Specification method '" + contextClass.getType().getName() + METHOD_SEPARATOR + items[1] + "' does not exist");
+        } else {
+            final SpecificationMethod spec = specs.head();
+            // SUPPRESS GenericIllegalRegexp {
+            //            System.out.println("spec = " + spec);
+            // } SUPPRESS GenericIllegalRegexp
+            return spec;
+        }
+    }
+
+    private ContextClass buildContextClass(final String contextToRun) {
         final Class<?> contextClass = classInstantiator.instantiateClass(contextToRun);
         if (isAbstract(contextClass.getModifiers())) {
             return new AbstractContextClass(contextClass);
         } else {
             return new ContextClassImpl(contextClass);
         }
-    }
-
-    private RunnableItem buildSpecificationMethod(final String specToRun) {
-        final String[] items = specToRun.split(METHOD_SEPARATOR);
-        checkOnlyOneSpecMethod(items);
-        final ContextClass contextClass = (ContextClass) buildContextClass(items[0]);
-        final Method specificationMethod = findSpecMethod(contextClass, items[1]);
-        return createSpecificationMethod(contextClass, specificationMethod);
-    }
-
-    private Method findSpecMethod(final ContextClass contextClass, final String methodName) {
-        try {
-            return classEdge.getDeclaredMethod(contextClass.getType(), methodName);
-        } catch (EdgeException e) {
-            throw new IllegalArgumentException(
-                    "Specification method '" + contextClass.getType().getName() + METHOD_SEPARATOR + methodName + "' does not exist", e);
-        }
-    }
-
-    private RunnableItem createSpecificationMethod(final ContextClass contextClass, final Method specMethod) {
-        return new OldDodgySpecificationMethodImpl(new LifecycleMethodImpl(specMethod), contextClass.getBeforeSpecificationMethods(),
-                contextClass.getAfterSpecificationMethods());
     }
 
     private void checkOnlyOneSpecMethod(final String[] items) {

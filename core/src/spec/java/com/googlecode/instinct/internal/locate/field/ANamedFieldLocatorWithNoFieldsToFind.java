@@ -18,7 +18,7 @@ import java.lang.reflect.Field;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
-public final class ANamedFieldLocatorWithNothingNoFieldsToFind {
+public final class ANamedFieldLocatorWithNoFieldsToFind {
     @Subject(implementation = NamedFieldLocatorImpl.class) private NamedFieldLocator locator;
     @Stub(auto = false) private NamingConvention namingConvention;
 
@@ -31,12 +31,6 @@ public final class ANamedFieldLocatorWithNothingNoFieldsToFind {
     @Specification
     public void conformsToClassTraits() {
         checkClass(NamedFieldLocatorImpl.class, NamedFieldLocator.class);
-    }
-
-    @Specification(expectedException = UnsupportedOperationException.class)
-    public void returnsAnUnmodifiableSetOfFields() {
-        final Iterable<Field> fields = locator.locate(WithoutNamedFields.class, namingConvention);
-        fields.iterator().remove();
     }
 
     @Specification

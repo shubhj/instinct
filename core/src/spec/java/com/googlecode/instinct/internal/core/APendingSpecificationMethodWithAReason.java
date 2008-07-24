@@ -18,60 +18,74 @@ package com.googlecode.instinct.internal.core;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunPendingStatus;
 import static com.googlecode.instinct.internal.util.Reflector.getDeclaredMethod;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
-import static com.googlecode.instinct.marker.annotate.Specification.NO_REASON;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import fj.data.List;
 import java.lang.reflect.Method;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
-public final class APendingSpecificationMethodWithoutAReason {
+public final class APendingSpecificationMethodWithAReason {
     @Subject(auto = false) private PendingSpecificationMethod pendingMethod;
-    @Stub(auto = false) private Method underlyingMethod;
+    @Stub List<LifecycleMethod> beforeSpecificationMethods;
+    @Stub List<LifecycleMethod> afterSpecificationMethods;
 
     @BeforeSpecification
     public void before() {
-        underlyingMethod = getDeclaredMethod(WithPendingSpecification.class, "aPendingMethod");
-        pendingMethod = new PendingSpecificationMethod(underlyingMethod);
+        final Method method = getDeclaredMethod(PendingSpecificationWithReason.class, "aPendingMethod");
+        pendingMethod = new PendingSpecificationMethod(method, beforeSpecificationMethods, afterSpecificationMethods);
     }
 
     @Specification
-    public void hasANameThatComesFromTheUnderlyingMethod() {
-        expect.that(pendingMethod.getName()).isEqualTo("aPendingMethod");
+    public void conformsToClassTraits() {
+        checkClass(PendingSpecificationMethod.class, SpecificationMethod.class);
     }
 
     @Specification
-    public void hasNoPendingReason() {
+    public void hasANameThatComesFromTheUnderlyingMethodWithPendingAnnotation() {
+        expect.that(pendingMethod.getName()).isEqualTo("aPendingMethod [PENDING - Haven't done it yet]");
+    }
+
+    @Specification
+    public void exposesTheContextClass() {
+        expect.that(pendingMethod.getContextClass().equals(PendingSpecificationWithReason.class)).isTrue();
+    }
+
+    @Specification
+    public void pullsThePendingReasonOffTheAnnotation() {
         final String reason = pendingMethod.getPendingReason();
-        expect.that(reason).isEqualTo(NO_REASON);
+        expect.that(reason).isEqualTo("Haven't done it yet");
     }
 
     @Specification
     public void includesThePendingDescriptionInTheNameOfTheResult() {
-        expect.that(pendingMethod.run().getSpecificationName()).isEqualTo("aPendingMethod [PENDING]");
+        expect.that(pendingMethod.run().getSpecificationName()).isEqualTo("aPendingMethod [PENDING - Haven't done it yet]");
     }
 
     @Specification
-    public void returnsAPendingRunStatus() {
-        final SpecificationResult result = pendingMethod.run();
-        expect.that(result.getStatus()).isOfType(SpecificationRunPendingStatus.class);
+    public void hasAPendingStatus() {
+        expect.that(pendingMethod.run().getStatus()).isOfType(SpecificationRunPendingStatus.class);
     }
 
     @Specification
-    public void takesNoTimeToRun() {
-        final SpecificationResult result = pendingMethod.run();
-        expect.that(result.getExecutionTime()).isEqualTo(0L);
+    public void runsSuccessfully() {
+        expect.that(pendingMethod.run().completedSuccessfully()).isTrue();
+    }
+
+    @Specification
+    public void runsInZeroTime() {
+        expect.that(pendingMethod.run().getExecutionTime()).isEqualTo(0L);
     }
 
     @SuppressWarnings({"ALL"})
-    private static final class WithPendingSpecification {
-        @Specification(state = PENDING)
+    private static final class PendingSpecificationWithReason {
+        @Specification(state = PENDING, reason = "Haven't done it yet")
         public void aPendingMethod() {
         }
     }

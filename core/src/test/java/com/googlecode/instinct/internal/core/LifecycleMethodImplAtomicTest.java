@@ -17,20 +17,18 @@
 package com.googlecode.instinct.internal.core;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.sandbox.ForAll;
+import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 public final class LifecycleMethodImplAtomicTest extends InstinctTestCase {
-    private static final Class<ASampleClass> CLASS_TO_TEST = ASampleClass.class;
     private LifecycleMethod lifecycleMethod;
     private Method method;
 
     @Override
     public void setUpTestDoubles() {
-        method = CLASS_TO_TEST.getMethods()[0];
+        method = SampleClass.class.getMethods()[0];
     }
 
     @Override
@@ -51,18 +49,12 @@ public final class LifecycleMethodImplAtomicTest extends InstinctTestCase {
     }
 
     public void testReturnsDeclaringClassOfUnderlyingMethod() {
-        expect.that((Object) lifecycleMethod.getContextClass()).isTheSameInstanceAs(CLASS_TO_TEST);
+        expect.that((Object) lifecycleMethod.getContextClass()).isTheSameInstanceAs(SampleClass.class);
     }
 
-    public void testReturnsParametersAnnotations() {
-        final Annotation[][] parameterAnnotations = lifecycleMethod.getParameterAnnotations();
-        expect.that(parameterAnnotations).isEqualTo(method.getParameterAnnotations());
-        expect.that(parameterAnnotations).isOfSize(1);
-        expect.that(parameterAnnotations[0]).isOfSize(1);
-        expect.that(parameterAnnotations[0][0].annotationType().getClass().equals(ForAll.class));
-    }
-
-    public void testReturnsAnnotationsFromUnderlyingMethod() {
-        expect.that(lifecycleMethod.getAnnotations()).isEqualTo(method.getAnnotations());
+    private static final class SampleClass {
+        @Specification
+        public void someMethod() {
+        }
     }
 }

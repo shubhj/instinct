@@ -18,23 +18,17 @@ package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.expect.behaviour.Mocker;
-import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
-import com.googlecode.instinct.internal.core.LifecycleMethod;
-import com.googlecode.instinct.internal.core.LifecycleMethodImpl;
-import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
-import com.googlecode.instinct.internal.core.OldDodgySpecificationMethodImpl;
-import static com.googlecode.instinct.internal.util.Reflector.getMethod;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import fj.Effect;
+import fj.F;
 import org.jmock.api.ExpectationError;
 
 @SuppressWarnings({"StringContatenationInLoop", "OverlyCoupledClass", "UnusedDeclaration"})
 public final class SpecificationRunnerSlowTest extends InstinctTestCase {
-    @Subject(implementation = OldDodgySpecificationRunnerImpl.class) private SpecificationRunner runner;
+    @Subject(implementation = SpecificationRunnerImpl.class) private SpecificationRunner runner;
 
     public void testRunWithSuccess() {
         checkContextsRunWithoutError(ContextContainerWithSetUpAndTearDown.class);
@@ -52,61 +46,14 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
         checkInvalidMethodsBarf(ContextWithInvalidlyMarkedBeforeSpecification2.class);
     }
 
-    public void testExpectedFailuresSucceed() {
-        final SpecificationResult specificationResult = runner.run(getSpecificationMethod(ContextWithExpectedFailures.class, "failsWithoutMessage"));
-        expect.that(specificationResult.completedSuccessfully()).isTrue();
-    }
-
-    public void testExpectedFailureWithDifferentExceptionFails() {
-        final SpecificationResult specificationResult =
-                runner.run(getSpecificationMethod(ContextWithExpectedFailures.class, "failsWithDifferentException"));
-        expect.that(specificationResult.completedSuccessfully()).isFalse();
-    }
-
-    public void testExpectedFailuresWithExpectedMessageSucceeds() {
-        final SpecificationResult specificationResult = runner.run(getSpecificationMethod(ContextWithExpectedFailures.class, "failsWithMessage"));
-        expect.that(specificationResult.completedSuccessfully()).isTrue();
-    }
-
-    public void testExpectedFailuresWithDifferentMessageCausesFailure() {
-        final SpecificationResult specificationResult =
-                runner.run(getSpecificationMethod(ContextWithExpectedFailures.class, "failsWithDifferentMessage"));
-        expect.that(specificationResult.completedSuccessfully()).isFalse();
-    }
-
-    public void testExpectedFailureButDoesNotFail() {
-        final SpecificationResult specificationResult =
-                runner.run(getSpecificationMethod(ContextWithExpectedFailures.class, "markedAsFailureButDoesNot"));
-        expect.that(specificationResult.completedSuccessfully()).isFalse();
-    }
-
-    public void testExpectedFailureWithEdgeException() {
-        final SpecificationResult specificationResult =
-                runner.run(getSpecificationMethod(ContextWithExpectedFailures.class, "expectedFailureWithEdgeException"));
-        expect.that(specificationResult.completedSuccessfully()).isTrue();
-    }
-
-    public void testExpectedFailureWithEdgeExceptionWithNestedInvocationTargetException() {
-        final SpecificationResult specificationResult = runner.run(
-                getSpecificationMethod(ContextWithExpectedFailures.class, "expectedFailureWithEdgeExceptionWithInvocationTargetException"));
-        expect.that(specificationResult.completedSuccessfully()).isTrue();
-    }
-
-    public void testExpectedFailureWithIndexOutOfBoundsException() {
-        final OldDodgySpecificationMethod method =
-                getSpecificationMethod(ContextWithExpectedFailures.class, "expectedFailureWithIndexOutOfBoundsException");
-        final SpecificationResult specificationResult = runner.run(method);
-        expect.that(specificationResult.completedSuccessfully()).isTrue();
-    }
-
     public void testWiresInStubsMocksAndDummiesForUseSpecifications() {
-        final OldDodgySpecificationMethod method = getSpecificationMethod(ContextWithAutoWiredFields.class, "doSomethingWithAutoWiredDoubles");
+        final SpecificationMethod method = getSpecificationMethod(ContextWithAutoWiredFields.class, "doSomethingWithAutoWiredDoubles");
         final SpecificationResult result = runner.run(method);
         expect.that(result.completedSuccessfully()).isTrue();
     }
 
     public void testVerifiesAutoWiredMocks() {
-        final OldDodgySpecificationMethod method = getSpecificationMethod(ContextWithAutoWiredFields.class, "autoWiredMocksFailToBeCalled");
+        final SpecificationMethod method = getSpecificationMethod(ContextWithAutoWiredFields.class, "autoWiredMocksFailToBeCalled");
         final SpecificationResult result = runner.run(method);
         // Note. Need to reset the mocker or the error will be caught in the InstinctTestCase super class.
         Mocker.reset();
@@ -118,36 +65,29 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
         expect.that(failureCause.getMessage()).matchesRegex("not all expectations were satisfied");
     }
 
-    private <T> OldDodgySpecificationMethod getSpecificationMethod(final Class<T> contextClass, final String specMethodName) {
-        return new OldDodgySpecificationMethodImpl(new LifecycleMethodImpl(getMethod(contextClass, specMethodName)),
-                Collections.<LifecycleMethod>emptyList(), Collections.<LifecycleMethod>emptyList());
+    private <T> SpecificationMethod getSpecificationMethod(final Class<T> contextClass, final Object specMethodName) {
+        return new ContextClassImpl(contextClass).getSpecificationMethods().filter(new F<SpecificationMethod, Boolean>() {
+            public Boolean f(final SpecificationMethod a) {
+                return a.getName().equals(specMethodName);
+            }
+        }).head();
     }
 
     private <T> void checkContextsRunWithoutError(final Class<T> contextClass) {
-        final Collection<OldDodgySpecificationMethod> specificationMethods = findSpecificationMethods(contextClass);
-        for (final OldDodgySpecificationMethod specificationMethod : specificationMethods) {
-            final SpecificationResult result = runner.run(specificationMethod);
-            expect.that(result.completedSuccessfully()).isTrue();
-        }
+        new ContextClassImpl(contextClass).getSpecificationMethods().foreach(new Effect<SpecificationMethod>() {
+            public void e(final SpecificationMethod a) {
+                final SpecificationResult result = runner.run(a);
+                expect.that(result.completedSuccessfully()).isTrue();
+            }
+        });
     }
 
     private <T> void checkInvalidMethodsBarf(final Class<T> contextClass) {
-        final Collection<OldDodgySpecificationMethod> specificationMethods = findSpecificationMethods(contextClass);
-        for (final OldDodgySpecificationMethod specificationMethod : specificationMethods) {
-            final SpecificationResult specificationResult = runner.run(specificationMethod);
-            assertFalse("Spec " + specificationMethod.getName() + " should have failed", specificationResult.completedSuccessfully());
-        }
-    }
-
-    private <T> Collection<OldDodgySpecificationMethod> findSpecificationMethods(final Class<T> cls) {
-        final Collection<OldDodgySpecificationMethod> specs = new ArrayList<OldDodgySpecificationMethod>();
-        final ContextClass contextClass = new ContextClassImpl(cls);
-        final Collection<LifecycleMethod> specificationMethods = contextClass.getSpecificationMethods();
-        for (final LifecycleMethod specificationMethod : specificationMethods) {
-            final OldDodgySpecificationMethod spec = new OldDodgySpecificationMethodImpl(specificationMethod,
-                    contextClass.getBeforeSpecificationMethods(), contextClass.getAfterSpecificationMethods());
-            specs.add(spec);
-        }
-        return specs;
+        new ContextClassImpl(contextClass).getSpecificationMethods().foreach(new Effect<SpecificationMethod>() {
+            public void e(final SpecificationMethod a) {
+                final SpecificationResult specificationResult = runner.run(a);
+                expect.that(specificationResult.completedSuccessfully()).isFalse();
+            }
+        });
     }
 }

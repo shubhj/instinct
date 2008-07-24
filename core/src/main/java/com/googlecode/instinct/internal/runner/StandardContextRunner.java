@@ -17,28 +17,27 @@
 package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.core.ContextClass;
-import com.googlecode.instinct.internal.core.LifecycleMethod;
-import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
-import com.googlecode.instinct.internal.core.OldDodgySpecificationMethodImpl;
 import com.googlecode.instinct.internal.core.RunnableItem;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
-import java.util.ArrayList;
-import java.util.Collection;
+import fj.Effect;
+import fj.data.List;
+import static fj.data.List.nil;
 
 public final class StandardContextRunner implements ContextRunner {
-    private final Collection<ContextListener> contextListeners = new ArrayList<ContextListener>();
-    private final Collection<SpecificationListener> specificationListeners = new ArrayList<SpecificationListener>();
+    private List<ContextListener> contextListeners = nil();
+    private List<SpecificationListener> specificationListeners = nil();
 
     public void addContextListener(final ContextListener contextListener) {
         checkNotNull(contextListener);
-        contextListeners.add(contextListener);
+        contextListeners = contextListeners.cons(contextListener);
     }
 
     public void addSpecificationListener(final SpecificationListener specificationListener) {
         checkNotNull(specificationListener);
-        specificationListeners.add(specificationListener);
+        specificationListeners = specificationListeners.cons(specificationListener);
     }
 
     public ContextResult run(final ContextClass contextClass) {
@@ -56,39 +55,36 @@ public final class StandardContextRunner implements ContextRunner {
     }
 
     private void runSpecifications(final ContextClass contextClass, final ContextResult contextResult) {
-        for (final LifecycleMethod specificationMethod : contextClass.getSpecificationMethods()) {
-            final OldDodgySpecificationMethod spec = createSpecificationMethod(contextClass, specificationMethod);
-            final SpecificationResult specificationResult = runSpecification(spec);
-            contextResult.addSpecificationResult(specificationResult);
-        }
-    }
-
-    private SpecificationResult runSpecification(final OldDodgySpecificationMethod specificationMethod) {
-        addSpecificationListeners(specificationMethod);
-        return specificationMethod.run();
-    }
-
-    private OldDodgySpecificationMethod createSpecificationMethod(final ContextClass contextClass, final LifecycleMethod specificationMethod) {
-        final Collection<LifecycleMethod> beforeSpecificationMethods = contextClass.getBeforeSpecificationMethods();
-        final Collection<LifecycleMethod> afterSpecificationMethods = contextClass.getAfterSpecificationMethods();
-        return new OldDodgySpecificationMethodImpl(specificationMethod, beforeSpecificationMethods, afterSpecificationMethods);
+        final List<SpecificationMethod> specs = contextClass.getSpecificationMethods();
+        specs.foreach(new Effect<SpecificationMethod>() {
+            public void e(final SpecificationMethod spec) {
+                addSpecificationListeners(spec);
+                contextResult.addSpecificationResult(spec.run());
+            }
+        });
     }
 
     private void addSpecificationListeners(final RunnableItem specificationMethod) {
-        for (final SpecificationListener specificationListener : specificationListeners) {
-            specificationMethod.addSpecificationListener(specificationListener);
-        }
+        specificationListeners.foreach(new Effect<SpecificationListener>() {
+            public void e(final SpecificationListener listener) {
+                specificationMethod.addSpecificationListener(listener);
+            }
+        });
     }
 
     private void notifyListenersOfPreContextRun(final ContextClass contextClass) {
-        for (final ContextListener contextListener : contextListeners) {
-            contextListener.preContextRun(contextClass);
-        }
+        contextListeners.foreach(new Effect<ContextListener>() {
+            public void e(final ContextListener listener) {
+                listener.preContextRun(contextClass);
+            }
+        });
     }
 
     private void notifyListenersOfPostContextRun(final ContextClass contextClass, final ContextResult contextResult) {
-        for (final ContextListener contextListener : contextListeners) {
-            contextListener.postContextRun(contextClass, contextResult);
-        }
+        contextListeners.foreach(new Effect<ContextListener>() {
+            public void e(final ContextListener listener) {
+                listener.postContextRun(contextClass, contextResult);
+            }
+        });
     }
 }

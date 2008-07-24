@@ -28,12 +28,12 @@ import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 import java.util.Collection;
 import org.jmock.Expectations;
 
+@SuppressWarnings({"UnusedDeclaration"})
 public final class AnnotatedFieldLocatorImplAtomicTest extends InstinctTestCase {
     @Subject private AnnotatedFieldLocator locator;
     @Mock private AnnotationChecker checker;
@@ -45,15 +45,6 @@ public final class AnnotatedFieldLocatorImplAtomicTest extends InstinctTestCase 
 
     public void testConformsToClassTraits() {
         checkClass(AnnotatedFieldLocatorImpl.class, AnnotatedFieldLocator.class);
-    }
-
-    public void testReturnsAnUnModifiableCollection() {
-        expectException(UnsupportedOperationException.class, new Runnable() {
-            public void run() {
-                final Collection<Field> fields = new AnnotatedFieldLocatorImpl().locate(WithoutRuntimeAnnotations.class, Dummy.class);
-                fields.clear();
-            }
-        });
     }
 
     public void testLocateOnAClassWithNoAnnotationsReturnsNoFields() {

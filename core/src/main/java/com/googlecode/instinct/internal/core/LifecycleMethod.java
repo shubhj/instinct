@@ -15,7 +15,6 @@
  */
 package com.googlecode.instinct.internal.core;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 public interface LifecycleMethod {
@@ -23,9 +22,5 @@ public interface LifecycleMethod {
 
     Method getMethod();
 
-    Annotation[] getAnnotations();
-
-    Annotation[][] getParameterAnnotations();
-
-    Class<?> getContextClass();
+    <T> Class<T> getContextClass();
 }

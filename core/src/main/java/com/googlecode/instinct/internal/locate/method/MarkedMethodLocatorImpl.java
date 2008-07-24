@@ -20,7 +20,6 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.MarkingScheme;
 import java.lang.reflect.Method;
 import java.util.Collection;
-import static java.util.Collections.unmodifiableCollection;
 import java.util.HashSet;
 
 public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
@@ -32,7 +31,7 @@ public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
         final Collection<Method> methods = new HashSet<Method>();
         methods.addAll(findMethodsByAnnotation(cls, markingScheme));
         methods.addAll(findMethodsByNamingConvention(cls, markingScheme));
-        return unmodifiableCollection(methods);
+        return methods;
     }
 
     private <T> Collection<Method> findMethodsByAnnotation(final Class<T> cls, final MarkingScheme markingScheme) {

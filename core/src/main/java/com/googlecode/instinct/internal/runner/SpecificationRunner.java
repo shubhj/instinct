@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2008 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,10 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.runner.SpecificationListener;
 
+/** Runs a complete/ordinary (non-pending, non-exception expecting) specification. */
 public interface SpecificationRunner {
     /**
      * Registers a listener for specification lifecycle events.
@@ -27,9 +28,9 @@ public interface SpecificationRunner {
     void addSpecificationListener(SpecificationListener specificationListener);
 
     /**
-     * Runs the given specification.
-     * @param specificationMethod A specification to run.
-     * @return The results of running the given specification.
+     * Runs the <var>specificationMethod</var>.
+     * @param specificationMethod The specification to run.
+     * @return The results of running the specification.
      */
-    SpecificationResult run(OldDodgySpecificationMethod specificationMethod);
+    SpecificationResult run(SpecificationMethod specificationMethod);
 }

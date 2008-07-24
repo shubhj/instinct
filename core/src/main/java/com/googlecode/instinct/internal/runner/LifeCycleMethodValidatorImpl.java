@@ -24,17 +24,15 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.ContextConfigurationException;
 import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
-import com.googlecode.instinct.sandbox.ForAll;
 import java.lang.reflect.Method;
 
 public final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
     private final ClassEdge edgeClass = new ClassEdgeImpl();
-    private final ParameterAnnotationFinder annotationFinder = new ParameterAnnotationFinderImpl();
 
     @Suggest("Consider adding parameter types to message for overloaded methods")
     public void checkMethodHasNoParameters(final LifecycleMethod method) {
         checkNotNull(method);
-        if (method.getMethod().getParameterTypes().length > 0 && !annotationFinder.hasAnnotation(ForAll.class, method.getParameterAnnotations())) {
+        if (method.getMethod().getParameterTypes().length > 0) {
             final String methodDetails = method.getContextClass().getSimpleName() + '.' + method.getName() + "(...)";
             final String message = "Unable to run context. Specifaction method '" + methodDetails + "' cannot have parameters";
             throw new LifeCycleMethodConfigurationException(message);

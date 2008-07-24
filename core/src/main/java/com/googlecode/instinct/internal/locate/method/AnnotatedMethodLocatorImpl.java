@@ -20,32 +20,21 @@ import com.googlecode.instinct.internal.locate.AnnotationChecker;
 import com.googlecode.instinct.internal.locate.AnnotationCheckerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
+import fj.F;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
 import java.util.Collection;
-import java.util.HashSet;
 
 public final class AnnotatedMethodLocatorImpl implements AnnotatedMethodLocator {
     private final AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
-    private final HierarchicalMethodLocator methodLocator = new HierarchicalMethodLocatorImpl();
+    private final SuperClassTraversingMethodLocator methodLocator = new SuperClassTraversingMethodLocatorImpl();
 
     public <A extends Annotation, T> Collection<Method> locate(final Class<T> cls, final Class<A> runtimeAnnotationType) {
         checkNotNull(cls, runtimeAnnotationType);
-        final Collection<Method> annotatedMethods = new HashSet<Method>();
-        for (final Method method : findMethods(cls)) {
-            if (methodIsAnnotated(runtimeAnnotationType, method)) {
-                annotatedMethods.add(method);
+        return methodLocator.locate(cls).filter(new F<Method, Boolean>() {
+            public Boolean f(final Method method) {
+                return annotationChecker.isAnnotated(method, runtimeAnnotationType, IGNORE);
             }
-        }
-        return annotatedMethods;
-    }
-
-    private Iterable<Method> findMethods(final Class<?> cls) {
-        return methodLocator.locate(cls);
-    }
-
-    private <A extends Annotation> boolean methodIsAnnotated(final Class<A> runtimeAnnotationType, final AnnotatedElement method) {
-        return annotationChecker.isAnnotated(method, runtimeAnnotationType, IGNORE);
+        }).toCollection();
     }
 }

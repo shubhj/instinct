@@ -20,7 +20,6 @@ import com.googlecode.instinct.marker.naming.NamingConvention;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
-import static java.util.Collections.unmodifiableCollection;
 
 public final class NamedFieldLocatorImpl implements NamedFieldLocator {
     public <T> Collection<Field> locate(final Class<T> cls, final NamingConvention namingConvention) {
@@ -30,6 +29,6 @@ public final class NamedFieldLocatorImpl implements NamedFieldLocator {
                 fields.add(field);
             }
         }
-        return unmodifiableCollection(fields);
+        return fields;
     }
 }

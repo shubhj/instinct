@@ -18,13 +18,14 @@ package com.googlecode.instinct.integrate.junit3;
 
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
-import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
 import com.googlecode.instinct.runner.SpecificationListener;
-import java.util.Collection;
+import fj.Effect;
+import fj.data.List;
 import junit.framework.TestSuite;
 
 @SuppressWarnings({"ThisEscapedInObjectConstruction"})
@@ -36,7 +37,7 @@ public final class ContextTestSuite extends TestSuite implements SpecificationLi
         checkNotNull(contextType);
         contextClass = objectFactory.create(ContextClassImpl.class, contextType);
         contextClass.addSpecificationListener(this);
-        addSpecificationsToSuite(contextClass.buildSpecificationMethods());
+        addSpecificationsToSuite(contextClass.getSpecificationMethods());
     }
 
     @Override
@@ -44,19 +45,21 @@ public final class ContextTestSuite extends TestSuite implements SpecificationLi
         return contextClass.getName();
     }
 
-    public void preSpecificationMethod(final OldDodgySpecificationMethod specificationMethod) {
+    public void preSpecificationMethod(final SpecificationMethod specificationMethod) {
         checkNotNull(specificationMethod);
         addTest(new SpecificationTestCase(specificationMethod));
     }
 
-    public void postSpecificationMethod(final OldDodgySpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
+    public void postSpecificationMethod(final SpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
         checkNotNull(specificationMethod, specificationResult);
         // ignored
     }
 
-    private void addSpecificationsToSuite(final Collection<OldDodgySpecificationMethod> specificationMethods) {
-        for (final OldDodgySpecificationMethod specificationMethod : specificationMethods) {
-            addTest(new SpecificationTestCase(specificationMethod));
-        }
+    private void addSpecificationsToSuite(final List<SpecificationMethod> specificationMethods) {
+        specificationMethods.foreach(new Effect<SpecificationMethod>() {
+            public void e(final SpecificationMethod a) {
+                addTest(new SpecificationTestCase(a));
+            }
+        });
     }
 }

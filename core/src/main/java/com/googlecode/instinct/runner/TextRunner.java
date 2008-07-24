@@ -21,16 +21,17 @@ import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.util.Fix;
+import static com.googlecode.instinct.internal.util.Fj.toFjArray;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.report.ResultFormat;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import com.googlecode.instinct.report.ResultMessageBuilder;
+import fj.Effect;
 import java.io.BufferedWriter;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
-@Fix({"Write atomic test for this.", "Don't make this implement ContextRunner, but create ContextClasses internally.?"})
 public final class TextRunner implements ContextRunner, ContextListener {
     private static final boolean AUTO_FLUSH_OUTPUT = true;
     private final PrintWriter writer;
@@ -83,6 +84,10 @@ public final class TextRunner implements ContextRunner, ContextListener {
         }
     }
 
+    /**
+     * Runs the specifications in the given context returning the result.
+     * @param contextClass The context class containing specifications to run.
+     */
     public ContextResult run(final ContextClass contextClass) {
         checkNotNull(contextClass);
         contextClass.addContextListener(this);
@@ -90,14 +95,16 @@ public final class TextRunner implements ContextRunner, ContextListener {
     }
 
     /**
-     * Runs the given contexts sending the results to standard out.
+     * Runs the specifications in the given contexts, sending the results to standard out using brief formatting..
      * @param contextClasses An array of classes containing specifications to run.
      */
     public static void runContexts(final Class<?>... contextClasses) {
         checkNotNull((Object[]) contextClasses);
         final ContextRunner runner = new TextRunner();
-        for (final Class<?> contextClass : contextClasses) {
-            runner.run(new ContextClassImpl(contextClass));
-        }
+        toFjArray(contextClasses).foreach(new Effect<Class<?>>() {
+            public void e(final Class<?> context) {
+                runner.run(new ContextClassImpl(context));
+            }
+        });
     }
 }

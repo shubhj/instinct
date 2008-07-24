@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2008 Tom Adams, Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,34 +17,17 @@
 package com.googlecode.instinct.internal.core;
 
 import com.googlecode.instinct.internal.lang.Primordial;
-import com.googlecode.instinct.internal.locate.method.MarkedMethodLocator;
-import com.googlecode.instinct.internal.locate.method.MarkedMethodLocatorImpl;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
-import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
-import com.googlecode.instinct.marker.MarkingScheme;
-import com.googlecode.instinct.marker.MarkingSchemeImpl;
-import com.googlecode.instinct.marker.annotate.AfterSpecification;
-import com.googlecode.instinct.marker.annotate.BeforeSpecification;
-import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.marker.naming.AfterSpecificationNamingConvention;
-import com.googlecode.instinct.marker.naming.BeforeSpecificationNamingConvention;
-import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
+import fj.data.List;
 
-@SuppressWarnings({"OverlyCoupledClass"})
-@Suggest("The interface should be typed?")
 public final class ContextClassImpl extends Primordial implements ContextClass {
     private ContextRunner contextRunner = new StandardContextRunner();
-    private MarkedMethodLocator methodLocator = new MarkedMethodLocatorImpl();
+    private final SpecificationMethodBuilder specificationBuilder = new SpecificationMethodBuilderImpl();
     private final Class<?> contextType;
 
     public <T> ContextClassImpl(final Class<T> contextType) {
@@ -75,35 +58,15 @@ public final class ContextClassImpl extends Primordial implements ContextClass {
         return contextRunner.run(this);
     }
 
-    public Collection<LifecycleMethod> getSpecificationMethods() {
-        return findMethods(new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention(), IGNORE));
+    public List<SpecificationMethod> getSpecificationMethods() {
+        return specificationBuilder.buildSpecificationMethods(contextType);
     }
 
-    public Collection<LifecycleMethod> getBeforeSpecificationMethods() {
-        return findMethods(new MarkingSchemeImpl(BeforeSpecification.class, new BeforeSpecificationNamingConvention(), IGNORE));
+    public List<LifecycleMethod> getBeforeSpecificationMethods() {
+        return specificationBuilder.buildBeforeSpecificationMethods(contextType);
     }
 
-    public Collection<LifecycleMethod> getAfterSpecificationMethods() {
-        return findMethods(new MarkingSchemeImpl(AfterSpecification.class, new AfterSpecificationNamingConvention(), IGNORE));
-    }
-
-    @Suggest({"This logic is duplicated in StandardContextRunner.createSpecificationMethod()"})
-    public Collection<OldDodgySpecificationMethod> buildSpecificationMethods() {
-        final Collection<OldDodgySpecificationMethod> specificationMethodResults = new ArrayList<OldDodgySpecificationMethod>();
-        for (final LifecycleMethod lifecycleSpecificationMethod : getSpecificationMethods()) {
-            final OldDodgySpecificationMethod specificationMethod = new OldDodgySpecificationMethodImpl(lifecycleSpecificationMethod,
-                    getBeforeSpecificationMethods(), getAfterSpecificationMethods());
-            specificationMethodResults.add(specificationMethod);
-        }
-        return specificationMethodResults;
-    }
-
-    private Collection<LifecycleMethod> findMethods(final MarkingScheme markingScheme) {
-        final Collection<LifecycleMethod> lifecycleMethodSet = new HashSet<LifecycleMethod>();
-        final Collection<Method> methods = methodLocator.locateAll(contextType, markingScheme);
-        for (final Method method : methods) {
-            lifecycleMethodSet.add(new LifecycleMethodImpl(method, contextType));
-        }
-        return lifecycleMethodSet;
+    public List<LifecycleMethod> getAfterSpecificationMethods() {
+        return specificationBuilder.buildAfterSpecificationMethods(contextType);
     }
 }

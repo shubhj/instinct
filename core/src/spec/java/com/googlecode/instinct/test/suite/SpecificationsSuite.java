@@ -38,15 +38,17 @@ import com.googlecode.instinct.defect.defect23.AFixedDefect23;
 import com.googlecode.instinct.defect.defect3.AFixedDefect3;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithANamingConventionLocator;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithAnAnnotationMethodLocator;
+import com.googlecode.instinct.expect.state.matcher.AFjItemInListMatcher;
 import com.googlecode.instinct.integrate.junit3.ContextTestSuite;
 import com.googlecode.instinct.internal.core.APendingSpecificationMethodWithAReason;
 import com.googlecode.instinct.internal.core.APendingSpecificationMethodWithoutAReason;
+import com.googlecode.instinct.internal.core.ASpecificationMethodBuilder;
 import com.googlecode.instinct.internal.core.ASpecificationThatExpectsAnExceptionButOneIsNotThrown;
 import com.googlecode.instinct.internal.core.ASpecificationThatThrowsAnExpectedException;
+import com.googlecode.instinct.internal.core.AnExectingExceptionSpecificationMethod;
 import com.googlecode.instinct.internal.edge.org.hamcrest.AStringFactoryImplContext;
 import com.googlecode.instinct.internal.locate.field.ANamedFieldLocatorWithFieldsToFind;
-import com.googlecode.instinct.internal.locate.field.ANamedFieldLocatorWithNothingNoFieldsToFind;
-import com.googlecode.instinct.internal.locate.method.AHierarchicalMethodLocatorContext;
+import com.googlecode.instinct.internal.locate.field.ANamedFieldLocatorWithNoFieldsToFind;
 import com.googlecode.instinct.internal.locate.method.AnAnnotatedMethodLocatorContext;
 import com.googlecode.instinct.internal.util.ExceptionSanitiserWithKnownException;
 import com.googlecode.instinct.internal.util.ExceptionSanitiserWithUnknownException;
@@ -71,10 +73,10 @@ public final class SpecificationsSuite {
     @Suggest("We should be able to automatically find these. Maybe add a group to all 'testdata' specs so they don't run.")
     private static Class<?>[] getContexts() {
         return new Class<?>[]{ExceptionSanitiserWithKnownException.class, ExceptionSanitiserWithUnknownException.class,
-                AnAnnotatedMethodLocatorContext.class, AHierarchicalMethodLocatorContext.class, AFixedDefect8WithAnAnnotationMethodLocator.class,
+                AnAnnotatedMethodLocatorContext.class, AFixedDefect8WithAnAnnotationMethodLocator.class,
                 AFixedDefect8WithANamingConventionLocator.class, AFixedDefect23.class, AFixedDefect3.class, CommonAPIContext.class,
                 AnObjectCheckerContext.class, AnObjectCheckerFailure.class, AStringFactoryImplContext.class,
-                ANamedFieldLocatorWithNothingNoFieldsToFind.class, ANamedFieldLocatorWithFieldsToFind.class,
+                ANamedFieldLocatorWithNoFieldsToFind.class, ANamedFieldLocatorWithFieldsToFind.class,
                 AMockAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire.class, AMockAutoWireDeterminatorWithAnAnnotatedFieldNotToAutoWire.class,
                 AMockAutoWireDeterminatorWithANamedFieldToAutoWire.class, AMockAutoWireDeterminatorWithANamedFieldNotToAutoWire.class,
                 AMockAutoWireDeterminatorWithNoMarkedFields.class, AStubAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire.class,
@@ -84,6 +86,7 @@ public final class SpecificationsSuite {
                 ADummyAutoWireDeterminatorWithANamedFieldToAutoWire.class, ADummyAutoWireDeterminatorWithANamedFieldNotToAutoWire.class,
                 ADummyAutoWireDeterminatorWithNoMarkedFields.class, APendingSpecificationMethodWithoutAReason.class,
                 APendingSpecificationMethodWithAReason.class, ASpecificationThatThrowsAnExpectedException.class,
-                ASpecificationThatExpectsAnExceptionButOneIsNotThrown.class};
+                AnExectingExceptionSpecificationMethod.class, ASpecificationThatExpectsAnExceptionButOneIsNotThrown.class,
+                ASpecificationMethodBuilder.class, AFjItemInListMatcher.class};
     }
 }

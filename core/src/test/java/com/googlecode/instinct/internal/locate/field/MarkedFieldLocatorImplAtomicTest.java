@@ -27,7 +27,6 @@ import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.marker.naming.MockNamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import com.googlecode.instinct.test.checker.ExceptionTestChecker;
 import java.lang.reflect.Field;
 import java.util.Collection;
 
@@ -54,15 +53,6 @@ public final class MarkedFieldLocatorImplAtomicTest extends InstinctTestCase {
         expect.that(fields).isNotEmpty();
         expect.that(fields).containsItem(field("mockCharSequence"));
         expect.that(fields).containsItem(field("mockAnotherCharSequence"));
-    }
-
-    public void testReturnsAnUnmodifiableCollection() {
-        ExceptionTestChecker.expectException(UnsupportedOperationException.class, new Runnable() {
-            public void run() {
-                final Collection<Field> fields = fieldLocator.locateAll(WithAnnotatedAndNamedFields.class, markingScheme);
-                fields.clear();
-            }
-        });
     }
 
     public void testDoesNotReturnTheSameFieldTwice() {

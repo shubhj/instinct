@@ -24,8 +24,11 @@ import com.googlecode.instinct.marker.annotate.Specification;
 
 @Context
 public final class ASimpleContext {
+    private Object stub;
+
     @BeforeSpecification
     public void setUp() {
+        stub = new Object();
     }
 
     @BeforeSpecification
@@ -34,7 +37,7 @@ public final class ASimpleContext {
 
     @Specification
     public void toCheckVerification() {
-        expect.that(true).isEqualTo(true);
+        expect.that(stub).isNotNull();
     }
 
     @AfterSpecification

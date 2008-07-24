@@ -21,7 +21,7 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
-import java.util.Collection;
+import static fj.data.List.nil;
 import static java.util.Collections.emptyList;
 import java.util.List;
 
@@ -54,26 +54,22 @@ public final class AbstractContextClass implements ContextClass {
         return new AbstractContextContextResult(getName());
     }
 
-    public Collection<LifecycleMethod> getSpecificationMethods() {
-        return emptyList();
+    public fj.data.List<SpecificationMethod> getSpecificationMethods() {
+        return nil();
     }
 
-    public Collection<LifecycleMethod> getBeforeSpecificationMethods() {
-        return emptyList();
+    public fj.data.List<LifecycleMethod> getBeforeSpecificationMethods() {
+        return nil();
     }
 
-    public Collection<LifecycleMethod> getAfterSpecificationMethods() {
-        return emptyList();
-    }
-
-    public Collection<OldDodgySpecificationMethod> buildSpecificationMethods() {
-        return emptyList();
+    public fj.data.List<LifecycleMethod> getAfterSpecificationMethods() {
+        return nil();
     }
 
     private static final class AbstractContextContextResult implements ContextResult {
         private final String contextName;
 
-        private <T> AbstractContextContextResult(final String contextName) {
+        private AbstractContextContextResult(final String contextName) {
             this.contextName = contextName;
         }
 

@@ -17,11 +17,12 @@
 package com.googlecode.instinct.internal.core;
 
 import com.googlecode.instinct.internal.runner.SpecificationResult;
-import com.googlecode.instinct.internal.util.Suggest;
+import fj.data.List;
 
-@Suggest("Add: Complete")
-public interface SpecificationMethod {
+public interface SpecificationMethod extends RunnableItem, LifecycleMethod {
+    List<LifecycleMethod> getBeforeSpecificationMethods();
+
+    List<LifecycleMethod> getAfterSpecificationMethods();
+
     SpecificationResult run();
-
-    String getName();
 }

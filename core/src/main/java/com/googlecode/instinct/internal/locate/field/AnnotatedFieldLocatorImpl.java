@@ -24,15 +24,13 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
-import static java.util.Collections.unmodifiableCollection;
 
 public final class AnnotatedFieldLocatorImpl implements AnnotatedFieldLocator {
     private AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
 
     public <A extends Annotation, T> Collection<Field> locate(final Class<T> cls, final Class<A> runtimeAnnotationType) {
         checkNotNull(cls, runtimeAnnotationType);
-        final Collection<Field> fields = findAnnotatedFields(cls.getDeclaredFields(), runtimeAnnotationType);
-        return unmodifiableCollection(fields);
+        return findAnnotatedFields(cls.getDeclaredFields(), runtimeAnnotationType);
     }
 
     private <A extends Annotation> Collection<Field> findAnnotatedFields(final Field[] declaredFields, final Class<A> runtimeAnnotationType) {

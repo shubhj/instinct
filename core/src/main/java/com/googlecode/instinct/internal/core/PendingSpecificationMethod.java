@@ -16,35 +16,66 @@
 
 package com.googlecode.instinct.internal.core;
 
+import com.googlecode.instinct.internal.lang.Primordial;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationResultImpl;
 import com.googlecode.instinct.internal.runner.SpecificationRunPendingStatus;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.marker.annotate.Specification.NO_REASON;
+import com.googlecode.instinct.runner.ContextListener;
+import com.googlecode.instinct.runner.SpecificationListener;
+import fj.data.List;
 import java.lang.reflect.Method;
 
-public final class PendingSpecificationMethod implements SpecificationMethod {
+/** A specification that is not pending completion. Pens specifications will not be run. */
+public final class PendingSpecificationMethod extends Primordial implements SpecificationMethod {
     private final Method method;
+    private List<LifecycleMethod> beforeSpecificationMethods;
+    private List<LifecycleMethod> afterSpecificationMethods;
 
-    public PendingSpecificationMethod(final Method method) {
-        checkNotNull(method);
+    public PendingSpecificationMethod(final Method method, final List<LifecycleMethod> beforeSpecificationMethods,
+            final List<LifecycleMethod> afterSpecificationMethods) {
+        checkNotNull(method, beforeSpecificationMethods, afterSpecificationMethods);
         this.method = method;
+        this.beforeSpecificationMethods = beforeSpecificationMethods;
+        this.afterSpecificationMethods = afterSpecificationMethods;
     }
 
     public String getPendingReason() {
         return method.getAnnotation(Specification.class).reason();
     }
 
+    public List<LifecycleMethod> getBeforeSpecificationMethods() {
+        return beforeSpecificationMethods;
+    }
+
+    public List<LifecycleMethod> getAfterSpecificationMethods() {
+        return afterSpecificationMethods;
+    }
+
     public String getName() {
-        return method.getName();
+        return method.getName() + " [PENDING" + (getPendingReason().equals(NO_REASON) ? "" : " - " + getPendingReason()) + "]";
+    }
+
+    public Method getMethod() {
+        return method;
+    }
+
+    @SuppressWarnings({"unchecked"})
+    public <T> Class<T> getContextClass() {
+        return (Class<T>) method.getDeclaringClass();
+    }
+
+    public void addContextListener(final ContextListener contextListener) {
+        checkNotNull(contextListener);
+    }
+
+    public void addSpecificationListener(final SpecificationListener specificationListener) {
+        checkNotNull(specificationListener);
     }
 
     public SpecificationResult run() {
-        return new SpecificationResultImpl(name(), new SpecificationRunPendingStatus(), 0L);
-    }
-
-    private String name() {
-        return method.getName() + " [PENDING" + (getPendingReason().equals(NO_REASON) ? "" : " - " + getPendingReason()) + "]";
+        return new SpecificationResultImpl(getName(), new SpecificationRunPendingStatus(), 0L);
     }
 }

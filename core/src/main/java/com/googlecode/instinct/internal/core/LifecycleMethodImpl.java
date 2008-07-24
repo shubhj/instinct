@@ -16,15 +16,16 @@
 
 package com.googlecode.instinct.internal.core;
 
+import com.googlecode.instinct.internal.lang.Primordial;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.TechNote;
-import com.googlecode.instinct.internal.lang.Primordial;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 public final class LifecycleMethodImpl extends Primordial implements LifecycleMethod {
     private final Method method;
+    @SuppressWarnings({"TypeMayBeWeakened"})
     private final Class<?> contextClass;
 
     @Fix("Can't call this() because of the null check :| Remove this duplication if possible.")
@@ -34,7 +35,7 @@ public final class LifecycleMethodImpl extends Primordial implements LifecycleMe
         contextClass = method.getDeclaringClass();
     }
 
-    public LifecycleMethodImpl(final Method method, final Class<?> contextClass) {
+    public <T> LifecycleMethodImpl(final Method method, final Class<T> contextClass) {
         checkNotNull(method, contextClass);
         this.contextClass = contextClass;
         this.method = method;
@@ -56,8 +57,9 @@ public final class LifecycleMethodImpl extends Primordial implements LifecycleMe
         return method.getParameterAnnotations();
     }
 
-    public Class<?> getContextClass() {
-        return contextClass;
+    @SuppressWarnings({"unchecked"})
+    public <T> Class<T> getContextClass() {
+        return (Class<T>) contextClass;
     }
 
     @TechNote("generate the hashCode based on the method name, as methods with the same name on different classes have different hashCodes.")

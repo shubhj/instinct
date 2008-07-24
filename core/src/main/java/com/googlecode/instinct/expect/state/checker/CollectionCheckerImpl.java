@@ -16,12 +16,10 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
-import com.googlecode.instinct.internal.util.Fix;
 import static java.util.Arrays.asList;
 import java.util.Collection;
 import org.hamcrest.Matchers;
 
-@Fix("Test this especially desc strings or make custom matchers?")
 public class CollectionCheckerImpl<E, T extends Collection<E>> extends IterableCheckerImpl<E, T> implements CollectionChecker<E, T> {
     public CollectionCheckerImpl(final T subject) {
         super(subject);

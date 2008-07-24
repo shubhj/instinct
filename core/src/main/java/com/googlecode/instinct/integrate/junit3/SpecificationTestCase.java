@@ -16,7 +16,7 @@
 
 package com.googlecode.instinct.integrate.junit3;
 
-import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.edge.EdgeException;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
@@ -31,9 +31,9 @@ import junit.framework.TestResult;
 public final class SpecificationTestCase extends TestCase {
     private final ExceptionFinder exceptionFinder = new ExceptionFinderImpl();
     private TestResult result;
-    private OldDodgySpecificationMethod specificationMethod;
+    private SpecificationMethod specificationMethod;
 
-    public SpecificationTestCase(final OldDodgySpecificationMethod specificationMethod) {
+    public SpecificationTestCase(final SpecificationMethod specificationMethod) {
         checkNotNull(specificationMethod);
         this.specificationMethod = specificationMethod;
     }

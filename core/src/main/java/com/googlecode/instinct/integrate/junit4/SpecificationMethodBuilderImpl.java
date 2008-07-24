@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Workingmouse
+ * Copyright 2006-2008 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,29 +16,29 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
-import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
-import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
-import com.googlecode.instinct.internal.util.ParamChecker;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
+import static com.googlecode.instinct.internal.util.Fj.toFjList;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
+import fj.F;
+import fj.data.List;
+import static fj.data.List.join;
 import java.util.Collection;
-import java.util.HashSet;
 
 public final class SpecificationMethodBuilderImpl implements SpecificationMethodBuilder {
     private ContextClassesFinder finder = new ContextClassesFinderImpl();
     private ObjectFactory objectFactory = new ObjectFactoryImpl();
 
-    public <T> Collection<OldDodgySpecificationMethod> build(final Class<T> cls) {
-        ParamChecker.checkNotNull(cls);
-        final Collection<OldDodgySpecificationMethod> specificationMethods = new HashSet<OldDodgySpecificationMethod>();
-        final Collection<Class<?>> classes = finder.getContextClasses(cls);
-        for (final Class<?> classWithContext : classes) {
-            final ContextClass contextClass = objectFactory.create(ContextClassImpl.class, classWithContext);
-            specificationMethods.addAll(contextClass.buildSpecificationMethods());
-        }
-        //        final ContextClasses annotation = cls.getAnnotation(ContextClasses.class);
-        //        final Class<?>[] classes = annotation.value();
-        return specificationMethods;
+    public <T> List<SpecificationMethod> buildSpecifications(final Class<T> cls) {
+        checkNotNull(cls);
+        final Collection<Class<?>> contextClasses = finder.getContextClasses(cls);
+        final List<List<SpecificationMethod>> list = toFjList(contextClasses).map(new F<Class<?>, List<SpecificationMethod>>() {
+            public List<SpecificationMethod> f(final Class<?> a) {
+                return objectFactory.create(ContextClassImpl.class, a).getSpecificationMethods();
+            }
+        });
+        return join(list);
     }
 }

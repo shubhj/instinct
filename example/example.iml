@@ -19,6 +19,7 @@
     <orderEntry type="library" name="Objenesis" level="project" />
     <orderEntry type="library" name="JMock" level="project" />
     <orderEntry type="library" name="JUnit" level="project" />
+    <orderEntry type="library" name="Functional Java" level="project" />
     <orderEntryProperties />
   </component>
   <component name="copyright">

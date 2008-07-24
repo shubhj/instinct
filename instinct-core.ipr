@@ -284,10 +284,6 @@
           <option name="m_limit" value="3" />
         </inspection_tool>
         <inspection_tool class="ClassNameSameAsAncestorName" level="WARNING" enabled="true" />
-        <inspection_tool class="ParameterNameDiffersFromOverriddenParameter" level="WARNING" enabled="true">
-          <option name="m_ignoreSingleCharacterNames" value="false" />
-          <option name="m_ignoreOverridesOfLibraryMethods" value="false" />
-        </inspection_tool>
         <inspection_tool class="CastConflictsWithInstanceof" level="WARNING" enabled="true" />
         <inspection_tool class="WhileLoopSpinsOnField" level="WARNING" enabled="true">
           <option name="ignoreNonEmtpyLoops" value="false" />
@@ -725,6 +721,15 @@
       </CLASSES>
       <JAVADOC />
       <SOURCES />
+    </library>
+    <library name="Functional Java">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/core/lib/functionaljava/functionaljava-20080723.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/core/etc/lib-src/functionaljava-20080723-sources.jar!/" />
+      </SOURCES>
     </library>
   </component>
   <UsedPathMacros>

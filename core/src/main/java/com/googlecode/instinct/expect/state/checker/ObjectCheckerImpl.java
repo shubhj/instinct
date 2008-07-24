@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
-import static com.googlecode.instinct.expect.state.matcher.NoneOf.noneOf;
 import com.googlecode.instinct.expect.state.describer.PropertyMatcherDescriber;
 import com.googlecode.instinct.expect.state.describer.PropertyMatcherWithValueDescriber;
+import static com.googlecode.instinct.expect.state.matcher.NoneOf.noneOf;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdgeImpl;
 import org.hamcrest.Matcher;
@@ -26,10 +26,8 @@ import org.hamcrest.Matchers;
 
 // SUPPRESS VisibilityModifier|IllegalToken {
 public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
-
-    @SuppressWarnings({"ProtectedField"})
     protected final T subject;
-    private MatcherAssertEdge asserter = new MatcherAssertEdgeImpl();
+    private final MatcherAssertEdge asserter = new MatcherAssertEdgeImpl();
 
     public ObjectCheckerImpl(final T subject) {
         this.subject = subject;

@@ -18,62 +18,47 @@ package com.googlecode.instinct.internal.core;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.internal.runner.CompleteSpecificationRunner;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
+import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import static com.googlecode.instinct.internal.util.Reflector.getDeclaredMethod;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubjectWithConstructorArgs;
-import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import fj.data.List;
 import org.jmock.Expectations;
 import org.junit.runner.RunWith;
 
-@SuppressWarnings({"UnusedDeclaration"})
+@SuppressWarnings({"UnusedDeclaration", "TypeMayBeWeakened"})
 @RunWith(InstinctRunner.class)
-public final class ASpecificationThatThrowsAnExpectedException {
+public final class ASpecificationThatThrowsAnExpectedExceptionThatHasAnUnexpectedMessage {
     @Subject(auto = false) private ExpectingExceptionSpecificationMethod expectsExceptionMethod;
-    @Mock private CompleteSpecificationRunner specificationRunner;
+    @Mock private SpecificationRunner specificationRunner;
     @Dummy private SpecificationResult specificationResult;
+    @Stub private List<LifecycleMethod> beforeSpecMethods;
+    @Stub private List<LifecycleMethod> afterSpecMethods;
 
     @BeforeSpecification
     public void before() {
-        final Object[] constructorArgs = {getDeclaredMethod(ContainsExpectedException.class, "expectsExceptionThrown")};
+        final Object[] constructorArgs =
+                {getDeclaredMethod(ContainsExpectedException.class, "expectsExceptionThrown"), beforeSpecMethods, afterSpecMethods};
         expectsExceptionMethod = createSubjectWithConstructorArgs(ExpectingExceptionSpecificationMethod.class, constructorArgs, specificationRunner);
     }
 
     @Specification
-    public void conformsToClassTraits() {
-        checkClass(ExpectingExceptionSpecificationMethod.class, SpecificationMethod.class);
-    }
-
-    @Specification
-    public void hasANameThatComesFromTheUnderlyingMethod() {
-        expect.that(expectsExceptionMethod.getName()).isEqualTo("expectsExceptionThrown");
-    }
-
-    @Specification
-    public void exposesTheExpectedException() {
-        expect.that(expectsExceptionMethod.getExpectedException().equals(RuntimeException.class)).isTrue();
-    }
-
-    @Specification
-    public void exposesTheExceptionMessage() {
-        expect.that(expectsExceptionMethod.getExpectedExceptionMessage()).isEqualTo("This should fail");
-    }
-
-    @Specification
-    public void runsSpecsUsingTheNormalSpecificationRunner() {
+    public void failsAsTheMessageDoesNotMatch() {
         expect.that(new Expectations() {
             {
                 one(specificationRunner).run(expectsExceptionMethod);
-                will(throwException(new RuntimeException("This should fail")));
+                will(throwException(new RuntimeException("This is the wrong message")));
             }
         });
         final SpecificationResult result = expectsExceptionMethod.run();
-        expect.that(result.completedSuccessfully()).isTrue();
+        expect.that(result.completedSuccessfully()).isFalse();
+        expect.that(((Throwable) result.getStatus().getDetailedStatus()).getMessage()).containsString("Expected exception message was incorrect");
     }
 
     @SuppressWarnings({"ALL"})

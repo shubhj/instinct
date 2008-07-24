@@ -24,11 +24,13 @@ import com.googlecode.instinct.internal.locate.cls.ContextFinder;
 import com.googlecode.instinct.internal.locate.cls.ContextFinderImpl;
 import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.runner.StandardContextRunner;
+import static com.googlecode.instinct.internal.util.Fj.toFjArray;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.marker.ContextConfigurationException;
 import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
 import static com.googlecode.instinct.marker.annotate.Specification.ALL_GROUPS;
 import com.googlecode.instinct.test.InstinctTestCase;
+import fj.Effect;
 import java.lang.reflect.InvocationTargetException;
 
 @SuppressWarnings({"ProhibitedExceptionThrown"})
@@ -42,11 +44,12 @@ public final class AllContextsSlowTest extends InstinctTestCase {
 
     private void runAllContexts() {
         final ContextFinder contextFinder = new ContextFinderImpl(AllContextsSlowTest.class);
-        final JavaClassName[] contextClasses = contextFinder.getContextNames(ALL_GROUPS);
-        for (final JavaClassName contextClassName : contextClasses) {
-            final Class<?> cls = edgeClass.forName(contextClassName.getFullyQualifiedName());
-            invokeContextIgnoringConfigurationExceptions(cls);
-        }
+        toFjArray(contextFinder.getContextNames(ALL_GROUPS)).foreach(new Effect<JavaClassName>() {
+            public void e(final JavaClassName contextClassName) {
+                final Class<?> cls = edgeClass.forName(contextClassName.getFullyQualifiedName());
+                invokeContextIgnoringConfigurationExceptions(cls);
+            }
+        });
     }
 
     private <T> void invokeContextIgnoringConfigurationExceptions(final Class<T> cls) {

@@ -21,7 +21,6 @@ import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
 
 public class ABaseContextWithExceptionalMethods {
-
     @BeforeSpecification
     public void setup() {
         throw new IllegalStateException("setup should be called from subclasses");

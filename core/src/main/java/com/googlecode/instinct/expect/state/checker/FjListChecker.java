@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Workingmouse
+ * Copyright 2008 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,20 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.core;
+package com.googlecode.instinct.expect.state.checker;
 
-import static com.googlecode.instinct.expect.Expect.expect;
+import fj.F;
+import fj.data.List;
+import org.hamcrest.Matcher;
 
-public class ASampleClassWithNoAnnotations {
-    public void someMethod() {
-        expect.that(Boolean.FALSE).isFalse();
-    }
+public interface FjListChecker<T> extends ObjectChecker<List<T>>, ContainerChecker<T>, SizeChecker {
+    void contains(F<T, Boolean> matching);
+
+    void doesNotContain(F<T, Boolean> matching);
+
+    void allItemsMatch(Matcher<T> matcher);
+
+    void allItemsMatch(F<T, Boolean> matching);
+
+    void allItemsMatch(T item);
 }

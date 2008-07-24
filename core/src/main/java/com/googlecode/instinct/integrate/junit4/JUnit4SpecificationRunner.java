@@ -14,14 +14,11 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.sandbox;
+package com.googlecode.instinct.integrate.junit4;
 
-import com.googlecode.instinct.internal.core.ContextClass;
-import com.googlecode.instinct.internal.core.ContextClassImpl;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
+import fj.data.List;
 
-public class TheoryProcessor {
-    public final void run(final Class<?> classToRun) {
-        final ContextClass context = new ContextClassImpl(classToRun);
-        context.getSpecificationMethods();
-    }
+public interface JUnit4SpecificationRunner {
+    void run(List<SpecificationMethod> specificationMethods);
 }

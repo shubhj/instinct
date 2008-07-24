@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.core;
 
 import com.googlecode.instinct.internal.runner.ContextResult;
-import java.util.Collection;
+import fj.data.List;
 
 public interface ContextClass extends RunnableItem {
     <T> Class<T> getType();
@@ -26,11 +26,9 @@ public interface ContextClass extends RunnableItem {
 
     ContextResult run();
 
-    Collection<LifecycleMethod> getSpecificationMethods();
+    List<SpecificationMethod> getSpecificationMethods();
 
-    Collection<LifecycleMethod> getBeforeSpecificationMethods();
+    List<LifecycleMethod> getBeforeSpecificationMethods();
 
-    Collection<LifecycleMethod> getAfterSpecificationMethods();
-
-    Collection<OldDodgySpecificationMethod> buildSpecificationMethods();
+    List<LifecycleMethod> getAfterSpecificationMethods();
 }

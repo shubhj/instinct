@@ -24,12 +24,14 @@ import com.googlecode.instinct.expect.state.checker.ComparableChecker;
 import com.googlecode.instinct.expect.state.checker.DoubleChecker;
 import com.googlecode.instinct.expect.state.checker.EventObjectChecker;
 import com.googlecode.instinct.expect.state.checker.FileChecker;
+import com.googlecode.instinct.expect.state.checker.FjListChecker;
 import com.googlecode.instinct.expect.state.checker.IterableChecker;
 import com.googlecode.instinct.expect.state.checker.MapChecker;
 import com.googlecode.instinct.expect.state.checker.NodeChecker;
 import com.googlecode.instinct.expect.state.checker.ObjectChecker;
 import com.googlecode.instinct.expect.state.checker.StringChecker;
 import com.googlecode.instinct.internal.util.Fix;
+import fj.data.List;
 import java.io.File;
 import java.util.Collection;
 import java.util.EventObject;
@@ -38,14 +40,10 @@ import org.hamcrest.Matcher;
 import org.w3c.dom.Node;
 
 /**
- * State-based expectation API.
- * State expectations are expectations on the state of an object, and are similar to JUnit's Assert capabilities.
- * The instinct state-based expectation API is built on top of the Hamcrest Matcher API. The Instinct wrapper methods enable:
- * <ol>
- * <li>IDE code completion reduced to the methods that apply to the type object being checked.</li>
- * <li>A more English like (and longer) flow. </li>
- * <li>The standard Hamcrest Matchers or custom Matcher implementations to be passed in as well.</li>
- * </ol>
+ * State-based expectation API. State expectations are expectations on the state of an object, and are similar to JUnit's Assert capabilities. The
+ * instinct state-based expectation API is built on top of the Hamcrest Matcher API. The Instinct wrapper methods enable: <ol> <li>IDE code completion
+ * reduced to the methods that apply to the type object being checked.</li> <li>A more English like (and longer) flow. </li> <li>The standard Hamcrest
+ * Matchers or custom Matcher implementations to be passed in as well.</li> </ol>
  */
 @Fix({"Add javadoc"})
 public interface StateExpectations {
@@ -60,6 +58,8 @@ public interface StateExpectations {
     <E, T extends Collection<E>> CollectionChecker<E, T> that(T collection);
 
     <T> ArrayChecker<T> that(T[] array);
+
+    <T> FjListChecker<T> that(List<T> list);
 
     <K, V> MapChecker<K, V> that(Map<K, V> map);
 

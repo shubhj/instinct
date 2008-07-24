@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Workingmouse
+ * Copyright 2006-2007 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,11 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.core;
+package com.googlecode.instinct.internal.locate.method;
 
-import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.sandbox.ForAll;
+import fj.data.List;
+import java.lang.reflect.Method;
 
-public class ASampleClass {
-    @Specification
-    public void someMethod(@ForAll final int x) {
-        expect.that(Boolean.TRUE).isTrue();
-    }
+public interface SuperClassTraversingMethodLocator {
+    <T> List<Method> locate(Class<T> cls);
 }

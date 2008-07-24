@@ -14,10 +14,14 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.runner;
+package com.googlecode.instinct.internal.core;
 
-import com.googlecode.instinct.internal.core.SpecificationMethod;
+import fj.data.List;
 
-public interface CompleteSpecificationRunner {
-    SpecificationResult run(SpecificationMethod specificationMethod);
+public interface SpecificationMethodBuilder {
+    <T> List<LifecycleMethod> buildBeforeSpecificationMethods(Class<T> contextType);
+
+    <T> List<LifecycleMethod> buildAfterSpecificationMethods(Class<T> contextType);
+
+    <T> List<SpecificationMethod> buildSpecificationMethods(Class<T> contextType);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Chris Myers, Workingmouse
+ * Copyright 2006-2008 Chris Myers, Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,12 @@
 
 package com.googlecode.instinct.integrate.junit4;
 
-import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
-import java.util.Collection;
+import fj.Effect;
+import fj.data.List;
 import org.junit.runner.Description;
 import static org.junit.runner.Description.createSuiteDescription;
 import static org.junit.runner.Description.createTestDescription;
@@ -31,7 +32,7 @@ public final class InstinctRunner extends Runner {
     private final SpecificationMethodBuilder specificationMethodBuilder = new SpecificationMethodBuilderImpl();
     private final ObjectFactory objectFactory = new ObjectFactoryImpl();
     private final Class<?> classToRun;
-    private Collection<OldDodgySpecificationMethod> specificationMethods;
+    private List<SpecificationMethod> specificationMethods;
 
     public InstinctRunner(final Class<?> classToRun) {
         checkNotNull(classToRun);
@@ -41,10 +42,12 @@ public final class InstinctRunner extends Runner {
     @Override
     public Description getDescription() {
         final Description description = createSuiteDescription(classToRun);
-        specificationMethods = specificationMethodBuilder.build(classToRun);
-        for (final OldDodgySpecificationMethod method : specificationMethods) {
-            description.addChild(createTestDescription(classToRun, method.getName()));
-        }
+        specificationMethods = specificationMethodBuilder.buildSpecifications(classToRun);
+        specificationMethods.foreach(new Effect<SpecificationMethod>() {
+            public void e(final SpecificationMethod method) {
+                description.addChild(createTestDescription(classToRun, method.getName()));
+            }
+        });
         return description;
     }
 
@@ -52,9 +55,9 @@ public final class InstinctRunner extends Runner {
     public void run(final RunNotifier notifier) {
         checkNotNull(notifier);
         if (specificationMethods == null) {
-            specificationMethods = specificationMethodBuilder.build(classToRun);
+            specificationMethods = specificationMethodBuilder.buildSpecifications(classToRun);
         }
-        final SpecificationRunner specificationRunner = objectFactory.create(SpecificationRunnerImpl.class, notifier);
-        specificationRunner.run(specificationMethods);
+        final JUnit4SpecificationRunner junit4SpecificationRunner = objectFactory.create(JUnit4SpecificationRunnerImpl.class, notifier);
+        junit4SpecificationRunner.run(specificationMethods);
     }
 }

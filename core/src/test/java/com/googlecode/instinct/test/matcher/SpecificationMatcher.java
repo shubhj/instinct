@@ -16,11 +16,11 @@
 
 package com.googlecode.instinct.test.matcher;
 
-import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 
-public final class SpecificationMatcher extends BaseMatcher<OldDodgySpecificationMethod> {
+public final class SpecificationMatcher extends BaseMatcher<SpecificationMethod> {
     private final String methodName;
 
     public SpecificationMatcher(final String methodName) {
@@ -28,8 +28,7 @@ public final class SpecificationMatcher extends BaseMatcher<OldDodgySpecificatio
     }
 
     public boolean matches(final Object item) {
-        final OldDodgySpecificationMethod specificationMethod = (OldDodgySpecificationMethod) item;
-        return methodName.equals(specificationMethod.getName());
+        return methodName.equals(((SpecificationMethod) item).getName());
     }
 
     public void describeTo(final Description description) {

@@ -17,13 +17,16 @@
 package com.googlecode.instinct.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.locate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
+import com.googlecode.instinct.internal.locate.ContextWithSpecsWithDifferentAccessModifiers;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ContextContainerWithSetUpAndTearDown;
 import com.googlecode.instinct.internal.runner.ContextRunner;
+import com.googlecode.instinct.internal.runner.ContextWithSpecificationMethodContainingParameter;
+import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import static com.googlecode.instinct.report.ResultFormat.QUIET;
+import static com.googlecode.instinct.report.ResultFormat.VERBOSE;
 import static com.googlecode.instinct.runner.TextRunner.runContexts;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.io.StreamRedirector.doWithRedirectedStandardOut;
@@ -33,6 +36,7 @@ public final class TextRunnerSlowTest extends InstinctTestCase {
     private ContextRunner briefContextRunner;
     private ByteArrayOutputStream outputBuffer;
     private ContextRunner quietContextRunner;
+    private ContextRunner verboseContextRunner;
 
     @Override
     public void setUpTestDoubles() {
@@ -43,6 +47,12 @@ public final class TextRunnerSlowTest extends InstinctTestCase {
     public void setUpSubject() {
         briefContextRunner = new TextRunner(outputBuffer, BRIEF);
         quietContextRunner = new TextRunner(outputBuffer, QUIET);
+        verboseContextRunner = new TextRunner(outputBuffer, VERBOSE);
+    }
+
+    public void testDoesNotThrowNullPointerErrorWhenReportingLifecycleConfigurationErrors() {
+        verboseContextRunner.run(new ContextClassImpl(ContextWithSpecificationMethodContainingParameter.class));
+        checkRunnerSendsSpeciciationResultsToOutput(LifeCycleMethodConfigurationException.class);
     }
 
     public void testSendsSpeciciationResultsToOutput() {

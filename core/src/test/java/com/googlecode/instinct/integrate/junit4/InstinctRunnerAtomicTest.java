@@ -17,7 +17,7 @@
 package com.googlecode.instinct.integrate.junit4;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.core.OldDodgySpecificationMethod;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
@@ -27,18 +27,19 @@ import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubjectWithConstructorArgs;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import fj.data.List;
 import java.util.Collection;
 import org.jmock.Expectations;
 import org.junit.runner.Description;
 import org.junit.runner.Runner;
 import org.junit.runner.notification.RunNotifier;
 
-@SuppressWarnings({"unchecked"})
+@SuppressWarnings({"unchecked", "UnusedDeclaration"})
 public final class InstinctRunnerAtomicTest extends InstinctTestCase {
     @Subject(auto = false) private Runner runner;
-    @Mock private SpecificationRunner specificationRunner;
+    @Mock private JUnit4SpecificationRunner junit4SpecificationRunner;
     @Mock private ObjectFactory objectFactory;
-    @Stub(auto = false) private Collection<OldDodgySpecificationMethod> specificationMethods;
+    @Stub(auto = false) private Collection<SpecificationMethod> specificationMethods;
     @Dummy RunNotifier runNotifier;
 
     @Override
@@ -58,9 +59,9 @@ public final class InstinctRunnerAtomicTest extends InstinctTestCase {
     public void testRunsSuitesContainingContextClasses() {
         expect.that(new Expectations() {
             {
-                one(objectFactory).create(with(same(SpecificationRunnerImpl.class)), with(any(RunNotifier.class)));
-                will(returnValue(specificationRunner));
-                one(specificationRunner).run(with(any(Collection.class)));
+                one(objectFactory).create(with(same(JUnit4SpecificationRunnerImpl.class)), with(any(RunNotifier.class)));
+                will(returnValue(junit4SpecificationRunner));
+                one(junit4SpecificationRunner).run(with(any(List.class)));
             }
         });
         runner.run(runNotifier);

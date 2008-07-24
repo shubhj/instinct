@@ -17,7 +17,6 @@
 package com.googlecode.instinct.internal.locate.method;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.test.matcher.MethodMatcher;
 import com.googlecode.instinct.internal.runner.AContextThatHasAMethodWithAnnotationAndNamingConvention;
 import com.googlecode.instinct.internal.runner.AContextWithAnnotationsAndNamingConventions;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
@@ -29,17 +28,16 @@ import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
-import com.googlecode.instinct.marker.naming.BeforeSpecificationNamingConvention;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
+import com.googlecode.instinct.test.matcher.MethodMatcher;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import org.hamcrest.Matcher;
 import org.jmock.Expectations;
 
-@SuppressWarnings({"unchecked"})
+@SuppressWarnings({"unchecked", "UnusedDeclaration"})
 @Suggest("This class needs a bit of a tidy up.")
 public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
     @Subject private MarkedMethodLocator locator;
@@ -47,16 +45,6 @@ public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
 
     public void testConformsToClassTraits() {
         checkClass(MarkedMethodLocatorImpl.class, MarkedMethodLocator.class);
-    }
-
-    public void testReturnsAnUnModifiableCollection() {
-        expectException(UnsupportedOperationException.class, new Runnable() {
-            public void run() {
-                final Collection<Method> methods = locator.locateAll(ASimpleContext.class,
-                        new MarkingSchemeImpl(BeforeSpecification.class, new BeforeSpecificationNamingConvention(), IGNORE));
-                methods.clear();
-            }
-        });
     }
 
     public void testFindsAnnotatedSpecificationMethodsInASimpleContext() {

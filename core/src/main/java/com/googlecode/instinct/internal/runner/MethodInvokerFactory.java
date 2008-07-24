@@ -16,9 +16,8 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 
 public interface MethodInvokerFactory {
-    MethodInvoker create(LifecycleMethod specificationMethod);
+    MethodInvoker create();
 }

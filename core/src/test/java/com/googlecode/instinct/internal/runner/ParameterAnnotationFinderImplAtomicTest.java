@@ -16,30 +16,17 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.core.ASampleClass;
-import com.googlecode.instinct.internal.core.ASampleClassWithNoAnnotations;
 import com.googlecode.instinct.marker.annotate.Subject;
-import com.googlecode.instinct.sandbox.ForAll;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import java.lang.annotation.Annotation;
 
+@SuppressWarnings({"UnusedDeclaration"})
 public final class ParameterAnnotationFinderImplAtomicTest extends InstinctTestCase {
     @Subject(implementation = ParameterAnnotationFinderImpl.class) private ParameterAnnotationFinder finder;
 
     public void testConformsToClassTraits() {
         checkClass(ParameterAnnotationFinderImpl.class, ParameterAnnotationFinder.class);
-    }
-
-    public void testWillFindSuppliedAnnotationInMethodParametersForASampleClass() {
-        final Annotation[][] parameterAnnotations = getParameterAnnotationsForClass(ASampleClass.class);
-        expect.that(finder.hasAnnotation(ForAll.class, parameterAnnotations)).isTrue();
-    }
-
-    public void testWillNotFindSuppliedAnnotationInMethodParatersForASampleClassWithoutAnnotations() {
-        final Annotation[][] parameterAnnotations = getParameterAnnotationsForClass(ASampleClassWithNoAnnotations.class);
-        expect.that(finder.hasAnnotation(ForAll.class, parameterAnnotations)).isFalse();
     }
 
     private Annotation[][] getParameterAnnotationsForClass(final Class<?> classWithMethod) {

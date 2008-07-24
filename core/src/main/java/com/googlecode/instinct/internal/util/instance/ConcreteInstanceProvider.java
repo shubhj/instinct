@@ -17,6 +17,7 @@
 package com.googlecode.instinct.internal.util.instance;
 
 import com.googlecode.instinct.internal.util.Suggest;
+import fj.data.List;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -53,6 +54,9 @@ public final class ConcreteInstanceProvider implements InstanceProvider {
         }
         if (cls.equals(Object[].class)) {
             return (T) OBJECT_ARRAY;
+        }
+        if (cls.equals(List.class)) {
+            return (T) List.nil();
         }
         if (cls.equals(Long.class)) {
             return (T) new Long(1L);

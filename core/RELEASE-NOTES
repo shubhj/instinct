@@ -12,8 +12,13 @@ o Infrastructure
 o Core Features
   o Removed in progress specification state, use pending instead.
   o All runners now emit pending specification reason.
+o Expectation API
+  o Added function matcher, e.g. expect.that(list).doesNotContain({int i => i > 3} (based
+    on Functional Java's fj.F).
+  o Added fj.data.List matcher.
 o Infrastructure
-  o Added dependency on Functional Java.
+  o Added dependency on Functional Java, used both internally and for use in expectation
+    API.
   o Continued clean up of specification running code.
   o Upgraded to: Ant 1.7.1, CGLib 2.2, jMock 2.5.0 and Objenesis 1.1.
 o Bugs

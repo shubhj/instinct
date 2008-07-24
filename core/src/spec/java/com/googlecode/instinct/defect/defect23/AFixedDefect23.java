@@ -16,22 +16,22 @@
 
 package com.googlecode.instinct.defect.defect23;
 
-import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.marker.annotate.Context;
-import com.googlecode.instinct.marker.annotate.Specification;
-import com.googlecode.instinct.internal.core.ContextClass;
-import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.defect.defect23.data.ASubContextOverridingExceptionalMethods;
 import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.ContextClassImpl;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.marker.annotate.Specification;
+import fj.data.List;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
-@Context
 public class AFixedDefect23 {
-
     @Specification
     public void shouldReturnOverridenSpecsOnceOnly() {
         final ContextClass contextClass = new ContextClassImpl(ASubContextOverridingExceptionalMethods.class);
-        expect.that(contextClass.getSpecificationMethods()).isOfSize(2);
+        final List<SpecificationMethod> specs = contextClass.getSpecificationMethods();
+        expect.that(specs).isOfSize(2);
     }
 }

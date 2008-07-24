@@ -37,6 +37,7 @@
             <include name="${lib.dir}/ant-1.*.jar"/>
             <include name="${lib.dir}/hamcrest-all-*.jar"/>
             <include name="${lib.dir}/junit-*.jar"/>
+            <include name="${lib.dir}/functionaljava-*.jar"/>
         </fileset>
         <pathelement location="${spec.classes.dir}"/>
         <pathelement location="${spec.resources.dir}"/>

@@ -18,27 +18,24 @@ package com.googlecode.instinct.internal.locate.method;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.naming.NamingConvention;
+import fj.F;
+import fj.data.List;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Collection;
-import static java.util.Collections.unmodifiableCollection;
 
 public final class NamedMethodLocatorImpl implements NamedMethodLocator {
-    private final HierarchicalMethodLocator methodLocator = new HierarchicalMethodLocatorImpl();
+    private final SuperClassTraversingMethodLocator methodLocator = new SuperClassTraversingMethodLocatorImpl();
 
     public <T> Collection<Method> locate(final Class<T> cls, final NamingConvention namingConvention) {
         checkNotNull(cls, namingConvention);
-        final Collection<Method> locatedMethods = findNamedMethods(cls, namingConvention);
-        return unmodifiableCollection(locatedMethods);
+        return findNamedMethods(cls, namingConvention).toCollection();
     }
 
-    private <T> Collection<Method> findNamedMethods(final Class<T> cls, final NamingConvention namingConvention) {
-        final Collection<Method> locatedMethods = new ArrayList<Method>();
-        for (final Method method : methodLocator.locate(cls)) {
-            if (method.getName().matches(namingConvention.getPattern())) {
-                locatedMethods.add(method);
+    private <T> List<Method> findNamedMethods(final Class<T> cls, final NamingConvention namingConvention) {
+        return methodLocator.locate(cls).filter(new F<Method, Boolean>() {
+            public Boolean f(final Method method) {
+                return method.getName().matches(namingConvention.getPattern());
             }
-        }
-        return locatedMethods;
+        });
     }
 }

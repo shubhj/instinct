@@ -16,20 +16,24 @@
 
 package com.googlecode.instinct.internal.util;
 
-import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
-import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
 import com.googlecode.instinct.internal.runner.SpecificationFailureException;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.instance.ClassInstantiator;
+import com.googlecode.instinct.internal.util.instance.ClassInstantiatorImpl;
 
 @Suggest({"Wrap 'unexpected ...' jMock cardinality exception if you a mock is used in a test without expectations being set on it"})
 public final class ExceptionSanitiserImpl implements ExceptionSanitiser {
-    private final ClassEdge classEdge = new ClassEdgeImpl();
+    private final ClassInstantiator instantiator = new ClassInstantiatorImpl();
 
     public Throwable sanitise(final Throwable throwable) {
         checkNotNull(throwable);
-        if (instantiate("org.jmock.api.ExpectationError").isAssignableFrom(throwable.getClass())) {
-            return sanitiseJMockExpectationError(throwable);
-        } else {
+        try {
+            if (instantiator.instantiateClass("org.jmock.api.ExpectationError").isAssignableFrom(throwable.getClass())) {
+                return sanitiseJMockExpectationError(throwable);
+            } else {
+                return throwable;
+            }
+        } catch (Exception e) {
             return throwable;
         }
     }
@@ -38,9 +42,5 @@ public final class ExceptionSanitiserImpl implements ExceptionSanitiser {
         final String message = "Unexpected invocation. You may need to wrap the code in your new Expections(){{}} block with cardinality " +
                 "constraints, one(), atLeast(), etc.\n";
         return new SpecificationFailureException(message + throwable.toString(), throwable);
-    }
-
-    private Class<?> instantiate(final String className) {
-        return classEdge.forName(className);
     }
 }
