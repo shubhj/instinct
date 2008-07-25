@@ -16,19 +16,27 @@
 
 package com.googlecode.instinct.internal.locate.method;
 
+import com.googlecode.instinct.internal.reflect.ConstructorInvoker;
+import com.googlecode.instinct.internal.reflect.ConstructorInvokerImpl;
 import static com.googlecode.instinct.internal.util.MethodEquality.methodEquals;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.MarkingScheme;
+import com.googlecode.instinct.marker.MarkingSchemeImpl;
+import com.googlecode.instinct.marker.annotate.Context;
+import com.googlecode.instinct.marker.naming.NamingConvention;
 import fj.data.List;
+import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
 
 public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
     private final AnnotatedMethodLocator annotatedMethodLocator = new AnnotatedMethodLocatorImpl();
     private final NamedMethodLocator namedMethodLocator = new NamedMethodLocatorImpl();
+    private final ConstructorInvoker invoker = new ConstructorInvokerImpl();
 
     public <T> List<Method> locateAll(final Class<T> cls, final MarkingScheme markingScheme) {
         checkNotNull(cls, markingScheme);
-        return findMethodsByAnnotation(cls, markingScheme).append(findMethodsByNamingConvention(cls, markingScheme)).nub(methodEquals());
+        final MarkingScheme newScheme = getUserDefinedMarkingScheme(cls, markingScheme);
+        return findMethodsByAnnotation(cls, newScheme).append(findMethodsByNamingConvention(cls, newScheme)).nub(methodEquals());
     }
 
     private <T> List<Method> findMethodsByAnnotation(final Class<T> cls, final MarkingScheme markingScheme) {
@@ -37,5 +45,15 @@ public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
 
     private <T> List<Method> findMethodsByNamingConvention(final Class<T> cls, final MarkingScheme markingScheme) {
         return namedMethodLocator.locate(cls, markingScheme.getNamingConvention());
+    }
+
+    private MarkingScheme getUserDefinedMarkingScheme(final AnnotatedElement cls, final MarkingScheme markingScheme) {
+        if (cls.isAnnotationPresent(Context.class)) {
+            final Class<? extends NamingConvention> namingConventionClass = cls.getAnnotation(Context.class).specificationNamingConvention();
+            final NamingConvention namingConvention = (NamingConvention) invoker.invokeNullaryConstructor(namingConventionClass);
+            return new MarkingSchemeImpl(markingScheme.getAnnotationType(), namingConvention, markingScheme.getAttributeConstraint());
+        } else {
+            return markingScheme;
+        }
     }
 }
