@@ -37,7 +37,7 @@ public final class ADummyAutoWireDeterminatorWithAnAnnotatedFieldNotToAutoWire {
 
     @Specification
     public void respondsWithFalse() {
-        expect.that(autoWireDeterminator.autoWire(field("charSequence"))).isFalse();
+        expect.that(autoWireDeterminator.f(field("charSequence"))).isFalse();
     }
 
     private Field field(final String fieldName) {

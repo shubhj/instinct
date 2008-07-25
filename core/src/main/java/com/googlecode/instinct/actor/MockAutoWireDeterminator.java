@@ -24,7 +24,7 @@ import java.lang.reflect.Field;
 public final class MockAutoWireDeterminator implements AutoWireDeterminator {
     private final NamingConvention namingConvention = new MockNamingConvention();
 
-    public boolean autoWire(final Field field) {
+    public Boolean f(final Field field) {
         final Mock annotation = field.getAnnotation(Mock.class);
         if (annotation == null) {
             return field.getName().matches(namingConvention.getPattern());

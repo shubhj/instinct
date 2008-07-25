@@ -37,7 +37,7 @@ public final class AMockAutoWireDeterminatorWithANamedFieldNotToAutoWire {
 
     @Specification
     public void respondsWithTrue() {
-        expect.that(autoWireDeterminator.autoWire(field("mockCharSequence"))).isFalse();
+        expect.that(autoWireDeterminator.f(field("mockCharSequence"))).isFalse();
     }
 
     private Field field(final String fieldName) {

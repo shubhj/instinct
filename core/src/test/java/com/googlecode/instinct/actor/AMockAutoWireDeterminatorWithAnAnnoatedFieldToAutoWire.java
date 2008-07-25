@@ -37,7 +37,7 @@ public final class AMockAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire {
 
     @Specification
     public void respondsWithTrue() {
-        expect.that(autoWireDeterminator.autoWire(field("charSequence"))).isTrue();
+        expect.that(autoWireDeterminator.f(field("charSequence"))).isTrue();
     }
 
     private Field field(final String fieldName) {

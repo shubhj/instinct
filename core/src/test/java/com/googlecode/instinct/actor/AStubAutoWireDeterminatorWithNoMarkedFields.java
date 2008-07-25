@@ -36,7 +36,7 @@ public final class AStubAutoWireDeterminatorWithNoMarkedFields {
 
     @Specification
     public void respondsWithTrue() {
-        expect.that(autoWireDeterminator.autoWire(field("charSequence"))).isFalse();
+        expect.that(autoWireDeterminator.f(field("charSequence"))).isFalse();
     }
 
     private Field field(final String fieldName) {

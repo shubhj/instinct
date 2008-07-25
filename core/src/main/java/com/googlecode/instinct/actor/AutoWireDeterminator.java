@@ -16,8 +16,9 @@
 
 package com.googlecode.instinct.actor;
 
+import fj.F;
 import java.lang.reflect.Field;
 
-public interface AutoWireDeterminator {
-    boolean autoWire(Field field);
+public interface AutoWireDeterminator extends F<Field, Boolean> {
+    Boolean f(Field field);
 }

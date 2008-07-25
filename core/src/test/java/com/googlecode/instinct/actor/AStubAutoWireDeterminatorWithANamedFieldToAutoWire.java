@@ -36,7 +36,7 @@ public final class AStubAutoWireDeterminatorWithANamedFieldToAutoWire {
 
     @Specification
     public void respondsWithTrue() {
-        expect.that(autoWireDeterminator.autoWire(field("stubCharSequence"))).isTrue();
+        expect.that(autoWireDeterminator.f(field("stubCharSequence"))).isTrue();
     }
 
     private Field field(final String fieldName) {

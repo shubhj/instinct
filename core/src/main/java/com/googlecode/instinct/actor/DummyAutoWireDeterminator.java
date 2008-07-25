@@ -24,7 +24,7 @@ import java.lang.reflect.Field;
 public final class DummyAutoWireDeterminator implements AutoWireDeterminator {
     private final NamingConvention namingConvention = new DummyNamingConvention();
 
-    public boolean autoWire(final Field field) {
+    public Boolean f(final Field field) {
         final Dummy annotation = field.getAnnotation(Dummy.class);
         if (annotation == null) {
             return field.getName().matches(namingConvention.getPattern());

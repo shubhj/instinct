@@ -24,7 +24,7 @@ import java.lang.reflect.Field;
 public final class StubAutoWireDeterminator implements AutoWireDeterminator {
     private final NamingConvention namingConvention = new StubNamingConvention();
 
-    public boolean autoWire(final Field field) {
+    public Boolean f(final Field field) {
         final Stub annotation = field.getAnnotation(Stub.class);
         if (annotation == null) {
             return field.getName().matches(namingConvention.getPattern());

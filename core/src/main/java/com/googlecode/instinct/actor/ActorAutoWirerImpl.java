@@ -33,6 +33,7 @@ import com.googlecode.instinct.marker.naming.DummyNamingConvention;
 import com.googlecode.instinct.marker.naming.MockNamingConvention;
 import com.googlecode.instinct.marker.naming.StubNamingConvention;
 import fj.Effect;
+import fj.F;
 import java.lang.reflect.Field;
 
 @SuppressWarnings({"OverlyCoupledClass"})
@@ -68,12 +69,10 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
     }
 
     private void autoWireMarkedFields(final Object instanceToAutoWire, final SpecificationDoubleCreator doubleCreator,
-            final AutoWireDeterminator autoWireDeterminator, final MarkingScheme markingScheme) {
-        markedFieldLocator.locateAll(instanceToAutoWire.getClass(), markingScheme).foreach(new Effect<Field>() {
+            final F<Field, Boolean> autoWireDeterminator, final MarkingScheme markingScheme) {
+        markedFieldLocator.locateAll(instanceToAutoWire.getClass(), markingScheme).filter(autoWireDeterminator).foreach(new Effect<Field>() {
             public void e(final Field field) {
-                if (autoWireDeterminator.autoWire(field)) {
-                    autoWireField(instanceToAutoWire, field, doubleCreator);
-                }
+                autoWireField(instanceToAutoWire, field, doubleCreator);
             }
         });
     }
