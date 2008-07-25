@@ -98,6 +98,7 @@
             <zipfileset dir="${lib.dir}/jmock" prefix="lib"/>
             <zipfileset dir="${lib.dir}/junit" prefix="lib"/>
             <zipfileset dir="${lib.dir}/objenesis" prefix="lib"/>
+            <zipfileset dir="${lib.dir}/functionaljava" prefix="lib"/>
         </zip>
     </target>
 
