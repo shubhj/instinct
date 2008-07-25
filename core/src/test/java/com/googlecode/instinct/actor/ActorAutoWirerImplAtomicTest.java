@@ -21,11 +21,13 @@ import static com.googlecode.instinct.internal.util.Reflector.getFieldByName;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Mock;
+import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
+import fj.data.List;
 import java.lang.reflect.Field;
 import org.jmock.api.ExpectationError;
 
@@ -153,6 +155,15 @@ public final class ActorAutoWirerImplAtomicTest extends InstinctTestCase {
                 actorAutoWirer.autoWireFields(instanceWithBadlyMarkedMocksToWire);
             }
         });
+    }
+
+    @Specification
+    public void testReturnsFieldsThatWereAutoWired() {
+        final List<Field> fieldList = actorAutoWirer.autoWireFields(instanceWithFieldsToWire);
+        expect.that(fieldList).isOfSize(3);
+        expect.that(fieldList).containsItem(getField(instanceWithFieldsToWire, "dummy"));
+        expect.that(fieldList).containsItem(getField(instanceWithFieldsToWire, "stub"));
+        expect.that(fieldList).containsItem(getField(instanceWithFieldsToWire, "mock"));
     }
 
     // TODO: TestDouble

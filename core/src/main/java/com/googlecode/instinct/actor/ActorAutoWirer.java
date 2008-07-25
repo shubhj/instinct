@@ -16,6 +16,9 @@
 
 package com.googlecode.instinct.actor;
 
+import java.lang.reflect.Field;
+import fj.data.List;
+
 public interface ActorAutoWirer {
-    void autoWireFields(Object instanceToAutoWire);
+    List<Field> autoWireFields(Object instanceToAutoWire);
 }

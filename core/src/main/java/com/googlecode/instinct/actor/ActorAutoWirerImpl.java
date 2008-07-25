@@ -34,6 +34,7 @@ import com.googlecode.instinct.marker.naming.MockNamingConvention;
 import com.googlecode.instinct.marker.naming.StubNamingConvention;
 import fj.Effect;
 import fj.F;
+import fj.data.List;
 import java.lang.reflect.Field;
 
 @SuppressWarnings({"OverlyCoupledClass"})
@@ -46,35 +47,38 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
 
     @Suggest("Add in subject auto-wiring. Do it last, as it may require doubles.")
     @Fix("This needs to make sue we don't wire fields twice, say marked with @Mock but named stubFoo. See StubCreatorAtomicTest.")
-    public void autoWireFields(final Object instanceToAutoWire) {
+    public List<Field> autoWireFields(final Object instanceToAutoWire) {
         checkNotNull(instanceToAutoWire);
-        autoWireDummies(instanceToAutoWire);
-        autoWireStubs(instanceToAutoWire);
-        autoWireMocks(instanceToAutoWire);
+        final List<Field> dummies = autoWireDummies(instanceToAutoWire);
+        final List<Field> stubs = autoWireStubs(instanceToAutoWire);
+        final List<Field> mocks = autoWireMocks(instanceToAutoWire);
+        return dummies.append(stubs).append(mocks);
     }
 
-    private void autoWireDummies(final Object instanceToAutoWire) {
+    private List<Field> autoWireDummies(final Object instanceToAutoWire) {
         final MarkingScheme dummyMarkingScheme = new MarkingSchemeImpl(Dummy.class, new DummyNamingConvention(), IGNORE);
-        autoWireMarkedFields(instanceToAutoWire, dummyCreator, new DummyAutoWireDeterminator(), dummyMarkingScheme);
+        return autoWireMarkedFields(instanceToAutoWire, dummyCreator, new DummyAutoWireDeterminator(), dummyMarkingScheme);
     }
 
-    private void autoWireStubs(final Object instanceToAutoWire) {
+    private List<Field> autoWireStubs(final Object instanceToAutoWire) {
         final MarkingScheme stubMarkingScheme = new MarkingSchemeImpl(Stub.class, new StubNamingConvention(), IGNORE);
-        autoWireMarkedFields(instanceToAutoWire, stubCreator, new StubAutoWireDeterminator(), stubMarkingScheme);
+        return autoWireMarkedFields(instanceToAutoWire, stubCreator, new StubAutoWireDeterminator(), stubMarkingScheme);
     }
 
-    private void autoWireMocks(final Object instanceToAutoWire) {
+    private List<Field> autoWireMocks(final Object instanceToAutoWire) {
         final MarkingScheme mockMarkingScheme = new MarkingSchemeImpl(Mock.class, new MockNamingConvention(), IGNORE);
-        autoWireMarkedFields(instanceToAutoWire, mockCreator, new MockAutoWireDeterminator(), mockMarkingScheme);
+        return autoWireMarkedFields(instanceToAutoWire, mockCreator, new MockAutoWireDeterminator(), mockMarkingScheme);
     }
 
-    private void autoWireMarkedFields(final Object instanceToAutoWire, final SpecificationDoubleCreator doubleCreator,
+    private List<Field> autoWireMarkedFields(final Object instanceToAutoWire, final SpecificationDoubleCreator doubleCreator,
             final F<Field, Boolean> autoWireDeterminator, final MarkingScheme markingScheme) {
-        markedFieldLocator.locateAll(instanceToAutoWire.getClass(), markingScheme).filter(autoWireDeterminator).foreach(new Effect<Field>() {
+        final List<Field> fieldsToAutowire = markedFieldLocator.locateAll(instanceToAutoWire.getClass(), markingScheme).filter(autoWireDeterminator);
+        fieldsToAutowire.foreach(new Effect<Field>() {
             public void e(final Field field) {
                 autoWireField(instanceToAutoWire, field, doubleCreator);
             }
         });
+        return fieldsToAutowire;
     }
 
     @SuppressWarnings({"CatchGenericClass", "OverlyBroadCatchBlock"})
