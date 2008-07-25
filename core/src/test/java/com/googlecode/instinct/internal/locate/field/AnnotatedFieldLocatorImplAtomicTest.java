@@ -28,9 +28,9 @@ import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import fj.data.List;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
-import java.util.Collection;
 import org.jmock.Expectations;
 
 @SuppressWarnings({"UnusedDeclaration"})
@@ -54,7 +54,7 @@ public final class AnnotatedFieldLocatorImplAtomicTest extends InstinctTestCase 
                 will(returnValue(false));
             }
         });
-        final Collection<Field> fields = locator.locate(WithoutRuntimeAnnotations.class, Dummy.class);
+        final List<Field> fields = locator.locate(WithoutRuntimeAnnotations.class, Dummy.class);
         expect.that(fields).isEmpty();
     }
 
@@ -78,7 +78,7 @@ public final class AnnotatedFieldLocatorImplAtomicTest extends InstinctTestCase 
                 will(returnValue(false));
             }
         });
-        final Iterable<Field> fields = locator.locate(WithRuntimeAnnotations.class, Dummy.class);
+        final List<Field> fields = locator.locate(WithRuntimeAnnotations.class, Dummy.class);
         expect.that(fields).isNotNull();
         expect.that(fields).containsItem(field1);
         expect.that(fields).containsItem(field2);

@@ -1,19 +1,30 @@
 * Instinct Release 0.1.8 *
 
+Added the ability to customise the way specifications and other lifecycle methods are
+found.
+
+o Core Features
+  o Custom specification, before specification and after specification annotations and
+    naming conventions can be provided via the Context annotation. This can also be used
+    to turn off detection based on naming convention when NoNamingConvention is used.
 o Reductio Integration
   o Integrated Reductio, a tool for automated specification testing. See
     http://reductiotest.org/ for more information.
 o Bugs
   o (Issue 36) Abstract classes are being run as a result of specification runner refactoring.
+  o (Issue 37) Expected exceptions are being printed to console in Ant runner even though spec passes.
 
 
 * Instinct Release 0.1.7 *
 
-Maintenance release; removed in progress specification state, runners emit pending reason,
-added Functional Java based matchers, upgraded to Ant 1.7.1, CGLib 2.2, jMock 2.5.0 and
-Objenesis 1.1, internal re-write of specification runners.
+Maintenance release; specification double naming conventions, removed in progress
+specification state, runners emit pending reason, added Functional Java based matchers,
+upgraded to Ant 1.7.1, CGLib 2.2, jMock 2.5.0 and Objenesis 1.1, internal re-write of
+specification runners.
 
 o Core Features
+  o Automatic creation of specification doubles (mocks, stubs and dummies) based on naming
+    convention (in addition to annotations).
   o Removed in progress specification state, use pending instead.
   o All runners now emit pending specification reason.
 o Expectation API

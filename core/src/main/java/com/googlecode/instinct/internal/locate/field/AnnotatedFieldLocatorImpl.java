@@ -18,28 +18,23 @@ package com.googlecode.instinct.internal.locate.field;
 
 import com.googlecode.instinct.internal.locate.AnnotationChecker;
 import com.googlecode.instinct.internal.locate.AnnotationCheckerImpl;
+import static com.googlecode.instinct.internal.util.Fj.toFjList;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
+import fj.F;
+import fj.data.List;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collection;
 
 public final class AnnotatedFieldLocatorImpl implements AnnotatedFieldLocator {
     private AnnotationChecker annotationChecker = new AnnotationCheckerImpl();
 
-    public <A extends Annotation, T> Collection<Field> locate(final Class<T> cls, final Class<A> runtimeAnnotationType) {
+    public <A extends Annotation, T> List<Field> locate(final Class<T> cls, final Class<A> runtimeAnnotationType) {
         checkNotNull(cls, runtimeAnnotationType);
-        return findAnnotatedFields(cls.getDeclaredFields(), runtimeAnnotationType);
-    }
-
-    private <A extends Annotation> Collection<Field> findAnnotatedFields(final Field[] declaredFields, final Class<A> runtimeAnnotationType) {
-        final Collection<Field> annotatedFields = new ArrayList<Field>();
-        for (final Field field : declaredFields) {
-            if (annotationChecker.isAnnotated(field, runtimeAnnotationType, IGNORE)) {
-                annotatedFields.add(field);
+        return toFjList(cls.getDeclaredFields()).filter(new F<Field, Boolean>() {
+            public Boolean f(final Field field) {
+                return annotationChecker.isAnnotated(field, runtimeAnnotationType, IGNORE);
             }
-        }
-        return annotatedFields;
+        });
     }
 }

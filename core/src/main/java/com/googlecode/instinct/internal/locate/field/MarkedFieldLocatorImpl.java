@@ -16,29 +16,26 @@
 
 package com.googlecode.instinct.internal.locate.field;
 
+import static com.googlecode.instinct.internal.util.FieldEquality.fieldEquals;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.MarkingScheme;
+import fj.data.List;
 import java.lang.reflect.Field;
-import java.util.Collection;
-import java.util.HashSet;
 
 public final class MarkedFieldLocatorImpl implements MarkedFieldLocator {
     private AnnotatedFieldLocator annotatedFieldLocator = new AnnotatedFieldLocatorImpl();
     private NamedFieldLocator namedFieldLocator = new NamedFieldLocatorImpl();
 
-    public <T> Collection<Field> locateAll(final Class<T> cls, final MarkingScheme markingScheme) {
+    public <T> List<Field> locateAll(final Class<T> cls, final MarkingScheme markingScheme) {
         checkNotNull(cls, markingScheme);
-        final Collection<Field> fields = new HashSet<Field>();
-        fields.addAll(findFieldsByAnnotation(cls, markingScheme));
-        fields.addAll(findFieldsByNamingConvention(cls, markingScheme));
-        return fields;
+        return findFieldsByAnnotation(cls, markingScheme).append(findFieldsByNamingConvention(cls, markingScheme)).nub(fieldEquals());
     }
 
-    private <T> Collection<Field> findFieldsByAnnotation(final Class<T> cls, final MarkingScheme markingScheme) {
+    private <T> List<Field> findFieldsByAnnotation(final Class<T> cls, final MarkingScheme markingScheme) {
         return annotatedFieldLocator.locate(cls, markingScheme.getAnnotationType());
     }
 
-    private <T> Collection<Field> findFieldsByNamingConvention(final Class<T> cls, final MarkingScheme markingScheme) {
+    private <T> List<Field> findFieldsByNamingConvention(final Class<T> cls, final MarkingScheme markingScheme) {
         return namedFieldLocator.locate(cls, markingScheme.getNamingConvention());
     }
 }

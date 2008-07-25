@@ -16,6 +16,8 @@
 
 package com.googlecode.instinct.marker.annotate;
 
+import com.googlecode.instinct.marker.naming.AfterSpecificationNamingConvention;
+import com.googlecode.instinct.marker.naming.BeforeSpecificationNamingConvention;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 import java.lang.annotation.Documented;
@@ -42,6 +44,24 @@ public @interface Context {
      */
     String[] groups() default "ALL";
 
-    /** @return  */
+    /**
+     * The naming convention to use to find methods to be run before every specification. Changing this will cause Instinct's method locators to use
+     * this naming convention instead of the default one.
+     * @return The naming convention to use to find methods to be run before every specification.
+     */
+    Class<? extends NamingConvention> beforeSpecificationNamingConvention() default BeforeSpecificationNamingConvention.class;
+
+    /**
+     * The naming convention to use to find methods to be run after every specification. Changing this will cause Instinct's method locators to use
+     * this naming convention instead of the default one.
+     * @return The naming convention to use to find methods to be run after every specification.
+     */
+    Class<? extends NamingConvention> afterSpecificationNamingConvention() default AfterSpecificationNamingConvention.class;
+
+    /**
+     * The naming convention to use to find specification methods. Changing this will cause Instinct's method locators to use this naming convention
+     * instead of the default one.
+     * @return The naming convention to use to find specification methods.
+     */
     Class<? extends NamingConvention> specificationNamingConvention() default SpecificationNamingConvention.class;
 }

@@ -17,9 +17,9 @@
 package com.googlecode.instinct.internal.locate.field;
 
 import com.googlecode.instinct.marker.MarkingScheme;
+import fj.data.List;
 import java.lang.reflect.Field;
-import java.util.Collection;
 
 public interface MarkedFieldLocator {
-    <T> Collection<Field> locateAll(Class<T> cls, MarkingScheme markingScheme);
+    <T> List<Field> locateAll(Class<T> cls, MarkingScheme markingScheme);
 }

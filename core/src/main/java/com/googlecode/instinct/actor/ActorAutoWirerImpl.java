@@ -32,8 +32,8 @@ import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.naming.DummyNamingConvention;
 import com.googlecode.instinct.marker.naming.MockNamingConvention;
 import com.googlecode.instinct.marker.naming.StubNamingConvention;
+import fj.Effect;
 import java.lang.reflect.Field;
-import java.util.Collection;
 
 @SuppressWarnings({"OverlyCoupledClass"})
 public final class ActorAutoWirerImpl implements ActorAutoWirer {
@@ -69,12 +69,13 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
 
     private void autoWireMarkedFields(final Object instanceToAutoWire, final SpecificationDoubleCreator doubleCreator,
             final AutoWireDeterminator autoWireDeterminator, final MarkingScheme markingScheme) {
-        final Collection<Field> fields = markedFieldLocator.locateAll(instanceToAutoWire.getClass(), markingScheme);
-        for (final Field field : fields) {
-            if (autoWireDeterminator.autoWire(field)) {
-                autoWireField(instanceToAutoWire, field, doubleCreator);
+        markedFieldLocator.locateAll(instanceToAutoWire.getClass(), markingScheme).foreach(new Effect<Field>() {
+            public void e(final Field field) {
+                if (autoWireDeterminator.autoWire(field)) {
+                    autoWireField(instanceToAutoWire, field, doubleCreator);
+                }
             }
-        }
+        });
     }
 
     @SuppressWarnings({"CatchGenericClass", "OverlyBroadCatchBlock"})

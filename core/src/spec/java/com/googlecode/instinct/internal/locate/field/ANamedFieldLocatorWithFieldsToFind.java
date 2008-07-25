@@ -14,6 +14,7 @@ import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import fj.data.List;
 import java.lang.reflect.Field;
 import org.junit.runner.RunWith;
 
@@ -35,7 +36,7 @@ public final class ANamedFieldLocatorWithFieldsToFind {
 
     @Specification
     public void findFieldsMarkedWithANamingConvention() {
-        final Iterable<Field> fields = locator.locate(WithNamedFields.class, namingConvention);
+        final List<Field> fields = locator.locate(WithNamedFields.class, namingConvention);
         expect.that(fields).containsItem(getField("fooString1"));
         expect.that(fields).containsItem(getField("fooString2"));
     }

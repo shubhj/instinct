@@ -27,8 +27,8 @@ import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.marker.naming.MockNamingConvention;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import fj.data.List;
 import java.lang.reflect.Field;
-import java.util.Collection;
 
 public final class MarkedFieldLocatorImplAtomicTest extends InstinctTestCase {
     @Subject private MarkedFieldLocator fieldLocator;
@@ -49,7 +49,7 @@ public final class MarkedFieldLocatorImplAtomicTest extends InstinctTestCase {
     }
 
     public void testFindsAnnotatedAndNamedFields() {
-        final Iterable<Field> fields = fieldLocator.locateAll(WithAnnotatedAndNamedFields.class, markingScheme);
+        final List<Field> fields = fieldLocator.locateAll(WithAnnotatedAndNamedFields.class, markingScheme);
         expect.that(fields).isNotEmpty();
         expect.that(fields).containsItem(field("mockCharSequence"));
         expect.that(fields).containsItem(field("mockAnotherCharSequence"));
@@ -57,7 +57,7 @@ public final class MarkedFieldLocatorImplAtomicTest extends InstinctTestCase {
 
     public void testDoesNotReturnTheSameFieldTwice() {
         final MarkingScheme scheme = new MarkingSchemeImpl(Mock.class, new MockNamingConvention(), IGNORE);
-        final Collection<Field> fields = new MarkedFieldLocatorImpl().locateAll(WithAnnotatedAndNamedFields.class, scheme);
+        final List<Field> fields = new MarkedFieldLocatorImpl().locateAll(WithAnnotatedAndNamedFields.class, scheme);
         expect.that(fields).isOfSize(2);
     }
 

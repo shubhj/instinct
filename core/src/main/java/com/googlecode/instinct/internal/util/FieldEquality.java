@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2008 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,26 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.locate.field;
+package com.googlecode.instinct.internal.util;
 
-import static com.googlecode.instinct.internal.util.Fj.toFjList;
-import com.googlecode.instinct.marker.naming.NamingConvention;
 import fj.F;
-import fj.data.List;
+import fj.pre.Equal;
+import static fj.pre.Equal.equal;
 import java.lang.reflect.Field;
 
-public final class NamedFieldLocatorImpl implements NamedFieldLocator {
-    public <T> List<Field> locate(final Class<T> cls, final NamingConvention namingConvention) {
-        return toFjList(cls.getDeclaredFields()).filter(new F<Field, Boolean>() {
-            public Boolean f(final Field field) {
-                return field.getName().matches(namingConvention.getPattern());
+public final class FieldEquality {
+    private FieldEquality() {
+        throw new UnsupportedOperationException();
+    }
+
+    public static Equal<Field> fieldEquals() {
+        return equal(new F<Field, F<Field, Boolean>>() {
+            public F<Field, Boolean> f(final Field field1) {
+                return new F<Field, Boolean>() {
+                    public Boolean f(final Field field2) {
+                        return field1.equals(field2);
+                    }
+                };
             }
         });
     }

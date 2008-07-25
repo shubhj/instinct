@@ -21,7 +21,6 @@ import com.googlecode.instinct.internal.runner.AContextThatHasAMethodWithAnnotat
 import com.googlecode.instinct.internal.runner.AContextWithAnnotationsAndNamingConventions;
 import com.googlecode.instinct.internal.runner.ASimpleContext;
 import com.googlecode.instinct.internal.runner.ASimpleNamingConventionContext;
-import com.googlecode.instinct.internal.util.Suggest;
 import static com.googlecode.instinct.marker.AnnotationAttribute.IGNORE;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
@@ -38,7 +37,6 @@ import org.hamcrest.Matcher;
 import org.jmock.Expectations;
 
 @SuppressWarnings({"unchecked", "UnusedDeclaration"})
-@Suggest("This class needs a bit of a tidy up.")
 public final class MarkedMethodLocatorImplAtomicTest extends InstinctTestCase {
     @Subject private MarkedMethodLocator locator;
     @Mock private NamingConvention namingConvention;
