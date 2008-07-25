@@ -1,3 +1,10 @@
+* Instinct Release 0.1.9 *
+
+o Reductio Integration
+  o Integrated Reductio, a tool for automated specification testing. See
+    http://reductiotest.org/ for more information.
+
+
 * Instinct Release 0.1.8 *
 
 Added the ability to customise the way specifications and other lifecycle methods are
@@ -6,10 +13,7 @@ found.
 o Core Features
   o Custom specification, before specification and after specification annotations and
     naming conventions can be provided via the Context annotation. This can also be used
-    to turn off detection based on naming convention when NoNamingConvention is used.
-o Reductio Integration
-  o Integrated Reductio, a tool for automated specification testing. See
-    http://reductiotest.org/ for more information.
+    to turn off naming convention-based detection (using NoNamingConvention).
 o Infrastructure
   o Upgraded to: Functional Java 2.8.
 o Bugs

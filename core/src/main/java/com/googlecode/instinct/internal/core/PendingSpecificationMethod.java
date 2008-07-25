@@ -25,7 +25,9 @@ import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.marker.annotate.Specification.NO_REASON;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
+import fj.Effect;
 import fj.data.List;
+import static fj.data.List.nil;
 import java.lang.reflect.Method;
 
 /** A specification that is not pending completion. Pens specifications will not be run. */
@@ -33,6 +35,7 @@ public final class PendingSpecificationMethod extends Primordial implements Spec
     private final Method method;
     private List<LifecycleMethod> beforeSpecificationMethods;
     private List<LifecycleMethod> afterSpecificationMethods;
+    private List<SpecificationListener> specificationListeners = nil();
 
     public PendingSpecificationMethod(final Method method, final List<LifecycleMethod> beforeSpecificationMethods,
             final List<LifecycleMethod> afterSpecificationMethods) {
@@ -73,15 +76,35 @@ public final class PendingSpecificationMethod extends Primordial implements Spec
 
     public void addSpecificationListener(final SpecificationListener specificationListener) {
         checkNotNull(specificationListener);
+        specificationListeners = specificationListeners.cons(specificationListener);
     }
 
     public SpecificationResult run() {
-        return new SpecificationResultImpl(getName(), new SpecificationRunPendingStatus(), 0L);
+        notifyListenersOfPreSpecification(this);
+        final SpecificationResult result = new SpecificationResultImpl(getName(), new SpecificationRunPendingStatus(), 0L);
+        notifyListenersOfPostSpecification(this, result);
+        return result;
     }
 
     @Override
     public String toString() {
         return PendingSpecificationMethod.class.getSimpleName() + "[method=" + method + ";before=" + beforeSpecificationMethods.toCollection() +
                 ";after=" + afterSpecificationMethods.toCollection() + "]";
+    }
+
+    private void notifyListenersOfPreSpecification(final SpecificationMethod specificationMethod) {
+        specificationListeners.foreach(new Effect<SpecificationListener>() {
+            public void e(final SpecificationListener listener) {
+                listener.preSpecificationMethod(specificationMethod);
+            }
+        });
+    }
+
+    private void notifyListenersOfPostSpecification(final SpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
+        specificationListeners.foreach(new Effect<SpecificationListener>() {
+            public void e(final SpecificationListener listener) {
+                listener.postSpecificationMethod(specificationMethod, specificationResult);
+            }
+        });
     }
 }

@@ -30,13 +30,9 @@ import com.googlecode.instinct.internal.util.ExceptionSanitiser;
 import com.googlecode.instinct.internal.util.ExceptionSanitiserImpl;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.runner.SpecificationListener;
 import fj.Effect;
 import fj.data.List;
-import java.util.ArrayList;
-import java.util.Collection;
 
 @SuppressWarnings({"ParameterNameDiffersFromOverriddenParameter"})
 public final class SpecificationRunnerImpl implements SpecificationRunner {
@@ -45,26 +41,12 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final Clock clock = new ClockImpl();
     private final LifeCycleMethodValidator methodValidator = new LifeCycleMethodValidatorImpl();
     private final ExceptionSanitiser exceptionSanitiser = new ExceptionSanitiserImpl();
-    private final Collection<SpecificationListener> specificationListeners = new ArrayList<SpecificationListener>();
     private final MethodInvoker methodInvoker = new MethodInvokerImpl();
 
-    public void addSpecificationListener(final SpecificationListener specificationListener) {
-        checkNotNull(specificationListener);
-        specificationListeners.add(specificationListener);
-    }
-
-    public SpecificationResult run(final SpecificationMethod specificationMethod) {
-        notifyListenersOfPreSpecification(specificationMethod);
-        final SpecificationResult specificationResult = runSpecification(specificationMethod);
-        notifyListenersOfPostSpecification(specificationMethod, specificationResult);
-        return specificationResult;
-    }
-
     @SuppressWarnings({"CatchGenericClass"})
-    private SpecificationResult runSpecification(final SpecificationMethod specificationMethod) {
+    public SpecificationResult run(final SpecificationMethod specificationMethod) {
         final long startTime = clock.getCurrentTime();
         try {
-            // expose the context class, rather than getting the method
             final Class<?> contextClass = specificationMethod.getContextClass();
             final Object instance = invokeConstructor(contextClass);
             runSpecificationLifecycle(instance, specificationMethod);
@@ -95,18 +77,6 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     private void runSpecificationMethod(final Object contextInstance, final LifecycleMethod specificationMethod) {
         methodValidator.checkMethodHasNoParameters(specificationMethod);
         methodInvoker.invokeMethod(contextInstance, specificationMethod.getMethod());
-    }
-
-    private void notifyListenersOfPreSpecification(final SpecificationMethod specificationMethod) {
-        for (final SpecificationListener specificationListener : specificationListeners) {
-            specificationListener.preSpecificationMethod(specificationMethod);
-        }
-    }
-
-    private void notifyListenersOfPostSpecification(final SpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
-        for (final SpecificationListener specificationListener : specificationListeners) {
-            specificationListener.postSpecificationMethod(specificationMethod, specificationResult);
-        }
     }
 
     private void runMethods(final Object instance, final List<LifecycleMethod> methods) {

@@ -32,7 +32,9 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
+import fj.Effect;
 import fj.data.List;
+import static fj.data.List.nil;
 import java.lang.reflect.Method;
 
 /** A specification that expects an exception to be thrown. The specification will fail if the expected exception is not thrown. */
@@ -43,6 +45,7 @@ public final class ExpectingExceptionSpecificationMethod extends Primordial impl
     private final Method method;
     private final List<LifecycleMethod> beforeSpecificationMethods;
     private final List<LifecycleMethod> afterSpecificationMethods;
+    private List<SpecificationListener> specificationListeners = nil();
 
     public ExpectingExceptionSpecificationMethod(final Method method, final List<LifecycleMethod> beforeSpecificationMethods,
             final List<LifecycleMethod> afterSpecificationMethods) {
@@ -88,10 +91,23 @@ public final class ExpectingExceptionSpecificationMethod extends Primordial impl
 
     public void addSpecificationListener(final SpecificationListener specificationListener) {
         checkNotNull(specificationListener);
-        specificationRunner.addSpecificationListener(specificationListener);
+        specificationListeners = specificationListeners.cons(specificationListener);
     }
 
     public SpecificationResult run() {
+        notifyListenersOfPreSpecification(this);
+        final SpecificationResult result = doRun();
+        notifyListenersOfPostSpecification(this, result);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return ExpectingExceptionSpecificationMethod.class.getSimpleName() + "[method=" + method + ";before=" +
+                beforeSpecificationMethods.toCollection() + ";after=" + afterSpecificationMethods.toCollection() + "]";
+    }
+
+    private SpecificationResult doRun() {
         final Class<? extends Throwable> expectedException = method.getAnnotation(Specification.class).expectedException();
         final long startTime = clock.getCurrentTime();
         final SpecificationResult result = specificationRunner.run(this);
@@ -102,12 +118,6 @@ public final class ExpectingExceptionSpecificationMethod extends Primordial impl
             final Throwable exceptionThrown = (Throwable) result.getStatus().getDetailedStatus();
             return processExpectedFailure(startTime, expectedException, exceptionFinder.getRootCause(exceptionThrown));
         }
-    }
-
-    @Override
-    public String toString() {
-        return ExpectingExceptionSpecificationMethod.class.getSimpleName() + "[method=" + method + ";before=" +
-                beforeSpecificationMethods.toCollection() + ";after=" + afterSpecificationMethods.toCollection() + "]";
     }
 
     @SuppressWarnings({"TypeMayBeWeakened"})
@@ -132,6 +142,22 @@ public final class ExpectingExceptionSpecificationMethod extends Primordial impl
                     exceptionThrown.getMessage();
             return fail(startTime, message);
         }
+    }
+
+    private void notifyListenersOfPreSpecification(final SpecificationMethod specificationMethod) {
+        specificationListeners.foreach(new Effect<SpecificationListener>() {
+            public void e(final SpecificationListener listener) {
+                listener.preSpecificationMethod(specificationMethod);
+            }
+        });
+    }
+
+    private void notifyListenersOfPostSpecification(final SpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
+        specificationListeners.foreach(new Effect<SpecificationListener>() {
+            public void e(final SpecificationListener listener) {
+                listener.postSpecificationMethod(specificationMethod, specificationResult);
+            }
+        });
     }
 
     private SpecificationResult fail(final long startTime, final String message, final Throwable thrownException) {

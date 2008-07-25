@@ -17,16 +17,9 @@
 package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.core.SpecificationMethod;
-import com.googlecode.instinct.runner.SpecificationListener;
 
 /** Runs a complete/ordinary (non-pending, non-exception expecting) specification. */
 public interface SpecificationRunner {
-    /**
-     * Registers a listener for specification lifecycle events.
-     * @param specificationListener A listener for specification lifecycle events.
-     */
-    void addSpecificationListener(SpecificationListener specificationListener);
-
     /**
      * Runs the <var>specificationMethod</var>.
      * @param specificationMethod The specification to run.
