@@ -10,9 +10,12 @@ o Core Features
 o Reductio Integration
   o Integrated Reductio, a tool for automated specification testing. See
     http://reductiotest.org/ for more information.
+o Infrastructure
+  o Upgraded to: Functional Java 2.8.
 o Bugs
   o (Issue 36) Abstract classes are being run as a result of specification runner refactoring.
   o (Issue 37) Expected exceptions are being printed to console in Ant runner even though spec passes.
+  o (Issue 38) Functional java jar is not included in release zip.
 
 
 * Instinct Release 0.1.7 *

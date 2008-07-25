@@ -20,6 +20,7 @@ import static com.googlecode.instinct.internal.util.MethodEquality.methodEquals;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.MarkingScheme;
 import fj.data.List;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
@@ -32,7 +33,8 @@ public final class MarkedMethodLocatorImpl implements MarkedMethodLocator {
     }
 
     private <T> List<Method> findMethodsByAnnotation(final Class<T> cls, final MarkingScheme markingScheme) {
-        return annotatedMethodLocator.locate(cls, markingScheme.getAnnotationType());
+        final Class<Annotation> annotationType = markingScheme.getAnnotationType();
+        return annotatedMethodLocator.locate(cls, annotationType);
     }
 
     private <T> List<Method> findMethodsByNamingConvention(final Class<T> cls, final MarkingScheme markingScheme) {

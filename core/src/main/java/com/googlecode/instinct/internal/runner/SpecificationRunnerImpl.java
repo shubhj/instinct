@@ -117,13 +117,11 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         });
     }
 
-    @Suggest("Share this check logic with the IntelliJ integration.")
     private void runMethod(final Object instance, final LifecycleMethod method) {
         methodValidator.checkMethodHasNoParameters(method);
         methodInvoker.invokeMethod(instance, method.getMethod());
     }
 
-    @Suggest("Share this check logic with the IntelliJ integration.")
     private <T> Object invokeConstructor(final Class<T> cls) {
         methodValidator.checkContextConstructor(cls);
         return constructorInvoker.invokeNullaryConstructor(cls);

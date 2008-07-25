@@ -20,6 +20,7 @@ import com.googlecode.instinct.marker.naming.AfterSpecificationNamingConvention;
 import com.googlecode.instinct.marker.naming.BeforeSpecificationNamingConvention;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
+import java.lang.annotation.Annotation;
 import java.lang.annotation.Documented;
 import static java.lang.annotation.ElementType.TYPE;
 import java.lang.annotation.Inherited;
@@ -52,6 +53,13 @@ public @interface Context {
     Class<? extends NamingConvention> beforeSpecificationNamingConvention() default BeforeSpecificationNamingConvention.class;
 
     /**
+     * The annotation to use to find methods to be run before every specification. Changing this will cause Instinct's method locators to use this
+     * annotation instead of the default one.
+     * @return The annotation to use to find methods to be run before every specification.
+     */
+    Class<? extends Annotation> beforeSpecificationAnnotation() default BeforeSpecification.class;
+
+    /**
      * The naming convention to use to find methods to be run after every specification. Changing this will cause Instinct's method locators to use
      * this naming convention instead of the default one.
      * @return The naming convention to use to find methods to be run after every specification.
@@ -59,9 +67,23 @@ public @interface Context {
     Class<? extends NamingConvention> afterSpecificationNamingConvention() default AfterSpecificationNamingConvention.class;
 
     /**
+     * The annotation to use to find methods to be run after every specification. Changing this will cause Instinct's method locators to use this
+     * annotation instead of the default one.
+     * @return The annotation to use to find methods to be run after every specification.
+     */
+    Class<? extends Annotation> afterSpecificationAnnotation() default AfterSpecification.class;
+
+    /**
      * The naming convention to use to find specification methods. Changing this will cause Instinct's method locators to use this naming convention
      * instead of the default one.
      * @return The naming convention to use to find specification methods.
      */
     Class<? extends NamingConvention> specificationNamingConvention() default SpecificationNamingConvention.class;
+
+    /**
+     * The annotation to use to find specification methods. Changing this will cause Instinct's method locators to use this annotation instead of the
+     * default one.
+     * @return The annotation to use to find specification methods.
+     */
+    Class<? extends Annotation> specificationAnnotation() default Specification.class;
 }

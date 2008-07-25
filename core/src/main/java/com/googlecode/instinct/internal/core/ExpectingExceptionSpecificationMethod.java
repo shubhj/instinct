@@ -94,7 +94,6 @@ public final class ExpectingExceptionSpecificationMethod extends Primordial impl
     public SpecificationResult run() {
         final Class<? extends Throwable> expectedException = method.getAnnotation(Specification.class).expectedException();
         final long startTime = clock.getCurrentTime();
-        // Don't notify the listener until it's run, as it notifies of failures
         final SpecificationResult result = specificationRunner.run(this);
         if (result.completedSuccessfully()) {
             final String message = "Expected exception " + expectedException.getName() + " was not thrown in body of specification";

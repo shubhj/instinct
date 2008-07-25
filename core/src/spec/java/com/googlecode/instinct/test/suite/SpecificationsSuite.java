@@ -43,7 +43,7 @@ import com.googlecode.instinct.integrate.junit3.ContextTestSuite;
 import com.googlecode.instinct.internal.core.APendingSpecificationMethodWithAReason;
 import com.googlecode.instinct.internal.core.APendingSpecificationMethodWithoutAReason;
 import com.googlecode.instinct.internal.core.ASpecificationMethodBuilder;
-import com.googlecode.instinct.internal.core.ASpecificationMethodBuilderWithNoNamingScheme;
+import com.googlecode.instinct.internal.core.ASpecificationMethodBuilderWithNonDefaultAnnotations;
 import com.googlecode.instinct.internal.core.ASpecificationThatExpectsAnExceptionButOneIsNotThrown;
 import com.googlecode.instinct.internal.core.ASpecificationThatThrowsAnExpectedException;
 import com.googlecode.instinct.internal.core.AnExectingExceptionSpecificationMethod;
@@ -91,6 +91,6 @@ public final class SpecificationsSuite {
                 APendingSpecificationMethodWithAReason.class, ASpecificationThatThrowsAnExpectedException.class,
                 AnExectingExceptionSpecificationMethod.class, ASpecificationThatExpectsAnExceptionButOneIsNotThrown.class,
                 ASpecificationMethodBuilder.class, AFjItemInListMatcher.class, AMethodEqualityUtility.class, ASuperClassTraversingMethodLocator.class,
-                ASpecificationMethodBuilderWithNoNamingScheme.class};
+                ASpecificationMethodBuilderWithNonDefaultAnnotations.class};
     }
 }

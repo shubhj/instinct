@@ -35,6 +35,7 @@ import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
 import fj.F;
 import fj.data.List;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
 
@@ -94,30 +95,30 @@ public final class SpecificationMethodBuilderImpl implements SpecificationMethod
         }
     }
 
-    private <T> MarkingScheme beforeSpecificationMarkingScheme(final AnnotatedElement contextType) {
-        return markingScheme(contextType, BEFORE_SPECIFICATION, beforeNaming());
+    private MarkingScheme beforeSpecificationMarkingScheme(final AnnotatedElement contextType) {
+        return markingScheme(BEFORE_SPECIFICATION, contextType, beforeNaming(), beforeAnnotation());
     }
 
-    private <T> MarkingScheme afterSpecificationMarkingScheme(final AnnotatedElement contextType) {
-        return markingScheme(contextType, AFTER_SPECIFICATION, afterNaming());
+    private MarkingScheme afterSpecificationMarkingScheme(final AnnotatedElement contextType) {
+        return markingScheme(AFTER_SPECIFICATION, contextType, afterNaming(), afterAnnotation());
     }
 
-    private <T> MarkingScheme specificationMarkingScheme(final AnnotatedElement contextType) {
-        return markingScheme(contextType, SPECIFICATION, specificationNaming());
+    private MarkingScheme specificationMarkingScheme(final AnnotatedElement contextType) {
+        return markingScheme(SPECIFICATION, contextType, specificationNaming(), specificationAnnotation());
     }
 
     @SuppressWarnings({"unchecked"})
-    private <T> MarkingScheme markingScheme(final AnnotatedElement contextType, final MarkingScheme markingScheme,
-            final F<Class<T>, NamingConvention> namingConvention) {
+    private <T> MarkingScheme markingScheme(final MarkingScheme defaultMarkingScheme, final AnnotatedElement contextType,
+            final F<Class<T>, NamingConvention> namingConvention, final F<Class<T>, Class<? extends Annotation>> annotation) {
         if (contextType.isAnnotationPresent(Context.class)) {
-            final NamingConvention naming = namingConvention.f((Class<T>) contextType);
-            return new MarkingSchemeImpl(markingScheme.getAnnotationType(), naming, markingScheme.getAttributeConstraint());
+            return new MarkingSchemeImpl(annotation.f((Class<T>) contextType), namingConvention.f((Class<T>) contextType),
+                    defaultMarkingScheme.getAttributeConstraint());
         } else {
-            return markingScheme;
+            return defaultMarkingScheme;
         }
     }
 
-    public <T> F<Class<T>, NamingConvention> beforeNaming() {
+    private <T> F<Class<T>, NamingConvention> beforeNaming() {
         return new F<Class<T>, NamingConvention>() {
             public NamingConvention f(final Class<T> contextClass) {
                 return (NamingConvention) invoker
@@ -126,7 +127,15 @@ public final class SpecificationMethodBuilderImpl implements SpecificationMethod
         };
     }
 
-    public <T> F<Class<T>, NamingConvention> afterNaming() {
+    private <T> F<Class<T>, Class<? extends Annotation>> beforeAnnotation() {
+        return new F<Class<T>, Class<? extends Annotation>>() {
+            public Class<? extends Annotation> f(final Class<T> contextClass) {
+                return contextClass.getAnnotation(Context.class).beforeSpecificationAnnotation();
+            }
+        };
+    }
+
+    private <T> F<Class<T>, NamingConvention> afterNaming() {
         return new F<Class<T>, NamingConvention>() {
             public NamingConvention f(final Class<T> contextClass) {
                 return (NamingConvention) invoker
@@ -135,11 +144,27 @@ public final class SpecificationMethodBuilderImpl implements SpecificationMethod
         };
     }
 
-    public <T> F<Class<T>, NamingConvention> specificationNaming() {
+    private <T> F<Class<T>, Class<? extends Annotation>> afterAnnotation() {
+        return new F<Class<T>, Class<? extends Annotation>>() {
+            public Class<? extends Annotation> f(final Class<T> contextClass) {
+                return contextClass.getAnnotation(Context.class).afterSpecificationAnnotation();
+            }
+        };
+    }
+
+    private <T> F<Class<T>, NamingConvention> specificationNaming() {
         return new F<Class<T>, NamingConvention>() {
             public NamingConvention f(final Class<T> contextClass) {
                 return (NamingConvention) invoker
                         .invokeNullaryConstructor(contextClass.getAnnotation(Context.class).specificationNamingConvention());
+            }
+        };
+    }
+
+    private <T> F<Class<T>, Class<? extends Annotation>> specificationAnnotation() {
+        return new F<Class<T>, Class<? extends Annotation>>() {
+            public Class<? extends Annotation> f(final Class<T> contextClass) {
+                return contextClass.getAnnotation(Context.class).specificationAnnotation();
             }
         };
     }
