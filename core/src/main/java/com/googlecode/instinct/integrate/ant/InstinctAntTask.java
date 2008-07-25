@@ -139,11 +139,7 @@ public final class InstinctAntTask extends Task implements StatusLogger {
                 return fromString(contextClass.getFullyQualifiedName());
             }
         });
-        final String s = asString(join(contexts.intersperse(fromString(RunnableItemBuilder.ITEM_SEPARATOR))));
-        // SUPPRESS GenericIllegalRegexp {
-        System.out.println("contexts to run = " + s);
-        // } SUPPRESS GenericIllegalRegexp
-        return s;
+        return asString(join(contexts.intersperse(fromString(RunnableItemBuilder.ITEM_SEPARATOR))));
     }
 
     private List<JavaClassName> findContextsFromAllAggregators() {

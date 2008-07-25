@@ -3,7 +3,7 @@
     <property name="project.longname" value="Instinct Behaviour Driven Development (BDD) Framework Examples"/>
     <property name="project.shortname" value="instinct-example"/>
     <property name="project.version.major" value="0"/>
-    <property name="project.version.minor" value="1.7"/>
+    <property name="project.version.minor" value="1.8"/>
     <property name="version-status" value=""/>
     <property name="project.version.full" value="${project.version.major}.${project.version.minor}${version-status}"/>
 
