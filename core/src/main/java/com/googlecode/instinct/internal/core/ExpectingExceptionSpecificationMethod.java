@@ -42,14 +42,16 @@ public final class ExpectingExceptionSpecificationMethod extends Primordial impl
     private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
     private final ExceptionFinder exceptionFinder = new ExceptionFinderImpl();
     private final Clock clock = new ClockImpl();
+    private final Class<?> contextType;
     private final Method method;
     private final List<LifecycleMethod> beforeSpecificationMethods;
     private final List<LifecycleMethod> afterSpecificationMethods;
     private List<SpecificationListener> specificationListeners = nil();
 
-    public ExpectingExceptionSpecificationMethod(final Method method, final List<LifecycleMethod> beforeSpecificationMethods,
-            final List<LifecycleMethod> afterSpecificationMethods) {
-        checkNotNull(method, beforeSpecificationMethods, afterSpecificationMethods);
+    public <T> ExpectingExceptionSpecificationMethod(final Class<T> contextType, final Method method,
+            final List<LifecycleMethod> beforeSpecificationMethods, final List<LifecycleMethod> afterSpecificationMethods) {
+        checkNotNull(contextType, method, beforeSpecificationMethods, afterSpecificationMethods);
+        this.contextType = contextType;
         this.method = method;
         this.beforeSpecificationMethods = beforeSpecificationMethods;
         this.afterSpecificationMethods = afterSpecificationMethods;
@@ -82,7 +84,7 @@ public final class ExpectingExceptionSpecificationMethod extends Primordial impl
 
     @SuppressWarnings({"unchecked"})
     public <T> Class<T> getContextClass() {
-        return (Class<T>) method.getDeclaringClass();
+        return (Class<T>) contextType;
     }
 
     public void addContextListener(final ContextListener contextListener) {

@@ -32,14 +32,17 @@ import java.lang.reflect.Method;
 
 /** A specification that is not pending completion. Pens specifications will not be run. */
 public final class PendingSpecificationMethod extends Primordial implements SpecificationMethod {
+    @SuppressWarnings({"TypeMayBeWeakened"})
+    private final Class<?> contextType;
     private final Method method;
     private List<LifecycleMethod> beforeSpecificationMethods;
     private List<LifecycleMethod> afterSpecificationMethods;
     private List<SpecificationListener> specificationListeners = nil();
 
-    public PendingSpecificationMethod(final Method method, final List<LifecycleMethod> beforeSpecificationMethods,
+    public <T> PendingSpecificationMethod(final Class<T> contextType, final Method method, final List<LifecycleMethod> beforeSpecificationMethods,
             final List<LifecycleMethod> afterSpecificationMethods) {
-        checkNotNull(method, beforeSpecificationMethods, afterSpecificationMethods);
+        checkNotNull(contextType, method, beforeSpecificationMethods, afterSpecificationMethods);
+        this.contextType = contextType;
         this.method = method;
         this.beforeSpecificationMethods = beforeSpecificationMethods;
         this.afterSpecificationMethods = afterSpecificationMethods;
@@ -67,7 +70,7 @@ public final class PendingSpecificationMethod extends Primordial implements Spec
 
     @SuppressWarnings({"unchecked"})
     public <T> Class<T> getContextClass() {
-        return (Class<T>) method.getDeclaringClass();
+        return (Class<T>) contextType;
     }
 
     public void addContextListener(final ContextListener contextListener) {

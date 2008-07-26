@@ -112,6 +112,6 @@ public final class ContextClassImplAtomicTest extends InstinctTestCase {
     }
 
     private LifecycleMethod lifecycleMethod(final String methodName) {
-        return new LifecycleMethodImpl(getMethod(ASimpleContext.class, methodName));
+        return new LifecycleMethodImpl(ASimpleContext.class, getMethod(ASimpleContext.class, methodName));
     }
 }

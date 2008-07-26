@@ -36,10 +36,12 @@ public final class CompleteSpecificationMethod extends Primordial implements Spe
     private List<LifecycleMethod> beforeSpecificationMethods;
     private List<LifecycleMethod> afterSpecificationMethods;
     private List<SpecificationListener> specificationListeners = nil();
+    private final Class<?> contextType;
 
-    public CompleteSpecificationMethod(final Method method, final List<LifecycleMethod> beforeSpecificationMethods,
+    public <T> CompleteSpecificationMethod(final Class<T> contextType, final Method method, final List<LifecycleMethod> beforeSpecificationMethods,
             final List<LifecycleMethod> afterSpecificationMethods) {
-        checkNotNull(method, beforeSpecificationMethods, afterSpecificationMethods);
+        checkNotNull(contextType, method, beforeSpecificationMethods, afterSpecificationMethods);
+        this.contextType = contextType;
         this.method = method;
         this.beforeSpecificationMethods = beforeSpecificationMethods;
         this.afterSpecificationMethods = afterSpecificationMethods;
@@ -59,11 +61,11 @@ public final class CompleteSpecificationMethod extends Primordial implements Spe
 
     public Method getMethod() {
         return method;
-    }   
+    }
 
     @SuppressWarnings({"unchecked"})
     public <T> Class<T> getContextClass() {
-        return (Class<T>) method.getDeclaringClass();
+        return (Class<T>) contextType;
     }
 
     public void addContextListener(final ContextListener contextListener) {

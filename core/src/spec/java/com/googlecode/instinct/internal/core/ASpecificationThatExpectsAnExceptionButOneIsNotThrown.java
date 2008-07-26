@@ -36,8 +36,8 @@ public final class ASpecificationThatExpectsAnExceptionButOneIsNotThrown {
 
     @BeforeSpecification
     public void before() {
-        expectsExceptionMethod = new ExpectingExceptionSpecificationMethod(getDeclaredMethod(ContainsExpectedException.class, "throwsNoException"),
-                beforeSpecMethods, afterSpecMethods);
+        expectsExceptionMethod = new ExpectingExceptionSpecificationMethod(ContainsExpectedException.class,
+                getDeclaredMethod(ContainsExpectedException.class, "throwsNoException"), beforeSpecMethods, afterSpecMethods);
     }
 
     @Specification

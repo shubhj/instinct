@@ -63,16 +63,16 @@ public final class SpecificationMethodBuilderImpl implements SpecificationMethod
 
     private <T> F<Method, LifecycleMethod> lifecycleMethod(final Class<T> contextType) {
         return new F<Method, LifecycleMethod>() {
-            public LifecycleMethod f(final Method a) {
-                return new LifecycleMethodImpl(a, contextType);
+            public LifecycleMethod f(final Method method) {
+                return new LifecycleMethodImpl(contextType, method);
             }
         };
     }
 
     private <T> F<Method, SpecificationMethod> specificationMethod(final Class<T> contextType) {
         return new F<Method, SpecificationMethod>() {
-            public SpecificationMethod f(final Method a) {
-                return buildSpecification(contextType, a);
+            public SpecificationMethod f(final Method method) {
+                return buildSpecification(contextType, method);
             }
         };
     }
@@ -81,17 +81,18 @@ public final class SpecificationMethodBuilderImpl implements SpecificationMethod
         if (method.isAnnotationPresent(Specification.class)) {
             final Specification annotation = method.getAnnotation(Specification.class);
             if (annotation.state() == PENDING) {
-                return new PendingSpecificationMethod(method, buildBeforeSpecificationMethods(contextType),
+                return new PendingSpecificationMethod(contextType, method, buildBeforeSpecificationMethods(contextType),
                         buildAfterSpecificationMethods(contextType));
             } else if (annotation.expectedException() != NO_EXPECTED_EXCEPTION) {
-                return new ExpectingExceptionSpecificationMethod(method, buildBeforeSpecificationMethods(contextType),
+                return new ExpectingExceptionSpecificationMethod(contextType, method, buildBeforeSpecificationMethods(contextType),
                         buildAfterSpecificationMethods(contextType));
             } else {
-                return new CompleteSpecificationMethod(method, buildBeforeSpecificationMethods(contextType),
+                return new CompleteSpecificationMethod(contextType, method, buildBeforeSpecificationMethods(contextType),
                         buildAfterSpecificationMethods(contextType));
             }
         } else {
-            return new CompleteSpecificationMethod(method, buildBeforeSpecificationMethods(contextType), buildAfterSpecificationMethods(contextType));
+            return new CompleteSpecificationMethod(contextType, method, buildBeforeSpecificationMethods(contextType),
+                    buildAfterSpecificationMethods(contextType));
         }
     }
 

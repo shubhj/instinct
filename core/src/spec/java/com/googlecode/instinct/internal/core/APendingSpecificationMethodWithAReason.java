@@ -39,7 +39,8 @@ public final class APendingSpecificationMethodWithAReason {
     @BeforeSpecification
     public void before() {
         final Method method = getDeclaredMethod(PendingSpecificationWithReason.class, "aPendingMethod");
-        pendingMethod = new PendingSpecificationMethod(method, beforeSpecificationMethods, afterSpecificationMethods);
+        pendingMethod =
+                new PendingSpecificationMethod(PendingSpecificationWithReason.class, method, beforeSpecificationMethods, afterSpecificationMethods);
     }
 
     @Specification

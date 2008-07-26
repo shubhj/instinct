@@ -51,7 +51,10 @@ public final class AbstractContextClass implements ContextClass {
     }
 
     public ContextResult run() {
+        // SUPPRESS GenericIllegalRegexp {
+        System.out.println(">>>> Running abstract class");
         return new AbstractContextContextResult(getName());
+        // } SUPPRESS GenericIllegalRegexp
     }
 
     public fj.data.List<SpecificationMethod> getSpecificationMethods() {

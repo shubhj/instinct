@@ -37,7 +37,7 @@ public final class ASpecificationThatThrowsAnExpectedException {
 
     @BeforeSpecification
     public void before() {
-        expectsExceptionMethod = new ExpectingExceptionSpecificationMethod(
+        expectsExceptionMethod = new ExpectingExceptionSpecificationMethod(ContainsExpectedException.class,
                 getDeclaredMethod(ContainsExpectedException.class, "expectsExceptionThrown"), beforeSpecMethods, afterSpecMethods);
     }
 

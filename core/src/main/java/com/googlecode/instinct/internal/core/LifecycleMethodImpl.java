@@ -17,7 +17,6 @@
 package com.googlecode.instinct.internal.core;
 
 import com.googlecode.instinct.internal.lang.Primordial;
-import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.TechNote;
 import java.lang.annotation.Annotation;
@@ -28,15 +27,8 @@ public final class LifecycleMethodImpl extends Primordial implements LifecycleMe
     @SuppressWarnings({"TypeMayBeWeakened"})
     private final Class<?> contextClass;
 
-    @Fix("Can't call this() because of the null check :| Remove this duplication if possible.")
-    public LifecycleMethodImpl(final Method method) {
-        checkNotNull(method);
-        this.method = method;
-        contextClass = method.getDeclaringClass();
-    }
-
-    public <T> LifecycleMethodImpl(final Method method, final Class<T> contextClass) {
-        checkNotNull(method, contextClass);
+    public <T> LifecycleMethodImpl(final Class<T> contextClass, final Method method) {
+        checkNotNull(contextClass, method);
         this.contextClass = contextClass;
         this.method = method;
     }

@@ -33,7 +33,7 @@ public final class LifecycleMethodImplAtomicTest extends InstinctTestCase {
 
     @Override
     public void setUpSubject() {
-        lifecycleMethod = new LifecycleMethodImpl(method);
+        lifecycleMethod = new LifecycleMethodImpl(SampleClass.class, method);
     }
 
     public void testConformsToClassTraits() {
