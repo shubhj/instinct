@@ -724,12 +724,10 @@
     </library>
     <library name="Functional Java">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/core/lib/functionaljava/functionaljava-20080723.jar!/" />
+        <root url="jar://$PROJECT_DIR$/core/lib/functionaljava/functionaljava-2.8.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/core/etc/lib-src/functionaljava-20080723-sources.jar!/" />
-      </SOURCES>
+      <SOURCES />
     </library>
   </component>
   <UsedPathMacros>

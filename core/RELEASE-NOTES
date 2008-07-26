@@ -7,8 +7,8 @@ o Reductio Integration
 
 * Instinct Release 0.1.8 *
 
-Added the ability to customise the way specifications and other lifecycle methods are
-found.
+Maintenance release; Added the ability to customise the way specifications and other lifecycle
+methods are found.
 
 o Core Features
   o Custom specification, before specification and after specification annotations and
