@@ -19,16 +19,14 @@ package com.googlecode.instinct.stack
 import integrate.junit4.InstinctRunner
 import org.junit.runner.RunWith
 
-@RunWith(classOf[InstinctRunner])
 final class AnEmptyStackInScala {
     def shouldDoSomething {
-        println("Foo")
+
     }
 }
 
 object Runner {
     import com.googlecode.instinct.runner.TextRunner._
-//    import com.googlecode.instinct.stack.AnEmptyStackInScala
 
     def main(args: Array[String]) {
         runContexts(Array(classOf[AnEmptyStackInScala]));

@@ -28,15 +28,20 @@
     <property name="compile.deprecation" value="on"/>
     <property name="compile.force" value="never"/>
 
-    <path id="main.class.path">
+    <path id="main.java.class.path">
         <fileset dir="${basedir}">
             <include name="${instinct.jar}"/>
-            <include name="${lib.dir}/scala-*.jar"/>
         </fileset>
         <pathelement location="${main.classes.dir}"/>
     </path>
-    <path id="spec.class.path">
-        <path refid="main.class.path"/>
+    <path id="main.scala.class.path">
+        <path refid="main.java.class.path"/>
+        <fileset dir="${basedir}">
+            <include name="${lib.dir}/scala-*.jar"/>
+        </fileset>
+    </path>
+    <path id="spec.java.class.path">
+        <path refid="main.java.class.path"/>
         <fileset dir="${basedir}">
             <include name="${lib.dir}/cglib-nodep-*.jar"/>
             <include name="${lib.dir}/jmock-*.jar"/>
@@ -49,8 +54,13 @@
         <pathelement location="${spec.classes.dir}"/>
         <pathelement location="${spec.resources.dir}"/>
     </path>
+    <path id="spec.scala.class.path">
+        <path refid="main.scala.class.path"/>
+        <path refid="spec.java.class.path"/>
+    </path>
 
-    <taskdef resource="scala/tools/ant/antlib.xml" classpathref="main.class.path"/>
+    <taskdef resource="instincttask.properties" classpathref="spec.scala.class.path"/>
+    <taskdef resource="scala/tools/ant/antlib.xml" classpathref="main.scala.class.path"/>
 
     <target name="all" depends="clean,release"/>
     <target name="clean" depends="-clean"/>
@@ -75,25 +85,24 @@
     </target>
 
     <target name="-compile-java" depends="-generate">
-        <compile.java.macro src.dir="${main.java.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}"
+        <compile.java.macro classpath.ref="main.java.class.path" src.dir="${main.java.src.dir}" output.dir="${main.classes.dir}"
                 src.path="${main.java.src.dir}"/>
-        <compile.java.macro src.dir="${spec.java.src.dir}" classpath.ref="spec.class.path" output.dir="${spec.classes.dir}"
+        <compile.java.macro classpath.ref="spec.java.class.path" src.dir="${spec.java.src.dir}" output.dir="${spec.classes.dir}"
                 src.path="${spec.java.src.dir}"/>
     </target>
 
-    <target name="foo" depends="compile-scala">
-        <java classname="com.googlecode.instinct.stack.Runner" fork="true" classpathref="spec.class.path"/>
+    <!--<target name="foo" depends="-compile-scala">-->
+    <!--<java classname="com.googlecode.instinct.stack.Runner" fork="true" classpathref="spec.scala.class.path"/>-->
+    <!--</target>-->
+
+    <target name="-compile-scala" depends="-generate">
+        <compile.scala.macro classpath.ref="main.scala.class.path" output.dir="${main.classes.dir}" src.path="${main.scala.src.dir}"/>
+        <compile.scala.macro classpath.ref="spec.scala.class.path" output.dir="${spec.classes.dir}" src.path="${spec.scala.src.dir}"/>
     </target>
 
-    <target name="compile-scala" depends="-generate">
-        <compile.scala.macro classpath.ref="main.class.path" output.dir="${main.classes.dir}" src.path="${main.scala.src.dir}"/>
-        <compile.scala.macro classpath.ref="spec.class.path" output.dir="${spec.classes.dir}" src.path="${spec.scala.src.dir}"/>
-    </target>
-
-    <target name="-run-specs" depends="-compile-java">
-        <taskdef resource="instincttask.properties" classpathref="spec.class.path"/>
+    <target name="-run-specs" depends="-compile-java,-compile-scala">
         <instinct failureproperty="specs-failed">
-            <classpath refid="spec.class.path"/>
+            <classpath refid="spec.scala.class.path"/>
             <specifications dir="${spec.classes.dir}" groups="osdc"/>
             <formatter type="brief"/>
         </instinct>
@@ -102,7 +111,7 @@
 
     <target name="-run-junit3-integration" depends="-compile-java">
         <junit failureproperty="tests-failed" fork="true" forkmode="perBatch">
-            <classpath refid="spec.class.path"/>
+            <classpath refid="spec.java.class.path"/>
             <test name="com.googlecode.instinct.example.junit.StackJUnitSuite"/>
             <formatter type="brief" usefile="false"/>
         </junit>
@@ -111,7 +120,7 @@
 
     <target name="-run-junit4-integration" depends="-compile-java">
         <junit failureproperty="tests-failed" fork="true" forkmode="perBatch">
-            <classpath refid="spec.class.path"/>
+            <classpath refid="spec.java.class.path"/>
             <test name="com.googlecode.instinct.example.junit.StackJUnit4Suite"/>
             <test name="com.googlecode.instinct.example.csvreader.junit.CsvReaderJUnitTests"/>
             <formatter type="brief" usefile="false"/>
