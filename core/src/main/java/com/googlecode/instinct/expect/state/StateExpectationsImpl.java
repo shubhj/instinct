@@ -42,6 +42,8 @@ import com.googlecode.instinct.expect.state.checker.NodeChecker;
 import com.googlecode.instinct.expect.state.checker.NodeCheckerImpl;
 import com.googlecode.instinct.expect.state.checker.ObjectChecker;
 import com.googlecode.instinct.expect.state.checker.ObjectCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.OptionChecker;
+import com.googlecode.instinct.expect.state.checker.OptionCheckerImpl;
 import com.googlecode.instinct.expect.state.checker.StringChecker;
 import com.googlecode.instinct.expect.state.checker.StringCheckerImpl;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
@@ -50,6 +52,7 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
 import fj.data.List;
+import fj.data.Option;
 import java.io.File;
 import java.util.Collection;
 import java.util.EventObject;
@@ -92,6 +95,10 @@ public final class StateExpectationsImpl implements StateExpectations {
 
     public <K, V> MapChecker<K, V> that(final Map<K, V> map) {
         return (MapChecker<K, V>) createChecker(MapCheckerImpl.class, map);
+    }
+
+    public <T> OptionChecker<T> that(final Option<T> option) {
+        return createChecker(OptionCheckerImpl.class, option);
     }
 
     public DoubleChecker that(final Double d) {

@@ -34,9 +34,11 @@ import com.googlecode.instinct.expect.state.checker.MapChecker;
 import com.googlecode.instinct.expect.state.checker.NodeChecker;
 import com.googlecode.instinct.expect.state.checker.ObjectChecker;
 import com.googlecode.instinct.expect.state.checker.StringChecker;
+import com.googlecode.instinct.expect.state.checker.OptionChecker;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import fj.data.List;
+import fj.data.Option;
 import java.io.File;
 import java.util.Collection;
 import java.util.EventObject;
@@ -80,6 +82,10 @@ public final class ExpectThatImpl implements ExpectThat {
 
     public <K, V> MapChecker<K, V> that(final Map<K, V> map) {
         return stateExpectations.that(map);
+    }
+
+    public <T> OptionChecker<T> that(final Option<T> option) {
+        return stateExpectations.that(option);
     }
 
     public DoubleChecker that(final Double d) {
