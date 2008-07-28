@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.stack
 
+import marker.annotate.{Stub, Specification}
 import com.googlecode.instinct.expect.Expect._
-import com.googlecode.instinct.marker.annotate.Specification
 
 sealed trait Stack[+A] {
     def push[B >: A](element: B): Stack[B]
@@ -48,13 +48,22 @@ final case class NonEmptyStack[+A](element: A, elements: Stack[A]) extends Stack
 }
 
 final class AnEmptyStackInScala {
+    @Stub var element: Int = 1
+
     @Specification {val expectedException = classOf[RuntimeException], val withMessage = "Cannot pop an empty stack"}
     def failsWhenPopped {
         EmptyStack.pop
     }
 
+    @Specification
     def returnsNoneWhenSafelyPopped {
         expect.that(EmptyStack.safePop).isEqualTo(None)
+    }
+
+    @Specification
+    def isNoLongerBeEmptyAfterPush {
+        val stack = EmptyStack.push(element)
+        expect.that(stack.peek).isEqualTo(element)
     }
 }
 
