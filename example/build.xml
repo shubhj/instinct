@@ -92,7 +92,7 @@
     </target>
 
     <target name="stack" depends="-compile-scala">
-        <java classname="com.googlecode.instinct.scala.Runner" fork="true" classpathref="spec.scala.class.path"/>
+        <java classname="com.googlecode.instinct.stack.Runner" fork="true" classpathref="spec.scala.class.path"/>
     </target>
 
     <target name="-compile-scala" depends="-generate">
@@ -135,7 +135,7 @@
         <attribute name="src.path"/>
         <sequential>
             <mkdir dir="@{output.dir}"/>
-            <javac source="1.5" srcdir="@{src.dir}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="true"
+            <javac classpathref="@{classpath.ref}" source="1.5" srcdir="@{src.dir}" destdir="@{output.dir}" debug="true"
                     debuglevel="source,lines,vars" deprecation="false" optimize="true">
                 <src>
                     <path path="@{src.path}"/>

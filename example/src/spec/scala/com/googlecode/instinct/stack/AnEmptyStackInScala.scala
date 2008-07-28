@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.scala.stack
+package com.googlecode.instinct.stack
 
 import com.googlecode.instinct.expect.Expect._
 import com.googlecode.instinct.marker.annotate.Specification
