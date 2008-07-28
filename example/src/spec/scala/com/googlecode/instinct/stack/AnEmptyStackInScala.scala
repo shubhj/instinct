@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package scala
+package com.googlecode.instinct.scala.stack
 
 import com.googlecode.instinct.expect.Expect._
 import com.googlecode.instinct.marker.annotate.Specification
 
-sealed trait Stack[+ A] {
+sealed trait Stack[+A] {
     def push[B >: A](element: B): Stack[B]
     def pop: Stack[A]
     def safePop: Option[Stack[A]]
@@ -39,7 +39,7 @@ final case object EmptyStack extends Stack[Nothing] {
     override def safePeek = None
 }
 
-final case class NonEmptyStack[+ A](element: A, elements: Stack[A]) extends Stack[A] {
+final case class NonEmptyStack[+A](element: A, elements: Stack[A]) extends Stack[A] {
     override def push[B >: A](element: B) = NonEmptyStack(element, this)
     override def pop = elements
     override def safePop = Some(elements)
