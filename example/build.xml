@@ -91,9 +91,9 @@
                 src.path="${spec.java.src.dir}"/>
     </target>
 
-    <!--<target name="foo" depends="-compile-scala">-->
-    <!--<java classname="com.googlecode.instinct.stack.Runner" fork="true" classpathref="spec.scala.class.path"/>-->
-    <!--</target>-->
+    <target name="stack" depends="-compile-scala">
+        <java classname="com.googlecode.instinct.scala.Runner" fork="true" classpathref="spec.scala.class.path"/>
+    </target>
 
     <target name="-compile-scala" depends="-generate">
         <compile.scala.macro classpath.ref="main.scala.class.path" output.dir="${main.classes.dir}" src.path="${main.scala.src.dir}"/>
