@@ -25,6 +25,9 @@ final class AnEmptyStackSpeccedUsingScala {
     @Specification {val expectedException = classOf[RuntimeException], val withMessage = "Cannot pop an empty stack"}
     def failsWhenPopped {
         EmptyStack.pop
+//        expect.that(EmptyStack.pop).willThrow(classOf[RuntimeException]).withMessage("Cannot pop an empty stack")
+//        expect.that(EmptyStack.pop).willThrow(new RuntimeException("Cannot pop an empty stack"))
+//        expect.that(EmptyStack.pop).errorsWith("Cannot pop an empty stack")
     }
 
     @Specification {val expectedException = classOf[RuntimeException], val withMessage = "Nothing to see"}
@@ -35,19 +38,16 @@ final class AnEmptyStackSpeccedUsingScala {
     @Specification
     def returnsNoneWhenSafelyPopped {
         expect.that(EmptyStack.safePop).isEqualTo(None)
+//        EmptyStack.safePop.must.equal(None)
+//        EmptyStack.safePop.mustNot.equal(Some(element))
+//        expect.that(EmptyStack.safePop).isEqualTo(None)
+//        expect.that(EmptyStack.safePop).isNone
+//        expect.that(EmptyStack.safePop).isSome(element)
     }
 
     @Specification
     def isNoLongerEmptyAfterPush {
         val stack = EmptyStack.push(element)
         expect.that(stack.peek).isEqualTo(element)
-    }
-}
-
-object Runner {
-    import com.googlecode.instinct.runner.TextRunner._
-
-    def main(args: Array[String]) {
-        runContexts(Array(classOf[AnEmptyStackSpeccedUsingScala]))
     }
 }
