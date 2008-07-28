@@ -28,8 +28,6 @@
     <property name="compile.deprecation" value="on"/>
     <property name="compile.force" value="never"/>
 
-    <taskdef resource="scala/tools/ant/antlib.xml" classpathref="main.class.path"/>
-
     <path id="main.class.path">
         <fileset dir="${basedir}">
             <include name="${instinct.jar}"/>
@@ -51,6 +49,8 @@
         <pathelement location="${spec.classes.dir}"/>
         <pathelement location="${spec.resources.dir}"/>
     </path>
+
+    <taskdef resource="scala/tools/ant/antlib.xml" classpathref="main.class.path"/>
 
     <target name="all" depends="clean,release"/>
     <target name="clean" depends="-clean"/>
@@ -120,24 +120,6 @@
     </target>
 
     <macrodef name="compile.java.macro">
-        <attribute name="src.dir"/>
-        <attribute name="output.dir"/>
-        <attribute name="classpath.ref"/>
-        <attribute name="src.path"/>
-        <sequential>
-            <mkdir dir="@{output.dir}"/>
-            <javac source="1.5" srcdir="@{src.dir}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="true"
-                    debuglevel="source,lines,vars" deprecation="false" optimize="true">
-                <src>
-                    <path path="@{src.path}"/>
-                </src>
-                <patternset includes="**/*.java"/>
-                <compilerarg value="-Xlint"/>
-            </javac>
-        </sequential>
-    </macrodef>
-
-    <macrodef name="compile.scala.macro">
         <attribute name="src.dir"/>
         <attribute name="output.dir"/>
         <attribute name="classpath.ref"/>

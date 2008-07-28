@@ -28,7 +28,7 @@ final class AnEmptyStackInScala {
 
 object Runner {
     import com.googlecode.instinct.runner.TextRunner._
-    import com.googlecode.instinct.stack.AnEmptyStackInScala
+//    import com.googlecode.instinct.stack.AnEmptyStackInScala
 
     def main(args: Array[String]) {
         runContexts(Array(classOf[AnEmptyStackInScala]));

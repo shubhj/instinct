@@ -1,5 +1,7 @@
 * Instinct Release 0.1.9 *
 
+o Scala integration
+  o Added Scala examples, using Instinct in Scala to spec Java and Scala code. 
 o Reductio Integration
   o Integrated Reductio, a tool for automated specification testing. See
     http://reductiotest.org/ for more information.
