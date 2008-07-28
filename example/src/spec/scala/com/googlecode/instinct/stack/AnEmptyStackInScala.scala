@@ -19,40 +19,17 @@ package com.googlecode.instinct.stack
 import marker.annotate.{Stub, Specification}
 import com.googlecode.instinct.expect.Expect._
 
-sealed trait Stack[+A] {
-    def push[B >: A](element: B): Stack[B]
-    def pop: Stack[A]
-    def safePop: Option[Stack[A]]
-    def peek: A
-    def safePeek: Option[A]
-    def map[B, BB >: B](f: A => B): Stack[BB] = this match {
-        case EmptyStack => EmptyStack
-        case NonEmptyStack(element, elements) => NonEmptyStack(f(element), elements.map(f))
-    }
-}
-
-final case object EmptyStack extends Stack[Nothing] {
-    override def push[B](element: B) = NonEmptyStack(element, this)
-    override def pop = error("Cannot pop an empty stack")
-    override def safePop = None
-    override def peek = error("Nothing to see")
-    override def safePeek = None
-}
-
-final case class NonEmptyStack[+A](element: A, elements: Stack[A]) extends Stack[A] {
-    override def push[B >: A](element: B) = NonEmptyStack(element, this)
-    override def pop = elements
-    override def safePop = Some(elements)
-    override def peek = element
-    override def safePeek = Some(element)
-}
-
-final class AnEmptyStackInScala {
+final class AnEmptyStackSpeccedUsingScala {
     @Stub var element: Int = 1
 
     @Specification {val expectedException = classOf[RuntimeException], val withMessage = "Cannot pop an empty stack"}
     def failsWhenPopped {
         EmptyStack.pop
+    }
+
+    @Specification {val expectedException = classOf[RuntimeException], val withMessage = "Nothing to see"}
+    def failsWhenPeeked {
+        EmptyStack.peek
     }
 
     @Specification
@@ -61,7 +38,7 @@ final class AnEmptyStackInScala {
     }
 
     @Specification
-    def isNoLongerBeEmptyAfterPush {
+    def isNoLongerEmptyAfterPush {
         val stack = EmptyStack.push(element)
         expect.that(stack.peek).isEqualTo(element)
     }
@@ -71,6 +48,6 @@ object Runner {
     import com.googlecode.instinct.runner.TextRunner._
 
     def main(args: Array[String]) {
-        runContexts(Array(classOf[AnEmptyStackInScala]))
+        runContexts(Array(classOf[AnEmptyStackSpeccedUsingScala]))
     }
 }
