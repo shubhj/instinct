@@ -12,8 +12,10 @@
     <property name="src.dir" value="src"/>
     <property name="main.dir" value="${src.dir}/main"/>
     <property name="spec.dir" value="${src.dir}/spec"/>
-    <property name="main.src.dir" value="${main.dir}/java"/>
-    <property name="spec.src.dir" value="${spec.dir}/java"/>
+    <property name="main.java.src.dir" value="${main.dir}/java"/>
+    <property name="spec.java.src.dir" value="${spec.dir}/java"/>
+    <property name="main.scala.src.dir" value="${main.dir}/scala"/>
+    <property name="spec.scala.src.dir" value="${spec.dir}/scala"/>
     <property name="spec.resources.dir" value="${spec.dir}/resources"/>
     <property name="main.classes.dir" value="${build.dir}/main-classes"/>
     <property name="spec.classes.dir" value="${build.dir}/spec-classes"/>
@@ -22,9 +24,16 @@
     <property name="project.zip" value="${project.shortname}-${project.version.full}.zip"/>
     <property name="instinct.jar" value="${lib.dir}/instinct-${project.version.full}.jar"/>
 
+    <property name="compile.unchecked" value="on"/>
+    <property name="compile.deprecation" value="on"/>
+    <property name="compile.force" value="never"/>
+
+    <taskdef resource="scala/tools/ant/antlib.xml" classpathref="main.class.path"/>
+
     <path id="main.class.path">
         <fileset dir="${basedir}">
             <include name="${instinct.jar}"/>
+            <include name="${lib.dir}/scala-*.jar"/>
         </fileset>
         <pathelement location="${main.classes.dir}"/>
     </path>
@@ -65,7 +74,52 @@
         </zip>
     </target>
 
-    <macrodef name="compile.macro">
+    <target name="-compile-java" depends="-generate">
+        <compile.java.macro src.dir="${main.java.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}"
+                src.path="${main.java.src.dir}"/>
+        <compile.java.macro src.dir="${spec.java.src.dir}" classpath.ref="spec.class.path" output.dir="${spec.classes.dir}"
+                src.path="${spec.java.src.dir}"/>
+    </target>
+
+    <target name="foo" depends="compile-scala">
+        <java classname="com.googlecode.instinct.stack.Runner" fork="true" classpathref="spec.class.path"/>
+    </target>
+
+    <target name="compile-scala" depends="-generate">
+        <compile.scala.macro classpath.ref="main.class.path" output.dir="${main.classes.dir}" src.path="${main.scala.src.dir}"/>
+        <compile.scala.macro classpath.ref="spec.class.path" output.dir="${spec.classes.dir}" src.path="${spec.scala.src.dir}"/>
+    </target>
+
+    <target name="-run-specs" depends="-compile-java">
+        <taskdef resource="instincttask.properties" classpathref="spec.class.path"/>
+        <instinct failureproperty="specs-failed">
+            <classpath refid="spec.class.path"/>
+            <specifications dir="${spec.classes.dir}" groups="osdc"/>
+            <formatter type="brief"/>
+        </instinct>
+        <fail if="specs-failed" message="Specifications failed."/>
+    </target>
+
+    <target name="-run-junit3-integration" depends="-compile-java">
+        <junit failureproperty="tests-failed" fork="true" forkmode="perBatch">
+            <classpath refid="spec.class.path"/>
+            <test name="com.googlecode.instinct.example.junit.StackJUnitSuite"/>
+            <formatter type="brief" usefile="false"/>
+        </junit>
+        <fail if="tests-failed" message="JUnit 3 integration suite(s) failed."/>
+    </target>
+
+    <target name="-run-junit4-integration" depends="-compile-java">
+        <junit failureproperty="tests-failed" fork="true" forkmode="perBatch">
+            <classpath refid="spec.class.path"/>
+            <test name="com.googlecode.instinct.example.junit.StackJUnit4Suite"/>
+            <test name="com.googlecode.instinct.example.csvreader.junit.CsvReaderJUnitTests"/>
+            <formatter type="brief" usefile="false"/>
+        </junit>
+        <fail if="tests-failed" message="JUnit 4 integration suite(s) failed."/>
+    </target>
+
+    <macrodef name="compile.java.macro">
         <attribute name="src.dir"/>
         <attribute name="output.dir"/>
         <attribute name="classpath.ref"/>
@@ -83,41 +137,39 @@
         </sequential>
     </macrodef>
 
-    <target name="-compile" depends="-generate">
-        <compile.macro src.dir="${main.src.dir}" classpath.ref="main.class.path" output.dir="${main.classes.dir}"
-                src.path="${main.src.dir}"/>
-        <compile.macro src.dir="${spec.src.dir}" classpath.ref="spec.class.path" output.dir="${spec.classes.dir}"
-                src.path="${spec.src.dir}"/>
-    </target>
+    <macrodef name="compile.scala.macro">
+        <attribute name="src.dir"/>
+        <attribute name="output.dir"/>
+        <attribute name="classpath.ref"/>
+        <attribute name="src.path"/>
+        <sequential>
+            <mkdir dir="@{output.dir}"/>
+            <javac source="1.5" srcdir="@{src.dir}" destdir="@{output.dir}" classpathref="@{classpath.ref}" debug="true"
+                    debuglevel="source,lines,vars" deprecation="false" optimize="true">
+                <src>
+                    <path path="@{src.path}"/>
+                </src>
+                <patternset includes="**/*.java"/>
+                <compilerarg value="-Xlint"/>
+            </javac>
+        </sequential>
+    </macrodef>
 
-    <target name="-run-specs" depends="-compile">
-        <taskdef resource="instincttask.properties" classpathref="spec.class.path"/>
-        <instinct failureproperty="specs-failed">
-            <classpath refid="spec.class.path"/>
-            <specifications dir="${spec.classes.dir}" groups="osdc"/>
-            <formatter type="brief"/>
-        </instinct>
-        <fail if="specs-failed" message="Specifications failed."/>
-    </target>
+    <macrodef name="compile.scala.macro">
+        <attribute name="classpath.ref"/>
+        <attribute name="src.path"/>
+        <attribute name="output.dir"/>
+        <sequential>
+            <mkdir dir="@{output.dir}"/>
+            <scalac classpathref="@{classpath.ref}" destdir="@{output.dir}" force="${compile.force}" deprecation="${compile.deprecation}"
+                    unchecked="${compile.unchecked}">
+                <src>
+                    <path path="@{src.path}"/>
+                </src>
+                <patternset includes="**/*.scala"/>
+            </scalac>
+        </sequential>
+    </macrodef>
 
-    <target name="-run-junit3-integration" depends="-compile">
-        <junit failureproperty="tests-failed" fork="true" forkmode="perBatch">
-            <classpath refid="spec.class.path"/>
-            <test name="com.googlecode.instinct.example.junit.StackJUnitSuite"/>
-            <formatter type="brief" usefile="false"/>
-        </junit>
-        <fail if="tests-failed" message="JUnit 3 integration suite(s) failed."/>
-    </target>
 
-    <target name="-run-junit4-integration" depends="-compile">
-        <junit failureproperty="tests-failed" fork="true" forkmode="perBatch">
-            <classpath refid="spec.class.path"/>
-            <test name="com.googlecode.instinct.example.junit.StackJUnit4Suite"/>
-            <test name="com.googlecode.instinct.example.csvreader.junit.CsvReaderJUnitTests"/>
-            <formatter type="brief" usefile="false"/>
-        </junit>
-        <fail if="tests-failed" message="JUnit 4 integration suite(s) failed."/>
-    </target>
-
-    <!-- FIX KEF Zip up the example project to ship - see instinct-example-0.1.5.zip. -->
 </project>
