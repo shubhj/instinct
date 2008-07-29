@@ -17,9 +17,14 @@
 package com.googlecode.instinct.expect.state.checker;
 
 import fj.data.Option;
+import org.hamcrest.Matcher;
 
 public interface OptionChecker<T> extends ObjectChecker<Option<T>> {
     void isNone();
 
     void isSome();
+
+    void isSome(final T some);
+
+    void isSome(final Matcher<T> matcher);
 }

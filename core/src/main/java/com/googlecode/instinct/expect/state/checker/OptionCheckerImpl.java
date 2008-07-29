@@ -17,8 +17,9 @@
 package com.googlecode.instinct.expect.state.checker;
 
 import com.googlecode.instinct.expect.state.matcher.OptionIsNoneMatcher;
+import com.googlecode.instinct.expect.state.matcher.OptionIsSomeMatcher;
 import fj.data.Option;
-import static org.hamcrest.Matchers.not;
+import org.hamcrest.Matcher;
 
 public final class OptionCheckerImpl<T> extends ObjectCheckerImpl<Option<T>> implements OptionChecker<T> {
     public OptionCheckerImpl(final Option<T> subject) {
@@ -30,6 +31,14 @@ public final class OptionCheckerImpl<T> extends ObjectCheckerImpl<Option<T>> imp
     }
 
     public void isSome() {
-        getAsserter().expectThat(subject, not(OptionIsNoneMatcher.<T>isNone()));
+        getAsserter().expectThat(subject, OptionIsSomeMatcher.<T>isSome());
+    }
+
+    public void isSome(final T some) {
+        getAsserter().expectThat(subject, OptionIsSomeMatcher.<T>isSome(some));
+    }
+
+    public void isSome(final Matcher<T> matcher) {
+        getAsserter().expectThat(subject, OptionIsSomeMatcher.<T>isSome(matcher));
     }
 }

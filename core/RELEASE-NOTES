@@ -1,7 +1,9 @@
 * Instinct Release 0.1.9 *
 
 o Scala integration
-  o Added Scala examples, using Instinct in Scala to spec Java and Scala code.
+  o Added Scala stack example, showing the use of Instinct under Scala to spec out Scala code.
+o Expectation API
+  o Added Option matchers, expect.that(Some(1)).isSome(1), expect.that(foo.bar()).isNone().
 o Reductio Integration
   o Integrated Reductio, a tool for automated specification testing. See
     http://reductiotest.org/ for more information.

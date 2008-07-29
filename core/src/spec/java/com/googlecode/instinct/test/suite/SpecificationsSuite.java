@@ -40,6 +40,7 @@ import com.googlecode.instinct.defect.defect8.AFixedDefect8WithANamingConvention
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithAnAnnotationMethodLocator;
 import com.googlecode.instinct.expect.state.matcher.AFjItemInListMatcher;
 import com.googlecode.instinct.expect.state.matcher.AnOptionIsNoneMatcher;
+import com.googlecode.instinct.expect.state.matcher.AnOptionIsSomeMatcher;
 import com.googlecode.instinct.integrate.junit3.ContextTestSuite;
 import com.googlecode.instinct.internal.core.APendingSpecificationMethodWithAReason;
 import com.googlecode.instinct.internal.core.APendingSpecificationMethodWithoutAReason;
@@ -92,6 +93,6 @@ public final class SpecificationsSuite {
                 APendingSpecificationMethodWithAReason.class, ASpecificationThatThrowsAnExpectedException.class,
                 AnExectingExceptionSpecificationMethod.class, ASpecificationThatExpectsAnExceptionButOneIsNotThrown.class,
                 ASpecificationMethodBuilder.class, AFjItemInListMatcher.class, AMethodEqualityUtility.class, ASuperClassTraversingMethodLocator.class,
-                ASpecificationMethodBuilderWithNonDefaultAnnotations.class, AnOptionIsNoneMatcher.class};
+                ASpecificationMethodBuilderWithNonDefaultAnnotations.class, AnOptionIsNoneMatcher.class, AnOptionIsSomeMatcher.class};
     }
 }

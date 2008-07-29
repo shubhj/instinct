@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2008 Workingmouse
+ * Copyright 2008 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,11 +24,12 @@ import fj.data.Option;
 import static fj.data.Option.none;
 import static fj.data.Option.some;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.not;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
-public final class AnOptionIsNoneMatcher {
+public final class AnOptionIsSomeMatcher {
     @Stub(auto = false) private Option<Integer> someOption;
     @Stub(auto = false) private Option<Integer> noneOption;
 
@@ -39,12 +40,14 @@ public final class AnOptionIsNoneMatcher {
     }
 
     @Specification
-    public void matchesOptionsThatAreNone() {
-        assertThat(noneOption, OptionIsNoneMatcher.<Integer>isNone());
+    public void matchesOptionsThatAreSome() {
+        assertThat(someOption, OptionIsSomeMatcher.<Integer>isSome());
+        assertThat(someOption, OptionIsSomeMatcher.<Integer>isSome(5));
+        assertThat(someOption, OptionIsSomeMatcher.<Integer>isSome(lessThan(7)));
     }
 
     @Specification
-    public void doesNotMatchSome() {
-        assertThat(someOption, not(OptionIsNoneMatcher.<Integer>isNone()));
+    public void doesNotMatchNone() {
+        assertThat(noneOption, not(OptionIsSomeMatcher.<Integer>isSome()));
     }
 }
