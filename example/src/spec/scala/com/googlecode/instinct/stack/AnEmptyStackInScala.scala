@@ -17,7 +17,7 @@
 package com.googlecode.instinct.stack
 
 import expect.Expect._
-import marker.annotate.{Stub, Specification}
+import marker.annotate.{Specification, Stub}
 
 final class AnEmptyStackSpeccedUsingScala {
     @Stub var element: Int = 1
