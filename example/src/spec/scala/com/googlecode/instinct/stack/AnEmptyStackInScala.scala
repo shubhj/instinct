@@ -41,9 +41,6 @@ final class AnEmptyStackSpeccedUsingScala {
         expect.that(EmptyStack.safePop: fj.data.Option[Int]).isNone
 //        EmptyStack.safePop.must.equal(None)
 //        EmptyStack.safePop.mustNot.equal(Some(element))
-//        expect.that(EmptyStack.safePop).isEqualTo(None)
-//        expect.that(EmptyStack.safePop).isNone
-//        expect.that(EmptyStack.safePop).isSome(element)
     }
 
     @Specification

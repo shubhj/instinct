@@ -12,10 +12,10 @@
     <property name="src.dir" value="src"/>
     <property name="main.dir" value="${src.dir}/main"/>
     <property name="spec.dir" value="${src.dir}/spec"/>
-    <property name="main.java.src.dir" value="${main.dir}/java"/>
-    <property name="spec.java.src.dir" value="${spec.dir}/java"/>
-    <property name="main.scala.src.dir" value="${main.dir}/scala"/>
-    <property name="spec.scala.src.dir" value="${spec.dir}/scala"/>
+    <property name="java.main.src.dir" value="${main.dir}/java"/>
+    <property name="java.spec.src.dir" value="${spec.dir}/java"/>
+    <property name="scala.main.src.dir" value="${main.dir}/scala"/>
+    <property name="scala.spec.src.dir" value="${spec.dir}/scala"/>
     <property name="spec.resources.dir" value="${spec.dir}/resources"/>
     <property name="main.classes.dir" value="${build.dir}/main-classes"/>
     <property name="spec.classes.dir" value="${build.dir}/spec-classes"/>
@@ -24,24 +24,20 @@
     <property name="project.zip" value="${project.shortname}-${project.version.full}.zip"/>
     <property name="instinct.jar" value="${lib.dir}/instinct-${project.version.full}.jar"/>
 
-    <property name="compile.unchecked" value="on"/>
-    <property name="compile.deprecation" value="on"/>
-    <property name="compile.force" value="never"/>
-
-    <path id="main.java.class.path">
+    <path id="java.main.class.path">
         <fileset dir="${basedir}">
             <include name="${instinct.jar}"/>
         </fileset>
         <pathelement location="${main.classes.dir}"/>
     </path>
-    <path id="main.scala.class.path">
-        <path refid="main.java.class.path"/>
+    <path id="scala.main.class.path">
+        <path refid="java.main.class.path"/>
         <fileset dir="${basedir}">
             <include name="${lib.dir}/scala-*.jar"/>
         </fileset>
     </path>
-    <path id="spec.java.class.path">
-        <path refid="main.java.class.path"/>
+    <path id="java.spec.class.path">
+        <path refid="java.main.class.path"/>
         <fileset dir="${basedir}">
             <include name="${lib.dir}/cglib-nodep-*.jar"/>
             <include name="${lib.dir}/jmock-*.jar"/>
@@ -54,13 +50,13 @@
         <pathelement location="${spec.classes.dir}"/>
         <pathelement location="${spec.resources.dir}"/>
     </path>
-    <path id="spec.scala.class.path">
-        <path refid="main.scala.class.path"/>
-        <path refid="spec.java.class.path"/>
+    <path id="scala.spec.class.path">
+        <path refid="scala.main.class.path"/>
+        <path refid="java.spec.class.path"/>
     </path>
 
-    <taskdef resource="instincttask.properties" classpathref="spec.scala.class.path"/>
-    <taskdef resource="scala/tools/ant/antlib.xml" classpathref="main.scala.class.path"/>
+    <taskdef resource="instincttask.properties" classpathref="scala.spec.class.path"/>
+    <taskdef resource="scala/tools/ant/antlib.xml" classpathref="scala.main.class.path"/>
 
     <target name="all" depends="clean,release"/>
     <target name="clean" depends="-clean"/>
@@ -85,20 +81,20 @@
     </target>
 
     <target name="-compile-java" depends="-generate">
-        <compile.java.macro classpath.ref="main.java.class.path" src.dir="${main.java.src.dir}" output.dir="${main.classes.dir}"
-                src.path="${main.java.src.dir}"/>
-        <compile.java.macro classpath.ref="spec.java.class.path" src.dir="${spec.java.src.dir}" output.dir="${spec.classes.dir}"
-                src.path="${spec.java.src.dir}"/>
+        <compile.java.macro classpath.ref="java.main.class.path" src.dir="${java.main.src.dir}" output.dir="${main.classes.dir}"
+                src.path="${java.main.src.dir}"/>
+        <compile.java.macro classpath.ref="java.spec.class.path" src.dir="${java.spec.src.dir}" output.dir="${spec.classes.dir}"
+                src.path="${java.spec.src.dir}"/>
     </target>
 
     <target name="-compile-scala" depends="-generate">
-        <compile.scala.macro classpath.ref="main.scala.class.path" output.dir="${main.classes.dir}" src.path="${main.scala.src.dir}"/>
-        <compile.scala.macro classpath.ref="spec.scala.class.path" output.dir="${spec.classes.dir}" src.path="${spec.scala.src.dir}"/>
+        <compile.scala.macro classpath.ref="scala.main.class.path" output.dir="${main.classes.dir}" src.path="${scala.main.src.dir}"/>
+        <compile.scala.macro classpath.ref="scala.spec.class.path" output.dir="${spec.classes.dir}" src.path="${scala.spec.src.dir}"/>
     </target>
 
     <target name="-run-specs" depends="-compile-java,-compile-scala">
         <instinct failureproperty="specs-failed">
-            <classpath refid="spec.scala.class.path"/>
+            <classpath refid="scala.spec.class.path"/>
             <specifications dir="${spec.classes.dir}" groups="osdc"/>
             <formatter type="brief"/>
         </instinct>
@@ -107,7 +103,7 @@
 
     <target name="-run-junit3-integration" depends="-compile-java">
         <junit failureproperty="tests-failed" fork="true" forkmode="perBatch">
-            <classpath refid="spec.java.class.path"/>
+            <classpath refid="java.spec.class.path"/>
             <test name="com.googlecode.instinct.example.junit.StackJUnitSuite"/>
             <formatter type="brief" usefile="false"/>
         </junit>
@@ -116,7 +112,7 @@
 
     <target name="-run-junit4-integration" depends="-compile-java">
         <junit failureproperty="tests-failed" fork="true" forkmode="perBatch">
-            <classpath refid="spec.java.class.path"/>
+            <classpath refid="java.spec.class.path"/>
             <test name="com.googlecode.instinct.example.junit.StackJUnit4Suite"/>
             <test name="com.googlecode.instinct.example.csvreader.junit.CsvReaderJUnitTests"/>
             <formatter type="brief" usefile="false"/>
@@ -148,8 +144,7 @@
         <attribute name="output.dir"/>
         <sequential>
             <mkdir dir="@{output.dir}"/>
-            <scalac classpathref="@{classpath.ref}" destdir="@{output.dir}" force="${compile.force}" deprecation="${compile.deprecation}"
-                    unchecked="${compile.unchecked}">
+            <scalac classpathref="@{classpath.ref}" destdir="@{output.dir}" force="never" deprecation="on" unchecked="on">
                 <src>
                     <path path="@{src.path}"/>
                 </src>
