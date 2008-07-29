@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.stack
 
+import expect.Expect._
 import marker.annotate.{Stub, Specification}
-import com.googlecode.instinct.expect.Expect._
 
 final class AnEmptyStackSpeccedUsingScala {
     @Stub var element: Int = 1
@@ -38,6 +38,7 @@ final class AnEmptyStackSpeccedUsingScala {
     @Specification
     def returnsNoneWhenSafelyPopped {
         expect.that(EmptyStack.safePop).isEqualTo(None)
+//        expect.that(EmptyStack.safePop.asInstanceOf[fj.data.Option[_]]).isNone
 //        EmptyStack.safePop.must.equal(None)
 //        EmptyStack.safePop.mustNot.equal(Some(element))
 //        expect.that(EmptyStack.safePop).isEqualTo(None)
@@ -49,5 +50,6 @@ final class AnEmptyStackSpeccedUsingScala {
     def isNoLongerEmptyAfterPush {
         val stack = EmptyStack.push(element)
         expect.that(stack.peek).isEqualTo(element)
+//        expect.that(stack.safePeek).isSome(element)
     }
 }
