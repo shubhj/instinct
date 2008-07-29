@@ -10,6 +10,7 @@
       <antReference bundledAnt="true" />
       <customJdkName value="" />
       <maximumHeapSize value="128" />
+      <maximumStackSize value="32" />
       <properties />
     </buildFile>
   </component>
@@ -168,6 +169,7 @@
         <inspection_tool class="ReadResolveAndWriteReplaceProtected" level="WARNING" enabled="true" />
         <inspection_tool class="TypeMayBeWeakened" level="WARNING" enabled="true">
           <option name="useRighthandTypeAsWeakestTypeInAssignments" value="true" />
+          <option name="useParameterizedTypeForCollectionMethods" value="true" />
         </inspection_tool>
         <inspection_tool class="MultipleTopLevelClassesInFile" level="WARNING" enabled="true" />
         <inspection_tool class="UtilityClassWithPublicConstructor" level="WARNING" enabled="true" />
@@ -202,7 +204,9 @@
         <inspection_tool class="UnnecessaryInterfaceModifier" level="WARNING" enabled="true" />
         <inspection_tool class="UnnecessaryEnumModifier" level="WARNING" enabled="true" />
         <inspection_tool class="UnnecessaryQualifierForThis" level="WARNING" enabled="true" />
-        <inspection_tool class="UnnecessaryParentheses" level="WARNING" enabled="true" />
+        <inspection_tool class="UnnecessaryParentheses" level="WARNING" enabled="true">
+          <option name="ignoreClarifyingParentheses" value="false" />
+        </inspection_tool>
         <inspection_tool class="BreakStatement" level="WARNING" enabled="true" />
         <inspection_tool class="BreakStatementWithLabel" level="WARNING" enabled="true" />
         <inspection_tool class="ConditionalExpressionWithIdenticalBranches" level="WARNING" enabled="true" />
@@ -245,7 +249,9 @@
           <option name="limit" value="15" />
         </inspection_tool>
         <inspection_tool class="UseOfAnotherObjectsPrivateField" level="WARNING" enabled="true" />
-        <inspection_tool class="TooBroadCatch" level="WARNING" enabled="true" />
+        <inspection_tool class="TooBroadCatch" level="WARNING" enabled="true">
+          <option name="onlyWarnOnRootExceptions" value="false" />
+        </inspection_tool>
         <inspection_tool class="SerialVersionUIDNotStaticFinal" level="WARNING" enabled="true" />
         <inspection_tool class="SerialPersistentFieldsWithWrongSignature" level="WARNING" enabled="true" />
         <inspection_tool class="DesignForExtension" level="WARNING" enabled="true" />
@@ -463,6 +469,9 @@
       </item>
     </group>
   </component>
+  <component name="ProjectDetails">
+    <option name="projectName" value="instinct-core" />
+  </component>
   <component name="ProjectFileVersion" converted="true" />
   <component name="ProjectModuleManager">
     <modules>
@@ -486,6 +495,9 @@
     <option name="GENERATE_NO_WARNINGS" value="false" />
     <option name="GENERATE_IIOP_STUBS" value="false" />
     <option name="ADDITIONAL_OPTIONS_STRING" value="" />
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="myVersion" value="123" />
   </component>
   <component name="TeamCityRootDirectoryHolder">
     <option name="myRelativeRootDirectory" />
@@ -727,7 +739,9 @@
         <root url="jar://$PROJECT_DIR$/core/lib/functionaljava/functionaljava-2.8.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/core/etc/lib-src/functionaljava-2.8-sources.jar!/" />
+      </SOURCES>
     </library>
   </component>
   <UsedPathMacros>
