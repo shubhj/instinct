@@ -19,7 +19,7 @@ package com.googlecode.instinct.integrate.junit3;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.edge.EdgeException;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
-import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
+import com.googlecode.instinct.internal.runner.SpecificationRunFailureStatus;
 import com.googlecode.instinct.internal.util.ExceptionFinder;
 import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
@@ -68,13 +68,12 @@ public final class SpecificationTestCase extends TestCase {
             result.addError(this, e);
         }
     }
-
     // } SUPPRESS IllegalCatch
 
+    @SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
     private void processSpecificationResult(final SpecificationResult specificationResult) {
         if (!specificationResult.completedSuccessfully()) {
-            final SpecificationRunStatus status = specificationResult.getStatus();
-            final Throwable error = (Throwable) status.getDetailedStatus();
+            final Throwable error = ((SpecificationRunFailureStatus) specificationResult.getStatus()).getDetails();
             result.addFailure(this, new ChainableAssertionFailedError(exceptionFinder.getRootCause(error)));
         }
     }

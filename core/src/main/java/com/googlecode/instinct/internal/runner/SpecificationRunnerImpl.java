@@ -23,6 +23,12 @@ import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.reflect.ConstructorInvoker;
 import com.googlecode.instinct.internal.reflect.ConstructorInvokerImpl;
+import static com.googlecode.instinct.internal.runner.ErrorLocation.AFTER_SPECIFICATION;
+import static com.googlecode.instinct.internal.runner.ErrorLocation.AUTO_WIRING;
+import static com.googlecode.instinct.internal.runner.ErrorLocation.BEFORE_SPECIFICATION;
+import static com.googlecode.instinct.internal.runner.ErrorLocation.CLASS_INITIALISATION;
+import static com.googlecode.instinct.internal.runner.ErrorLocation.MOCK_VERIFICATION;
+import static com.googlecode.instinct.internal.runner.ErrorLocation.SPECIFICATION;
 import static com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus.SPECIFICATION_SUCCESS;
 import com.googlecode.instinct.internal.util.Clock;
 import com.googlecode.instinct.internal.util.ClockImpl;
@@ -30,7 +36,7 @@ import com.googlecode.instinct.internal.util.ExceptionSanitiser;
 import com.googlecode.instinct.internal.util.ExceptionSanitiserImpl;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
-import com.googlecode.instinct.internal.util.Suggest;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import fj.Effect;
 import fj.data.List;
 
@@ -43,34 +49,46 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final ExceptionSanitiser exceptionSanitiser = new ExceptionSanitiserImpl();
     private final MethodInvoker methodInvoker = new MethodInvokerImpl();
 
-    @SuppressWarnings({"CatchGenericClass"})
+    @SuppressWarnings({"CatchGenericClass", "ThrowableResultOfMethodCallIgnored", "ReturnInsideFinallyBlock"})
     public SpecificationResult run(final SpecificationMethod specificationMethod) {
+        checkNotNull(specificationMethod);
         final long startTime = clock.getCurrentTime();
         try {
             final Class<?> contextClass = specificationMethod.getContextClass();
             final Object instance = invokeConstructor(contextClass);
-            runSpecificationLifecycle(instance, specificationMethod);
-            return createSpecResult(specificationMethod, SPECIFICATION_SUCCESS, startTime);
-        } catch (Throwable exceptionThrown) {
-            final SpecificationRunStatus status = new SpecificationRunFailureStatus(exceptionSanitiser.sanitise(exceptionThrown));
-            return createSpecResult(specificationMethod, status, startTime);
-        }
-    }
-
-    @Suggest({"How do we expose this lifecycle?"})
-    private void runSpecificationLifecycle(final Object contextInstance, final SpecificationMethod specificationMethod) {
-        Mocker.reset();
-        actorAutoWirer.autoWireFields(contextInstance);
-        try {
-            runMethods(contextInstance, specificationMethod.getBeforeSpecificationMethods());
-            runSpecificationMethod(contextInstance, specificationMethod);
-        } finally {
+            Mocker.reset();
             try {
-                runMethods(contextInstance, specificationMethod.getAfterSpecificationMethods());
-            } finally {
-                // Note. We need to make sure we capture and report all errors correctly.
-                Mocker.verify();
+                actorAutoWirer.autoWireFields(instance);
+                try {
+                    runMethods(instance, specificationMethod.getBeforeSpecificationMethods());
+                    try {
+                        runSpecificationMethod(instance, specificationMethod);
+                        return createSpecResult(specificationMethod, SPECIFICATION_SUCCESS, startTime);
+                    } catch (Throwable t) {
+                        return fail(startTime, specificationMethod, t, SPECIFICATION);
+                    } finally {
+                        try {
+                            try {
+                                runMethods(instance, specificationMethod.getAfterSpecificationMethods());
+                            } catch (Throwable t) {
+                                return fail(startTime, specificationMethod, t, AFTER_SPECIFICATION);
+                            }
+                        } finally {
+                            try {
+                                Mocker.verify();
+                            } catch (Throwable t) {
+                                return fail(startTime, specificationMethod, t, MOCK_VERIFICATION);
+                            }
+                        }
+                    }
+                } catch (Throwable t) {
+                    return fail(startTime, specificationMethod, t, BEFORE_SPECIFICATION);
+                }
+            } catch (Throwable t) {
+                return fail(startTime, specificationMethod, t, AUTO_WIRING);
             }
+        } catch (Throwable t) {
+            return fail(startTime, specificationMethod, t, CLASS_INITIALISATION);
         }
     }
 
@@ -101,5 +119,12 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
             final long startTime) {
         final long executionTime = clock.getElapsedTime(startTime);
         return new SpecificationResultImpl(specificationMethod.getName(), runStatus, executionTime);
+    }
+
+    @SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
+    private SpecificationResult fail(final long startTime, final LifecycleMethod specificationMethod, final Throwable exceptionThrown,
+            final ErrorLocation location) {
+        final SpecificationRunStatus status = new SpecificationRunFailureStatus(exceptionSanitiser.sanitise(exceptionThrown), location);
+        return createSpecResult(specificationMethod, status, startTime);
     }
 }

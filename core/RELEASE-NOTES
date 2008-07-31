@@ -7,6 +7,8 @@ o Expectation API
 o Reductio Integration
   o Integrated Reductio, a tool for automated specification testing. See
     http://reductiotest.org/ for more information.
+o Packaging
+  o Moved source code out of main jar into instinct-<version>-sources.jar. 
 
 
 * Instinct Release 0.1.8 *

@@ -20,6 +20,7 @@ import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdge;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdgeImpl;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
+import com.googlecode.instinct.internal.runner.SpecificationRunFailureStatus;
 import com.googlecode.instinct.internal.util.ExceptionFinder;
 import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
@@ -57,7 +58,7 @@ public final class JUnit4SpecificationRunnerImpl implements JUnit4SpecificationR
         notifier.fireTestStarted(description);
         final SpecificationResult specificationResult = specificationMethod.run();
         if (specificationResult.completedSuccessfully()) {
-            if (specificationResult.getStatus().getDetailedStatus().equals(PENDING)) {
+            if (specificationResult.getStatus().getDetails().equals(PENDING)) {
                 notifier.fireTestIgnored(description);
             } else {
                 notifier.fireTestFinished(description);
@@ -73,7 +74,8 @@ public final class JUnit4SpecificationRunnerImpl implements JUnit4SpecificationR
     }
 
     private Failure createFailure(final Description description, final SpecificationResult specificationResult) {
-        final Throwable rootCause = exceptionFinder.getRootCause((Throwable) specificationResult.getStatus().getDetailedStatus());
+        final Throwable rootCause =
+                exceptionFinder.getRootCause(((SpecificationRunFailureStatus) specificationResult.getStatus()).getDetails());
         return objectFactory.create(Failure.class, description, rootCause);
     }
 }

@@ -42,13 +42,15 @@ import com.googlecode.instinct.expect.state.matcher.AFjItemInListMatcher;
 import com.googlecode.instinct.expect.state.matcher.AnOptionIsNoneMatcher;
 import com.googlecode.instinct.expect.state.matcher.AnOptionIsSomeMatcher;
 import com.googlecode.instinct.integrate.junit3.ContextTestSuite;
+import com.googlecode.instinct.internal.core.ABeforeSpecMethodThatThrowsAnException;
 import com.googlecode.instinct.internal.core.APendingSpecificationMethodWithAReason;
 import com.googlecode.instinct.internal.core.APendingSpecificationMethodWithoutAReason;
 import com.googlecode.instinct.internal.core.ASpecificationMethodBuilder;
 import com.googlecode.instinct.internal.core.ASpecificationMethodBuilderWithNonDefaultAnnotations;
 import com.googlecode.instinct.internal.core.ASpecificationThatExpectsAnExceptionButOneIsNotThrown;
 import com.googlecode.instinct.internal.core.ASpecificationThatThrowsAnExpectedException;
-import com.googlecode.instinct.internal.core.AnExectingExceptionSpecificationMethod;
+import com.googlecode.instinct.internal.core.AnAfterSpecMethodThatThrowsAnException;
+import com.googlecode.instinct.internal.core.AnExpectingExceptionSpecificationMethod;
 import com.googlecode.instinct.internal.edge.org.hamcrest.AStringFactoryImplContext;
 import com.googlecode.instinct.internal.locate.field.ANamedFieldLocatorWithFieldsToFind;
 import com.googlecode.instinct.internal.locate.field.ANamedFieldLocatorWithNoFieldsToFind;
@@ -58,6 +60,7 @@ import com.googlecode.instinct.internal.util.AMethodEqualityUtility;
 import com.googlecode.instinct.internal.util.ExceptionSanitiserWithKnownException;
 import com.googlecode.instinct.internal.util.ExceptionSanitiserWithUnknownException;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.runner.ASpecificationLifecycle;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -91,8 +94,9 @@ public final class SpecificationsSuite {
                 ADummyAutoWireDeterminatorWithANamedFieldToAutoWire.class, ADummyAutoWireDeterminatorWithANamedFieldNotToAutoWire.class,
                 ADummyAutoWireDeterminatorWithNoMarkedFields.class, APendingSpecificationMethodWithoutAReason.class,
                 APendingSpecificationMethodWithAReason.class, ASpecificationThatThrowsAnExpectedException.class,
-                AnExectingExceptionSpecificationMethod.class, ASpecificationThatExpectsAnExceptionButOneIsNotThrown.class,
+                AnExpectingExceptionSpecificationMethod.class, ASpecificationThatExpectsAnExceptionButOneIsNotThrown.class,
                 ASpecificationMethodBuilder.class, AFjItemInListMatcher.class, AMethodEqualityUtility.class, ASuperClassTraversingMethodLocator.class,
-                ASpecificationMethodBuilderWithNonDefaultAnnotations.class, AnOptionIsNoneMatcher.class, AnOptionIsSomeMatcher.class};
+                ASpecificationMethodBuilderWithNonDefaultAnnotations.class, AnOptionIsNoneMatcher.class, AnOptionIsSomeMatcher.class,
+                ABeforeSpecMethodThatThrowsAnException.class, AnAfterSpecMethodThatThrowsAnException.class, ASpecificationLifecycle.class};
     }
 }

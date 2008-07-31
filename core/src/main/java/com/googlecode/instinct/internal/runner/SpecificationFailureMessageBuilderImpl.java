@@ -32,8 +32,9 @@ public final class SpecificationFailureMessageBuilderImpl implements Specificati
         return status.runSuccessful() ? NO_FAILURE : buildFailureMessage(status);
     }
 
+    @SuppressWarnings({"ThrowableResultOfMethodCallIgnored", "TypeMayBeWeakened"})
     private String buildFailureMessage(final SpecificationRunStatus status) {
-        final Throwable rootCause = exceptionFinder.getRootCause((Throwable) status.getDetailedStatus());
+        final Throwable rootCause = exceptionFinder.getRootCause(((SpecificationRunFailureStatus) status).getDetails());
         return getStackTrace(rootCause);
     }
 

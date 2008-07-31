@@ -10,6 +10,7 @@
     <property name="project.jar" value="${project.shortname}-${project.version.full}.jar"/>
     <property name="project.zip" value="${project.shortname}-${project.version.full}.zip"/>
     <property name="javadoc.zip" value="${project.shortname}-${project.version.full}-javadoc.zip"/>
+    <property name="sources.jar" value="${project.shortname}-${project.version.full}-sources.jar"/>
     <property name="main.package.name" value="com.googlecode.instinct"/>
 
     <property name="build.dir" value="build"/>

@@ -16,21 +16,25 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.lang.Primordial;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class SpecificationRunFailureStatus extends Primordial implements SpecificationRunStatus {
     private final Throwable error;
+    private final ErrorLocation errorLocation;
 
-    public SpecificationRunFailureStatus(final Throwable error) {
-        checkNotNull(error);
+    public SpecificationRunFailureStatus(final Throwable error, final ErrorLocation errorLocation) {
+        checkNotNull(error, errorLocation);
         this.error = error;
+        this.errorLocation = errorLocation;
     }
 
-    @Suggest("Should this return Throwable?")
-    public Object getDetailedStatus() {
+    public Throwable getDetails() {
         return error;
+    }
+
+    public ErrorLocation getErrorLocation() {
+        return errorLocation;
     }
 
     public boolean runSuccessful() {

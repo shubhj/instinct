@@ -19,6 +19,7 @@ package com.googlecode.instinct.internal.core;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
+import com.googlecode.instinct.internal.runner.SpecificationRunFailureStatus;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import static com.googlecode.instinct.internal.util.Reflector.getDeclaredMethod;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
@@ -32,7 +33,7 @@ import fj.data.List;
 import org.jmock.Expectations;
 import org.junit.runner.RunWith;
 
-@SuppressWarnings({"UnusedDeclaration", "TypeMayBeWeakened"})
+@SuppressWarnings({"UnusedDeclaration", "TypeMayBeWeakened", "ThrowableResultOfMethodCallIgnored"})
 @RunWith(InstinctRunner.class)
 public final class ASpecificationThatThrowsAnExpectedExceptionThatHasAnUnexpectedMessage {
     @Subject(auto = false) private ExpectingExceptionSpecificationMethod expectsExceptionMethod;
@@ -58,7 +59,7 @@ public final class ASpecificationThatThrowsAnExpectedExceptionThatHasAnUnexpecte
         });
         final SpecificationResult result = expectsExceptionMethod.run();
         expect.that(result.completedSuccessfully()).isFalse();
-        expect.that(((Throwable) result.getStatus().getDetailedStatus()).getMessage()).containsString("Expected exception message was incorrect");
+        expect.that(((SpecificationRunFailureStatus) result.getStatus()).getDetails().getMessage()).containsString("Expected exception message was incorrect");
     }
 
     @SuppressWarnings({"ALL"})

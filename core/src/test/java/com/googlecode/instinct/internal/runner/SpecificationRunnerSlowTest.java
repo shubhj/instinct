@@ -58,7 +58,7 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
         // Note. Need to reset the mocker or the error will be caught in the InstinctTestCase super class.
         Mocker.reset();
         expect.that(result.completedSuccessfully()).isFalse();
-        final Object detailedStatus = result.getStatus().getDetailedStatus();
+        final Object detailedStatus = result.getStatus().getDetails();
         expect.that(detailedStatus).isAnInstanceOf(SpecificationFailureException.class);
         final Throwable failureCause = ((Throwable) detailedStatus).getCause();
         expect.that(failureCause).isAnInstanceOf(ExpectationError.class);

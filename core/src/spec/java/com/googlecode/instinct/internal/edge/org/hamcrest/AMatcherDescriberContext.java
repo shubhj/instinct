@@ -6,18 +6,15 @@ package com.googlecode.instinct.internal.edge.org.hamcrest;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
-@Context
-public class AMatcherDescriberContext {
-
-    @Subject MatcherDescriberBuilder describing = new MatcherDescriberImpl();
+public final class AMatcherDescriberContext {
     private static final String EMPTY_STRING = "";
     private static final String NL = System.getProperty("line.separator");
+    @Subject private MatcherDescriberBuilder describing = new MatcherDescriberImpl();
 
     @Specification
     public void shouldReturnAnEmptyStringByDefault() {
@@ -70,8 +67,9 @@ public class AMatcherDescriberContext {
                 addNewLine().
                 setReturnedLabelName("Result").addColon().addSpace(2).setReturnedValue("Could not find property byte1 on String.").
                 addNewLine();
-        expect.that(describing.describe()).isEqualTo("The specified property could not be found." + NL +
-                "Expected: To find property byte1 on String." + NL + "Result:  Could not find property byte1 on String." + NL);
+        expect.that(describing.describe()).isEqualTo(
+                "The specified property could not be found." + NL + "Expected: To find property byte1 on String." + NL +
+                        "Result:  Could not find property byte1 on String." + NL);
     }
 
     @Specification

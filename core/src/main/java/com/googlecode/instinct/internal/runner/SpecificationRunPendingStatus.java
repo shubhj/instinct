@@ -4,7 +4,7 @@ import com.googlecode.instinct.internal.lang.Primordial;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
 
 public final class SpecificationRunPendingStatus extends Primordial implements SpecificationRunStatus {
-    public Object getDetailedStatus() {
+    public Object getDetails() {
         return PENDING;
     }
 

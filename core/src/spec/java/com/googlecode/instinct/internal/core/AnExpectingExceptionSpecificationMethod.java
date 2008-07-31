@@ -19,17 +19,19 @@ package com.googlecode.instinct.internal.core;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.internal.runner.ContextWithExpectedFailures;
+import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.marker.annotate.Specification;
 import fj.F;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings({"UnusedDeclaration", "TypeMayBeWeakened"})
 @RunWith(InstinctRunner.class)
-public final class AnExectingExceptionSpecificationMethod {
+public final class AnExpectingExceptionSpecificationMethod {
     @Specification
     public void testExpectedFailuresDoNotFailSpec() {
         final SpecificationMethod spec = getSpecificationMethod(ContextWithExpectedFailures.class, "failsWithoutMessage");
-        expect.that(spec.run().completedSuccessfully()).isTrue();
+        final SpecificationResult specificationResult = spec.run();
+        expect.that(specificationResult.completedSuccessfully()).isTrue();
     }
 
     @Specification

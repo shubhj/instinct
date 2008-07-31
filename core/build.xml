@@ -75,13 +75,18 @@
         -->
         <jar destfile="${build.dir}/${project.jar}">
             <fileset dir="${main.classes.dir}"/>
-            <!-- FIX KEF Move these sources to a separate -sources.jar file a la Maven repository. -->
+            <fileset dir="${properties.src.dir}"/>
+        </jar>
+    </target>
+
+    <target name="-sources-jar">
+        <jar destfile="${build.dir}/${sources.jar}">
             <fileset dir="${main.src.dir}"/>
             <fileset dir="${properties.src.dir}"/>
         </jar>
     </target>
 
-    <target name="-release-zip" depends="-clover-safe-jar,-javadoc">
+    <target name="-release-zip" depends="-clover-safe-jar,-sources-jar,-javadoc">
         <mkdir dir="${release.dir}"/>
         <zip destfile="${release.dir}/${project.zip}">
             <fileset dir="${basedir}">
@@ -91,6 +96,7 @@
                 <include name="RELEASE-NOTES"/>
             </fileset>
             <fileset dir="${build.dir}" includes="${project.jar}"/>
+            <fileset dir="${build.dir}" includes="${sources.jar}"/>
             <fileset dir="${build.dir}" includes="${javadoc.zip}"/>
             <zipfileset dir="${lib.dir}/ant" prefix="lib" includes="ant-1.*.jar,ant-license.txt"/>
             <zipfileset dir="${lib.dir}/cglib" prefix="lib"/>

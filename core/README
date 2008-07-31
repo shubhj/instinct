@@ -22,8 +22,8 @@ o README                            - This readme file.
 o LICENCE                           - Instinct licence file.
 o NOTICE                            - Licence notices for libraries used in Instinct.
 o RELEASE-NOTES                     - Release notes for this & previous releases.
-o instinct-<version>.jar            - Instinct Jar file, source code is included in the
-                                      Jar for convenience.
+o instinct-<version>.jar            - Instinct Jar file.
+o instinct-<version>-sources.jar    - Instinct source code.
 o instinct-<version>-javadoc.jar    - Instinct API javadoc (does not include internal API).
 o lib/                              - Libraries required by Instinct at runtime (including
                                       licences), see below for details.
@@ -35,7 +35,7 @@ o hamcrest-all-1.1.jar
 o jmock-2.5.0.jar
 o jmock-legacy-2.5.0.jar
 o objenesis-1.1.jar
-o functionaljava-2.7.jar
+o functionaljava-2.8.jar
 
 In addition, to use the Instinct Ant task, you'll need:
 

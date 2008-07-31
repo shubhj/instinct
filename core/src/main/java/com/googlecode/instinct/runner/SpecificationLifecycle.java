@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2008 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,18 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.runner;
+package com.googlecode.instinct.runner;
 
-public interface SpecificationRunStatus {
-    Object getDetails();
+public interface SpecificationLifecycle {
+    void resetMockery();
 
-    boolean runSuccessful();
+    void wireActors();
+
+    void runBeforeSpecificationMethods();
+
+    void runSpecifications();
+
+    void runAfterSpecificationMethods();
+
+    void verifyMocks();
 }

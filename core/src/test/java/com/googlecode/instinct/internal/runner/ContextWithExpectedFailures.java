@@ -17,11 +17,9 @@
 package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.edge.EdgeException;
-import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import java.lang.reflect.InvocationTargetException;
 
-@Context
 public final class ContextWithExpectedFailures {
     @Specification(expectedException = RuntimeException.class)
     public void markedAsFailureButDoesNot() {
