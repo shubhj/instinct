@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2008 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,6 +39,8 @@ import com.googlecode.instinct.defect.defect3.AFixedDefect3;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithANamingConventionLocator;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithAnAnnotationMethodLocator;
 import com.googlecode.instinct.expect.state.matcher.AFjItemInListMatcher;
+import com.googlecode.instinct.expect.state.matcher.AnEitherIsLeftMatcher;
+import com.googlecode.instinct.expect.state.matcher.AnEitherIsRightMatcher;
 import com.googlecode.instinct.expect.state.matcher.AnOptionIsNoneMatcher;
 import com.googlecode.instinct.expect.state.matcher.AnOptionIsSomeMatcher;
 import com.googlecode.instinct.integrate.junit3.ContextTestSuite;
@@ -56,11 +58,12 @@ import com.googlecode.instinct.internal.locate.field.ANamedFieldLocatorWithField
 import com.googlecode.instinct.internal.locate.field.ANamedFieldLocatorWithNoFieldsToFind;
 import com.googlecode.instinct.internal.locate.method.ASuperClassTraversingMethodLocator;
 import com.googlecode.instinct.internal.locate.method.AnAnnotatedMethodLocatorContext;
+import com.googlecode.instinct.internal.runner.ASpecificationLifecycleResultDeterminatorWithNoFailures;
 import com.googlecode.instinct.internal.util.AMethodEqualityUtility;
 import com.googlecode.instinct.internal.util.ExceptionSanitiserWithKnownException;
 import com.googlecode.instinct.internal.util.ExceptionSanitiserWithUnknownException;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.runner.ASpecificationLifecycle;
+import com.googlecode.instinct.runner.ADefaultSpecificationLifecycle;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -97,6 +100,7 @@ public final class SpecificationsSuite {
                 AnExpectingExceptionSpecificationMethod.class, ASpecificationThatExpectsAnExceptionButOneIsNotThrown.class,
                 ASpecificationMethodBuilder.class, AFjItemInListMatcher.class, AMethodEqualityUtility.class, ASuperClassTraversingMethodLocator.class,
                 ASpecificationMethodBuilderWithNonDefaultAnnotations.class, AnOptionIsNoneMatcher.class, AnOptionIsSomeMatcher.class,
-                ABeforeSpecMethodThatThrowsAnException.class, AnAfterSpecMethodThatThrowsAnException.class, ASpecificationLifecycle.class};
+                ABeforeSpecMethodThatThrowsAnException.class, AnAfterSpecMethodThatThrowsAnException.class, ADefaultSpecificationLifecycle.class,
+                ASpecificationLifecycleResultDeterminatorWithNoFailures.class, AnEitherIsLeftMatcher.class, AnEitherIsRightMatcher.class};
     }
 }
