@@ -1,14 +1,26 @@
 * Instinct Release 0.1.9 *
 
+o Core Features
+  o Custom specification lifecycles can now be plugged in using the @Context annotation.
+    This would allow for example, a Spring application context to be initialised and wired
+    into each specification method allowing integration-style specifications using a Spring
+    beans.
 o Scala integration
-  o Added Scala stack example, showing the use of Instinct under Scala to spec out Scala code.
+  o Added Scala stack example, showing the use of Instinct under Scala to spec out Scala
+    code.
 o Expectation API
-  o Added Option matchers, expect.that(Some(1)).isSome(1), expect.that(foo.bar()).isNone().
+  o Added fj.data.Option matchers:
+    expect.that(Some(1)).isSome(1), expect.that(foo.bar()).isNone().
+  o Added fj.data.Either matchers:
+    expect.that(error()).isLeft(runtimeException), expect.that(foo.bar()).isRight(42).
 o Reductio Integration
   o Integrated Reductio, a tool for automated specification testing. See
     http://reductiotest.org/ for more information.
 o Packaging
-  o Moved source code out of main jar into instinct-<version>-sources.jar. 
+  o Moved source code out of main jar into instinct-<version>-sources.jar.
+o Bugs
+  o (Issue 21) Expected exception try-catch should only wrap specs, not before and after.
+  o (Issue 19) Throwing exception out of mocked code confused expected exception handling.
 
 
 * Instinct Release 0.1.8 *
