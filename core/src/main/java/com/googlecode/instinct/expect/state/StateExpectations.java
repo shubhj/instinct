@@ -22,6 +22,7 @@ import com.googlecode.instinct.expect.state.checker.ClassChecker;
 import com.googlecode.instinct.expect.state.checker.CollectionChecker;
 import com.googlecode.instinct.expect.state.checker.ComparableChecker;
 import com.googlecode.instinct.expect.state.checker.DoubleChecker;
+import com.googlecode.instinct.expect.state.checker.EitherChecker;
 import com.googlecode.instinct.expect.state.checker.EventObjectChecker;
 import com.googlecode.instinct.expect.state.checker.FileChecker;
 import com.googlecode.instinct.expect.state.checker.FjListChecker;
@@ -32,6 +33,7 @@ import com.googlecode.instinct.expect.state.checker.ObjectChecker;
 import com.googlecode.instinct.expect.state.checker.OptionChecker;
 import com.googlecode.instinct.expect.state.checker.StringChecker;
 import com.googlecode.instinct.internal.util.Fix;
+import fj.data.Either;
 import fj.data.List;
 import fj.data.Option;
 import java.io.File;
@@ -66,6 +68,8 @@ public interface StateExpectations {
     <K, V> MapChecker<K, V> that(Map<K, V> map);
 
     <T> OptionChecker<T> that(Option<T> option);
+
+    <A, B> EitherChecker<A, B> that(Either<A, B> either);
 
     DoubleChecker that(Double d);
 

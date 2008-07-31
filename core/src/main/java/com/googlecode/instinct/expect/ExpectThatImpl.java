@@ -26,6 +26,7 @@ import com.googlecode.instinct.expect.state.checker.ClassChecker;
 import com.googlecode.instinct.expect.state.checker.CollectionChecker;
 import com.googlecode.instinct.expect.state.checker.ComparableChecker;
 import com.googlecode.instinct.expect.state.checker.DoubleChecker;
+import com.googlecode.instinct.expect.state.checker.EitherChecker;
 import com.googlecode.instinct.expect.state.checker.EventObjectChecker;
 import com.googlecode.instinct.expect.state.checker.FileChecker;
 import com.googlecode.instinct.expect.state.checker.FjListChecker;
@@ -33,10 +34,11 @@ import com.googlecode.instinct.expect.state.checker.IterableChecker;
 import com.googlecode.instinct.expect.state.checker.MapChecker;
 import com.googlecode.instinct.expect.state.checker.NodeChecker;
 import com.googlecode.instinct.expect.state.checker.ObjectChecker;
-import com.googlecode.instinct.expect.state.checker.StringChecker;
 import com.googlecode.instinct.expect.state.checker.OptionChecker;
+import com.googlecode.instinct.expect.state.checker.StringChecker;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import fj.data.Either;
 import fj.data.List;
 import fj.data.Option;
 import java.io.File;
@@ -86,6 +88,10 @@ public final class ExpectThatImpl implements ExpectThat {
 
     public <T> OptionChecker<T> that(final Option<T> option) {
         return stateExpectations.that(option);
+    }
+
+    public <A, B> EitherChecker<A, B> that(final Either<A, B> either) {
+        return stateExpectations.that(either);
     }
 
     public DoubleChecker that(final Double d) {

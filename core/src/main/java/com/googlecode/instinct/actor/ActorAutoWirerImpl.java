@@ -46,7 +46,7 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
     private final SpecificationDoubleCreator mockCreator = new MockCreator();
 
     @Suggest("Add in subject auto-wiring. Do it last, as it may require doubles.")
-    @Fix("This needs to make sue we don't wire fields twice, say marked with @Mock but named stubFoo. See StubCreatorAtomicTest.")
+    @Fix("This needs to make sure we don't wire fields twice, say marked with @Mock but named stubFoo. See StubCreatorAtomicTest.")
     public List<Field> autoWireFields(final Object instanceToAutoWire) {
         checkNotNull(instanceToAutoWire);
         final List<Field> dummies = autoWireDummies(instanceToAutoWire);

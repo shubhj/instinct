@@ -20,6 +20,8 @@ import com.googlecode.instinct.marker.naming.AfterSpecificationNamingConvention;
 import com.googlecode.instinct.marker.naming.BeforeSpecificationNamingConvention;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
+import com.googlecode.instinct.runner.SpecificationLifecycle;
+import com.googlecode.instinct.runner.SpecificationLifecycleImpl;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Documented;
 import static java.lang.annotation.ElementType.TYPE;
@@ -44,6 +46,13 @@ public @interface Context {
      * @see Specification#groups()
      */
     String[] groups() default "ALL";
+
+    /**
+     * The lifecycle to use to run each of the specifications in this context. Changing this will cause each specification to be run using this
+     * lifecycle instead of the default one.
+     * @return The lifecycle to use to run each of the specifications in this context.
+     */
+    Class<? extends SpecificationLifecycle> lifecycle() default SpecificationLifecycleImpl.class;
 
     /**
      * The naming convention to use to find methods to be run before every specification. Changing this will cause Instinct's method locators to use

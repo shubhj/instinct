@@ -28,6 +28,8 @@ import com.googlecode.instinct.expect.state.checker.ComparableChecker;
 import com.googlecode.instinct.expect.state.checker.ComparableCheckerImpl;
 import com.googlecode.instinct.expect.state.checker.DoubleChecker;
 import com.googlecode.instinct.expect.state.checker.DoubleCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.EitherChecker;
+import com.googlecode.instinct.expect.state.checker.EitherCheckerImpl;
 import com.googlecode.instinct.expect.state.checker.EventObjectChecker;
 import com.googlecode.instinct.expect.state.checker.EventObjectCheckerImpl;
 import com.googlecode.instinct.expect.state.checker.FileChecker;
@@ -46,11 +48,14 @@ import com.googlecode.instinct.expect.state.checker.OptionChecker;
 import com.googlecode.instinct.expect.state.checker.OptionCheckerImpl;
 import com.googlecode.instinct.expect.state.checker.StringChecker;
 import com.googlecode.instinct.expect.state.checker.StringCheckerImpl;
+import static com.googlecode.instinct.expect.state.matcher.ToStringableEither.toStringableEither;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdgeImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
+import fj.data.Either;
 import fj.data.List;
 import fj.data.Option;
 import java.io.File;
@@ -97,8 +102,13 @@ public final class StateExpectationsImpl implements StateExpectations {
         return (MapChecker<K, V>) createChecker(MapCheckerImpl.class, map);
     }
 
+    @Suggest("Create, then pass this a ToStringableOption")
     public <T> OptionChecker<T> that(final Option<T> option) {
         return createChecker(OptionCheckerImpl.class, option);
+    }
+
+    public <A, B> EitherChecker<A, B> that(final Either<A, B> either) {
+        return createChecker(EitherCheckerImpl.class, toStringableEither(either));
     }
 
     public DoubleChecker that(final Double d) {

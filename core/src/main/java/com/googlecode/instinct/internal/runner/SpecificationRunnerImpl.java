@@ -63,7 +63,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
                     runMethods(instance, specificationMethod.getBeforeSpecificationMethods());
                     try {
                         runSpecificationMethod(instance, specificationMethod);
-                        return createSpecResult(specificationMethod, SPECIFICATION_SUCCESS, startTime);
+                        return result(startTime, specificationMethod, SPECIFICATION_SUCCESS);
                     } catch (Throwable t) {
                         return fail(startTime, specificationMethod, t, SPECIFICATION);
                     } finally {
@@ -115,8 +115,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         return constructorInvoker.invokeNullaryConstructor(cls);
     }
 
-    private SpecificationResult createSpecResult(final LifecycleMethod specificationMethod, final SpecificationRunStatus runStatus,
-            final long startTime) {
+    private SpecificationResult result(final long startTime, final LifecycleMethod specificationMethod, final SpecificationRunStatus runStatus) {
         final long executionTime = clock.getElapsedTime(startTime);
         return new SpecificationResultImpl(specificationMethod.getName(), runStatus, executionTime);
     }
@@ -125,6 +124,6 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     private SpecificationResult fail(final long startTime, final LifecycleMethod specificationMethod, final Throwable exceptionThrown,
             final ErrorLocation location) {
         final SpecificationRunStatus status = new SpecificationRunFailureStatus(exceptionSanitiser.sanitise(exceptionThrown), location);
-        return createSpecResult(specificationMethod, status, startTime);
+        return result(startTime, specificationMethod, status);
     }
 }

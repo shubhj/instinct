@@ -1,0 +1,30 @@
+/*
+ * Copyright 2006-2008 Workingmouse
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.googlecode.instinct.internal.runner;
+
+import fj.Unit;
+import fj.data.Either;
+import fj.data.List;
+
+public final class SpecificationLifecycleResultDeterminator {
+    public <T extends Throwable> Either<List<T>, SpecificationResult> result(final Either<T, Unit> createContextResult,
+            final Either<T, Unit> restMockeryResult, final Either<T, Unit> wireActorsResult,
+            final Either<T, Unit> runBeforeSpecificationMethodsResult, final Either<T, SpecificationResult> runSpecificationResult,
+            final Either<T, Unit> runAfterSpecificationMethodsResult, final Either<T, Unit> verifyMocksResult) {
+        return Either.right(runSpecificationResult.right().value());
+    }
+}

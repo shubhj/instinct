@@ -16,22 +16,37 @@
 
 package com.googlecode.instinct.runner;
 
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.runner.SpecificationResult;
+import fj.Unit;
+import fj.data.Either;
+
 public final class SpecificationLifecycleImpl implements SpecificationLifecycle {
-    public void resetMockery() {
+    public <T extends Throwable> Either<T, ContextClass> createContext() {
+        throw new UnsupportedOperationException();
     }
 
-    public void wireActors() {
+    public <T extends Throwable> Either<T, Unit> resetMockery() {
+        throw new UnsupportedOperationException();
     }
 
-    public void runBeforeSpecificationMethods() {
+    public <T extends Throwable> Either<T, Unit> wireActors() {
+        throw new UnsupportedOperationException();
     }
 
-    public void runSpecifications() {
+    public <T extends Throwable> Either<T, Unit> runBeforeSpecificationMethods() {
+        throw new UnsupportedOperationException();
     }
 
-    public void runAfterSpecificationMethods() {
+    public <T extends Throwable> Either<T, SpecificationResult> runSpecification() {
+        throw new UnsupportedOperationException();
     }
 
-    public void verifyMocks() {
+    public <T extends Throwable> Either<T, Unit> runAfterSpecificationMethods() {
+        throw new UnsupportedOperationException();
+    }
+
+    public <T extends Throwable> Either<T, Unit> verifyMocks() {
+        throw new UnsupportedOperationException();
     }
 }
