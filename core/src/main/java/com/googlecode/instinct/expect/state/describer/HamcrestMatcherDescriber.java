@@ -35,10 +35,8 @@ public final class HamcrestMatcherDescriber<T> implements MatcherDescriber {
     public String describe() {
         final StringBuilder builder = new StringBuilder();
         builder.append(newLine()).
-                    append("Expected: ").append(getExpectation()).
-                append(newLine()).
-                    append(createFiveSpaces()).append("got: ").append(getValue()).
-                append(newLine());
+                append("Expected: ").append(getExpectation()).append(newLine()).
+                append(createFiveSpaces()).append("got: ").append(getValue()).append(newLine());
         return builder.toString();
     }
 

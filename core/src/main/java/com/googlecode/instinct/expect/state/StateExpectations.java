@@ -25,7 +25,7 @@ import com.googlecode.instinct.expect.state.checker.DoubleChecker;
 import com.googlecode.instinct.expect.state.checker.EitherChecker;
 import com.googlecode.instinct.expect.state.checker.EventObjectChecker;
 import com.googlecode.instinct.expect.state.checker.FileChecker;
-import com.googlecode.instinct.expect.state.checker.FjListChecker;
+import com.googlecode.instinct.expect.state.checker.ListChecker;
 import com.googlecode.instinct.expect.state.checker.IterableChecker;
 import com.googlecode.instinct.expect.state.checker.MapChecker;
 import com.googlecode.instinct.expect.state.checker.NodeChecker;
@@ -63,7 +63,7 @@ public interface StateExpectations {
 
     <T> ArrayChecker<T> that(T[] array);
 
-    <T> FjListChecker<T> that(List<T> list);
+    <T> ListChecker<T> that(List<T> list);
 
     <K, V> MapChecker<K, V> that(Map<K, V> map);
 

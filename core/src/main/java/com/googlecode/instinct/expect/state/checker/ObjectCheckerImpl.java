@@ -18,6 +18,7 @@ package com.googlecode.instinct.expect.state.checker;
 
 import com.googlecode.instinct.expect.state.describer.PropertyMatcherDescriber;
 import com.googlecode.instinct.expect.state.describer.PropertyMatcherWithValueDescriber;
+import com.googlecode.instinct.expect.state.matcher.EqualityMatcher;
 import static com.googlecode.instinct.expect.state.matcher.NoneOf.noneOf;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdgeImpl;
@@ -37,12 +38,14 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
         return asserter;
     }
 
+    @SuppressWarnings({"unchecked"})
     public final void isEqualTo(final T t) {
-        getAsserter().expectThat(subject, Matchers.equalTo(t));
+        getAsserter().expectThat(subject, EqualityMatcher.equalTo(t));
     }
 
+    @SuppressWarnings({"unchecked"})
     public final void isNotEqualTo(final T t) {
-        getAsserter().expectNotThat(subject, Matchers.equalTo(t));
+        getAsserter().expectNotThat(subject, EqualityMatcher.equalTo(t));
     }
 
     public final void isAnInstanceOf(final Class<?> type) {
@@ -119,5 +122,4 @@ public class ObjectCheckerImpl<T> implements ObjectChecker<T> {
     public final boolean equals(final Object obj) {
         throw new UnsupportedOperationException("Equality on checkers is not supported, you probably want isEqualTo() instead.");
     }
-}
-// } SUPPRESS VisibilityModifier|IllegalToken
+}// } SUPPRESS VisibilityModifier|IllegalToken

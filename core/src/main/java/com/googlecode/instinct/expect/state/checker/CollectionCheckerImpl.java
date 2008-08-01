@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
+import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
 import static java.util.Arrays.asList;
 import java.util.Collection;
 import org.hamcrest.Matchers;
@@ -27,20 +28,20 @@ public class CollectionCheckerImpl<E, T extends Collection<E>> extends IterableC
 
     @Override
     public final void isEmpty() {
-        getAsserter().expectThat(subject.isEmpty(), Matchers.describedAs("isEmpty() = <true>", Matchers.equalTo(true)));
+        getAsserter().expectThat(subject.isEmpty(), Matchers.describedAs("isEmpty() = <true>", equalTo(true)));
     }
 
     @Override
     public final void isNotEmpty() {
-        getAsserter().expectThat(subject.isEmpty(), Matchers.describedAs("isEmpty() = <false>", Matchers.equalTo(false)));
+        getAsserter().expectThat(subject.isEmpty(), Matchers.describedAs("isEmpty() = <false>", equalTo(false)));
     }
 
     public final void isOfSize(final int size) {
-        getAsserter().expectThat(subject.size(), Matchers.equalTo(size));
+        getAsserter().expectThat(subject.size(), equalTo(size));
     }
 
     public final void hasTheSameContentAs(final Collection<E> items) {
-        getAsserter().expectThat(subject.size(), Matchers.equalTo(items.size()));
+        getAsserter().expectThat(subject.size(), equalTo(items.size()));
         containsItems(items);
     }
 

@@ -21,22 +21,22 @@ import com.googlecode.instinct.internal.edge.org.hamcrest.StringFactoryImpl;
 import com.googlecode.instinct.internal.util.ClassUtil;
 import com.googlecode.instinct.internal.util.ClassUtilImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.StringDescription;
 
 public final class CommonMatcherUtilImpl<T> implements CommonMatcherUtil<T> {
-
     private final ClassUtil classUtil = new ClassUtilImpl();
     private final StringFactory stringFactory = new StringFactoryImpl();
 
     public String describeValue(final T value) {
-        final StringDescription description = new StringDescription();
+        final Description description = new StringDescription();
         description.appendValue(value);
         return description.toString();
     }
 
     public String describeExpectation(final Matcher<T> matcher) {
-        final StringDescription description = new StringDescription();
+        final Description description = new StringDescription();
         matcher.describeTo(description);
         return description.toString();
     }

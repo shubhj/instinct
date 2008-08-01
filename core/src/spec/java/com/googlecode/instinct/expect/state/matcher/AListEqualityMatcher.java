@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2008 Workingmouse
+ * Copyright 2008 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,37 +16,36 @@
 
 package com.googlecode.instinct.expect.state.matcher;
 
-import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
-import static com.googlecode.instinct.expect.state.matcher.ToStringableEither.toStringableEither;
+import static com.googlecode.instinct.expect.state.matcher.ListEqualityMatcher.equalTo;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Stub;
-import fj.data.Either;
+import fj.data.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
-public final class AnEitherIsRightMatcher {
-    @Stub(auto = false) private ToStringableEither<Integer, Integer> left;
-    @Stub(auto = false) private ToStringableEither<Integer, Integer> right;
+public final class AListEqualityMatcher {
+    @Stub(auto = false) private List<Integer> list1;
+    @Stub(auto = false) private List<Integer> list2;
+    @Stub(auto = false) private List<Integer> list3;
 
     @BeforeSpecification
     public void before() {
-        left = toStringableEither(Either.<Integer, Integer>left(1));
-        right = toStringableEither(Either.<Integer, Integer>right(1));
+        list1 = List.<Integer>nil().cons(1);
+        list2 = List.<Integer>nil().cons(1);
+        list3 = List.<Integer>nil().cons(2);
     }
 
     @Specification
-    public void matchesEithersThatAreRight() {
-        assertThat(right, EitherIsRightMatcher.<Integer, Integer>isRight());
-        assertThat(right, EitherIsRightMatcher.<Integer, Integer>isRight(1));
-        assertThat(right, EitherIsRightMatcher.<Integer, Integer>isRight(equalTo(1)));
+    public void matchesListsThatAreEqual() {
+        assertThat(list1, equalTo(list2));
     }
 
     @Specification
-    public void doesNotMatchEithersThatAreLeft() {
-        assertThat(left, not(EitherIsRightMatcher.<Integer, Integer>isRight()));
+    public void doesNotMatchListsThatAreNotEqual() {
+        assertThat(list1, not(equalTo(list3)));
     }
 }

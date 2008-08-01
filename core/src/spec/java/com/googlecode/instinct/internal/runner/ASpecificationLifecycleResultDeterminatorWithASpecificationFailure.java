@@ -26,15 +26,15 @@ import com.googlecode.instinct.marker.annotate.Subject;
 import fj.Unit;
 import static fj.Unit.unit;
 import fj.data.Either;
+import static fj.data.Either.left;
 import static fj.data.Either.right;
 import fj.data.List;
-import static org.hamcrest.Matchers.sameInstance;
 import org.junit.runner.RunWith;
 
+@SuppressWarnings({"UnusedDeclaration"})
 @RunWith(InstinctRunner.class)
-public final class ASpecificationLifecycleResultDeterminatorWithNoFailures {
+public final class ASpecificationLifecycleResultDeterminatorWithASpecificationFailure {
     @Subject private SpecificationLifecycleResultDeterminator determinator;
-    @Dummy SpecificationResult specificationResult;
     @Stub(auto = false) Either<Throwable, Unit> createContextResult;
     @Stub(auto = false) Either<Throwable, Unit> restMockeryResult;
     @Stub(auto = false) Either<Throwable, Unit> wireActorsResult;
@@ -42,6 +42,7 @@ public final class ASpecificationLifecycleResultDeterminatorWithNoFailures {
     @Stub(auto = false) Either<Throwable, SpecificationResult> runSpecificationResult;
     @Stub(auto = false) Either<Throwable, Unit> runAfterSpecificationMethodsResult;
     @Stub(auto = false) Either<Throwable, Unit> verifyMocksResult;
+    @Dummy private Throwable throwable;
 
     @BeforeSpecification
     public void before() {
@@ -49,17 +50,17 @@ public final class ASpecificationLifecycleResultDeterminatorWithNoFailures {
         restMockeryResult = right(unit());
         wireActorsResult = right(unit());
         runBeforeSpecificationMethodsResult = right(unit());
-        runSpecificationResult = right(specificationResult);
+        runSpecificationResult = left(throwable);
         runAfterSpecificationMethodsResult = right(unit());
         verifyMocksResult = right(unit());
         determinator = new SpecificationLifecycleResultDeterminator();
     }
 
     @Specification
-    public void returnsTheResultOnTheRight() {
+    public void returnsTheSpecFailureOnTheLeft() {
         final Either<List<Throwable>, SpecificationResult> result = determinator
                 .determineLifecycleResult(createContextResult, restMockeryResult, wireActorsResult, runBeforeSpecificationMethodsResult,
                         runSpecificationResult, runAfterSpecificationMethodsResult, verifyMocksResult);
-        expect.that(result).isRight(sameInstance(specificationResult));
+        expect.that(result).isLeft(List.<Throwable>nil().cons(throwable));
     }
 }

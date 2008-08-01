@@ -20,7 +20,13 @@ import fj.F;
 import fj.data.List;
 import org.hamcrest.Matcher;
 
-public interface FjListChecker<T> extends ObjectChecker<List<T>>, ContainerChecker<T>, SizeChecker {
+public interface ListChecker<T> extends ObjectChecker<List<T>>, ContainerChecker<T>, SizeChecker {
+    @SuppressWarnings({"AbstractMethodOverridesAbstractMethod"})
+    void isEqualTo(List<T> list);
+
+    @SuppressWarnings({"AbstractMethodOverridesAbstractMethod"})
+    void isNotEqualTo(List<T> list);
+
     void contains(F<T, Boolean> matching);
 
     void doesNotContain(F<T, Boolean> matching);

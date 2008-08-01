@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.expect.state.matcher;
 
+import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import fj.F;
 import fj.data.List;
@@ -23,7 +24,6 @@ import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import static org.hamcrest.core.IsEqual.equalTo;
 
 public final class UniversalListMatcher<T> extends TypeSafeMatcher<List<T>> {
     private final Matcher<T> elementMatcher;

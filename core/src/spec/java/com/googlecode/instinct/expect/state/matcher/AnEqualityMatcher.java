@@ -16,42 +16,36 @@
 
 package com.googlecode.instinct.expect.state.matcher;
 
-import static com.googlecode.instinct.expect.state.matcher.ExistentialListMatcher.hasItemInList;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Stub;
-import fj.F;
 import fj.data.List;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.not;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
-public final class AFjItemInListMatcher {
-    @Stub(auto = false) private List<Integer> list;
+public final class AnEqualityMatcher {
+    @Stub(auto = false) private List<Integer> list1;
+    @Stub(auto = false) private List<Integer> list2;
+    @Stub(auto = false) private Integer int1;
+    @Stub(auto = false) private Integer int2;
 
     @BeforeSpecification
     public void before() {
-        list = List.<Integer>nil().cons(1).cons(2).cons(3);
+        list1 = List.<Integer>nil().cons(1);
+        list2 = List.<Integer>nil().cons(1);
+        int1 = 1;
+        int2 = 1;
     }
 
     @Specification
-    public void matchesItemsBasedOnAFunction() {
-        assertThat(list, hasItemInList(new F<Integer, Boolean>() {
-            public Boolean f(final Integer integer) {
-                return integer == 3;
-            }
-        }));
+    public void matchesListsThatAreEqual() {
+        assertThat(list1, EqualityMatcher.equalTo(list2));
     }
 
     @Specification
-    public void matchesItemsThatAreInTheList() {
-        assertThat(list, hasItemInList(1));
-    }
-
-    @Specification
-    public void doesNotMatchItemsThatAreNotInTheList() {
-        assertThat(list, not(hasItemInList(0)));
+    public void matchesNonListsThatAreEqual() {
+        assertThat(int1, EqualityMatcher.equalTo(int2));
     }
 }

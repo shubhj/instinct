@@ -14,19 +14,20 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.api;
+package com.googlecode.instinct.expect.state.checker;
 
 import com.googlecode.instinct.data.Person;
-import com.googlecode.instinct.expect.state.checker.ObjectChecker;
-import com.googlecode.instinct.expect.state.checker.ObjectCheckerImpl;
+import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.Stub;
+import fj.data.List;
 import java.util.ArrayList;
 import java.util.Collection;
 import org.hamcrest.Matcher;
 import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsEqual.equalTo;
 import org.hamcrest.core.IsNull;
 import static org.hamcrest.core.IsSame.sameInstance;
 import org.junit.runner.RunWith;
@@ -34,8 +35,35 @@ import org.junit.runner.RunWith;
 @SuppressWarnings({"unchecked"})
 @RunWith(InstinctRunner.class)
 @Context
-public class AnObjectCheckerContext {
-    private static final String GREETING = "greeting";
+public final class AnObjectCheckerContext {
+    @Stub(auto = false) private static final String greeting = "greeting";
+    @Stub(auto = false) private List<Integer> list1;
+    @Stub(auto = false) private List<Integer> list2;
+    @Stub(auto = false) private Integer int1;
+    @Stub(auto = false) private Integer int2;
+
+    @BeforeSpecification
+    public void before() {
+        list1 = List.<Integer>nil().cons(1);
+        list2 = List.<Integer>nil().cons(1);
+        int1 = 1;
+        int2 = 1;
+    }
+
+    @Specification
+    public void canDetermineEqualityOnNull() {
+        new ObjectCheckerImpl<Object>(null).isEqualTo(null);
+    }
+
+    @Specification
+    public void matchesListsThatAreEqual() {
+        new ObjectCheckerImpl<List<Integer>>(list1).isEqualTo(list2);
+    }
+
+    @Specification
+    public void matchesNonListsThatAreEqual() {
+        new ObjectCheckerImpl<Integer>(int1).isEqualTo(int2);
+    }
 
     @Specification
     public void shouldImplementDoesNotMatchOnAllOf() {
@@ -59,14 +87,14 @@ public class AnObjectCheckerContext {
 
     @Specification
     public void shouldImplementHasToString() {
-        final String greeting = GREETING;
+        final String greeting = AnObjectCheckerContext.greeting;
         final ObjectChecker<String> objectChecker = new ObjectCheckerImpl<String>(greeting);
-        objectChecker.hasToString(equalTo(GREETING));
+        objectChecker.hasToString(equalTo(AnObjectCheckerContext.greeting));
     }
 
     @Specification
     public void shouldImplementTypeChecking() {
-        final String greeting = GREETING;
+        final String greeting = AnObjectCheckerContext.greeting;
         final String goodbye = "au revoir";
         final ObjectChecker<String> objectChecker = new ObjectCheckerImpl<String>(greeting);
         objectChecker.isAnInstanceOf(String.class);
@@ -76,10 +104,10 @@ public class AnObjectCheckerContext {
 
     @Specification
     public void shouldImplementEquality() {
-        final String greeting = GREETING;
+        final String greeting = AnObjectCheckerContext.greeting;
         final ObjectChecker<String> objectChecker = new ObjectCheckerImpl<String>(greeting);
         objectChecker.isNotNull();
-        objectChecker.isEqualTo(GREETING);
+        objectChecker.isEqualTo(AnObjectCheckerContext.greeting);
         objectChecker.isNotEqualTo("foobar");
     }
 
@@ -92,6 +120,7 @@ public class AnObjectCheckerContext {
         matcherList.add(is(doubleValue));
         objectChecker.matches(equalTo(2.5d), IsNull.<Double>notNullValue());
         objectChecker.matches(matcherList);
-        objectChecker.matchesAnyOf(equalTo(2.4d), equalTo(2.5d), IsNull.<Double>nullValue(), IsNull.<Double>notNullValue());
+        objectChecker.matchesAnyOf(equalTo(2.4d), equalTo(2.5d), IsNull.<Double>nullValue(),
+                IsNull.<Double>notNullValue());
     }
 }

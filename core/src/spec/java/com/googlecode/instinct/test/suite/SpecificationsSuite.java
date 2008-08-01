@@ -31,16 +31,18 @@ import com.googlecode.instinct.actor.AStubAutoWireDeterminatorWithANamedFieldToA
 import com.googlecode.instinct.actor.AStubAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire;
 import com.googlecode.instinct.actor.AStubAutoWireDeterminatorWithAnAnnotatedFieldNotToAutoWire;
 import com.googlecode.instinct.actor.AStubAutoWireDeterminatorWithNoMarkedFields;
-import com.googlecode.instinct.api.AnObjectCheckerContext;
-import com.googlecode.instinct.api.AnObjectCheckerFailure;
-import com.googlecode.instinct.api.CommonAPIContext;
+import com.googlecode.instinct.expect.state.checker.AnObjectCheckerContext;
+import com.googlecode.instinct.expect.state.checker.AnObjectCheckerFailure;
+import com.googlecode.instinct.expect.state.checker.CommonExpectations;
 import com.googlecode.instinct.defect.defect23.AFixedDefect23;
 import com.googlecode.instinct.defect.defect3.AFixedDefect3;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithANamingConventionLocator;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithAnAnnotationMethodLocator;
-import com.googlecode.instinct.expect.state.matcher.AFjItemInListMatcher;
+import com.googlecode.instinct.expect.state.matcher.AItemInListMatcher;
 import com.googlecode.instinct.expect.state.matcher.AnEitherIsLeftMatcher;
 import com.googlecode.instinct.expect.state.matcher.AnEitherIsRightMatcher;
+import com.googlecode.instinct.expect.state.matcher.AnEqualityMatcher;
+import com.googlecode.instinct.expect.state.matcher.AListEqualityMatcher;
 import com.googlecode.instinct.expect.state.matcher.AnOptionIsNoneMatcher;
 import com.googlecode.instinct.expect.state.matcher.AnOptionIsSomeMatcher;
 import com.googlecode.instinct.integrate.junit3.ContextTestSuite;
@@ -85,7 +87,7 @@ public final class SpecificationsSuite {
     private static Class<?>[] getContexts() {
         return new Class<?>[]{ExceptionSanitiserWithKnownException.class, ExceptionSanitiserWithUnknownException.class,
                 AnAnnotatedMethodLocatorContext.class, AFixedDefect8WithAnAnnotationMethodLocator.class,
-                AFixedDefect8WithANamingConventionLocator.class, AFixedDefect23.class, AFixedDefect3.class, CommonAPIContext.class,
+                AFixedDefect8WithANamingConventionLocator.class, AFixedDefect23.class, AFixedDefect3.class, CommonExpectations.class,
                 AnObjectCheckerContext.class, AnObjectCheckerFailure.class, AStringFactoryImplContext.class,
                 ANamedFieldLocatorWithNoFieldsToFind.class, ANamedFieldLocatorWithFieldsToFind.class,
                 AMockAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire.class, AMockAutoWireDeterminatorWithAnAnnotatedFieldNotToAutoWire.class,
@@ -98,9 +100,10 @@ public final class SpecificationsSuite {
                 ADummyAutoWireDeterminatorWithNoMarkedFields.class, APendingSpecificationMethodWithoutAReason.class,
                 APendingSpecificationMethodWithAReason.class, ASpecificationThatThrowsAnExpectedException.class,
                 AnExpectingExceptionSpecificationMethod.class, ASpecificationThatExpectsAnExceptionButOneIsNotThrown.class,
-                ASpecificationMethodBuilder.class, AFjItemInListMatcher.class, AMethodEqualityUtility.class, ASuperClassTraversingMethodLocator.class,
+                ASpecificationMethodBuilder.class, AItemInListMatcher.class, AMethodEqualityUtility.class, ASuperClassTraversingMethodLocator.class,
                 ASpecificationMethodBuilderWithNonDefaultAnnotations.class, AnOptionIsNoneMatcher.class, AnOptionIsSomeMatcher.class,
                 ABeforeSpecMethodThatThrowsAnException.class, AnAfterSpecMethodThatThrowsAnException.class, ADefaultSpecificationLifecycle.class,
-                ASpecificationLifecycleResultDeterminatorWithNoFailures.class, AnEitherIsLeftMatcher.class, AnEitherIsRightMatcher.class};
+                ASpecificationLifecycleResultDeterminatorWithNoFailures.class, AnEitherIsLeftMatcher.class, AnEitherIsRightMatcher.class,
+                AnEqualityMatcher.class, AListEqualityMatcher.class};
     }
 }

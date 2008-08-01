@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.api;
+package com.googlecode.instinct.expect.state.checker;
 
 import com.googlecode.instinct.expect.state.checker.EventObjectChecker;
 import com.googlecode.instinct.expect.state.checker.EventObjectCheckerImpl;

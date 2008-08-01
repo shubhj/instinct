@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
+import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.Suggest;
 import java.util.Map;
@@ -79,16 +80,16 @@ public class MapCheckerImpl<K, V> extends ObjectCheckerImpl<Map<K, V>> implement
     }
 
     public final void isOfSize(final int size) {
-        getAsserter().expectThat(subject.size(), Matchers.equalTo(size));
+        getAsserter().expectThat(subject.size(), equalTo(size));
     }
 
     public final void isEmpty() {
         getAsserter().expectThat(subject.isEmpty(),
-                Matchers.describedAs("isEmpty() = <true>", Matchers.equalTo(true)));
+                Matchers.describedAs("isEmpty() = <true>", equalTo(true)));
     }
 
     public final void isNotEmpty() {
         getAsserter().expectThat(subject.isEmpty(),
-                Matchers.describedAs("isEmpty() = <false>", Matchers.equalTo(false)));
+                Matchers.describedAs("isEmpty() = <false>", equalTo(false)));
     }
 }

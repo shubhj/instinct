@@ -29,7 +29,7 @@ import com.googlecode.instinct.expect.state.checker.DoubleChecker;
 import com.googlecode.instinct.expect.state.checker.EitherChecker;
 import com.googlecode.instinct.expect.state.checker.EventObjectChecker;
 import com.googlecode.instinct.expect.state.checker.FileChecker;
-import com.googlecode.instinct.expect.state.checker.FjListChecker;
+import com.googlecode.instinct.expect.state.checker.ListChecker;
 import com.googlecode.instinct.expect.state.checker.IterableChecker;
 import com.googlecode.instinct.expect.state.checker.MapChecker;
 import com.googlecode.instinct.expect.state.checker.NodeChecker;
@@ -78,7 +78,7 @@ public final class ExpectThatImpl implements ExpectThat {
         return stateExpectations.that(array);
     }
 
-    public <T> FjListChecker<T> that(final List<T> list) {
+    public <T> ListChecker<T> that(final List<T> list) {
         return stateExpectations.that(list);
     }
 

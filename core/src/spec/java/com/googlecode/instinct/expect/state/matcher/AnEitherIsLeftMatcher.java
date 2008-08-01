@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.expect.state.matcher;
 
+import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
 import static com.googlecode.instinct.expect.state.matcher.ToStringableEither.toStringableEither;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
@@ -24,7 +25,6 @@ import com.googlecode.instinct.marker.annotate.Stub;
 import fj.data.Either;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.not;
-import static org.hamcrest.core.IsEqual.equalTo;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)

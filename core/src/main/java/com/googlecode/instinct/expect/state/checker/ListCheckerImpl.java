@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
+import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
 import com.googlecode.instinct.expect.state.matcher.ExistentialListMatcher;
 import com.googlecode.instinct.expect.state.matcher.UniversalListMatcher;
 import fj.F;
@@ -23,21 +24,21 @@ import fj.data.List;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
-public final class FjListCheckerImpl<T> extends ObjectCheckerImpl<List<T>> implements FjListChecker<T> {
-    public FjListCheckerImpl(final List<T> subject) {
+public final class ListCheckerImpl<T> extends ObjectCheckerImpl<List<T>> implements ListChecker<T> {
+    public ListCheckerImpl(final List<T> subject) {
         super(subject);
     }
 
     public void isEmpty() {
-        getAsserter().expectThat(subject.toArray().length() == 0, Matchers.describedAs("length == 0", Matchers.equalTo(true)));
+        getAsserter().expectThat(subject.toArray().length() == 0, Matchers.describedAs("length == 0", equalTo(true)));
     }
 
     public void isNotEmpty() {
-        getAsserter().expectThat(subject.toArray().length() != 0, Matchers.describedAs("length != 0", Matchers.equalTo(true)));
+        getAsserter().expectThat(subject.toArray().length() != 0, Matchers.describedAs("length != 0", equalTo(true)));
     }
 
     public void isOfSize(final int size) {
-        getAsserter().expectThat(subject.toArray().length(), Matchers.equalTo(size));
+        getAsserter().expectThat(subject.toArray().length(), equalTo(size));
     }
 
     public void containsItem(final Matcher<T> matcher) {

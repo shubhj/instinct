@@ -16,13 +16,13 @@
 
 package com.googlecode.instinct.expect.state.matcher;
 
+import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.hamcrest.core.IsAnything;
-import static org.hamcrest.core.IsEqual.equalTo;
 
 public final class EitherIsLeftMatcher<A, B> extends TypeSafeMatcher<ToStringableEither<A, B>> {
     private Matcher<ToStringableEither<A, B>> matcher;

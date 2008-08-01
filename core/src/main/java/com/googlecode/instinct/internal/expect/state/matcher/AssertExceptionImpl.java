@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.internal.expect.state.matcher;
 
+import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.instanceOf;
 
 public final class AssertExceptionImpl implements AssertException {
@@ -67,9 +67,7 @@ public final class AssertExceptionImpl implements AssertException {
             checkExceptionClass(expectedException, t);
             return t;
         }
-    }
-
-    // } SUPPRESS IllegalCatch
+    }// } SUPPRESS IllegalCatch
 
     private <T> Throwable checkWraps(final Class<T> expectedExceptionClass, final Throwable wrapperException, final int depth) {
         final Throwable cause = getCauseAtDepth(wrapperException, depth);
@@ -98,7 +96,5 @@ public final class AssertExceptionImpl implements AssertException {
             }
         }
         return cause;
-    }
-
-    // } SUPPRESS JavaNCSS
+    }// } SUPPRESS JavaNCSS
 }

@@ -18,13 +18,20 @@ package com.googlecode.instinct.internal.runner;
 
 import fj.Unit;
 import fj.data.Either;
+import static fj.data.Either.lefts;
 import fj.data.List;
 
+@SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
 public final class SpecificationLifecycleResultDeterminator {
-    public <T extends Throwable> Either<List<T>, SpecificationResult> result(final Either<T, Unit> createContextResult,
+    public <T extends Throwable> Either<List<T>, SpecificationResult> determineLifecycleResult(final Either<T, Unit> createContextResult,
             final Either<T, Unit> restMockeryResult, final Either<T, Unit> wireActorsResult,
             final Either<T, Unit> runBeforeSpecificationMethodsResult, final Either<T, SpecificationResult> runSpecificationResult,
             final Either<T, Unit> runAfterSpecificationMethodsResult, final Either<T, Unit> verifyMocksResult) {
-        return Either.right(runSpecificationResult.right().value());
+        final List<Either<T, ?>> results = List.<Either<T, ?>>nil().cons(createContextResult).cons(restMockeryResult).cons(wireActorsResult)
+                .cons(runBeforeSpecificationMethodsResult).cons(runSpecificationResult).cons(runAfterSpecificationMethodsResult)
+                .cons(verifyMocksResult);
+        final List<T> errors = lefts(results);
+        return errors.isNotEmpty() ? Either.<List<T>, SpecificationResult>left(errors)
+                : Either.<List<T>, SpecificationResult>right(runSpecificationResult.right().value());
     }
 }

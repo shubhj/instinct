@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
+import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
 import com.googlecode.instinct.internal.util.Fix;
 import java.util.Collection;
 import org.hamcrest.Matcher;
@@ -28,12 +29,14 @@ public class IterableCheckerImpl<E, T extends Iterable<E>> extends ObjectChecker
         super(subject);
     }
 
+    @SuppressWarnings({"DesignForExtension"})
     public void isEmpty() {
-        getAsserter().expectThat(subject.iterator().hasNext(), describedAs("iterator().hasNext() = <false>", Matchers.equalTo(false)));
+        getAsserter().expectThat(subject.iterator().hasNext(), describedAs("iterator().hasNext() = <false>", equalTo(false)));
     }
 
+    @SuppressWarnings({"DesignForExtension"})
     public void isNotEmpty() {
-        getAsserter().expectThat(subject.iterator().hasNext(), describedAs("iterator().hasNext() = <true>", Matchers.equalTo(true)));
+        getAsserter().expectThat(subject.iterator().hasNext(), describedAs("iterator().hasNext() = <true>", equalTo(true)));
     }
 
     public final void containsItem(final E item) {

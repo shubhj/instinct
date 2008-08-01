@@ -17,11 +17,12 @@
 package com.googlecode.instinct.internal.lang;
 
 import static com.googlecode.instinct.expect.Expect.expect;
+import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClassWithoutParamChecks;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
-import static org.hamcrest.Matchers.equalTo;
 
+@SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
 public final class FieldValueSpecImplAtomicTest extends InstinctTestCase {
     private static final String NAME_1 = "x";
     private static final String NAME_2 = "y";

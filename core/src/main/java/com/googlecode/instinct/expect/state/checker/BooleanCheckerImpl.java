@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
+import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
 import com.googlecode.instinct.internal.util.Fix;
-import org.hamcrest.Matchers;
 
 @Fix("Test this.")
 public class BooleanCheckerImpl extends ComparableCheckerImpl<Boolean> implements BooleanChecker {
@@ -26,10 +26,10 @@ public class BooleanCheckerImpl extends ComparableCheckerImpl<Boolean> implement
     }
 
     public final void isTrue() {
-        getAsserter().expectThat(subject, Matchers.equalTo(true));
+        getAsserter().expectThat(subject, equalTo(true));
     }
 
     public final void isFalse() {
-        getAsserter().expectThat(subject, Matchers.equalTo(false));
+        getAsserter().expectThat(subject, equalTo(false));
     }
 }

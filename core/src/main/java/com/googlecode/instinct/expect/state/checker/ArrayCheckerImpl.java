@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
+import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 
@@ -25,15 +26,15 @@ public class ArrayCheckerImpl<T> extends ObjectCheckerImpl<T[]> implements Array
     }
 
     public final void isEmpty() {
-        getAsserter().expectThat(subject.length == 0, Matchers.describedAs("length == 0", Matchers.equalTo(true)));
+        getAsserter().expectThat(subject.length == 0, Matchers.describedAs("length == 0", equalTo(true)));
     }
 
     public final void isNotEmpty() {
-        getAsserter().expectThat(subject.length != 0, Matchers.describedAs("length != 0", Matchers.equalTo(true)));
+        getAsserter().expectThat(subject.length != 0, Matchers.describedAs("length != 0", equalTo(true)));
     }
 
     public final void isOfSize(final int size) {
-        getAsserter().expectThat(subject.length, Matchers.equalTo(size));
+        getAsserter().expectThat(subject.length, equalTo(size));
     }
 
     public final void containsItem(final Matcher<T> matcher) {
