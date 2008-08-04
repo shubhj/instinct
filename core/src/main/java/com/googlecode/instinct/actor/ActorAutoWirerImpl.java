@@ -52,7 +52,7 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
         final List<Field> dummies = autoWireDummies(instanceToAutoWire);
         final List<Field> stubs = autoWireStubs(instanceToAutoWire);
         final List<Field> mocks = autoWireMocks(instanceToAutoWire);
-        return dummies.append(stubs).append(mocks);
+        return List.<Field>nil().append(dummies).append(stubs).append(mocks).reverse();
     }
 
     private List<Field> autoWireDummies(final Object instanceToAutoWire) {
@@ -88,8 +88,9 @@ public final class ActorAutoWirerImpl implements ActorAutoWirer {
             field.setAccessible(true);
             fieldEdge.set(field, instanceToAutoWire, createdDouble);
         } catch (Throwable throwable) {
-            final String message = "Unable to autowire a specification double value into field '" + field.getName() + "' (type " +
-                    field.getType().getSimpleName() + ") in class " + instanceToAutoWire.getClass().getSimpleName();
+            final String message =
+                    "Unable to autowire a specification double value into field '" + field.getName() + "' (type " + field.getType().getSimpleName() +
+                            ") in class " + instanceToAutoWire.getClass().getSimpleName();
             throw new AutoWireException(message, throwable);
         }
     }

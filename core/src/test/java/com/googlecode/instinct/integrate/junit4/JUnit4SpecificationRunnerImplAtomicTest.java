@@ -19,11 +19,10 @@ package com.googlecode.instinct.integrate.junit4;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdge;
-import static com.googlecode.instinct.internal.runner.ErrorLocation.SPECIFICATION;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunFailureStatus;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
-import com.googlecode.instinct.internal.util.ExceptionFinder;
+import com.googlecode.instinct.internal.util.exception.ExceptionFinder;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.marker.annotate.Mock;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
@@ -58,7 +57,7 @@ public final class JUnit4SpecificationRunnerImplAtomicTest extends InstinctTestC
     @Override
     public void setUpTestDoubles() {
         specificationMethods = List.<SpecificationMethod>nil().cons(specificationMethod);
-        specificationRunStatus = new SpecificationRunFailureStatus(exception, SPECIFICATION);
+        specificationRunStatus = new SpecificationRunFailureStatus(exception, true);
     }
 
     @Override

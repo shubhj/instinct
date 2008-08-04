@@ -23,22 +23,17 @@ import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.reflect.ConstructorInvoker;
 import com.googlecode.instinct.internal.reflect.ConstructorInvokerImpl;
-import static com.googlecode.instinct.internal.runner.ErrorLocation.AFTER_SPECIFICATION;
-import static com.googlecode.instinct.internal.runner.ErrorLocation.AUTO_WIRING;
-import static com.googlecode.instinct.internal.runner.ErrorLocation.BEFORE_SPECIFICATION;
-import static com.googlecode.instinct.internal.runner.ErrorLocation.CLASS_INITIALISATION;
-import static com.googlecode.instinct.internal.runner.ErrorLocation.MOCK_VERIFICATION;
-import static com.googlecode.instinct.internal.runner.ErrorLocation.SPECIFICATION;
 import static com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus.SPECIFICATION_SUCCESS;
 import com.googlecode.instinct.internal.util.Clock;
 import com.googlecode.instinct.internal.util.ClockImpl;
-import com.googlecode.instinct.internal.util.ExceptionSanitiser;
-import com.googlecode.instinct.internal.util.ExceptionSanitiserImpl;
 import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.exception.ExceptionSanitiser;
+import com.googlecode.instinct.internal.util.exception.ExceptionSanitiserImpl;
 import fj.Effect;
 import fj.data.List;
+import fj.data.Option;
 
 @SuppressWarnings({"ParameterNameDiffersFromOverriddenParameter"})
 public final class SpecificationRunnerImpl implements SpecificationRunner {
@@ -49,7 +44,8 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final ExceptionSanitiser exceptionSanitiser = new ExceptionSanitiserImpl();
     private final MethodInvoker methodInvoker = new MethodInvokerImpl();
 
-    @SuppressWarnings({"CatchGenericClass", "ThrowableResultOfMethodCallIgnored", "ReturnInsideFinallyBlock"})
+    @SuppressWarnings(
+            {"CatchGenericClass", "ThrowableResultOfMethodCallIgnored", "ReturnInsideFinallyBlock"})
     public SpecificationResult run(final SpecificationMethod specificationMethod) {
         checkNotNull(specificationMethod);
         final long startTime = clock.getCurrentTime();
@@ -65,35 +61,38 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
                         runSpecificationMethod(instance, specificationMethod);
                         return result(startTime, specificationMethod, SPECIFICATION_SUCCESS);
                     } catch (Throwable t) {
-                        return fail(startTime, specificationMethod, t, SPECIFICATION);
+                        return fail(startTime, specificationMethod, t, true);
                     } finally {
                         try {
                             try {
                                 runMethods(instance, specificationMethod.getAfterSpecificationMethods());
                             } catch (Throwable t) {
-                                return fail(startTime, specificationMethod, t, AFTER_SPECIFICATION);
+                                return fail(startTime, specificationMethod, t, false);
                             }
                         } finally {
                             try {
                                 Mocker.verify();
                             } catch (Throwable t) {
-                                return fail(startTime, specificationMethod, t, MOCK_VERIFICATION);
+                                return fail(startTime, specificationMethod, t, false);
                             }
                         }
                     }
                 } catch (Throwable t) {
-                    return fail(startTime, specificationMethod, t, BEFORE_SPECIFICATION);
+                    return fail(startTime, specificationMethod, t, false);
                 }
             } catch (Throwable t) {
-                return fail(startTime, specificationMethod, t, AUTO_WIRING);
+                return fail(startTime, specificationMethod, t, false);
             }
         } catch (Throwable t) {
-            return fail(startTime, specificationMethod, t, CLASS_INITIALISATION);
+            return fail(startTime, specificationMethod, t, false);
         }
     }
 
     private void runSpecificationMethod(final Object contextInstance, final LifecycleMethod specificationMethod) {
-        methodValidator.checkMethodHasNoParameters(specificationMethod);
+        final Option<Throwable> result = methodValidator.checkMethodHasNoParameters(specificationMethod);
+        if (result.isSome()) {
+            throw (RuntimeException) result.some();
+        }
         methodInvoker.invokeMethod(contextInstance, specificationMethod.getMethod());
     }
 
@@ -106,24 +105,31 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     }
 
     private void runMethod(final Object instance, final LifecycleMethod method) {
-        methodValidator.checkMethodHasNoParameters(method);
+        final Option<Throwable> result = methodValidator.checkMethodHasNoParameters(method);
+        if (result.isSome()) {
+            throw (RuntimeException) result.some();
+        }
         methodInvoker.invokeMethod(instance, method.getMethod());
     }
 
     private <T> Object invokeConstructor(final Class<T> cls) {
-        methodValidator.checkContextConstructor(cls);
+        final Option<Throwable> result = methodValidator.checkContextConstructor(cls);
+        if (result.isSome()) {
+            throw (RuntimeException) result.some();
+        }
         return constructorInvoker.invokeNullaryConstructor(cls);
+    }
+
+    @SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
+    private SpecificationResult fail(final long startTime, final LifecycleMethod specificationMethod, final Throwable exceptionThrown,
+            final boolean expectedExceptionCandidate) {
+        final SpecificationRunStatus status =
+                new SpecificationRunFailureStatus(exceptionSanitiser.sanitise(exceptionThrown), expectedExceptionCandidate);
+        return result(startTime, specificationMethod, status);
     }
 
     private SpecificationResult result(final long startTime, final LifecycleMethod specificationMethod, final SpecificationRunStatus runStatus) {
         final long executionTime = clock.getElapsedTime(startTime);
         return new SpecificationResultImpl(specificationMethod.getName(), runStatus, executionTime);
-    }
-
-    @SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
-    private SpecificationResult fail(final long startTime, final LifecycleMethod specificationMethod, final Throwable exceptionThrown,
-            final ErrorLocation location) {
-        final SpecificationRunStatus status = new SpecificationRunFailureStatus(exceptionSanitiser.sanitise(exceptionThrown), location);
-        return result(startTime, specificationMethod, status);
     }
 }

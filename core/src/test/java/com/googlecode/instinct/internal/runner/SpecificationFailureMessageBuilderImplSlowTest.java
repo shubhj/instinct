@@ -17,7 +17,6 @@
 package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.internal.runner.ErrorLocation.SPECIFICATION;
 import com.googlecode.instinct.test.InstinctTestCase;
 
 public final class SpecificationFailureMessageBuilderImplSlowTest extends InstinctTestCase {
@@ -29,7 +28,7 @@ public final class SpecificationFailureMessageBuilderImplSlowTest extends Instin
     }
 
     public void testCreatesStackTracesFromSpecificationFailures() {
-        final String stack = failureMessageBuilder.buildMessage(new SpecificationRunFailureStatus(new RuntimeException(), SPECIFICATION));
+        final String stack = failureMessageBuilder.buildMessage(new SpecificationRunFailureStatus(new RuntimeException(), true));
         expect.that(stack).isNotEmpty();
     }
 }

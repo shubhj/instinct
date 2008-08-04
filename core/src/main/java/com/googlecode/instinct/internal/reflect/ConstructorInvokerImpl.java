@@ -28,10 +28,10 @@ public final class ConstructorInvokerImpl implements ConstructorInvoker {
     private final ClassEdge classEdge = new ClassEdgeImpl();
     private final ConstructorEdge edgeConstructor = new ConstructorEdgeImpl();
 
-    public <T> Object invokeNullaryConstructor(final Class<T> cls) {
+    public <T> T invokeNullaryConstructor(final Class<T> cls) {
         checkClassIsNotAbstract(cls);
         final Constructor<T> constructor = getNullaryConstructor(cls);
-        return edgeConstructor.newInstance(constructor, new Object[]{});
+        return edgeConstructor.newInstance(constructor);
     }
 
     private <T> Constructor<T> getNullaryConstructor(final Class<T> cls) {

@@ -17,7 +17,6 @@
 package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.internal.runner.ErrorLocation.SPECIFICATION;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
@@ -30,7 +29,7 @@ public final class SpecificationRunFailueStatusAtomicTest extends InstinctTestCa
     }
 
     public void testGetDetailedStatusReturnsError() {
-        final SpecificationRunStatus runStatus = new SpecificationRunFailureStatus(error, SPECIFICATION);
+        final SpecificationRunStatus runStatus = new SpecificationRunFailureStatus(error, true);
         expect.that(runStatus.getDetails()).isTheSameInstanceAs(error);
     }
 }

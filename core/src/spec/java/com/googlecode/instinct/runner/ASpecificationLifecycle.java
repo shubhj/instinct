@@ -25,10 +25,6 @@ import org.junit.runner.RunWith;
 public final class ASpecificationLifecycle {
     @Specification
     public void conformsToClassTraits() {
-        checkClass(SpecificationLifecycleImpl.class, SpecificationLifecycle.class);
-    }
-
-    @Specification
-    public void xxx() {
+        checkClass(StandardSpecificationLifecycle.class, SpecificationLifecycle.class);
     }
 }

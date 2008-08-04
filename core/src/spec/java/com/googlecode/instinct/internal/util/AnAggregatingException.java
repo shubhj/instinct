@@ -19,36 +19,44 @@ package com.googlecode.instinct.internal.util;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
-import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
-import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import fj.data.List;
 import org.junit.runner.RunWith;
 
+@SuppressWarnings({"UnusedDeclaration"})
 @RunWith(InstinctRunner.class)
-public final class ExceptionSanitiserWithUnknownException {
-    @Subject(implementation = ExceptionSanitiserImpl.class) private ExceptionSanitiser exceptionSanitiser;
-    @Dummy(auto = false) private Throwable exception;
+public final class AnAggregatingException {
+    @Subject private AggregatingException exception;
+    @Stub private String message1;
+    @Stub private String message2;
 
     @BeforeSpecification
     public void before() {
-        exceptionSanitiser = createSubject(ExceptionSanitiserImpl.class);
-        exception = new NotNeedingSanitisation();
+        List<Throwable> results = List.nil();
+        try {
+            throw new RuntimeException(message1);
+        } catch (RuntimeException e) {
+            results = results.cons(e);
+        }
+        try {
+            throw new RuntimeException(message2);
+        } catch (RuntimeException e) {
+            results = results.cons(e);
+        }
+        exception = new AggregatingException(results);
+    }
+
+    public void testConformsToClassTraits() {
+        checkClass(AggregatingException.class, RuntimeException.class);
     }
 
     @Specification
-    public void conformsToClassTraits() {
-        checkClass(ExceptionSanitiserImpl.class, ExceptionSanitiser.class);
-    }
-
-    @Specification
-    public void passesExceptionThroughUnchanged() {
-        expect.that(exceptionSanitiser.sanitise(exception)).isEqualTo(exception);
-    }
-
-    @SuppressWarnings({"ALL"})
-    private static final class NotNeedingSanitisation extends Throwable {
-        private static final long serialVersionUID = -7221958359176000824L;
+    public void turnsAListOfSpecificationResultsIntoASingleError() {
+        expect.that(exception.getMessage()).containsString("The following 2 errors ocurred while running the specification:\n");
+        expect.that(exception.getMessage()).containsString("RuntimeException: " + message1);
+        expect.that(exception.getMessage()).containsString("RuntimeException: " + message2);
     }
 }

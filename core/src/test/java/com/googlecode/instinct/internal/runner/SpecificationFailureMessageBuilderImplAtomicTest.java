@@ -17,8 +17,7 @@
 package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.internal.runner.ErrorLocation.SPECIFICATION;
-import com.googlecode.instinct.internal.util.ExceptionFinder;
+import com.googlecode.instinct.internal.util.exception.ExceptionFinder;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
@@ -40,7 +39,7 @@ public final class SpecificationFailureMessageBuilderImplAtomicTest extends Inst
     @Override
     public void setUpTestDoubles() {
         successStatus = new SpecificationRunSuccessStatus();
-        failureStatus = new SpecificationRunFailureStatus(failureCause, SPECIFICATION);
+        failureStatus = new SpecificationRunFailureStatus(failureCause, true);
     }
 
     @Override

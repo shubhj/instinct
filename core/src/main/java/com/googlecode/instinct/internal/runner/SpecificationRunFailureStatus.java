@@ -21,20 +21,20 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 
 public final class SpecificationRunFailureStatus extends Primordial implements SpecificationRunStatus {
     private final Throwable error;
-    private final ErrorLocation errorLocation;
+    private final boolean expectedExceptionCandidate;
 
-    public SpecificationRunFailureStatus(final Throwable error, final ErrorLocation errorLocation) {
-        checkNotNull(error, errorLocation);
+    public SpecificationRunFailureStatus(final Throwable error, final boolean expectedExceptionCandidate) {
+        this.expectedExceptionCandidate = expectedExceptionCandidate;
+        checkNotNull(error, expectedExceptionCandidate);
         this.error = error;
-        this.errorLocation = errorLocation;
     }
 
     public Throwable getDetails() {
         return error;
     }
 
-    public ErrorLocation getErrorLocation() {
-        return errorLocation;
+    public boolean isExpectedExceptionCandidate() {
+        return expectedExceptionCandidate;
     }
 
     public boolean runSuccessful() {

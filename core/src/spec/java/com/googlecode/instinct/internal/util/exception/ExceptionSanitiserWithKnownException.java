@@ -14,46 +14,40 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util;
+package com.googlecode.instinct.internal.util.exception;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
-import com.googlecode.instinct.internal.edge.EdgeException;
-import com.googlecode.instinct.internal.util.instance.ClassInstantiator;
+import com.googlecode.instinct.internal.runner.SpecificationFailureException;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Dummy;
-import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
-import org.jmock.Expectations;
+import org.hamcrest.Description;
+import org.hamcrest.SelfDescribing;
+import org.jmock.api.ExpectationError;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings({"UnusedDeclaration"})
 @RunWith(InstinctRunner.class)
-public final class ExceptionSanitiserWithAnExceptionNotInClasspath {
+public final class ExceptionSanitiserWithKnownException {
     @Subject(implementation = ExceptionSanitiserImpl.class) private ExceptionSanitiser exceptionSanitiser;
-    @Mock private ClassInstantiator instantiator;
     @Dummy(auto = false) private Throwable exception;
+    @Stub private String message;
 
     @BeforeSpecification
     public void before() {
-        exceptionSanitiser = createSubject(ExceptionSanitiserImpl.class, instantiator);
-        exception = new NotNeedingSanitisation();
+        exceptionSanitiser = createSubject(ExceptionSanitiserImpl.class);
+        exception = new ExpectationError(message, new SelfDescribing() {
+            public void describeTo(final Description description) {
+            }
+        });
     }
 
     @Specification
-    public void passesExceptionThroughUnchanged() {
-        expect.that(new Expectations() {
-            {
-                one(instantiator).instantiateClass("org.jmock.api.ExpectationError");
-                will(throwException(new EdgeException(new ClassNotFoundException())));
-            }
-        });
-        expect.that(exceptionSanitiser.sanitise(exception)).isEqualTo(exception);
-    }
-
-    private static final class NotNeedingSanitisation extends Throwable {
-        private static final long serialVersionUID = -7221958359176000824L;
+    public void transformsJMockExpectationErrorIntoSpecificationFailureException() {
+        expect.that(exceptionSanitiser.sanitise(exception)).isOfType(SpecificationFailureException.class);
     }
 }

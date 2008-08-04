@@ -24,41 +24,37 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.marker.ContextConfigurationException;
 import com.googlecode.instinct.marker.LifeCycleMethodConfigurationException;
-import java.lang.reflect.Method;
+import fj.data.Option;
+import static fj.data.Option.none;
+import static fj.data.Option.some;
 
 public final class LifeCycleMethodValidatorImpl implements LifeCycleMethodValidator {
     private final ClassEdge edgeClass = new ClassEdgeImpl();
 
     @Suggest("Consider adding parameter types to message for overloaded methods")
-    public void checkMethodHasNoParameters(final LifecycleMethod method) {
+    public Option<Throwable> checkMethodHasNoParameters(final LifecycleMethod method) {
         checkNotNull(method);
         if (method.getMethod().getParameterTypes().length > 0) {
             final String methodDetails = method.getContextClass().getSimpleName() + '.' + method.getName() + "(...)";
             final String message = "Unable to run context. Specifaction method '" + methodDetails + "' cannot have parameters";
-            throw new LifeCycleMethodConfigurationException(message);
+            return some((Throwable) new LifeCycleMethodConfigurationException(message));
+        } else {
+            return none();
         }
     }
 
-    public void checkMethodHasNoReturnType(final Method method) {
-        checkNotNull(method);
-        if (!method.getReturnType().equals(Void.TYPE)) {
-            final String methodDetails = method.getDeclaringClass().getSimpleName() + '.' + method.getName() + "(...)";
-            final String message = "Unable to run context. Method '" + methodDetails + "' must have void return type";
-            throw new LifeCycleMethodConfigurationException(message);
-        }
-    }
-
-    public <T> void checkContextConstructor(final Class<T> cls) {
+    public <T> Option<Throwable> checkContextConstructor(final Class<T> cls) {
         checkNotNull(cls);
-        checkClassContainsNullaryConstructor(cls);
+        return checkClassContainsNullaryConstructor(cls);
     }
 
-    private <T> void checkClassContainsNullaryConstructor(final Class<T> cls) {
+    private <T> Option<Throwable> checkClassContainsNullaryConstructor(final Class<T> cls) {
         try {
             edgeClass.getDeclaredConstructor(cls);
+            return none();
         } catch (EdgeException e) {
             final String message = "Unable to run context. Context '" + cls.getSimpleName() + "' must have a no-argument constructor";
-            throw new ContextConfigurationException(message, e);
+            return some((Throwable) new ContextConfigurationException(message, e));
         }
     }
 }

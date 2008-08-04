@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.internal.runner;
 
-import com.googlecode.instinct.internal.util.ExceptionFinder;
-import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
+import com.googlecode.instinct.internal.util.exception.ExceptionFinder;
+import com.googlecode.instinct.internal.util.exception.ExceptionFinderImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;

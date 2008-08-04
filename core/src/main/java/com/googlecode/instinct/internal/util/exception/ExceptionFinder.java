@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2008 Workingmouse
+ * Copyright 2006-2007 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,12 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.runner;
+package com.googlecode.instinct.internal.util.exception;
 
-public enum ErrorLocation {
-    CLASS_INITIALISATION("Class initialisation"), AUTO_WIRING("Actor auto wiring"), BEFORE_SPECIFICATION("Before specification methods"),
-    SPECIFICATION("Specification"), AFTER_SPECIFICATION("After specification methods"), MOCK_VERIFICATION("Mock verification");
-    private final String message;
+import com.googlecode.instinct.internal.edge.EdgeException;
 
-    ErrorLocation(final String message) {
-        this.message = message;
-    }
+public interface ExceptionFinder {
+    Throwable getRootCause(Throwable topLevelCause);
 
-    public String getMessage() {
-        return message;
-    }
+    void rethrowRealError(final EdgeException e);
 }

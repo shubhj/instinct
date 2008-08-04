@@ -19,7 +19,6 @@ package com.googlecode.instinct.internal.report;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextResultImpl;
-import static com.googlecode.instinct.internal.runner.ErrorLocation.SPECIFICATION;
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilder;
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilderImpl;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
@@ -51,7 +50,7 @@ public final class BriefResultMessageBuilderAtomicTest extends InstinctTestCase 
         contextResult = new ContextResultImpl("Context");
         failureMessageBuilder = new SpecificationFailureMessageBuilderImpl();
         final RuntimeException failureCause = new RuntimeException("Failure cause");
-        failureStatus = new SpecificationRunFailureStatus(failureCause, SPECIFICATION);
+        failureStatus = new SpecificationRunFailureStatus(failureCause, true);
         failingSpec = new SpecificationResultImpl("fails", failureStatus, 1L);
         final SpecificationRunStatus successStatus = new SpecificationRunSuccessStatus();
         succeedingSpec1 = new SpecificationResultImpl("runs", successStatus, 1L);

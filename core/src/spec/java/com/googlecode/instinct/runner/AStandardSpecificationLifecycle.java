@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2008 Tom Adams
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,12 +14,17 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util;
+package com.googlecode.instinct.runner;
 
-import com.googlecode.instinct.internal.edge.EdgeException;
+import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.marker.annotate.Specification;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import org.junit.runner.RunWith;
 
-public interface ExceptionFinder {
-    Throwable getRootCause(Throwable topLevelCause);
-
-    void rethrowRealError(final EdgeException e);
+@RunWith(InstinctRunner.class)
+public final class AStandardSpecificationLifecycle {
+    @Specification
+    public void conformsToClassTraits() {
+        checkClass(StandardSpecificationLifecycle.class, SpecificationLifecycle.class);
+    }
 }

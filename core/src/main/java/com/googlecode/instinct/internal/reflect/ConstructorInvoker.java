@@ -17,5 +17,5 @@
 package com.googlecode.instinct.internal.reflect;
 
 public interface ConstructorInvoker {
-    <T> Object invokeNullaryConstructor(Class<T> cls);
+    <T> T invokeNullaryConstructor(Class<T> cls);
 }

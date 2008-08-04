@@ -17,8 +17,6 @@
 package com.googlecode.instinct.internal.core;
 
 import com.googlecode.instinct.internal.lang.Primordial;
-import com.googlecode.instinct.internal.runner.ErrorLocation;
-import static com.googlecode.instinct.internal.runner.ErrorLocation.SPECIFICATION;
 import com.googlecode.instinct.internal.runner.SpecificationFailureException;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationResultImpl;
@@ -28,9 +26,9 @@ import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 import com.googlecode.instinct.internal.util.Clock;
 import com.googlecode.instinct.internal.util.ClockImpl;
-import com.googlecode.instinct.internal.util.ExceptionFinder;
-import com.googlecode.instinct.internal.util.ExceptionFinderImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.exception.ExceptionFinder;
+import com.googlecode.instinct.internal.util.exception.ExceptionFinderImpl;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
@@ -107,8 +105,8 @@ public final class ExpectingExceptionSpecificationMethod extends Primordial impl
 
     @Override
     public String toString() {
-        return ExpectingExceptionSpecificationMethod.class.getSimpleName() + "[method=" + method + ";before=" +
-                beforeSpecificationMethods.toCollection() + ";after=" + afterSpecificationMethods.toCollection() + "]";
+        return ExpectingExceptionSpecificationMethod.class.getSimpleName() + "[method=" + method + ";before="
+                + beforeSpecificationMethods.toCollection() + ";after=" + afterSpecificationMethods.toCollection() + "]";
     }
 
     @SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
@@ -118,30 +116,30 @@ public final class ExpectingExceptionSpecificationMethod extends Primordial impl
         final SpecificationResult result = specificationRunner.run(this);
         if (result.completedSuccessfully()) {
             final String message = "Expected exception " + expectedException.getName() + " was not thrown in body of specification";
-            return fail(startTime, message, SPECIFICATION);
+            return fail(startTime, message, true);
         } else {
             final SpecificationRunFailureStatus failureStatus = (SpecificationRunFailureStatus) result.getStatus();
             final Throwable exceptionThrown = failureStatus.getDetails();
-            final ErrorLocation location = failureStatus.getErrorLocation();
-            return processExpectedFailure(startTime, expectedException, exceptionFinder.getRootCause(exceptionThrown), location);
+            return processExpectedFailure(startTime, expectedException, exceptionFinder.getRootCause(exceptionThrown),
+                    failureStatus.isExpectedExceptionCandidate());
         }
     }
 
     @SuppressWarnings({"TypeMayBeWeakened"})
-    private <T extends Throwable> SpecificationResult processExpectedFailure(final long startTime,
-            final Class<? extends Throwable> expectedExceptionClass, final Throwable thrownException, final ErrorLocation location) {
-        if (location == SPECIFICATION) {
+    private <T extends Throwable> SpecificationResult processExpectedFailure(final long startTime, final Class<T> expectedExceptionClass,
+            final Throwable thrownException, final boolean expectedExceptionCandidate) {
+        if (expectedExceptionCandidate) {
             if (thrownException.getClass().equals(expectedExceptionClass)) {
                 return checkExpectedMessage(startTime, thrownException);
             } else {
                 final String message =
-                        "Expected exception was not thrown in body of specification\nExpected: " + expectedExceptionClass + "\n     got: " +
-                                thrownException.getClass();
-                return fail(startTime, message, thrownException, location);
+                        "Expected exception was not thrown in body of specification\nExpected: " + expectedExceptionClass + "\n     got: "
+                                + thrownException.getClass();
+                return fail(startTime, message, thrownException, expectedExceptionCandidate);
             }
         } else {
-            final String message = "An unexpected error was thrown while running " + location.getMessage().toLowerCase();
-            return fail(startTime, message, thrownException, location);
+            final String message = "An unexpected error was thrown while running specification";
+            return fail(startTime, message, thrownException, expectedExceptionCandidate);
         }
     }
 
@@ -151,9 +149,10 @@ public final class ExpectingExceptionSpecificationMethod extends Primordial impl
         } else if (getExpectedExceptionMessage().equals(exceptionThrown.getMessage())) {
             return new SpecificationResultImpl(getName(), SPECIFICATION_SUCCESS, clock.getElapsedTime(startTime));
         } else {
-            final String message = "Expected exception message was incorrect\nExpected: " + getExpectedExceptionMessage() + "\n     got: " +
-                    exceptionThrown.getMessage();
-            return fail(startTime, message, SPECIFICATION);
+            final String message =
+                    "Expected exception message was incorrect\nExpected: " + getExpectedExceptionMessage() + "\n     got: " + exceptionThrown
+                            .getMessage();
+            return fail(startTime, message, true);
         }
     }
 
@@ -173,15 +172,17 @@ public final class ExpectingExceptionSpecificationMethod extends Primordial impl
         });
     }
 
-    private SpecificationResult fail(final long startTime, final String message, final Throwable thrownException, final ErrorLocation location) {
-        return fail(startTime, new SpecificationFailureException(message, thrownException), location);
+    private SpecificationResult fail(final long startTime, final String message, final Throwable thrownException,
+            final boolean expectedExceptionCandidate) {
+        return fail(startTime, new SpecificationFailureException(message, thrownException), expectedExceptionCandidate);
     }
 
-    private SpecificationResult fail(final long startTime, final String message, final ErrorLocation location) {
-        return fail(startTime, new SpecificationFailureException(message), location);
+    private SpecificationResult fail(final long startTime, final String message, final boolean expectedExceptionCandidate) {
+        return fail(startTime, new SpecificationFailureException(message), expectedExceptionCandidate);
     }
 
-    private SpecificationResult fail(final long startTime, final SpecificationFailureException failure, final ErrorLocation location) {
-        return new SpecificationResultImpl(getName(), new SpecificationRunFailureStatus(failure, location), clock.getElapsedTime(startTime));
+    private SpecificationResult fail(final long startTime, final SpecificationFailureException failure, final boolean expectedExceptionCandidate) {
+        return new SpecificationResultImpl(getName(), new SpecificationRunFailureStatus(failure, expectedExceptionCandidate),
+                clock.getElapsedTime(startTime));
     }
 }

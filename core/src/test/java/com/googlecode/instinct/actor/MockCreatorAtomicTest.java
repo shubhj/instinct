@@ -52,7 +52,7 @@ public final class MockCreatorAtomicTest extends InstinctTestCase {
 
     public void testWrapsLowerLevelExceptionsInSomethingMoreUsable() {
         final String message = "Unable to create a mock java.lang.String (with role name 'string'). Mock types cannot be final, you may want to " +
-                "use a dummy or a stub.";
+                "use a dummy or a stub. Have you inadvertently prefixed a field with mock?";
         expectException(SpecificationDoubleCreationException.class, message, new Runnable() {
             public void run() {
                 mockCreator.createDouble(String.class, "string");

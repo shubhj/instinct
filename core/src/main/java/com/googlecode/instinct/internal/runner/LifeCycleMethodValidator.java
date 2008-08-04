@@ -17,12 +17,10 @@
 package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.core.LifecycleMethod;
-import java.lang.reflect.Method;
+import fj.data.Option;
 
 public interface LifeCycleMethodValidator {
-    void checkMethodHasNoParameters(LifecycleMethod method);
+    Option<Throwable> checkMethodHasNoParameters(LifecycleMethod method);
 
-    <T> void checkContextConstructor(Class<T> cls);
-
-    void checkMethodHasNoReturnType(Method method);
+    <T> Option<Throwable> checkContextConstructor(Class<T> cls);
 }

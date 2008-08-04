@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util;
+package com.googlecode.instinct.internal.util.exception;
 
 import com.googlecode.instinct.internal.runner.SpecificationFailureException;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.ClassInstantiator;
 import com.googlecode.instinct.internal.util.instance.ClassInstantiatorImpl;
+import com.googlecode.instinct.internal.util.Suggest;
 
 @Suggest({"Wrap 'unexpected ...' jMock cardinality exception if you a mock is used in a test without expectations being set on it"})
 public final class ExceptionSanitiserImpl implements ExceptionSanitiser {

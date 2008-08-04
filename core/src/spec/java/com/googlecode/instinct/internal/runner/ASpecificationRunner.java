@@ -18,12 +18,13 @@ package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.Specification;
+import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
 public final class ASpecificationRunner {
     @Specification
-    public void testExpectedFailuresDoNotFailSpec() {
+    public void conformsToClassTraits() {
+        checkClass(NewSpecificationRunnerImpl.class, SpecificationRunner.class);
     }
-
 }

@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util;
+package com.googlecode.instinct.internal.util.exception;
 
 import com.googlecode.instinct.internal.edge.EdgeException;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 import java.lang.reflect.InvocationTargetException;
 
 @Suggest("May need to put smarts in to detect InvocationTargetException & EdgeExceptions")

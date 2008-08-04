@@ -31,18 +31,18 @@ import com.googlecode.instinct.actor.AStubAutoWireDeterminatorWithANamedFieldToA
 import com.googlecode.instinct.actor.AStubAutoWireDeterminatorWithAnAnnoatedFieldToAutoWire;
 import com.googlecode.instinct.actor.AStubAutoWireDeterminatorWithAnAnnotatedFieldNotToAutoWire;
 import com.googlecode.instinct.actor.AStubAutoWireDeterminatorWithNoMarkedFields;
-import com.googlecode.instinct.expect.state.checker.AnObjectCheckerContext;
-import com.googlecode.instinct.expect.state.checker.AnObjectCheckerFailure;
-import com.googlecode.instinct.expect.state.checker.CommonExpectations;
 import com.googlecode.instinct.defect.defect23.AFixedDefect23;
 import com.googlecode.instinct.defect.defect3.AFixedDefect3;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithANamingConventionLocator;
 import com.googlecode.instinct.defect.defect8.AFixedDefect8WithAnAnnotationMethodLocator;
+import com.googlecode.instinct.expect.state.checker.AnObjectCheckerContext;
+import com.googlecode.instinct.expect.state.checker.AnObjectCheckerFailure;
+import com.googlecode.instinct.expect.state.checker.CommonExpectations;
 import com.googlecode.instinct.expect.state.matcher.AItemInListMatcher;
+import com.googlecode.instinct.expect.state.matcher.AListEqualityMatcher;
 import com.googlecode.instinct.expect.state.matcher.AnEitherIsLeftMatcher;
 import com.googlecode.instinct.expect.state.matcher.AnEitherIsRightMatcher;
 import com.googlecode.instinct.expect.state.matcher.AnEqualityMatcher;
-import com.googlecode.instinct.expect.state.matcher.AListEqualityMatcher;
 import com.googlecode.instinct.expect.state.matcher.AnOptionIsNoneMatcher;
 import com.googlecode.instinct.expect.state.matcher.AnOptionIsSomeMatcher;
 import com.googlecode.instinct.integrate.junit3.ContextTestSuite;
@@ -60,12 +60,14 @@ import com.googlecode.instinct.internal.locate.field.ANamedFieldLocatorWithField
 import com.googlecode.instinct.internal.locate.field.ANamedFieldLocatorWithNoFieldsToFind;
 import com.googlecode.instinct.internal.locate.method.ASuperClassTraversingMethodLocator;
 import com.googlecode.instinct.internal.locate.method.AnAnnotatedMethodLocatorContext;
-import com.googlecode.instinct.internal.runner.ASpecificationLifecycleResultDeterminatorWithNoFailures;
+import com.googlecode.instinct.internal.runner.ASpecificationRunner;
+import com.googlecode.instinct.internal.runner.RunningAContextWithAContextAnnotation;
+import com.googlecode.instinct.internal.runner.RunningAContextWithoutAContextAnnotation;
 import com.googlecode.instinct.internal.util.AMethodEqualityUtility;
-import com.googlecode.instinct.internal.util.ExceptionSanitiserWithKnownException;
-import com.googlecode.instinct.internal.util.ExceptionSanitiserWithUnknownException;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.runner.ADefaultSpecificationLifecycle;
+import com.googlecode.instinct.internal.util.exception.ExceptionSanitiserWithKnownException;
+import com.googlecode.instinct.internal.util.exception.ExceptionSanitiserWithUnknownException;
+import com.googlecode.instinct.runner.AStandardSpecificationLifecycle;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
@@ -102,8 +104,8 @@ public final class SpecificationsSuite {
                 AnExpectingExceptionSpecificationMethod.class, ASpecificationThatExpectsAnExceptionButOneIsNotThrown.class,
                 ASpecificationMethodBuilder.class, AItemInListMatcher.class, AMethodEqualityUtility.class, ASuperClassTraversingMethodLocator.class,
                 ASpecificationMethodBuilderWithNonDefaultAnnotations.class, AnOptionIsNoneMatcher.class, AnOptionIsSomeMatcher.class,
-                ABeforeSpecMethodThatThrowsAnException.class, AnAfterSpecMethodThatThrowsAnException.class, ADefaultSpecificationLifecycle.class,
-                ASpecificationLifecycleResultDeterminatorWithNoFailures.class, AnEitherIsLeftMatcher.class, AnEitherIsRightMatcher.class,
-                AnEqualityMatcher.class, AListEqualityMatcher.class};
+                ABeforeSpecMethodThatThrowsAnException.class, AnAfterSpecMethodThatThrowsAnException.class, AStandardSpecificationLifecycle.class,
+                AnEitherIsLeftMatcher.class, AnEitherIsRightMatcher.class, AnEqualityMatcher.class, AListEqualityMatcher.class,
+                ASpecificationRunner.class, RunningAContextWithoutAContextAnnotation.class, RunningAContextWithAContextAnnotation.class};
     }
 }

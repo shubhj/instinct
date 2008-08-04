@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util;
+package com.googlecode.instinct.internal.util.exception;
 
 public interface ExceptionSanitiser {
     Throwable sanitise(Throwable throwable);
