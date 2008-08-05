@@ -17,7 +17,7 @@
 package com.googlecode.instinct.example.csvreader.junit;
 
 import com.googlecode.instinct.example.csvreader.CsvLine;
-import static org.hamcrest.core.IsEqual.equalTo;
+import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.hamcrest.object.HasToString.hasToString;
 import static org.junit.Assert.assertThat;

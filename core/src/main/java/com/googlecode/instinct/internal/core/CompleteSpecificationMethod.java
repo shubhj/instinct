@@ -86,8 +86,8 @@ public final class CompleteSpecificationMethod extends Primordial implements Spe
 
     @Override
     public String toString() {
-        return CompleteSpecificationMethod.class.getSimpleName() + "[method=" + method + ";before=" + beforeSpecificationMethods.toCollection() +
-                ";after=" + afterSpecificationMethods.toCollection() + "]";
+        return CompleteSpecificationMethod.class.getSimpleName() + "[method=" + method + ";before=" + beforeSpecificationMethods.toCollection()
+                + ";after=" + afterSpecificationMethods.toCollection() + "]";
     }
 
     private void notifyListenersOfPreSpecification(final SpecificationMethod specificationMethod) {

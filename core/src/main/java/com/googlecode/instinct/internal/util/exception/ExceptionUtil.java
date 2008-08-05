@@ -23,12 +23,13 @@ import static fj.data.List.asString;
 import static fj.data.List.fromString;
 import static fj.data.List.join;
 import java.io.ByteArrayOutputStream;
-import java.io.PrintWriter;
+import java.io.PrintStream;
 import static java.lang.System.getProperty;
 
 public final class ExceptionUtil {
     private static final String NEW_LINE = getProperty("line.separator");
-    private static final int LINES_PER_EXCEPTION = 10;
+    private static final int LINES_PER_EXCEPTION = 15;
+    private static final String TRIMMED_SUFFIX = "\t...";
 
     private ExceptionUtil() {
         throw new UnsupportedOperationException();
@@ -39,7 +40,8 @@ public final class ExceptionUtil {
     }
 
     public static String trimStackTrace(final Throwable throwable, final int numberOfLines) {
-        final List<String> trimmedStackTrace = toFjList(stackTraceToString(throwable).split(NEW_LINE)).take(numberOfLines);
+        final List<String> stackLines = toFjList(stackTrace(throwable).split(NEW_LINE));
+        final List<String> trimmedStackTrace = stackLines.take(numberOfLines).snoc(TRIMMED_SUFFIX).intersperse(NEW_LINE);
         return asString(join(trimmedStackTrace.map(new F<String, List<Character>>() {
             public List<Character> f(final String stackTrace) {
                 return fromString(stackTrace);
@@ -47,9 +49,9 @@ public final class ExceptionUtil {
         })));
     }
 
-    public static String stackTraceToString(final Throwable throwable) {
+    public static String stackTrace(final Throwable throwable) {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        throwable.printStackTrace(new PrintWriter(out));
+        throwable.printStackTrace(new PrintStream(out, true));
         return out.toString();
     }
 }

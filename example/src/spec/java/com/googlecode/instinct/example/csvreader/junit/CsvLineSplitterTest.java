@@ -18,8 +18,8 @@ package com.googlecode.instinct.example.csvreader.junit;
 
 import com.googlecode.instinct.example.csvreader.CsvLineSplitter;
 import com.googlecode.instinct.example.csvreader.CsvLineSplitterImpl;
+import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
 import static org.hamcrest.collection.IsArrayContaining.hasItemInArray;
-import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;

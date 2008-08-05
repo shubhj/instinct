@@ -37,7 +37,9 @@ import fj.data.List;
 import static fj.data.List.nil;
 import java.lang.reflect.Method;
 
-/** A specification that expects an exception to be thrown. The specification will fail if the expected exception is not thrown. */
+/**
+ * A specification that expects an exception to be thrown. The specification will fail if the expected exception is not thrown.
+ * */
 public final class ExpectingExceptionSpecificationMethod extends Primordial implements SpecificationMethod {
     private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
     private final ExceptionFinder exceptionFinder = new ExceptionFinderImpl();

@@ -2,6 +2,7 @@ package com.googlecode.instinct.example.expect;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.expect.state.StateExpectations;
+import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.Specification;
 import java.io.File;
@@ -13,7 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.startsWith;
 import org.junit.runner.RunWith;

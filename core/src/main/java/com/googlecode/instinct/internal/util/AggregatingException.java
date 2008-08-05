@@ -18,7 +18,7 @@ package com.googlecode.instinct.internal.util;
 
 import com.googlecode.instinct.internal.util.exception.ExceptionSanitiser;
 import com.googlecode.instinct.internal.util.exception.ExceptionSanitiserImpl;
-import static com.googlecode.instinct.internal.util.exception.ExceptionUtil.trimStackTrace;
+import static com.googlecode.instinct.internal.util.exception.ExceptionUtil.stackTrace;
 import fj.F;
 import fj.data.List;
 import static fj.data.List.asString;
@@ -45,16 +45,23 @@ public final class AggregatingException extends RuntimeException {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + ":" + NEW_LINE + getMessage();
+        return getClass().getName() + ": " + errors.length() + " error(s) occurred" + NEW_LINE + NEW_LINE + getMessage();
     }
 
     private String errorsAsString(final List<Throwable> errors) {
-        final List<List<Character>> shortenedStackTraces = errors.map(new F<Throwable, List<Character>>() {
-            @SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
-            public List<Character> f(final Throwable throwable) {
-                return fromString(throwable + trimStackTrace(exceptionSanitiser.sanitise(throwable)));
-            }
-        });
-        return asString(join(shortenedStackTraces.intersperse(fromString(NEW_LINE + NEW_LINE))));
+        return asString(join(errorAsString(errors, List.<String>nil(), 1).intersperse(fromString(NEW_LINE + NEW_LINE))));
+    }
+
+    private List<List<Character>> errorAsString(final List<Throwable> errors, final List<String> traces, final int exceptionNumber) {
+        if (errors.isEmpty()) {
+            return traces.reverse().map(new F<String, List<Character>>() {
+                public List<Character> f(final String trace) {
+                    return fromString(trace);
+                }
+            });
+        } else {
+            final String trace = exceptionNumber + ") " + stackTrace(exceptionSanitiser.sanitise(errors.head()));
+            return errorAsString(errors.tail(), traces.cons(trace), exceptionNumber + 1);
+        }
     }
 }

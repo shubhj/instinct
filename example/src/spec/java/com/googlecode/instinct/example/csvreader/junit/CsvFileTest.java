@@ -18,8 +18,8 @@ package com.googlecode.instinct.example.csvreader.junit;
 
 import com.googlecode.instinct.example.csvreader.CsvFile;
 import com.googlecode.instinct.example.csvreader.CsvFileImpl;
+import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
 import static com.googlecode.instinct.internal.util.io.ResourceUtil.getResourceAsFilePath;
-import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import org.junit.Before;
 import org.junit.Test;

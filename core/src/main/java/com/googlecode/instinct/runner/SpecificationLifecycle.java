@@ -40,7 +40,7 @@ import java.lang.reflect.Field;
  * Implementations of <code>SpecificationLifecycle</code> must have a public no-args (nullary) constructor. Before, after and specification methods
  * will be validated (checked they take no parameters) before being passed to the lifecycle implementation.
  * @see com.googlecode.instinct.marker.annotate.Context
- * @see com.googlecode.instinct.internal.runner.NewSpecificationRunnerImpl
+ * @see com.googlecode.instinct.internal.runner.SpecificationRunnerImpl
  * @see com.googlecode.instinct.actor.ActorAutoWirerImpl
  */
 @SuppressWarnings({"UnnecessaryFullyQualifiedName"})
