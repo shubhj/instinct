@@ -65,6 +65,7 @@ import com.googlecode.instinct.internal.runner.RunningAContextWithAContextAnnota
 import com.googlecode.instinct.internal.runner.RunningAContextWithoutAContextAnnotation;
 import com.googlecode.instinct.internal.util.AMethodEqualityUtility;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.util.exception.AnExceptionUtil;
 import com.googlecode.instinct.internal.util.exception.ExceptionSanitiserWithKnownException;
 import com.googlecode.instinct.internal.util.exception.ExceptionSanitiserWithUnknownException;
 import com.googlecode.instinct.runner.AStandardSpecificationLifecycle;
@@ -106,6 +107,7 @@ public final class SpecificationsSuite {
                 ASpecificationMethodBuilderWithNonDefaultAnnotations.class, AnOptionIsNoneMatcher.class, AnOptionIsSomeMatcher.class,
                 ABeforeSpecMethodThatThrowsAnException.class, AnAfterSpecMethodThatThrowsAnException.class, AStandardSpecificationLifecycle.class,
                 AnEitherIsLeftMatcher.class, AnEitherIsRightMatcher.class, AnEqualityMatcher.class, AListEqualityMatcher.class,
-                ASpecificationRunner.class, RunningAContextWithoutAContextAnnotation.class, RunningAContextWithAContextAnnotation.class};
+                ASpecificationRunner.class, RunningAContextWithoutAContextAnnotation.class, RunningAContextWithAContextAnnotation.class,
+                AnExceptionUtil.class};
     }
 }

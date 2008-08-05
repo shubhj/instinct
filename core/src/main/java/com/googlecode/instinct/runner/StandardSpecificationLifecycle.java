@@ -46,8 +46,8 @@ public final class StandardSpecificationLifecycle implements SpecificationLifecy
         checkNotNull(contextClass);
         try {
             return right((ContextClass) new ContextClassImpl(contextClass));
-        } catch (Exception e) {
-            return left((Throwable) e);
+        } catch (Throwable t) {
+            return left(t);
         }
     }
 
@@ -55,8 +55,8 @@ public final class StandardSpecificationLifecycle implements SpecificationLifecy
         try {
             Mocker.reset();
             return none();
-        } catch (Exception e) {
-            return some((Throwable) e);
+        } catch (Throwable t) {
+            return some(t);
         }
     }
 
@@ -64,8 +64,8 @@ public final class StandardSpecificationLifecycle implements SpecificationLifecy
         checkNotNull(contextInstance);
         try {
             return right(actorAutoWirer.autoWireFields(contextInstance));
-        } catch (Exception e) {
-            return left((Throwable) e);
+        } catch (Throwable t) {
+            return left(t);
         }
     }
 
@@ -88,8 +88,8 @@ public final class StandardSpecificationLifecycle implements SpecificationLifecy
         try {
             Mocker.verify();
             return none();
-        } catch (Exception e) {
-            return some((Throwable) e);
+        } catch (Throwable t) {
+            return some(t);
         }
     }
 
@@ -107,8 +107,8 @@ public final class StandardSpecificationLifecycle implements SpecificationLifecy
         try {
             methodInvoker.invokeMethod(instance, method.getMethod());
             return none();
-        } catch (Exception e) {
-            return some((Throwable) e);
+        } catch (Throwable t) {
+            return some(t);
         }
     }
 }

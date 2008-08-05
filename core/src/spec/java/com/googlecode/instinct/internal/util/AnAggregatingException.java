@@ -23,6 +23,7 @@ import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import fj.F;
 import fj.data.List;
 import org.junit.runner.RunWith;
 
@@ -30,23 +31,27 @@ import org.junit.runner.RunWith;
 @RunWith(InstinctRunner.class)
 public final class AnAggregatingException {
     @Subject private AggregatingException exception;
-    @Stub private String message1;
-    @Stub private String message2;
+    @Stub(auto = false) private String message1;
+    @Stub(auto = false) private String message2;
 
     @BeforeSpecification
     public void before() {
-        List<Throwable> results = List.nil();
-        try {
-            throw new RuntimeException(message1);
-        } catch (RuntimeException e) {
-            results = results.cons(e);
-        }
-        try {
-            throw new RuntimeException(message2);
-        } catch (RuntimeException e) {
-            results = results.cons(e);
-        }
-        exception = new AggregatingException(results);
+        message1 = "The first exception";
+        message2 = "The second exception";
+        final List<Throwable> errors = List.<String>nil().cons(message2).cons(message1).map(new F<String, Throwable>() {
+            public Throwable f(final String message) {
+                try {
+                    throw new RuntimeException();
+                } catch (RuntimeException nested) {
+                    try {
+                        throw new RuntimeException(message, nested);
+                    } catch (RuntimeException parent) {
+                        return parent;
+                    }
+                }
+            }
+        });
+        exception = new AggregatingException(errors);
     }
 
     public void testConformsToClassTraits() {
@@ -54,9 +59,9 @@ public final class AnAggregatingException {
     }
 
     @Specification
-    public void turnsAListOfSpecificationResultsIntoASingleError() {
-        expect.that(exception.getMessage()).containsString("The following 2 errors ocurred while running the specification:\n");
-        expect.that(exception.getMessage()).containsString("RuntimeException: " + message1);
-        expect.that(exception.getMessage()).containsString("RuntimeException: " + message2);
+    public void turnsAListOfSpecificationResultsIntoASingleErrorUsingToString() {
+        expect.that(exception.toString()).containsString(AggregatingException.class.getName() + ": 2 error(s) occurred");
+        expect.that(exception.toString()).containsString("RuntimeException: " + message1);
+        expect.that(exception.toString()).containsString("RuntimeException: " + message2);
     }
 }
