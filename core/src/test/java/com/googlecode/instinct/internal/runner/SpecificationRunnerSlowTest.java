@@ -52,17 +52,20 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
         expect.that(result.completedSuccessfully()).isTrue();
     }
 
+    // Note. Need to reset the mocker or the error will be caught in the InstinctTestCase super class.
     public void testVerifiesAutoWiredMocks() {
         final SpecificationMethod method = getSpecificationMethod(ContextWithAutoWiredFields.class, "autoWiredMocksFailToBeCalled");
         final SpecificationResult result = runner.run(method);
-        // Note. Need to reset the mocker or the error will be caught in the InstinctTestCase super class.
         Mocker.reset();
         expect.that(result.completedSuccessfully()).isFalse();
         final Object detailedStatus = result.getStatus().getDetails();
         expect.that(detailedStatus).isAnInstanceOf(SpecificationFailureException.class);
         final Throwable failureCause = ((Throwable) detailedStatus).getCause();
         expect.that(failureCause).isAnInstanceOf(ExpectationError.class);
+        expect.that(failureCause.getMessage()).containsString("not all expectations were satisfied");
         expect.that(failureCause.getMessage()).matchesRegex("not all expectations were satisfied");
+//        expect.that(failureCause).isAnInstanceOf(AggregatingException.class);
+//        expect.that(failureCause.getMessage()).containsString("not all expectations were satisfied");
     }
 
     private <T> SpecificationMethod getSpecificationMethod(final Class<T> contextClass, final Object specMethodName) {
