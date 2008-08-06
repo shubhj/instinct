@@ -33,6 +33,8 @@ import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.runner.SpecificationLifecycle;
 import com.googlecode.instinct.runner.StandardSpecificationLifecycle;
 import fj.F;
+import fj.F2;
+import fj.F3;
 import fj.Unit;
 import static fj.Unit.unit;
 import fj.data.Either;
@@ -78,19 +80,70 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     private SpecificationResult runSpecification(final long startTime, final SpecificationLifecycle lifecycle, final ContextClass contextClass,
             final SpecificationMethod specificationMethod) {
         final Object contextInstance = constructorInvoker.invokeNullaryConstructor(contextClass.getType());
-        final Validation<Throwable, Unit> preconditions = specificationPreconditions(lifecycle, contextClass, contextInstance);
-        final Option<Throwable> specificationResult = lifecycle.runSpecification(contextInstance, specificationMethod);
-        final Validation<Throwable, Unit> specificationValidation = validate(specificationResult);
-        final Validation<Throwable, Unit> aftersValidation =
-                validate(lifecycle.runAfterSpecificationMethods(contextInstance, contextClass.getAfterSpecificationMethods()));
-        final Validation<Throwable, Unit> verifyMocksValidation = validate(lifecycle.verifyMocks());
-        final Option<NonEmptyList<Throwable>> result =
-                preconditions.nel().accumulate(throwables(), specificationValidation.nel(), aftersValidation.nel(), verifyMocksValidation.nel());
-        if (result.isSome()) {
-            return fail(startTime, specificationMethod, result.some().toList(), specificationResult);
+        final Validation<Throwable, Unit> preSpecificationSteps =
+                validate(resetMocks().f(lifecycle)).sequence(validation(wireActors().f(lifecycle, contextInstance)))
+                        .sequence(validate(befores().f(lifecycle, contextInstance, contextClass.getBeforeSpecificationMethods())));
+        if (preSpecificationSteps.isFail()) {
+            return fail(startTime, specificationMethod, preSpecificationSteps.fail(), Option.<Throwable>none());
         } else {
-            return success(startTime, specificationMethod);
+            final Option<Throwable> specification = specification().f(lifecycle, contextInstance, specificationMethod);
+            final Option<NonEmptyList<Throwable>> result = preSpecificationSteps.nel().accumulate(throwables(), validate(specification).nel(),
+                    validate(afters().f(lifecycle, contextInstance, contextClass.getAfterSpecificationMethods())).nel(),
+                    validate(verifyMocks().f(lifecycle)).nel());
+            if (result.isSome()) {
+                return fail(startTime, specificationMethod, result.some().toList(), specification);
+            } else {
+                return success(startTime, specificationMethod);
+            }
         }
+    }
+
+    private F<SpecificationLifecycle, Option<Throwable>> resetMocks() {
+        return new F<SpecificationLifecycle, Option<Throwable>>() {
+            public Option<Throwable> f(final SpecificationLifecycle lifecycle) {
+                return lifecycle.resetMockery();
+            }
+        };
+    }
+
+    private F2<SpecificationLifecycle, Object, Either<Throwable, Unit>> wireActors() {
+        return new F2<SpecificationLifecycle, Object, Either<Throwable, Unit>>() {
+            public Either<Throwable, Unit> f(final SpecificationLifecycle lifecycle, final Object contextInstance) {
+                return rightToUnit(lifecycle.wireActors(contextInstance));
+            }
+        };
+    }
+
+    private F3<SpecificationLifecycle, Object, List<LifecycleMethod>, Option<Throwable>> befores() {
+        return new F3<SpecificationLifecycle, Object, List<LifecycleMethod>, Option<Throwable>>() {
+            public Option<Throwable> f(final SpecificationLifecycle lifecycle, final Object contextInstance, final List<LifecycleMethod> befores) {
+                return lifecycle.runBeforeSpecificationMethods(contextInstance, befores);
+            }
+        };
+    }
+
+    private F3<SpecificationLifecycle, Object, SpecificationMethod, Option<Throwable>> specification() {
+        return new F3<SpecificationLifecycle, Object, SpecificationMethod, Option<Throwable>>() {
+            public Option<Throwable> f(final SpecificationLifecycle lifecycle, final Object contextInstance, final SpecificationMethod method) {
+                return lifecycle.runSpecification(contextInstance, method);
+            }
+        };
+    }
+
+    private F3<SpecificationLifecycle, Object, List<LifecycleMethod>, Option<Throwable>> afters() {
+        return new F3<SpecificationLifecycle, Object, List<LifecycleMethod>, Option<Throwable>>() {
+            public Option<Throwable> f(final SpecificationLifecycle lifecycle, final Object contextInstance, final List<LifecycleMethod> afters) {
+                return lifecycle.runAfterSpecificationMethods(contextInstance, afters);
+            }
+        };
+    }
+
+    private F<SpecificationLifecycle, Option<Throwable>> verifyMocks() {
+        return new F<SpecificationLifecycle, Option<Throwable>>() {
+            public Option<Throwable> f(final SpecificationLifecycle lifecycle) {
+                return lifecycle.verifyMocks();
+            }
+        };
     }
 
     @Suggest({"Push validation into the lifecycle"})
@@ -100,15 +153,6 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         final Validation<Throwable, Unit> specValidation = validate(methodValidator.checkMethodHasNoParameters(specificationMethod));
         final Validation<Throwable, Unit> aftersValidation = validate(validateMethods(contextClass.getAfterSpecificationMethods()));
         return contextValidation.sequence(beforesValidation).sequence(specValidation).sequence(aftersValidation);
-    }
-
-    private Validation<Throwable, Unit> specificationPreconditions(final SpecificationLifecycle lifecycle, final ContextClass contextClass,
-            final Object contextInstance) {
-        final Validation<Throwable, Unit> resetMocksResult = validate(lifecycle.resetMockery());
-        final Validation<Throwable, Unit> wiringResult = validation(rightToUnit(lifecycle.wireActors(contextInstance)));
-        final Validation<Throwable, Unit> beforesResult =
-                validate(lifecycle.runBeforeSpecificationMethods(contextInstance, contextClass.getBeforeSpecificationMethods()));
-        return resetMocksResult.sequence(wiringResult).sequence(beforesResult);
     }
 
     private Option<Throwable> validateMethods(final List<LifecycleMethod> methods) {
