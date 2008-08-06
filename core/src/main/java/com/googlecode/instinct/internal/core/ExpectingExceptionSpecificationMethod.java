@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.core;
 
 import com.googlecode.instinct.internal.lang.Primordial;
-import com.googlecode.instinct.internal.runner.NewSpecificationRunnerImpl;
+import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 import com.googlecode.instinct.internal.runner.SpecificationFailureException;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationResultImpl;
@@ -42,7 +42,7 @@ import java.lang.reflect.Method;
  * A specification that expects an exception to be thrown. The specification will fail if the expected exception is not thrown.
  */
 public final class ExpectingExceptionSpecificationMethod extends Primordial implements SpecificationMethod {
-    private final SpecificationRunner specificationRunner = new NewSpecificationRunnerImpl();
+    private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
     private final Clock clock = new ClockImpl();
     private final Class<?> contextType;
     private final Method method;

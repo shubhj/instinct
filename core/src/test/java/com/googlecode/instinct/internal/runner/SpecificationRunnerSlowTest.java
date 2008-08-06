@@ -28,7 +28,7 @@ import fj.F;
 
 @SuppressWarnings({"StringContatenationInLoop", "OverlyCoupledClass", "UnusedDeclaration"})
 public final class SpecificationRunnerSlowTest extends InstinctTestCase {
-    @Subject(implementation = NewSpecificationRunnerImpl.class) private SpecificationRunner runner;
+    @Subject(implementation = SpecificationRunnerImpl.class) private SpecificationRunner runner;
 
     public void testRunWithSuccess() {
         checkContextsRunWithoutError(ContextContainerWithSetUpAndTearDown.class);

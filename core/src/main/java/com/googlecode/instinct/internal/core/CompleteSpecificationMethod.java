@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.core;
 
 import com.googlecode.instinct.internal.lang.Primordial;
-import com.googlecode.instinct.internal.runner.NewSpecificationRunnerImpl;
+import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
 import static com.googlecode.instinct.internal.util.ListUtil.listToString;
@@ -32,7 +32,7 @@ import java.lang.reflect.Method;
 
 @Suggest("Spec this out.")
 public final class CompleteSpecificationMethod extends Primordial implements SpecificationMethod {
-    private final SpecificationRunner specificationRunner = new NewSpecificationRunnerImpl();
+    private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
     private Method method;
     private List<LifecycleMethod> beforeSpecificationMethods;
     private List<LifecycleMethod> afterSpecificationMethods;

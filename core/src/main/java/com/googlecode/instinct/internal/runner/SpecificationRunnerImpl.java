@@ -46,7 +46,7 @@ import static fj.data.Validation.validation;
 import fj.pre.Semigroup;
 import java.lang.reflect.AnnotatedElement;
 
-public final class NewSpecificationRunnerImpl implements SpecificationRunner {
+public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
     private final LifeCycleMethodValidator methodValidator = new LifeCycleMethodValidatorImpl();
     private final ExceptionFinder exceptionFinder = new ExceptionFinderImpl();

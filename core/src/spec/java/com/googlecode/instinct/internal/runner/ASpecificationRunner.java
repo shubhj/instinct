@@ -25,6 +25,6 @@ import org.junit.runner.RunWith;
 public final class ASpecificationRunner {
     @Specification
     public void conformsToClassTraits() {
-        checkClass(NewSpecificationRunnerImpl.class, SpecificationRunner.class);
+        checkClass(SpecificationRunnerImpl.class, SpecificationRunner.class);
     }
 }

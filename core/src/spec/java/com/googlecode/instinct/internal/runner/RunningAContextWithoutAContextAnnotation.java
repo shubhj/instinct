@@ -35,7 +35,7 @@ import org.junit.runner.RunWith;
 @SuppressWarnings({"UnusedDeclaration"})
 @RunWith(InstinctRunner.class)
 public final class RunningAContextWithoutAContextAnnotation {
-    @Subject(implementation = NewSpecificationRunnerImpl.class) private SpecificationRunner runner;
+    @Subject(implementation = SpecificationRunnerImpl.class) private SpecificationRunner runner;
     @Mock private ConstructorInvoker constructorInvoker;
     @Stub(auto = false) private SpecificationMethod specification;
     @Stub(auto = false) private SpecificationLifecycle lifecycle;
@@ -44,7 +44,7 @@ public final class RunningAContextWithoutAContextAnnotation {
     public void before() {
         specification = new ContextClassImpl(WithoutContextAnnotation.class).getSpecificationMethods().head();
         lifecycle = new StandardSpecificationLifecycle();
-        runner = createSubject(NewSpecificationRunnerImpl.class, constructorInvoker);
+        runner = createSubject(SpecificationRunnerImpl.class, constructorInvoker);
     }
 
     @Specification
