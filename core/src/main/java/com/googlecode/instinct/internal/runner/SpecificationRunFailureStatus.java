@@ -23,7 +23,6 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import fj.F;
 import static fj.Function.compose;
 import fj.data.List;
-import static fj.data.List.nil;
 import fj.data.Option;
 import static fj.data.Option.fromNull;
 
@@ -46,27 +45,18 @@ public final class SpecificationRunFailureStatus extends Primordial implements S
     }
 
     public List<Throwable> getLifecycleErrors() {
-        if (specificationError.isSome()) {
-            if (failure.getCause() instanceof AggregatingException) {
-                final List<Throwable> allErrors = ((AggregatingException) failure.getCause()).getAggregatedErrors();
-                return allErrors.filter(compose(not(), isSpecificationError()));
-            } else {
-                return nil();
-            }
+        if (failure.getCause() instanceof AggregatingException) {
+            return ((AggregatingException) failure.getCause()).getAggregatedErrors().filter(compose(not(), isSpecificationError()));
         } else {
-            if (failure.getCause() instanceof AggregatingException) {
-                return ((AggregatingException) failure.getCause()).getAggregatedErrors();
-            } else {
-                final Option<Throwable> cause = fromNull(failure.getCause());
-                return cause.isSome() ? List.<Throwable>nil().cons(cause.some()) : List.<Throwable>nil();
-            }
+            final Option<Throwable> cause = fromNull(failure.getCause());
+            return cause.isSome() ? List.<Throwable>nil().cons(cause.some()) : List.<Throwable>nil();
         }
     }
 
     private F<Throwable, Boolean> isSpecificationError() {
         return new F<Throwable, Boolean>() {
             public Boolean f(final Throwable throwable) {
-                return !specificationError.isNone() && specificationError.some().equals(throwable);
+                return specificationError.isSome() && specificationError.some().equals(throwable);
             }
         };
     }

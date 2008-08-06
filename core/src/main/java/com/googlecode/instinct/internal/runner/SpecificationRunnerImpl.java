@@ -66,9 +66,9 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
             return fail(startTime, specificationMethod, createContext.left().value(), Option.<Throwable>none());
         } else {
             final ContextClass contextClass = createContext.right().value();
-            final Either<Throwable, Unit> validation = validateSpecification(contextClass, specificationMethod);
-            if (validation.isLeft()) {
-                return fail(startTime, specificationMethod, validation.left().value(), Option.<Throwable>none());
+            final Validation<Throwable, Unit> validation = validateSpecification(contextClass, specificationMethod);
+            if (validation.isFail()) {
+                return fail(startTime, specificationMethod, validation.fail(), Option.<Throwable>none());
             } else {
                 return runSpecification(startTime, lifecycle, contextClass, specificationMethod);
             }
@@ -78,14 +78,14 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     private SpecificationResult runSpecification(final long startTime, final SpecificationLifecycle lifecycle, final ContextClass contextClass,
             final SpecificationMethod specificationMethod) {
         final Object contextInstance = constructorInvoker.invokeNullaryConstructor(contextClass.getType());
-        final Validation<NonEmptyList<Throwable>, Unit> preconditions = specificationPreconditions(lifecycle, contextClass, contextInstance);
+        final Validation<Throwable, Unit> preconditions = specificationPreconditions(lifecycle, contextClass, contextInstance);
         final Option<Throwable> specificationResult = lifecycle.runSpecification(contextInstance, specificationMethod);
-        final Validation<NonEmptyList<Throwable>, Unit> specificationValidation = validate(specificationResult);
-        final Validation<NonEmptyList<Throwable>, Unit> aftersValidation =
+        final Validation<Throwable, Unit> specificationValidation = validate(specificationResult);
+        final Validation<Throwable, Unit> aftersValidation =
                 validate(lifecycle.runAfterSpecificationMethods(contextInstance, contextClass.getAfterSpecificationMethods()));
-        final Validation<NonEmptyList<Throwable>, Unit> verifyMocksValidation = validate(lifecycle.verifyMocks());
+        final Validation<Throwable, Unit> verifyMocksValidation = validate(lifecycle.verifyMocks());
         final Option<NonEmptyList<Throwable>> result =
-                preconditions.accumulate(throwables(), specificationValidation, aftersValidation, verifyMocksValidation);
+                preconditions.nel().accumulate(throwables(), specificationValidation.nel(), aftersValidation.nel(), verifyMocksValidation.nel());
         if (result.isSome()) {
             return fail(startTime, specificationMethod, result.some().toList(), specificationResult);
         } else {
@@ -93,21 +93,22 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         }
     }
 
-    private Either<Throwable, Unit> validateSpecification(final ContextClass contextClass, final LifecycleMethod specificationMethod) {
-        final Either<Throwable, Unit> contextValidation = toEither(methodValidator.checkContextConstructor(contextClass.getType()));
-        final Either<Throwable, Unit> beforesValidation = toEither(validateMethods(contextClass.getBeforeSpecificationMethods()));
-        final Either<Throwable, Unit> specValidation = toEither(methodValidator.checkMethodHasNoParameters(specificationMethod));
-        final Either<Throwable, Unit> aftersValidation = toEither(validateMethods(contextClass.getAfterSpecificationMethods()));
-        return contextValidation.right().sequence(beforesValidation).right().sequence(specValidation).right().sequence(aftersValidation);
+    @Suggest({"Push validation into the lifecycle"})
+    private Validation<Throwable, Unit> validateSpecification(final ContextClass contextClass, final LifecycleMethod specificationMethod) {
+        final Validation<Throwable, Unit> contextValidation = validate(methodValidator.checkContextConstructor(contextClass.getType()));
+        final Validation<Throwable, Unit> beforesValidation = validate(validateMethods(contextClass.getBeforeSpecificationMethods()));
+        final Validation<Throwable, Unit> specValidation = validate(methodValidator.checkMethodHasNoParameters(specificationMethod));
+        final Validation<Throwable, Unit> aftersValidation = validate(validateMethods(contextClass.getAfterSpecificationMethods()));
+        return contextValidation.sequence(beforesValidation).sequence(specValidation).sequence(aftersValidation);
     }
 
-    private Validation<NonEmptyList<Throwable>, Unit> specificationPreconditions(final SpecificationLifecycle lifecycle,
-            final ContextClass contextClass, final Object contextInstance) {
-        final Either<Throwable, Unit> resetMocksResult = toEither(lifecycle.resetMockery());
-        final Either<Throwable, Unit> wiringResult = rightToUnit(lifecycle.wireActors(contextInstance));
-        final Either<Throwable, Unit> beforesResult =
-                toEither(lifecycle.runBeforeSpecificationMethods(contextInstance, contextClass.getBeforeSpecificationMethods()));
-        return validation(resetMocksResult.right().sequence(wiringResult).right().sequence(beforesResult)).nel();
+    private Validation<Throwable, Unit> specificationPreconditions(final SpecificationLifecycle lifecycle, final ContextClass contextClass,
+            final Object contextInstance) {
+        final Validation<Throwable, Unit> resetMocksResult = validate(lifecycle.resetMockery());
+        final Validation<Throwable, Unit> wiringResult = validation(rightToUnit(lifecycle.wireActors(contextInstance)));
+        final Validation<Throwable, Unit> beforesResult =
+                validate(lifecycle.runBeforeSpecificationMethods(contextInstance, contextClass.getBeforeSpecificationMethods()));
+        return resetMocksResult.sequence(wiringResult).sequence(beforesResult);
     }
 
     private Option<Throwable> validateMethods(final List<LifecycleMethod> methods) {
@@ -160,9 +161,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         });
     }
 
-    @Suggest({"Push the obtaining of the lifecycle into the specification builder",
-            "Push validation into the lifecycle",
-            "Groups that don't run get no-op lifecycle"})
+    @Suggest({"Push the obtaining of the lifecycle into the specification builder", "Groups that don't run get no-op lifecycle"})
     private SpecificationLifecycle lifecycle(final AnnotatedElement contextClass) {
         final Class<? extends SpecificationLifecycle> lifecycleClass =
                 contextClass.isAnnotationPresent(Context.class) ? contextClass.getAnnotation(Context.class).lifecycle()
@@ -170,12 +169,8 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         return constructorInvoker.invokeNullaryConstructor(lifecycleClass);
     }
 
-    private Validation<NonEmptyList<Throwable>, Unit> validate(final Option<Throwable> option) {
-        return validation(toEither(option)).nel();
-    }
-
-    private Either<Throwable, Unit> toEither(final Option<Throwable> option) {
-        return option.toEither(unit()).swap();
+    private Validation<Throwable, Unit> validate(final Option<Throwable> option) {
+        return validation(option.toEither(unit()).swap());
     }
 
     private Either<Throwable, Unit> rightToUnit(final Either<Throwable, ?> either) {
