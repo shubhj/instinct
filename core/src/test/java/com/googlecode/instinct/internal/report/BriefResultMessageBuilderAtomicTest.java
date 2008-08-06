@@ -26,6 +26,7 @@ import com.googlecode.instinct.internal.runner.SpecificationResultImpl;
 import com.googlecode.instinct.internal.runner.SpecificationRunFailureStatus;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
 import com.googlecode.instinct.internal.runner.SpecificationRunSuccessStatus;
+import com.googlecode.instinct.internal.runner.SpecificationFailureException;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
@@ -34,6 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import static java.util.regex.Pattern.MULTILINE;
 import static java.util.regex.Pattern.compile;
+import fj.data.Option;
 
 public final class BriefResultMessageBuilderAtomicTest extends InstinctTestCase {
     private static final String NEW_LINE = getProperty("line.separator");
@@ -49,8 +51,8 @@ public final class BriefResultMessageBuilderAtomicTest extends InstinctTestCase 
     public void setUpTestDoubles() {
         contextResult = new ContextResultImpl("Context");
         failureMessageBuilder = new SpecificationFailureMessageBuilderImpl();
-        final RuntimeException failureCause = new RuntimeException("Failure cause");
-        failureStatus = new SpecificationRunFailureStatus(failureCause, true);
+        final SpecificationFailureException failureCause = new SpecificationFailureException("Failure cause");
+        failureStatus = new SpecificationRunFailureStatus(failureCause, Option.<Throwable>none());
         failingSpec = new SpecificationResultImpl("fails", failureStatus, 1L);
         final SpecificationRunStatus successStatus = new SpecificationRunSuccessStatus();
         succeedingSpec1 = new SpecificationResultImpl("runs", successStatus, 1L);

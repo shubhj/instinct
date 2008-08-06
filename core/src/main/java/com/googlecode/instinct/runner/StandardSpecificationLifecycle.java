@@ -100,7 +100,8 @@ public final class StandardSpecificationLifecycle implements SpecificationLifecy
             }
         });
         final List<Throwable> errors = somes(results);
-        return errors.isEmpty() ? Option.<Throwable>none() : some((Throwable) new AggregatingException(errors));
+        final String message = "At least one specification lifecycle method failed to execute";
+        return errors.isEmpty() ? Option.<Throwable>none() : some((Throwable) new AggregatingException(message, errors));
     }
 
     private Option<Throwable> runMethod(final Object instance, final LifecycleMethod method) {

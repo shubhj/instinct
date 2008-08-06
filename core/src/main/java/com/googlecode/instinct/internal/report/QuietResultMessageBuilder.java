@@ -23,6 +23,11 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ResultMessageBuilder;
+import fj.F;
+import fj.data.List;
+import static fj.data.List.asString;
+import static fj.data.List.fromString;
+import static fj.data.List.*;
 import static java.lang.System.getProperty;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -51,15 +56,12 @@ public final class QuietResultMessageBuilder implements ResultMessageBuilder {
     }
 
     private String buildFailingContextResultMessage(final ContextResult contextResult) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(contextResult.getContextName());
-        for (final SpecificationResult specificationResult : contextResult.getSpecificationResults()) {
-            if (!specificationResult.completedSuccessfully()) {
-                builder.append(NEW_LINE);
-                builder.append("- ").append(buildSpecificationResultMessage(specificationResult));
+        final List<List<Character>> failureMessages = failedSpecifications(contextResult).map(new F<SpecificationResult, List<Character>>() {
+            public List<Character> f(final SpecificationResult result) {
+                return fromString("- " + buildSpecificationResultMessage(result));
             }
-        }
-        return builder.toString();
+        }).intersperse(fromString(NEW_LINE));
+        return contextResult.getContextName() + NEW_LINE + asString(join(failureMessages));
     }
 
     private String buildSpecificationResultMessage(final SpecificationResult specificationResult) {
@@ -78,12 +80,19 @@ public final class QuietResultMessageBuilder implements ResultMessageBuilder {
         return indentEachLine(removeLastNewline(failureCause));
     }
 
-    private String removeLastNewline(final String failureCause) {
+    private List<SpecificationResult> failedSpecifications(final ContextResult contextResult) {
+        return contextResult.getSpecificationResults().filter(new F<SpecificationResult, Boolean>() {
+            public Boolean f(final SpecificationResult result) {
+                return !result.completedSuccessfully();
+            }
+        });
+    }
+
+    private CharSequence removeLastNewline(final String failureCause) {
         return failureCause.endsWith(NEW_LINE) ? failureCause.substring(0, failureCause.length() - 1) : failureCause;
     }
 
-    @Suggest("Utility?")
-    private String indentEachLine(final String failureCause) {
+    private String indentEachLine(final CharSequence failureCause) {
         final Matcher matcher = START_OF_LINE.matcher(failureCause);
         return matcher.replaceAll(TAB);
     }

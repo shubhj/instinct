@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2006-2008 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.runner;
+package com.googlecode.instinct.internal.util;
 
 import fj.data.List;
+import fj.pre.Show;
 
-public interface ContextResult extends ItemResult {
-    void addSpecificationResult(SpecificationResult specificationResult);
+public final class ListUtil {
+    private ListUtil() {
+        throw new UnsupportedOperationException();
+    }
 
-    List<SpecificationResult> getSpecificationResults();
-
-    String getContextName();
-
-    int getNumberOfSpecificationsRun();
-
-    int getNumberOfSuccesses();
-
-    int getNumberOfFailures();
+    public static <A> String listToString(final List<A> list) {
+        return Show.<A>listShow(Show.<A>anyShow()).showS(list);
+    }
 }

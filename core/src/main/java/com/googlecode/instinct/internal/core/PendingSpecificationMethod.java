@@ -20,6 +20,7 @@ import com.googlecode.instinct.internal.lang.Primordial;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationResultImpl;
 import com.googlecode.instinct.internal.runner.SpecificationRunPendingStatus;
+import static com.googlecode.instinct.internal.util.ListUtil.listToString;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.marker.annotate.Specification.NO_REASON;
@@ -91,8 +92,8 @@ public final class PendingSpecificationMethod extends Primordial implements Spec
 
     @Override
     public String toString() {
-        return PendingSpecificationMethod.class.getSimpleName() + "[method=" + method + ";before=" + beforeSpecificationMethods.toCollection() +
-                ";after=" + afterSpecificationMethods.toCollection() + "]";
+        return PendingSpecificationMethod.class.getSimpleName() + "[method=" + method + ";before=" + listToString(beforeSpecificationMethods)
+                + ";after=" + listToString(afterSpecificationMethods) + "]";
     }
 
     private void notifyListenersOfPreSpecification(final SpecificationMethod specificationMethod) {

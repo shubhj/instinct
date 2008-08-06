@@ -18,12 +18,12 @@ package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.marker.annotate.Mock;
-import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.marker.annotate.Stub;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import java.util.List;
 import org.jmock.Expectations;
+import fj.data.List;
 
 public final class ContextResultImplAtomicTest extends InstinctTestCase {
     @Subject(auto = false) private ContextResult contextResult;

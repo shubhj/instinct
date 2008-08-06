@@ -19,10 +19,10 @@ package com.googlecode.instinct.integrate.junit4;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdge;
+import com.googlecode.instinct.internal.runner.SpecificationFailureException;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunFailureStatus;
 import com.googlecode.instinct.internal.runner.SpecificationRunStatus;
-import com.googlecode.instinct.internal.util.exception.ExceptionFinder;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.marker.annotate.Mock;
 import static com.googlecode.instinct.marker.annotate.Specification.SpecificationState.PENDING;
@@ -32,6 +32,7 @@ import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubjectWithConstructorArgs;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
 import fj.data.List;
+import fj.data.Option;
 import org.jmock.Expectations;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
@@ -44,9 +45,8 @@ public final class JUnit4SpecificationRunnerImplAtomicTest extends InstinctTestC
     @Mock private DescriptionEdge descriptionEdge;
     @Mock private SpecificationMethod specificationMethod;
     @Mock private SpecificationResult specificationResult;
-    @Mock private ExceptionFinder exceptionFinder;
     @Mock private Failure failure;
-    @Mock private Throwable exception;
+    @Stub private SpecificationFailureException exception;
     @Mock private ObjectFactory objectFactory;
     @Mock private Throwable rootCause;
     @Mock private RunNotifier notifier;
@@ -57,15 +57,14 @@ public final class JUnit4SpecificationRunnerImplAtomicTest extends InstinctTestC
     @Override
     public void setUpTestDoubles() {
         specificationMethods = List.<SpecificationMethod>nil().cons(specificationMethod);
-        specificationRunStatus = new SpecificationRunFailureStatus(exception, true);
+        specificationRunStatus = new SpecificationRunFailureStatus(exception, Option.<Throwable>none());
     }
 
     @Override
     public void setUpSubject() {
         description = Description.createTestDescription(String.class, "dontCare");
         junit4SpecificationRunner =
-                createSubjectWithConstructorArgs(JUnit4SpecificationRunnerImpl.class, new Object[]{notifier}, descriptionEdge, exceptionFinder,
-                        objectFactory);
+                createSubjectWithConstructorArgs(JUnit4SpecificationRunnerImpl.class, new Object[]{notifier}, descriptionEdge, objectFactory);
     }
 
     public void testConformsToClassTraits() {
@@ -109,9 +108,7 @@ public final class JUnit4SpecificationRunnerImplAtomicTest extends InstinctTestC
                 will(returnValue(false));
                 one(specificationResult).getStatus();
                 will(returnValue(specificationRunStatus));
-                one(exceptionFinder).getRootCause(with(any(Throwable.class)));
-                will(returnValue(rootCause));
-                one(objectFactory).create(with(same(Failure.class)), with(equal(new Object[]{description, rootCause})));
+                one(objectFactory).create(with(same(Failure.class)), with(equal(new Object[]{description, null})));
                 will(returnValue(failure));
                 one(notifier).fireTestFailure(failure);
             }

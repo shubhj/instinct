@@ -7,6 +7,9 @@ o Reductio Integration
 
 * Instinct Release 0.1.9 *
 
+Maintenance release; Specification lifecycle can now be customised, Scala examples, additional
+Functional Java matchers (List, Either, Option), seperate source JAR.
+
 o Core Features
   o Custom specification lifecycles can now be plugged in using the @Context annotation.
     This would allow for example, a Spring application context to be initialised and wired
@@ -25,7 +28,7 @@ o Expectation API
 o Packaging
   o Moved source code out of main jar into instinct-<version>-sources.jar.
 o Infrastructure
-  o Upgraded to: Functional Java 2.9.
+  o Upgraded to: Functional Java 2.10.
 o Bugs
   o (Issue 21) Expected exception try-catch should only wrap specs, not before and after.
   o (Issue 19) Throwing exception out of mocked code confused expected exception handling.

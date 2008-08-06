@@ -20,15 +20,15 @@ import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.expect.behaviour.Mocker;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.util.AggregatingException;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import fj.Effect;
 import fj.F;
-import org.jmock.api.ExpectationError;
 
 @SuppressWarnings({"StringContatenationInLoop", "OverlyCoupledClass", "UnusedDeclaration"})
 public final class SpecificationRunnerSlowTest extends InstinctTestCase {
-    @Subject(implementation = SpecificationRunnerImpl.class) private SpecificationRunner runner;
+    @Subject(implementation = NewSpecificationRunnerImpl.class) private SpecificationRunner runner;
 
     public void testRunWithSuccess() {
         checkContextsRunWithoutError(ContextContainerWithSetUpAndTearDown.class);
@@ -61,11 +61,8 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
         final Object detailedStatus = result.getStatus().getDetails();
         expect.that(detailedStatus).isAnInstanceOf(SpecificationFailureException.class);
         final Throwable failureCause = ((Throwable) detailedStatus).getCause();
-        expect.that(failureCause).isAnInstanceOf(ExpectationError.class);
+        expect.that(failureCause).isAnInstanceOf(AggregatingException.class);
         expect.that(failureCause.getMessage()).containsString("not all expectations were satisfied");
-        expect.that(failureCause.getMessage()).matchesRegex("not all expectations were satisfied");
-//        expect.that(failureCause).isAnInstanceOf(AggregatingException.class);
-//        expect.that(failureCause.getMessage()).containsString("not all expectations were satisfied");
     }
 
     private <T> SpecificationMethod getSpecificationMethod(final Class<T> contextClass, final Object specMethodName) {

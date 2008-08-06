@@ -17,34 +17,33 @@
 package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import com.googlecode.instinct.internal.util.exception.ExceptionFinder;
-import com.googlecode.instinct.marker.annotate.Mock;
+import static com.googlecode.instinct.internal.util.exception.ExceptionUtil.stackTrace;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintWriter;
-import org.jmock.Expectations;
+import fj.data.Option;
 
+@SuppressWarnings({"UnusedDeclaration"})
 public final class SpecificationFailureMessageBuilderImplAtomicTest extends InstinctTestCase {
     @Subject(auto = false) private SpecificationFailureMessageBuilder failureMessageBuilder;
-    @Stub private Throwable failureCause;
-    @Stub private Throwable rootCause;
-    @Mock private ExceptionFinder exceptionFinder;
-    private SpecificationRunStatus failureStatus;
-    private SpecificationRunStatus successStatus;
+    @Stub(auto = false) private SpecificationFailureException failureCause;
+    @Stub(auto = false) private Throwable rootCause;
+    @Stub(auto = false) private SpecificationRunStatus failureStatus;
+    @Stub(auto = false) private SpecificationRunStatus successStatus;
 
     @Override
     public void setUpTestDoubles() {
+        rootCause = new RuntimeException();
+        failureCause = new SpecificationFailureException("", rootCause);
         successStatus = new SpecificationRunSuccessStatus();
-        failureStatus = new SpecificationRunFailureStatus(failureCause, true);
+        failureStatus = new SpecificationRunFailureStatus(failureCause, Option.<Throwable>none());
     }
 
     @Override
     public void setUpSubject() {
-        failureMessageBuilder = createSubject(SpecificationFailureMessageBuilderImpl.class, exceptionFinder);
+        failureMessageBuilder = createSubject(SpecificationFailureMessageBuilderImpl.class);
     }
 
     public void testConformsToClassTraits() {
@@ -57,21 +56,7 @@ public final class SpecificationFailureMessageBuilderImplAtomicTest extends Inst
     }
 
     public void testBuildsMessagesFromFailedSpecResults() {
-        expect.that(new Expectations() {
-            {
-                atLeast(1).of(exceptionFinder).getRootCause(failureCause);
-                will(returnValue(rootCause));
-            }
-        });
         final String failureMessage = failureMessageBuilder.buildMessage(failureStatus);
-        final String rootCauseStackTrace = getRootCauseStackTrace();
-        expect.that(failureMessage).isEqualTo(rootCauseStackTrace);
-    }
-
-    @SuppressWarnings({"IOResourceOpenedButNotSafelyClosed"})
-    private String getRootCauseStackTrace() {
-        final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        rootCause.printStackTrace(new PrintWriter(bytes, true));
-        return bytes.toString();
+        expect.that(failureMessage).isEqualTo(stackTrace(rootCause));
     }
 }

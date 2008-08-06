@@ -17,12 +17,18 @@
 package com.googlecode.instinct.internal.report;
 
 import com.googlecode.instinct.internal.runner.ContextResult;
+import com.googlecode.instinct.internal.runner.ItemResult;
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilder;
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilderImpl;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ResultMessageBuilder;
+import fj.F;
+import fj.data.List;
+import static fj.data.List.asString;
+import static fj.data.List.fromString;
+import static fj.data.List.join;
 import static java.lang.System.getProperty;
 
 @Suggest("Add pending here")
@@ -52,11 +58,11 @@ public final class VerboseResultMessageBuilder implements ResultMessageBuilder {
     }
 
     private String getSpecificationResults(final ContextResult contextResult) {
-        final StringBuilder builder = new StringBuilder();
-        for (final SpecificationResult specificationResult : contextResult.getSpecificationResults()) {
-            builder.append(TAB).append(buildSpecificationResultMessage(specificationResult));
-        }
-        return builder.toString();
+        return asString(join(contextResult.getSpecificationResults().map(new F<SpecificationResult, List<Character>>() {
+            public List<Character> f(final SpecificationResult result) {
+                return fromString(TAB + buildSpecificationResultMessage(result));
+            }
+        })));
     }
 
     private String getContextSummary(final ContextResult contextResult) {
@@ -84,14 +90,13 @@ public final class VerboseResultMessageBuilder implements ResultMessageBuilder {
     }
 
     private int getNumberOfSpecsRun(final ContextResult contextResult) {
-        return contextResult.getSpecificationResults().size();
+        return contextResult.getSpecificationResults().length();
     }
 
-    private double getExecutionTime(final ContextResult contextResult) {
+    private double getExecutionTime(final ItemResult contextResult) {
         return millisToSeconds(contextResult.getExecutionTime());
     }
 
-    @Suggest("Utility.")
     private double millisToSeconds(final long millis) {
         return (double) millis / MILLISECONDS_IN_SECONDS;
     }

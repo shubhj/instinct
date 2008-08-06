@@ -35,7 +35,7 @@ o hamcrest-all-1.1.jar
 o jmock-2.5.0.jar
 o jmock-legacy-2.5.0.jar
 o objenesis-1.1.jar
-o functionaljava-2.8.jar
+o functionaljava-2.10.jar
 
 In addition, to use the Instinct Ant task, you'll need:
 
@@ -51,12 +51,13 @@ JUnit Jar 'junit-4.4.jar' instead of the no dependencies version listed here.
 
 In addition, if you want to use Instinct from Scala, you'll need:
 
-o scala-compiler-2.7.1.r15535-b20080712185233.jar
-o scala-library-2.7.1.r15535-b20080712185233.jar
+o scala-compiler-2.7.1.r15611-b20080728010100.jar
+o scala-library-2.7.1.r15611-b20080728010100.jar
 
 Note. The version of Scala required is newer than the latest released version (2.7.1).
 This is due to a known issue in the compiler that has been fixed in the trunk. The
-version in lib/scala and used in the example project will work.
+version in lib/scala and used in the example project will work, as will 2.7.2 when
+released.
 
 
 * Documentation *

@@ -23,8 +23,12 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.report.ResultMessageBuilder;
+import fj.F;
+import fj.data.List;
+import static fj.data.List.asString;
+import static fj.data.List.fromString;
+import static fj.data.List.join;
 import static java.lang.System.getProperty;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import static java.util.regex.Pattern.MULTILINE;
@@ -48,16 +52,12 @@ public final class BriefResultMessageBuilder implements ResultMessageBuilder {
     }
 
     private String buildContextResultMessage(final ContextResult contextResult) {
-        final StringBuilder builder = new StringBuilder();
-        builder.append(contextResult.getContextName()).append(NEW_LINE);
-        for (final Iterator<SpecificationResult> iterator = contextResult.getSpecificationResults().iterator(); iterator.hasNext();) {
-            final SpecificationResult specificationResult = iterator.next();
-            builder.append("- ").append(buildSpecificationResultMessage(specificationResult));
-            if (iterator.hasNext()) {
-                builder.append(NEW_LINE);
+        final List<List<Character>> specMessages = contextResult.getSpecificationResults().map(new F<SpecificationResult, List<Character>>() {
+            public List<Character> f(final SpecificationResult result) {
+                return fromString("- " + buildSpecificationResultMessage(result));
             }
-        }
-        return builder.toString();
+        });
+        return contextResult.getContextName() + NEW_LINE + asString(join(specMessages.intersperse(fromString(NEW_LINE))));
     }
 
     private String buildSpecificationResultMessage(final SpecificationResult specificationResult) {
@@ -79,7 +79,7 @@ public final class BriefResultMessageBuilder implements ResultMessageBuilder {
         return failureCause.endsWith(NEW_LINE) ? failureCause.substring(0, failureCause.length() - 1) : failureCause;
     }
 
-    @Suggest("Utility?")
+    @SuppressWarnings({"TypeMayBeWeakened"})
     private String indentEachLine(final String failureCause) {
         final Matcher matcher = START_OF_LINE.matcher(failureCause);
         return matcher.replaceAll(TAB);

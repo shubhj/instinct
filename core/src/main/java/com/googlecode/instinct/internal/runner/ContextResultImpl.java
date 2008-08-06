@@ -16,15 +16,16 @@
 
 package com.googlecode.instinct.internal.runner;
 
+import com.googlecode.instinct.internal.lang.Primordial;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
-import com.googlecode.instinct.internal.lang.Primordial;
-import java.util.ArrayList;
-import java.util.List;
+import fj.F;
+import fj.data.List;
+import static fj.data.List.nil;
 
 public final class ContextResultImpl extends Primordial implements ContextResult {
-    private final List<SpecificationResult> specificationResults = new ArrayList<SpecificationResult>();
     private final String contextName;
+    private List<SpecificationResult> specificationResults = nil();
 
     public ContextResultImpl(final String contextName) {
         checkNotWhitespace(contextName);
@@ -37,24 +38,23 @@ public final class ContextResultImpl extends Primordial implements ContextResult
 
     public void addSpecificationResult(final SpecificationResult specificationResult) {
         checkNotNull(specificationResult);
-        specificationResults.add(specificationResult);
+        specificationResults = specificationResults.cons(specificationResult);
     }
 
     public List<SpecificationResult> getSpecificationResults() {
-        return specificationResults;
+        return specificationResults.reverse();
     }
 
     public boolean completedSuccessfully() {
-        for (final ItemResult specificationResult : specificationResults) {
-            if (!specificationResult.completedSuccessfully()) {
-                return false;
+        return specificationResults.forall(new F<SpecificationResult, Boolean>() {
+            public Boolean f(final SpecificationResult result) {
+                return result.completedSuccessfully();
             }
-        }
-        return true;
+        });
     }
 
     public int getNumberOfSpecificationsRun() {
-        return specificationResults.size();
+        return specificationResults.length();
     }
 
     public int getNumberOfSuccesses() {
@@ -66,20 +66,22 @@ public final class ContextResultImpl extends Primordial implements ContextResult
     }
 
     public long getExecutionTime() {
-        long executionTime = 0L;
-        for (final ItemResult specificationResult : specificationResults) {
-            executionTime += specificationResult.getExecutionTime();
-        }
-        return executionTime;
+        return specificationResults.foldLeft(new F<Long, F<SpecificationResult, Long>>() {
+            public F<SpecificationResult, Long> f(final Long time) {
+                return new F<SpecificationResult, Long>() {
+                    public Long f(final SpecificationResult result) {
+                        return time + result.getExecutionTime();
+                    }
+                };
+            }
+        }, 0L);
     }
 
-    private int countStatus(final boolean succeeded) {
-        int number = 0;
-        for (final ItemResult specificationResult : specificationResults) {
-            if (specificationResult.completedSuccessfully() == succeeded) {
-                number++;
+    private int countStatus(final boolean success) {
+        return specificationResults.find(new F<SpecificationResult, Boolean>() {
+            public Boolean f(final SpecificationResult result) {
+                return result.completedSuccessfully() == success;
             }
-        }
-        return number;
+        }).length();
     }
 }

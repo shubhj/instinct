@@ -19,6 +19,7 @@ package com.googlecode.instinct.internal.util;
 import fj.data.Array;
 import fj.data.Java;
 import fj.data.List;
+import fj.F;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -47,6 +48,14 @@ public final class Fj {
         return Array.array(array);
     }
 
+    public static F<Boolean, Boolean> not() {
+        return new F<Boolean, Boolean>() {
+            public Boolean f(final Boolean b) {
+                return !b;
+            }
+        };
+    }
+
     // SUPPRESS IllegalType {
     private static <T> List<T> toFjList(final HashSet<T> set) {
         return Java.<T>HashSet_List().f(set);
@@ -55,6 +64,5 @@ public final class Fj {
     private static <T> List<T> toFjList(final ArrayList<T> list) {
         return Java.<T>ArrayList_List().f(list);
     }
-
     // } SUPPRESS IllegalType
 }

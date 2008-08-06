@@ -17,9 +17,10 @@
 package com.googlecode.instinct.internal.core;
 
 import com.googlecode.instinct.internal.lang.Primordial;
+import com.googlecode.instinct.internal.runner.NewSpecificationRunnerImpl;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunner;
-import com.googlecode.instinct.internal.runner.SpecificationRunnerImpl;
+import static com.googlecode.instinct.internal.util.ListUtil.listToString;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.runner.ContextListener;
@@ -31,7 +32,7 @@ import java.lang.reflect.Method;
 
 @Suggest("Spec this out.")
 public final class CompleteSpecificationMethod extends Primordial implements SpecificationMethod {
-    private final SpecificationRunner specificationRunner = new SpecificationRunnerImpl();
+    private final SpecificationRunner specificationRunner = new NewSpecificationRunnerImpl();
     private Method method;
     private List<LifecycleMethod> beforeSpecificationMethods;
     private List<LifecycleMethod> afterSpecificationMethods;
@@ -86,8 +87,8 @@ public final class CompleteSpecificationMethod extends Primordial implements Spe
 
     @Override
     public String toString() {
-        return CompleteSpecificationMethod.class.getSimpleName() + "[method=" + method + ";before=" + beforeSpecificationMethods.toCollection()
-                + ";after=" + afterSpecificationMethods.toCollection() + "]";
+        return CompleteSpecificationMethod.class.getSimpleName() + "[method=" + method + ";before=" + listToString(beforeSpecificationMethods)
+                + ";after=" + listToString(afterSpecificationMethods) + "]";
     }
 
     private void notifyListenersOfPreSpecification(final SpecificationMethod specificationMethod) {

@@ -19,6 +19,7 @@ package com.googlecode.instinct.internal.util.exception;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import static com.googlecode.instinct.internal.util.exception.ExceptionUtil.stackTrace;
+import static com.googlecode.instinct.internal.util.exception.ExceptionUtil.trimStackTrace;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Stub;
@@ -46,7 +47,14 @@ public final class AnExceptionUtil {
 
     @Specification
     public void canTrimAStackTrace() {
-        final String[] lines = ExceptionUtil.trimStackTrace(exception, 10).split("\n");
+        final String[] lines = trimStackTrace(exception, 10).split("\n");
         expect.that(lines).isOfSize(11);
+    }
+
+    @Specification
+    public void returnsEmptyStringForNullExceptions() {
+        expect.that(stackTrace(null)).isEmpty();
+        expect.that(trimStackTrace(null)).isEmpty();
+        expect.that(trimStackTrace(null, 10)).isEmpty();
     }
 }

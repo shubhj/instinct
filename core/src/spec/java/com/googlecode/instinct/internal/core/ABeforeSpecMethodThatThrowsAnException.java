@@ -18,6 +18,7 @@ package com.googlecode.instinct.internal.core;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.marker.annotate.Specification;
 import org.junit.runner.RunWith;
 
@@ -25,13 +26,14 @@ import org.junit.runner.RunWith;
 @RunWith(InstinctRunner.class)
 public final class ABeforeSpecMethodThatThrowsAnException {
     @Specification
-    public void shouldFailTheSpecWhenTheExceptionThrownIsTheSameAsTheSpec() {
+    public void shouldFailTheSpecWhenTheExceptionThrownIsTheSameAsTheSpecsExpectedException() {
         final ContextClass contextClass = new ContextClassImpl(BeforeThrowsSameExceptionAsSpec.class);
-        expect.that(contextClass.run().completedSuccessfully()).isFalse();
+        final ContextResult result = contextClass.run();
+        expect.that(result.completedSuccessfully()).isFalse();
     }
 
     @Specification
-    public void shouldFailTheSpecWhenTheExceptionThrownIsNotTheSameAsTheSpec() {
+    public void shouldFailTheBeforeThrowsAnException() {
         final ContextClass contextClass = new ContextClassImpl(BeforeThrowsException.class);
         expect.that(contextClass.run().completedSuccessfully()).isFalse();
     }

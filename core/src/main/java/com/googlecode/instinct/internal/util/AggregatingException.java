@@ -31,21 +31,22 @@ public final class AggregatingException extends RuntimeException {
     private static final String NEW_LINE = getProperty("line.separator");
     private static final long serialVersionUID = -3212899060420825954L;
     private final ExceptionSanitiser exceptionSanitiser;
+    private final String message;
     private final List<Throwable> errors;
 
-    public AggregatingException(final List<Throwable> errors) {
+    public AggregatingException(final String message, final List<Throwable> errors) {
+        this.message = message;
         this.errors = errors;
         exceptionSanitiser = new ExceptionSanitiserImpl();
     }
 
-    @Override
-    public String getMessage() {
-        return errorsAsString(errors);
+    public List<Throwable> getAggregatedErrors() {
+        return errors;
     }
 
     @Override
-    public String toString() {
-        return getClass().getName() + ": " + errors.length() + " error(s) occurred" + NEW_LINE + NEW_LINE + getMessage();
+    public String getMessage() {
+        return message + "; " + errors.length() + " error(s) occurred" + NEW_LINE + NEW_LINE + errorsAsString(errors);
     }
 
     private String errorsAsString(final List<Throwable> errors) {

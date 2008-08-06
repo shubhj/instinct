@@ -16,8 +16,12 @@
 
 package com.googlecode.instinct.internal.runner;
 
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
+import static com.googlecode.instinct.internal.util.Fj.not;
 import com.googlecode.instinct.test.InstinctTestCase;
+import fj.F;
+import static fj.Function.compose;
 
 public final class ContextRunnerSlowTest extends InstinctTestCase {
     private ContextRunner runner;
@@ -43,9 +47,15 @@ public final class ContextRunnerSlowTest extends InstinctTestCase {
 
     private <T> void checkInvalidConstructorsGivesFailedStatus(final Class<T> cls) {
         final ContextResult result = runner.run(new ContextClassImpl(cls));
-        assertFalse(result.completedSuccessfully());
-        for (final SpecificationResult specificationResult : result.getSpecificationResults()) {
-            assertFalse(specificationResult.completedSuccessfully());
-        }
+        expect.that(result.completedSuccessfully()).isFalse();
+        expect.that(result.getSpecificationResults()).allItemsMatch(compose(not(), runSuccessful()));
+    }
+
+    private <T> F<SpecificationResult, Boolean> runSuccessful() {
+        return new F<SpecificationResult, Boolean>() {
+            public Boolean f(final SpecificationResult result) {
+                return result.completedSuccessfully();
+            }
+        };
     }
 }

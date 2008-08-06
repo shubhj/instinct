@@ -19,10 +19,9 @@ import com.googlecode.instinct.internal.core.LifecycleMethod;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdge;
 import com.googlecode.instinct.internal.edge.org.junit.runner.DescriptionEdgeImpl;
+import com.googlecode.instinct.internal.runner.SpecificationFailureException;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunFailureStatus;
-import com.googlecode.instinct.internal.util.exception.ExceptionFinder;
-import com.googlecode.instinct.internal.util.exception.ExceptionFinderImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
@@ -35,7 +34,6 @@ import org.junit.runner.notification.RunNotifier;
 
 public final class JUnit4SpecificationRunnerImpl implements JUnit4SpecificationRunner {
     private final DescriptionEdge descriptionEdge = new DescriptionEdgeImpl();
-    private final ExceptionFinder exceptionFinder = new ExceptionFinderImpl();
     private final ObjectFactory objectFactory = new ObjectFactoryImpl();
     private final RunNotifier notifier;
 
@@ -74,8 +72,7 @@ public final class JUnit4SpecificationRunnerImpl implements JUnit4SpecificationR
     }
 
     private Failure createFailure(final Description description, final SpecificationResult specificationResult) {
-        final Throwable rootCause =
-                exceptionFinder.getRootCause(((SpecificationRunFailureStatus) specificationResult.getStatus()).getDetails());
-        return objectFactory.create(Failure.class, description, rootCause);
+        final SpecificationFailureException failureException = ((SpecificationRunFailureStatus) specificationResult.getStatus()).getDetails();
+        return objectFactory.create(Failure.class, description, failureException.getCause());
     }
 }

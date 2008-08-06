@@ -21,9 +21,8 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.runner.ContextListener;
 import com.googlecode.instinct.runner.SpecificationListener;
+import fj.data.List;
 import static fj.data.List.nil;
-import static java.util.Collections.emptyList;
-import java.util.List;
 
 public final class AbstractContextClass implements ContextClass {
     private Class<?> contextType;
@@ -78,7 +77,7 @@ public final class AbstractContextClass implements ContextClass {
         }
 
         public List<SpecificationResult> getSpecificationResults() {
-            return emptyList();
+            return nil();
         }
 
         public String getContextName() {

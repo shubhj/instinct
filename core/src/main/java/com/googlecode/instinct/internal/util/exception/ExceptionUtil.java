@@ -27,6 +27,7 @@ import java.io.PrintStream;
 import static java.lang.System.getProperty;
 
 public final class ExceptionUtil {
+    private static final boolean AUTO_FLUSH = true;
     private static final String NEW_LINE = getProperty("line.separator");
     private static final int LINES_PER_EXCEPTION = 15;
     private static final String TRIMMED_SUFFIX = "\t...";
@@ -36,22 +37,30 @@ public final class ExceptionUtil {
     }
 
     public static String trimStackTrace(final Throwable throwable) {
-        return trimStackTrace(throwable, LINES_PER_EXCEPTION);
+        return throwable == null ? "" : trimStackTrace(throwable, LINES_PER_EXCEPTION);
     }
 
     public static String trimStackTrace(final Throwable throwable, final int numberOfLines) {
-        final List<String> stackLines = toFjList(stackTrace(throwable).split(NEW_LINE));
-        final List<String> trimmedStackTrace = stackLines.take(numberOfLines).snoc(TRIMMED_SUFFIX).intersperse(NEW_LINE);
-        return asString(join(trimmedStackTrace.map(new F<String, List<Character>>() {
-            public List<Character> f(final String stackTrace) {
-                return fromString(stackTrace);
-            }
-        })));
+        if (throwable == null) {
+            return "";
+        } else {
+            final List<String> stackLines = toFjList(stackTrace(throwable).split(NEW_LINE));
+            final List<String> trimmedStackTrace = stackLines.take(numberOfLines).snoc(TRIMMED_SUFFIX).intersperse(NEW_LINE);
+            return asString(join(trimmedStackTrace.map(new F<String, List<Character>>() {
+                public List<Character> f(final String stackTrace) {
+                    return fromString(stackTrace);
+                }
+            })));
+        }
     }
 
     public static String stackTrace(final Throwable throwable) {
-        final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        throwable.printStackTrace(new PrintStream(out, true));
-        return out.toString();
+        if (throwable == null) {
+            return "";
+        } else {
+            final ByteArrayOutputStream out = new ByteArrayOutputStream();
+            throwable.printStackTrace(new PrintStream(out, AUTO_FLUSH));
+            return out.toString();
+        }
     }
 }

@@ -17,24 +17,58 @@
 package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.internal.lang.Primordial;
+import com.googlecode.instinct.internal.util.AggregatingException;
+import static com.googlecode.instinct.internal.util.Fj.not;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import fj.F;
+import static fj.Function.compose;
+import fj.data.List;
+import static fj.data.List.nil;
+import fj.data.Option;
+import static fj.data.Option.fromNull;
 
 public final class SpecificationRunFailureStatus extends Primordial implements SpecificationRunStatus {
-    private final Throwable error;
-    private final boolean expectedExceptionCandidate;
+    private final SpecificationFailureException failure;
+    private final Option<Throwable> specificationError;
 
-    public SpecificationRunFailureStatus(final Throwable error, final boolean expectedExceptionCandidate) {
-        this.expectedExceptionCandidate = expectedExceptionCandidate;
-        checkNotNull(error, expectedExceptionCandidate);
-        this.error = error;
+    public SpecificationRunFailureStatus(final SpecificationFailureException failure, final Option<Throwable> specificationError) {
+        checkNotNull(failure, specificationError);
+        this.failure = failure;
+        this.specificationError = specificationError;
     }
 
-    public Throwable getDetails() {
-        return error;
+    public SpecificationFailureException getDetails() {
+        return failure;
     }
 
-    public boolean isExpectedExceptionCandidate() {
-        return expectedExceptionCandidate;
+    public Option<Throwable> getSpecificationError() {
+        return specificationError;
+    }
+
+    public List<Throwable> getLifecycleErrors() {
+        if (specificationError.isSome()) {
+            if (failure.getCause() instanceof AggregatingException) {
+                final List<Throwable> allErrors = ((AggregatingException) failure.getCause()).getAggregatedErrors();
+                return allErrors.filter(compose(not(), isSpecificationError()));
+            } else {
+                return nil();
+            }
+        } else {
+            if (failure.getCause() instanceof AggregatingException) {
+                return ((AggregatingException) failure.getCause()).getAggregatedErrors();
+            } else {
+                final Option<Throwable> cause = fromNull(failure.getCause());
+                return cause.isSome() ? List.<Throwable>nil().cons(cause.some()) : List.<Throwable>nil();
+            }
+        }
+    }
+
+    private F<Throwable, Boolean> isSpecificationError() {
+        return new F<Throwable, Boolean>() {
+            public Boolean f(final Throwable throwable) {
+                return !specificationError.isNone() && specificationError.some().equals(throwable);
+            }
+        };
     }
 
     public boolean runSuccessful() {

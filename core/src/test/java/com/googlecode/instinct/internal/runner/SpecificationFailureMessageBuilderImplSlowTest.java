@@ -18,6 +18,7 @@ package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.test.InstinctTestCase;
+import fj.data.Option;
 
 public final class SpecificationFailureMessageBuilderImplSlowTest extends InstinctTestCase {
     private SpecificationFailureMessageBuilder failureMessageBuilder;
@@ -28,7 +29,8 @@ public final class SpecificationFailureMessageBuilderImplSlowTest extends Instin
     }
 
     public void testCreatesStackTracesFromSpecificationFailures() {
-        final String stack = failureMessageBuilder.buildMessage(new SpecificationRunFailureStatus(new RuntimeException(), true));
+        final SpecificationFailureException failure = new SpecificationFailureException("Huzzah!", new RuntimeException("Huzzah!"));
+        final String stack = failureMessageBuilder.buildMessage(new SpecificationRunFailureStatus(failure, Option.<Throwable>none()));
         expect.that(stack).isNotEmpty();
     }
 }

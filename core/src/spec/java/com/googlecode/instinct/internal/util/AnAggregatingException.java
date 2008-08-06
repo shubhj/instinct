@@ -51,7 +51,7 @@ public final class AnAggregatingException {
                 }
             }
         });
-        exception = new AggregatingException(errors);
+        exception = new AggregatingException("An error", errors);
     }
 
     public void testConformsToClassTraits() {
