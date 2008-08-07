@@ -36,22 +36,17 @@ public final class ASpecificationWithAMockErrorAndExpectedError {
 
     @TechNote("Need to reset the mockery here, or the mock error will be reported as an error in *this* specification.")
     @Specification
-    public void failsTheSpecWithTwoErrors() {
+    public void failsTheSpecWithOneError() {
         final ContextClass contextClass = new ContextClassImpl(MockVerificiationAndException.class);
         final ContextResult result = contextClass.run();
         expect.that(result.completedSuccessfully()).isFalse();
         final SpecificationResult specResult = result.getSpecificationResults().head();
         final AggregatingException exception =
                 (AggregatingException) ((SpecificationRunFailureStatus) specResult.getStatus()).getDetails().getCause();
-        expect.that(exception.getAggregatedErrors()).isOfSize(2);
+        expect.that(exception.getAggregatedErrors()).isOfSize(1);
         expect.that(exception.getAggregatedErrors()).contains(new F<Throwable, Boolean>() {
             public Boolean f(final Throwable throwable) {
                 return throwable.getMessage().contains("not all expectations were satisfied");
-            }
-        });
-        expect.that(exception.getAggregatedErrors()).contains(new F<Throwable, Boolean>() {
-            public Boolean f(final Throwable throwable) {
-                return throwable.getMessage().contains("Should be seen");
             }
         });
         Mocker.reset();
@@ -67,13 +62,7 @@ public final class ASpecificationWithAMockErrorAndExpectedError {
                     one(mockRunnable).run();
                 }
             });
-            throw new RuntimeException("Should be seen");
-        }
-    }
-
-    private static final class Fails {
-        public void fail() {
-
+            throw new RuntimeException("This is expected");
         }
     }
 }

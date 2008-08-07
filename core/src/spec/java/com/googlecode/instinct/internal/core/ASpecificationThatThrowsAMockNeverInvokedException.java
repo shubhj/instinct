@@ -23,6 +23,7 @@ import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import com.googlecode.instinct.internal.runner.SpecificationRunFailureStatus;
 import com.googlecode.instinct.internal.util.AggregatingException;
+import com.googlecode.instinct.internal.util.TechNote;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
 import fj.F;
@@ -32,6 +33,8 @@ import org.junit.runner.RunWith;
 @SuppressWarnings({"UnusedDeclaration", "TypeMayBeWeakened"})
 @RunWith(InstinctRunner.class)
 public final class ASpecificationThatThrowsAMockNeverInvokedException {
+
+    @TechNote("Need to reset the mockery here, or the mock error will be reported as an error in *this* specification.")
     @Specification
     public void failsTheSpecWithTwoErrors() {
         final ContextClass contextClass = new ContextClassImpl(MockVerificiationAndException.class);
@@ -51,7 +54,6 @@ public final class ASpecificationThatThrowsAMockNeverInvokedException {
                 return throwable.getMessage().contains("Should be seen");
             }
         });
-        // Need to reset the mockery here, or the mock error will be reported as an error in *this* specification.
         Mocker.reset();
     }
 
@@ -65,12 +67,6 @@ public final class ASpecificationThatThrowsAMockNeverInvokedException {
                     one(mockRunnable).run();
                 }
             });
-            new Fails().fail();
-        }
-    }
-
-    private static final class Fails {
-        public void fail() {
             throw new RuntimeException("Should be seen");
         }
     }
