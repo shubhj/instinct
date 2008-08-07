@@ -35,8 +35,6 @@ import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.runner.SpecificationLifecycle;
 import com.googlecode.instinct.runner.StandardSpecificationLifecycle;
 import fj.F;
-import fj.F2;
-import fj.F3;
 import fj.Unit;
 import static fj.Unit.unit;
 import fj.data.Either;
@@ -66,7 +64,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
 
     private SpecificationResult runLifecycle(final long startTime, final SpecificationLifecycle lifecycle,
             final SpecificationMethod specificationMethod) {
-        final Either<Throwable, ContextClass> createContext = lifecycle.createContext(specificationMethod.getContextClass());
+        final Either<Throwable, ContextClass> createContext = lifecycle.createContext().f(specificationMethod.getContextClass());
         if (createContext.isLeft()) {
             return fail(startTime, specificationMethod, createContext.left().value(), Option.<Throwable>none());
         } else {
@@ -84,69 +82,21 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
             final SpecificationMethod specificationMethod) {
         final Object contextInstance = constructorInvoker.invokeNullaryConstructor(contextClass.getType());
         final Validation<Throwable, Unit> preSpecificationSteps =
-                validate(resetMocks().f(lifecycle)).sequence(validation(wireActors().f(lifecycle, contextInstance)))
-                        .sequence(validate(befores().f(lifecycle, contextInstance, contextClass.getBeforeSpecificationMethods())));
+                validate(lifecycle.resetMockery()._1()).sequence(validation(rightToUnit(lifecycle.wireActors().f(contextInstance)))).sequence(
+                        validate(lifecycle.runBeforeSpecificationMethods().f(contextInstance, contextClass.getBeforeSpecificationMethods())));
         if (preSpecificationSteps.isFail()) {
             return fail(startTime, specificationMethod, preSpecificationSteps.fail(), Option.<Throwable>none());
         } else {
-            final Option<Throwable> specification = specification().f(lifecycle, contextInstance, specificationMethod);
+            final Option<Throwable> specification = lifecycle.runSpecification().f(contextInstance, specificationMethod);
             final Option<NonEmptyList<Throwable>> result = preSpecificationSteps.nel().accumulate(throwables(), validate(specification).nel(),
-                    validate(afters().f(lifecycle, contextInstance, contextClass.getAfterSpecificationMethods())).nel(),
-                    validate(verifyMocks().f(lifecycle)).nel());
+                    validate(lifecycle.runAfterSpecificationMethods().f(contextInstance, contextClass.getAfterSpecificationMethods())).nel(),
+                    validate(lifecycle.verifyMocks()._1()).nel());
             if (result.isSome()) {
                 return fail(startTime, specificationMethod, result.some().toList(), specification);
             } else {
                 return success(startTime, specificationMethod);
             }
         }
-    }
-
-    private F<SpecificationLifecycle, Option<Throwable>> resetMocks() {
-        return new F<SpecificationLifecycle, Option<Throwable>>() {
-            public Option<Throwable> f(final SpecificationLifecycle lifecycle) {
-                return lifecycle.resetMockery();
-            }
-        };
-    }
-
-    private F2<SpecificationLifecycle, Object, Either<Throwable, Unit>> wireActors() {
-        return new F2<SpecificationLifecycle, Object, Either<Throwable, Unit>>() {
-            public Either<Throwable, Unit> f(final SpecificationLifecycle lifecycle, final Object contextInstance) {
-                return rightToUnit(lifecycle.wireActors(contextInstance));
-            }
-        };
-    }
-
-    private F3<SpecificationLifecycle, Object, List<LifecycleMethod>, Option<Throwable>> befores() {
-        return new F3<SpecificationLifecycle, Object, List<LifecycleMethod>, Option<Throwable>>() {
-            public Option<Throwable> f(final SpecificationLifecycle lifecycle, final Object contextInstance, final List<LifecycleMethod> befores) {
-                return lifecycle.runBeforeSpecificationMethods(contextInstance, befores);
-            }
-        };
-    }
-
-    private F3<SpecificationLifecycle, Object, SpecificationMethod, Option<Throwable>> specification() {
-        return new F3<SpecificationLifecycle, Object, SpecificationMethod, Option<Throwable>>() {
-            public Option<Throwable> f(final SpecificationLifecycle lifecycle, final Object contextInstance, final SpecificationMethod method) {
-                return lifecycle.runSpecification(contextInstance, method);
-            }
-        };
-    }
-
-    private F3<SpecificationLifecycle, Object, List<LifecycleMethod>, Option<Throwable>> afters() {
-        return new F3<SpecificationLifecycle, Object, List<LifecycleMethod>, Option<Throwable>>() {
-            public Option<Throwable> f(final SpecificationLifecycle lifecycle, final Object contextInstance, final List<LifecycleMethod> afters) {
-                return lifecycle.runAfterSpecificationMethods(contextInstance, afters);
-            }
-        };
-    }
-
-    private F<SpecificationLifecycle, Option<Throwable>> verifyMocks() {
-        return new F<SpecificationLifecycle, Option<Throwable>>() {
-            public Option<Throwable> f(final SpecificationLifecycle lifecycle) {
-                return lifecycle.verifyMocks();
-            }
-        };
     }
 
     @Suggest({"Push validation into the lifecycle"})
@@ -208,7 +158,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         });
     }
 
-    @Suggest({"Push the obtaining of the lifecycle into the specification builder", "Groups that don't run get no-op lifecycle"})
+    @Suggest({"Push the obtaining of the lifecycle into the specification builder", "Groups that don't run get the no-op lifecycle"})
     private SpecificationLifecycle lifecycle(final AnnotatedElement contextClass) {
         final Class<? extends SpecificationLifecycle> lifecycleClass =
                 contextClass.isAnnotationPresent(Context.class) ? contextClass.getAnnotation(Context.class).lifecycle()

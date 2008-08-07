@@ -15,4 +15,5 @@
     <suppress checks="DesignForExtension" files="IterableCheckerImpl.java"/>
     <suppress checks="IllegalCatch" files="ActorAutoWirerImpl.java"/>
     <suppress checks="GenericIllegalRegexp" files="ExceptionUtil.java"/>
+    <suppress checks="MethodName" files="StandardSpecificationLifecycle.java"/>
 </suppressions>

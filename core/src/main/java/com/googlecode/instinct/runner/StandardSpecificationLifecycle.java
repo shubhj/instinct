@@ -28,6 +28,8 @@ import com.googlecode.instinct.internal.util.MethodInvoker;
 import com.googlecode.instinct.internal.util.MethodInvokerImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import fj.F;
+import fj.F2;
+import fj.P1;
 import fj.data.Either;
 import static fj.data.Either.left;
 import static fj.data.Either.right;
@@ -38,59 +40,91 @@ import static fj.data.Option.some;
 import static fj.data.Option.somes;
 import java.lang.reflect.Field;
 
+/**
+ * The standard (default) specification lifecycle.
+ */
 public final class StandardSpecificationLifecycle implements SpecificationLifecycle {
     private final ActorAutoWirer actorAutoWirer = new ActorAutoWirerImpl();
     private final MethodInvoker methodInvoker = new MethodInvokerImpl();
 
-    public <C> Either<Throwable, ContextClass> createContext(final Class<C> contextClass) {
-        checkNotNull(contextClass);
-        try {
-            return right((ContextClass) new ContextClassImpl(contextClass));
-        } catch (Throwable t) {
-            return left(t);
-        }
+    public <T> F<Class<T>, Either<Throwable, ContextClass>> createContext() {
+        return new F<Class<T>, Either<Throwable, ContextClass>>() {
+            public Either<Throwable, ContextClass> f(final Class<T> contextClass) {
+                checkNotNull(contextClass);
+                try {
+                    return right((ContextClass) new ContextClassImpl(contextClass));
+                } catch (Throwable t) {
+                    return left(t);
+                }
+            }
+        };
     }
 
-    public Option<Throwable> resetMockery() {
-        try {
-            Mocker.reset();
-            return none();
-        } catch (Throwable t) {
-            return some(t);
-        }
+    public P1<Option<Throwable>> resetMockery() {
+        return new P1<Option<Throwable>>() {
+            @Override
+            public Option<Throwable> _1() {
+                try {
+                    Mocker.reset();
+                    return none();
+                } catch (Throwable t) {
+                    return some(t);
+                }
+            }
+        };
     }
 
-    public Either<Throwable, List<Field>> wireActors(final Object contextInstance) {
-        checkNotNull(contextInstance);
-        try {
-            return right(actorAutoWirer.autoWireFields(contextInstance));
-        } catch (Throwable t) {
-            return left(t);
-        }
+    public F<Object, Either<Throwable, List<Field>>> wireActors() {
+        return new F<Object, Either<Throwable, List<Field>>>() {
+            public Either<Throwable, List<Field>> f(final Object contextInstance) {
+                checkNotNull(contextInstance);
+                try {
+                    return right(actorAutoWirer.autoWireFields(contextInstance));
+                } catch (Throwable t) {
+                    return left(t);
+                }
+            }
+        };
     }
 
-    public Option<Throwable> runBeforeSpecificationMethods(final Object contextInstance, final List<LifecycleMethod> beforeSpecificationMethods) {
-        checkNotNull(contextInstance, beforeSpecificationMethods);
-        return runMethods(contextInstance, beforeSpecificationMethods);
+    public F2<Object, List<LifecycleMethod>, Option<Throwable>> runBeforeSpecificationMethods() {
+        return runLifecycleMethods();
     }
 
-    public Option<Throwable> runSpecification(final Object contextInstance, final SpecificationMethod specificationMethod) {
-        checkNotNull(contextInstance, specificationMethod);
-        return runMethod(contextInstance, specificationMethod);
+    public F2<Object, SpecificationMethod, Option<Throwable>> runSpecification() {
+        return new F2<Object, SpecificationMethod, Option<Throwable>>() {
+            public Option<Throwable> f(final Object contextInstance, final SpecificationMethod specificationMethod) {
+                checkNotNull(contextInstance, specificationMethod);
+                return runMethod(contextInstance, specificationMethod);
+            }
+        };
     }
 
-    public Option<Throwable> runAfterSpecificationMethods(final Object contextInstance, final List<LifecycleMethod> afterSpecificationMethods) {
-        checkNotNull(contextInstance, afterSpecificationMethods);
-        return runMethods(contextInstance, afterSpecificationMethods);
+    public F2<Object, List<LifecycleMethod>, Option<Throwable>> runAfterSpecificationMethods() {
+        return runLifecycleMethods();
     }
 
-    public Option<Throwable> verifyMocks() {
-        try {
-            Mocker.verify();
-            return none();
-        } catch (Throwable t) {
-            return some(t);
-        }
+    public P1<Option<Throwable>> verifyMocks() {
+        return new P1<Option<Throwable>>() {
+            @Override
+            public Option<Throwable> _1() {
+                try {
+                    Mocker.verify();
+                    return none();
+                } catch (Throwable t) {
+                    return some(t);
+                }
+            }
+        };
+    }
+
+    private F2<Object, List<LifecycleMethod>, Option<Throwable>> runLifecycleMethods() {
+        return new F2<Object, List<LifecycleMethod>, Option<Throwable>>() {
+            public Option<Throwable> f(final Object contextInstance, final List<LifecycleMethod> methods) {
+                checkNotNull(contextInstance, methods);
+                return runMethods(contextInstance, methods);
+            }
+        };
     }
 
     private Option<Throwable> runMethods(final Object instance, final List<LifecycleMethod> methods) {

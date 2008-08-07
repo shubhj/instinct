@@ -31,6 +31,9 @@ import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.runner.SpecificationLifecycle;
 import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
+import fj.F;
+import fj.F2;
+import fj.P1;
 import fj.data.Either;
 import static fj.data.Either.right;
 import fj.data.List;
@@ -62,8 +65,7 @@ public final class RunningAContextWithAContextAnnotation {
                 one(constructorInvoker).invokeNullaryConstructor(with(equal(CustomLifecycle.class)));
                 will(returnValue(lifecycle));
                 one(constructorInvoker).invokeNullaryConstructor(with(equal(WithContextAnnotation.class)));
-            }
-        });
+            }});
         runner.run(specification);
     }
 
@@ -75,32 +77,62 @@ public final class RunningAContextWithAContextAnnotation {
     }
 
     private static final class CustomLifecycle implements SpecificationLifecycle {
-        public <T> Either<Throwable, ContextClass> createContext(final Class<T> contextClass) {
-            return right((ContextClass) new ContextClassImpl(WithContextAnnotation.class));
+        public <T> F<Class<T>, Either<Throwable, ContextClass>> createContext() {
+            return new F<Class<T>, Either<Throwable, ContextClass>>() {
+                public Either<Throwable, ContextClass> f(final Class<T> contextClass) {
+                    return right((ContextClass) new ContextClassImpl(WithContextAnnotation.class));
+                }
+            };
         }
 
-        public Option<Throwable> resetMockery() {
-            return none();
+        public P1<Option<Throwable>> resetMockery() {
+            return new P1<Option<Throwable>>() {
+                @Override
+                public Option<Throwable> _1() {
+                    return none();
+                }
+            };
         }
 
-        public Either<Throwable, List<Field>> wireActors(final Object contextInstance) {
-            return right(List.<Field>nil());
+        public F<Object, Either<Throwable, List<Field>>> wireActors() {
+            return new F<Object, Either<Throwable, List<Field>>>() {
+                public Either<Throwable, List<Field>> f(final Object contextInstance) {
+                    return right(List.<Field>nil());
+                }
+            };
         }
 
-        public Option<Throwable> runBeforeSpecificationMethods(final Object contextInstance, final List<LifecycleMethod> beforeSpecificationMethods) {
-            return none();
+        public F2<Object, List<LifecycleMethod>, Option<Throwable>> runBeforeSpecificationMethods() {
+            return new F2<Object, List<LifecycleMethod>, Option<Throwable>>() {
+                public Option<Throwable> f(final Object contextInstance, final List<LifecycleMethod> beforeSpecificationMethods) {
+                    return none();
+                }
+            };
         }
 
-        public Option<Throwable> runSpecification(final Object contextInstance, final SpecificationMethod specificationMethod) {
-            return none();
+        public F2<Object, SpecificationMethod, Option<Throwable>> runSpecification() {
+            return new F2<Object, SpecificationMethod, Option<Throwable>>() {
+                public Option<Throwable> f(final Object contextInstance, final SpecificationMethod specificationMethod) {
+                    return none();
+                }
+            };
         }
 
-        public Option<Throwable> runAfterSpecificationMethods(final Object contextInstance, final List<LifecycleMethod> afterSpecificationMethods) {
-            return none();
+        public F2<Object, List<LifecycleMethod>, Option<Throwable>> runAfterSpecificationMethods() {
+            return new F2<Object, List<LifecycleMethod>, Option<Throwable>>() {
+                public Option<Throwable> f(final Object contextInstance, final List<LifecycleMethod> beforeSpecificationMethods) {
+                    return none();
+                }
+            };
         }
 
-        public Option<Throwable> verifyMocks() {
-            return none();
+        public P1<Option<Throwable>> verifyMocks() {
+            return new P1<Option<Throwable>>() {
+                @Override
+                public Option<Throwable> _1() {
+                    return none();
+                }
+            };
         }
     }
 }
