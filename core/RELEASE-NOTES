@@ -7,7 +7,8 @@ o Reductio Integration
 
 * Instinct Release 0.1.9 *
 
-Maintenance release; Specification lifecycle can now be customised, Scala examples, additional
+Maintenance release; Multiple errors are now displayed when a specification fails with more
+than one exception, specification lifecycle can now be customised, Scala examples, additional
 Functional Java matchers (List, Either, Option), seperate source JAR.
 
 o Core Features
@@ -15,6 +16,7 @@ o Core Features
     This would allow for example, a Spring application context to be initialised and wired
     into each specification method allowing integration-style specifications using a Spring
     beans.
+  o Multiple errors are now displayed when a specification fails with more than one exception.
 o Scala integration
   o Added Scala stack example, showing the use of Instinct under Scala to spec out Scala
     code.
