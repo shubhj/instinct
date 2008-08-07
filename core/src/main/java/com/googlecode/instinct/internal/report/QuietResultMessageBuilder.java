@@ -22,23 +22,18 @@ import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilde
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import static com.googlecode.instinct.internal.util.exception.StringUtil.indentEachLine;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import fj.F;
 import fj.data.List;
 import static fj.data.List.asString;
 import static fj.data.List.fromString;
-import static fj.data.List.*;
+import static fj.data.List.join;
 import static java.lang.System.getProperty;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import static java.util.regex.Pattern.MULTILINE;
-import static java.util.regex.Pattern.compile;
 
 @Suggest("Only print out context name for pending or failed specs. For pending or failed specs print spec names also.")
 public final class QuietResultMessageBuilder implements ResultMessageBuilder {
-    private static final Pattern START_OF_LINE = compile("^", MULTILINE);
     private static final String NEW_LINE = getProperty("line.separator");
-    private static final String TAB = "\t";
     private final SpecificationFailureMessageBuilder failureMessageBuilder = new SpecificationFailureMessageBuilderImpl();
 
     public String buildMessage(final ContextResult contextResult) {
@@ -77,7 +72,7 @@ public final class QuietResultMessageBuilder implements ResultMessageBuilder {
 
     private String getFailureCause(final SpecificationResult specificationResult) {
         final String failureCause = failureMessageBuilder.buildMessage(specificationResult.getStatus());
-        return indentEachLine(removeLastNewline(failureCause));
+        return indentEachLine(failureCause);
     }
 
     private List<SpecificationResult> failedSpecifications(final ContextResult contextResult) {
@@ -86,14 +81,5 @@ public final class QuietResultMessageBuilder implements ResultMessageBuilder {
                 return !result.completedSuccessfully();
             }
         });
-    }
-
-    private CharSequence removeLastNewline(final String failureCause) {
-        return failureCause.endsWith(NEW_LINE) ? failureCause.substring(0, failureCause.length() - 1) : failureCause;
-    }
-
-    private String indentEachLine(final CharSequence failureCause) {
-        final Matcher matcher = START_OF_LINE.matcher(failureCause);
-        return matcher.replaceAll(TAB);
     }
 }

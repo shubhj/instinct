@@ -52,6 +52,8 @@ import com.googlecode.instinct.internal.core.APendingSpecificationMethodWithoutA
 import com.googlecode.instinct.internal.core.ASpecificationMethodBuilder;
 import com.googlecode.instinct.internal.core.ASpecificationMethodBuilderWithNonDefaultAnnotations;
 import com.googlecode.instinct.internal.core.ASpecificationThatExpectsAnExceptionButOneIsNotThrown;
+import com.googlecode.instinct.internal.core.ASpecificationThatThrowsAMockNeverInvokedException;
+import com.googlecode.instinct.internal.core.ASpecificationThatThrowsAMockNoExpectationsError;
 import com.googlecode.instinct.internal.core.ASpecificationThatThrowsAnExpectedException;
 import com.googlecode.instinct.internal.core.AnAfterSpecMethodThatThrowsAnException;
 import com.googlecode.instinct.internal.core.AnExpectingExceptionSpecificationMethod;
@@ -67,7 +69,7 @@ import com.googlecode.instinct.internal.util.AMethodEqualityUtility;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.exception.AListUtil;
 import com.googlecode.instinct.internal.util.exception.AnExceptionUtil;
-import com.googlecode.instinct.internal.util.exception.ExceptionSanitiserWithKnownException;
+import com.googlecode.instinct.internal.util.exception.ExceptionSanitiserWithJMockException;
 import com.googlecode.instinct.internal.util.exception.ExceptionSanitiserWithUnknownException;
 import com.googlecode.instinct.runner.AStandardSpecificationLifecycle;
 import junit.framework.Test;
@@ -89,7 +91,7 @@ public final class SpecificationsSuite {
 
     @Suggest("We should be able to automatically find these. Maybe add a group to all 'testdata' specs so they don't run.")
     private static Class<?>[] getContexts() {
-        return new Class<?>[]{ExceptionSanitiserWithKnownException.class, ExceptionSanitiserWithUnknownException.class,
+        return new Class<?>[]{ExceptionSanitiserWithJMockException.class, ExceptionSanitiserWithUnknownException.class,
                 AnAnnotatedMethodLocatorContext.class, AFixedDefect8WithAnAnnotationMethodLocator.class,
                 AFixedDefect8WithANamingConventionLocator.class, AFixedDefect23.class, AFixedDefect3.class, CommonExpectations.class,
                 AnObjectCheckerContext.class, AnObjectCheckerFailure.class, AStringFactoryImplContext.class,
@@ -109,6 +111,7 @@ public final class SpecificationsSuite {
                 ABeforeSpecMethodThatThrowsAnException.class, AnAfterSpecMethodThatThrowsAnException.class, AStandardSpecificationLifecycle.class,
                 AnEitherIsLeftMatcher.class, AnEitherIsRightMatcher.class, AnEqualityMatcher.class, AListEqualityMatcher.class,
                 ASpecificationRunner.class, RunningAContextWithoutAContextAnnotation.class, RunningAContextWithAContextAnnotation.class,
-                AnExceptionUtil.class, AListUtil.class};
+                AnExceptionUtil.class, AListUtil.class, ASpecificationThatThrowsAMockNeverInvokedException.class,
+                ASpecificationThatThrowsAMockNoExpectationsError.class};
     }
 }

@@ -25,12 +25,17 @@ import static fj.data.List.join;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import static java.lang.System.getProperty;
+import java.util.regex.Pattern;
+import static java.util.regex.Pattern.MULTILINE;
+import static java.util.regex.Pattern.compile;
 
 public final class ExceptionUtil {
+    private static final int LINES_PER_EXCEPTION = 15;
     private static final boolean AUTO_FLUSH = true;
     private static final String NEW_LINE = getProperty("line.separator");
-    private static final int LINES_PER_EXCEPTION = 15;
-    private static final String TRIMMED_SUFFIX = "\t...";
+    private static final Pattern START_OF_LINE = compile("^", MULTILINE);
+    private static final String TAB = "\t";
+    private static final String TRIMMED_SUFFIX = TAB + "...";
 
     private ExceptionUtil() {
         throw new UnsupportedOperationException();
@@ -60,7 +65,28 @@ public final class ExceptionUtil {
         } else {
             final ByteArrayOutputStream out = new ByteArrayOutputStream();
             throwable.printStackTrace(new PrintStream(out, AUTO_FLUSH));
-            return out.toString();
+            final String stackTrace = out.toString();
+            return StringUtil.removeFirstNewline(StringUtil.removeLastNewline(stackTrace));
         }
+    }
+
+    public static F<Throwable, String> stackTrace() {
+        return new F<Throwable, String>() {
+            public String f(final Throwable throwable) {
+                return stackTrace(throwable);
+            }
+        };
+    }
+
+    public static F<Throwable, String> message() {
+        return new F<Throwable, String>() {
+            public String f(final Throwable throwable) {
+                if (throwable == null) {
+                    return "";
+                } else {
+                    return StringUtil.removeFirstNewline(StringUtil.removeLastNewline(throwable.getMessage()));
+                }
+            }
+        };
     }
 }

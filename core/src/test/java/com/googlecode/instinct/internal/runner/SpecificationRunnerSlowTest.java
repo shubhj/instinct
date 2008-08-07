@@ -62,7 +62,7 @@ public final class SpecificationRunnerSlowTest extends InstinctTestCase {
         expect.that(detailedStatus).isAnInstanceOf(SpecificationFailureException.class);
         final Throwable failureCause = ((Throwable) detailedStatus).getCause();
         expect.that(failureCause).isAnInstanceOf(AggregatingException.class);
-        expect.that(failureCause.getMessage()).containsString("not all expectations were satisfied");
+        expect.that(failureCause.getMessage()).containsString("The following errors ocurred while running the specification");
     }
 
     private <T> SpecificationMethod getSpecificationMethod(final Class<T> contextClass, final Object specMethodName) {

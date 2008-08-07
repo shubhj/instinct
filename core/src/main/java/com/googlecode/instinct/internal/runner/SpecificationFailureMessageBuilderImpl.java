@@ -30,7 +30,6 @@ public final class SpecificationFailureMessageBuilderImpl implements Specificati
     @SuppressWarnings({"TypeMayBeWeakened"})
     private String buildFailureMessage(final SpecificationRunStatus status) {
         final SpecificationFailureException failureException = ((SpecificationRunFailureStatus) status).getDetails();
-//        final Throwable rootCause = exceptionFinder.getRootCause(((SpecificationRunFailureStatus) status).getDetails());
         return stackTrace(failureException.getCause());
     }
 }

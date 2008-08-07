@@ -16,9 +16,12 @@
 
 package com.googlecode.instinct.internal.util;
 
+import static com.googlecode.instinct.internal.util.ListUtil.stringToCharacter;
 import com.googlecode.instinct.internal.util.exception.ExceptionSanitiser;
 import com.googlecode.instinct.internal.util.exception.ExceptionSanitiserImpl;
+import com.googlecode.instinct.internal.util.exception.ExceptionUtil;
 import static com.googlecode.instinct.internal.util.exception.ExceptionUtil.stackTrace;
+import static com.googlecode.instinct.internal.util.exception.StringUtil.indentEachLineButFirst;
 import fj.F;
 import fj.data.List;
 import static fj.data.List.asString;
@@ -46,23 +49,37 @@ public final class AggregatingException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        return message + "; " + errors.length() + " error(s) occurred" + NEW_LINE + NEW_LINE + errorsAsString(errors);
+        return message;
     }
 
-    private String errorsAsString(final List<Throwable> errors) {
-        return asString(join(errorAsString(errors, List.<String>nil(), 1).intersperse(fromString(NEW_LINE + NEW_LINE))));
+    @Override
+    public String toString() {
+        return getMessage() + NEW_LINE + NEW_LINE + summary() + NEW_LINE + NEW_LINE + details();
     }
 
-    private List<List<Character>> errorAsString(final List<Throwable> errors, final List<String> traces, final int exceptionNumber) {
+    private String summary() {
+        final String summaryPreamble = "Summary: " + errors.length() + " error" + (errors.length() == 1 ? "" : "s") + " occurred";
+        final String summary = text(errors, ExceptionUtil.message(), NEW_LINE);
+        return summaryPreamble + NEW_LINE + indentEachLineButFirst(summary);
+    }
+
+    private String details() {
+        final String detailPreamble = "Full details follow:";
+        final String details = text(errors, stackTrace(), NEW_LINE + NEW_LINE);
+        return detailPreamble + NEW_LINE + NEW_LINE + details;
+    }
+
+    private String text(final List<Throwable> errors, final F<Throwable, String> text, final String delimiter) {
+        return asString(join(throwableToString(errors, List.<String>nil(), 1, text).intersperse(fromString(delimiter))));
+    }
+
+    private List<List<Character>> throwableToString(final List<Throwable> errors, final List<String> strings, final int exceptionNumber,
+            final F<Throwable, String> text) {
         if (errors.isEmpty()) {
-            return traces.reverse().map(new F<String, List<Character>>() {
-                public List<Character> f(final String trace) {
-                    return fromString(trace);
-                }
-            });
+            return strings.reverse().map(stringToCharacter());
         } else {
-            final String trace = exceptionNumber + ") " + stackTrace(exceptionSanitiser.sanitise(errors.head()));
-            return errorAsString(errors.tail(), traces.cons(trace), exceptionNumber + 1);
+            final String message = exceptionNumber + ")  " + text.f(exceptionSanitiser.sanitise(errors.head()));
+            return throwableToString(errors.tail(), strings.cons(message), exceptionNumber + 1, text);
         }
     }
 }

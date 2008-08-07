@@ -29,6 +29,8 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.exception.ExceptionFinder;
 import com.googlecode.instinct.internal.util.exception.ExceptionFinderImpl;
+import com.googlecode.instinct.internal.util.exception.ExceptionSanitiser;
+import com.googlecode.instinct.internal.util.exception.ExceptionSanitiserImpl;
 import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.runner.SpecificationLifecycle;
 import com.googlecode.instinct.runner.StandardSpecificationLifecycle;
@@ -52,6 +54,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
     private final ConstructorInvoker constructorInvoker = new ConstructorInvokerImpl();
     private final LifeCycleMethodValidator methodValidator = new LifeCycleMethodValidatorImpl();
     private final ExceptionFinder exceptionFinder = new ExceptionFinderImpl();
+    private final ExceptionSanitiser exceptionSanitiser = new ExceptionSanitiserImpl();
     private final Clock clock = new ClockImpl();
 
     public SpecificationResult run(final SpecificationMethod specificationMethod) {
@@ -199,7 +202,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
                 if (throwable instanceof AggregatingException) {
                     return realErrors(((AggregatingException) throwable).getAggregatedErrors());
                 } else {
-                    return List.<Throwable>nil().cons(exceptionFinder.getRootCause(throwable));
+                    return List.<Throwable>nil().cons(exceptionSanitiser.sanitise(exceptionFinder.getRootCause(throwable)));
                 }
             }
         });

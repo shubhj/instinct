@@ -16,7 +16,9 @@
 
 package com.googlecode.instinct.internal.util;
 
+import fj.F;
 import fj.data.List;
+import static fj.data.List.fromString;
 import fj.pre.Show;
 
 public final class ListUtil {
@@ -26,5 +28,13 @@ public final class ListUtil {
 
     public static <A> String listToString(final List<A> list) {
         return Show.<A>listShow(Show.<A>anyShow()).showS(list);
+    }
+
+    public static F<String, List<Character>> stringToCharacter() {
+        return new F<String, List<Character>>() {
+            public List<Character> f(final String string) {
+                return fromString(string);
+            }
+        };
     }
 }

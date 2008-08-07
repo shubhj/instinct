@@ -18,9 +18,9 @@ package com.googlecode.instinct.internal.util.exception;
 
 import com.googlecode.instinct.internal.runner.SpecificationFailureException;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.instance.ClassInstantiator;
 import com.googlecode.instinct.internal.util.instance.ClassInstantiatorImpl;
-import com.googlecode.instinct.internal.util.Suggest;
 
 @Suggest({"Wrap 'unexpected ...' jMock cardinality exception if you a mock is used in a test without expectations being set on it"})
 public final class ExceptionSanitiserImpl implements ExceptionSanitiser {
@@ -40,8 +40,13 @@ public final class ExceptionSanitiserImpl implements ExceptionSanitiser {
     }
 
     private Throwable sanitiseJMockExpectationError(final Throwable throwable) {
-        final String message = "Unexpected invocation. You may need to wrap the code in your new Expections(){{}} block with cardinality " +
-                "constraints, one(), atLeast(), etc.\n";
-        return new SpecificationFailureException(message + throwable.toString(), throwable);
+        final String errorString = throwable.toString();
+        if (errorString.contains("no expectations specified")) {
+            final String message = "Unexpected invocation. You may need to wrap the code in your new Expections(){{}} block with cardinality " +
+                    "constraints, one(), atLeast(), etc.\n";
+            return new SpecificationFailureException(message + errorString, throwable);
+        } else {
+            return throwable;
+        }
     }
 }
