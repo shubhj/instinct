@@ -34,6 +34,7 @@ o Infrastructure
 o Bugs
   o (Issue 21) Expected exception try-catch should only wrap specs, not before and after.
   o (Issue 19) Throwing exception out of mocked code confused expected exception handling.
+  o (Issue 40) Formatting of multiple exception report could be nicer.
 
 
 * Instinct Release 0.1.8 *

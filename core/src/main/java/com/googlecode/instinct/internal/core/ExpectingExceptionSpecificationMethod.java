@@ -29,6 +29,7 @@ import com.googlecode.instinct.internal.util.Clock;
 import com.googlecode.instinct.internal.util.ClockImpl;
 import static com.googlecode.instinct.internal.util.ListUtil.listToString;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.StringUtil.NEW_LINE;
 import com.googlecode.instinct.marker.annotate.Specification;
 import static com.googlecode.instinct.marker.annotate.Specification.NO_MESSAGE;
 import com.googlecode.instinct.runner.ContextListener;
@@ -135,8 +136,8 @@ public final class ExpectingExceptionSpecificationMethod extends Primordial impl
                 return checkExpectedException(startTime, failureStatus);
             } else {
                 final String message =
-                        "Expected exception was not thrown in body of specification\nExpected: " + expectedExceptionClass + "\n     got: " +
-                                exceptionThrown.getClass();
+                        "Expected exception was not thrown in body of specification" + NEW_LINE + "Expected: " + expectedExceptionClass + NEW_LINE +
+                                "     got: " + exceptionThrown.getClass();
                 return fail(startTime, message, failureStatus);
             }
         } else {
@@ -155,8 +156,9 @@ public final class ExpectingExceptionSpecificationMethod extends Primordial impl
                 return fail(startTime, message, failureStatus);
             }
         } else {
-            final String message = "Expected exception message was incorrect\nExpected: " + getExpectedExceptionMessage() + "\n     got: " +
-                    exceptionThrown.getMessage();
+            final String message =
+                    "Expected exception message was incorrect" + NEW_LINE + "Expected: " + getExpectedExceptionMessage() + NEW_LINE + "     got: " +
+                            exceptionThrown.getMessage();
             return fail(startTime, message, failureStatus);
         }
     }

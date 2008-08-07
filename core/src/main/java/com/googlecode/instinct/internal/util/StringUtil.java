@@ -22,8 +22,8 @@ import static java.util.regex.Pattern.MULTILINE;
 import static java.util.regex.Pattern.compile;
 
 public final class StringUtil {
+    public static final String NEW_LINE = getProperty("line.separator");
     public static final String INDENT = "\t";
-    private static final String NEW_LINE = getProperty("line.separator");
     private static final Pattern START_OF_LINE = compile("^", MULTILINE);
 
     private StringUtil() {
