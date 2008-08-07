@@ -55,6 +55,7 @@ import com.googlecode.instinct.internal.core.ASpecificationThatExpectsAnExceptio
 import com.googlecode.instinct.internal.core.ASpecificationThatThrowsAMockNeverInvokedException;
 import com.googlecode.instinct.internal.core.ASpecificationThatThrowsAMockNoExpectationsError;
 import com.googlecode.instinct.internal.core.ASpecificationThatThrowsAnExpectedException;
+import com.googlecode.instinct.internal.core.ASpecificationWithAMockErrorAndExpectedError;
 import com.googlecode.instinct.internal.core.AnAfterSpecMethodThatThrowsAnException;
 import com.googlecode.instinct.internal.core.AnExpectingExceptionSpecificationMethod;
 import com.googlecode.instinct.internal.edge.org.hamcrest.AStringFactoryImplContext;
@@ -112,6 +113,6 @@ public final class SpecificationsSuite {
                 AnEitherIsLeftMatcher.class, AnEitherIsRightMatcher.class, AnEqualityMatcher.class, AListEqualityMatcher.class,
                 ASpecificationRunner.class, RunningAContextWithoutAContextAnnotation.class, RunningAContextWithAContextAnnotation.class,
                 AnExceptionUtil.class, AListUtil.class, ASpecificationThatThrowsAMockNeverInvokedException.class,
-                ASpecificationThatThrowsAMockNoExpectationsError.class};
+                ASpecificationThatThrowsAMockNoExpectationsError.class, ASpecificationWithAMockErrorAndExpectedError.class};
     }
 }

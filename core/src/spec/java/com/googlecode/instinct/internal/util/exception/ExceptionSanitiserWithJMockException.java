@@ -51,7 +51,7 @@ public final class ExceptionSanitiserWithJMockException {
 
     @Specification
     public void transformsJMockNoExpectationErrorIntoSpecificationFailureException() {
-        expect.that(exceptionSanitiser.sanitise(noExpectations)).isOfType(SpecificationFailureException.class);
+        expect.that(exceptionSanitiser.sanitise(noExpectations)).isOfType(RuntimeException.class);
     }
 
     @Specification

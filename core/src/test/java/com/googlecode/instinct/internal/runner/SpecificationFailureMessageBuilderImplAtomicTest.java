@@ -17,25 +17,27 @@
 package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.internal.util.AggregatingException;
 import static com.googlecode.instinct.internal.util.exception.ExceptionUtil.stackTrace;
 import com.googlecode.instinct.marker.annotate.Stub;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.actor.TestSubjectCreator.createSubject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import fj.data.List;
 import fj.data.Option;
 
 @SuppressWarnings({"UnusedDeclaration"})
 public final class SpecificationFailureMessageBuilderImplAtomicTest extends InstinctTestCase {
     @Subject(auto = false) private SpecificationFailureMessageBuilder failureMessageBuilder;
     @Stub(auto = false) private SpecificationFailureException failureCause;
-    @Stub(auto = false) private Throwable rootCause;
+    @Stub(auto = false) private AggregatingException rootCause;
     @Stub(auto = false) private SpecificationRunStatus failureStatus;
     @Stub(auto = false) private SpecificationRunStatus successStatus;
 
     @Override
     public void setUpTestDoubles() {
-        rootCause = new RuntimeException();
+        rootCause = new AggregatingException("A message", List.<Throwable>nil().cons(new RuntimeException()));
         failureCause = new SpecificationFailureException("", rootCause);
         successStatus = new SpecificationRunSuccessStatus();
         failureStatus = new SpecificationRunFailureStatus(failureCause, Option.<Throwable>none());

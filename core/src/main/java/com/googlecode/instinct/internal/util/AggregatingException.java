@@ -17,11 +17,11 @@
 package com.googlecode.instinct.internal.util;
 
 import static com.googlecode.instinct.internal.util.ListUtil.stringToCharacter;
+import static com.googlecode.instinct.internal.util.StringUtil.unindent;
 import com.googlecode.instinct.internal.util.exception.ExceptionSanitiser;
 import com.googlecode.instinct.internal.util.exception.ExceptionSanitiserImpl;
 import com.googlecode.instinct.internal.util.exception.ExceptionUtil;
 import static com.googlecode.instinct.internal.util.exception.ExceptionUtil.stackTrace;
-import static com.googlecode.instinct.internal.util.exception.StringUtil.indentEachLineButFirst;
 import fj.F;
 import fj.data.List;
 import static fj.data.List.asString;
@@ -54,19 +54,28 @@ public final class AggregatingException extends RuntimeException {
 
     @Override
     public String toString() {
-        return getMessage() + NEW_LINE + NEW_LINE + summary() + NEW_LINE + NEW_LINE + details();
+        return errors.isEmpty() ? getMessage() : getMessage() + NEW_LINE + NEW_LINE + summary() + NEW_LINE + NEW_LINE + details();
     }
 
     private String summary() {
         final String summaryPreamble = "Summary: " + errors.length() + " error" + (errors.length() == 1 ? "" : "s") + " occurred";
         final String summary = text(errors, ExceptionUtil.message(), NEW_LINE);
-        return summaryPreamble + NEW_LINE + indentEachLineButFirst(summary);
+        return summaryPreamble + NEW_LINE + formatSummary(StringUtil.indentEachLine(summary));
     }
 
     private String details() {
         final String detailPreamble = "Full details follow:";
         final String details = text(errors, stackTrace(), NEW_LINE + NEW_LINE);
         return detailPreamble + NEW_LINE + NEW_LINE + details;
+    }
+
+    private String formatSummary(final String summary) {
+        final List<String> lines = Fj.toFjList(summary.split(NEW_LINE));
+        return asString(join(lines.map(new F<String, List<Character>>() {
+            public List<Character> f(final String line) {
+                return fromString(line.matches("^\\s+[0-9]+\\).*") ? unindent(line) : line);
+            }
+        }).intersperse(fromString(NEW_LINE))));
     }
 
     private String text(final List<Throwable> errors, final F<Throwable, String> text, final String delimiter) {
@@ -78,7 +87,7 @@ public final class AggregatingException extends RuntimeException {
         if (errors.isEmpty()) {
             return strings.reverse().map(stringToCharacter());
         } else {
-            final String message = exceptionNumber + ")  " + text.f(exceptionSanitiser.sanitise(errors.head()));
+            final String message = exceptionNumber + (exceptionNumber >= 10 ? ") " : ")  ") + text.f(exceptionSanitiser.sanitise(errors.head()));
             return throwableToString(errors.tail(), strings.cons(message), exceptionNumber + 1, text);
         }
     }

@@ -17,6 +17,8 @@
 package com.googlecode.instinct.internal.util.exception;
 
 import static com.googlecode.instinct.internal.util.Fj.toFjList;
+import static com.googlecode.instinct.internal.util.StringUtil.removeFirstNewline;
+import static com.googlecode.instinct.internal.util.StringUtil.removeLastNewline;
 import fj.F;
 import fj.data.List;
 import static fj.data.List.asString;
@@ -25,15 +27,11 @@ import static fj.data.List.join;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import static java.lang.System.getProperty;
-import java.util.regex.Pattern;
-import static java.util.regex.Pattern.MULTILINE;
-import static java.util.regex.Pattern.compile;
 
 public final class ExceptionUtil {
     private static final int LINES_PER_EXCEPTION = 15;
     private static final boolean AUTO_FLUSH = true;
     private static final String NEW_LINE = getProperty("line.separator");
-    private static final Pattern START_OF_LINE = compile("^", MULTILINE);
     private static final String TAB = "\t";
     private static final String TRIMMED_SUFFIX = TAB + "...";
 
@@ -66,7 +64,7 @@ public final class ExceptionUtil {
             final ByteArrayOutputStream out = new ByteArrayOutputStream();
             throwable.printStackTrace(new PrintStream(out, AUTO_FLUSH));
             final String stackTrace = out.toString();
-            return StringUtil.removeFirstNewline(StringUtil.removeLastNewline(stackTrace));
+            return removeFirstNewline(removeLastNewline(stackTrace));
         }
     }
 
@@ -84,7 +82,8 @@ public final class ExceptionUtil {
                 if (throwable == null) {
                     return "";
                 } else {
-                    return StringUtil.removeFirstNewline(StringUtil.removeLastNewline(throwable.getMessage()));
+                    final String message = throwable.getMessage();
+                    return message == null || message.isEmpty() ? message : removeFirstNewline(removeLastNewline(message));
                 }
             }
         };

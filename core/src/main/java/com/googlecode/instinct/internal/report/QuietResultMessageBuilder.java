@@ -21,8 +21,8 @@ import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilde
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilderImpl;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import static com.googlecode.instinct.internal.util.StringUtil.indentEachLine;
 import com.googlecode.instinct.internal.util.Suggest;
-import static com.googlecode.instinct.internal.util.exception.StringUtil.indentEachLine;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import fj.F;
 import fj.data.List;

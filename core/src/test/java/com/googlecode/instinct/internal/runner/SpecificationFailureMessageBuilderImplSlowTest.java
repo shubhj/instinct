@@ -18,7 +18,9 @@ package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.test.InstinctTestCase;
+import com.googlecode.instinct.internal.util.AggregatingException;
 import fj.data.Option;
+import fj.data.List;
 
 public final class SpecificationFailureMessageBuilderImplSlowTest extends InstinctTestCase {
     private SpecificationFailureMessageBuilder failureMessageBuilder;
@@ -29,7 +31,8 @@ public final class SpecificationFailureMessageBuilderImplSlowTest extends Instin
     }
 
     public void testCreatesStackTracesFromSpecificationFailures() {
-        final SpecificationFailureException failure = new SpecificationFailureException("Huzzah!", new RuntimeException("Huzzah!"));
+        final AggregatingException cause = new AggregatingException("The underlying cause is...", List.<Throwable>nil().cons(new RuntimeException("Huzzah!")));
+        final SpecificationFailureException failure = new SpecificationFailureException("Huzzah! Again!", cause);
         final String stack = failureMessageBuilder.buildMessage(new SpecificationRunFailureStatus(failure, Option.<Throwable>none()));
         expect.that(stack).isNotEmpty();
     }

@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.internal.util.exception;
 
-import com.googlecode.instinct.internal.runner.SpecificationFailureException;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.instance.ClassInstantiator;
@@ -44,7 +43,7 @@ public final class ExceptionSanitiserImpl implements ExceptionSanitiser {
         if (errorString.contains("no expectations specified")) {
             final String message = "Unexpected invocation. You may need to wrap the code in your new Expections(){{}} block with cardinality " +
                     "constraints, one(), atLeast(), etc.\n";
-            return new SpecificationFailureException(message + errorString, throwable);
+            return new RuntimeException(message + errorString, throwable);
         } else {
             return throwable;
         }

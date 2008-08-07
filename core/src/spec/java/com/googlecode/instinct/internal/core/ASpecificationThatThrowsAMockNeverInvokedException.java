@@ -39,6 +39,7 @@ public final class ASpecificationThatThrowsAMockNeverInvokedException {
     public void failsTheSpecWithTwoErrors() {
         final ContextClass contextClass = new ContextClassImpl(MockVerificiationAndException.class);
         final ContextResult result = contextClass.run();
+        Mocker.reset();
         expect.that(result.completedSuccessfully()).isFalse();
         final SpecificationResult specResult = result.getSpecificationResults().head();
         final AggregatingException exception =
@@ -54,7 +55,6 @@ public final class ASpecificationThatThrowsAMockNeverInvokedException {
                 return throwable.getMessage().contains("Should be seen");
             }
         });
-        Mocker.reset();
     }
 
     private static final class MockVerificiationAndException {

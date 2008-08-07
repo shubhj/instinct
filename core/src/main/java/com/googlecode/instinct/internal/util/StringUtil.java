@@ -14,30 +14,32 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.util.exception;
+package com.googlecode.instinct.internal.util;
 
 import static java.lang.System.getProperty;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import static java.util.regex.Pattern.MULTILINE;
 import static java.util.regex.Pattern.compile;
 
 public final class StringUtil {
+    public static final String INDENT = "\t";
     private static final String NEW_LINE = getProperty("line.separator");
     private static final Pattern START_OF_LINE = compile("^", MULTILINE);
-    private static final String INDENT = "\t";
 
     private StringUtil() {
         throw new UnsupportedOperationException();
     }
 
-    public static String indentEachLine(final CharSequence text) {
-        final Matcher matcher = START_OF_LINE.matcher(text);
-        return matcher.replaceAll(INDENT);
+    public static String indent(final String text) {
+        return INDENT + text;
     }
 
-    public static String indentEachLineButFirst(final CharSequence text) {
-        return removeFirst(indentEachLine(text), INDENT);
+    public static String unindent(final String text) {
+        return removeFirst(text, INDENT);
+    }
+
+    public static String indentEachLine(final CharSequence text) {
+        return START_OF_LINE.matcher(text).replaceAll(INDENT);
     }
 
     public static String removeFirstNewline(final String text) {
@@ -46,7 +48,7 @@ public final class StringUtil {
 
     @SuppressWarnings({"TypeMayBeWeakened"})
     public static String removeFirst(final String text, final String toRemove) {
-        return text.startsWith(toRemove) ? text.substring(1) : text;
+        return text.startsWith(toRemove) ? text.substring(toRemove.length()) : text;
     }
 
     public static String removeLastNewline(final String text) {
@@ -55,6 +57,6 @@ public final class StringUtil {
 
     @SuppressWarnings({"TypeMayBeWeakened"})
     public static String removeLast(final String text, final String toRemove) {
-        return text.endsWith(toRemove) ? text.substring(0, text.length() - 1) : text;
+        return text.endsWith(toRemove) ? text.substring(0, text.length() - toRemove.length()) : text;
     }
 }

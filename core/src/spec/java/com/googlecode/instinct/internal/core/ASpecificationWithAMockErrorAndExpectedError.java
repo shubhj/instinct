@@ -36,9 +36,10 @@ public final class ASpecificationWithAMockErrorAndExpectedError {
 
     @TechNote("Need to reset the mockery here, or the mock error will be reported as an error in *this* specification.")
     @Specification
-    public void failsTheSpecWithOneError() {
+    public void failsTheSpecWithTheMockError() {
         final ContextClass contextClass = new ContextClassImpl(MockVerificiationAndException.class);
         final ContextResult result = contextClass.run();
+        Mocker.reset();
         expect.that(result.completedSuccessfully()).isFalse();
         final SpecificationResult specResult = result.getSpecificationResults().head();
         final AggregatingException exception =
@@ -49,7 +50,6 @@ public final class ASpecificationWithAMockErrorAndExpectedError {
                 return throwable.getMessage().contains("not all expectations were satisfied");
             }
         });
-        Mocker.reset();
     }
 
     private static final class MockVerificiationAndException {
@@ -60,8 +60,7 @@ public final class ASpecificationWithAMockErrorAndExpectedError {
             expect.that(new Expectations() {
                 {
                     one(mockRunnable).run();
-                }
-            });
+                }});
             throw new RuntimeException("This is expected");
         }
     }

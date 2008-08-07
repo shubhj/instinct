@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Workingmouse
+ * Copyright 2006-2008 Workingmouse
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,16 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.runner;
+package com.googlecode.instinct.internal.core;
 
-import com.googlecode.instinct.internal.util.AggregatingException;
+import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.marker.annotate.Specification;
+import org.junit.runner.RunWith;
 
-public final class SpecificationFailureException extends RuntimeException {
-    private static final long serialVersionUID = 6144863835465899524L;
-
-    public SpecificationFailureException(final String message) {
-        super(message);
-    }
-
-    @SuppressWarnings({"TypeMayBeWeakened"})
-    public SpecificationFailureException(final String message, final AggregatingException cause) {
-        super(message, cause);
+@RunWith(InstinctRunner.class)
+public final class Foo {
+    // Check expected: 1) different class, 2) different message, 3)  other error in lifecycle, 4) errors elsewhere in lifecycle
+    @Specification
+    public void xxx() {
     }
 }
