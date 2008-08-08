@@ -11,6 +11,7 @@
     <property name="project.zip" value="${project.shortname}-${project.version.full}.zip"/>
     <property name="javadoc.zip" value="${project.shortname}-${project.version.full}-javadoc.zip"/>
     <property name="sources.jar" value="${project.shortname}-${project.version.full}-sources.jar"/>
+    <property name="maven-bundle.jar" value="${project.shortname}-${project.version.full}-bundle.jar"/>
     <property name="main.package.name" value="com.googlecode.instinct"/>
 
     <property name="build.dir" value="build"/>

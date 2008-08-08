@@ -5,8 +5,20 @@
     <groupId>com.googlecode.instinct</groupId>
     <artifactId>instinct-example</artifactId>
     <packaging>jar</packaging>
-    <name>Instinct Behaviour Driven Development (BDD) Framework Examples</name>
+    <name>Instinct Examples</name>
+    <description>Instinct Behaviour Driven Development (BDD) Framework Examples</description>
     <version>0.1.9</version>
+    <url>http://instinct.googlecode.com/</url>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <url>http://instinct.googlecode.com/svn/</url>
+    </scm>
     <dependencies>
         <dependency>
             <groupId>com.googlecode.instinct</groupId>

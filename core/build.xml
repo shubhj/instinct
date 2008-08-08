@@ -108,6 +108,16 @@
         </zip>
     </target>
 
+    <target name="-maven-bundle" depends="-clover-safe-jar,-sources-jar,-javadoc">
+        <mkdir dir="${release.dir}"/>
+        <jar destfile="${build.dir}/${maven-bundle.jar}">
+            <fileset dir="${basedir}" includes="pom.xml"/>
+            <fileset dir="${build.dir}" includes="${project.jar}"/>
+            <fileset dir="${build.dir}" includes="${sources.jar}"/>
+            <fileset dir="${build.dir}" includes="${javadoc.zip}"/>
+        </jar>
+    </target>
+
     <macrodef name="clean.classes.macro">
         <sequential>
             <delete dir="${main.classes.dir}"/>
