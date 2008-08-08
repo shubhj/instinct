@@ -14,9 +14,9 @@
     <target name="javadoc" depends="clean,-javadoc"/>
     <target name="jar" depends="clean,-clover-safe-jar"/>
     <target name="quality" depends="clean,-quality"/>
-    <target name="release" depends="clean,-release-zip"/>
+    <target name="release" depends="clean,-release-zip,-maven-bundle"/>
 
-    <target name="-artifacts" depends="-release-zip">
+    <target name="-artifacts" depends="-release-zip,-maven-bundle">
         <copy todir="${build.dir}">
             <fileset dir="${etc.dir}/artifacts">
                 <include name="**/*"/>
@@ -24,9 +24,11 @@
             <filterset>
                 <filter token="TITLE" value="Artifacts - ${project.shortname} v${project.version.full}"/>
                 <filter token="PROJECT_NAME" value="${project.longname}"/>
-                <filter token="PROJECT_JAR" value="${project.jar}"/>
                 <filter token="RELEASE_ZIP" value="${project.zip}"/>
-                <filter token="JAVADOC_ZIP" value="${javadoc.zip}"/>
+                <filter token="PROJECT_JAR" value="${project.jar}"/>
+                <filter token="SOURCES_JAR" value="${sources.jar}"/>
+                <filter token="JAVADOC_JAR" value="${javadoc.jar}"/>
+                <filter token="MAVEN_BUNDLE" value="${maven-bundle.jar}"/>
             </filterset>
         </copy>
     </target>
@@ -49,9 +51,9 @@
                 useexternalfile="true">
             <link href="http://java.sun.com/j2se/1.5.0/docs/api"/>
         </javadoc>
-        <zip destfile="${build.dir}/${javadoc.zip}">
+        <jar destfile="${build.dir}/${javadoc.jar}">
             <fileset dir="${javadoc.dir}"/>
-        </zip>
+        </jar>
     </target>
 
     <target name="-compile" depends="-checkstyle">
@@ -97,7 +99,7 @@
             </fileset>
             <fileset dir="${build.dir}" includes="${project.jar}"/>
             <fileset dir="${build.dir}" includes="${sources.jar}"/>
-            <fileset dir="${build.dir}" includes="${javadoc.zip}"/>
+            <fileset dir="${build.dir}" includes="${javadoc.jar}"/>
             <zipfileset dir="${lib.dir}/ant" prefix="lib" includes="ant-1.*.jar,ant-license.txt"/>
             <zipfileset dir="${lib.dir}/cglib" prefix="lib"/>
             <zipfileset dir="${lib.dir}/hamcrest" prefix="lib"/>
@@ -110,11 +112,11 @@
 
     <target name="-maven-bundle" depends="-clover-safe-jar,-sources-jar,-javadoc">
         <mkdir dir="${release.dir}"/>
-        <jar destfile="${build.dir}/${maven-bundle.jar}">
+        <jar destfile="${release.dir}/${maven-bundle.jar}">
             <fileset dir="${basedir}" includes="pom.xml"/>
             <fileset dir="${build.dir}" includes="${project.jar}"/>
             <fileset dir="${build.dir}" includes="${sources.jar}"/>
-            <fileset dir="${build.dir}" includes="${javadoc.zip}"/>
+            <fileset dir="${build.dir}" includes="${javadoc.jar}"/>
         </jar>
     </target>
 

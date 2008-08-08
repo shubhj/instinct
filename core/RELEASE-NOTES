@@ -34,7 +34,8 @@ o Scala integration
 o Maven integration
   o Added Maven bundle to allow uploading to central Maven repository.
 o Packaging
-  o Moved source code out of main jar into instinct-<version>-sources.jar.
+  o Moved source code out of main jar into instinct-<version>-sources.jar (for Maven).
+  o Moved javadoc into jar instead of zip instinct-<version>-javadoc.jar (for Maven).
 o Infrastructure
   o Upgraded to Functional Java 2.10.
   o Downgraded (again) to CGLib 2.1.3 (for Maven integration).
