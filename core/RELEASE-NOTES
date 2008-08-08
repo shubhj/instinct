@@ -13,7 +13,7 @@ o Infrastructure
 
 Maintenance release; Multiple specification failures reported, specification lifecycle
 can now be customised, Scala examples, additional Functional Java matchers (List, Either,
-Option), Maven bundle, seperate source JAR.
+Option), Maven bundle and a seperate source JAR.
 
 o Core Features
   o Custom specification lifecycles can now be plugged in using the @Context annotation.

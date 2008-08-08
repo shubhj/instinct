@@ -14,7 +14,7 @@
     <target name="javadoc" depends="clean,-javadoc"/>
     <target name="jar" depends="clean,-clover-safe-jar"/>
     <target name="quality" depends="clean,-quality"/>
-    <target name="release" depends="clean,-release-zip,-maven-bundle"/>
+    <target name="release" depends="clean,-release-zip,-maven-deploy"/>
 
     <target name="-artifacts" depends="-release-zip,-maven-bundle">
         <copy todir="${build.dir}">
@@ -118,6 +118,16 @@
             <fileset dir="${build.dir}" includes="${sources.jar}"/>
             <fileset dir="${build.dir}" includes="${javadoc.jar}"/>
         </jar>
+    </target>
+
+    <target name="-maven-deploy" depends="-maven-bundle">
+        <exec dir="${basedir}" executable="mvn" failonerror="true" os="Mac OS X,Linux">
+            <arg value="deploy:deploy-file"/>
+            <arg value="-Durl=file://${basedir}/../artifacts/maven"/>
+            <arg value="-DrepositoryId=local-svn-artifacts"/>
+            <arg value="-Dfile=${release.dir}/${maven-bundle.jar}"/>
+            <arg value="-DpomFile=${basedir}/pom.xml"/>
+        </exec>
     </target>
 
     <macrodef name="clean.classes.macro">
