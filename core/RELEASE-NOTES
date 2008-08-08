@@ -8,6 +8,7 @@ o Reductio Integration
 o Infrastructure
    o Parse lifecycle in builder (required for groups)
 
+
 * Instinct Release 0.1.9 *
 
 Maintenance release; Multiple errors are now displayed when a specification fails with more
@@ -29,11 +30,12 @@ o Expectation API
   o Added fj.data.Option matchers:
     expect.that(Some(1)).isSome(1), expect.that(foo.bar()).isNone().
   o Added fj.data.Either matchers:
-    expect.that(error()).isLeft(runtimeException), expect.that(foo.bar()).isRight(42).  
+    expect.that(error()).isLeft(runtimeException), expect.that(foo.bar()).isRight(42).
 o Packaging
   o Moved source code out of main jar into instinct-<version>-sources.jar.
 o Infrastructure
-  o Upgraded to: Functional Java 2.10.
+  o Upgraded to Functional Java 2.10.
+  o Downgraded (again) to CGLib 2.1.3 (for Maven integration).
 o Bugs
   o (Issue 21) Expected exception try-catch should only wrap specs, not before and after.
   o (Issue 19) Throwing exception out of mocked code confused expected exception handling.
