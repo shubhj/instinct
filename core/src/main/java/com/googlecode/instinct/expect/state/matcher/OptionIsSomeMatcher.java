@@ -16,16 +16,15 @@
 
 package com.googlecode.instinct.expect.state.matcher;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.expect.state.matcher.EqualityMatcher.equalTo;
-import fj.data.Option;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import static org.hamcrest.core.IsAnything.anything;
 
-public final class OptionIsSomeMatcher<T> extends TypeSafeMatcher<Option<T>> {
+public final class OptionIsSomeMatcher<T> extends TypeSafeMatcher<ToStringableOption<T>> {
     private final Matcher<T> matcher;
 
     private OptionIsSomeMatcher(final Matcher<T> matcher) {
@@ -33,31 +32,31 @@ public final class OptionIsSomeMatcher<T> extends TypeSafeMatcher<Option<T>> {
     }
 
     @Override
-    public boolean matchesSafely(final Option<T> item) {
+    public boolean matchesSafely(final ToStringableOption<T> item) {
         return item.isSome() && matcher.matches(item.some());
     }
 
     public void describeTo(final Description description) {
-        description.appendText("a some option containing ").appendDescriptionOf(matcher);
+        description.appendText("some containing ").appendDescriptionOf(matcher);
     }
 
     @SuppressWarnings({"unchecked"})
     @Factory
-    public static <T> Matcher<Option<T>> isSome(final Matcher<T> elementMatcher) {
+    public static <T> Matcher<ToStringableOption<T>> isSome(final Matcher<T> elementMatcher) {
         checkNotNull(elementMatcher);
         return new OptionIsSomeMatcher(elementMatcher);
     }
 
     @SuppressWarnings({"unchecked"})
     @Factory
-    public static <T> Matcher<Option<T>> isSome(final T item) {
+    public static <T> Matcher<ToStringableOption<T>> isSome(final T item) {
         checkNotNull(item);
         return new OptionIsSomeMatcher(equalTo(item));
     }
 
     @SuppressWarnings({"unchecked"})
     @Factory
-    public static <T> Matcher<Option<T>> isSome() {
+    public static <T> Matcher<ToStringableOption<T>> isSome() {
         return new OptionIsSomeMatcher<T>((Matcher<T>) anything());
     }
 }

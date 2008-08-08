@@ -16,10 +16,12 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
+import static com.googlecode.instinct.expect.state.matcher.ToStringableOption.toStringableOption;
 import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ExceptionTestChecker.expectException;
 import static com.googlecode.instinct.test.checker.ModifierChecker.checkPublic;
 import fj.data.Option;
+import static fj.data.Option.some;
 
 public final class OptionCheckerImplAtomicTest extends InstinctTestCase {
     private OptionChecker<Integer> checkerWithNothing;
@@ -31,8 +33,8 @@ public final class OptionCheckerImplAtomicTest extends InstinctTestCase {
 
     @Override
     public void setUpSubject() {
-        checkerWithNothing = new OptionCheckerImpl<Integer>(Option.<Integer>none());
-        checkerWithSomething = new OptionCheckerImpl<Integer>(Option.<Integer>some(3));
+        checkerWithNothing = new OptionCheckerImpl<Integer>(toStringableOption(Option.<Integer>none()));
+        checkerWithSomething = new OptionCheckerImpl<Integer>(toStringableOption(some(3)));
     }
 
     public void testsFailsIfIsSomeAndChecksIfIsNone() {

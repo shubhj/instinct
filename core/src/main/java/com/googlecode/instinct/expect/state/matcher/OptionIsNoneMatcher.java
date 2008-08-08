@@ -16,27 +16,26 @@
 
 package com.googlecode.instinct.expect.state.matcher;
 
-import fj.data.Option;
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
-public final class OptionIsNoneMatcher<T> extends TypeSafeMatcher<Option<T>> {
+public final class OptionIsNoneMatcher<T> extends TypeSafeMatcher<ToStringableOption<T>> {
     private OptionIsNoneMatcher() {
     }
 
     @Override
-    public boolean matchesSafely(final Option<T> item) {
+    public boolean matchesSafely(final ToStringableOption<T> item) {
         return item.isNone();
     }
 
     public void describeTo(final Description description) {
-        description.appendText("a none option");
+        description.appendText("none");
     }
 
     @Factory
-    public static <T> Matcher<Option<T>> isNone() {
+    public static <T> Matcher<ToStringableOption<T>> isNone() {
         return new OptionIsNoneMatcher<T>();
     }
 }

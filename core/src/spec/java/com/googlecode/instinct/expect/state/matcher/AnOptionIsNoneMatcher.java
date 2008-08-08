@@ -20,6 +20,7 @@ import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Stub;
+import static com.googlecode.instinct.expect.state.matcher.ToStringableOption.*;
 import fj.data.Option;
 import static fj.data.Option.none;
 import static fj.data.Option.some;
@@ -29,13 +30,13 @@ import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
 public final class AnOptionIsNoneMatcher {
-    @Stub(auto = false) private Option<Integer> someOption;
-    @Stub(auto = false) private Option<Integer> noneOption;
+    @Stub(auto = false) private ToStringableOption<Integer> someOption;
+    @Stub(auto = false) private ToStringableOption<Integer> noneOption;
 
     @BeforeSpecification
     public void before() {
-        someOption = some(5);
-        noneOption = none();
+        someOption = toStringableOption(some(5));
+        noneOption = toStringableOption(Option.<Integer>none());
     }
 
     @Specification

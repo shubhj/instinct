@@ -34,10 +34,10 @@ import com.googlecode.instinct.expect.state.checker.EventObjectChecker;
 import com.googlecode.instinct.expect.state.checker.EventObjectCheckerImpl;
 import com.googlecode.instinct.expect.state.checker.FileChecker;
 import com.googlecode.instinct.expect.state.checker.FileCheckerImpl;
-import com.googlecode.instinct.expect.state.checker.ListChecker;
-import com.googlecode.instinct.expect.state.checker.ListCheckerImpl;
 import com.googlecode.instinct.expect.state.checker.IterableChecker;
 import com.googlecode.instinct.expect.state.checker.IterableCheckerImpl;
+import com.googlecode.instinct.expect.state.checker.ListChecker;
+import com.googlecode.instinct.expect.state.checker.ListCheckerImpl;
 import com.googlecode.instinct.expect.state.checker.MapChecker;
 import com.googlecode.instinct.expect.state.checker.MapCheckerImpl;
 import com.googlecode.instinct.expect.state.checker.NodeChecker;
@@ -49,10 +49,10 @@ import com.googlecode.instinct.expect.state.checker.OptionCheckerImpl;
 import com.googlecode.instinct.expect.state.checker.StringChecker;
 import com.googlecode.instinct.expect.state.checker.StringCheckerImpl;
 import static com.googlecode.instinct.expect.state.matcher.ToStringableEither.toStringableEither;
+import static com.googlecode.instinct.expect.state.matcher.ToStringableOption.toStringableOption;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdge;
 import com.googlecode.instinct.internal.edge.org.hamcrest.MatcherAssertEdgeImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
 import com.googlecode.instinct.internal.util.instance.ObjectFactoryImpl;
 import fj.data.Either;
@@ -102,9 +102,8 @@ public final class StateExpectationsImpl implements StateExpectations {
         return (MapChecker<K, V>) createChecker(MapCheckerImpl.class, map);
     }
 
-    @Suggest("Create, then pass this a ToStringableOption")
     public <T> OptionChecker<T> that(final Option<T> option) {
-        return createChecker(OptionCheckerImpl.class, option);
+        return createChecker(OptionCheckerImpl.class, toStringableOption(option));
     }
 
     public <A, B> EitherChecker<A, B> that(final Either<A, B> either) {

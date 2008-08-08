@@ -16,10 +16,10 @@
 
 package com.googlecode.instinct.expect.state.checker;
 
-import fj.data.Option;
+import com.googlecode.instinct.expect.state.matcher.ToStringableOption;
 import org.hamcrest.Matcher;
 
-public interface OptionChecker<T> extends ObjectChecker<Option<T>> {
+public interface OptionChecker<T> extends ObjectChecker<ToStringableOption<T>> {
     void isNone();
 
     void isSome();

@@ -1,9 +1,12 @@
 * Instinct Release 0.2.0 *
 
+o Core features
+  o Specification groups
 o Reductio Integration
   o Integrated Reductio, a tool for automated specification testing. See
     http://reductiotest.org/ for more information.
-
+o Infrastructure
+   o Parse lifecycle in builder (required for groups)
 
 * Instinct Release 0.1.9 *
 
@@ -26,7 +29,7 @@ o Expectation API
   o Added fj.data.Option matchers:
     expect.that(Some(1)).isSome(1), expect.that(foo.bar()).isNone().
   o Added fj.data.Either matchers:
-    expect.that(error()).isLeft(runtimeException), expect.that(foo.bar()).isRight(42).
+    expect.that(error()).isLeft(runtimeException), expect.that(foo.bar()).isRight(42).  
 o Packaging
   o Moved source code out of main jar into instinct-<version>-sources.jar.
 o Infrastructure

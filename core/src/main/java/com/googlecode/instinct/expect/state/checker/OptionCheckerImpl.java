@@ -18,11 +18,11 @@ package com.googlecode.instinct.expect.state.checker;
 
 import com.googlecode.instinct.expect.state.matcher.OptionIsNoneMatcher;
 import com.googlecode.instinct.expect.state.matcher.OptionIsSomeMatcher;
-import fj.data.Option;
+import com.googlecode.instinct.expect.state.matcher.ToStringableOption;
 import org.hamcrest.Matcher;
 
-public final class OptionCheckerImpl<T> extends ObjectCheckerImpl<Option<T>> implements OptionChecker<T> {
-    public OptionCheckerImpl(final Option<T> subject) {
+public final class OptionCheckerImpl<T> extends ObjectCheckerImpl<ToStringableOption<T>> implements OptionChecker<T> {
+    public OptionCheckerImpl(final ToStringableOption<T> subject) {
         super(subject);
     }
 
