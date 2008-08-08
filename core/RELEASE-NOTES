@@ -1,19 +1,19 @@
 * Instinct Release 0.2.0 *
 
 o Core features
-  o Specification groups
+  o Specification groups.
 o Reductio Integration
   o Integrated Reductio, a tool for automated specification testing. See
     http://reductiotest.org/ for more information.
 o Infrastructure
-   o Parse lifecycle in builder (required for groups)
+   o Parse lifecycle in builder, attach to specification method.
 
 
 * Instinct Release 0.1.9 *
 
-Maintenance release; Multiple errors are now displayed when a specification fails with more
-than one exception, specification lifecycle can now be customised, Scala examples, additional
-Functional Java matchers (List, Either, Option), seperate source JAR.
+Maintenance release; Multiple specification failures reported, specification lifecycle
+can now be customised, Scala examples, additional Functional Java matchers (List, Either,
+Option), Maven bundle, seperate source JAR.
 
 o Core Features
   o Custom specification lifecycles can now be plugged in using the @Context annotation.
@@ -21,9 +21,6 @@ o Core Features
     into each specification method allowing integration-style specifications using a Spring
     beans.
   o Multiple errors are now displayed when a specification fails with more than one exception.
-o Scala integration
-  o Added Scala stack example, showing the use of Instinct under Scala to spec out Scala
-    code.
 o Expectation API
   o Added fj.data.List matchers:
     expect.that(List.nil().cons(1)).isEqualTo(List.nil().cons(1))
@@ -31,6 +28,11 @@ o Expectation API
     expect.that(Some(1)).isSome(1), expect.that(foo.bar()).isNone().
   o Added fj.data.Either matchers:
     expect.that(error()).isLeft(runtimeException), expect.that(foo.bar()).isRight(42).
+o Scala integration
+  o Added Scala stack example, showing the use of Instinct under Scala to spec out Scala
+    code.
+o Maven integration
+  o Added Maven bundle to allow uploading to central Maven repository.
 o Packaging
   o Moved source code out of main jar into instinct-<version>-sources.jar.
 o Infrastructure
