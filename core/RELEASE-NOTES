@@ -32,7 +32,8 @@ o Scala integration
   o Added Scala stack example, showing the use of Instinct under Scala to spec out Scala
     code.
 o Maven integration
-  o Added Maven bundle to allow uploading to central Maven repository.
+  o Added Maven bundle to allow uploading to central Maven repository, also available
+    from this repository: http://instinct.googlecode.com/svn/artifacts/maven
 o Packaging
   o Moved source code out of main jar into instinct-<version>-sources.jar (for Maven).
   o Moved javadoc into jar instead of zip instinct-<version>-javadoc.jar (for Maven).

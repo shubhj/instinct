@@ -8,7 +8,7 @@
         <delete dir="${build.dir}"/>
     </target>
 
-    <target name="all" depends="clean,spec,-check-coverage,release,-artifacts"/>
+    <target name="all" depends="clean,spec,-check-coverage,-release-zip,-maven-bundle,-artifacts"/>
     <target name="compile" depends="clean,-compile"/>
     <target name="spec" depends="clean,-spec"/>
     <target name="javadoc" depends="clean,-javadoc"/>
