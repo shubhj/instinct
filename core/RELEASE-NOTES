@@ -6,7 +6,9 @@ o Reductio Integration
   o Integrated Reductio, a tool for automated specification testing. See
     http://reductiotest.org/ for more information.
 o Infrastructure
-   o Parse lifecycle in builder, attach to specification method.
+  o Jar file name change: instinct-core-0.2.0.jar (addition of "core", brings into line
+    with Maven).
+  o Parse lifecycle in builder, attach to specification method.
 
 
 * Instinct Release 0.1.9 *
