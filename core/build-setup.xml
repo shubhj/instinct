@@ -2,17 +2,19 @@
 <project name="instinct-setup" default="default" basedir=".">
 
     <property name="project.longname" value="Instinct Behaviour Driven Development (BDD) Framework"/>
-    <property name="project.shortname" value="instinct"/>
+    <property name="project.shortname" value="instinct-core"/>
     <property name="project.version.major" value="0"/>
-    <property name="project.version.minor" value="1.9"/>
+    <property name="project.version.minor" value="2.0"/>
     <property name="version-status" value=""/>
     <property name="project.version.full" value="${project.version.major}.${project.version.minor}${version-status}"/>
     <property name="project.jar" value="${project.shortname}-${project.version.full}.jar"/>
     <property name="project.zip" value="${project.shortname}-${project.version.full}.zip"/>
     <property name="javadoc.jar" value="${project.shortname}-${project.version.full}-javadoc.jar"/>
     <property name="sources.jar" value="${project.shortname}-${project.version.full}-sources.jar"/>
-    <property name="maven-bundle.jar" value="${project.shortname}-${project.version.full}-bundle.jar"/>
     <property name="main.package.name" value="com.googlecode.instinct"/>
+    <property name="maven-bundle.jar" value="${project.shortname}-${project.version.full}-bundle.jar"/>
+    <property name="maven-repo.dir" value="${basedir}/../artifacts/maven"/>
+    <property name="maven-repo-release.dir" value="${maven-repo.dir}/com/googlecode/instinct/instinct-core/${project.version.full}"/>
 
     <property name="build.dir" value="build"/>
     <property name="doc.dir" value="doc"/>

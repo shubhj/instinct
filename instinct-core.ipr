@@ -574,51 +574,6 @@
         <entry key="$PROJECT_DIR$">
           <value>
             <SvnBranchConfiguration>
-              <option name="branchMap">
-                <map>
-                  <entry key="https://instinct.googlecode.com/svn/tags">
-                    <value>
-                      <list>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1217045245416" />
-                          <option name="revision" value="1378" />
-                          <option name="url" value="https://instinct.googlecode.com/svn/tags/Release-0.1.8" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1216881391665" />
-                          <option name="revision" value="1361" />
-                          <option name="url" value="https://instinct.googlecode.com/svn/tags/Release-0.1.7" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1197613307983" />
-                          <option name="revision" value="1106" />
-                          <option name="url" value="https://instinct.googlecode.com/svn/tags/Release-0.1.6" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1192619518139" />
-                          <option name="revision" value="671" />
-                          <option name="url" value="https://instinct.googlecode.com/svn/tags/Release-0.1.5" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1180436916832" />
-                          <option name="revision" value="468" />
-                          <option name="url" value="https://instinct.googlecode.com/svn/tags/Release-0.1.4" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1177063689029" />
-                          <option name="revision" value="382" />
-                          <option name="url" value="https://instinct.googlecode.com/svn/tags/Release-0.1.3" />
-                        </SvnBranchItem>
-                        <SvnBranchItem>
-                          <option name="creationDateMillis" value="1169602851177" />
-                          <option name="revision" value="244" />
-                          <option name="url" value="https://instinct.googlecode.com/svn/tags/Release-0.1.0" />
-                        </SvnBranchItem>
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
               <option name="branchUrls">
                 <list>
                   <option value="https://instinct.googlecode.com/svn/branches" />

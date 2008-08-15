@@ -69,12 +69,6 @@
     </target>
 
     <target name="-jar" depends="-disable-coverage,-clover-clean,-clean-classes,-compile">
-        <!--
-        Add the following, see: http://java.sun.com/j2se/1.3/docs/guide/versioning/spec/VersioningSpecification.html#PackageVersionSpecification
-            Implementation-Title: java.util
-            Implementation-Version: build57
-            Implementation-Vendor: SunMicrosystems. Inc.
-        -->
         <jar destfile="${build.dir}/${project.jar}">
             <fileset dir="${main.classes.dir}"/>
             <fileset dir="${properties.src.dir}"/>
@@ -120,14 +114,31 @@
         </jar>
     </target>
 
+    <target name="maven" depends="-maven-deploy"/>
     <target name="-maven-deploy" depends="-maven-bundle">
+        <fail message="The local Maven repository was not found in expected location: ${maven-repo.dir}">
+            <condition>
+                <not>
+                    <available file="${maven-repo.dir}" type="dir" property="maven-repo-present"/>
+                </not>
+            </condition>
+        </fail>
         <exec dir="${basedir}" executable="mvn" failonerror="true" os="Mac OS X,Linux">
             <arg value="deploy:deploy-file"/>
-            <arg value="-Durl=file://${basedir}/../artifacts/maven"/>
+            <arg value="-Durl=file://${maven-repo.dir}"/>
             <arg value="-DrepositoryId=local-svn-artifacts"/>
-            <arg value="-Dfile=${release.dir}/${maven-bundle.jar}"/>
+            <arg value="-Dfile=${build.dir}/${project.jar}"/>
             <arg value="-DpomFile=${basedir}/pom.xml"/>
         </exec>
+        <copy file="${release.dir}/${maven-bundle.jar}" todir="${maven-repo-release.dir}"/>
+        <copy file="${build.dir}/${sources.jar}" todir="${maven-repo-release.dir}"/>
+        <copy file="${build.dir}/${javadoc.jar}" todir="${maven-repo-release.dir}"/>
+        <checksum file="${maven-repo-release.dir}/${maven-bundle.jar}" algorithm="MD5" forceOverwrite="yes" fileext=".md5"/>
+        <checksum file="${maven-repo-release.dir}/${maven-bundle.jar}" algorithm="SHA" forceOverwrite="yes" fileext=".sha1"/>
+        <checksum file="${maven-repo-release.dir}/${sources.jar}" algorithm="MD5" forceOverwrite="yes" fileext=".md5"/>
+        <checksum file="${maven-repo-release.dir}/${sources.jar}" algorithm="SHA" forceOverwrite="yes" fileext=".sha1"/>
+        <checksum file="${maven-repo-release.dir}/${javadoc.jar}" algorithm="MD5" forceOverwrite="yes" fileext=".md5"/>
+        <checksum file="${maven-repo-release.dir}/${javadoc.jar}" algorithm="SHA" forceOverwrite="yes" fileext=".sha1"/>
     </target>
 
     <macrodef name="clean.classes.macro">
