@@ -16,8 +16,12 @@
 
 package com.googlecode.instinct.locate;
 
+import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.util.JavaClassName;
+import fj.data.Array;
 
 public interface ContextFinder {
     JavaClassName[] getContextNames(String... specificationGroups);
+
+    Array<ContextClass> getContexts(String... specificationGroups);
 }

@@ -1,6 +1,7 @@
 * Instinct Release 0.2.0 *
 
 o Core features
+  o Exposed ContextFinder (for locating contexts and specifications) in the public API.
   o Specification groups.
 o Reductio Integration
   o Integrated Reductio, a tool for automated specification testing. See

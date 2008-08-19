@@ -16,13 +16,17 @@
 
 package com.googlecode.instinct.locate;
 
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.ContextClassImpl;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
+import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
 import com.googlecode.instinct.internal.locate.cls.ClassLocator;
 import com.googlecode.instinct.internal.locate.cls.ClassLocatorImpl;
 import com.googlecode.instinct.internal.locate.cls.ClassWithContextAnnotationFileFilter;
 import com.googlecode.instinct.internal.locate.cls.ClassWithMarkedMethodsFileFilter;
 import com.googlecode.instinct.internal.locate.cls.PackageRootFinder;
 import com.googlecode.instinct.internal.locate.cls.PackageRootFinderImpl;
-import com.googlecode.instinct.internal.util.Fix;
+import static com.googlecode.instinct.internal.util.Fj.toFjArray;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
@@ -36,6 +40,8 @@ import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.naming.ContextNamingConvention;
 import com.googlecode.instinct.marker.naming.NamingConvention;
 import com.googlecode.instinct.marker.naming.SpecificationNamingConvention;
+import fj.F;
+import fj.data.Array;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Set;
@@ -46,6 +52,7 @@ public final class ContextFinderImpl implements ContextFinder {
     private PackageRootFinder packageRootFinder = new PackageRootFinderImpl();
     private ClassLocator classLocator = new ClassLocatorImpl();
     private ObjectFactory objectFactory = new ObjectFactoryImpl();
+    private final ClassEdge classEdge = new ClassEdgeImpl();
     private final Class<?> classInSpecTree;
 
     public <T> ContextFinderImpl(final Class<T> classInSpecTree) {
@@ -53,7 +60,6 @@ public final class ContextFinderImpl implements ContextFinder {
         this.classInSpecTree = classInSpecTree;
     }
 
-    @Fix({"Return a set here.", "Return context classes"})
     public JavaClassName[] getContextNames(final String... specificationGroups) {
         final File packageRoot = objectFactory.create(File.class, packageRootFinder.getPackageRoot(classInSpecTree));
         final AnnotationAttribute attributeConstraint = new AnnotationAttribute("group", specificationGroups);
@@ -61,6 +67,14 @@ public final class ContextFinderImpl implements ContextFinder {
         final FileFilter markedMethodClasses = createMarkedMethodsFilter(packageRoot, attributeConstraint);
         final Set<JavaClassName> names = classLocator.locate(packageRoot, annotatedClasses, markedMethodClasses);
         return names.toArray(new JavaClassName[names.size()]);
+    }
+
+    public Array<ContextClass> getContexts(final String... specificationGroups) {
+        return toFjArray(getContextNames(specificationGroups)).map(new F<JavaClassName, ContextClass>() {
+            public ContextClass f(final JavaClassName name) {
+                return new ContextClassImpl(classEdge.forName(name.getFullyQualifiedName()));
+            }
+        });
     }
 
     private FileFilter createMarkedClassFileFilter(final File packageRoot, final AnnotationAttribute attributeConstraint) {
