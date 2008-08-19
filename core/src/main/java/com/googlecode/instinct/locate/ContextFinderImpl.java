@@ -14,8 +14,14 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.locate.cls;
+package com.googlecode.instinct.locate;
 
+import com.googlecode.instinct.internal.locate.cls.ClassLocator;
+import com.googlecode.instinct.internal.locate.cls.ClassLocatorImpl;
+import com.googlecode.instinct.internal.locate.cls.ClassWithContextAnnotationFileFilter;
+import com.googlecode.instinct.internal.locate.cls.ClassWithMarkedMethodsFileFilter;
+import com.googlecode.instinct.internal.locate.cls.PackageRootFinder;
+import com.googlecode.instinct.internal.locate.cls.PackageRootFinderImpl;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
@@ -47,7 +53,7 @@ public final class ContextFinderImpl implements ContextFinder {
         this.classInSpecTree = classInSpecTree;
     }
 
-    @Fix({"Return a set here.", "Return either classes or contexts, or specifications, consider removing contexts as an entity in Instinct"})
+    @Fix({"Return a set here.", "Return context classes"})
     public JavaClassName[] getContextNames(final String... specificationGroups) {
         final File packageRoot = objectFactory.create(File.class, packageRootFinder.getPackageRoot(classInSpecTree));
         final AnnotationAttribute attributeConstraint = new AnnotationAttribute("group", specificationGroups);

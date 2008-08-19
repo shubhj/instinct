@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.locate.cls;
+package com.googlecode.instinct.locate;
 
 import com.googlecode.instinct.internal.util.JavaClassName;
 

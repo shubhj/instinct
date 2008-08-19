@@ -79,13 +79,22 @@ com.googlecode.instinct.actor
   Utilities for creating specification actors; dummies, stubs and mocks.
 
 com.googlecode.instinct.expect
-  Expectation API -Includes support for setting state & behaviour expectations.
+  Expectation API - Includes support for setting state & behaviour expectations.
 
 com.googlecode.instinct.integrate
   Integration with other tools such as JUnit and Ant.
 
+com.googlecode.instinct.locate
+  Classes for finding contexts and specifications.
+
 com.googlecode.instinct.marker
   Annotations and naming conventions for making code available to Instinct.
+
+com.googlecode.instinct.report
+  Classes for customising reporting of specifications.
+
+com.googlecode.instinct.runner
+  Specification runners - Includes classes for overriding the default specification lifecycle. 
 
 
 Internal packages

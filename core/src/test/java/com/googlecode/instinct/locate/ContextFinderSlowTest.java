@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.locate.cls;
+package com.googlecode.instinct.locate;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.internal.util.Fix;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.locate.ContextFinder;
+import com.googlecode.instinct.locate.ContextFinderImpl;
 import static com.googlecode.instinct.marker.annotate.Specification.ALL_GROUPS;
 import com.googlecode.instinct.test.InstinctTestCase;
 

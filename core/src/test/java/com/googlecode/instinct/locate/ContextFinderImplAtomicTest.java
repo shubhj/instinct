@@ -14,12 +14,18 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.locate.cls;
+package com.googlecode.instinct.locate;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import static com.googlecode.instinct.expect.behaviour.Mocker.mock;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.internal.util.instance.ObjectFactory;
+import com.googlecode.instinct.locate.ContextFinder;
+import com.googlecode.instinct.internal.locate.cls.PackageRootFinder;
+import com.googlecode.instinct.internal.locate.cls.ClassLocator;
+import com.googlecode.instinct.locate.ContextFinderImpl;
+import com.googlecode.instinct.internal.locate.cls.ClassWithContextAnnotationFileFilter;
+import com.googlecode.instinct.internal.locate.cls.ClassWithMarkedMethodsFileFilter;
 import com.googlecode.instinct.marker.AnnotationAttribute;
 import com.googlecode.instinct.marker.MarkingScheme;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;

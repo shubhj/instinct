@@ -22,6 +22,8 @@ import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.test.InstinctTestCase;
+import com.googlecode.instinct.locate.ContextFinderImpl;
+import com.googlecode.instinct.locate.ContextFinder;
 
 @SuppressWarnings({"serial", "ClassExtendsConcreteCollection", "AnonymousInnerClassWithTooManyMethods"})
 public final class ContextClassAggregatorImplSlowTest extends InstinctTestCase {

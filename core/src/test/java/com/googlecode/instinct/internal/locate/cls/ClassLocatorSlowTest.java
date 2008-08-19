@@ -17,7 +17,7 @@
 package com.googlecode.instinct.internal.locate.cls;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.internal.locate.cls.ContextFinderSlowTest.EXPECTED_MINIMUM_NOMBER_OF_CONTEXTS;
+import static com.googlecode.instinct.locate.ContextFinderSlowTest.EXPECTED_MINIMUM_NOMBER_OF_CONTEXTS;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import com.googlecode.instinct.marker.AnnotationAttribute;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
