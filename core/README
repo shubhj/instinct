@@ -49,15 +49,10 @@ Note. As JUnit 4.4 bundles Hamcrest, you can choose to either take Hamcrest from
 or as a seperate Jar. If you choose to take the JUnit version you will need the full
 JUnit Jar 'junit-4.4.jar' instead of the no dependencies version listed here.
 
-In addition, if you want to use Instinct from Scala, you'll need:
+In addition, if you want to use Instinct from Scala, you'll need Scala 2.7.2 RC1 or later:
 
-o scala-compiler-2.7.1.r15611-b20080728010100.jar
-o scala-library-2.7.1.r15611-b20080728010100.jar
-
-Note. The version of Scala required is newer than the latest released version (2.7.1).
-This is due to a known issue in the compiler that has been fixed in the trunk. The
-version in lib/scala and used in the example project will work, as will 2.7.2 when
-released.
+o scala-compiler-2.7.2.RC1.jar
+o scala-library-2.7.2.RC1.jar
 
 
 * Documentation *
@@ -94,7 +89,7 @@ com.googlecode.instinct.report
   Classes for customising reporting of specifications.
 
 com.googlecode.instinct.runner
-  Specification runners - Includes classes for overriding the default specification lifecycle. 
+  Specification runners - Includes classes for overriding the default specification lifecycle.
 
 
 Internal packages
