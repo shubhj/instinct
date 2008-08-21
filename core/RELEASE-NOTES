@@ -11,7 +11,8 @@ o Infrastructure
   o Jar file name change: instinct-core-0.2.0.jar (addition of "core", brings into line
     with Maven).
   o Parse lifecycle in builder, attach to specification method.
-
+o Bugs
+  (Issue 44) Instinct FirstStep results in "class file for fj.data.Either not found"
 
 * Instinct Release 0.1.9 *
 
