@@ -7,7 +7,7 @@
     <packaging>jar</packaging>
     <name>Instinct Examples</name>
     <description>Instinct Behaviour Driven Development (BDD) Framework Examples</description>
-    <version>0.1.9</version>
+    <version>0.2.0</version>
     <url>http://instinct.googlecode.com/</url>
     <licenses>
         <license>
@@ -19,6 +19,12 @@
     <scm>
         <url>http://instinct.googlecode.com/svn/</url>
     </scm>
+    <repositories>
+        <repository>
+            <id>fj-repository</id>
+            <url>http://projects.workingmouse.com/public/functionaljava/maven</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>com.googlecode.instinct</groupId>
@@ -59,6 +65,11 @@
             <groupId>org.objenesis</groupId>
             <artifactId>objenesis</artifactId>
             <version>1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.functionaljava</groupId>
+            <artifactId>fj</artifactId>
+            <version>2.12</version>
         </dependency>
     </dependencies>
 </project>
