@@ -21,6 +21,10 @@
     </scm>
     <repositories>
         <repository>
+            <id>instinct-repository</id>
+            <url>http://instinct.googlecode.com/svn/artifacts/maven</url>
+        </repository>
+        <repository>
             <id>fj-repository</id>
             <url>http://projects.workingmouse.com/public/functionaljava/maven</url>
         </repository>
