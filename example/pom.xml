@@ -29,6 +29,40 @@
             <url>http://projects.workingmouse.com/public/functionaljava/maven</url>
         </repository>
     </repositories>
+    <build>
+        <testSourceDirectory>${basedir}/src/spec/java</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <source>1.5</source>
+                    <target>1.5</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.4.2</version>
+                <configuration>
+                    <includes>
+                        <include>**/*.java</include>
+                    </includes>
+                    <excludes>
+                        <!-- ignore utility class -->
+                        <exclude>**/util/*</exclude>
+                        <!-- ignore anonymous inner classes -->
+                        <exclude>**/*$*</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+        <testResources>
+            <testResource>
+                <directory>src/spec/resources</directory>
+            </testResource>
+        </testResources>
+    </build>
     <dependencies>
         <dependency>
             <groupId>com.googlecode.instinct</groupId>

@@ -3,6 +3,8 @@
 o Core features
   o Exposed ContextFinder (for locating contexts and specifications) in the public API.
   o Specification groups.
+o Maven Integration
+  o Example project now builds using Maven (see issue 45 below).
 o Reductio Integration
   o Integrated Reductio, a tool for automated specification testing. See
     http://reductiotest.org/ for more information.
@@ -12,7 +14,8 @@ o Infrastructure
     with Maven).
   o Parse lifecycle in builder, attach to specification method.
 o Bugs
-  (Issue 44) Instinct FirstStep results in "class file for fj.data.Either not found"
+  (Issue 44) Instinct FirstStep results in "class file for fj.data.Either not found".
+  (Issue 45) Example project pom.xml isn't correct.
 
 * Instinct Release 0.1.9 *
 
