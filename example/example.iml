@@ -17,8 +17,9 @@
       <sourceFolder url="file://$MODULE_DIR$/src/spec/scala" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
       <excludeFolder url="file://$MODULE_DIR$/i-build" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
-    <orderEntry type="library" name="scala-2.7.1" level="application" />
+    <orderEntry type="library" name="scala-2.7.2.RC1" level="application" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="core" />
