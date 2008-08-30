@@ -19,9 +19,7 @@ package com.googlecode.instinct.report;
 import com.googlecode.instinct.internal.report.BriefResultMessageBuilder;
 import com.googlecode.instinct.internal.report.QuietResultMessageBuilder;
 import com.googlecode.instinct.internal.report.VerboseResultMessageBuilder;
-import com.googlecode.instinct.internal.util.Suggest;
 
-@Suggest("Figure out how to test this sucker.")
 public enum ResultFormat {
     QUIET {
         @Override
@@ -43,6 +41,18 @@ public enum ResultFormat {
             return new VerboseResultMessageBuilder();
         }
     };
+
+    public static boolean isEquivalentToAny(final String formatName) {
+        if (formatName == null) {
+            return false;
+        }
+        try {
+            valueOf(formatName.toUpperCase());
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
 
     // SUPPRESS IllegalToken {
     public abstract ResultMessageBuilder getMessageBuilder();

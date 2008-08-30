@@ -18,6 +18,7 @@ package com.googlecode.instinct.integrate.ant;
 
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import com.googlecode.instinct.report.ResultFormat;
+import static com.googlecode.instinct.report.ResultFormat.isEquivalentToAny;
 import static com.googlecode.instinct.report.ResultFormat.valueOf;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import static java.util.Arrays.asList;
@@ -27,11 +28,7 @@ public final class Formatter {
 
     public void setType(final String type) {
         checkNotWhitespace(type);
-        boolean isAMatchedFormat = false;
-        for (final ResultFormat resultFormat : ResultFormat.values()) {
-            isAMatchedFormat = isAMatchedFormat || type.equalsIgnoreCase(resultFormat.name());
-        }
-        if (!isAMatchedFormat) {
+        if (!isEquivalentToAny(type)) {
             throw new UnsupportedOperationException(
                     "Formatter type '" + type + "' is not supported, supported types " + asList(ResultFormat.values()));
         }
