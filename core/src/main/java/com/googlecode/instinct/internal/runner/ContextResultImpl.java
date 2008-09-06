@@ -19,21 +19,19 @@ package com.googlecode.instinct.internal.runner;
 import com.googlecode.instinct.internal.lang.Primordial;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
+import com.googlecode.instinct.internal.core.ContextClass;
 import fj.F;
 import fj.data.List;
 import static fj.data.List.nil;
 
 public final class ContextResultImpl extends Primordial implements ContextResult {
-    private final String contextName;
+    private final ContextClass contextClass;
     private List<SpecificationResult> specificationResults = nil();
 
-    public ContextResultImpl(final String contextName) {
-        checkNotWhitespace(contextName);
-        this.contextName = contextName;
-    }
-
-    public String getContextName() {
-        return contextName;
+    public ContextResultImpl(final ContextClass contextClass) {
+        checkNotNull(contextClass);
+        checkNotWhitespace(contextClass.getName());
+        this.contextClass = contextClass;
     }
 
     public void addSpecificationResult(final SpecificationResult specificationResult) {
@@ -43,6 +41,10 @@ public final class ContextResultImpl extends Primordial implements ContextResult
 
     public List<SpecificationResult> getSpecificationResults() {
         return specificationResults.reverse();
+    }
+
+    public ContextClass getContextClass() {
+        return contextClass;
     }
 
     public boolean completedSuccessfully() {

@@ -24,4 +24,6 @@ public interface RunnableItemBuilder {
     String ITEM_SEPARATOR = " ";
 
     List<RunnableItem> build(String itemsToRun);
+
+    List<RunnableItem> build(final List<String> arguments);
 }

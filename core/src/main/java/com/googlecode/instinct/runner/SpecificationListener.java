@@ -22,5 +22,5 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 public interface SpecificationListener {
     void preSpecificationMethod(SpecificationMethod specificationMethod);
 
-    void postSpecificationMethod(SpecificationMethod specificationMethod, SpecificationResult specificationResult);
+    void postSpecificationMethod(SpecificationResult specificationResult);
 }

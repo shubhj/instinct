@@ -85,8 +85,8 @@ public final class PendingSpecificationMethod extends Primordial implements Spec
 
     public SpecificationResult run() {
         notifyListenersOfPreSpecification(this);
-        final SpecificationResult result = new SpecificationResultImpl(getName(), new SpecificationRunPendingStatus(), 0L);
-        notifyListenersOfPostSpecification(this, result);
+        final SpecificationResult result = new SpecificationResultImpl(this, new SpecificationRunPendingStatus(), 0L);
+        notifyListenersOfPostSpecification(result);
         return result;
     }
 
@@ -104,10 +104,10 @@ public final class PendingSpecificationMethod extends Primordial implements Spec
         });
     }
 
-    private void notifyListenersOfPostSpecification(final SpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
+    private void notifyListenersOfPostSpecification(final SpecificationResult specificationResult) {
         specificationListeners.foreach(new Effect<SpecificationListener>() {
             public void e(final SpecificationListener listener) {
-                listener.postSpecificationMethod(specificationMethod, specificationResult);
+                listener.postSpecificationMethod(specificationResult);
             }
         });
     }

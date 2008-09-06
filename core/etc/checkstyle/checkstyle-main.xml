@@ -150,7 +150,7 @@
         <module name="UpperEll"/>
         <module name="ArrayTypeStyle"/>
         <module name="Indentation">
-            <property name="caseIndent" value="0"/>
+            <property name="caseIndent" value="4"/>
         </module>
         <module name="TrailingComment"/>
 

@@ -6,6 +6,7 @@
     <suppress checks="ConstantName" files="Expect.java"/>
     <suppress checks="GenericIllegalRegexp" files="TextRunner.java"/>
     <suppress checks="GenericIllegalRegexp" files="CommandLineRunner.java"/>
+    <suppress checks="GenericIllegalRegexp" files="SystemOutPrintWriterDecorator.java"/>
     <suppress checks="EqualsHashCode" files="ObjectCheckerImpl.java"/>
     <suppress checks="IllegalThrows" files="DummyMethodInterceptor.java"/>
     <suppress checks="IllegalCatch" files="StubCreator.java"/>
@@ -16,4 +17,8 @@
     <suppress checks="IllegalCatch" files="ActorAutoWirerImpl.java"/>
     <suppress checks="GenericIllegalRegexp" files="ExceptionUtil.java"/>
     <suppress checks="MethodName" files="StandardSpecificationLifecycle.java"/>
+    <suppress checks="GenericIllegalRegexp" files="ResultFormat.java"/>
+    <suppress checks="IllegalType" files="Settings.java"/>
+    <suppress checks="IllegalToken" files="PrintWriterDecoratorFactoryImpl.java"/>
+    <suppress checks="IllegalToken" files="ResultMessageBuilderFactoryImpl.java"/>
 </suppressions>

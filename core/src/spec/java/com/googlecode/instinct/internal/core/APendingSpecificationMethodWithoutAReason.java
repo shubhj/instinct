@@ -56,7 +56,7 @@ public final class APendingSpecificationMethodWithoutAReason {
 
     @Specification
     public void includesThePendingDescriptionInTheNameOfTheResult() {
-        expect.that(pendingMethod.run().getSpecificationName()).isEqualTo("aPendingMethod [PENDING]");
+        expect.that(pendingMethod.run().getSpecificationMethod().getName()).isEqualTo("aPendingMethod [PENDING]");
     }
 
     @Specification

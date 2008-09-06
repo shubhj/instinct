@@ -103,7 +103,7 @@ public final class ExpectingExceptionSpecificationMethod extends Primordial impl
     public SpecificationResult run() {
         notifyListenersOfPreSpecification(this);
         final SpecificationResult result = doRun();
-        notifyListenersOfPostSpecification(this, result);
+        notifyListenersOfPostSpecification(result);
         return result;
     }
 
@@ -176,29 +176,29 @@ public final class ExpectingExceptionSpecificationMethod extends Primordial impl
         });
     }
 
-    private void notifyListenersOfPostSpecification(final SpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
+    private void notifyListenersOfPostSpecification(final SpecificationResult specificationResult) {
         specificationListeners.foreach(new Effect<SpecificationListener>() {
             public void e(final SpecificationListener listener) {
-                listener.postSpecificationMethod(specificationMethod, specificationResult);
+                listener.postSpecificationMethod(specificationResult);
             }
         });
     }
 
     private SpecificationResult success(final long startTime) {
-        return new SpecificationResultImpl(getName(), SPECIFICATION_SUCCESS, clock.getElapsedTime(startTime));
+        return new SpecificationResultImpl(this, SPECIFICATION_SUCCESS, clock.getElapsedTime(startTime));
     }
 
     private SpecificationResult fail(final long startTime, final String message) {
         final SpecificationFailureException failure =
                 new SpecificationFailureException(message, new AggregatingException(message, List.<Throwable>nil()));
-        return new SpecificationResultImpl(getName(), new SpecificationRunFailureStatus(failure, Option.<Throwable>none()),
+        return new SpecificationResultImpl(this, new SpecificationRunFailureStatus(failure, Option.<Throwable>none()),
                 clock.getElapsedTime(startTime));
     }
 
     private SpecificationResult fail(final long startTime, final String message, final SpecificationRunFailureStatus originalStatus) {
         final SpecificationFailureException failure =
                 new SpecificationFailureException(message, new AggregatingException(message, originalStatus.getLifecycleErrors()));
-        return new SpecificationResultImpl(getName(), new SpecificationRunFailureStatus(failure, originalStatus.getSpecificationError()),
+        return new SpecificationResultImpl(this, new SpecificationRunFailureStatus(failure, originalStatus.getSpecificationError()),
                 clock.getElapsedTime(startTime));
     }
 }

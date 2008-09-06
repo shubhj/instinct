@@ -46,6 +46,9 @@
             <include name="${lib.dir}/hamcrest-all-*.jar"/>
             <include name="${lib.dir}/junit-*.jar"/>
             <include name="${lib.dir}/functionaljava-*.jar"/>
+            <include name="${lib.dir}/commons-collections-*.jar"/>
+            <include name="${lib.dir}/commons-lang-*.jar"/>
+            <include name="${lib.dir}/velocity-*.jar"/>
         </fileset>
         <pathelement location="${spec.classes.dir}"/>
         <pathelement location="${spec.resources.dir}"/>
@@ -97,6 +100,7 @@
             <classpath refid="scala.spec.class.path"/>
             <specifications dir="${spec.classes.dir}" groups="osdc"/>
             <formatter type="brief"/>
+            <formatter type="xml"/>
         </instinct>
         <fail if="specs-failed" message="Specifications failed."/>
     </target>

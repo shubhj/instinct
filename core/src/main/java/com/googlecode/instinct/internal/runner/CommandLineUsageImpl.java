@@ -17,14 +17,18 @@
 package com.googlecode.instinct.internal.runner;
 
 import com.googlecode.instinct.runner.CommandLineRunner;
+import com.googlecode.instinct.runner.cli.OptionArgument;
+import com.googlecode.instinct.runner.cli.UsageStatementFormatter;
+import com.googlecode.instinct.runner.cli.UsageStatementFormatterImpl;
 
 public final class CommandLineUsageImpl implements CommandLineUsage {
     private static final String NEWLINE = System.getProperty("line.separator");
+    private static final UsageStatementFormatter FORMATTER = new UsageStatementFormatterImpl();
 
     public CharSequence getUsage() {
         final StringBuilder usage = new StringBuilder();
         final String className = CommandLineRunner.class.getSimpleName();
-        usage.append("Usage: ").append(className).append(" <context_class[#spec]> [<context_class[#spec>]]...").append(NEWLINE);
+        usage.append("Usage: ").append(className).append(" [options] <context_class[#spec]> [<context_class[#spec>]]...").append(NEWLINE);
         usage.append(NEWLINE);
         usage.append("Runs specifications, sending results to standard out.").append(NEWLINE);
         usage.append("  - To run a single specification - include the fully qualified class name of").append(NEWLINE);
@@ -33,7 +37,11 @@ public final class CommandLineUsageImpl implements CommandLineUsage {
         usage.append("  - To run all the specifications in a class - include the fully qualified").append(NEWLINE);
         usage.append("    name of the class containing the specification.").append(NEWLINE);
         usage.append(NEWLINE);
-        usage.append("You can list as many specifications as you like.");
+        usage.append("You can list as many specifications as you like.").append(NEWLINE);
+        usage.append(NEWLINE);
+        usage.append("Options:");
+        usage.append(NEWLINE);
+        usage.append(FORMATTER.format(OptionArgument.FORMATTERS));
         return usage.toString();
     }
 }

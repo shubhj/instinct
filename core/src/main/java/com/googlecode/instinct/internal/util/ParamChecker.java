@@ -16,8 +16,11 @@
 
 package com.googlecode.instinct.internal.util;
 
+import java.util.regex.Pattern;
+
 public final class ParamChecker {
     private static final NullMaster NULL_MASTER = new NullMasterImpl();
+    private static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\s");
 
     private ParamChecker() {
         throw new UnsupportedOperationException();
@@ -47,4 +50,14 @@ public final class ParamChecker {
             throw new IllegalArgumentException(type.getSimpleName() + " must be a concrete class not an interface");
         }
     }
+
+    public static void checkNoWhitespace(final String... params) {
+        for (int i = 0; i < params.length; i++) {
+            final String param = params[i];
+            if (param != null && WHITESPACE_PATTERN.matcher(param).find()) {
+                throw new IllegalArgumentException("Parameter " + i + " should not contain whitespace");
+            }
+        }
+    }
+
 }

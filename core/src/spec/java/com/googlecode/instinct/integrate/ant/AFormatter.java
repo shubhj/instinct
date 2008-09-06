@@ -16,9 +16,14 @@
 
 package com.googlecode.instinct.integrate.ant;
 
+import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
+import static com.googlecode.instinct.report.ResultFormat.BRIEF;
+import static com.googlecode.instinct.report.ResultFormat.QUIET;
+import static com.googlecode.instinct.report.ResultFormat.VERBOSE;
+import static com.googlecode.instinct.report.ResultFormat.XML;
 import com.googlecode.instinct.test.actor.SubjectCreatorImpl;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -55,14 +60,24 @@ public final class AFormatter {
     @Specification
     public void acceptsRecognisedTypes() {
         formatter.setType("brief");
+        expect.that(formatter.getType()).isEqualTo(BRIEF);
         formatter.setType("quiet");
+        expect.that(formatter.getType()).isEqualTo(QUIET);
         formatter.setType("verbose");
+        expect.that(formatter.getType()).isEqualTo(VERBOSE);
+        formatter.setType("xml");
+        expect.that(formatter.getType()).isEqualTo(XML);
     }
 
     @Specification
     public void acceptsRecognisedTypesDespiteChangedCase() {
         formatter.setType("Brief");
+        expect.that(formatter.getType()).isEqualTo(BRIEF);
         formatter.setType("Quiet");
+        expect.that(formatter.getType()).isEqualTo(QUIET);
         formatter.setType("Verbose");
+        expect.that(formatter.getType()).isEqualTo(VERBOSE);
+        formatter.setType("Xml");
+        expect.that(formatter.getType()).isEqualTo(XML);
     }
 }

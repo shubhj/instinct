@@ -66,7 +66,7 @@ public final class APendingSpecificationMethodWithAReason {
 
     @Specification
     public void includesThePendingDescriptionInTheNameOfTheResult() {
-        expect.that(pendingMethod.run().getSpecificationName()).isEqualTo("aPendingMethod [PENDING - Haven't done it yet]");
+        expect.that(pendingMethod.run().getSpecificationMethod().getName()).isEqualTo("aPendingMethod [PENDING - Haven't done it yet]");
     }
 
     @Specification

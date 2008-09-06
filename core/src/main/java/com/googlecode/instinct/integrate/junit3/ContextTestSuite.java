@@ -50,8 +50,8 @@ public final class ContextTestSuite extends TestSuite implements SpecificationLi
         addTest(new SpecificationTestCase(specificationMethod));
     }
 
-    public void postSpecificationMethod(final SpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
-        checkNotNull(specificationMethod, specificationResult);
+    public void postSpecificationMethod(final SpecificationResult specificationResult) {
+        checkNotNull(specificationResult);
         // ignored
     }
 

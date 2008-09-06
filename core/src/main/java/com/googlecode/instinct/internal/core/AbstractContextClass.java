@@ -50,26 +50,26 @@ public final class AbstractContextClass implements ContextClass {
     }
 
     public ContextResult run() {
-        return new AbstractContextContextResult(getName());
+        return new AbstractContextContextResult(this);
     }
 
-    public fj.data.List<SpecificationMethod> getSpecificationMethods() {
+    public List<SpecificationMethod> getSpecificationMethods() {
         return nil();
     }
 
-    public fj.data.List<LifecycleMethod> getBeforeSpecificationMethods() {
+    public List<LifecycleMethod> getBeforeSpecificationMethods() {
         return nil();
     }
 
-    public fj.data.List<LifecycleMethod> getAfterSpecificationMethods() {
+    public List<LifecycleMethod> getAfterSpecificationMethods() {
         return nil();
     }
 
     private static final class AbstractContextContextResult implements ContextResult {
-        private final String contextName;
+        private final ContextClass contextClass;
 
-        private AbstractContextContextResult(final String contextName) {
-            this.contextName = contextName;
+        private AbstractContextContextResult(final ContextClass contextClass) {
+            this.contextClass = contextClass;
         }
 
         public void addSpecificationResult(final SpecificationResult specificationResult) {
@@ -80,8 +80,8 @@ public final class AbstractContextClass implements ContextClass {
             return nil();
         }
 
-        public String getContextName() {
-            return contextName;
+        public ContextClass getContextClass() {
+            return contextClass;
         }
 
         public int getNumberOfSpecificationsRun() {

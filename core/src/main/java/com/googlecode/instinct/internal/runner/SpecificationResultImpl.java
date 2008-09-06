@@ -19,16 +19,17 @@ package com.googlecode.instinct.internal.runner;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
 import com.googlecode.instinct.internal.lang.Primordial;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 
 public final class SpecificationResultImpl extends Primordial implements SpecificationResult {
-    private final String specificationName;
+    private final SpecificationMethod specificationMethod;
     private final SpecificationRunStatus status;
     private final long executionTime;
 
-    public SpecificationResultImpl(final String specificationName, final SpecificationRunStatus status, final long executionTime) {
-        checkNotNull(specificationName, status);
-        checkNotWhitespace(specificationName);
-        this.specificationName = specificationName;
+    public SpecificationResultImpl(final SpecificationMethod specificationMethod, final SpecificationRunStatus status, final long executionTime) {
+        checkNotNull(specificationMethod, status);
+        checkNotWhitespace(specificationMethod.getName());
+        this.specificationMethod = specificationMethod;
         this.status = status;
         this.executionTime = executionTime;
     }
@@ -37,8 +38,8 @@ public final class SpecificationResultImpl extends Primordial implements Specifi
         return status.runSuccessful();
     }
 
-    public String getSpecificationName() {
-        return specificationName;
+    public SpecificationMethod getSpecificationMethod() {
+        return specificationMethod;
     }
 
     public SpecificationRunStatus getStatus() {

@@ -27,6 +27,9 @@ import com.googlecode.instinct.internal.util.instance.ClassInstantiator;
 import com.googlecode.instinct.internal.util.instance.ClassInstantiatorImpl;
 import fj.F;
 import fj.data.List;
+import static fj.data.List.fromString;
+import static fj.data.List.asString;
+import static fj.data.List.join;
 import static java.lang.reflect.Modifier.isAbstract;
 
 public final class RunnableItemBuilderImpl implements RunnableItemBuilder {
@@ -39,6 +42,15 @@ public final class RunnableItemBuilderImpl implements RunnableItemBuilder {
                 return buildItem(item);
             }
         });
+    }
+
+    public List<RunnableItem> build(final List<String> arguments) {
+        final List<List<Character>> contexts = arguments.map(new F<String, List<Character>>() {
+            public List<Character> f(final String arg) {
+                return fromString(arg);
+            }
+        });
+        return build(asString(join(contexts.intersperse(fromString(ITEM_SEPARATOR)))));
     }
 
     private RunnableItem buildItem(final String itemToRun) {

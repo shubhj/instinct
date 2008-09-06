@@ -41,7 +41,7 @@ public final class CommandLineUsageImplAtomicTest extends InstinctTestCase {
     private String expectedUsage() {
         final StringBuilder usage = new StringBuilder();
         final String className = CommandLineRunner.class.getSimpleName();
-        usage.append("Usage: ").append(className).append(" <context_class[#spec]> [<context_class[#spec>]]...").append(NEWLINE);
+        usage.append("Usage: ").append(className).append(" [options] <context_class[#spec]> [<context_class[#spec>]]...").append(NEWLINE);
         usage.append(NEWLINE);
         usage.append("Runs specifications, sending results to standard out.").append(NEWLINE);
         usage.append("  - To run a single specification - include the fully qualified class name of").append(NEWLINE);
@@ -50,7 +50,13 @@ public final class CommandLineUsageImplAtomicTest extends InstinctTestCase {
         usage.append("  - To run all the specifications in a class - include the fully qualified").append(NEWLINE);
         usage.append("    name of the class containing the specification.").append(NEWLINE);
         usage.append(NEWLINE);
-        usage.append("You can list as many specifications as you like.");
+        usage.append("You can list as many specifications as you like.").append(NEWLINE);
+        usage.append(NEWLINE);
+        usage.append("Options:");
+        usage.append(NEWLINE);
+        usage.append("  -f, --formatters LIST   Overrides the default formatter with a comma-separated").append(NEWLINE);
+        usage.append("                          list of formatters. Choose from [QUIET, BRIEF,").append(NEWLINE);
+        usage.append("                          VERBOSE, XML]");
         return usage.toString();
     }
 }

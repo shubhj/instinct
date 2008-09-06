@@ -16,8 +16,10 @@
 
 package com.googlecode.instinct.internal.runner;
 
+import com.googlecode.instinct.internal.core.SpecificationMethod;
+
 public interface SpecificationResult extends ItemResult {
-    String getSpecificationName();
+    SpecificationMethod getSpecificationMethod();
 
     SpecificationRunStatus getStatus();
 }

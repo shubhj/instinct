@@ -20,7 +20,6 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitesp
 import com.googlecode.instinct.report.ResultFormat;
 import static com.googlecode.instinct.report.ResultFormat.isEquivalentToAny;
 import static com.googlecode.instinct.report.ResultFormat.valueOf;
-import com.googlecode.instinct.report.ResultMessageBuilder;
 import static java.util.Arrays.asList;
 
 public final class Formatter {
@@ -35,7 +34,7 @@ public final class Formatter {
         this.type = valueOf(type.toUpperCase());
     }
 
-    public ResultMessageBuilder createMessageBuilder() {
-        return type.getMessageBuilder();
+    public ResultFormat getType() {
+        return type;
     }
 }

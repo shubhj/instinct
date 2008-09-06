@@ -119,16 +119,16 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         return errors.isEmpty() ? Option.<Throwable>none() : some((Throwable) new AggregatingException(message, errors));
     }
 
-    private SpecificationResult success(final long startTime, final LifecycleMethod specificationMethod) {
-        return new SpecificationResultImpl(specificationMethod.getName(), SPECIFICATION_SUCCESS, clock.getElapsedTime(startTime));
+    private SpecificationResult success(final long startTime, final SpecificationMethod specificationMethod) {
+        return new SpecificationResultImpl(specificationMethod, SPECIFICATION_SUCCESS, clock.getElapsedTime(startTime));
     }
 
-    private SpecificationResult fail(final long startTime, final LifecycleMethod specificationMethod, final Throwable error,
+    private SpecificationResult fail(final long startTime, final SpecificationMethod specificationMethod, final Throwable error,
             final Option<Throwable> specificationError) {
         return fail(startTime, specificationMethod, List.<Throwable>nil().cons(error), specificationError);
     }
 
-    private SpecificationResult fail(final long startTime, final LifecycleMethod specificationMethod, final List<Throwable> lifecycleErrors,
+    private SpecificationResult fail(final long startTime, final SpecificationMethod specificationMethod, final List<Throwable> lifecycleErrors,
             final Option<Throwable> specificationError) {
         final List<Throwable> realErrors = realErrors(lifecycleErrors.reverse());
         final Option<Throwable> realSpecificationError = specificationError.map(new F<Throwable, Throwable>() {
@@ -139,7 +139,7 @@ public final class SpecificationRunnerImpl implements SpecificationRunner {
         final String message = "The following errors ocurred while running the specification";
         final SpecificationFailureException exception = new SpecificationFailureException(message, new AggregatingException(message, realErrors));
         final SpecificationRunStatus status = new SpecificationRunFailureStatus(exception, realSpecificationError);
-        return new SpecificationResultImpl(specificationMethod.getName(), status, clock.getElapsedTime(startTime));
+        return new SpecificationResultImpl(specificationMethod, status, clock.getElapsedTime(startTime));
     }
 
     private Throwable realError(final Throwable lifecycleError) {

@@ -44,12 +44,12 @@ public final class StandardContextRunner implements ContextRunner {
         checkNotNull(contextClass);
         notifyListenersOfPreContextRun(contextClass);
         final ContextResult contextResult = runContextClass(contextClass);
-        notifyListenersOfPostContextRun(contextClass, contextResult);
+        notifyListenersOfPostContextRun(contextResult);
         return contextResult;
     }
 
     private ContextResult runContextClass(final ContextClass contextClass) {
-        final ContextResult contextResult = new ContextResultImpl(contextClass.getName());
+        final ContextResult contextResult = new ContextResultImpl(contextClass);
         runSpecifications(contextClass, contextResult);
         return contextResult;
     }
@@ -80,10 +80,10 @@ public final class StandardContextRunner implements ContextRunner {
         });
     }
 
-    private void notifyListenersOfPostContextRun(final ContextClass contextClass, final ContextResult contextResult) {
+    private void notifyListenersOfPostContextRun(final ContextResult contextResult) {
         contextListeners.foreach(new Effect<ContextListener>() {
             public void e(final ContextListener listener) {
-                listener.postContextRun(contextClass, contextResult);
+                listener.postContextRun(contextResult);
             }
         });
     }

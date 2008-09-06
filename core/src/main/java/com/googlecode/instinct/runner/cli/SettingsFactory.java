@@ -1,5 +1,5 @@
 /*
- * Copyright 2006-2007 Tom Adams
+ * Copyright 2008 Jeremy Mawson
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,10 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.report;
+package com.googlecode.instinct.runner.cli;
 
-import com.googlecode.instinct.report.ResultMessageBuilder;
-import com.googlecode.instinct.test.InstinctTestCase;
-import com.googlecode.instinct.test.checker.ClassChecker;
+import fj.data.List;
 
-public final class VerboseResultMessageBuilderAtomicTest extends InstinctTestCase {
-    public void testConformsToClassTraits() {
-        ClassChecker.checkClass(VerboseResultMessageBuilder.class, ResultMessageBuilder.class);
-    }
+public interface SettingsFactory {
+    Settings extractFrom(final List<String> arguments);
 }

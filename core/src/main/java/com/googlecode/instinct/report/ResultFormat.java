@@ -16,31 +16,8 @@
 
 package com.googlecode.instinct.report;
 
-import com.googlecode.instinct.internal.report.BriefResultMessageBuilder;
-import com.googlecode.instinct.internal.report.QuietResultMessageBuilder;
-import com.googlecode.instinct.internal.report.VerboseResultMessageBuilder;
-
 public enum ResultFormat {
-    QUIET {
-        @Override
-        public ResultMessageBuilder getMessageBuilder() {
-            return new QuietResultMessageBuilder();
-        }
-    },
-
-    BRIEF {
-        @Override
-        public ResultMessageBuilder getMessageBuilder() {
-            return new BriefResultMessageBuilder();
-        }
-    },
-
-    VERBOSE {
-        @Override
-        public ResultMessageBuilder getMessageBuilder() {
-            return new VerboseResultMessageBuilder();
-        }
-    };
+    QUIET, BRIEF, VERBOSE, XML;
 
     public static boolean isEquivalentToAny(final String formatName) {
         if (formatName == null) {
@@ -53,8 +30,4 @@ public enum ResultFormat {
             return false;
         }
     }
-
-    // SUPPRESS IllegalToken {
-    public abstract ResultMessageBuilder getMessageBuilder();
-    // } SUPPRESS IllegalToken
 }

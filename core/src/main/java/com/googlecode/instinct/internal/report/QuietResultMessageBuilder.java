@@ -23,6 +23,8 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.StringUtil.indentEachLine;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import fj.F;
 import fj.data.List;
@@ -36,6 +38,11 @@ public final class QuietResultMessageBuilder implements ResultMessageBuilder {
     private static final String NEW_LINE = getProperty("line.separator");
     private final SpecificationFailureMessageBuilder failureMessageBuilder = new SpecificationFailureMessageBuilderImpl();
 
+    public String buildMessage(final ContextClass contextClass) {
+        checkNotNull(contextClass);
+        return "";
+    }
+
     public String buildMessage(final ContextResult contextResult) {
         checkNotNull(contextResult);
         if (contextResult.completedSuccessfully()) {
@@ -43,6 +50,17 @@ public final class QuietResultMessageBuilder implements ResultMessageBuilder {
         } else {
             return buildFailingContextResultMessage(contextResult);
         }
+    }
+
+    public String buildMessage(final SpecificationMethod specificationMethod) {
+        checkNotNull(specificationMethod);
+        return "";
+    }
+
+    public String buildMessage(final ContextResultsSummary summary) {
+        checkNotNull(summary);
+        return String.format("%n%1$d specifications, %2$d failures%nFinished in %3$f seconds", summary.getFailedCount() + summary.getSuccessCount(),
+                summary.getFailedCount(), summary.getSecondsTaken());
     }
 
     public String buildMessage(final SpecificationResult specificationResult) {
@@ -56,7 +74,7 @@ public final class QuietResultMessageBuilder implements ResultMessageBuilder {
                 return fromString("- " + buildSpecificationResultMessage(result));
             }
         }).intersperse(fromString(NEW_LINE));
-        return contextResult.getContextName() + NEW_LINE + asString(join(failureMessages));
+        return contextResult.getContextClass().getName() + NEW_LINE + asString(join(failureMessages));
     }
 
     private String buildSpecificationResultMessage(final SpecificationResult specificationResult) {
@@ -65,7 +83,7 @@ public final class QuietResultMessageBuilder implements ResultMessageBuilder {
         }
         final StringBuilder builder = new StringBuilder();
         final String status = " (FAILED)";
-        builder.append(specificationResult.getSpecificationName()).append(status);
+        builder.append(specificationResult.getSpecificationMethod().getName()).append(status);
         builder.append(NEW_LINE).append(NEW_LINE).append(getFailureCause(specificationResult));
         return builder.toString();
     }

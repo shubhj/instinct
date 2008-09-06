@@ -36,6 +36,8 @@
         <option name="KEEP_BLANK_LINES_IN_CODE" value="0" />
         <option name="KEEP_BLANK_LINES_BEFORE_RBRACE" value="0" />
         <option name="PREFER_LONGER_NAMES" value="false" />
+        <option name="GENERATE_FINAL_LOCALS" value="true" />
+        <option name="GENERATE_FINAL_PARAMETERS" value="true" />
         <option name="INSERT_INNER_CLASS_IMPORTS" value="true" />
         <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="99" />
         <option name="NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND" value="99" />
@@ -585,6 +587,22 @@
             </SvnBranchConfiguration>
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/example">
+          <value>
+            <SvnBranchConfiguration>
+              <option name="branchUrls">
+                <list>
+                  <option value="https://instinct.googlecode.com/svn/1470" />
+                  <option value="https://instinct.googlecode.com/svn/artifacts" />
+                  <option value="https://instinct.googlecode.com/svn/branches" />
+                  <option value="https://instinct.googlecode.com/svn/tags" />
+                  <option value="https://instinct.googlecode.com/svn/wiki" />
+                </list>
+              </option>
+              <option name="trunkUrl" value="https://instinct.googlecode.com/svn/trunk" />
+            </SvnBranchConfiguration>
+          </value>
+        </entry>
       </map>
     </option>
     <option name="myVersion" value="123" />
@@ -606,27 +624,6 @@
     <Base>
       <setting name="state" value="1" />
     </Base>
-    <LanguageOptions name="$TEMPLATE$">
-      <option name="templateOptions">
-        <value>
-          <option name="block" value="true" />
-          <option name="separateBefore" value="false" />
-          <option name="separateAfter" value="false" />
-          <option name="prefixLines" value="true" />
-          <option name="lenBefore" value="80" />
-          <option name="lenAfter" value="80" />
-          <option name="box" value="false" />
-          <option name="filler" value=" " />
-        </value>
-      </option>
-      <option name="notice" value="Copyright 2006-2008 Workingmouse&#10;&#10;Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);&#10;you may not use this file except in compliance with the License.&#10;You may obtain a copy of the License at&#10;&#10;    http://www.apache.org/licenses/LICENSE-2.0&#10;&#10;Unless required by applicable law or agreed to in writing, software&#10;distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#10;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#10;See the License for the specific language governing permissions and&#10;limitations under the License." />
-      <option name="keyword" value="Copyright" />
-      <option name="fileTypeOverride" value="4" />
-      <option name="relativeBefore" value="true" />
-      <option name="addBlankAfter" value="true" />
-      <option name="fileLocation" value="1" />
-      <option name="useAlternate" value="false" />
-    </LanguageOptions>
     <LanguageOptions name="HTML">
       <option name="templateOptions">
         <value>
@@ -753,6 +750,27 @@
       <option name="fileLocation" value="1" />
       <option name="useAlternate" value="false" />
     </LanguageOptions>
+    <LanguageOptions name="__TEMPLATE__">
+      <option name="templateOptions">
+        <value>
+          <option name="block" value="true" />
+          <option name="separateBefore" value="false" />
+          <option name="separateAfter" value="false" />
+          <option name="prefixLines" value="true" />
+          <option name="lenBefore" value="80" />
+          <option name="lenAfter" value="80" />
+          <option name="box" value="false" />
+          <option name="filler" value=" " />
+        </value>
+      </option>
+      <option name="notice" value="Copyright &amp;#36;today.year Jeremy Mawson&#10;&#10;Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);&#10;you may not use this file except in compliance with the License.&#10;You may obtain a copy of the License at&#10;&#10;    http://www.apache.org/licenses/LICENSE-2.0&#10;&#10;Unless required by applicable law or agreed to in writing, software&#10;distributed under the License is distributed on an &quot;AS IS&quot; BASIS,&#10;WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.&#10;See the License for the specific language governing permissions and&#10;limitations under the License." />
+      <option name="keyword" value="Copyright" />
+      <option name="fileTypeOverride" value="4" />
+      <option name="relativeBefore" value="true" />
+      <option name="addBlankAfter" value="true" />
+      <option name="fileLocation" value="1" />
+      <option name="useAlternate" value="false" />
+    </LanguageOptions>
   </component>
   <component name="libraryTable">
     <library name="CGLib">
@@ -831,9 +849,42 @@
         <root url="jar://$PROJECT_DIR$/core/etc/lib-src/functionaljava-2.10-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Velocity">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/core/lib/velocity/velocity-1.5.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Commons-Lang">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/core/lib/commons-lang/commons-lang-2.4.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/core/etc/lib-doc/commons-lang-2.4-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/core/etc/lib-src/commons-lang-2.4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Commons-Collections">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/core/lib/commons-collections/commons-collections-3.2.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$PROJECT_DIR$/core/etc/lib-doc/commons-collections-3.2.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/core/etc/lib-src/commons-collections-3.2.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Resources">
+      <CLASSES>
+        <root url="file://$PROJECT_DIR$/core/src/main/resources" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
   </component>
-  <UsedPathMacros>
-    <macro name="TEMPLATE" />
-  </UsedPathMacros>
 </project>
 

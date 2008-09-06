@@ -16,6 +16,7 @@
 
 package com.googlecode.instinct.internal.runner;
 
+import com.googlecode.instinct.internal.core.ContextClass;
 import fj.data.List;
 
 public interface ContextResult extends ItemResult {
@@ -23,7 +24,7 @@ public interface ContextResult extends ItemResult {
 
     List<SpecificationResult> getSpecificationResults();
 
-    String getContextName();
+    ContextClass getContextClass();
 
     int getNumberOfSpecificationsRun();
 

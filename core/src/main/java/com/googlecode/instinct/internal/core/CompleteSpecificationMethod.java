@@ -81,7 +81,7 @@ public final class CompleteSpecificationMethod extends Primordial implements Spe
     public SpecificationResult run() {
         notifyListenersOfPreSpecification(this);
         final SpecificationResult result = specificationRunner.run(this);
-        notifyListenersOfPostSpecification(this, result);
+        notifyListenersOfPostSpecification(result);
         return result;
     }
 
@@ -99,10 +99,10 @@ public final class CompleteSpecificationMethod extends Primordial implements Spe
         });
     }
 
-    private void notifyListenersOfPostSpecification(final SpecificationMethod specificationMethod, final SpecificationResult specificationResult) {
+    private void notifyListenersOfPostSpecification(final SpecificationResult specificationResult) {
         specificationListeners.foreach(new Effect<SpecificationListener>() {
             public void e(final SpecificationListener listener) {
-                listener.postSpecificationMethod(specificationMethod, specificationResult);
+                listener.postSpecificationMethod(specificationResult);
             }
         });
     }

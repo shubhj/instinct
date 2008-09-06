@@ -37,6 +37,7 @@
         <clean.classes.macro/>
         <cloverenable.macro/>
         <compile.all.macro/>
+        <copy.resources.macro output.dir="${main.classes.dir}" src.path.ref="${main.resources.dir}"/>
         <spec.macro/>
         <cloverreport.macro/>
     </target>
@@ -72,6 +73,7 @@
         <jar destfile="${build.dir}/${project.jar}">
             <fileset dir="${main.classes.dir}"/>
             <fileset dir="${properties.src.dir}"/>
+            <fileset dir="${main.resources.dir}"/>
         </jar>
     </target>
 
@@ -79,6 +81,7 @@
         <jar destfile="${build.dir}/${sources.jar}">
             <fileset dir="${main.src.dir}"/>
             <fileset dir="${properties.src.dir}"/>
+            <fileset dir="${main.resources.dir}"/>
         </jar>
     </target>
 
@@ -175,6 +178,16 @@
                 <patternset refid="@{src.pattern}"/>
                 <compilerarg value="@{compiler.args}"/>
             </javac>
+        </sequential>
+    </macrodef>
+
+    <macrodef name="copy.resources.macro">
+        <attribute name="output.dir"/>
+        <attribute name="src.path.ref"/>
+        <sequential>
+            <copy todir="@{output.dir}">
+                <fileset dir="@{src.path.ref}"/>
+            </copy>
         </sequential>
     </macrodef>
 

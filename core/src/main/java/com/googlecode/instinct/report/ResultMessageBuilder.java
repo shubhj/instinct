@@ -16,11 +16,20 @@
 
 package com.googlecode.instinct.report;
 
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
+import com.googlecode.instinct.internal.report.ContextResultsSummary;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 
 public interface ResultMessageBuilder {
-    String buildMessage(ContextResult contextResult);
+    String buildMessage(final ContextClass contextClass);
 
-    String buildMessage(SpecificationResult specificationResult);
+    String buildMessage(final ContextResult contextResult);
+
+    String buildMessage(final SpecificationMethod specificationMethod);
+
+    String buildMessage(final SpecificationResult specificationResult);
+
+    String buildMessage(final ContextResultsSummary summary);
 }

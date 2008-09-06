@@ -1,0 +1,25 @@
+#set($duration = $result.ExecutionTime / 1000.0)
+#set($duration_formatted = $decimal_format.format($duration))
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite errors="0" failures="$result.NumberOfFailures" hostname="$hostname" name="$result.ContextClass.Type.Name" tests="$result.NumberOfSpecificationsRun" time="$duration_formatted" timestamp="$reportdate">
+  <properties>
+#foreach($entry in $properties.entrySet())
+    <property name="$entry.Key" value="$entry.Value" />
+#end
+  </properties>
+#foreach($spec_result in $spec_results)
+#set($spec_duration = $spec_result.ExecutionTime / 1000.0)
+#set($spec_duration_formatted = $decimal_format.format($spec_duration))
+#if ($spec_result.Status.Class.SimpleName == "SpecificationRunPendingStatus")
+  <testcase classname="$result.ContextClass.Type.Name" name="$spec_result.SpecificationMethod.Name" time="$spec_duration_formatted">
+    <pending>$spec_result.SpecificationMethod.PendingReason</pending>
+  </testcase>
+#elseif ($spec_result.Status.runSuccessful())
+  <testcase classname="$result.ContextClass.Type.Name" name="$spec_result.SpecificationMethod.Name" time="$spec_duration_formatted" />
+#else
+  <testcase classname="$result.ContextClass.Type.Name" name="$spec_result.SpecificationMethod.Name" time="$spec_duration_formatted">
+    <failure message="$spec_result.Status.Details.Message" type="$spec_result.Status.Details.Cause.Class.CanonicalName">$spec_result.Status.Details.Cause</failure>
+  </testcase>
+#end
+#end
+</testsuite>

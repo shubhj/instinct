@@ -23,6 +23,8 @@ import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilde
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import fj.F;
 import fj.data.List;
@@ -39,9 +41,25 @@ public final class VerboseResultMessageBuilder implements ResultMessageBuilder {
     private static final String NEW_LINE = getProperty("line.separator");
     private final SpecificationFailureMessageBuilder failureMessageBuilder = new SpecificationFailureMessageBuilderImpl();
 
+    public String buildMessage(final ContextClass contextClass) {
+        checkNotNull(contextClass);
+        return "";
+    }
+
     public String buildMessage(final ContextResult contextResult) {
         checkNotNull(contextResult);
         return buildContextResultMessage(contextResult);
+    }
+
+    public String buildMessage(final SpecificationMethod specificationMethod) {
+        checkNotNull(specificationMethod);
+        return "";
+    }
+
+    public String buildMessage(final ContextResultsSummary summary) {
+        checkNotNull(summary);
+        return String.format("%n%1$d specifications, %2$d failures%nFinished in %3$f seconds", summary.getFailedCount() + summary.getSuccessCount(),
+                summary.getFailedCount(), summary.getSecondsTaken());
     }
 
     public String buildMessage(final SpecificationResult specificationResult) {
@@ -67,7 +85,7 @@ public final class VerboseResultMessageBuilder implements ResultMessageBuilder {
 
     private String getContextSummary(final ContextResult contextResult) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(contextResult.getContextName()).append(SPACER);
+        builder.append(contextResult.getContextClass().getName()).append(SPACER);
         builder.append("Specifications run: ").append(getNumberOfSpecsRun(contextResult)).append(SPACER);
         builder.append("Successes: ").append(contextResult.getNumberOfSuccesses()).append(SPACER);
         builder.append("Failures: ").append(contextResult.getNumberOfFailures()).append(SPACER);
@@ -78,7 +96,7 @@ public final class VerboseResultMessageBuilder implements ResultMessageBuilder {
 
     private String buildSpecificationResultMessage(final SpecificationResult specificationResult) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(specificationResult.getSpecificationName()).append(SPACER);
+        builder.append(specificationResult.getSpecificationMethod().getName()).append(SPACER);
         builder.append("Time elapsed: ").append(millisToSeconds(specificationResult.getExecutionTime())).append(" seconds").append(SPACER);
         builder.append("Status: ").append(specificationResult.completedSuccessfully() ? "succeeded" : "FAILED");
         if (!specificationResult.completedSuccessfully()) {

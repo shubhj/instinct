@@ -22,5 +22,5 @@ import com.googlecode.instinct.internal.runner.ContextResult;
 public interface ContextListener {
     void preContextRun(ContextClass contextClass);
 
-    void postContextRun(ContextClass contextClass, ContextResult contextResult);
+    void postContextRun(ContextResult contextResult);
 }

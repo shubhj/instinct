@@ -23,6 +23,8 @@ import com.googlecode.instinct.internal.runner.ContextRunner;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.Fj.toFjArray;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.internal.report.ResultMessageBuilderFactoryImpl;
+import com.googlecode.instinct.internal.report.ResultMessageBuilderFactory;
 import com.googlecode.instinct.report.ResultFormat;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import com.googlecode.instinct.report.ResultMessageBuilder;
@@ -33,6 +35,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 public final class TextRunner implements ContextRunner, ContextListener {
+    private static final ResultMessageBuilderFactory RESULT_MESSAGE_BUILDER_FACTORY = new ResultMessageBuilderFactoryImpl();
     private static final boolean AUTO_FLUSH_OUTPUT = true;
     private final PrintWriter writer;
     private final ResultMessageBuilder messageBuilder;
@@ -60,7 +63,7 @@ public final class TextRunner implements ContextRunner, ContextListener {
     public TextRunner(final OutputStream output, final ResultFormat resultFormat) {
         checkNotNull(output, resultFormat);
         writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(output)), AUTO_FLUSH_OUTPUT);
-        messageBuilder = resultFormat.getMessageBuilder();
+        messageBuilder = RESULT_MESSAGE_BUILDER_FACTORY.createFor(resultFormat);
     }
 
     public void addContextListener(final ContextListener contextListener) {
@@ -76,8 +79,8 @@ public final class TextRunner implements ContextRunner, ContextListener {
     }
 
     @Fix("Use a specification listener to report these as they come out.")
-    public void postContextRun(final ContextClass contextClass, final ContextResult contextResult) {
-        checkNotNull(contextClass, contextResult);
+    public void postContextRun(final ContextResult contextResult) {
+        checkNotNull(contextResult);
         final String contextResultMessage = messageBuilder.buildMessage(contextResult);
         if (contextResultMessage.trim().length() > 0) {
             writer.println(contextResultMessage);
