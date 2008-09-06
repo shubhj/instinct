@@ -21,6 +21,7 @@ import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.report.PrintWriterDecorator;
+import com.googlecode.instinct.internal.util.Reflector;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
@@ -46,20 +47,14 @@ public final class AResultReporterWithSeveralResultFormats {
     @Mock SpecificationResult specificationResult;
     @Mock PrintWriterDecorator printWriterDecorator;
     @Mock ResultMessageBuilder resultMessageBuilder;
-    //    @Mock PrintWriterDecorator xmlPrintWriterDecorator;
-    //    @Mock ResultMessageBuilder xmlResultMessageBuilder;
-    //    @Mock PrintWriterDecorator briefPrintWriterDecorator;
-    //    @Mock ResultMessageBuilder briefResultMessageBuilder;
-    //    @Mock PrintWriterDecorator verbosePrintWriterDecorator;
-    //    @Mock ResultMessageBuilder verboseResultMessageBuilder;
 
     @BeforeSpecification
     @SuppressWarnings({"unchecked"})
-    public void setUp() throws NoSuchFieldException, IllegalAccessException {
+    public void setUp() throws IllegalAccessException {
         reporter = new ResultReporterImpl(List.<ResultFormat>list(RESULT_FORMATS.toArray(new ResultFormat[RESULT_FORMATS.size()])));
         // inject mock objects into this instance
-        final Field writersField = ResultReporterImpl.class.getDeclaredField("writers");
-        final Field buildersField = ResultReporterImpl.class.getDeclaredField("builders");
+        final Field writersField = Reflector.getFieldByName(ResultReporterImpl.class, "writers");
+        final Field buildersField = Reflector.getFieldByName(ResultReporterImpl.class, "builders");
         writersField.setAccessible(true);
         buildersField.setAccessible(true);
         final Map<ResultFormat, PrintWriterDecorator> writers = (Map<ResultFormat, PrintWriterDecorator>) writersField.get(reporter);
@@ -68,12 +63,6 @@ public final class AResultReporterWithSeveralResultFormats {
             writers.put(format, printWriterDecorator);
             builders.put(format, resultMessageBuilder);
         }
-        //        writers.put(XML, xmlPrintWriterDecorator);
-        //        writers.put(BRIEF, briefPrintWriterDecorator);
-        //        writers.put(VERBOSE, verbosePrintWriterDecorator);
-        //        builders.put(XML, xmlResultMessageBuilder);
-        //        builders.put(BRIEF, briefResultMessageBuilder);
-        //        builders.put(VERBOSE, verboseResultMessageBuilder);
         writersField.setAccessible(false);
         buildersField.setAccessible(false);
     }

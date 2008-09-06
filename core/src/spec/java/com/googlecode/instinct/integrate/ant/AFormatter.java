@@ -18,6 +18,7 @@ package com.googlecode.instinct.integrate.ant;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import static com.googlecode.instinct.internal.util.Reflector.getFieldByName;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
@@ -33,8 +34,8 @@ public final class AFormatter {
     @Subject Formatter formatter;
 
     @Before
-    public void setUp() throws NoSuchFieldException {
-        formatter = (Formatter) new SubjectCreatorImpl().create(getClass().getDeclaredField("formatter"));
+    public void setUp() {
+        formatter = (Formatter) new SubjectCreatorImpl().create(getFieldByName(getClass(), "formatter"));
     }
 
     @Specification(expectedException = IllegalArgumentException.class)

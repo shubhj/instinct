@@ -21,6 +21,7 @@ import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.report.PrintWriterDecorator;
+import static com.googlecode.instinct.internal.util.Reflector.getFieldByName;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
@@ -49,15 +50,15 @@ public final class AResultReporterWithOneResultFormat {
 
     @BeforeSpecification
     @SuppressWarnings({"unchecked"})
-    public void setUp() throws NoSuchFieldException, IllegalAccessException {
+    public void setUp() throws IllegalAccessException {
         reporter = new ResultReporterImpl(List.<ResultFormat>single(BRIEF));
         // inject mock objects into this instance
-        final Field writersField = ResultReporterImpl.class.getDeclaredField("writers");
+        final Field writersField = getFieldByName(ResultReporterImpl.class, "writers");
         writersField.setAccessible(true);
         final Map<ResultFormat, PrintWriterDecorator> writers = (Map<ResultFormat, PrintWriterDecorator>) writersField.get(reporter);
         writers.put(BRIEF, printWriterDecorator);
         writersField.setAccessible(false);
-        final Field buildersField = ResultReporterImpl.class.getDeclaredField("builders");
+        final Field buildersField = getFieldByName(ResultReporterImpl.class, "builders");
         buildersField.setAccessible(true);
         final Map<ResultFormat, ResultMessageBuilder> builders = (Map<ResultFormat, ResultMessageBuilder>) buildersField.get(reporter);
         builders.put(BRIEF, resultMessageBuilder);
