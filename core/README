@@ -40,13 +40,16 @@ o functionaljava-2.10.jar
 In addition, to use the Instinct Ant task, you'll need:
 
 o ant-1.7.1.jar
+o commons-collections-3.2.1.jar
+o commons-lang-2.4.jar
+o velocity-1.5.jar
 
 In addition, to use the JUnit 3/4 runners, you'll need:
 
 o junit-dep-4.4.jar
 
 Note. As JUnit 4.4 bundles Hamcrest, you can choose to either take Hamcrest from JUnit
-or as a seperate Jar. If you choose to take the JUnit version you will need the full
+or as a separate Jar. If you choose to take the JUnit version you will need the full
 JUnit Jar 'junit-4.4.jar' instead of the no dependencies version listed here.
 
 In addition, if you want to use Instinct from Scala, you'll need Scala 2.7.2 RC1 or later:
@@ -129,6 +132,7 @@ Current Developers
 o Tom Adams
 o Chris Myers
 o Nicholas Partridge
+o Jeremy Mawson
 
 Past Developers & Contributors
 o Ben Warren
