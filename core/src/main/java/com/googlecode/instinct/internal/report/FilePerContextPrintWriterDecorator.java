@@ -26,10 +26,15 @@ import java.io.PrintWriter;
 
 public final class FilePerContextPrintWriterDecorator implements PrintWriterDecorator {
     private PrintWriter writer;
+    private final File dir;
+
+    public FilePerContextPrintWriterDecorator(final File dir) {
+        this.dir = dir;
+    }
 
     public void printBefore(final ContextClass contextClass, final String message) {
         final String filename = new StringBuilder().append("SPEC-").append(contextClass.getType().getSimpleName()).append(".xml").toString();
-        final File contextFile = new File(filename);
+        final File contextFile = new File(dir, filename);
         try {
             writer = new PrintWriter(contextFile);
         } catch (FileNotFoundException e) {
@@ -50,5 +55,9 @@ public final class FilePerContextPrintWriterDecorator implements PrintWriterDeco
     }
 
     public void printAfterAll(final String message) {
+    }
+
+    public File getDir() {
+        return dir;
     }
 }

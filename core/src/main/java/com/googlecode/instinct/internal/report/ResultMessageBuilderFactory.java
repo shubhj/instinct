@@ -16,9 +16,9 @@
 
 package com.googlecode.instinct.internal.report;
 
+import com.googlecode.instinct.internal.runner.Formatter;
 import com.googlecode.instinct.report.ResultMessageBuilder;
-import com.googlecode.instinct.report.ResultFormat;
 
 public interface ResultMessageBuilderFactory {
-    ResultMessageBuilder createFor(final ResultFormat format);
+    ResultMessageBuilder createFor(final Formatter format);
 }

@@ -48,7 +48,8 @@ public final class AUsageStatementFormatterImpl {
         final StringBuilder builder = new StringBuilder();
         builder.append("  -f, --formatters LIST   Overrides the default formatter with a comma-separated").append(NEW_LINE);
         builder.append("                          list of formatters. Choose from [QUIET, BRIEF,").append(NEW_LINE);
-        builder.append("                          VERBOSE, XML]");
+        builder.append("                          VERBOSE, XML]. Each formatter can optionally be").append(NEW_LINE);
+        builder.append("                          parameterised with {toDir=outputDirectory}");
         return builder.toString();
     }
 }

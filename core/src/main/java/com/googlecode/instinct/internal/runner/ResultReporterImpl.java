@@ -25,76 +25,78 @@ import com.googlecode.instinct.internal.report.PrintWriterDecoratorFactoryImpl;
 import com.googlecode.instinct.internal.report.ResultMessageBuilderFactory;
 import com.googlecode.instinct.internal.report.ResultMessageBuilderFactoryImpl;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.report.ResultFormat;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import com.googlecode.instinct.runner.ResultReporter;
 import fj.Effect;
+import fj.data.HashMap;
 import fj.data.List;
-import java.util.EnumMap;
-import java.util.Map;
+import fj.pre.Equal;
+import fj.pre.Hash;
 
 public final class ResultReporterImpl implements ResultReporter {
     private static final PrintWriterDecoratorFactory PRINT_WRITER_DECORATOR_FACTORY = new PrintWriterDecoratorFactoryImpl();
     private static final ResultMessageBuilderFactory RESULT_MESSAGE_BUILDER_FACTORY = new ResultMessageBuilderFactoryImpl();
-    private final List<ResultFormat> resultFormats;
-    private final Map<ResultFormat, PrintWriterDecorator> writers = new EnumMap<ResultFormat, PrintWriterDecorator>(ResultFormat.class);
-    private final Map<ResultFormat, ResultMessageBuilder> builders = new EnumMap<ResultFormat, ResultMessageBuilder>(ResultFormat.class);
+    private final HashMap<Formatter, PrintWriterDecorator> writers =
+            new HashMap<Formatter, PrintWriterDecorator>(Equal.<Formatter>anyEqual(), Hash.<Formatter>anyHash());
+    private final HashMap<Formatter, ResultMessageBuilder> builders =
+            new HashMap<Formatter, ResultMessageBuilder>(Equal.<Formatter>anyEqual(), Hash.<Formatter>anyHash());
+    private final List<Formatter> formatters;
 
-    public ResultReporterImpl(final List<ResultFormat> resultFormats) {
-        this.resultFormats = resultFormats;
-        resultFormats.foreach(new Effect<ResultFormat>() {
-            public void e(final ResultFormat format) {
-                writers.put(format, PRINT_WRITER_DECORATOR_FACTORY.createFor(format));
-                builders.put(format, RESULT_MESSAGE_BUILDER_FACTORY.createFor(format));
+    public ResultReporterImpl(final List<Formatter> formatters) {
+        this.formatters = formatters;
+        formatters.foreach(new Effect<Formatter>() {
+            public void e(final Formatter formatter) {
+                writers.set(formatter, PRINT_WRITER_DECORATOR_FACTORY.createFor(formatter));
+                builders.set(formatter, RESULT_MESSAGE_BUILDER_FACTORY.createFor(formatter));
             }
         });
     }
 
     public void preContextRun(final ContextClass contextClass) {
         checkNotNull(contextClass);
-        resultFormats.foreach(new Effect<ResultFormat>() {
-            public void e(final ResultFormat format) {
-                final String message = builders.get(format).buildMessage(contextClass);
-                writers.get(format).printBefore(contextClass, message);
+        formatters.foreach(new Effect<Formatter>() {
+            public void e(final Formatter formatter) {
+                final String message = builders.get(formatter).some().buildMessage(contextClass);
+                writers.get(formatter).some().printBefore(contextClass, message);
             }
         });
     }
 
     public void postContextRun(final ContextResult contextResult) {
         checkNotNull(contextResult);
-        resultFormats.foreach(new Effect<ResultFormat>() {
-            public void e(final ResultFormat format) {
-                final String message = builders.get(format).buildMessage(contextResult);
-                writers.get(format).printAfter(contextResult, message);
+        formatters.foreach(new Effect<Formatter>() {
+            public void e(final Formatter formatter) {
+                final String message = builders.get(formatter).some().buildMessage(contextResult);
+                writers.get(formatter).some().printAfter(contextResult, message);
             }
         });
     }
 
     public void preSpecificationMethod(final SpecificationMethod specificationMethod) {
         checkNotNull(specificationMethod);
-        resultFormats.foreach(new Effect<ResultFormat>() {
-            public void e(final ResultFormat format) {
-                final String message = builders.get(format).buildMessage(specificationMethod);
-                writers.get(format).printBefore(specificationMethod, message);
+        formatters.foreach(new Effect<Formatter>() {
+            public void e(final Formatter formatter) {
+                final String message = builders.get(formatter).some().buildMessage(specificationMethod);
+                writers.get(formatter).some().printBefore(specificationMethod, message);
             }
         });
     }
 
     public void postSpecificationMethod(final SpecificationResult specificationResult) {
         checkNotNull(specificationResult);
-        resultFormats.foreach(new Effect<ResultFormat>() {
-            public void e(final ResultFormat format) {
-                final String message = builders.get(format).buildMessage(specificationResult);
-                writers.get(format).printAfter(specificationResult, message);
+        formatters.foreach(new Effect<Formatter>() {
+            public void e(final Formatter formatter) {
+                final String message = builders.get(formatter).some().buildMessage(specificationResult);
+                writers.get(formatter).some().printAfter(specificationResult, message);
             }
         });
     }
 
     public void printSummary(final ContextResultsSummary summary) {
-        resultFormats.foreach(new Effect<ResultFormat>() {
-            public void e(final ResultFormat format) {
-                final String message = builders.get(format).buildMessage(summary);
-                writers.get(format).printAfterAll(message);
+        formatters.foreach(new Effect<Formatter>() {
+            public void e(final Formatter formatter) {
+                final String message = builders.get(formatter).some().buildMessage(summary);
+                writers.get(formatter).some().printAfterAll(message);
             }
         });
     }

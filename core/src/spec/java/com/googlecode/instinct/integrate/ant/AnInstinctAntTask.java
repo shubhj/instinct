@@ -18,11 +18,11 @@ package com.googlecode.instinct.integrate.ant;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.internal.runner.Formatter;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
-import java.io.File;
 import org.apache.tools.ant.Task;
 import org.junit.runner.RunWith;
 
@@ -66,10 +66,5 @@ public final class AnInstinctAntTask {
     @Specification(expectedException = IllegalArgumentException.class)
     public void willNotAcceptANullFormatter() {
         antTask.addFormatter(null);
-    }
-
-    @Specification
-    public void allowsTheSettingOfAToDirFile() {
-        antTask.setToDir(new File("."));
     }
 }

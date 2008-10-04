@@ -18,6 +18,7 @@ package com.googlecode.instinct.integrate.ant;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.internal.runner.Formatter;
 import static com.googlecode.instinct.internal.util.Reflector.getFieldByName;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;

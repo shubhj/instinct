@@ -24,8 +24,8 @@ import java.util.EnumSet;
  * Any argument to the command line interface which is to be interpreted as an option.
  */
 public enum OptionArgument {
-    FORMATTERS("f", "formatters", "LIST",
-            "Overrides the default formatter with a comma-separated list of formatters. Choose from " + EnumSet.allOf(ResultFormat.class));
+    FORMATTERS("f", "formatters", "LIST", "Overrides the default formatter with a comma-separated list of formatters. Choose from " +
+            EnumSet.allOf(ResultFormat.class) + ". Each formatter can optionally be parameterised with {toDir=outputDirectory}");
 
     private static final String SHORT_FORM_PREFIX = "-";
     private static final String LONG_FORM_PREFIX = "--";

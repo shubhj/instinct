@@ -17,24 +17,32 @@
 package com.googlecode.instinct.internal.runner;
 
 import static com.googlecode.instinct.expect.Expect.expect;
+import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.marker.annotate.BeforeSpecification;
+import com.googlecode.instinct.marker.annotate.Specification;
+import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.runner.CommandLineRunner;
-import com.googlecode.instinct.test.InstinctTestCase;
 import static com.googlecode.instinct.test.checker.ClassChecker.checkClass;
+import org.junit.runner.RunWith;
 
-public final class CommandLineUsageImplAtomicTest extends InstinctTestCase {
+@RunWith(InstinctRunner.class)
+public final class ACommandLineUsageImpl {
     private static final String NEWLINE = System.getProperty("line.separator");
+    @Subject
     private CommandLineUsage commandLineUsage;
 
-    @Override
+    @BeforeSpecification
     public void setUpSubject() {
         commandLineUsage = new CommandLineUsageImpl();
     }
 
-    public void testConformsToClassTraits() {
+    @Specification
+    public void conformsToClassTraits() {
         checkClass(CommandLineUsageImpl.class, CommandLineUsage.class);
     }
 
-    public void testReturnsCommandLineUsage() {
+    @Specification
+    public void returnsCommandLineUsage() {
         expect.that(commandLineUsage.getUsage()).isEqualTo(expectedUsage());
     }
 
@@ -56,7 +64,8 @@ public final class CommandLineUsageImplAtomicTest extends InstinctTestCase {
         usage.append(NEWLINE);
         usage.append("  -f, --formatters LIST   Overrides the default formatter with a comma-separated").append(NEWLINE);
         usage.append("                          list of formatters. Choose from [QUIET, BRIEF,").append(NEWLINE);
-        usage.append("                          VERBOSE, XML]");
+        usage.append("                          VERBOSE, XML]. Each formatter can optionally be").append(NEWLINE);
+        usage.append("                          parameterised with {toDir=outputDirectory}");
         return usage.toString();
     }
 }

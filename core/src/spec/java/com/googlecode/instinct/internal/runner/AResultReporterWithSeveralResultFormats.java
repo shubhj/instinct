@@ -29,10 +29,10 @@ import com.googlecode.instinct.marker.annotate.Subject;
 import com.googlecode.instinct.report.ResultFormat;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import com.googlecode.instinct.runner.ResultReporter;
+import fj.data.HashMap;
 import fj.data.List;
 import java.lang.reflect.Field;
 import java.util.EnumSet;
-import java.util.Map;
 import org.jmock.Expectations;
 import org.junit.runner.RunWith;
 
@@ -51,17 +51,21 @@ public final class AResultReporterWithSeveralResultFormats {
     @BeforeSpecification
     @SuppressWarnings({"unchecked"})
     public void setUp() throws IllegalAccessException {
-        reporter = new ResultReporterImpl(List.<ResultFormat>list(RESULT_FORMATS.toArray(new ResultFormat[RESULT_FORMATS.size()])));
+        List<Formatter> formatters = List.nil();
+        for (final ResultFormat format : RESULT_FORMATS) {
+            formatters = formatters.cons(new Formatter(format));
+        }
+        reporter = new ResultReporterImpl(formatters);
         // inject mock objects into this instance
         final Field writersField = Reflector.getFieldByName(ResultReporterImpl.class, "writers");
         final Field buildersField = Reflector.getFieldByName(ResultReporterImpl.class, "builders");
         writersField.setAccessible(true);
         buildersField.setAccessible(true);
-        final Map<ResultFormat, PrintWriterDecorator> writers = (Map<ResultFormat, PrintWriterDecorator>) writersField.get(reporter);
-        final Map<ResultFormat, ResultMessageBuilder> builders = (Map<ResultFormat, ResultMessageBuilder>) buildersField.get(reporter);
+        final HashMap<Formatter, PrintWriterDecorator> writers = (HashMap<Formatter, PrintWriterDecorator>) writersField.get(reporter);
+        final HashMap<Formatter, ResultMessageBuilder> builders = (HashMap<Formatter, ResultMessageBuilder>) buildersField.get(reporter);
         for (final ResultFormat format : RESULT_FORMATS) {
-            writers.put(format, printWriterDecorator);
-            builders.put(format, resultMessageBuilder);
+            writers.set(new Formatter(format), printWriterDecorator);
+            builders.set(new Formatter(format), resultMessageBuilder);
         }
         writersField.setAccessible(false);
         buildersField.setAccessible(false);

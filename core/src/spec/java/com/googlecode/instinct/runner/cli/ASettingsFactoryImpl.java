@@ -117,4 +117,30 @@ public final class ASettingsFactoryImpl {
     public void willNotAcceptAnOptionThatRequiresAValueWithoutAValue() {
         factory.extractFrom(list("--formatters"));
     }
+
+    @Specification
+    public void willExtractSettingsWithOptionsThatAcceptModifiersAndAreInShortForm() {
+        final Settings settings = factory.extractFrom(list("-f", "xml{toDir=/tmp},verbose", "specifications"));
+        expect.that(settings).isNotNull();
+        expect.that(settings.getOptions()).isNotNull();
+        expect.that(settings.getOptions()).isOfSize(1);
+        expect.that(settings.getOptions()).containsItem(FORMATTERS);
+        expect.that(settings.getOption(FORMATTERS)).isEqualTo("xml{toDir=/tmp},verbose");
+        expect.that(settings.getArguments()).isNotNull();
+        expect.that(settings.getArguments()).isOfSize(1);
+        expect.that(settings.getArguments()).containsItem("specifications");
+    }
+
+    @Specification
+    public void willExtractSettingsWithOptionsThatAcceptModifiersAndAreInLongForm() {
+        final Settings settings = factory.extractFrom(list("--formatters", "xml{toDir=/tmp},verbose", "specifications"));
+        expect.that(settings).isNotNull();
+        expect.that(settings.getOptions()).isNotNull();
+        expect.that(settings.getOptions()).isOfSize(1);
+        expect.that(settings.getOptions()).containsItem(FORMATTERS);
+        expect.that(settings.getOption(FORMATTERS)).isEqualTo("xml{toDir=/tmp},verbose");
+        expect.that(settings.getArguments()).isNotNull();
+        expect.that(settings.getArguments()).isOfSize(1);
+        expect.that(settings.getArguments()).containsItem("specifications");
+    }
 }

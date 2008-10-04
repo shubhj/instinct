@@ -16,21 +16,12 @@
 
 package com.googlecode.instinct.integrate.ant;
 
-import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
+import com.googlecode.instinct.internal.runner.Formatter;
 import com.googlecode.instinct.internal.util.Fix;
-import static com.googlecode.instinct.internal.util.Fj.toFjList;
-import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
-import com.googlecode.instinct.runner.CommandLineRunner;
-import fj.Effect;
-import fj.F;
 import fj.data.List;
-import static fj.data.List.asString;
-import static fj.data.List.fromString;
-import static fj.data.List.join;
 import static fj.data.List.nil;
-import java.io.File;
 import java.io.IOException;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
@@ -43,13 +34,11 @@ import org.apache.tools.ant.types.Path;
 import org.apache.tools.ant.types.Reference;
 
 @SuppressWarnings({"MethodParameterOfConcreteClass", "InstanceVariableOfConcreteClass", "UnusedDeclaration"})
-@Fix("The toDir attribute needs to be passed as a command line argument, so that the SPEC-*.xml reports are not dumped in the user.dir")
 public final class InstinctAntTask extends Task implements StatusLogger {
     private List<Specifications> specificationLocators = nil();
     private String failureProperty;
     private List<Formatter> formatters = List.nil();
-    private CommandlineJava javaCommandLine;
-    private File toDir;
+    private CommandLineBuilder commandLineBuilder = new CommandLineBuilderImpl();
 
     public void setFailureProperty(final String failureProperty) {
         checkNotWhitespace(failureProperty);
@@ -61,17 +50,13 @@ public final class InstinctAntTask extends Task implements StatusLogger {
         specificationLocators = specificationLocators.cons(specificationLocator);
     }
 
-    public void setToDir(final File toDir) {
-        this.toDir = toDir;
-    }
-
     public void addFormatter(final Formatter formatter) {
         checkNotNull(formatter);
         formatters = formatters.cons(formatter);
     }
 
     public Path createClasspath() {
-        return getJavaCommandLine().createClasspath(getProject()).createPath();
+        return commandLineBuilder.createClasspath(getProject()).createPath();
     }
 
     public void setClasspath(final Path classPath) {
@@ -102,17 +87,10 @@ public final class InstinctAntTask extends Task implements StatusLogger {
         return super.clone();
     }
 
-    private CommandlineJava getJavaCommandLine() {
-        if (javaCommandLine == null) {
-            javaCommandLine = new CommandlineJava();
-        }
-        return javaCommandLine;
-    }
-
     @Fix("Register as a runner, so that we recieve results as it happens.")
     // TODO The runners also need to be passed a group, so they don't run the wrong thing.
     private void runContexts() {
-        final CommandlineJava commandLine = createCommandLine();
+        final CommandlineJava commandLine = commandLineBuilder.build(formatters, specificationLocators);
         final int exitCode = executeAsForked(commandLine);
         if (isFailure(exitCode)) {
             // getProject().setNewProperty(failureProperty, "true");
@@ -130,51 +108,6 @@ public final class InstinctAntTask extends Task implements StatusLogger {
         } catch (IOException e) {
             throw new BuildException("Unable to run specifications", e, getLocation());
         }
-    }
-
-    private CommandlineJava createCommandLine() {
-        final CommandlineJava commandLine = getJavaCommandLine();
-        commandLine.setClassname(CommandLineRunner.class.getName());
-        if (formatters.isNotEmpty()) {
-            commandLine.createArgument().setValue("--formatters");
-            commandLine.createArgument().setValue(asArgumentString(formatters));
-        }
-        final String contexts = getContextNamesToRun();
-        commandLine.createArgument().setValue(contexts);
-        return commandLine;
-    }
-
-    private String asArgumentString(final List<Formatter> formatters) {
-        if (formatters.isEmpty()) {
-            return "";
-        }
-        final StringBuilder builder = new StringBuilder();
-        formatters.foreach(new Effect<Formatter>() {
-            public void e(final Formatter formatter) {
-                if (!formatter.equals(formatters.head())) {
-                    builder.append(",");
-                }
-                builder.append(formatter.getType().name());
-            }
-        });
-        return builder.toString();
-    }
-
-    private String getContextNamesToRun() {
-        final List<List<Character>> contexts = findContextsFromAllAggregators().map(new F<JavaClassName, List<Character>>() {
-            public List<Character> f(final JavaClassName contextClass) {
-                return fromString(contextClass.getFullyQualifiedName());
-            }
-        });
-        return asString(join(contexts.intersperse(fromString(RunnableItemBuilder.ITEM_SEPARATOR))));
-    }
-
-    private List<JavaClassName> findContextsFromAllAggregators() {
-        return join(specificationLocators.map(new F<Specifications, List<JavaClassName>>() {
-            public List<JavaClassName> f(final Specifications locator) {
-                return toFjList(locator.getContextClasses());
-            }
-        }));
     }
 
     private void checkExecutePreconditions() {

@@ -18,13 +18,14 @@ package com.googlecode.instinct.runner;
 
 import com.googlecode.instinct.internal.core.ContextClass;
 import com.googlecode.instinct.internal.core.ContextClassImpl;
+import com.googlecode.instinct.internal.report.ResultMessageBuilderFactory;
+import com.googlecode.instinct.internal.report.ResultMessageBuilderFactoryImpl;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.ContextRunner;
+import com.googlecode.instinct.internal.runner.Formatter;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.Fj.toFjArray;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.report.ResultMessageBuilderFactoryImpl;
-import com.googlecode.instinct.internal.report.ResultMessageBuilderFactory;
 import com.googlecode.instinct.report.ResultFormat;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import com.googlecode.instinct.report.ResultMessageBuilder;
@@ -40,7 +41,9 @@ public final class TextRunner implements ContextRunner, ContextListener {
     private final PrintWriter writer;
     private final ResultMessageBuilder messageBuilder;
 
-    /** Create a new context runner that sends output to standard out using brief formatting. */
+    /**
+     * Create a new context runner that sends output to standard out using brief formatting.
+     */
     @SuppressWarnings({"UseOfSystemOutOrSystemErr"})
     public TextRunner() {
         this(System.out);
@@ -63,7 +66,7 @@ public final class TextRunner implements ContextRunner, ContextListener {
     public TextRunner(final OutputStream output, final ResultFormat resultFormat) {
         checkNotNull(output, resultFormat);
         writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(output)), AUTO_FLUSH_OUTPUT);
-        messageBuilder = RESULT_MESSAGE_BUILDER_FACTORY.createFor(resultFormat);
+        messageBuilder = RESULT_MESSAGE_BUILDER_FACTORY.createFor(new Formatter(resultFormat));
     }
 
     public void addContextListener(final ContextListener contextListener) {

@@ -16,15 +16,16 @@
 
 package com.googlecode.instinct.internal.report;
 
+import com.googlecode.instinct.internal.runner.Formatter;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.report.ResultFormat;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 
 public final class ResultMessageBuilderFactoryImpl implements ResultMessageBuilderFactory {
-    public ResultMessageBuilder createFor(final ResultFormat format) {
-        checkNotNull(format);
+    public ResultMessageBuilder createFor(final Formatter formatter) {
+        checkNotNull(formatter);
+        checkNotNull(formatter.getType());
         ResultMessageBuilder builder = null;
-        switch (format) {
+        switch (formatter.getType()) {
             case BRIEF:
                 builder = new BriefResultMessageBuilder();
                 break;

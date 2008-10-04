@@ -16,23 +16,13 @@
 
 package com.googlecode.instinct.internal.report;
 
+import com.googlecode.instinct.internal.runner.Formatter;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.report.ResultFormat;
 
 public class PrintWriterDecoratorFactoryImpl implements PrintWriterDecoratorFactory {
-    public final PrintWriterDecorator createFor(final ResultFormat format) {
-        checkNotNull(format);
-        PrintWriterDecorator writer = null;
-        switch (format) {
-            case BRIEF:
-            case QUIET:
-            case VERBOSE:
-                writer = new SystemOutPrintWriterDecorator();
-                break;
-            case XML:
-                writer = new FilePerContextPrintWriterDecorator();
-                break;
-        }
-        return writer;
+    public final PrintWriterDecorator createFor(final Formatter formatter) {
+        checkNotNull(formatter);
+        return formatter.getToDir() != null && formatter.getToDir().isDirectory() ? new FilePerContextPrintWriterDecorator(formatter.getToDir())
+               : new SystemOutPrintWriterDecorator();
     }
 }

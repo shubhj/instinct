@@ -26,13 +26,12 @@ import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Mock;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
-import com.googlecode.instinct.report.ResultFormat;
 import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import com.googlecode.instinct.runner.ResultReporter;
+import fj.data.HashMap;
 import fj.data.List;
 import java.lang.reflect.Field;
-import java.util.Map;
 import org.jmock.Expectations;
 import org.junit.runner.RunWith;
 
@@ -51,17 +50,17 @@ public final class AResultReporterWithOneResultFormat {
     @BeforeSpecification
     @SuppressWarnings({"unchecked"})
     public void setUp() throws IllegalAccessException {
-        reporter = new ResultReporterImpl(List.<ResultFormat>single(BRIEF));
+        reporter = new ResultReporterImpl(List.<Formatter>single(new Formatter(BRIEF)));
         // inject mock objects into this instance
         final Field writersField = getFieldByName(ResultReporterImpl.class, "writers");
         writersField.setAccessible(true);
-        final Map<ResultFormat, PrintWriterDecorator> writers = (Map<ResultFormat, PrintWriterDecorator>) writersField.get(reporter);
-        writers.put(BRIEF, printWriterDecorator);
+        final HashMap<Formatter, PrintWriterDecorator> writers = (HashMap<Formatter, PrintWriterDecorator>) writersField.get(reporter);
+        writers.set(new Formatter(BRIEF), printWriterDecorator);
         writersField.setAccessible(false);
         final Field buildersField = getFieldByName(ResultReporterImpl.class, "builders");
         buildersField.setAccessible(true);
-        final Map<ResultFormat, ResultMessageBuilder> builders = (Map<ResultFormat, ResultMessageBuilder>) buildersField.get(reporter);
-        builders.put(BRIEF, resultMessageBuilder);
+        final HashMap<Formatter, ResultMessageBuilder> builders = (HashMap<Formatter, ResultMessageBuilder>) buildersField.get(reporter);
+        builders.set(new Formatter(BRIEF), resultMessageBuilder);
         buildersField.setAccessible(false);
     }
 

@@ -14,10 +14,16 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.runner;
+package com.googlecode.instinct.integrate.ant;
 
+import com.googlecode.instinct.internal.runner.Formatter;
 import fj.data.List;
+import org.apache.tools.ant.Project;
+import org.apache.tools.ant.types.CommandlineJava;
+import org.apache.tools.ant.types.Path;
 
-public interface ResultFormatBuilder {
-    List<Formatter> build(final String optionValue);
+public interface CommandLineBuilder {
+    CommandlineJava build(final List<Formatter> formatters, final List<Specifications> specifications);
+
+    Path createClasspath(final Project project);
 }

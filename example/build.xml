@@ -19,6 +19,7 @@
     <property name="spec.resources.dir" value="${spec.dir}/resources"/>
     <property name="main.classes.dir" value="${build.dir}/main-classes"/>
     <property name="spec.classes.dir" value="${build.dir}/spec-classes"/>
+    <property name="spec.reports.dir" value="${basedir}/build/reports"/>
     <property name="release.dir" value="${build.dir}/release"/>
 
     <property name="project.zip" value="${project.shortname}-${project.version.full}.zip"/>
@@ -96,11 +97,12 @@
     </target>
 
     <target name="-run-specs" depends="-compile-java,-compile-scala">
+        <mkdir dir="${spec.reports.dir}"/>
         <instinct failureproperty="specs-failed">
             <classpath refid="scala.spec.class.path"/>
             <specifications dir="${spec.classes.dir}" groups="osdc"/>
             <formatter type="brief"/>
-            <formatter type="xml"/>
+            <formatter type="xml" toDir="${spec.reports.dir}"/>
         </instinct>
         <fail if="specs-failed" message="Specifications failed."/>
     </target>

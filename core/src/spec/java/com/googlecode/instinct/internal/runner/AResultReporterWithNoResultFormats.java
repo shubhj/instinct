@@ -23,7 +23,6 @@ import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Dummy;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
-import com.googlecode.instinct.report.ResultFormat;
 import com.googlecode.instinct.runner.ResultReporter;
 import fj.data.List;
 import org.junit.runner.RunWith;
@@ -39,7 +38,7 @@ public final class AResultReporterWithNoResultFormats {
 
     @BeforeSpecification
     public void setUp() {
-        reporter = new ResultReporterImpl(List.<ResultFormat>nil());
+        reporter = new ResultReporterImpl(List.<Formatter>nil());
     }
 
     @Specification(expectedException = IllegalArgumentException.class)

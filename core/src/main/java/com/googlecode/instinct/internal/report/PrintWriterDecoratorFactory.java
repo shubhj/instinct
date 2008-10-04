@@ -16,8 +16,8 @@
 
 package com.googlecode.instinct.internal.report;
 
-import com.googlecode.instinct.report.ResultFormat;
+import com.googlecode.instinct.internal.runner.Formatter;
 
 public interface PrintWriterDecoratorFactory {
-    PrintWriterDecorator createFor(final ResultFormat format);
+    PrintWriterDecorator createFor(final Formatter format);
 }

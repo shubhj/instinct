@@ -19,6 +19,8 @@
     <suppress checks="MethodName" files="StandardSpecificationLifecycle.java"/>
     <suppress checks="GenericIllegalRegexp" files="ResultFormat.java"/>
     <suppress checks="IllegalType" files="Settings.java"/>
+    <suppress checks="IllegalType" files="ResultFormatBuilderImpl.java"/>
+    <suppress checks="IllegalType" files="ResultReporterImpl.java"/>
     <suppress checks="IllegalToken" files="PrintWriterDecoratorFactoryImpl.java"/>
     <suppress checks="IllegalToken" files="ResultMessageBuilderFactoryImpl.java"/>
 </suppressions>

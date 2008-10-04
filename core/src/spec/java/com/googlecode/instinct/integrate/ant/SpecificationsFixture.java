@@ -14,10 +14,22 @@
  * limitations under the License.
  */
 
-package com.googlecode.instinct.internal.runner;
+package com.googlecode.instinct.integrate.ant;
 
-import fj.data.List;
+import java.io.File;
+import org.apache.tools.ant.Project;
 
-public interface ResultFormatBuilder {
-    List<Formatter> build(final String optionValue);
+public final class SpecificationsFixture {
+    private SpecificationsFixture() {
+    }
+
+    public static Specifications any(final Object object) {
+        final String path = object.getClass().getResource("/").getPath();
+        final File dir = new File(path);
+        final Project project = new Project();
+        final Specifications specifications = new Specifications(project);
+        project.setBaseDir(dir);
+        specifications.setDir(path);
+        return specifications;
+    }
 }

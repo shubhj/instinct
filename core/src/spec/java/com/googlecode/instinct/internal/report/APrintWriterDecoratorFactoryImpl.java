@@ -18,6 +18,7 @@ package com.googlecode.instinct.internal.report;
 
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
+import com.googlecode.instinct.internal.runner.Formatter;
 import com.googlecode.instinct.marker.annotate.BeforeSpecification;
 import com.googlecode.instinct.marker.annotate.Specification;
 import com.googlecode.instinct.marker.annotate.Subject;
@@ -25,6 +26,7 @@ import static com.googlecode.instinct.report.ResultFormat.BRIEF;
 import static com.googlecode.instinct.report.ResultFormat.QUIET;
 import static com.googlecode.instinct.report.ResultFormat.VERBOSE;
 import static com.googlecode.instinct.report.ResultFormat.XML;
+import java.io.File;
 import org.junit.runner.RunWith;
 
 @RunWith(InstinctRunner.class)
@@ -39,22 +41,82 @@ public final class APrintWriterDecoratorFactoryImpl {
 
     @Specification
     public void willReturnASystemOutPrintWriterDecoratorForBriefResultFormats() {
-        expect.that(factory.createFor(BRIEF)).isAnInstanceOf(SystemOutPrintWriterDecorator.class);
+        expect.that(factory.createFor(new Formatter(BRIEF))).isAnInstanceOf(SystemOutPrintWriterDecorator.class);
     }
 
     @Specification
     public void willReturnASystemOutPrintWriterDecoratorForQuietResultFormats() {
-        expect.that(factory.createFor(QUIET)).isAnInstanceOf(SystemOutPrintWriterDecorator.class);
+        expect.that(factory.createFor(new Formatter(QUIET))).isAnInstanceOf(SystemOutPrintWriterDecorator.class);
     }
 
     @Specification
     public void willReturnASystemOutPrintWriterDecoratorForVerboseResultFormats() {
-        expect.that(factory.createFor(VERBOSE)).isAnInstanceOf(SystemOutPrintWriterDecorator.class);
+        expect.that(factory.createFor(new Formatter(VERBOSE))).isAnInstanceOf(SystemOutPrintWriterDecorator.class);
     }
 
     @Specification
-    public void willReturnAFilePerContextPrintWriterDecoratorForXmlResultFormats() {
-        expect.that(factory.createFor(XML)).isAnInstanceOf(FilePerContextPrintWriterDecorator.class);
+    public void willReturnASystemOutPrintWriterDecoratorForXmlResultFormats() {
+        expect.that(factory.createFor(new Formatter(XML))).isAnInstanceOf(SystemOutPrintWriterDecorator.class);
+    }
+
+    @Specification
+    public void willReturnAFilePerContextPrintWriterDecoratorForBriefResultFormatsWithToDirSet() {
+        final File dir = new File(".");
+        final PrintWriterDecorator writerDecorator = factory.createFor(new Formatter(BRIEF, dir));
+        expect.that(writerDecorator).isAnInstanceOf(FilePerContextPrintWriterDecorator.class);
+        expect.that(((FilePerContextPrintWriterDecorator) writerDecorator).getDir()).isEqualTo(dir);
+    }
+
+    @Specification
+    public void willReturnAFilePerContextPrintWriterDecoratorForQuietResultFormatsWithToDirSet() {
+        final File dir = new File(".");
+        final PrintWriterDecorator writerDecorator = factory.createFor(new Formatter(QUIET, dir));
+        expect.that(writerDecorator).isAnInstanceOf(FilePerContextPrintWriterDecorator.class);
+        expect.that(((FilePerContextPrintWriterDecorator) writerDecorator).getDir()).isEqualTo(dir);
+    }
+
+    @Specification
+    public void willReturnAFilePerContextPrintWriterDecoratorForVerboseResultFormatsWithToDirSet() {
+        final File dir = new File(".");
+        final PrintWriterDecorator writerDecorator = factory.createFor(new Formatter(VERBOSE, dir));
+        expect.that(writerDecorator).isAnInstanceOf(FilePerContextPrintWriterDecorator.class);
+        expect.that(((FilePerContextPrintWriterDecorator) writerDecorator).getDir()).isEqualTo(dir);
+    }
+
+    @Specification
+    public void willReturnAFilePerContextPrintWriterDecoratorForXmlResultFormatsWithToDirSet() {
+        final File dir = new File(".");
+        final PrintWriterDecorator writerDecorator = factory.createFor(new Formatter(XML, dir));
+        expect.that(writerDecorator).isAnInstanceOf(FilePerContextPrintWriterDecorator.class);
+        expect.that(((FilePerContextPrintWriterDecorator) writerDecorator).getDir()).isEqualTo(dir);
+    }
+
+    @Specification
+    public void willReturnASystemOutPrintWriterDecoratorForBriefResultFormatsWithToDirSetWithNonDir() {
+        final File dir = new File("/not/a/valid/path");
+        final PrintWriterDecorator writerDecorator = factory.createFor(new Formatter(BRIEF, dir));
+        expect.that(writerDecorator).isAnInstanceOf(SystemOutPrintWriterDecorator.class);
+    }
+
+    @Specification
+    public void willReturnASystemOutPrintWriterDecoratorForQuietResultFormatsWithToDirSetWithNonDir() {
+        final File dir = new File("/not/a/valid/path");
+        final PrintWriterDecorator writerDecorator = factory.createFor(new Formatter(QUIET, dir));
+        expect.that(writerDecorator).isAnInstanceOf(SystemOutPrintWriterDecorator.class);
+    }
+
+    @Specification
+    public void willReturnASystemOutPrintWriterDecoratorForVerboseResultFormatsWithToDirSetWithNonDir() {
+        final File dir = new File("/not/a/valid/path");
+        final PrintWriterDecorator writerDecorator = factory.createFor(new Formatter(VERBOSE, dir));
+        expect.that(writerDecorator).isAnInstanceOf(SystemOutPrintWriterDecorator.class);
+    }
+
+    @Specification
+    public void willReturnASystemOutPrintWriterDecoratorForXmlResultFormatsWithToDirSetWithNonDir() {
+        final File dir = new File("/not/a/valid/path");
+        final PrintWriterDecorator writerDecorator = factory.createFor(new Formatter(XML, dir));
+        expect.that(writerDecorator).isAnInstanceOf(SystemOutPrintWriterDecorator.class);
     }
 
     @Specification(expectedException = IllegalArgumentException.class)

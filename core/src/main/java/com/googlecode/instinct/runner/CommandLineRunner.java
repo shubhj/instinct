@@ -20,20 +20,20 @@ import com.googlecode.instinct.internal.core.RunnableItem;
 import com.googlecode.instinct.internal.report.ContextResultsSummary;
 import com.googlecode.instinct.internal.runner.CommandLineUsage;
 import com.googlecode.instinct.internal.runner.CommandLineUsageImpl;
+import com.googlecode.instinct.internal.runner.Formatter;
 import com.googlecode.instinct.internal.runner.ItemResult;
 import com.googlecode.instinct.internal.runner.ResultFormatBuilder;
 import com.googlecode.instinct.internal.runner.ResultFormatBuilderImpl;
+import com.googlecode.instinct.internal.runner.ResultReporterImpl;
 import com.googlecode.instinct.internal.runner.RunnableItemBuilder;
 import com.googlecode.instinct.internal.runner.RunnableItemBuilderImpl;
-import com.googlecode.instinct.internal.runner.ResultReporterImpl;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.Fj.toFjList;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
+import com.googlecode.instinct.runner.cli.OptionArgument;
+import com.googlecode.instinct.runner.cli.Settings;
 import com.googlecode.instinct.runner.cli.SettingsFactory;
 import com.googlecode.instinct.runner.cli.SettingsFactoryImpl;
-import com.googlecode.instinct.runner.cli.Settings;
-import com.googlecode.instinct.runner.cli.OptionArgument;
-import com.googlecode.instinct.report.ResultFormat;
 import fj.Effect;
 import fj.data.List;
 import static java.lang.System.out;
@@ -69,14 +69,11 @@ public final class CommandLineRunner {
      * @param args Command line arguments (see above).
      */
     public static void main(final String... args) {
-        for (final String arg : args) {
-            System.out.println("arg = " + arg);
-        }
         checkNotNull((Object[]) args);
         checkNotEmpty(args);
         final CommandLineRunner runner = new CommandLineRunner();
         final Settings settings = SETTINGS_FACTORY.extractFrom(toFjList(args));
-        final List<ResultFormat> resultFormats = RESULT_FORMAT_BUILDER.build(settings.getOption(OptionArgument.FORMATTERS));
+        final List<Formatter> resultFormats = RESULT_FORMAT_BUILDER.build(settings.getOption(OptionArgument.FORMATTERS));
         final List<RunnableItem> runnableItems = RUNNABLE_ITEM_BUILDER.build(settings.getArguments());
         final ResultReporter reporter = new ResultReporterImpl(resultFormats);
         runner.run(runnableItems, reporter);
