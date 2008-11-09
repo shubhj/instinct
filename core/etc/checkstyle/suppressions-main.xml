@@ -7,6 +7,7 @@
     <suppress checks="GenericIllegalRegexp" files="TextRunner.java"/>
     <suppress checks="GenericIllegalRegexp" files="CommandLineRunner.java"/>
     <suppress checks="GenericIllegalRegexp" files="SystemOutPrintWriterDecorator.java"/>
+    <suppress checks="GenericIllegalRegexp" files="SpecificationReport.java"/>
     <suppress checks="EqualsHashCode" files="ObjectCheckerImpl.java"/>
     <suppress checks="IllegalThrows" files="DummyMethodInterceptor.java"/>
     <suppress checks="IllegalCatch" files="StubCreator.java"/>
@@ -18,9 +19,12 @@
     <suppress checks="GenericIllegalRegexp" files="ExceptionUtil.java"/>
     <suppress checks="MethodName" files="StandardSpecificationLifecycle.java"/>
     <suppress checks="GenericIllegalRegexp" files="ResultFormat.java"/>
+    <suppress checks="IllegalToken" files="PrintWriterDecoratorFactoryImpl.java"/>
+    <suppress checks="IllegalToken" files="ResultMessageBuilderFactoryImpl.java"/>
+    <!-- illegal type suppressions to get around checkstyle bug.
+    See https://sourceforge.net/tracker/index.php?func=detail&aid=2160665&group_id=29721&atid=397078 -->
     <suppress checks="IllegalType" files="Settings.java"/>
     <suppress checks="IllegalType" files="ResultFormatBuilderImpl.java"/>
     <suppress checks="IllegalType" files="ResultReporterImpl.java"/>
-    <suppress checks="IllegalToken" files="PrintWriterDecoratorFactoryImpl.java"/>
-    <suppress checks="IllegalToken" files="ResultMessageBuilderFactoryImpl.java"/>
+    <suppress checks="IllegalType" files="ContextResultSummary.java"/>
 </suppressions>

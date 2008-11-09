@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<style type="text/css">
+body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-size: 80%;
+}
+
+#header {
+    color: #fff;
+}
+
+#header.failed {
+    background: #C40D0D;
+}
+
+#header.passed {
+    background: #65C400;
+}
+
+#header.pending {
+    background: #FCFB98;
+    color: #131313;
+}
+
+.report h1 {
+    margin: 0 10px 0 10px;
+    padding: 10px;
+    font-family: "Lucida Grande", Helvetica, sans-serif;
+    font-size: 1.8em;
+}
+
+#summary {
+    margin: 0;
+    padding: 5px 10px;
+    font-family: "Lucida Grande", Helvetica, sans-serif;
+    text-align: right;
+    position: absolute;
+    top: 0;
+    right: 0px;
+}
+
+#summary p {
+    margin: 0 0 0 2px;
+}
+
+#summary #totals {
+    font-size: 1.2em;
+}
+
+.context {
+    margin: 0 10px 5px;
+    background: #fff;
+}
+
+dl {
+    margin: 0;
+    padding: 0 0 5px;
+    font: normal 11px "Lucida Grande", Helvetica, sans-serif;
+}
+
+dt {
+    font-weight: bold;
+    color: #fff;
+    padding: 3px;
+}
+
+dt.passed {
+    background-color: #65C400
+}
+
+dt.failed {
+    background-color: #C40D0D;
+}
+
+dt.pending {
+    background-color: #FAF834;
+    color: #000000;
+}
+
+dd {
+    margin: 5px 0 5px 5px;
+    padding: 3px 3px 3px 18px;
+}
+
+dd.passed {
+    border-left: 5px solid #65C400;
+    border-bottom: 1px solid #65C400;
+    background: #DBFFB4;
+    color: #3D7700;
+}
+
+dd.failed {
+    border-left: 5px solid #C20000;
+    border-bottom: 1px solid #C20000;
+    color: #C20000;
+    background: #FFFBD3;
+}
+
+dd.pending {
+    border-left: 5px solid #FAF834;
+    border-bottom: 1px solid #FAF834;
+    background: #FCFB98;
+    color: #131313;
+}
+
+.backtrace {
+    color: #000;
+    font-size: 10px;
+}
+
+a {
+    color: #BE5C00;
+}
+
+</style>
+</head>
+<body>
+<div class="report">
+    <div id="header" class="$status">
+        <h1>Instinct Results</h1>
+        <div id="summary">
+            <p id="totals">Finished in <strong>$duration $durationLabel</strong></p>
+            <p id="duration">$specificationCount $specificationLabel, $failureCount $failureLabel</p>
+        </div>
+    </div>
+    <div class="results">
+    #foreach($contextResult in $summaries)
+        <div class="context" id="$contextResult.contextName">
+            <dl>
+                <dt id="$contextResult.contextName" class="$contextResult.statusText">$contextResult.formattedContextName &#133;</dt>
+                #foreach($specResult in $contextResult.specificationResultsAsCollection)
+                <dd class="$specResult.statusText">
+                    <span class="passed_spec_name" id="$specResult.specificationName">$specResult.formattedSpecificationName</span>
+                    #if($specResult.failureText)
+                        <div class="backtrace"><pre>$specResult.failureText</pre></div>
+                    #end
+                </dd>
+                #end
+            </dl>
+        </div>
+    #end
+    </div>
+</div>
+</body>
+</html>

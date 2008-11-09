@@ -83,7 +83,7 @@ public final class ExceptionUtil {
                     return "";
                 } else {
                     final String message = throwable.getMessage();
-                    return message == null || message.isEmpty() ? message : removeFirstNewline(removeLastNewline(message));
+                    return message == null || message.length() == 0 ? message : removeFirstNewline(removeLastNewline(message));
                 }
             }
         };

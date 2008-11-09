@@ -64,7 +64,7 @@
 
     <target name="all" depends="clean,release"/>
     <target name="clean" depends="-clean"/>
-    <target name="run-specs" depends="clean,-run-specs,-run-junit3-integration,-run-junit4-integration"/>
+    <target name="run-specs" depends="clean,-run-specs,-run-junit3-integration,-run-junit4-integration,report"/>
     <target name="release" depends="clean,run-specs,-release-zip"/>
 
     <target name="-clean">
@@ -124,6 +124,14 @@
             <formatter type="brief" usefile="false"/>
         </junit>
         <fail if="tests-failed" message="JUnit 4 integration suite(s) failed."/>
+    </target>
+
+    <target name="report">
+        <instinct-report file="${spec.reports.dir}/report.html">
+            <fileset dir="${spec.reports.dir}">
+                <include name="SPEC-*.xml"/>
+            </fileset>
+        </instinct-report>
     </target>
 
     <macrodef name="compile.java.macro">

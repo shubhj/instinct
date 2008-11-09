@@ -19,11 +19,13 @@ package com.googlecode.instinct.internal.core;
 import static com.googlecode.instinct.expect.Expect.expect;
 import com.googlecode.instinct.integrate.junit4.InstinctRunner;
 import com.googlecode.instinct.internal.runner.ContextResult;
+import com.googlecode.instinct.marker.annotate.Context;
 import com.googlecode.instinct.marker.annotate.Specification;
 import org.junit.runner.RunWith;
 
 @SuppressWarnings({"UnusedDeclaration", "TypeMayBeWeakened"})
 @RunWith(InstinctRunner.class)
+@Context
 public final class ABeforeSpecMethodThatThrowsAnException {
     @Specification
     public void shouldFailTheSpecWhenTheExceptionThrownIsTheSameAsTheSpecsExpectedException() {
