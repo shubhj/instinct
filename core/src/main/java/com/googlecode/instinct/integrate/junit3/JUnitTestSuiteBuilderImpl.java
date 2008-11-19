@@ -18,15 +18,15 @@ package com.googlecode.instinct.integrate.junit3;
 
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdge;
 import com.googlecode.instinct.internal.edge.java.lang.reflect.ClassEdgeImpl;
-import com.googlecode.instinct.locate.ContextFinder;
-import com.googlecode.instinct.locate.ContextFinderImpl;
 import com.googlecode.instinct.internal.util.JavaClassName;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
+import com.googlecode.instinct.locate.ContextFinder;
+import com.googlecode.instinct.locate.ContextFinderImpl;
 import junit.framework.Test;
 import junit.framework.TestSuite;
 
-@Suggest("Move this (& all JUnit stuff) into a seperate distribution")
+@Suggest("Move this (& all JUnit stuff) into a separate distribution")
 public final class JUnitTestSuiteBuilderImpl implements JUnitTestSuiteBuilder {
     private final ClassEdge edgeClass = new ClassEdgeImpl();
     private final ContextFinder finder;

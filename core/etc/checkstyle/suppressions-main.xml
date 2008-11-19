@@ -27,4 +27,12 @@
     <suppress checks="IllegalType" files="ResultFormatBuilderImpl.java"/>
     <suppress checks="IllegalType" files="ResultReporterImpl.java"/>
     <suppress checks="IllegalType" files="ContextResultSummary.java"/>
+
+    <!--
+        <suppress checks="GenericIllegalRegexp" files="ClassLocatorImpl.java"/>
+        <suppress checks="GenericIllegalRegexp" files="ClassWithMarkedMethodsFileFilter.java"/>
+        <suppress checks="GenericIllegalRegexp" files="InstinctAntTask.java"/>
+        <suppress checks="GenericIllegalRegexp" files="MarkedMethodFileChecker.java"/>
+    -->
+
 </suppressions>

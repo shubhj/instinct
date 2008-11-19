@@ -58,17 +58,17 @@ public final class ACommandLineBuilderImpl {
 
     @Specification(expectedException = IllegalArgumentException.class, withMessage = "Parameter 1 should not be null")
     public void willRefuseToBuildCommandLineJavaWithNullFormatters() {
-        builder.build(null, List.<Specifications>nil());
+        builder.build(null, List.<Specifications>nil(), getClass().getClassLoader());
     }
 
     @Specification(expectedException = IllegalArgumentException.class, withMessage = "Parameter 2 should not be null")
     public void willRefuseToBuildCommandLineJavaWithNullSpecifications() {
-        builder.build(List.<Formatter>nil(), null);
+        builder.build(List.<Formatter>nil(), null, getClass().getClassLoader());
     }
 
     @Specification
     public void willBuildACommandWithNoParametersIfFormattersAndSpecificationsAreNotProvided() {
-        final CommandlineJava commandLine = builder.build(List.<Formatter>nil(), List.<Specifications>nil());
+        final CommandlineJava commandLine = builder.build(List.<Formatter>nil(), List.<Specifications>nil(), getClass().getClassLoader());
         expect.that(commandLine.getCommandline().length).isEqualTo(3);
         expect.that(commandLine.getClassname()).isEqualTo("com.googlecode.instinct.runner.CommandLineRunner");
         expect.that(commandLine.getCommandline()[1]).isEqualTo(commandLine.getClassname());
@@ -77,7 +77,8 @@ public final class ACommandLineBuilderImpl {
 
     @Specification
     public void willBuildACommandWithSingleFormatterProvided() {
-        final CommandlineJava commandLine = builder.build(List.<Formatter>single(new Formatter(ResultFormat.QUIET)), List.<Specifications>nil());
+        final CommandlineJava commandLine =
+                builder.build(List.<Formatter>single(new Formatter(ResultFormat.QUIET)), List.<Specifications>nil(), getClass().getClassLoader());
         expect.that(commandLine.getCommandline().length).isEqualTo(5);
         expect.that(commandLine.getClassname()).isEqualTo("com.googlecode.instinct.runner.CommandLineRunner");
         expect.that(commandLine.getCommandline()[1]).isEqualTo(commandLine.getClassname());
@@ -89,7 +90,8 @@ public final class ACommandLineBuilderImpl {
     @Specification
     public void willBuildACommandWithFormattersToDirParameterProvided() {
         final File dir = new File(".");
-        final CommandlineJava commandLine = builder.build(List.<Formatter>single(new Formatter(ResultFormat.QUIET, dir)), List.<Specifications>nil());
+        final CommandlineJava commandLine = builder.build(List.<Formatter>single(new Formatter(ResultFormat.QUIET, dir)), List.<Specifications>nil(),
+                getClass().getClassLoader());
         expect.that(commandLine.getCommandline().length).isEqualTo(5);
         expect.that(commandLine.getClassname()).isEqualTo("com.googlecode.instinct.runner.CommandLineRunner");
         expect.that(commandLine.getCommandline()[1]).isEqualTo(commandLine.getClassname());
@@ -100,7 +102,8 @@ public final class ACommandLineBuilderImpl {
 
     @Specification
     public void willBuildAComplexCommandWithSingleComplexSpecificationsProvided() {
-        final CommandlineJava commandLine = builder.build(List.<Formatter>nil(), List.<Specifications>single(SpecificationsFixture.any(this)));
+        final CommandlineJava commandLine =
+                builder.build(List.<Formatter>nil(), List.<Specifications>single(SpecificationsFixture.any(this)), getClass().getClassLoader());
         expect.that(commandLine.getCommandline().length).isEqualTo(3);
         expect.that(commandLine.getClassname()).isEqualTo("com.googlecode.instinct.runner.CommandLineRunner");
         expect.that(commandLine.getCommandline()[1]).isEqualTo(commandLine.getClassname());
@@ -111,7 +114,7 @@ public final class ACommandLineBuilderImpl {
     public void willBuildACommandWithMultipleFormatters() {
         final CommandlineJava commandLine = builder.build(
                 List.<Formatter>list(new Formatter(ResultFormat.QUIET), new Formatter(ResultFormat.BRIEF), new Formatter(ResultFormat.XML)),
-                List.<Specifications>nil());
+                List.<Specifications>nil(), getClass().getClassLoader());
         expect.that(commandLine.getCommandline().length).isEqualTo(5);
         expect.that(commandLine.getClassname()).isEqualTo("com.googlecode.instinct.runner.CommandLineRunner");
         expect.that(commandLine.getCommandline()[1]).isEqualTo(commandLine.getClassname());

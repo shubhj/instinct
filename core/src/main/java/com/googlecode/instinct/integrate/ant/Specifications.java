@@ -70,10 +70,10 @@ public final class Specifications {
 
     @Suggest({"This should return ContextClass's, that way we don't need to instantiate them.", "Don't return an array, use an ordered set."})
     @Fix({"The filters already instantiate them, do so here and re-use"})
-    public JavaClassName[] getContextClasses() {
+    public JavaClassName[] getContextClasses(final ClassLoader classloader) {
         checkPreconditions();
         ensureSpecificationGroupIsSet();
-        final Set<JavaClassName> contextClasses = findContextClasses();
+        final Set<JavaClassName> contextClasses = findContextClasses(classloader);
         return contextClasses.toArray(new JavaClassName[contextClasses.size()]);
     }
 
@@ -83,12 +83,12 @@ public final class Specifications {
         }
     }
 
-    private Set<JavaClassName> findContextClasses() {
+    private Set<JavaClassName> findContextClasses(final ClassLoader classloader) {
         final MarkingScheme contextMarking = new MarkingSchemeImpl(Context.class, new ContextNamingConvention(), specificationGroupsConstraint);
         final MarkingScheme specificationMarking =
                 new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention(), specificationGroupsConstraint);
         final FileFilter annotatedClasses = new ClassWithContextAnnotationFileFilter(specPackageRoot, contextMarking);
-        final FileFilter markedMethodClasses = new ClassWithMarkedMethodsFileFilter(specPackageRoot, specificationMarking);
+        final FileFilter markedMethodClasses = new ClassWithMarkedMethodsFileFilter(specPackageRoot, specificationMarking, classloader);
         return classLocator.locate(specPackageRoot, annotatedClasses, markedMethodClasses);
     }
 

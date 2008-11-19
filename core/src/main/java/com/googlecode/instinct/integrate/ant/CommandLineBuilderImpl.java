@@ -33,16 +33,17 @@ import org.apache.tools.ant.types.CommandlineJava;
 import org.apache.tools.ant.types.Path;
 
 public final class CommandLineBuilderImpl implements CommandLineBuilder {
+    //    private final ClassLocator classLocator = new ClassLocatorImpl();
     private CommandlineJava javaCommandLine = new CommandlineJava();
 
-    public CommandlineJava build(final List<Formatter> formatters, final List<Specifications> specifications) {
+    public CommandlineJava build(final List<Formatter> formatters, final List<Specifications> specifications, final ClassLoader classloader) {
         checkNotNull(formatters, specifications);
         javaCommandLine.setClassname(CommandLineRunner.class.getName());
         if (formatters.isNotEmpty()) {
             javaCommandLine.createArgument().setValue("--formatters");
             javaCommandLine.createArgument().setValue(asArgumentString(formatters));
         }
-        final String contexts = getContextNamesToRun(specifications);
+        final String contexts = getContextNamesToRun(specifications, classloader);
         javaCommandLine.createArgument().setValue(contexts);
         return javaCommandLine;
     }
@@ -51,8 +52,13 @@ public final class CommandLineBuilderImpl implements CommandLineBuilder {
         return javaCommandLine.createClasspath(project);
     }
 
-    private String getContextNamesToRun(final List<Specifications> specifications) {
-        final List<List<Character>> contexts = findContextsFromAllAggregators(specifications).map(new F<JavaClassName, List<Character>>() {
+    public Path getClasspath() {
+        return javaCommandLine.getClasspath();
+    }
+
+    private String getContextNamesToRun(final List<Specifications> specifications, final ClassLoader classloader) {
+        final List<JavaClassName> contextsFromAllAggregators = findContextsFromAllAggregators(specifications, classloader);
+        final List<List<Character>> contexts = contextsFromAllAggregators.map(new F<JavaClassName, List<Character>>() {
             public List<Character> f(final JavaClassName contextClass) {
                 return fromString(contextClass.getFullyQualifiedName());
             }
@@ -76,10 +82,10 @@ public final class CommandLineBuilderImpl implements CommandLineBuilder {
         return builder.toString();
     }
 
-    private List<JavaClassName> findContextsFromAllAggregators(final List<Specifications> specifications) {
+    private List<JavaClassName> findContextsFromAllAggregators(final List<Specifications> specifications, final ClassLoader classloader) {
         return join(specifications.map(new F<Specifications, List<JavaClassName>>() {
             public List<JavaClassName> f(final Specifications locator) {
-                return toFjList(locator.getContextClasses());
+                return toFjList(locator.getContextClasses(classloader));
             }
         }));
     }

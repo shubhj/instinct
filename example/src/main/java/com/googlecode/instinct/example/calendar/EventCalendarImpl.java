@@ -16,7 +16,6 @@
 
 package com.googlecode.instinct.example.calendar;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.util.ArrayList;
 import static java.util.Arrays.asList;
 import java.util.Collection;
@@ -44,7 +43,16 @@ public final class EventCalendarImpl implements EventCalendar {
     }
 
     public EventCalendar addEvents(final Event... someEvents) {
-        checkNotNull((Object) someEvents);
+        if (someEvents == null) {
+            throw new IllegalArgumentException("Parameter should not be null");
+        }
+        int i = 0;
+        for (final Event event : someEvents) {
+            if (event == null) {
+                throw new IllegalArgumentException("Parameter " + (i + 1) + " should not be null");
+            }
+            i++;
+        }
         final List<Event> copyOfEvents = copyEvents();
         copyOfEvents.addAll(asList(someEvents));
         return new EventCalendarImpl(copyOfEvents);

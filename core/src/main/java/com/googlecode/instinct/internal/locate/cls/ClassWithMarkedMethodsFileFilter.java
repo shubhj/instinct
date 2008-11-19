@@ -26,10 +26,10 @@ public final class ClassWithMarkedMethodsFileFilter implements FileFilter {
     private final MarkingScheme markingScheme;
     private final MarkedFileChecker markedFileChecker;
 
-    public ClassWithMarkedMethodsFileFilter(final File packageRoot, final MarkingScheme markingScheme) {
+    public ClassWithMarkedMethodsFileFilter(final File packageRoot, final MarkingScheme markingScheme, final ClassLoader classloader) {
         checkNotNull(packageRoot, markingScheme);
         this.markingScheme = markingScheme;
-        markedFileChecker = new MarkedMethodFileChecker(packageRoot);
+        markedFileChecker = new MarkedMethodFileChecker(packageRoot, classloader);
     }
 
     public boolean accept(final File pathname) {

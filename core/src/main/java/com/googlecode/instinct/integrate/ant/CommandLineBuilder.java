@@ -23,7 +23,9 @@ import org.apache.tools.ant.types.CommandlineJava;
 import org.apache.tools.ant.types.Path;
 
 public interface CommandLineBuilder {
-    CommandlineJava build(final List<Formatter> formatters, final List<Specifications> specifications);
+    CommandlineJava build(final List<Formatter> formatters, final List<Specifications> specifications, final ClassLoader classloader);
 
     Path createClasspath(final Project project);
+
+    Path getClasspath();
 }

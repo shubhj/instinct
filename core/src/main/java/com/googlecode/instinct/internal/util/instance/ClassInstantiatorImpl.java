@@ -25,8 +25,17 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.io.File;
 
 public final class ClassInstantiatorImpl implements ClassInstantiator {
-    private JavaClassNameFactory classNameFactory = new JavaClassNameFactoryImpl();
-    private ClassEdge classEdge = new ClassEdgeImpl();
+    private final JavaClassNameFactory classNameFactory = new JavaClassNameFactoryImpl();
+    private final ClassEdge classEdge;
+
+    public ClassInstantiatorImpl() {
+        classEdge = new ClassEdgeImpl();
+    }
+
+    public ClassInstantiatorImpl(final ClassLoader classloader) {
+        checkNotNull(classloader);
+        classEdge = new ClassEdgeImpl(classloader);
+    }
 
     public Class<?> instantiateClass(final File classFile, final File packageRoot) {
         checkNotNull(classFile, packageRoot);

@@ -16,15 +16,22 @@
 
 package com.googlecode.instinct.example.csvreader;
 
-import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
-import com.googlecode.instinct.internal.util.Suggest;
 import java.util.Arrays;
 
 public final class CsvLine {
     private final String[] columns;
 
     public CsvLine(final String... columns) {
-        checkNotNull((Object[]) columns);
+        if (columns == null) {
+            throw new IllegalArgumentException("Parameter should not be null");
+        }
+        int i = 0;
+        for (final String column : columns) {
+            if (column == null) {
+                throw new IllegalArgumentException("Parameter " + (i + 1) + " should not be null");
+            }
+            i++;
+        }
         this.columns = columns;
     }
 
@@ -35,8 +42,8 @@ public final class CsvLine {
         return columns[columnIndex];
     }
 
+    // @Suggest("Accessing the columns is a hack, consider exposing the field using a getter.")
     @SuppressWarnings({"InstanceofInterfaces", "CastToConcreteClass", "AccessingNonPublicFieldOfAnotherObject"})
-    @Suggest("Accessing the columns is a hack, consider exposing the field using a getter.")
     @Override
     public boolean equals(final Object obj) {
         return obj instanceof CsvLine && Arrays.equals(((CsvLine) obj).columns, columns);

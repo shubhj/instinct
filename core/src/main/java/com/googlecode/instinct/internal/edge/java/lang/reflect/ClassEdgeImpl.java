@@ -17,14 +17,26 @@
 package com.googlecode.instinct.internal.edge.java.lang.reflect;
 
 import com.googlecode.instinct.internal.edge.EdgeException;
+import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public final class ClassEdgeImpl implements ClassEdge {
+    private final ClassLoader classloader;
+
+    public ClassEdgeImpl() {
+        classloader = null;
+    }
+
+    public ClassEdgeImpl(final ClassLoader classloader) {
+        checkNotNull(classloader);
+        this.classloader = classloader;
+    }
+
     public Class<?> forName(final String className) {
         try {
-            return Class.forName(className);
+            return classloader == null ? Class.forName(className) : Class.forName(className, true, classloader);
         } catch (ClassNotFoundException e) {
             throw new EdgeException(e);
         }

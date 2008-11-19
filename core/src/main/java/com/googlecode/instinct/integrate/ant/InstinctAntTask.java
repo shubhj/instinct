@@ -23,6 +23,7 @@ import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitesp
 import fj.data.List;
 import static fj.data.List.nil;
 import java.io.IOException;
+import org.apache.tools.ant.AntClassLoader;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
@@ -90,10 +91,10 @@ public final class InstinctAntTask extends Task implements StatusLogger {
     @Fix("Register as a runner, so that we recieve results as it happens.")
     // TODO The runners also need to be passed a group, so they don't run the wrong thing.
     private void runContexts() {
-        final CommandlineJava commandLine = commandLineBuilder.build(formatters, specificationLocators);
+        final AntClassLoader classloader = new AntClassLoader(getClass().getClassLoader(), getProject(), commandLineBuilder.getClasspath());
+        final CommandlineJava commandLine = commandLineBuilder.build(formatters, specificationLocators, classloader);
         final int exitCode = executeAsForked(commandLine);
         if (isFailure(exitCode)) {
-            // getProject().setNewProperty(failureProperty, "true");
             throw new BuildException("Forked VM failed with exit code: " + exitCode);
         }
     }

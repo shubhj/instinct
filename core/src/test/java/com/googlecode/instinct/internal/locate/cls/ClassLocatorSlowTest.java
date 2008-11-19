@@ -17,8 +17,8 @@
 package com.googlecode.instinct.internal.locate.cls;
 
 import static com.googlecode.instinct.expect.Expect.expect;
-import static com.googlecode.instinct.locate.ContextFinderSlowTest.EXPECTED_MINIMUM_NOMBER_OF_CONTEXTS;
 import com.googlecode.instinct.internal.util.JavaClassName;
+import static com.googlecode.instinct.locate.ContextFinderSlowTest.EXPECTED_MINIMUM_NOMBER_OF_CONTEXTS;
 import com.googlecode.instinct.marker.AnnotationAttribute;
 import com.googlecode.instinct.marker.MarkingSchemeImpl;
 import com.googlecode.instinct.marker.annotate.Context;
@@ -49,7 +49,7 @@ public final class ClassLocatorSlowTest extends InstinctTestCase {
         final FileFilter filter1 = new ClassWithContextAnnotationFileFilter(getSpecPackageRoot(),
                 new MarkingSchemeImpl(Context.class, new ContextNamingConvention(), attributeConstraint));
         final FileFilter filter2 = new ClassWithMarkedMethodsFileFilter(getSpecPackageRoot(),
-                new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention(), attributeConstraint));
+                new MarkingSchemeImpl(Specification.class, new SpecificationNamingConvention(), attributeConstraint), getClass().getClassLoader());
         final Set<JavaClassName> names = locator.locate(getSpecPackageRoot(), filter1, filter2);
         expect.that(names.size()).isGreaterThan(EXPECTED_MINIMUM_NOMBER_OF_CONTEXTS);
     }

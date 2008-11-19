@@ -84,7 +84,7 @@ public final class ContextFinderImpl implements ContextFinder {
 
     private FileFilter createMarkedMethodsFilter(final File packageRoot, final AnnotationAttribute attributeConstraint) {
         final MarkingScheme markingScheme = createSpecificationMarkingScheme(attributeConstraint);
-        return objectFactory.create(ClassWithMarkedMethodsFileFilter.class, packageRoot, markingScheme);
+        return objectFactory.create(ClassWithMarkedMethodsFileFilter.class, packageRoot, markingScheme, getClass().getClassLoader());
     }
 
     private MarkingScheme createContextMarkingScheme(final AnnotationAttribute attributeConstraint) {

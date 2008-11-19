@@ -30,12 +30,13 @@ import java.lang.reflect.Method;
 @Fix("Remove dupe with MarkedFileChecker.")
 public final class MarkedMethodFileChecker implements MarkedFileChecker {
     private final MarkedMethodLocator markedMethodLocator = new MarkedMethodLocatorImpl();
-    private final ClassInstantiator classInstantiator = new ClassInstantiatorImpl();
+    private final ClassInstantiator classInstantiator;
     private final File packageRoot;
 
-    public MarkedMethodFileChecker(final File packageRoot) {
-        checkNotNull(packageRoot);
+    public MarkedMethodFileChecker(final File packageRoot, final ClassLoader classloader) {
+        checkNotNull(packageRoot, classloader);
         this.packageRoot = packageRoot;
+        classInstantiator = new ClassInstantiatorImpl(classloader);
     }
 
     public boolean isMarked(final File classFile, final MarkingScheme markingScheme) {
