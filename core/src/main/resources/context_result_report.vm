@@ -18,7 +18,9 @@
   <testcase classname="$result.ContextClass.Type.Name" name="$spec_result.SpecificationMethod.Name" time="$spec_duration_formatted" />
 #else
   <testcase classname="$result.ContextClass.Type.Name" name="$spec_result.SpecificationMethod.Name" time="$spec_duration_formatted">
-    <failure message="$spec_result.Status.Details.Message" type="$spec_result.Status.Details.Cause.Class.CanonicalName">$spec_result.Status.Details.Cause</failure>
+    <failure message="$spec_result.Status.Details.Message" type="$spec_result.Status.Details.Cause.Class.CanonicalName"><![CDATA[
+    $spec_result.Status.Details.Cause
+    ]]></failure>
   </testcase>
 #end
 #end

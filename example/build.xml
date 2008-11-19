@@ -1,161 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="instinct-example" default="all" basedir=".">
+<project name="instinct-example" default="release" basedir=".">
+
     <property name="project.longname" value="Instinct Behaviour Driven Development (BDD) Framework Examples"/>
     <property name="project.shortname" value="instinct-example"/>
     <property name="project.version.major" value="0"/>
     <property name="project.version.minor" value="2.0"/>
     <property name="version-status" value=""/>
     <property name="project.version.full" value="${project.version.major}.${project.version.minor}${version-status}"/>
-
-    <property name="build.dir" value="build"/>
-    <property name="lib.dir" value="lib"/>
-    <property name="src.dir" value="src"/>
-    <property name="main.dir" value="${src.dir}/main"/>
-    <property name="spec.dir" value="${src.dir}/spec"/>
-    <property name="java.main.src.dir" value="${main.dir}/java"/>
-    <property name="java.spec.src.dir" value="${spec.dir}/java"/>
-    <property name="scala.main.src.dir" value="${main.dir}/scala"/>
-    <property name="scala.spec.src.dir" value="${spec.dir}/scala"/>
-    <property name="spec.resources.dir" value="${spec.dir}/resources"/>
-    <property name="main.classes.dir" value="${build.dir}/main-classes"/>
-    <property name="spec.classes.dir" value="${build.dir}/spec-classes"/>
-    <property name="spec.reports.dir" value="${basedir}/build/reports"/>
-    <property name="release.dir" value="${build.dir}/release"/>
-
     <property name="project.zip" value="${project.shortname}-${project.version.full}.zip"/>
-    <property name="instinct.jar" value="${lib.dir}/instinct-core-${project.version.full}.jar"/>
 
-    <path id="java.main.class.path">
-        <fileset dir="${basedir}">
-            <include name="${instinct.jar}"/>
+    <property name="build.dir" location="build"/>
+    <property name="release.dir" location="${build.dir}/release"/>
+    <property name="prod.classes.dir" location="${build.dir}/main-classes"/>
+    <property name="spec.classes.dir" location="${build.dir}/spec-classes"/>
+    <property name="spec.report.dir" location="${build.dir}/spec-reports"/>
+    <property name="prod.java.src.dir" location="src/main/java"/>
+    <property name="prod.scala.src.dir" location="src/main/scala"/>
+    <property name="spec.java.src.dir" location="src/spec/java"/>
+    <property name="spec.scala.src.dir" location="src/spec/scala"/>
+    <property name="spec.lib.dir" location="lib"/>
+    <property name="spec.resources.dir" location="src/spec/resources"/>
+
+    <path id="java.prod.compiletime.classpath"/>
+
+    <path id="scala.prod.compiletime.classpath">
+        <fileset dir="${spec.lib.dir}">
+            <include name="scala-*.jar"/>
         </fileset>
-        <pathelement location="${main.classes.dir}"/>
+        <pathelement location="${prod.classes.dir}"/>
     </path>
-    <path id="scala.main.class.path">
-        <path refid="java.main.class.path"/>
-        <fileset dir="${basedir}">
-            <include name="${lib.dir}/scala-*.jar"/>
-        </fileset>
+
+    <path id="java.prod.runtime.classpath">
+        <pathelement location="${prod.classes.dir}"/>
+        <path refid="java.prod.compiletime.classpath"/>
     </path>
-    <path id="java.spec.class.path">
-        <path refid="java.main.class.path"/>
-        <fileset dir="${basedir}">
-            <include name="${lib.dir}/cglib-nodep-*.jar"/>
-            <include name="${lib.dir}/jmock-*.jar"/>
-            <include name="${lib.dir}/objenesis-*.jar"/>
-            <include name="${lib.dir}/ant-1.*.jar"/>
-            <include name="${lib.dir}/hamcrest-all-*.jar"/>
-            <include name="${lib.dir}/junit-*.jar"/>
-            <include name="${lib.dir}/functionaljava-*.jar"/>
-            <include name="${lib.dir}/commons-collections-*.jar"/>
-            <include name="${lib.dir}/commons-lang-*.jar"/>
-            <include name="${lib.dir}/velocity-*.jar"/>
+
+    <path id="java.spec.compiletime.classpath">
+        <fileset dir="${spec.lib.dir}">
+            <include name="*.jar"/>
         </fileset>
+        <path refid="java.prod.runtime.classpath"/>
+    </path>
+
+    <path id="scala.spec.compiletime.classpath">
+        <path refid="scala.prod.compiletime.classpath"/>
+        <path refid="java.spec.compiletime.classpath"/>
+    </path>
+
+    <path id="java.spec.runtime.classpath">
         <pathelement location="${spec.classes.dir}"/>
         <pathelement location="${spec.resources.dir}"/>
-    </path>
-    <path id="scala.spec.class.path">
-        <path refid="scala.main.class.path"/>
-        <path refid="java.spec.class.path"/>
+        <path refid="java.spec.compiletime.classpath"/>
     </path>
 
-    <taskdef resource="instincttask.properties" classpathref="scala.spec.class.path"/>
-    <taskdef resource="scala/tools/ant/antlib.xml" classpathref="scala.main.class.path"/>
+    <taskdef resource="instincttask.properties" classpathref="java.spec.compiletime.classpath"/>
+    <taskdef resource="scala/tools/ant/antlib.xml" classpathref="scala.spec.compiletime.classpath"/>
 
-    <target name="all" depends="clean,release"/>
-    <target name="clean" depends="-clean"/>
-    <target name="run-specs" depends="clean,-run-specs,-run-junit3-integration,-run-junit4-integration,report"/>
-    <target name="release" depends="clean,run-specs,-release-zip"/>
-
-    <target name="-clean">
+    <target name="clean">
         <delete dir="${build.dir}"/>
     </target>
 
-    <target name="-generate">
+    <target name="classes">
+        <java.compile classpath.ref="java.prod.compiletime.classpath" src.dir="${prod.java.src.dir}" output.dir="${prod.classes.dir}"/>
+        <scala.compile classpath.ref="scala.prod.compiletime.classpath" src.path="${prod.scala.src.dir}" output.dir="${prod.classes.dir}"/>
+    </target>
+
+    <target name="spec.resources">
         <copy todir="${spec.classes.dir}">
             <fileset dir="${spec.resources.dir}" includes="**/*"/>
         </copy>
     </target>
 
-    <target name="-release-zip">
-        <mkdir dir="${release.dir}"/>
-        <zip destfile="${release.dir}/${project.zip}" filesonly="true">
-            <fileset dir="${basedir}" includes="**/*" excludes="**/*.svn,${build.dir}/**/*,i-build/**/*"/>
-        </zip>
-    </target>
-
-    <target name="-compile-java" depends="-generate">
-        <compile.java.macro classpath.ref="java.main.class.path" src.dir="${java.main.src.dir}" output.dir="${main.classes.dir}"
-                src.path="${java.main.src.dir}"/>
-        <compile.java.macro classpath.ref="java.spec.class.path" src.dir="${java.spec.src.dir}" output.dir="${spec.classes.dir}"
-                src.path="${java.spec.src.dir}"/>
-    </target>
-
-    <target name="-compile-scala" depends="-generate">
-        <compile.scala.macro classpath.ref="scala.main.class.path" output.dir="${main.classes.dir}" src.path="${scala.main.src.dir}"/>
-        <compile.scala.macro classpath.ref="scala.spec.class.path" output.dir="${spec.classes.dir}" src.path="${scala.spec.src.dir}"/>
-    </target>
-
-    <target name="-run-specs" depends="-compile-java,-compile-scala">
-        <mkdir dir="${spec.reports.dir}"/>
+    <target name="tested.classes" depends="classes,spec.resources">
+        <!-- compilation of test classes -->
+        <java.compile classpath.ref="java.spec.compiletime.classpath" src.dir="${spec.java.src.dir}" output.dir="${spec.classes.dir}"/>
+        <scala.compile classpath.ref="scala.spec.compiletime.classpath" src.path="${spec.scala.src.dir}" output.dir="${spec.classes.dir}"/>
+        <mkdir dir="${spec.report.dir}"/>
+        <!-- execute specifications -->
         <instinct failureproperty="specs-failed">
-            <classpath refid="scala.spec.class.path"/>
+            <classpath refid="java.spec.runtime.classpath"/>
             <specifications dir="${spec.classes.dir}" groups="osdc"/>
             <formatter type="brief"/>
-            <formatter type="xml" toDir="${spec.reports.dir}"/>
+            <formatter type="xml" toDir="${spec.report.dir}"/>
         </instinct>
-        <fail if="specs-failed" message="Specifications failed."/>
-    </target>
-
-    <target name="-run-junit3-integration" depends="-compile-java">
-        <junit failureproperty="tests-failed" fork="true" forkmode="perBatch">
-            <classpath refid="java.spec.class.path"/>
+        <!--execute junit 3 test suite -->
+        <junit failureproperty="junit3-tests-failed" fork="true" forkmode="perBatch">
+            <classpath refid="java.spec.runtime.classpath"/>
             <test name="com.googlecode.instinct.example.junit.StackJUnitSuite"/>
             <formatter type="brief" usefile="false"/>
         </junit>
-        <fail if="tests-failed" message="JUnit 3 integration suite(s) failed."/>
-    </target>
-
-    <target name="-run-junit4-integration" depends="-compile-java">
-        <junit failureproperty="tests-failed" fork="true" forkmode="perBatch">
-            <classpath refid="java.spec.class.path"/>
+        <!--execute junit 4 test suite -->
+        <junit failureproperty="junit4-tests-failed" fork="true" forkmode="perBatch">
+            <classpath refid="java.spec.runtime.classpath"/>
             <test name="com.googlecode.instinct.example.junit.StackJUnit4Suite"/>
             <test name="com.googlecode.instinct.example.csvreader.junit.CsvReaderJUnitTests"/>
             <formatter type="brief" usefile="false"/>
         </junit>
-        <fail if="tests-failed" message="JUnit 4 integration suite(s) failed."/>
     </target>
 
-    <target name="report">
-        <instinct-report file="${spec.reports.dir}/report.html">
-            <fileset dir="${spec.reports.dir}">
+    <target name="spec.report" depends="tested.classes">
+        <instinct-report file="${spec.report.dir}/report.html">
+            <fileset dir="${spec.report.dir}">
                 <include name="SPEC-*.xml"/>
             </fileset>
         </instinct-report>
     </target>
 
-    <macrodef name="compile.java.macro">
+    <target name="tested.zip" depends="tested.classes">
+        <delete dir="${release.dir}"/>
+        <mkdir dir="${release.dir}"/>
+        <zip destfile="${release.dir}/${project.zip}" filesonly="true">
+            <fileset dir="${basedir}" includes="**/*" excludes="**/*.svn,${build.dir}/**/*,i-build/**/*,${release.dir}/${project.zip}"/>
+        </zip>
+    </target>
+
+    <target name="build.status">
+        <fail if="specs-failed" message="Specifications failed."/>
+        <fail if="junit3-tests-failed" message="JUnit 3 integration suite(s) failed."/>
+        <fail if="junit4-tests-failed" message="JUnit 4 integration suite(s) failed."/>
+        <echo>All specifications and integration tests were successful.</echo>
+    </target>
+
+    <target name="release" depends="tested.zip,spec.report,build.status"/>
+
+    <macrodef name="java.compile">
         <attribute name="src.dir"/>
         <attribute name="output.dir"/>
         <attribute name="classpath.ref"/>
-        <attribute name="src.path"/>
         <sequential>
             <mkdir dir="@{output.dir}"/>
             <javac classpathref="@{classpath.ref}" source="1.5" srcdir="@{src.dir}" destdir="@{output.dir}" debug="true"
                     debuglevel="source,lines,vars" deprecation="false" optimize="true">
-                <src>
-                    <path path="@{src.path}"/>
-                </src>
                 <patternset includes="**/*.java"/>
                 <compilerarg value="-Xlint"/>
             </javac>
         </sequential>
     </macrodef>
 
-    <macrodef name="compile.scala.macro">
-        <attribute name="classpath.ref"/>
+    <macrodef name="scala.compile">
         <attribute name="src.path"/>
         <attribute name="output.dir"/>
+        <attribute name="classpath.ref"/>
         <sequential>
             <mkdir dir="@{output.dir}"/>
             <scalac classpathref="@{classpath.ref}" destdir="@{output.dir}" force="never" deprecation="on" unchecked="on">
@@ -166,6 +151,5 @@
             </scalac>
         </sequential>
     </macrodef>
-
 
 </project>
