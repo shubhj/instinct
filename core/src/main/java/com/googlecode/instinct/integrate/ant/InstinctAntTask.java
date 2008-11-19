@@ -91,7 +91,7 @@ public final class InstinctAntTask extends Task implements StatusLogger {
     @Fix("Register as a runner, so that we recieve results as it happens.")
     // TODO The runners also need to be passed a group, so they don't run the wrong thing.
     private void runContexts() {
-        final AntClassLoader classloader = new AntClassLoader(getClass().getClassLoader(), getProject(), commandLineBuilder.getClasspath());
+        final ClassLoader classloader = new AntClassLoader(getClass().getClassLoader(), getProject(), commandLineBuilder.getClasspath());
         final CommandlineJava commandLine = commandLineBuilder.build(formatters, specificationLocators, classloader);
         final int exitCode = executeAsForked(commandLine);
         if (isFailure(exitCode)) {
