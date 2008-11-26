@@ -120,12 +120,12 @@ public final class ABriefResultMessageBuilder {
 
     @Specification
     public void createsBriefSpecificationSuccessResultMessages() {
-        expect.that(briefResultMessageBuilder.buildMessage(successSpecificationResult)).isEqualTo("aPassingMethod");
+        expect.that(briefResultMessageBuilder.buildMessage(successSpecificationResult)).isNull();
     }
 
     @Specification
     public void createsBriefSpecificationFailureResultMessages() {
-        expect.that(briefResultMessageBuilder.buildMessage(failureSpecificationResult)).startsWith(FAILURE_SPECIFICATION_MESSAGE_PREFIX);
+        expect.that(briefResultMessageBuilder.buildMessage(failureSpecificationResult)).isNull();
     }
 
     @Specification

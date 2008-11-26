@@ -53,9 +53,9 @@ public final class AQuietResultMessageBuilder {
     private SpecificationResult successSpecificationResult;
     private ContextResult failureContextResult;
     private SpecificationResult failureSpecificationResult;
-    private static final String FAILURE_SPECIFICATION_MESSAGE_PREFIX = "aFailingMethod (FAILED)" + NL + NL + TAB + "It just didn't work" + NL + TAB + NL +
-            TAB + "Summary: 1 error occurred" + NL + TAB + "1)  " + "Underlying cause" + NL + TAB + NL + TAB + "Full details follow:" + NL + TAB +
-            NL + TAB + "1)  " + "java.lang.RuntimeException: Underlying cause";
+    private static final String FAILURE_SPECIFICATION_MESSAGE_PREFIX = "aFailingMethod (FAILED)" + NL + NL + TAB + "It just didn't work" + NL + TAB +
+            NL + TAB + "Summary: 1 error occurred" + NL + TAB + "1)  " + "Underlying cause" + NL + TAB + NL + TAB + "Full details follow:" + NL +
+            TAB + NL + TAB + "1)  " + "java.lang.RuntimeException: Underlying cause";
     private static final String FAILURE_CONTEXT_MESSAGE_PREFIX = "AFailure" + NL + "- " + FAILURE_SPECIFICATION_MESSAGE_PREFIX;
 
     @BeforeSpecification
@@ -114,12 +114,12 @@ public final class AQuietResultMessageBuilder {
 
     @Specification
     public void showsNoMessagesForContextResultWithNoFails() {
-        expect.that(quietResultMessageBuilder.buildMessage(successContextResult)).isEqualTo("");
+        expect.that(quietResultMessageBuilder.buildMessage(successContextResult)).isNull();
     }
 
     @Specification
     public void createsQuietSpecificationSuccessResultMessages() {
-        expect.that(quietResultMessageBuilder.buildMessage(successSpecificationResult)).isEqualTo("");
+        expect.that(quietResultMessageBuilder.buildMessage(successSpecificationResult)).isNull();
     }
 
     @Specification
@@ -129,12 +129,12 @@ public final class AQuietResultMessageBuilder {
 
     @Specification
     public void createsQuietPreContextMessages() {
-        expect.that(quietResultMessageBuilder.buildMessage(successContextClass)).isEqualTo("");
+        expect.that(quietResultMessageBuilder.buildMessage(successContextClass)).isNull();
     }
 
     @Specification
     public void createsQuietPreSpecificationMessages() {
-        expect.that(quietResultMessageBuilder.buildMessage(successContextClass)).isEqualTo("");
+        expect.that(quietResultMessageBuilder.buildMessage(successContextClass)).isNull();
     }
 
     private class AFailure {

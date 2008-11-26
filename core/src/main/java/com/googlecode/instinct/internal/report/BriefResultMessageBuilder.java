@@ -16,14 +16,14 @@
 
 package com.googlecode.instinct.internal.report;
 
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilder;
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilderImpl;
 import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.internal.core.ContextClass;
-import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import fj.F;
 import fj.data.List;
@@ -55,12 +55,12 @@ public final class BriefResultMessageBuilder implements ResultMessageBuilder {
 
     public String buildMessage(final SpecificationMethod specificationMethod) {
         checkNotNull(specificationMethod);
-        return "";
+        return null;
     }
 
     public String buildMessage(final SpecificationResult specificationResult) {
         checkNotNull(specificationResult);
-        return buildSpecificationResultMessage(specificationResult);
+        return null;
     }
 
     public String buildMessage(final ContextResultsSummary summary) {

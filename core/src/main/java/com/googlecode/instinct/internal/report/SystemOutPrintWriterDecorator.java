@@ -28,22 +28,28 @@ public final class SystemOutPrintWriterDecorator implements PrintWriterDecorator
     private static final PrintWriter SYS_OUT_WRITER = new PrintWriter(System.out, AUTO_FLUSH);
 
     public void printBefore(final ContextClass contextClass, final String message) {
-        SYS_OUT_WRITER.println(message);
+        print(message);
     }
 
     public void printBefore(final SpecificationMethod specificationMethod, final String message) {
-        SYS_OUT_WRITER.println(message);
+        print(message);
     }
 
     public void printAfter(final ContextResult contextResult, final String message) {
-        SYS_OUT_WRITER.println(message);
+        print(message);
     }
 
     public void printAfter(final SpecificationResult specificationResult, final String message) {
-        SYS_OUT_WRITER.println(message);
+        print(message);
     }
 
     public void printAfterAll(final String message) {
-        SYS_OUT_WRITER.println(message);
+        print(message);
+    }
+
+    private void print(final String message) {
+        if (message != null) {
+            SYS_OUT_WRITER.println(message);
+        }
     }
 }

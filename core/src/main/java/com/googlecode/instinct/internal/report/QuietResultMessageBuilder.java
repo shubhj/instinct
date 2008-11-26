@@ -16,6 +16,8 @@
 
 package com.googlecode.instinct.internal.report;
 
+import com.googlecode.instinct.internal.core.ContextClass;
+import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.internal.runner.ContextResult;
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilder;
 import com.googlecode.instinct.internal.runner.SpecificationFailureMessageBuilderImpl;
@@ -23,8 +25,6 @@ import com.googlecode.instinct.internal.runner.SpecificationResult;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.StringUtil.indentEachLine;
 import com.googlecode.instinct.internal.util.Suggest;
-import com.googlecode.instinct.internal.core.ContextClass;
-import com.googlecode.instinct.internal.core.SpecificationMethod;
 import com.googlecode.instinct.report.ResultMessageBuilder;
 import fj.F;
 import fj.data.List;
@@ -40,13 +40,13 @@ public final class QuietResultMessageBuilder implements ResultMessageBuilder {
 
     public String buildMessage(final ContextClass contextClass) {
         checkNotNull(contextClass);
-        return "";
+        return null;
     }
 
     public String buildMessage(final ContextResult contextResult) {
         checkNotNull(contextResult);
         if (contextResult.completedSuccessfully()) {
-            return "";
+            return null;
         } else {
             return buildFailingContextResultMessage(contextResult);
         }
@@ -54,7 +54,7 @@ public final class QuietResultMessageBuilder implements ResultMessageBuilder {
 
     public String buildMessage(final SpecificationMethod specificationMethod) {
         checkNotNull(specificationMethod);
-        return "";
+        return null;
     }
 
     public String buildMessage(final ContextResultsSummary summary) {
@@ -79,7 +79,7 @@ public final class QuietResultMessageBuilder implements ResultMessageBuilder {
 
     private String buildSpecificationResultMessage(final SpecificationResult specificationResult) {
         if (specificationResult.completedSuccessfully()) {
-            return "";
+            return null;
         }
         final StringBuilder builder = new StringBuilder();
         final String status = " (FAILED)";

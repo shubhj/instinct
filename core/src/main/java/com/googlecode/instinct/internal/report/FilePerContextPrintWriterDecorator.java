@@ -46,7 +46,9 @@ public final class FilePerContextPrintWriterDecorator implements PrintWriterDeco
     }
 
     public void printAfter(final ContextResult contextResult, final String message) {
-        writer.write(message);
+        if (message != null) {
+            writer.write(message);
+        }
         writer.close();
         writer = null;
     }
