@@ -20,6 +20,7 @@ import com.googlecode.instinct.internal.runner.Formatter;
 import com.googlecode.instinct.internal.util.Fix;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotNull;
 import static com.googlecode.instinct.internal.util.ParamChecker.checkNotWhitespace;
+import com.googlecode.instinct.runner.ExitCode;
 import fj.data.List;
 import static fj.data.List.nil;
 import java.io.IOException;
@@ -28,7 +29,6 @@ import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.taskdefs.Execute;
-import static org.apache.tools.ant.taskdefs.Execute.isFailure;
 import org.apache.tools.ant.taskdefs.LogStreamHandler;
 import org.apache.tools.ant.types.CommandlineJava;
 import org.apache.tools.ant.types.Path;
@@ -80,7 +80,6 @@ public final class InstinctAntTask extends Task implements StatusLogger {
             throw new BuildException(t);
         }
     }
-
     // } SUPPRESS IllegalCatch
 
     @Override
@@ -93,9 +92,10 @@ public final class InstinctAntTask extends Task implements StatusLogger {
     private void runContexts() {
         final ClassLoader classloader = new AntClassLoader(getClass().getClassLoader(), getProject(), commandLineBuilder.getClasspath());
         final CommandlineJava commandLine = commandLineBuilder.build(formatters, specificationLocators, classloader);
-        final int exitCode = executeAsForked(commandLine);
-        if (isFailure(exitCode)) {
-            throw new BuildException("Forked VM failed with exit code: " + exitCode);
+        final int code = executeAsForked(commandLine);
+        final ExitCode exitCode = ExitCode.fromPrimitive(code);
+        if (ExitCode.TEST_FAILURES.equals(exitCode)) {
+            getProject().setNewProperty(failureProperty, "true");
         }
     }
 

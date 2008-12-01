@@ -59,7 +59,6 @@ public final class CommandLineRunner {
     private static final RunnableItemBuilder RUNNABLE_ITEM_BUILDER = new RunnableItemBuilderImpl();
     private static final ResultFormatBuilder RESULT_FORMAT_BUILDER = new ResultFormatBuilderImpl();
     private static final SettingsFactory SETTINGS_FACTORY = new SettingsFactoryImpl();
-    private static final int STATUS_NO_ARGS = -1;
 
     private CommandLineRunner() {
     }
@@ -76,17 +75,18 @@ public final class CommandLineRunner {
         final List<Formatter> resultFormats = RESULT_FORMAT_BUILDER.build(settings.getOption(OptionArgument.FORMATTERS));
         final List<RunnableItem> runnableItems = RUNNABLE_ITEM_BUILDER.build(settings.getArguments());
         final ResultReporter reporter = new ResultReporterImpl(resultFormats);
-        runner.run(runnableItems, reporter);
+        final ExitCode exitCode = runner.run(runnableItems, reporter);
+        System.exit(exitCode.getCode());
     }
 
     private static void checkNotEmpty(final String... args) {
         if (args.length == 0) {
             out.println(USAGE.getUsage());
-            System.exit(STATUS_NO_ARGS);
+            System.exit(ExitCode.ERROR_NO_ARGUMENTS.getCode());
         }
     }
 
-    private void run(final List<RunnableItem> itemsToRun, final ResultReporter reporter) {
+    private ExitCode run(final List<RunnableItem> itemsToRun, final ResultReporter reporter) {
         final ContextResultsSummary summary = new ContextResultsSummary();
         itemsToRun.foreach(new Effect<RunnableItem>() {
             public void e(final RunnableItem item) {
@@ -101,5 +101,6 @@ public final class CommandLineRunner {
             }
         });
         reporter.printSummary(summary);
+        return summary.getFailedCount() == 0 ? ExitCode.SUCCESS : ExitCode.TEST_FAILURES;
     }
 }
