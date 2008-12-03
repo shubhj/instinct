@@ -16,6 +16,8 @@
 
 package com.googlecode.instinct.internal.report.html;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 public final class SpecificationResultSummary {
     private static final CamelCaseNameFormatter FORMATTER = new CamelCaseNameFormatter();
     private String specificationName;
@@ -32,7 +34,7 @@ public final class SpecificationResultSummary {
     }
 
     public String getFormattedSpecificationName() {
-        return FORMATTER.convertToSentence(specificationName);
+        return specificationName == null ? null : FORMATTER.convertToSentence(specificationName);
     }
 
     public String getFailureText() {
@@ -44,6 +46,10 @@ public final class SpecificationResultSummary {
         if (failureText != null) {
             status = SummaryStatus.failed;
         }
+    }
+
+    public String getEncodedFailureText() {
+        return StringEscapeUtils.escapeXml(failureText);
     }
 
     public String getSubjectName() {

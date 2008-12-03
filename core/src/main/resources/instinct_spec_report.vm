@@ -137,7 +137,7 @@ a {
                 <dd class="$specResult.statusText">
                     <span class="passed_spec_name" id="$specResult.specificationName">$specResult.formattedSpecificationName</span>
                     #if($specResult.failureText)
-                        <div class="backtrace"><pre>$specResult.failureText</pre></div>
+                        <div class="backtrace"><pre>$specResult.encodedFailureText</pre></div>
                     #end
                 </dd>
                 #end
