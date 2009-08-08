@@ -1,13 +1,19 @@
+* Instinct Release 0.2.1 *
+
+o Core features
+  o Specification groups.
+o Ant Integration
+  o Added HTML report generation.
+
+
 * Instinct Release 0.2.0 *
 
 o Core features
   o Exposed ContextFinder (for locating contexts and specifications) in the public API.
-  o Specification groups.
-o Maven Integration
+o Ant Integration
+  o Added HTML report generation.
+oo Maven Integration
   o Example project now builds using Maven (see issue 45 below).
-o Reductio Integration
-  o Integrated Reductio, a tool for automated specification testing. See
-    http://reductiotest.org/ for more information.
 o Infrastructure
   o Upgraded to Scala 2.7.2 RC1.
   o Jar file name change: instinct-core-0.2.0.jar (addition of "core", brings into line
@@ -16,6 +22,7 @@ o Infrastructure
 o Bugs
   (Issue 44) Instinct FirstStep results in "class file for fj.data.Either not found".
   (Issue 45) Example project pom.xml isn't correct.
+
 
 * Instinct Release 0.1.9 *
 

@@ -39,6 +39,15 @@ public final class ParamChecker {
         }
     }
 
+    public static void checkNoWhitespace(final String... params) {
+        for (int i = 0; i < params.length; i++) {
+            final String param = params[i];
+            if (param != null && WHITESPACE_PATTERN.matcher(param).find()) {
+                throw new IllegalArgumentException("Parameter " + i + " should not contain whitespace");
+            }
+        }
+    }
+
     public static <T> void checkIsInterface(final Class<T> type) {
         if (!type.isInterface()) {
             throw new IllegalArgumentException(type.getSimpleName() + " must be an interface not a concrete class");
@@ -50,14 +59,4 @@ public final class ParamChecker {
             throw new IllegalArgumentException(type.getSimpleName() + " must be a concrete class not an interface");
         }
     }
-
-    public static void checkNoWhitespace(final String... params) {
-        for (int i = 0; i < params.length; i++) {
-            final String param = params[i];
-            if (param != null && WHITESPACE_PATTERN.matcher(param).find()) {
-                throw new IllegalArgumentException("Parameter " + i + " should not contain whitespace");
-            }
-        }
-    }
-
 }
