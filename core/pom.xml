@@ -26,7 +26,7 @@
         </repository>
         <repository>
             <id>fj-repository</id>
-            <url>http://projects.workingmouse.com/public/functionaljava/maven</url>
+            <url>http://functionaljava.googlecode.com/svn/maven/</url>
         </repository>
     </repositories>
     <dependencies>
