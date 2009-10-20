@@ -7,7 +7,7 @@
     <packaging>jar</packaging>
     <name>Instinct Core</name>
     <description>Instinct Behaviour Driven Development (BDD) Framework</description>
-    <version>0.2.0</version>
+    <version>0.2.1</version>
     <url>http://instinct.googlecode.com/</url>
     <licenses>
         <license>
