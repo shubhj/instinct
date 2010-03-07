@@ -1,3 +1,9 @@
+* Instinct Release 0.2.2 *
+
+o Bugs
+  o (Issue 50) Broken dependency on FJ
+
+
 * Instinct Release 0.2.1 *
 
 o Core features
