@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module relativePaths="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Scala" name="Scala">
+      <configuration />
+    </facet>
+  </component>
   <component name="NewModuleRootManager" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/i-build/main" />
     <output-test url="file://$MODULE_DIR$/i-build/test" />
@@ -12,9 +17,10 @@
       <sourceFolder url="file://$MODULE_DIR$/src/spec/scala" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
       <excludeFolder url="file://$MODULE_DIR$/i-build" />
+      <excludeFolder url="file://$MODULE_DIR$/src/main/scala" />
+      <excludeFolder url="file://$MODULE_DIR$/src/spec/scala" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
-    <orderEntry type="library" name="scala-2.7.2.RC1" level="application" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="core" />
@@ -24,6 +30,24 @@
     <orderEntry type="library" name="JMock" level="project" />
     <orderEntry type="library" name="JUnit" level="project" />
     <orderEntry type="library" name="Functional Java" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/scala-compiler-2.7.2.RC1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/scala-library-2.7.2.RC1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
   <component name="copyright">
     <Base>
